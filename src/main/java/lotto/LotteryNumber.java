@@ -4,16 +4,22 @@ import java.util.Objects;
 import java.util.Random;
 
 public class LotteryNumber {
-    private final int number;
+    public static final int MIN_LOTTERYNUMBER = 1;
+    public static final int MAX_LOTTERYNUMBER = 45;
+    private static final String MSG_WRONG_LOTTERYNUMBER_RANGE = String.format(
+            "로또 번호는 %d와 %d 사이의 수여야 합니다.", MIN_LOTTERYNUMBER, MAX_LOTTERYNUMBER);
+
     private static final Random random = new Random();
 
+    private final int number;
+
     public LotteryNumber() {
-        this(random.nextInt(44) + 1);
+        this(random.nextInt(MAX_LOTTERYNUMBER - MIN_LOTTERYNUMBER) + MIN_LOTTERYNUMBER);
     }
 
     public LotteryNumber(int number) {
-        if (number <= 0 || number > 45) {
-            throw new IllegalArgumentException("로또 번호는 1에서 45 사이의 수여야 합니다.");
+        if (number < MIN_LOTTERYNUMBER || number > MAX_LOTTERYNUMBER) {
+            throw new IllegalArgumentException(MSG_WRONG_LOTTERYNUMBER_RANGE);
         }
         this.number = number;
     }

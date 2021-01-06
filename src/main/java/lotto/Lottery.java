@@ -1,32 +1,34 @@
 package lotto;
 
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lottery {
-    private final List<LotteryNumber> numbers;
     private static final int LOTTERY_NUMBER_SIZE = 6;
+    private static final String MSG_WRONG_LOTTERY_LENGTH = String.format(
+            "로또 숫자의 길이는 %d이여야 합니다.", LOTTERY_NUMBER_SIZE);
+    private static final String MSG_DUPLICATED_LOTTERYNUMBER = "로또 숫자는 중복될 수 없습니다.";
 
-    //1~45
+    private final List<LotteryNumber> numbers;
+
     public Lottery(List<LotteryNumber> numbers) {
         if (isInvalidSizeLotteryNumbers(numbers)) {
-            throw new IllegalArgumentException("로또 숫자의 길이는 6이여야 합니다.");
+            throw new IllegalArgumentException(MSG_WRONG_LOTTERY_LENGTH);
         }
         if (isDuplicatedLotteryNumbers(numbers)) {
-            throw new IllegalArgumentException("로또 숫자는 중복될 수 없습니다.");
+            throw new IllegalArgumentException(MSG_DUPLICATED_LOTTERYNUMBER);
         }
         this.numbers = numbers;
     }
 
     public static List<LotteryNumber> createRandomLotteryNumbers() {
-        List<Integer> range_1_45_45 = IntStream.rangeClosed(1, 45)
+        List<Integer> range_1_45 = IntStream.rangeClosed(1, 45)
                 .boxed()
                 .collect(Collectors.toList());
-        Collections.shuffle(range_1_45_45);
-        List<Integer> range_1_45_6 = range_1_45_45.subList(0, LOTTERY_NUMBER_SIZE);
-        return range_1_45_6.stream()
+        Collections.shuffle(range_1_45);
+        return range_1_45.subList(0, LOTTERY_NUMBER_SIZE)
+                .stream()
                 .map(LotteryNumber::new)
                 .collect(Collectors.toList());
     }
