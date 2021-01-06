@@ -12,7 +12,6 @@ class LotteryNumberTest {
                 .isThrownBy(()->new LotteryNumber(0));
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(()->new LotteryNumber(46));
-
     }
 
     @Test
@@ -20,5 +19,4 @@ class LotteryNumberTest {
         assertThat(new LotteryNumber(1)).isEqualTo(new LotteryNumber(1));
         assertThat(new LotteryNumber(45)).isEqualTo(new LotteryNumber(45));
     }
-
 }
