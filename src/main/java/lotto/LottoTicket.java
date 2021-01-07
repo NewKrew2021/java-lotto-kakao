@@ -18,6 +18,12 @@ public class LottoTicket {
         return (int) numbers.stream().filter(compTicket::contains).count();
     }
 
+    public LottoRank getRank(WinnerNumber winnerNumber) {
+        int count = matchCount(winnerNumber);
+        boolean bonus = this.contains(winnerNumber.getBonusNumber());
+        return RankTable.get(count * 10 + (bonus && count == 5 ? 1 : 0));
+    }
+
     @Override
     public String toString() {
         return "[" + numbers.stream()

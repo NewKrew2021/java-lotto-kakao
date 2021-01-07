@@ -19,4 +19,12 @@ public class LottoTickets {
     public int getTicketCount() {
         return lottoTickets.size();
     }
+
+    public LottoResults getResults(WinnerNumber winnerNumber) {
+        LottoResults lottoResults = new LottoResults();
+        for (LottoTicket lottoTicket : lottoTickets) {
+            lottoResults.upsert(lottoTicket.getRank(winnerNumber));
+        }
+        return lottoResults;
+    }
 }
