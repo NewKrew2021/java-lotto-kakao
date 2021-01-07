@@ -8,13 +8,12 @@ import java.util.Set;
 public class Lotto implements Comparable<Lotto> {
 
     private final LottoNumbers numbers;
-    private Rank winnings;
 
     public Lotto(List<Integer> numbers) {
         this.numbers = new LottoNumbers(numbers);
     }
 
-    public void winningPrize(LottoAnswer answer) {
+    public Rank calculateRank(LottoAnswer answer) {
         Set<Number> answerNumbers = answer.getAnswerNumbers();
         Set<Number> combine = new HashSet<>(answerNumbers);
         combine.addAll(this.numbers.getNumbers());
@@ -23,22 +22,7 @@ public class Lotto implements Comparable<Lotto> {
         Number bonus = answer.getBonusNumber();
 
         boolean hasBonusNo = numbers.isContainLottoNumber(bonus);
-        winnings = Rank.getRank(correctNo, hasBonusNo);
-    }
-
-    public Rank getWinningsStat() {
-        return this.winnings;
-    }
-
-    public int getWinningMoney(LottoAnswer answer) {
-        if (isNullWinnings()) {
-            winningPrize(answer);
-        }
-        return this.winnings.getMoney();
-    }
-
-    private boolean isNullWinnings() {
-        return this.winnings == null;
+        return Rank.getRank(correctNo, hasBonusNo);
     }
 
     @Override

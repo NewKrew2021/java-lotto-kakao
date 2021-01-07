@@ -41,7 +41,7 @@ public class LottoController {
     }
 
     public Map<Rank, Integer> getAllLottoCount() {
-        return lottos.getAllLottoRankCount(answer);
+        return lottos.getAllLottoRank(answer);
     }
 
     public float getRateOfProfit() {

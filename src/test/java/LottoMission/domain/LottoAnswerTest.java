@@ -13,8 +13,8 @@ public class LottoAnswerTest {
         Lotto lottoNumbers = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoAnswer lottoAnswer = new LottoAnswer(
                 new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 7)), new Number(6));
-        lottoNumbers.winningPrize(lottoAnswer);
-        assertThat(lottoNumbers.getWinningsStat()).isEqualTo(Rank.SECOND);
+        lottoNumbers.calculateRank(lottoAnswer);
+        assertThat(lottoNumbers.calculateRank(lottoAnswer)).isEqualTo(Rank.SECOND);
     }
 
 }

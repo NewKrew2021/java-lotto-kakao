@@ -11,23 +11,22 @@ public class Lottos {
         Collections.sort(this.lottos);
     }
 
-    public Map<Rank, Integer> getAllLottoRankCount(LottoAnswer lottoAnswer) {
+    public Map<Rank, Integer> getAllLottoRank(LottoAnswer lottoAnswer) {
         Map<Rank, Integer> result = new TreeMap<>();
         for (Rank lotteryWinnings : Rank.values()) {
             result.put(lotteryWinnings, 0);
         }
         for (Lotto lotto : lottos) {
-            lotto.winningPrize(lottoAnswer);
-            Rank winningsStat = lotto.getWinningsStat();
-            result.put(winningsStat, result.get(winningsStat) + 1);
+            Rank rank = lotto.calculateRank(lottoAnswer);
+            result.put(rank, result.get(rank) + 1);
         }
         return result;
     }
 
     public int getSumAllWinningMoney(LottoAnswer answer) {
-        return lottos
-                .stream()
-                .mapToInt(lotto -> lotto.getWinningMoney(answer))
+        return lottos.stream()
+                .map(e -> e.calculateRank(answer))
+                .mapToInt(Rank::getMoney)
                 .sum();
     }
 
