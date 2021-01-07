@@ -9,11 +9,11 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private final int number;
 
     public LottoNumber(int number) {
-        validate(number);
+        validateRange(number);
         this.number = number;
     }
 
-    private void validate(int number) {
+    private void validateRange(int number) {
         if (number < 1 || number > 45) {
             throw new InvalidLottoNumberException();
         }
