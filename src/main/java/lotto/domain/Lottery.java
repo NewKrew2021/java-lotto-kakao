@@ -6,62 +6,74 @@ import java.util.stream.IntStream;
 
 public class Lottery {
     public static final int NONE = -1;
+    public static final String MSG_DUPLICATED_LOTTERYNUMBER = "로또 숫자는 중복될 수 없습니다.";
+    static final int LOTTERY_NUMBER_SIZE = 6;
+    public static final String MSG_WRONG_LOTTERY_LENGTH = String.format(
+            "로또 숫자의 길이는 %d이여야 합니다.", LOTTERY_NUMBER_SIZE);
 
     private final List<LotteryNumber> numbers;
 
-    public Lottery(int[] numbers) {
-        this(Arrays.stream(numbers)
+    public Lottery(int[] ints) {
+        this(
+                Arrays.stream(ints)
                 .mapToObj(LotteryNumber::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList())
+        );
     }
 
     public Lottery(List<LotteryNumber> numbers) {
-        if (LotteryUtil.isInvalidSizeLotteryNumbers(numbers)) {
-            throw new IllegalArgumentException(LotteryUtil.MSG_WRONG_LOTTERY_LENGTH);
+        if (isInvalidSizeLotteryNumbers(numbers)) {
+            throw new IllegalArgumentException(MSG_WRONG_LOTTERY_LENGTH);
         }
-        if (LotteryUtil.isDuplicatedLotteryNumbers(numbers)) {
-            throw new IllegalArgumentException(LotteryUtil.MSG_DUPLICATED_LOTTERYNUMBER);
+        if (isDuplicatedLotteryNumbers(numbers)) {
+            throw new IllegalArgumentException(MSG_DUPLICATED_LOTTERYNUMBER);
         }
         this.numbers = numbers;
     }
 
-    public static List<LotteryNumber> createRandomLotteryNumbers() {
+    public static Lottery createRandomLottery() {
         List<Integer> range_1_45 = IntStream.rangeClosed(LotteryNumber.MIN_LOTTERYNUMBER, LotteryNumber.MAX_LOTTERYNUMBER)
                 .boxed()
                 .collect(Collectors.toList());
         Collections.shuffle(range_1_45);
-        return range_1_45.subList(0, LotteryUtil.LOTTERY_NUMBER_SIZE)
+        return new Lottery(
+                range_1_45.subList(0, LOTTERY_NUMBER_SIZE)
                 .stream()
                 .map(LotteryNumber::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList())
+        );
+    }
+
+    public static boolean isDuplicatedLotteryNumbers(Lottery lottery, LotteryNumber bonusNumber) {
+        if (lottery.numbers.contains(bonusNumber)) {
+            return true;
+        }
+        return isDuplicatedLotteryNumbers(lottery.numbers);
+    }
+
+    private static boolean isDuplicatedLotteryNumbers(List<LotteryNumber> numbers) {
+        Set<LotteryNumber> set = new HashSet<>(numbers);
+        if (set.size() != numbers.size()) {
+            return true;
+        }
+        return false;
+    }
+
+    private static boolean isInvalidSizeLotteryNumbers(List<LotteryNumber> numbers) {
+        if (numbers.size() != LOTTERY_NUMBER_SIZE) {
+            return true;
+        }
+        return false;
     }
 
     public int checkRank(LotteryAnswer lotteryAnswer) {
         boolean bonus = numbers.contains(lotteryAnswer.getBonusNumber());
-        int count = (int) lotteryAnswer.getAnswerNumber()
+        int count = (int) lotteryAnswer.getLottery()
+                .numbers
                 .stream()
                 .filter(numbers::contains)
                 .count();
-        return convertCountToRank(count, bonus);
-    }
-
-    private int convertCountToRank(int count, boolean bonus) {
-        if (count == 3) {
-            return 5;
-        }
-        if (count == 4) {
-            return 4;
-        }
-        if (count == 5 && bonus) {
-            return 2;
-        }
-        if (count == 5) {
-            return 3;
-        }
-        if (count == 6) {
-            return 1;
-        }
-        return NONE;
+        return LotteryUtil.convertCountToRank(count, bonus);
     }
 
     @Override

@@ -1,12 +1,7 @@
 package lotto.domain;
 
-import lotto.domain.Lottery;
-import lotto.domain.LotteryAnswer;
-import lotto.domain.LotteryNumber;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -22,9 +17,9 @@ public class LotteryTest {
 
     @Test
     void Lottery_자동_생성() {
-        List<LotteryNumber> numbers = Lottery.createRandomLotteryNumbers();
+        Lottery randomLottery = Lottery.createRandomLottery();
 
-        assertThat(new Lottery(numbers)).isEqualTo(new Lottery(numbers));
+        assertThat(randomLottery).isEqualTo(randomLottery);
     }
 
     @Test

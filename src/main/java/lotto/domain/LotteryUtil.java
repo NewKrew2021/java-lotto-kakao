@@ -1,15 +1,10 @@
 package lotto.domain;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 
 public class LotteryUtil {
     public static final int LOTTERY_PRICE = 1000;
-    static final String MSG_DUPLICATED_LOTTERYNUMBER = "로또 숫자는 중복될 수 없습니다.";
-    static final int LOTTERY_NUMBER_SIZE = 6;
-    static final String MSG_WRONG_LOTTERY_LENGTH = String.format(
-            "로또 숫자의 길이는 %d이여야 합니다.", LOTTERY_NUMBER_SIZE);
 
     public static int calculateLotteryCount(int money) {
         if (money < 0) {
@@ -18,25 +13,28 @@ public class LotteryUtil {
         return money / LOTTERY_PRICE;
     }
 
-    public static boolean isInvalidSizeLotteryNumbers(List<LotteryNumber> numbers) {
-        if (numbers.size() != LOTTERY_NUMBER_SIZE) {
-            return true;
-        }
-        return false;
+    public static Lottery convertStringsToLottery(String[] strings) {
+        return new Lottery(Arrays.stream(strings)
+                .map(string -> new LotteryNumber(Integer.parseInt(string)))
+                .collect(Collectors.toList()));
     }
 
-    public static boolean isDuplicatedLotteryNumbers(List<LotteryNumber> numbers, LotteryNumber number) {
-        if (numbers.contains(number)) {
-            return true;
+    public static int convertCountToRank(int count, boolean bonus) {
+        if (count == 3) {
+            return 5;
         }
-        return isDuplicatedLotteryNumbers(numbers);
-    }
-
-    public static boolean isDuplicatedLotteryNumbers(List<LotteryNumber> numbers) {
-        Set<LotteryNumber> set = new HashSet<>(numbers);
-        if (set.size() != numbers.size()) {
-            return true;
+        if (count == 4) {
+            return 4;
         }
-        return false;
+        if (count == 5 && bonus) {
+            return 2;
+        }
+        if (count == 5) {
+            return 3;
+        }
+        if (count == 6) {
+            return 1;
+        }
+        return Lottery.NONE;
     }
 }
