@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Objects;
 import java.util.Set;
 
 public class Ticket {
@@ -56,6 +57,7 @@ public class Ticket {
         return 3 == duplicatedNumberCount;
     }
 
+
     private int getDuplicatedNumberCount(Ticket other){
         int count = 0;
         for(int number : numbers){
@@ -66,5 +68,18 @@ public class Ticket {
 
     public boolean isContain(int number){
         return numbers.contains(number);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Ticket)) return false;
+        Ticket ticket = (Ticket) o;
+        return Objects.equals(numbers, ticket.numbers);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numbers);
     }
 }
