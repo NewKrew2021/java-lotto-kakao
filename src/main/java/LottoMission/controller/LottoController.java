@@ -1,4 +1,7 @@
-package LottoMission;
+package LottoMission.controller;
+
+import LottoMission.domain.*;
+import LottoMission.util.RandomUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,13 +20,17 @@ public class LottoController {
         this.tryNumber = new TryNumber(userMoney/LOTTO_PRICE);
     }
 
-    public void buyLottos(){
+    public void buyLottosAuto(){
         List<Lotto> lottoList = new ArrayList<>();
         while(this.tryNumber.canTry()){
             lottoList.add(new Lotto(RandomUtil.getRandomSixIntegerList()));
             this.tryNumber.useTryNumberCount();
         }
         this.lottos = new Lottos(lottoList);
+    }
+
+    public void buyLottosSelf(Lottos lottos){
+        this.lottos = lottos;
     }
 
     public void setLastWeekWinningNumber(List<Integer> sixNumberList, int bonusNumber){
@@ -38,5 +45,9 @@ public class LottoController {
 
     public float getRateOfProfit() {
         return (float) lottos.getSumAllWinningMoney(answer) / userMoney.getUserMoney();
+    }
+
+    public List<Lotto> getLottos() {
+        return lottos.getLottos();
     }
 }

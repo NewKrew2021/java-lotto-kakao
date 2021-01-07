@@ -1,4 +1,4 @@
-package LottoMission;
+package LottoMission.domain;
 
 public class TryNumber {
 
@@ -22,5 +22,4 @@ public class TryNumber {
     public boolean canTry(){
         return tryNumber >= 1;
     }
-
 }
