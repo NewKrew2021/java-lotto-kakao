@@ -26,4 +26,13 @@ public class LottoNo {
     public int hashCode() {
         return Objects.hash(number);
     }
+
+    @Override
+    public int compareTo(LottoNo o) {
+        if(this.number < o.number)
+            return 1;
+        if(this.number > o.number)
+            return -1;
+        return 0;
+    }
 }
