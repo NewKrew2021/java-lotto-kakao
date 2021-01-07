@@ -8,4 +8,6 @@ public class LottoLogicTest {
         LottoLogic lottoLogic = new LottoLogic(10);
         assertThat(lottoLogic.getLottoCount()).isEqualTo(10);
     }
+
+
 }

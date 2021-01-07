@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class WinningLottoNos {
@@ -17,4 +18,12 @@ public class WinningLottoNos {
         }
 
     }
+
+    public List<Integer> isWinning(LottoNos lottoNos) {
+        List<Integer> matchResult = new ArrayList<>();
+        matchResult.add(this.lottoNos.getMatchCount(lottoNos));
+        matchResult.add(lottoNos.isContains(bonusNo) ? 1 : 0);
+        return matchResult;
+    }
+
 }

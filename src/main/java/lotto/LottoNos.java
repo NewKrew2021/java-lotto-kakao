@@ -1,8 +1,11 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.HashSet;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 public class LottoNos {
 
@@ -34,6 +37,13 @@ public class LottoNos {
 
     public boolean isContains(LottoNo lottoNo) {
         return this.numbers.contains(lottoNo);
+    }
+
+    public int getMatchCount(LottoNos lottoNos) {
+        return this.numbers.stream()
+                .filter((lottoNo)->lottoNos.isContains(lottoNo))
+                .collect(Collectors.toList())
+                .size();
     }
 
 }
