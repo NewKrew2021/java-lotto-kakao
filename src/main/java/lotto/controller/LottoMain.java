@@ -4,6 +4,8 @@ import lotto.view.InputView;
 import lotto.view.OutputView;
 import lotto.domain.LottoGame;
 
+import java.util.List;
+
 public class LottoMain {
     public static void main(String[] args){
         int money = InputView.getMoneyFromUser();
