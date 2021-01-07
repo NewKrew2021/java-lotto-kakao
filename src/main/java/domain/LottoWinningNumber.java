@@ -10,12 +10,12 @@ public class LottoWinningNumber {
     private final LottoNumber bonusNumber;
 
     public LottoWinningNumber(LottoTicket lottoWinningTicket, LottoNumber bonusNumber) {
-        validate(lottoWinningTicket, bonusNumber);
+        validateInclude(lottoWinningTicket, bonusNumber);
         this.lottoWinningTicket = lottoWinningTicket;
         this.bonusNumber = bonusNumber;
     }
 
-    private void validate(LottoTicket lottoWinningTicket, LottoNumber bonusNumber) {
+    private void validateInclude(LottoTicket lottoWinningTicket, LottoNumber bonusNumber) {
         if (lottoWinningTicket.isContains(bonusNumber)) {
             throw new InvalidLottoNumberException();
         }
