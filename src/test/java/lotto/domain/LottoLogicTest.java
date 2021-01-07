@@ -1,4 +1,5 @@
-package lotto;
+package lotto.domain;
+import lotto.domain.LottoLogic;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.*;
 public class LottoLogicTest {
