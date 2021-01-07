@@ -11,10 +11,4 @@ public class LottoGameTest {
         LottoGame game = new LottoGame(14000);
         assertThat(game).isEqualTo(new LottoGame(14000));
     }
-
-    @Test
-    public void buyHowMany() {
-        LottoGame game = new LottoGame(14001);
-        assertThat(game.possibleNumberBuy()).isEqualTo(14);
-    }
 }
