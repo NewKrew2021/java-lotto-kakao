@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.*;
+
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -52,5 +54,24 @@ public class LottoTest {
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
+    @Test
+    void containsBallTest() {
+        Ball includedBall = new Ball("3");
+        Ball excludedBall = new Ball("7");
+        Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
+        assertThat(lotto.contains(includedBall)).isTrue();
+        assertThat(lotto.contains(excludedBall)).isFalse();
+    }
 
+    @Test
+    void compareWithBallsTest() {
+        List<Ball> balls = Arrays.asList(new Ball("1"),
+                new Ball("2"),
+                new Ball("3"),
+                new Ball("4"),
+                new Ball("5"),
+                new Ball("6"));
+        Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
+        assertThat(lotto.compareWithBalls(balls)).isEqualTo(6);
+    }
 }
