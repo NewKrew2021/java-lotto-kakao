@@ -2,7 +2,7 @@ package lotto;
 
 import java.util.Objects;
 
-public class LottoNo {
+public class LottoNo implements Comparable<LottoNo>{
 
     int number;
 
