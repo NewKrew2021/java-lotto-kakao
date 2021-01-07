@@ -6,6 +6,7 @@ import java.util.List;
 public class LottoGame {
     private static final int TICKET_PRICE = 1000;
     private LottoTickets tickets;
+    private int money;
 
     public boolean isAssignedTickets() {
         return this.tickets != null;
@@ -32,7 +33,10 @@ public class LottoGame {
     }
 
     public int getLottoTicketCount(int money) {
+        this.money = money;
         return money / TICKET_PRICE;
     }
+
+
 
 }
