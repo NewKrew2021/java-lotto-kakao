@@ -25,4 +25,10 @@ public class MoneyTest {
         Money money = new Money(1001);
         assertThat(money.possibleNumberBuy()).isEqualTo(1);
     }
+
+    @Test
+    public void profitRate() {
+        Money money = new Money(10000);
+        assertThat(money.getProfitRate(5000)).isEqualTo(0.5);
+    }
 }

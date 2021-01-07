@@ -15,6 +15,10 @@ public class Money {
         return this.money / 1000;
     }
 
+    public double getProfitRate(int profitMoney) {
+        return (double)profitMoney / (double)money;
+    }
+
     private void validateMoney(int money) {
         if (!isOverThousand(money)) {
             throw new IllegalArgumentException("1000원 이상의 금액이 필요합니다.");
