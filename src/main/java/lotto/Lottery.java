@@ -11,6 +11,7 @@ public class Lottery {
     private static final String MSG_DUPLICATED_LOTTERYNUMBER = "로또 숫자는 중복될 수 없습니다.";
     public static final int NONE = -1;
 
+
     private final List<LotteryNumber> numbers;
 
     public Lottery(List<LotteryNumber> numbers) {
