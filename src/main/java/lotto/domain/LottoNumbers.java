@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.Collection;
 import java.util.Set;
 
 public class LottoNumbers {
@@ -15,12 +16,20 @@ public class LottoNumbers {
         if(numbers.size() != NUMBER_COUNT)
             throw new IllegalArgumentException("로또 번호는 6개의 숫자여야 합니다.");
         for (Integer number : numbers) {
-            checkNumberRange(number);
+            validateNumberRange(number);
         }
     }
 
-    private void checkNumberRange(Integer number) {
+    private void validateNumberRange(Integer number) {
         if(number < 1 || number > 45)
             throw new IllegalArgumentException("로또 번호는 1부터 45까지의 숫자 중 하나여야 합니다.");
+    }
+
+    public int countIntersection(LottoNumbers winnerNumbers) {
+        return (int) numbers.stream().filter(number -> winnerNumbers.contains(number)).count();
+    }
+
+    public boolean contains(int number) {
+        return this.numbers.contains(number);
     }
 }
