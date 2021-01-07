@@ -2,8 +2,9 @@ package view;
 
 import domain.Lotto;
 import domain.LottoStatistics;
+import domain.Lottos;
 
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -24,16 +25,16 @@ public class LottoProgramView {
         scanner = new Scanner(System.in);
     }
 
-    public BigInteger getBuyAmountForUser(){
+    public BigDecimal getBuyAmountForUser(){
         System.out.println(BUY_AMOUNT_PHRASE);
         String buyAmount = scanner.nextLine();
-        if(checkIntegerFormat(buyAmount)){
+        if(!checkNumberFormat(buyAmount)){
             throw new InputMismatchException("입력 값은 숫자이어야 합니다.");
         }
-        return new BigInteger(buyAmount);
+        return new BigDecimal(buyAmount);
     }
 
-    public boolean checkIntegerFormat(String buyAmount) {
+    public boolean checkNumberFormat(String buyAmount) {
         return buyAmount.chars().allMatch(Character::isDigit);
     }
 
@@ -56,7 +57,7 @@ public class LottoProgramView {
         System.out.println(BONUS_BALL_INPUT_PHRASE);
         String bonusBall = scanner.nextLine();
 
-        if(checkIntegerFormat(bonusBall)){
+        if(!checkNumberFormat(bonusBall)){
             throw new InputMismatchException("입력 값은 숫자이어야 합니다.");
         }
 
@@ -67,7 +68,5 @@ public class LottoProgramView {
         System.out.println(WINNING_STATISTICS_PHRASE);
         System.out.println(statistics.toString());
     }
-
-
 
 }

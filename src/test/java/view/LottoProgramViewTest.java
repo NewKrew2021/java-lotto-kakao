@@ -15,8 +15,8 @@ class LottoProgramViewTest {
 
     @Test
     void checkValidBuyAmount(){
-        assertThat(lottoProgramView.checkIntegerFormat("10000")).isTrue();
-        assertThat(lottoProgramView.checkIntegerFormat("123asd")).isFalse();
+        assertThat(lottoProgramView.checkNumberFormat("10000")).isTrue();
+        assertThat(lottoProgramView.checkNumberFormat("123asd")).isFalse();
     }
 
 }
