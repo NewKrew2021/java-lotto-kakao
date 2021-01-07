@@ -31,5 +31,4 @@ public class PurchaseMoneyTest {
         PurchaseMoney purchaseMoney = new PurchaseMoney(2000);
         assertThat(purchaseMoney.getLottoAmount()).isEqualTo(2);
     }
-
 }

@@ -9,18 +9,18 @@ public class WinningNumberSetTest {
 
     @Test
     void createTest() {
-        String lottoString = "1, 2, 3, 4, 5, 6";
-        String bonusBallString = "7";
-        WinningNumberSet winningNumberSet = new WinningNumberSet(lottoString, bonusBallString);
-        assertThat(winningNumberSet).isEqualTo(new WinningNumberSet(lottoString, bonusBallString));
+        Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
+        Ball bonusBall = new Ball("7");
+        WinningNumberSet winningNumberSet = new WinningNumberSet(winningLotto, bonusBall);
+        assertThat(winningNumberSet).isEqualTo(new WinningNumberSet(winningLotto, bonusBall));
     }
 
     @Test
     void duplicateTest() {
         assertThatThrownBy(() -> {
-            String lottoString = "1, 2, 3, 4, 5, 6";
-            String bonusBallString = "1";
-            WinningNumberSet winningNumberSet = new WinningNumberSet(lottoString, bonusBallString);
+            Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
+            Ball bonusBall = new Ball("1");
+            WinningNumberSet winningNumberSet = new WinningNumberSet(winningLotto, bonusBall);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

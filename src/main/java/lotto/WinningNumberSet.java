@@ -7,9 +7,9 @@ public class WinningNumberSet {
     private Lotto winningLotto;
     private Ball bonusBall;
 
-    public WinningNumberSet(String lottoString, String bonusBallString){
-        winningLotto = new Lotto(lottoString);
-        bonusBall = new Ball(bonusBallString);
+    public WinningNumberSet(Lotto winningLotto, Ball bonusBall){
+        this.winningLotto = winningLotto;
+        this.bonusBall = bonusBall;
         if(bonusBall.isDuplicated(winningLotto)){
             throw new IllegalArgumentException("보너스볼에는 당첨 번호가 포함되어서는 안된다.");
         }

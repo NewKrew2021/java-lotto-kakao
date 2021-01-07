@@ -26,7 +26,9 @@ public class LottoGroupTest {
                 new Lotto("1, 2, 3, 4, 5, 7"));
         LottoGroup lottoGroup = new LottoGroup(lottos);
 
-        WinningNumberSet winningNumberSet = new WinningNumberSet("1, 2, 3, 4, 5, 6", "7");
+        Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
+        Ball bonusBall = new Ball("7");
+        WinningNumberSet winningNumberSet = new WinningNumberSet(winningLotto, bonusBall);
 
         LottoResult lottoResult = lottoGroup.getLottoResult(winningNumberSet);
         assertThat(lottoResult.getRankCount(Rank.FIRST)).isEqualTo(1);
