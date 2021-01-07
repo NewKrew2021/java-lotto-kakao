@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.StatisticsType;
 import lotto.domain.LottoNos;
 import lotto.domain.WinningLottoNos;
 import org.junit.jupiter.api.Test;
@@ -39,18 +40,17 @@ public class WinningLottoNosTest {
         LottoNos lottoNos6 = new LottoNos(Arrays.asList(1, 2, 3, 4, 5, 6)); // 6
 
         assertThat(winningLottoNos.isWinning(lottoNos2))
-                .isEqualTo(Arrays.asList(2, 0));
+                .isEqualTo(StatisticsType.NONE);
         assertThat(winningLottoNos.isWinning(lottoNos3))
-                .isEqualTo(Arrays.asList(3, 0));
+                .isEqualTo(StatisticsType.THREE);
         assertThat(winningLottoNos.isWinning(lottoNos4))
-                .isEqualTo(Arrays.asList(4, 0));
+                .isEqualTo(StatisticsType.FOUR);
         assertThat(winningLottoNos.isWinning(lottoNos5))
-                .isEqualTo(Arrays.asList(5, 0));
+                .isEqualTo(StatisticsType.FIVE);
         assertThat(winningLottoNos.isWinning(lottoNos5_1))
-                .isEqualTo(Arrays.asList(5, 1));
+                .isEqualTo(StatisticsType.FIVE_WITH_BONUS);
         assertThat(winningLottoNos.isWinning(lottoNos6))
-                .isEqualTo(Arrays.asList(6, 0));
-
+                .isEqualTo(StatisticsType.SIX);
     }
 
 }

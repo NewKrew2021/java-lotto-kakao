@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.StatisticsType;
 import lotto.domain.LottoNo;
 import lotto.domain.LottoNos;
 
@@ -22,11 +23,10 @@ public class WinningLottoNos {
 
     }
 
-    public List<Integer> isWinning(LottoNos lottoNos) {
-        List<Integer> matchResult = new ArrayList<>();
-        matchResult.add(this.lottoNos.getMatchCount(lottoNos));
-        matchResult.add(lottoNos.isContains(bonusNo) ? 1 : 0);
-        return matchResult;
+    public StatisticsType isWinning(LottoNos lottoNos) {
+        int matchCount = this.lottoNos.getMatchCount(lottoNos);
+        boolean isBonusMatch = lottoNos.isContains(bonusNo);
+        return checkEnum(matchCount, isBonusMatch);
     }
 
     private StatisticsType checkEnum( int matchCount, boolean isBonusMatch) {
