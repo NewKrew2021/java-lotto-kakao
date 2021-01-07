@@ -1,8 +1,6 @@
 package LottoMission;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class Lottos {
 
