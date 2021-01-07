@@ -40,6 +40,21 @@ public class LottoNumbers {
         }
     }
 
+    public int countMatchingNumber(LottoNumbers lottoNumbers) {
+        List<LottoNumber> lottoNumbersA = getLottoNumbers();
+        List<LottoNumber> lottoNumbersB = lottoNumbers.getLottoNumbers();
+        Set<LottoNumber> lottoNumbersIntersection = new HashSet<>();
+        lottoNumbersIntersection.addAll(lottoNumbersA);
+        lottoNumbersIntersection.addAll(lottoNumbersB);
+
+        return (lottoNumbersA.size() + lottoNumbersB.size()) - lottoNumbersIntersection.size();
+
+    }
+
+    public boolean contains(LottoNumber number) {
+        return lottoNumbers.contains(number);
+    }
+
     public List<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
