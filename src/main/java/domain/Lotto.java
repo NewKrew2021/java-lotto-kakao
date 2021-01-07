@@ -13,7 +13,7 @@ public class Lotto {
     public static final int LOTTO_MIN = 1;
     public static final int LOTTO_MAX = 45;
 
-    Lotto(){
+    public Lotto(){
         lottoBalls = new ArrayList<>();
         randomPool = new ArrayList<>();
         for(int lottoNum = LOTTO_MIN; lottoNum <= LOTTO_MAX; ++lottoNum){
@@ -22,7 +22,7 @@ public class Lotto {
         generateLotto();
     }
 
-    Lotto(List<Integer> balls, int bonusBall){
+    public Lotto(List<Integer> balls, int bonusBall){
         lottoBalls = balls;
         randomPool = new ArrayList<>();
         this.bonusBall = bonusBall;
