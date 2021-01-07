@@ -26,7 +26,7 @@ public class LottoTicket {
     }
 
     private LottoTicket(List<LottoNumber> numbers) {
-        validate(numbers);
+        validateLength(numbers);
         validateDuplicate(numbers);
 
         this.numbers = numbers;
@@ -34,10 +34,10 @@ public class LottoTicket {
 
     private void validateDuplicate(List<LottoNumber> numbers) {
         Set<LottoNumber> numbersSet = new HashSet<>(numbers);
-        validate(numbersSet);
+        validateLength(numbersSet);
     }
 
-    private void validate(Collection<LottoNumber> numbers) {
+    private void validateLength(Collection<LottoNumber> numbers) {
         if (numbers == null || numbers.size() != LOTTO_NUMBERS_LENGTH) {
             throw new InvalidLottoNumberException();
         }
