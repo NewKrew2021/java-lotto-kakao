@@ -19,7 +19,7 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("-------");
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < LotteryUtil.WINNING_TABLE.length; i++) {
             System.out.println(String.format(
                     "%s %d개",
                     LotteryUtil.WINNING_MSG[i],

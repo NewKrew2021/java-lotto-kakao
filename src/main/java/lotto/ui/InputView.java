@@ -38,12 +38,12 @@ public class InputView {
     }
 
     private static void printReadMoneyHelp() {
-        System.out.println("로또 1장의 가격은 1000원이다.");
+        System.out.printf("로또 1장의 가격은 %d입니다.\n", LotteryUtil.LOTTERY_PRICE);
         System.out.println("구입금액을 입력해 주세요.");
     }
 
     private static Lottery getAnswerLotteryNumbers() {
-        System.out.println("지난주 당첨번호를 입력해주세요.");
+        System.out.println("지난 주 당첨번호를 입력해주세요.");
         return LotteryUtil.convertStringsToLottery(sc.nextLine().split(","));
     }
 
