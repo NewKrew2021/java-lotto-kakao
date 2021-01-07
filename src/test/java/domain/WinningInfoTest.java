@@ -13,4 +13,10 @@ public class WinningInfoTest {
         WinningInfo winningInfo = new WinningInfo(Arrays.asList(1, 1, 1, 1, 1));
         assertThat(winningInfo).isEqualTo(new WinningInfo(Arrays.asList(1, 1, 1, 1, 1)));
     }
+
+    @Test
+    void sum() {
+        WinningInfo winningInfo = new WinningInfo(Arrays.asList(1, 0, 0, 0, 0));
+        assertThat(winningInfo.getSumPrize()).isEqualTo(5000);
+    }
 }
