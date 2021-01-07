@@ -2,13 +2,13 @@ package lotto;
 
 import java.util.Objects;
 
-public class Ball {
+public class Ball implements Comparable<Ball> {
 
     private int ballNumber;
 
     public Ball(String ballString) {
         int ball = 0;
-        try{
+        try {
             ball = Integer.parseInt(ballString);
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("볼은 정수여야 한다.");
@@ -17,7 +17,7 @@ public class Ball {
         this.ballNumber = ball;
     }
 
-    public void checkRange(int ballNumber){
+    public void checkRange(int ballNumber) {
         if(outOfRange(ballNumber)){
             throw new IllegalArgumentException("볼은 1 이상 45 이하여야 한다.");
         }
@@ -32,6 +32,11 @@ public class Ball {
     }
 
     @Override
+    public String toString() {
+        return String.valueOf(ballNumber);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -42,5 +47,10 @@ public class Ball {
     @Override
     public int hashCode() {
         return Objects.hash(ballNumber);
+    }
+
+    @Override
+    public int compareTo(Ball o) {
+        return this.ballNumber - o.ballNumber;
     }
 }
