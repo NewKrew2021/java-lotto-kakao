@@ -1,8 +1,7 @@
-package lotto;
+package lotto.domain;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 import java.util.stream.IntStream;
 
 public class LottoNumber {
@@ -12,7 +11,7 @@ public class LottoNumber {
     private static Map<Integer, LottoNumber> lottoNumberCache = new HashMap<>();
 
     static {
-        IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+        IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER + 1)
                 .forEach(i -> lottoNumberCache.put(i, new LottoNumber(i)));
     }
 
@@ -25,6 +24,8 @@ public class LottoNumber {
     public static LottoNumber of(int number) {  // LottoNumber를 반환하는 정적 팩토리 메서드
         return lottoNumberCache.get(number);
     }
-}
 
-//LottoNumber no = LottoNumber.of(10);
+    public int getNumber() {
+        return number;
+    }
+}
