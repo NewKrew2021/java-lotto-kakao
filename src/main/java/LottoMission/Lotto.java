@@ -6,19 +6,26 @@ import java.util.Set;
 
 public class Lotto implements Comparable<Lotto> {
 
-    private final Set<Integer> numbers;
+    private final LottoNumbers numbers;
     private LotteryWinnings winnings;
 
-    public Lotto(Set<Integer> numbers) {
-        this.numbers = numbers;
+    public Lotto(){
+        this(RandomUtil.getRandomSixIntegerList());
     }
 
-    public void compareToWinningNumber(Set<Integer> sixNumber, Integer bonus) {
-        Set<Integer> combine = new HashSet<>(numbers);
-        combine.addAll(sixNumber);
-        int correctNo = 12 - combine.size();
-        boolean hasBonusNo = numbers.contains(bonus);
+    public Lotto(List<Integer> numbers) {
+        this.numbers = new LottoNumbers(numbers);
+    }
 
+    public void winningPrize(LottoAnswer answer) {
+        Set<LottoNumber> answerNumbers = answer.getAnswerNumbers();
+        Set<LottoNumber> combine = new HashSet<>(answerNumbers);
+        combine.addAll(this.numbers.getNumbers());
+
+        int correctNo = 12 - combine.size();
+        LottoNumber bonus = answer.getBonusNumber();
+
+        boolean hasBonusNo = numbers.isContainLottoNumber(bonus);
         winnings = LotteryWinnings.getState(correctNo, hasBonusNo);
     }
 
@@ -26,6 +33,16 @@ public class Lotto implements Comparable<Lotto> {
         return this.winnings;
     }
 
+    public int getWinningMoney(LottoAnswer answer){
+        if(isNullWinnings()){
+            winningPrize(answer);
+        }
+        return this.winnings.getMoney();
+    }
+
+    private boolean isNullWinnings() {
+        return this.winnings == null;
+    }
 
     @Override
     public boolean equals(Object o) {
