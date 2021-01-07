@@ -14,10 +14,10 @@ public class Lotto {
             throw new IllegalArgumentException("숫자는 6개만 입력해주세요.");
         }
         if (isDuplicate(digits)) {
-            throw new IllegalArgumentException("숫자는 중복되면 안 됩니다.");
+            throw new IllegalArgumentException("숫자는 중복되지 않게 입력해주세요.");
         }
         Collections.sort(digits);
-        this.digits = mapIntegerToDigit(digits);
+        this.digits = mapDigit(digits);
     }
 
     private boolean isDuplicate(List<Integer> digits) {
@@ -26,7 +26,7 @@ public class Lotto {
                 .count() != digits.size();
     }
 
-    private List<Digit> mapIntegerToDigit(List<Integer> digits) {
+    private List<Digit> mapDigit(List<Integer> digits) {
         return digits.stream()
                 .map(Digit::new)
                 .collect(Collectors.toList());

@@ -13,6 +13,9 @@ public class WinningLotto {
     }
 
     public WinningLotto(Lotto winningLotto, Digit bonusBall) {
+        if (winningLotto.contains(bonusBall)) {
+            throw new IllegalArgumentException("보너스 볼은 당첨번호에 포함될 수 없습니다.");
+        }
         this.bonusBall = bonusBall;
         this.winningLotto = winningLotto;
     }
