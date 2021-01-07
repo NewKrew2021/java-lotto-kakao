@@ -48,9 +48,13 @@ public enum LottoStatus {
     }
 
     public static LottoStatus findStatus(int matchedLottoNumberCount, boolean isBonusNumberMatched) {
+        if(matchedLottoNumberCount == LottoStatus.SECOND.matchedLottoNumberCount) {
+            return lottoStatuses.stream().filter(lotto ->
+                    lotto.getMatchedLottoNumberCount() == matchedLottoNumberCount
+                            && lotto.isBonusNumberMatched() == isBonusNumberMatched).findFirst().get();
+        }
         return lottoStatuses.stream().filter(lotto ->
-                lotto.getMatchedLottoNumberCount() == matchedLottoNumberCount
-                && lotto.isBonusNumberMatched() == isBonusNumberMatched).findFirst().get();
+                lotto.getMatchedLottoNumberCount() == matchedLottoNumberCount).findFirst().get();
     }
 
 }
