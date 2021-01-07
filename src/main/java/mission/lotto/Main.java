@@ -1,8 +1,8 @@
-package LottoMission;
+package mission.lotto;
 
-import LottoMission.controller.LottoController;
-import LottoMission.view.InputView;
-import LottoMission.view.OutputView;
+import mission.lotto.controller.LottoController;
+import mission.lotto.view.InputView;
+import mission.lotto.view.OutputView;
 
 public class Main {
 

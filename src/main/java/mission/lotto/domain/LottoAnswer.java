@@ -1,4 +1,4 @@
-package LottoMission.domain;
+package mission.lotto.domain;
 
 import java.util.Set;
 

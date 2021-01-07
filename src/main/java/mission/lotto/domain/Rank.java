@@ -1,4 +1,4 @@
-package LottoMission.domain;
+package mission.lotto.domain;
 
 public enum Rank {
     FIRST(1, 6, false, 2000000000),

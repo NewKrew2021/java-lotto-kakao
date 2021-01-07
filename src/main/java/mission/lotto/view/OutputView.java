@@ -1,8 +1,8 @@
-package LottoMission.view;
+package mission.lotto.view;
 
-import LottoMission.controller.LottoController;
-import LottoMission.domain.Rank;
-import LottoMission.domain.Lotto;
+import mission.lotto.controller.LottoController;
+import mission.lotto.domain.Rank;
+import mission.lotto.domain.Lotto;
 
 import java.util.List;
 import java.util.Map;

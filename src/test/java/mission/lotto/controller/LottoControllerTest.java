@@ -1,7 +1,7 @@
-package LottoMission.controller;
+package mission.lotto.controller;
 
-import LottoMission.domain.Lotto;
-import LottoMission.domain.Lottos;
+import mission.lotto.domain.Lotto;
+import mission.lotto.domain.Lottos;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;

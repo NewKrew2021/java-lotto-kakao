@@ -1,4 +1,4 @@
-package LottoMission.view;
+package mission.lotto.view;
 
 import java.util.ArrayList;
 import java.util.List;

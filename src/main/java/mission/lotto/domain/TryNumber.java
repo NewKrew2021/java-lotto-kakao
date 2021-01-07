@@ -1,4 +1,4 @@
-package LottoMission.domain;
+package mission.lotto.domain;
 
 public class TryNumber {
 
