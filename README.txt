@@ -29,9 +29,9 @@
 - [x] 4 (구현 추가) LotteryAnswer class 구현 및 당첨 계산 로직 간결화
 
 #### UI 영역
-- [ ] 1 입력 UI 처리 클래스 InputView class
-  - [ ] 1.1 구입금액 입력받는 UI 구현
-  - [ ] 1.2 지난 주 당첨 번호, 보너스 볼 입력 UI 구현
+- [x] 1 입력 UI 처리 클래스 InputView class
+  - [x] 1.1 구입금액 입력받는 UI 구현
+  - [x] 1.2 지난 주 당첨 번호, 보너스 볼 입력 UI 구현
 - [ ] 2 출력 UI 처리 클래스 OutputView class
   - [ ] 2.1 구매 개수 출력 UI 구현
   - [ ] 2.2 1개의 Lottery 로부터 발행된 로또 숫자들을 출력 UI 구현
