@@ -1,12 +1,18 @@
 package lotto.domain;
 
-import java.util.List;
+import java.util.Set;
 
-public class Ticket { //TODO 생성자로 들어온 입력이 유효한지 검사하여야 한다.
+public class Ticket {
 
-    private final List<Integer> numbers; //TODO 일급 콜렉션
+    private static final int TICKET_SIZE = 6;
+    private final Set<Integer> numbers; //TODO 일급 콜렉션
 
-    public Ticket(List<Integer> numbers){
+    public Ticket(Set<Integer> numbers){
+        if(TICKET_SIZE != numbers.size()){
+            throw new RuntimeException("invalid Ticket size!!");
+        }
+
+        //TODO 그대로 넣지 말고, 값 복사가 되도록 하자.
         this.numbers = numbers;
     }
 
