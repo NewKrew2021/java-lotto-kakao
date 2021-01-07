@@ -2,7 +2,6 @@ package domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class LottoService {
@@ -19,22 +18,21 @@ public class LottoService {
         }
     }
 
-    public static LottoTickets generateTickets(Amount amount) {
-        int count = amount.getCount();
+    public static LottoTickets generateRandomLottoTickets(int ticketCount) {
         List<LottoTicket> tickets = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            tickets.add(generateRandomTicket());
+        for (int i = 0; i < ticketCount; i++) {
+            tickets.add(generateRandomLottoTicket());
         }
+
         return new LottoTickets(tickets);
     }
 
-    private static LottoTicket generateRandomTicket() {
+    private static LottoTicket generateRandomLottoTicket() {
         Collections.shuffle(randomNumbers);
         List<LottoNumber> numbers = new ArrayList<>();
         for (int i = 0; i < LottoTicket.LOTTO_NUMBERS_LENGTH; i++) {
             numbers.add(new LottoNumber(randomNumbers.get(i)));
         }
-
         Collections.sort(numbers);
 
         return LottoTicket.ofLottoNumber(numbers);
