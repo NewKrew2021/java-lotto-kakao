@@ -1,15 +1,21 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class WinNumbers {
 
-    private final List<Integer> winNumbers;
+    private static final int WIN_NUMBERS_SIZE = 6;
+
+    private final List<LottoNumber> winNumbers;
 
     public WinNumbers(List<Integer> winNumbers) {
         validateWinNumbers(winNumbers);
-        this.winNumbers = winNumbers;
+        this.winNumbers = new ArrayList<>();
+        for (Integer winNum : winNumbers) {
+            this.winNumbers.add(new LottoNumber(winNum));
+        }
     }
 
     private void validateWinNumbers(List<Integer> winNumbers) {
@@ -22,7 +28,7 @@ public class WinNumbers {
     }
 
     private boolean isValidSize(List<Integer> winNumbers) {
-        return winNumbers.size() == 6;
+        return winNumbers.size() == WIN_NUMBERS_SIZE;
     }
 
     private boolean isUnique(List<Integer> winNumbers) {

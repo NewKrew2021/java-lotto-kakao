@@ -4,6 +4,9 @@ import java.util.Objects;
 
 public class LottoNumber {
 
+    private static final int MAX_LOTTO_NUMBER = 45;
+    private static final int MIN_LOTTO_NUMBER = 1;
+
     private final int lottoNumber;
 
     public LottoNumber(int lottoNumber) {
@@ -18,7 +21,7 @@ public class LottoNumber {
     }
 
     private boolean isValidRange(int lottoNumber) {
-        return lottoNumber <= 45 && lottoNumber >= 1;
+        return lottoNumber <= MAX_LOTTO_NUMBER && lottoNumber >= MIN_LOTTO_NUMBER;
     }
 
     @Override
