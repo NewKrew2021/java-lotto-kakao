@@ -6,7 +6,8 @@ public enum RankState {
     second(30000000),
     third(1500000),
     fourth(50000),
-    fifth(5000);
+    fifth(5000),
+    fail(0);
 
     private int winMoney;
 
