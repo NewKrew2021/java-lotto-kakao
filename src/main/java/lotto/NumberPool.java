@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class NumberPool {
-    List<Number> numbers;
+    private List<Number> numbers;
 
     public NumberPool() {
         numbers = IntStream.range(1,46)
