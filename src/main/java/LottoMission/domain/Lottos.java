@@ -11,7 +11,7 @@ public class Lottos {
         Collections.sort(this.lottos);
     }
 
-    public Map<LotteryWinnings,Integer> getAllLottoRankCount(LottoAnswer lottoAnswer){
+    public Map<LotteryWinnings, Integer> getAllLottoRankCount(LottoAnswer lottoAnswer) {
         Map<LotteryWinnings, Integer> result = new TreeMap<>();
         for (LotteryWinnings lotteryWinnings : LotteryWinnings.values()) {
             result.put(lotteryWinnings, 0);
@@ -24,7 +24,7 @@ public class Lottos {
         return result;
     }
 
-    public int getSumAllWinningMoney(LottoAnswer answer){
+    public int getSumAllWinningMoney(LottoAnswer answer) {
         return lottos
                 .stream()
                 .mapToInt(lotto -> lotto.getWinningMoney(answer))

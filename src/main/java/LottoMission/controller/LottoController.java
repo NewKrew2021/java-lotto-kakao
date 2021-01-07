@@ -15,31 +15,31 @@ public class LottoController {
     private LottoAnswer answer;
     private final int LOTTO_PRICE = 1000;
 
-    public LottoController(int userMoney){
+    public LottoController(int userMoney) {
         this.userMoney = new UserMoney(userMoney);
-        this.tryNumber = new TryNumber(userMoney/LOTTO_PRICE);
+        this.tryNumber = new TryNumber(userMoney / LOTTO_PRICE);
     }
 
-    public void buyLottosAuto(){
+    public void buyLottosAuto() {
         List<Lotto> lottoList = new ArrayList<>();
-        while(this.tryNumber.canTry()){
+        while (this.tryNumber.canTry()) {
             lottoList.add(new Lotto(RandomUtil.getRandomSixIntegerList()));
             this.tryNumber.useTryNumberCount();
         }
         this.lottos = new Lottos(lottoList);
     }
 
-    public void buyLottosSelf(Lottos lottos){
+    public void buyLottosSelf(Lottos lottos) {
         this.lottos = lottos;
     }
 
-    public void setLastWeekWinningNumber(List<Integer> sixNumberList, int bonusNumber){
+    public void setLastWeekWinningNumber(List<Integer> sixNumberList, int bonusNumber) {
         this.answer = new LottoAnswer(
                 new LottoNumbers(sixNumberList),
                 new LottoNumber(bonusNumber));
     }
 
-    public Map<LotteryWinnings,Integer> getAllLottoCount(){
+    public Map<LotteryWinnings, Integer> getAllLottoCount() {
         return lottos.getAllLottoRankCount(answer);
     }
 

@@ -12,7 +12,7 @@ public class LottoNumbers {
 
     public LottoNumbers(List<Integer> numbers) {
         Set<LottoNumber> temp = new HashSet<>();
-        for(int number: numbers){
+        for (int number : numbers) {
             temp.add(new LottoNumber(number));
         }
 
@@ -26,7 +26,7 @@ public class LottoNumbers {
         return temp.size() != MAX_NUMBERS_LENGTH;
     }
 
-    public boolean isContainLottoNumber(LottoNumber lottoNumber){
+    public boolean isContainLottoNumber(LottoNumber lottoNumber) {
         return numbers.contains(lottoNumber);
     }
 

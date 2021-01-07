@@ -26,12 +26,12 @@ public class Lotto implements Comparable<Lotto> {
         winnings = LotteryWinnings.getState(correctNo, hasBonusNo);
     }
 
-    public LotteryWinnings getWinningsStat(){
+    public LotteryWinnings getWinningsStat() {
         return this.winnings;
     }
 
-    public int getWinningMoney(LottoAnswer answer){
-        if(isNullWinnings()){
+    public int getWinningMoney(LottoAnswer answer) {
+        if (isNullWinnings()) {
             winningPrize(answer);
         }
         return this.winnings.getMoney();

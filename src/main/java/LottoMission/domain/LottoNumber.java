@@ -9,7 +9,7 @@ public class LottoNumber {
     private static final int MAX_NUMBER_VALUE = 45;
 
     public LottoNumber(int number) {
-        if(isInvalidNumber(number)){
+        if (isInvalidNumber(number)) {
             throw new IllegalArgumentException("숫자는 1~45 에 포함 되어야 합니다");
         }
         this.number = number;

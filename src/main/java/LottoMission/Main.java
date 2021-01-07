@@ -7,7 +7,6 @@ import LottoMission.view.OutputView;
 public class Main {
 
     public static void main(String[] args) {
-
         int userMoney = InputView.enterUerMoney();
 
         LottoController controller = new LottoController(userMoney);

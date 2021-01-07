@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoControllerTest {
 
     @Test
-    public void 수익률Test(){
+    public void 수익률Test() {
         LottoController controller = new LottoController(14000);
 
         Lottos lottos1 = new Lottos(Arrays.asList(
@@ -37,7 +37,7 @@ public class LottoControllerTest {
         controller.setLastWeekWinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 
         float rate = controller.getRateOfProfit();
-        assertThat((int) (rate*100)).isEqualTo(35);
+        assertThat((int) (rate * 100)).isEqualTo(35);
     }
 
 }

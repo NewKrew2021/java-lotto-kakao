@@ -13,33 +13,33 @@ public class LottosTest {
 
     @Test
     @DisplayName("Lottos 는 각각의 Lotto 순서가 다르더라도, 담긴 숫자가 일치하면 동일한 객체로 본다")
-    public void LottosEqualTest(){
+    public void LottosEqualTest() {
         Lottos lottos1 = new Lottos(Arrays.asList(
-                new Lotto(Arrays.asList(1,2,3,4,5,6)),
-                new Lotto(Arrays.asList(1,2,3,4,5,7)),
-                new Lotto(Arrays.asList(1,2,3,4,5,8))
-                ));
+                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)),
+                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 8))
+        ));
 
         Lottos lottos2 = new Lottos(Arrays.asList(
-                new Lotto(Arrays.asList(1,2,3,4,5,6)),
-                new Lotto(Arrays.asList(1,2,3,4,5,8)),
-                new Lotto(Arrays.asList(1,2,3,4,5,7))
+                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 8)),
+                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7))
         ));
         assertThat(lottos1).isEqualTo(lottos2);
     }
 
     @Test
-    public void LottoNotEqualTest(){
+    public void LottoNotEqualTest() {
         Lottos lottos1 = new Lottos(Arrays.asList(
-                new Lotto(Arrays.asList(1,2,3,4,5,6)),
-                new Lotto(Arrays.asList(1,2,3,4,5,7)),
-                new Lotto(Arrays.asList(1,2,3,4,5,8))
+                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)),
+                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 8))
         ));
 
         Lottos lottos2 = new Lottos(Arrays.asList(
-                new Lotto(Arrays.asList(1,2,3,4,5,6)),
-                new Lotto(Arrays.asList(1,2,3,4,5,8)),
-                new Lotto(Arrays.asList(9,10,11,12,13,14))
+                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
+                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 8)),
+                new Lotto(Arrays.asList(9, 10, 11, 12, 13, 14))
         ));
 
 
