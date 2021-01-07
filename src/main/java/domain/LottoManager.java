@@ -1,5 +1,6 @@
+package domain;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class LottoManager {
@@ -14,18 +15,17 @@ public class LottoManager {
 
     public Map<LottoStatus, Integer> checkResult() {
         Map<LottoStatus, Integer> result = new HashMap<>();
+
+        for (LottoStatus lottoStatus: LottoStatus.getLottoStatuses()) {
+            result.put(lottoStatus, 0);
+        }
         for (Lotto lotto : lottos.getLottos()) {
             LottoStatus lottoStatus = answerLotto.getResult(lotto);
-            result.put(lottoStatus, getRankCount(result, lottoStatus));
+            if(lottoStatus != null) {
+                result.put(lottoStatus, result.get(lottoStatus) + 1);
+            }
         }
         return result;
-    }
-
-    private int getRankCount(Map<LottoStatus, Integer> result, LottoStatus lottoStatus) {
-        if (!result.containsKey(lottoStatus)) {
-            return 1;
-        }
-        return result.get(lottoStatus) + 1;
     }
 
 }

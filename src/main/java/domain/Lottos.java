@@ -1,3 +1,5 @@
+package domain;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -24,5 +26,14 @@ public class Lottos {
     @Override
     public int hashCode() {
         return Objects.hash(lottos);
+    }
+
+    @Override
+    public String toString() {
+        StringBuffer stringBuffer = new StringBuffer();
+        for (Lotto lotto : lottos) {
+            stringBuffer.append(lotto + "\n");
+        }
+        return stringBuffer.toString();
     }
 }

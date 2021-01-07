@@ -1,19 +1,24 @@
+package domain;
+
+import utils.StringUtils;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class LottoSimulator {
 
-    private static final int LOTTO_PRICE = 1000;
-    private static final int PERCENTAGE = 100;
-    private final int initial_money;
-    public int money;
+    private static final long LOTTO_PRICE = 1000;
+    private static final long PERCENTAGE = 100;
+
+    private final long initial_money;
+    public long money;
     private LottoManager lottoManager;
     private List<Lotto> lottos;
     private AnswerLotto answerLotto;
     private LottoNumberMaker lottoNumberMaker;
 
-    public LottoSimulator(int money) {
+    public LottoSimulator(long money) {
         this.money = money;
         lottos = new ArrayList<>();
         initial_money = money;
@@ -33,8 +38,8 @@ public class LottoSimulator {
         lottos.add(new Lotto(lottoNumberMaker.generateLottoNumbers(lottoStrategy)));
     }
 
-    public void addAnswerLotto(List<Integer> lottoNumbers, int bonusNumber) {
-        answerLotto = new AnswerLotto(lottoNumbers, bonusNumber);
+    public void addAnswerLotto(String inputTexts, int bonus) {
+        answerLotto = new AnswerLotto(lottoNumberMaker.makeLottoNumberFromStrings(StringUtils.splitText(inputTexts)), bonus);
     }
 
     public void setLottoManager() {
@@ -43,11 +48,22 @@ public class LottoSimulator {
 
     public int getWinningMoney() {
         Map<LottoStatus, Integer> lottoResult = lottoManager.checkResult();
-
         return lottoResult.entrySet().stream().map(e->e.getValue() * e.getKey().getWinngs()).reduce(Integer::sum).get();
     }
 
-    public int profitPercentage() {
+    public Map<LottoStatus, Integer> getLottoResults() {
+        return lottoManager.checkResult();
+    }
+
+    public long profitPercentage() {
         return getWinningMoney() * PERCENTAGE / initial_money ;
+    }
+
+    public long getBuyLottoCount() {
+        return initial_money / LOTTO_PRICE;
+    }
+
+    public Lottos getLottos() {
+        return new Lottos(lottos);
     }
 }

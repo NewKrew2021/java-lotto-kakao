@@ -1,3 +1,6 @@
+package domain;
+
+import domain.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -17,8 +20,8 @@ public class LottoManagerTest {
         ));
         AnswerLotto answerLotto = new AnswerLotto(Arrays.asList(1,2,3,4,5,6),7);
         lottoManager = new LottoManager(lottos, answerLotto);
-        assertThat(lottoManager.checkResult().keySet()).containsExactly(LottoStatus.FIRST,
-                LottoStatus.SECOND, LottoStatus.FOURTH);
+        assertThat(lottoManager.checkResult().keySet()).containsAll(Arrays.asList(LottoStatus.FIRST,
+                LottoStatus.SECOND, LottoStatus.FOURTH));
     }
 
     @Test

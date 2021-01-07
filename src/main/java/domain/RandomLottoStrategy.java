@@ -1,3 +1,5 @@
+package domain;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,7 +20,9 @@ public class RandomLottoStrategy implements LottoStrategy {
     @Override
     public List<Integer> NumberChoose() {
         Collections.shuffle(LottoNumbers);
-        return LottoNumbers.stream().limit(LOTTO_NUMBER_SIZE).collect(Collectors.toList());
+        List<Integer> result = LottoNumbers.stream().limit(LOTTO_NUMBER_SIZE).collect(Collectors.toList());
+        Collections.sort(result);
+        return result;
     }
 
 }

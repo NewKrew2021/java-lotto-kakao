@@ -1,16 +1,16 @@
+package domain;
+
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 public enum LottoStatus {
     FIRST(1, 2000000000, 6, false),
     SECOND(2, 30000000, 5, true),
     THIRD(3, 1500000, 5, false),
     FOURTH(4, 50000, 4, false),
-    FIFTH(5, 5000, 3, false),
-    NOTHING(0, 0, 0, false);
+    FIFTH(5, 5000, 3, false);
 
     private final int rank;
     private final int winngs;
@@ -18,10 +18,12 @@ public enum LottoStatus {
     private final boolean isBonusNumberMatched;
 
     private static final List<LottoStatus> lottoStatuses = new ArrayList<>();
+
     static {
         for (LottoStatus e : values()) {
             lottoStatuses.add(e);
         }
+        Collections.sort(lottoStatuses, Comparator.reverseOrder());
     }
 
     LottoStatus(int rank, int winngs, int matchedLottoNumberCount, boolean isBonusNumberMatched) {
@@ -51,10 +53,16 @@ public enum LottoStatus {
         if(matchedLottoNumberCount == LottoStatus.SECOND.matchedLottoNumberCount) {
             return lottoStatuses.stream().filter(lotto ->
                     lotto.getMatchedLottoNumberCount() == matchedLottoNumberCount
-                            && lotto.isBonusNumberMatched() == isBonusNumberMatched).findFirst().get();
+                            && lotto.isBonusNumberMatched() == isBonusNumberMatched).
+                    findFirst().orElse(null);
         }
         return lottoStatuses.stream().filter(lotto ->
-                lotto.getMatchedLottoNumberCount() == matchedLottoNumberCount).findFirst().get();
+                lotto.getMatchedLottoNumberCount() == matchedLottoNumberCount).findFirst().
+                orElse(null);
+    }
+
+    public static List<LottoStatus> getLottoStatuses() {
+        return lottoStatuses;
     }
 
 }

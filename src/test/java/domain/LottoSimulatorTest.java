@@ -1,3 +1,7 @@
+package domain;
+
+import domain.LottoSimulator;
+import domain.LottoStatus;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -28,7 +32,7 @@ public class LottoSimulatorTest {
     void profitPercentageTest() {
         LottoSimulator lottoSimulator = new LottoSimulator(10000);
         lottoSimulator.addLotto(() -> Arrays.asList(1,2,3,14,15,16));
-        lottoSimulator.addAnswerLotto(Arrays.asList(1,2,3,4,5,6), 7);
+        lottoSimulator.addAnswerLotto("1,2,3,4,5,6", 7);
         lottoSimulator.setLottoManager();
         assertThat(lottoSimulator.profitPercentage()).isEqualTo(50);
 
@@ -39,7 +43,7 @@ public class LottoSimulatorTest {
         LottoSimulator lottoSimulator = new LottoSimulator(2000);
         lottoSimulator.addLotto(() -> Arrays.asList(1,2,3,4,5,6));
         lottoSimulator.addLotto(() -> Arrays.asList(1,2,3,4,5,7));
-        lottoSimulator.addAnswerLotto(Arrays.asList(1,2,3,4,5,6), 7);
+        lottoSimulator.addAnswerLotto("1,2,3,4,5,6", 7);
         lottoSimulator.setLottoManager();
         assertThat(lottoSimulator.getWinningMoney()).
                 isEqualTo(LottoStatus.FIRST.getWinngs() + LottoStatus.SECOND.getWinngs());
