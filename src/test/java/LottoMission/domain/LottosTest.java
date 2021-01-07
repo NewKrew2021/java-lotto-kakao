@@ -65,9 +65,9 @@ public class LottosTest {
         ));
 
         LottoAnswer answer = new LottoAnswer(
-                new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), new LottoNumber(7));
+                new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), new Number(7));
 
-        Map<LotteryWinnings, Integer> allLottoRankCount = lottos1.getAllLottoRankCount(answer);
+        Map<Rank, Integer> allLottoRankCount = lottos1.getAllLottoRankCount(answer);
         System.out.println(allLottoRankCount);
     }
 

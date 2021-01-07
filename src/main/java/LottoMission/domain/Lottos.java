@@ -11,14 +11,14 @@ public class Lottos {
         Collections.sort(this.lottos);
     }
 
-    public Map<LotteryWinnings, Integer> getAllLottoRankCount(LottoAnswer lottoAnswer) {
-        Map<LotteryWinnings, Integer> result = new TreeMap<>();
-        for (LotteryWinnings lotteryWinnings : LotteryWinnings.values()) {
+    public Map<Rank, Integer> getAllLottoRankCount(LottoAnswer lottoAnswer) {
+        Map<Rank, Integer> result = new TreeMap<>();
+        for (Rank lotteryWinnings : Rank.values()) {
             result.put(lotteryWinnings, 0);
         }
         for (Lotto lotto : lottos) {
             lotto.winningPrize(lottoAnswer);
-            LotteryWinnings winningsStat = lotto.getWinningsStat();
+            Rank winningsStat = lotto.getWinningsStat();
             result.put(winningsStat, result.get(winningsStat) + 1);
         }
         return result;

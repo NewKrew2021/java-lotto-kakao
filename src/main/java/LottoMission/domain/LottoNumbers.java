@@ -7,13 +7,13 @@ import java.util.Set;
 
 public class LottoNumbers {
 
-    private final Set<LottoNumber> numbers;
+    private final Set<Number> numbers;
     private static final int MAX_NUMBERS_LENGTH = 6;
 
     public LottoNumbers(List<Integer> numbers) {
-        Set<LottoNumber> temp = new HashSet<>();
+        Set<Number> temp = new HashSet<>();
         for (int number : numbers) {
-            temp.add(new LottoNumber(number));
+            temp.add(new Number(number));
         }
 
         if (checkNumbersLength(temp)) {
@@ -22,15 +22,15 @@ public class LottoNumbers {
         this.numbers = temp;
     }
 
-    private boolean checkNumbersLength(Set<LottoNumber> temp) {
+    private boolean checkNumbersLength(Set<Number> temp) {
         return temp.size() != MAX_NUMBERS_LENGTH;
     }
 
-    public boolean isContainLottoNumber(LottoNumber lottoNumber) {
+    public boolean isContainLottoNumber(Number lottoNumber) {
         return numbers.contains(lottoNumber);
     }
 
-    public Set<LottoNumber> getNumbers() {
+    public Set<Number> getNumbers() {
         return numbers;
     }
 

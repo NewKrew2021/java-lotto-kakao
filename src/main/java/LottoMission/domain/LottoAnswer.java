@@ -5,9 +5,9 @@ import java.util.Set;
 public class LottoAnswer {
 
     private final LottoNumbers answerNumbers;
-    private final LottoNumber bonusNumber;
+    private final Number bonusNumber;
 
-    public LottoAnswer(LottoNumbers answerNumbers, LottoNumber bonusNumber) {
+    public LottoAnswer(LottoNumbers answerNumbers, Number bonusNumber) {
         if (answerNumbers.isContainLottoNumber(bonusNumber)) {
             throw new IllegalArgumentException("당첨 번호와 보너스 번호가 같을 수 없습니다.");
         }
@@ -15,11 +15,11 @@ public class LottoAnswer {
         this.bonusNumber = bonusNumber;
     }
 
-    public Set<LottoNumber> getAnswerNumbers() {
+    public Set<Number> getAnswerNumbers() {
         return answerNumbers.getNumbers();
     }
 
-    public LottoNumber getBonusNumber() {
+    public Number getBonusNumber() {
         return bonusNumber;
     }
 

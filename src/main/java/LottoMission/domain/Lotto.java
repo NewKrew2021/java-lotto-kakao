@@ -8,25 +8,25 @@ import java.util.Set;
 public class Lotto implements Comparable<Lotto> {
 
     private final LottoNumbers numbers;
-    private LotteryWinnings winnings;
+    private Rank winnings;
 
     public Lotto(List<Integer> numbers) {
         this.numbers = new LottoNumbers(numbers);
     }
 
     public void winningPrize(LottoAnswer answer) {
-        Set<LottoNumber> answerNumbers = answer.getAnswerNumbers();
-        Set<LottoNumber> combine = new HashSet<>(answerNumbers);
+        Set<Number> answerNumbers = answer.getAnswerNumbers();
+        Set<Number> combine = new HashSet<>(answerNumbers);
         combine.addAll(this.numbers.getNumbers());
 
         int correctNo = 12 - combine.size();
-        LottoNumber bonus = answer.getBonusNumber();
+        Number bonus = answer.getBonusNumber();
 
         boolean hasBonusNo = numbers.isContainLottoNumber(bonus);
-        winnings = LotteryWinnings.getState(correctNo, hasBonusNo);
+        winnings = Rank.getRank(correctNo, hasBonusNo);
     }
 
-    public LotteryWinnings getWinningsStat() {
+    public Rank getWinningsStat() {
         return this.winnings;
     }
 

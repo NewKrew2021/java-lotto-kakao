@@ -1,6 +1,6 @@
 package LottoMission.domain;
 
-public enum LotteryWinnings {
+public enum Rank {
     FIRST(1, 6, false, 2000000000),
     SECOND(2, 5, true, 30000000),
     THIRD(3, 5, false, 1500000),
@@ -13,14 +13,14 @@ public enum LotteryWinnings {
     private final boolean hasBonus;
     private final int money;
 
-    LotteryWinnings(int rank, int correctNo, boolean hasBonus, int money) {
+    Rank(int rank, int correctNo, boolean hasBonus, int money) {
         this.rank = rank;
         this.correctNo = correctNo;
         this.hasBonus = hasBonus;
         this.money = money;
     }
 
-    public static LotteryWinnings getState(int correctNo, boolean hasBonus) {
+    public static Rank getRank(int correctNo, boolean hasBonus) {
         if (correctNo == 6) return FIRST;
         if (correctNo == 5 && hasBonus) return SECOND;
         if (correctNo == 5) return THIRD;

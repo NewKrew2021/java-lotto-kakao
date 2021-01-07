@@ -1,6 +1,7 @@
 package LottoMission.controller;
 
 import LottoMission.domain.*;
+import LottoMission.domain.Number;
 import LottoMission.util.RandomUtil;
 
 import java.util.ArrayList;
@@ -36,10 +37,10 @@ public class LottoController {
     public void setLastWeekWinningNumber(List<Integer> sixNumberList, int bonusNumber) {
         this.answer = new LottoAnswer(
                 new LottoNumbers(sixNumberList),
-                new LottoNumber(bonusNumber));
+                new Number(bonusNumber));
     }
 
-    public Map<LotteryWinnings, Integer> getAllLottoCount() {
+    public Map<Rank, Integer> getAllLottoCount() {
         return lottos.getAllLottoRankCount(answer);
     }
 

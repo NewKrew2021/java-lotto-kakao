@@ -1,7 +1,7 @@
 package LottoMission.view;
 
 import LottoMission.controller.LottoController;
-import LottoMission.domain.LotteryWinnings;
+import LottoMission.domain.Rank;
 import LottoMission.domain.Lotto;
 
 import java.util.List;
@@ -17,10 +17,10 @@ public class OutputView {
         }
     }
 
-    public static void resultView(Map<LotteryWinnings, Integer> allLottoRankCount) {
+    public static void resultView(Map<Rank, Integer> allLottoRankCount) {
         System.out.println("당첨 통계");
         StringBuilder sb = new StringBuilder();
-        for (LotteryWinnings lotteryWinnings : allLottoRankCount.keySet()) {
+        for (Rank lotteryWinnings : allLottoRankCount.keySet()) {
             String resultLine = lotteryWinnings.getCorrectNo() + "개 일치";
             if (lotteryWinnings.getHasBonus()) resultLine += ", 보너스 볼 일";
             resultLine += "(" + lotteryWinnings.getMoney() + "원) - ";

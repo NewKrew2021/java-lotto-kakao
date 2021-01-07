@@ -2,13 +2,13 @@ package LottoMission.domain;
 
 import java.util.Objects;
 
-public class LottoNumber {
+public class Number {
 
     private final int number;
     private static final int MIN_NUMBER_VALUE = 1;
     private static final int MAX_NUMBER_VALUE = 45;
 
-    public LottoNumber(int number) {
+    public Number(int number) {
         if (isInvalidNumber(number)) {
             throw new IllegalArgumentException("숫자는 1~45 에 포함 되어야 합니다");
         }
@@ -23,7 +23,7 @@ public class LottoNumber {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoNumber that = (LottoNumber) o;
+        Number that = (Number) o;
         return number == that.number;
     }
 
