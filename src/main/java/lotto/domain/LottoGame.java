@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -8,30 +7,21 @@ public class LottoGame {
 
     private final Money money;
     private final TotalUserBuyNumbers totalUserBuyNumbers;
-    private final WinAndBonusNumbers winAndBonusNumbers;
 
     public LottoGame(int money) {
         this.money = new Money(money);
         this.totalUserBuyNumbers = new TotalUserBuyNumbers();
-        this.winAndBonusNumbers = new WinAndBonusNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
     }
 
-//    public void play() {
-//        buyLotto();
-//    }
-//
-//    public void addBuyNumbers(UserBuyNumbers userBuyNumbers) {
-//        totalUserBuyNumbers.addBuyNumbers(userBuyNumbers);
-//    }
-//
-//    private void buyLotto() {
-//        for (int i = 0; i < money.possibleNumberBuy(); i++) {
-//            totalUserBuyNumbers.addBuyNumbers(NumberGenerator.generateBuyNumbers(new RandomGenerateStrategy()));
-//        }
-//    }
+    public List<List<String>> buyLotto() {
+        for (int i = 0; i < money.possibleNumberBuy(); i++) {
+            totalUserBuyNumbers.addBuyNumbers(NumberGenerator.generateBuyNumbers(new RandomGenerateStrategy()));
+        }
+        return totalUserBuyNumbers.convertToString();
+    }
 
-    private List<RankState> getLottoResult() {
-        return this.totalUserBuyNumbers.getAllRankResult(this.winAndBonusNumbers);
+    public List<RankState> getLottoResult(WinAndBonusNumbers winAndBonusNumbers) {
+        return this.totalUserBuyNumbers.getAllRankResult(winAndBonusNumbers);
     }
 
     @Override

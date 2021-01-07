@@ -26,4 +26,10 @@ public class LottoNumberTest {
             new LottoNumber(0);
         }).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    public void intToString() {
+        LottoNumber lottoNumber = new LottoNumber(7);
+        assertThat(lottoNumber.getNumberToString()).isEqualTo("7");
+    }
 }

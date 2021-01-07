@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,6 +22,14 @@ public class TotalUserBuyNumbers {
             winResult.add(totalUserBuyNumber.calculateRank(winAndBonusNumbers));
         }
         return winResult;
+    }
+
+    public List<List<String>> convertToString() {
+        List<List<String>> allNumbers = new ArrayList<>();
+        for (UserBuyNumbers userBuyNumbers : totalUserBuyNumbers) {
+            allNumbers.add(userBuyNumbers.convertToString());
+        }
+        return allNumbers;
     }
 
     @Override

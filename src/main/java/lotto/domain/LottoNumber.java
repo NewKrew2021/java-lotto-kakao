@@ -14,6 +14,10 @@ public class LottoNumber {
         this.lottoNumber = lottoNumber;
     }
 
+    public String getNumberToString() {
+        return Integer.toString(this.lottoNumber);
+    }
+
     private void validateLottoNumber(int lottoNumber) {
         if (!isValidRange(lottoNumber)){
             throw new IllegalArgumentException("로또 번호는 1부터 45까지의 숫자입니다.");

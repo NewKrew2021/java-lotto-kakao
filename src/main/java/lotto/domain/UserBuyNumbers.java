@@ -22,6 +22,14 @@ public class UserBuyNumbers {
         return winAndBonusNumbers.getRankState(this.userBuyNumbers);
     }
 
+    public List<String> convertToString() {
+        List<String> numbers = new ArrayList<>();
+        for (LottoNumber lottoNumber : userBuyNumbers) {
+            numbers.add(lottoNumber.getNumberToString());
+        }
+        return numbers;
+    }
+
     private void validateUserBuyNumbers(List<Integer> userBuyNumbers) {
         if (!isValidSize(userBuyNumbers)) {
             throw new IllegalArgumentException("구매 번호는 6개입니다.");
