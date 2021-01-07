@@ -22,7 +22,6 @@ public class LottoProgram {
         Lottos lottos = new Lottos(buyLottoCount);
 
         lottoProgramView.printLottosNumber(lottos);
-        System.out.println();
 
         Lotto winningLotto = lottoProgramView.getWinningLotto();
         lottoProgramView.printWinningStatistics(lottos.getLottoStatistics(winningLotto,buyAmount.intValue()));
