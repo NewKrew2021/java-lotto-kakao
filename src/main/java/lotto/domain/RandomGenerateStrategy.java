@@ -17,7 +17,7 @@ public class RandomGenerateStrategy implements GenerateStrategy {
         IntStream.rangeClosed(1, 45).forEach(numbers::add);
         Collections.shuffle(numbers);
         List<Integer> shuffledSubNumbers = numbers.subList(0, 6);
-        Collections.shuffle(shuffledSubNumbers);
+        Collections.sort(shuffledSubNumbers);
         return new UserBuyNumbers(shuffledSubNumbers);
     }
 }
