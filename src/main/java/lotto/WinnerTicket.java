@@ -16,4 +16,12 @@ public class WinnerTicket {
     public LottoNumber getBonusNumber() {
         return bonusNumber;
     }
+
+    public int countMatchingNumber(LottoNumbers lottoNumbers) {
+        return winnerNumbers.countMatchingNumber(lottoNumbers);
+    }
+
+    public boolean hasBonus(LottoNumbers lottoNumbers) {
+        return lottoNumbers.contains(bonusNumber);
+    }
 }
