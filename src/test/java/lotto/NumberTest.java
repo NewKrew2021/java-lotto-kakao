@@ -22,9 +22,8 @@ public class NumberTest {
 
     @Test
     void tempTest(){
-        NumberPool pool = new NumberPool();
         for(int i=0;i<10;i++){
-            List<Number> numbers = pool.getRandomNumbers();
+            List<Number> numbers = NumberPool.getInstance().getRandomNumbers();
             numbers.forEach(System.out::println);
             System.out.println();
         }

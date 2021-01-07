@@ -6,14 +6,17 @@ import java.util.stream.IntStream;
 
 public class LottoTickets {
     private List<LottoTicket> lottoTickets;
-    private NumberPool numberPool;
 
-    public LottoTickets(int price) {
-        numberPool = new NumberPool();
-        lottoTickets = new ArrayList<>();
-        lottoTickets = IntStream.range(1, price / 1000 + 1)
-                .mapToObj(val -> new LottoTicket(new HashSet<>(numberPool.getRandomNumbers())))
-                .collect(Collectors.toList());
+    public LottoTickets(List<LottoTicket> lottoTickets) {
+        this.lottoTickets = Collections.unmodifiableList(lottoTickets);
+    }
+
+    public static LottoTickets fromPrice(int price) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        for (int i = 0; i < price / 1000; i++) {
+            lottoTickets.add(new LottoTicket(new HashSet<>(NumberPool.getInstance().getRandomNumbers())));
+        }
+        return new LottoTickets(lottoTickets);
     }
 
     public int getTicketCount() {
