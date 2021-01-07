@@ -11,4 +11,16 @@ public class BonusNumberTest {
         BonusNumber bonusNum = new BonusNumber(7);
         assertThat(bonusNum).isEqualTo(new BonusNumber(7));
     }
+
+    @Test
+    public void same() {
+        BonusNumber bonusNum = new BonusNumber(7);
+        assertThat(bonusNum.isSame(new LottoNumber(7))).isTrue();
+    }
+
+    @Test
+    public void unsame() {
+        BonusNumber bonusNum = new BonusNumber(10);
+        assertThat(bonusNum.isSame(new LottoNumber(7))).isFalse();
+    }
 }

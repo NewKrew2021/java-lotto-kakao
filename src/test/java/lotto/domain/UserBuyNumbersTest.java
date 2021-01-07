@@ -10,9 +10,9 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 public class UserBuyNumbersTest {
 
     @Test
-    public void create(){
-        UserBuyNumbers userBuyNumbers = new UserBuyNumbers(Arrays.asList(1,2,3,4,5,6));
-        assertThat(userBuyNumbers).isEqualTo(new UserBuyNumbers(Arrays.asList(1,2,3,4,5,6)));
+    public void create() {
+        UserBuyNumbers userBuyNumbers = new UserBuyNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(userBuyNumbers).isEqualTo(new UserBuyNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
     }
 
     @Test
@@ -34,5 +34,18 @@ public class UserBuyNumbersTest {
         assertThatThrownBy(() -> {
             new UserBuyNumbers(Arrays.asList(1, 1, 2, 3, 4, 5));
         }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    public void checkRankSecond() {
+        WinAndBonusNumbers winAndBonusNumbers = new WinAndBonusNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+        UserBuyNumbers userBuyNumbers = new UserBuyNumbers(Arrays.asList(1, 2, 3, 4, 5, 7));
+        assertThat(userBuyNumbers.calculateRank(winAndBonusNumbers)).isEqualTo(RankState.SECOND);
+    }
+
+    public void checkRankFail() {
+        WinAndBonusNumbers winAndBonusNumbers = new WinAndBonusNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+        UserBuyNumbers userBuyNumbers = new UserBuyNumbers(Arrays.asList(40, 41, 42, 43, 44, 45));
+        assertThat(userBuyNumbers.calculateRank(winAndBonusNumbers)).isEqualTo(RankState.FAIL);
     }
 }

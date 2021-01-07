@@ -10,6 +10,10 @@ public class BonusNumber {
         this.bonusNumber = new LottoNumber(bonusNumber);
     }
 
+    public boolean isSame(LottoNumber lottoNumber) {
+        return this.bonusNumber.equals(lottoNumber);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

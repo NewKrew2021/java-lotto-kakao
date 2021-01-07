@@ -35,4 +35,18 @@ public class WinNumbersTest {
             new WinNumbers(Arrays.asList(1, 1, 2, 3, 4, 5));
         }).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    public void contain() {
+        WinNumbers winNums = new WinNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumber num = new LottoNumber(5);
+        assertThat(winNums.contains(num)).isTrue();
+    }
+
+    @Test
+    public void notContain() {
+        WinNumbers winNums = new WinNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumber num = new LottoNumber(10);
+        assertThat(winNums.contains(num)).isFalse();
+    }
 }

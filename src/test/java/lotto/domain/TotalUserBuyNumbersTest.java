@@ -2,7 +2,9 @@ package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -21,5 +23,16 @@ public class TotalUserBuyNumbersTest {
         TotalUserBuyNumbers totalUserBuyNums2 = new TotalUserBuyNumbers();
         totalUserBuyNums2.addBuyNumbers(new UserBuyNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
         assertThat(totalUserBuyNums1).isEqualTo(totalUserBuyNums2);
+    }
+
+    @Test
+    public void getWinResult() {
+        TotalUserBuyNumbers totalUserBuyNumbers = new TotalUserBuyNumbers();
+        totalUserBuyNumbers.addBuyNumbers(new UserBuyNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        totalUserBuyNumbers.addBuyNumbers(new UserBuyNumbers(Arrays.asList(5, 6, 7, 8, 9, 11)));
+        WinAndBonusNumbers winAndBonusNumbers = new WinAndBonusNumbers(Arrays.asList(5, 6, 7, 8, 9, 10), 11);
+        List<RankState> result = totalUserBuyNumbers.getAllRankResult(winAndBonusNumbers);
+        List<RankState> expected = new ArrayList<>(Arrays.asList(RankState.FAIL, RankState.SECOND));
+        assertThat(result).isEqualTo(expected);
     }
 }

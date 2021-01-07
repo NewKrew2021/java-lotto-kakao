@@ -14,6 +14,35 @@ public class WinAndBonusNumbers {
         this.bonusNumber = new BonusNumber(bonusNumber);
     }
 
+    public RankState getRankState(List<LottoNumber> userBuyNumbers) {
+        int matchCount = 0;
+        boolean bonusMatched = false;
+        for(int i=0;i<6;i++) {
+            if (winNumbers.contains(userBuyNumbers.get(i))) {
+                matchCount++;
+            }
+            if (bonusNumber.isSame(userBuyNumbers.get(i))) {
+                bonusMatched = true;
+            }
+        }
+        if (matchCount == 6) {
+            return RankState.FIRST;
+        }
+        if (matchCount == 5 && bonusMatched) {
+            return RankState.SECOND;
+        }
+        if (matchCount == 5) {
+            return RankState.THIRD;
+        }
+        if (matchCount == 4) {
+            return RankState.FOURTH;
+        }
+        if (matchCount == 3) {
+            return RankState.FIFTH;
+        }
+        return RankState.FAIL;
+    }
+
     private void validateWinAndBonusNumbers(List<Integer> winNumbers, int bonusNumber) {
         if (hasDuplicationBetween(winNumbers, bonusNumber)) {
             throw new IllegalArgumentException("보너스 번호는 당첨 번호와 중복될 수 없습니다.");

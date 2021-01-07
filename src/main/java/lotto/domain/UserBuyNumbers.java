@@ -18,6 +18,10 @@ public class UserBuyNumbers {
         }
     }
 
+    public RankState calculateRank(WinAndBonusNumbers winAndBonusNumbers) {
+        return winAndBonusNumbers.getRankState(this.userBuyNumbers);
+    }
+
     private void validateUserBuyNumbers(List<Integer> userBuyNumbers) {
         if (!isValidSize(userBuyNumbers)) {
             throw new IllegalArgumentException("구매 번호는 6개입니다.");

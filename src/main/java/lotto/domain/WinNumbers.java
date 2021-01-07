@@ -18,6 +18,10 @@ public class WinNumbers {
         }
     }
 
+    public boolean contains(LottoNumber num) {
+        return this.winNumbers.contains(num);
+    }
+
     private void validateWinNumbers(List<Integer> winNumbers) {
         if (!isValidSize(winNumbers)) {
             throw new IllegalArgumentException("당첨 번호는 6개입니다.");
