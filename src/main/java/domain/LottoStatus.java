@@ -6,15 +6,14 @@ import java.util.Comparator;
 import java.util.List;
 
 public enum LottoStatus {
-    FIRST(2000000000, 6, false),
-    SECOND(30000000, 5, true),
-    THIRD(1500000, 5, false),
-    FOURTH(50000, 4, false),
-    FIFTH(5000, 3, false);
+    FIRST(2000000000, 6),
+    SECOND(30000000, 5),
+    THIRD(1500000, 5),
+    FOURTH(50000, 4),
+    FIFTH(5000, 3);
 
     private final int winnings;
     private final int matchedLottoNumberCount;
-    private final boolean isBonusNumberMatched;
 
     private static final List<LottoStatus> lottoStatuses = new ArrayList<>();
 
@@ -25,10 +24,9 @@ public enum LottoStatus {
         Collections.sort(lottoStatuses, Comparator.reverseOrder());
     }
 
-    LottoStatus(int winnings, int matchedLottoNumberCount, boolean isBonusNumberMatched) {
+    LottoStatus(int winnings, int matchedLottoNumberCount) {
         this.winnings = winnings;
         this.matchedLottoNumberCount = matchedLottoNumberCount;
-        this.isBonusNumberMatched = isBonusNumberMatched;
     }
 
     public int getWinnings() {
@@ -39,20 +37,20 @@ public enum LottoStatus {
         return matchedLottoNumberCount;
     }
 
-    public boolean isBonusNumberMatched() {
-        return isBonusNumberMatched;
-    }
-
     public static LottoStatus findStatus(int matchedLottoNumberCount, boolean isBonusNumberMatched) {
         if (matchedLottoNumberCount == LottoStatus.SECOND.matchedLottoNumberCount) {
-            return lottoStatuses.stream().filter(lotto ->
-                    lotto.getMatchedLottoNumberCount() == matchedLottoNumberCount
-                            && lotto.isBonusNumberMatched() == isBonusNumberMatched).
-                    findFirst().orElse(null);
+            return secondOrThirdPrize(isBonusNumberMatched);
         }
         return lottoStatuses.stream().filter(lotto ->
                 lotto.getMatchedLottoNumberCount() == matchedLottoNumberCount).findFirst().
                 orElse(null);
+    }
+
+    public static LottoStatus secondOrThirdPrize(boolean isBonusNumberMatched) {
+        if(isBonusNumberMatched) {
+            return LottoStatus.SECOND;
+        }
+        return LottoStatus.THIRD;
     }
 
     public static List<LottoStatus> getLottoStatuses() {
