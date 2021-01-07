@@ -5,9 +5,11 @@ import java.util.Objects;
 public class LottoGame {
 
     private final int money;
+    private final TotalUserBuyNumbers totalUserBuyNumbers;
 
     public LottoGame(int money) {
         this.money = money;
+        this.totalUserBuyNumbers = new TotalUserBuyNumbers();
     }
 
     public int buyLotto() {
