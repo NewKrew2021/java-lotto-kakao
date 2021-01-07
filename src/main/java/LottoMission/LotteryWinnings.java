@@ -1,18 +1,20 @@
 package LottoMission;
 
 public enum LotteryWinnings {
-    FIRST(6, false, 2000000000),
-    SECOND(5, true, 30000000),
-    THIRD(5, false, 1500000),
-    FOURTH(4, false, 50000),
-    FIFTH(3, false, 5000),
-    UNRANKED(0, false, 0);
+    FIRST(1, 6, false, 2000000000),
+    SECOND(2, 5, true, 30000000),
+    THIRD(3, 5, false, 1500000),
+    FOURTH(4, 4, false, 50000),
+    FIFTH(5, 3, false, 5000),
+    UNRANKED(6, 0, false, 0);
 
+    private final int rank;
     private final int correctNo;
     private final boolean hasBonus;
     private final int money;
 
-    LotteryWinnings(int correctNo, boolean hasBonus, int money) {
+    LotteryWinnings(int rank, int correctNo, boolean hasBonus, int money) {
+        this.rank = rank;
         this.correctNo = correctNo;
         this.hasBonus = hasBonus;
         this.money = money;
@@ -26,4 +28,21 @@ public enum LotteryWinnings {
         if (correctNo == 3) return FIFTH;
         return UNRANKED;
     }
+
+    public int getRank() {
+        return rank;
+    }
+
+    public int getCorrectNo() {
+        return correctNo;
+    }
+
+    public boolean isHasBonus() {
+        return hasBonus;
+    }
+
+    public int getMoney() {
+        return money;
+    }
+
 }
