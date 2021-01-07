@@ -31,4 +31,9 @@ public class LottoNos {
             return true;
         return false;
     }
+
+    public boolean isContains(LottoNo lottoNo) {
+        return this.numbers.contains(lottoNo);
+    }
+
 }
