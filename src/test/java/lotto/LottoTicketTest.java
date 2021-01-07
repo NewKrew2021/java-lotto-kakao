@@ -68,13 +68,7 @@ public class LottoTicketTest {
 
     @ParameterizedTest
     @CsvSource({"1,6,3,5,4,2,FIRST", "3,2,1,7,5,4,SECOND", "3,40,30,2,7,5,FIFTH"})
-    void matchWinnerNumberTest(int i1,
-                               int i2,
-                               int i3,
-                               int i4,
-                               int i5,
-                               int i6,
-                               LottoRank rank) {
+    void matchWinnerNumberTest(int i1, int i2, int i3, int i4, int i5, int i6, LottoRank rank) {
         WinnerNumber winnerNumber = new WinnerNumber(Sets.newHashSet(Arrays.asList(
                 new Number(1),
                 new Number(2),

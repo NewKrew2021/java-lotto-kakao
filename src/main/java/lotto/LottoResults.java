@@ -2,6 +2,7 @@ package lotto;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class LottoResults {
     private final Map<LottoRank, Integer> results;
@@ -28,6 +29,19 @@ public class LottoResults {
             sum += results.get(rank) * rank.getPrice();
         }
         return this + "총 수익률은 " + (long) (sum / price * 100) + "%입니다.";
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoResults that = (LottoResults) o;
+        return Objects.equals(results, that.results);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(results);
     }
 
     @Override
