@@ -15,11 +15,11 @@ public class LottoTicketsTest {
     void create() {
         //given
         NumberGenerateStrategy strategy = new OneToSixGenerator();
-        List<LottoTicket> given = Arrays.asList(
-                LottoTicket.from(strategy),
-                LottoTicket.from(strategy),
-                LottoTicket.from(strategy),
-                LottoTicket.from(strategy)
+        List<LottoNumbers> given = Arrays.asList(
+                LottoNumbers.from(strategy),
+                LottoNumbers.from(strategy),
+                LottoNumbers.from(strategy),
+                LottoNumbers.from(strategy)
         );
 
         //when

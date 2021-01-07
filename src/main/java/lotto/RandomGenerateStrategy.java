@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static lotto.LottoTicket.LOTTO_TICKET_LENGTH;
+import static lotto.LottoNumbers.LOTTO_TICKET_LENGTH;
 
 public class RandomGenerateStrategy implements NumberGenerateStrategy {
 

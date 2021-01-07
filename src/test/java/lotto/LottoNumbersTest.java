@@ -6,12 +6,12 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.List;
 
-import static lotto.LottoTicket.LOTTO_TICKET_EXCEPTION_MESSAGE;
+import static lotto.LottoNumbers.LOTTO_TICKET_EXCEPTION_MESSAGE;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 
-public class LottoTicketTest {
+public class LottoNumbersTest {
 
     @DisplayName("숫자를 생성하는 전략이 주어 졌을 때 로또 티켓을 생성한다.")
     @Test
@@ -20,12 +20,12 @@ public class LottoTicketTest {
         NumberGenerateStrategy strategy = new OneToSixGenerator();
 
         //when
-        LottoTicket lottoTicket = LottoTicket.from(strategy);
+        LottoNumbers lottoNumbers = LottoNumbers.from(strategy);
 
         //then
         List<LottoNumber> expected = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
                 new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
-        assertThat(lottoTicket.getLottoNumbers()).isEqualTo(expected);
+        assertThat(lottoNumbers.getLottoNumbers()).isEqualTo(expected);
     }
 
     @DisplayName("중복된 숫자가 있는 6개의 로또 넘버가 주어 졌을 때 로또 티켓을 생성하면 예외가 발생된다.")
@@ -37,7 +37,7 @@ public class LottoTicketTest {
         //then
         assertThatIllegalArgumentException()
                 // when
-                .isThrownBy(() -> LottoTicket.from(duplicateStrategy))
+                .isThrownBy(() -> LottoNumbers.from(duplicateStrategy))
                 .withMessage(LOTTO_TICKET_EXCEPTION_MESSAGE);
     }
 
@@ -50,7 +50,7 @@ public class LottoTicketTest {
         //then
         assertThatIllegalArgumentException()
                 // when
-                .isThrownBy(() -> LottoTicket.from(lessLengthStrategy))
+                .isThrownBy(() -> LottoNumbers.from(lessLengthStrategy))
                 .withMessage(LOTTO_TICKET_EXCEPTION_MESSAGE);
     }
 
@@ -63,7 +63,7 @@ public class LottoTicketTest {
         //then
         assertThatIllegalArgumentException()
                 // when
-                .isThrownBy(() -> LottoTicket.from(overLengthStrategy))
+                .isThrownBy(() -> LottoNumbers.from(overLengthStrategy))
                 .withMessage(LOTTO_TICKET_EXCEPTION_MESSAGE);
     }
 }
