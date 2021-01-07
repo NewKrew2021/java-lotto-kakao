@@ -13,7 +13,20 @@ public class Lotteries {
     }
 
     public Lotteries() {
-        lotteries = new ArrayList<Lottery>();
+        lotteries = new ArrayList<>();
+    }
+
+    public LotteryRank calculateRank(LotteryAnswer lotteryAnswer) {
+        HashMap<Integer, Integer> ranks = new HashMap<>();
+        for (int i = 1; i <= 5; i++) {
+            ranks.put(i, 0);
+        }
+        ranks.put(Lottery.NONE, 0);
+        for (Lottery lottery : lotteries) {
+            int rank = lottery.checkRank(lotteryAnswer);
+            ranks.put(rank, ranks.get(rank) + 1);
+        }
+        return new LotteryRank(ranks);
     }
 
     @Override
@@ -27,19 +40,5 @@ public class Lotteries {
     @Override
     public int hashCode() {
         return Objects.hash(lotteries);
-    }
-
-    public HashMap<Integer, Integer> getRanks(List<LotteryNumber> answerNumbers, LotteryNumber bonusNumber) {
-        HashMap<Integer, Integer> ranks = new HashMap<>();
-        for (int i = 1; i <= 5; i++) {
-            ranks.put(i, 0);
-        }
-        ranks.put(Lottery.NONE, 0);
-
-        for (Lottery lottery : lotteries) {
-            int rank = lottery.checkRank(answerNumbers, bonusNumber);
-            ranks.put(rank, ranks.get(rank) + 1);
-        }
-        return ranks;
     }
 }

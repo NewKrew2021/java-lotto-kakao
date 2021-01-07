@@ -1,7 +1,6 @@
 package lotto;
 
 import java.util.Objects;
-import java.util.Random;
 
 public class LotteryNumber {
     public static final int MIN_LOTTERYNUMBER = 1;
@@ -9,13 +8,7 @@ public class LotteryNumber {
     private static final String MSG_WRONG_LOTTERYNUMBER_RANGE = String.format(
             "로또 번호는 %d와 %d 사이의 수여야 합니다.", MIN_LOTTERYNUMBER, MAX_LOTTERYNUMBER);
 
-    private static final Random random = new Random();
-
     private final int number;
-
-    public LotteryNumber() {
-        this(random.nextInt(MAX_LOTTERYNUMBER - MIN_LOTTERYNUMBER) + MIN_LOTTERYNUMBER);
-    }
 
     public LotteryNumber(int number) {
         if (number < MIN_LOTTERYNUMBER || number > MAX_LOTTERYNUMBER) {
