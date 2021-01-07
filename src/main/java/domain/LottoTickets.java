@@ -14,6 +14,12 @@ public class LottoTickets {
         this.lottoTickets = lottoTickets;
     }
 
+    public List<List<Integer>> getLottoTicketsInfo() {
+        return lottoTickets.stream()
+            .map(LottoTicket::getLottoTicketInfo)
+            .collect(Collectors.toList());
+    }
+
     public WinningInfo getWinningInfo(LottoWinningNumber lottoWinningNumber) {
         List<Integer> winningInfo = new ArrayList<>(Arrays.asList(0, 0, 0, 0, 0));
         for (LottoTicket lottoTicket : lottoTickets) {
