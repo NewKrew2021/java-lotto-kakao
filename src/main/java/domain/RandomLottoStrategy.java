@@ -11,18 +11,15 @@ public class RandomLottoStrategy implements LottoStrategy {
     private static final int START_LOTTO_NUMBER = 1;
     private static final int LOTTO_NUMBER_SIZE = 6;
 
-    private final List<Integer> LottoNumbers;
+    private final List<Integer> lotto;
 
     public RandomLottoStrategy() {
-        LottoNumbers = IntStream.rangeClosed(START_LOTTO_NUMBER, END_LOTTO_NUMBER).boxed().collect(Collectors.toList());
+        lotto = IntStream.rangeClosed(START_LOTTO_NUMBER, END_LOTTO_NUMBER).boxed().collect(Collectors.toList());
     }
 
     @Override
-    public List<Integer> NumberChoose() {
-        Collections.shuffle(LottoNumbers);
-        List<Integer> result = LottoNumbers.stream().limit(LOTTO_NUMBER_SIZE).collect(Collectors.toList());
-        Collections.sort(result);
-        return result;
+    public List<Integer> choose6Numbers() {
+        Collections.shuffle(lotto);
+        return lotto.stream().limit(LOTTO_NUMBER_SIZE).sorted().collect(Collectors.toList());
     }
-
 }

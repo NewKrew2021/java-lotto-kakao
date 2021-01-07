@@ -20,10 +20,8 @@ public enum LottoStatus {
     private static final List<LottoStatus> lottoStatuses = new ArrayList<>();
 
     static {
-        for (LottoStatus e : values()) {
-            lottoStatuses.add(e);
-        }
-        Collections.sort(lottoStatuses, Comparator.reverseOrder());
+        Collections.addAll(lottoStatuses, values());
+        lottoStatuses.sort(Comparator.reverseOrder());
     }
 
     LottoStatus(int rank, int winngs, int matchedLottoNumberCount, boolean isBonusNumberMatched) {
@@ -50,15 +48,15 @@ public enum LottoStatus {
     }
 
     public static LottoStatus findStatus(int matchedLottoNumberCount, boolean isBonusNumberMatched) {
-        if(matchedLottoNumberCount == LottoStatus.SECOND.matchedLottoNumberCount) {
+        if (matchedLottoNumberCount == LottoStatus.SECOND.matchedLottoNumberCount) {
             return lottoStatuses.stream().filter(lotto ->
                     lotto.getMatchedLottoNumberCount() == matchedLottoNumberCount
-                            && lotto.isBonusNumberMatched() == isBonusNumberMatched).
-                    findFirst().orElse(null);
+                            && lotto.isBonusNumberMatched() == isBonusNumberMatched)
+                    .findFirst().orElse(null);
         }
         return lottoStatuses.stream().filter(lotto ->
-                lotto.getMatchedLottoNumberCount() == matchedLottoNumberCount).findFirst().
-                orElse(null);
+                lotto.getMatchedLottoNumberCount() == matchedLottoNumberCount).findFirst()
+                .orElse(null);
     }
 
     public static List<LottoStatus> getLottoStatuses() {

@@ -30,10 +30,10 @@ public class Lottos {
 
     @Override
     public String toString() {
-        StringBuffer stringBuffer = new StringBuffer();
+        StringBuilder stringBuilder = new StringBuilder();
         for (Lotto lotto : lottos) {
-            stringBuffer.append(lotto + "\n");
+            stringBuilder.append(lotto).append("\n");
         }
-        return stringBuffer.toString();
+        return stringBuilder.toString();
     }
 }

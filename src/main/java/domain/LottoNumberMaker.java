@@ -6,7 +6,7 @@ import java.util.List;
 public class LottoNumberMaker {
 
     public List<Integer> generateLottoNumbers(LottoStrategy lottoStrategy) {
-        return lottoStrategy.NumberChoose();
+        return lottoStrategy.choose6Numbers();
     }
 
     public List<Integer> makeLottoNumberFromStrings(List<String> strings) {
@@ -16,12 +16,12 @@ public class LottoNumberMaker {
     private List<Integer> mapStringToInteger(List<String> strings) {
         List<Integer> results = new ArrayList<>();
         for (String string : strings) {
-            addNumber(results, string);
+            addNumberIfCanConvertToInt(results, string);
         }
         return results;
     }
 
-    private void addNumber(List<Integer> numbers, String string) {
+    private void addNumberIfCanConvertToInt(List<Integer> numbers, String string) {
         try {
             numbers.add(Integer.parseInt(string));
         } catch (NumberFormatException numberFormatException) {

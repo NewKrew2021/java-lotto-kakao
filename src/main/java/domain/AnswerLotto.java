@@ -14,12 +14,8 @@ public class AnswerLotto {
         this.bonusNumber = bonusNumber;
     }
 
-    public int getBonusNumber() {
-        return bonusNumber;
-    }
-
     public LottoStatus getResult(Lotto lotto) {
-        return LottoStatus.findStatus(getMatchingNumber(lotto.getLotto()),isMatchedBonusNumber(lotto.getLotto()));
+        return LottoStatus.findStatus(getMatchingNumber(lotto.getLotto()), isMatchedBonusNumber(lotto.getLotto()));
     }
 
     private boolean isMatchedBonusNumber(List<Integer> lotto) {

@@ -13,19 +13,23 @@ public class LottoManager {
         this.answerLotto = answerLotto;
     }
 
-    public Map<LottoStatus, Integer> checkResult() {
+    public Map<LottoStatus, Integer> resultOfLottos() {
         Map<LottoStatus, Integer> result = new HashMap<>();
 
-        for (LottoStatus lottoStatus: LottoStatus.getLottoStatuses()) {
+        for (LottoStatus lottoStatus : LottoStatus.getLottoStatuses()) {
             result.put(lottoStatus, 0);
         }
         for (Lotto lotto : lottos.getLottos()) {
             LottoStatus lottoStatus = answerLotto.getResult(lotto);
-            if(lottoStatus != null) {
-                result.put(lottoStatus, result.get(lottoStatus) + 1);
-            }
+            insertIfNotNull(result, lottoStatus);
         }
         return result;
+    }
+
+    private void insertIfNotNull(Map<LottoStatus, Integer> result, LottoStatus lottoStatus) {
+        if (lottoStatus != null) {
+            result.put(lottoStatus, result.get(lottoStatus) + 1);
+        }
     }
 
 }

@@ -20,9 +20,9 @@ public class LottoController {
     }
 
     private void buyAutoLotto() {
-        int lottoMoney = lottoSimulatorView.askMoneyForBuyLotto();
+        int lottoMoney = lottoSimulatorView.askMoneyToBuyLotto();
         lottoSimulator = new LottoSimulator(lottoMoney);
-        while(lottoSimulator.hasMoney()) {
+        while (lottoSimulator.hasMoney()) {
             lottoSimulator.buyAutoLotto();
         }
         lottoSimulatorView.printBuyLottoCount(lottoSimulator.getBuyLottoCount());
@@ -33,8 +33,8 @@ public class LottoController {
     }
 
     private void getAnswerLottoNumbers() {
-        String answerLottoNumbers = lottoSimulatorView.askLottoNumberForAnswerLotto();
-        int bonusNumber = lottoSimulatorView.askBonusNumberForAnswerLotto();
+        String answerLottoNumbers = lottoSimulatorView.askLottoNumberToAnswerLotto();
+        int bonusNumber = lottoSimulatorView.askBonusNumberToAnswerLotto();
         lottoSimulator.addAnswerLotto(answerLottoNumbers, bonusNumber);
         lottoSimulator.setLottoManager();
     }

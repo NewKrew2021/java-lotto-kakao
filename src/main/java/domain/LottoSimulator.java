@@ -14,9 +14,9 @@ public class LottoSimulator {
     private final long initial_money;
     public long money;
     private LottoManager lottoManager;
-    private List<Lotto> lottos;
+    private final List<Lotto> lottos;
     private AnswerLotto answerLotto;
-    private LottoNumberMaker lottoNumberMaker;
+    private final LottoNumberMaker lottoNumberMaker;
 
     public LottoSimulator(long money) {
         this.money = money;
@@ -47,16 +47,17 @@ public class LottoSimulator {
     }
 
     public int getWinningMoney() {
-        Map<LottoStatus, Integer> lottoResult = lottoManager.checkResult();
-        return lottoResult.entrySet().stream().map(e->e.getValue() * e.getKey().getWinngs()).reduce(Integer::sum).get();
+        Map<LottoStatus, Integer> lottoResult = lottoManager.resultOfLottos();
+        return lottoResult.entrySet().stream().map(e -> e.getValue() * e.getKey().getWinngs()).reduce(Integer::sum)
+                .orElse(0);
     }
 
     public Map<LottoStatus, Integer> getLottoResults() {
-        return lottoManager.checkResult();
+        return lottoManager.resultOfLottos();
     }
 
     public long profitPercentage() {
-        return getWinningMoney() * PERCENTAGE / initial_money ;
+        return getWinningMoney() * PERCENTAGE / initial_money;
     }
 
     public long getBuyLottoCount() {
