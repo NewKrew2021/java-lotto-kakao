@@ -5,21 +5,18 @@ import java.util.Collections;
 import java.util.List;
 
 public class LottoLogic {
-    private List<LottoNos> lottoTickets = new ArrayList<>();
 
-    public LottoLogic(int howmany) {
+    public static List<LottoNos> makeRandomLottos(int howmany) {
+        List<LottoNos> lottoTickets = new ArrayList<>();
         List<Integer> nums = makeLottoNumber();
         for (int i = 0; i < howmany; i++) {
             Collections.shuffle(nums);
             lottoTickets.add(new LottoNos(nums.subList(0, 6)));
         }
+        return lottoTickets;
     }
 
-    public int getLottoCount() {
-        return lottoTickets.size();
-    }
-
-    private List<Integer> makeLottoNumber() {
+    private static List<Integer> makeLottoNumber() {
         List<Integer> nums = new ArrayList<>();
         for (int i = 1; i <= 45; i++) {
             nums.add(i);
@@ -27,5 +24,13 @@ public class LottoLogic {
         return nums;
     }
 
+    public static StatisticsResult winningStatistics(List<LottoNos> lottoTickets, WinningLottoNos winningLottoNos ) {
+        StatisticsResult statisticsResult = new StatisticsResult();
+
+        for (LottoNos lottoNos: lottoTickets) {
+            statisticsResult.increaseTypeCount(winningLottoNos.isWinning(lottoNos));
+        }
+        return statisticsResult;
+    }
 
 }

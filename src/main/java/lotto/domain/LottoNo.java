@@ -35,4 +35,9 @@ public class LottoNo implements Comparable<LottoNo>{
             return -1;
         return 0;
     }
+
+    @Override
+    public String toString() {
+        return "" + this.number;
+    }
 }

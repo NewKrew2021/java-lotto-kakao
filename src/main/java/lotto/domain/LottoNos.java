@@ -44,4 +44,8 @@ public class LottoNos {
                 .size();
     }
 
+    @Override
+    public String toString() {
+        return this.numbers.toString();
+    }
 }
