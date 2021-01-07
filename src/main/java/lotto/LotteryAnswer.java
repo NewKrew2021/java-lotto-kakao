@@ -9,14 +9,14 @@ public class LotteryAnswer {
     private List<LotteryNumber> answerNumber;
     private LotteryNumber bonusNumber;
 
-    public LotteryAnswer(List<LotteryNumber> answerNumber, LotteryNumber bonusNumber) {
-        if (LotteryUtil.isInvalidSizeLotteryNumbers(answerNumber)) {
+    public LotteryAnswer(List<LotteryNumber> answerNumbers, LotteryNumber bonusNumber) {
+        if (LotteryUtil.isInvalidSizeLotteryNumbers(answerNumbers)) {
             throw new IllegalArgumentException(LotteryUtil.MSG_WRONG_LOTTERY_LENGTH);
         }
-        if (LotteryUtil.isDuplicatedLotteryNumbers(answerNumber, bonusNumber)) {
+        if (LotteryUtil.isDuplicatedLotteryNumbers(answerNumbers, bonusNumber)) {
             throw new IllegalArgumentException(LotteryUtil.MSG_DUPLICATED_LOTTERYNUMBER);
         }
-        this.answerNumber = answerNumber;
+        this.answerNumber = answerNumbers;
         this.bonusNumber = bonusNumber;
     }
 
