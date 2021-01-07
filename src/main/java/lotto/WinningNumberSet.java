@@ -14,7 +14,13 @@ public class WinningNumberSet {
             throw new IllegalArgumentException("보너스볼에는 당첨 번호가 포함되어서는 안된다.");
         }
     }
-    
+
+    public Rank compare(List<Ball> balls){
+        int matchedCount = winningLotto.compareWithBalls(balls);
+        boolean hasBonus = balls.contains(bonusBall);
+        return Rank.createRank(matchedCount, hasBonus);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

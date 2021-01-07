@@ -36,7 +36,20 @@ public class Lotto {
                 .map(Ball::new)
                 .collect(Collectors.toList());
     }
-    
+
+    public boolean contains(Ball ball) {
+        return lottoBalls.contains(ball);
+    }
+
+    public Rank compareWithWinning(WinningNumberSet winningNumberSet) {
+        return winningNumberSet.compare(lottoBalls);
+    }
+
+    public int compareWithBalls(List<Ball> counterBalls) {
+        return 2 * COUNT_OF_NUMBERS
+                - (int) Stream.concat(lottoBalls.stream(), counterBalls.stream()).distinct().count();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
