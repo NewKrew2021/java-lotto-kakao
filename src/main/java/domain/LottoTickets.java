@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 
 public class LottoTickets {
     private List<LottoTicket> lottoTickets;
-    private NumberPool numberPool;
+    private final NumberPool numberPool;
 
     public LottoTickets(int price) {
         numberPool = new NumberPool();
@@ -22,9 +22,16 @@ public class LottoTickets {
 
     public LottoResults getResults(WinnerNumber winnerNumber) {
         LottoResults lottoResults = new LottoResults();
-        for (LottoTicket lottoTicket : lottoTickets) {
-            lottoResults.upsert(lottoTicket.getRank(winnerNumber));
-        }
+        lottoTickets.stream()
+                .filter(ticket->ticket.getRank(winnerNumber)!=null)
+                .forEach(ticket->lottoResults.upsert(ticket.getRank(winnerNumber)));
         return lottoResults;
+    }
+
+    @Override
+    public String toString() {
+        return lottoTickets.stream()
+                .map(LottoTicket::toString)
+                .reduce("", (total, s) -> total + s + "\n");
     }
 }

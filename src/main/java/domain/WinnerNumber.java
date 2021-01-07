@@ -3,7 +3,7 @@ package domain;
 import java.util.Set;
 
 public class WinnerNumber extends LottoTicket {
-    private Number bonusNumber;
+    private final Number bonusNumber;
 
 
     public WinnerNumber(Set<Number> numbers, Number bonusNumber) {

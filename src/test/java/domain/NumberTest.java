@@ -17,7 +17,7 @@ public class NumberTest {
     void exceptionTest() {
         assertThatThrownBy(() -> new Number(0))
                 .isInstanceOf(RuntimeException.class)
-                .hasMessageContaining("숫자가 잘못되었습니다");
+                .hasMessageContaining("숫자가 잘못되었습니다 : 0");
     }
 
     @Test
