@@ -6,7 +6,7 @@ import java.util.List;
 public class LottoNumberMaker {
 
     public List<Integer> generateLottoNumbers(LottoStrategy lottoStrategy) {
-        return lottoStrategy.NumberChoose();
+        return lottoStrategy.NumberChooseStrategy();
     }
 
     public List<Integer> makeLottoNumberFromStrings(List<String> strings) {

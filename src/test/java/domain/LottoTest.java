@@ -12,7 +12,7 @@ public class LottoTest {
     @Test
     void lottoNumberTest() {
         Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
-        assertThat(lotto.equals(new Lotto(Arrays.asList(1,2,3,4,5,6)))).isTrue();
+        assertThat(lotto.getLottoNumbers()).containsExactly(1,2,3,4,5,6);
     }
 
 }

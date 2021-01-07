@@ -1,7 +1,5 @@
 package domain;
 
-import domain.LottoSimulator;
-import domain.LottoStatus;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -46,6 +44,6 @@ public class LottoSimulatorTest {
         lottoSimulator.addAnswerLotto("1,2,3,4,5,6", 7);
         lottoSimulator.setLottoManager();
         assertThat(lottoSimulator.getWinningMoney()).
-                isEqualTo(LottoStatus.FIRST.getWinngs() + LottoStatus.SECOND.getWinngs());
+                isEqualTo(LottoStatus.FIRST.getWinnings() + LottoStatus.SECOND.getWinnings());
     }
 }

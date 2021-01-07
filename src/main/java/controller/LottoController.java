@@ -22,7 +22,7 @@ public class LottoController {
     private void buyAutoLotto() {
         int lottoMoney = lottoSimulatorView.askMoneyForBuyLotto();
         lottoSimulator = new LottoSimulator(lottoMoney);
-        while(lottoSimulator.hasMoney()) {
+        while (lottoSimulator.hasMoney()) {
             lottoSimulator.buyAutoLotto();
         }
         lottoSimulatorView.printBuyLottoCount(lottoSimulator.getBuyLottoCount());

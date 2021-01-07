@@ -1,6 +1,5 @@
 package domain;
 
-import domain.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -18,8 +17,8 @@ public class LottoManagerTest {
                 new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)),
                 new Lotto(Arrays.asList(3, 4, 5, 6, 7, 8))
         ));
-        AnswerLotto answerLotto = new AnswerLotto(Arrays.asList(1,2,3,4,5,6),7);
-        lottoManager = new LottoManager(lottos, answerLotto);
+        Answer answer = new Answer(Arrays.asList(1,2,3,4,5,6),7);
+        lottoManager = new LottoManager(lottos, answer);
         assertThat(lottoManager.checkResult().keySet()).containsAll(Arrays.asList(LottoStatus.FIRST,
                 LottoStatus.SECOND, LottoStatus.FOURTH));
     }
@@ -31,8 +30,8 @@ public class LottoManagerTest {
                 new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
                 new Lotto(Arrays.asList(3, 4, 5, 6, 7, 8))
         ));
-        AnswerLotto answerLotto = new AnswerLotto(Arrays.asList(1,2,3,4,5,6),7);
-        lottoManager = new LottoManager(lottos, answerLotto);
+        Answer answer = new Answer(Arrays.asList(1,2,3,4,5,6),7);
+        lottoManager = new LottoManager(lottos, answer);
         assertThat(lottoManager.checkResult().get(LottoStatus.FIRST)).isEqualTo(2);
         assertThat(lottoManager.checkResult().get(LottoStatus.FOURTH)).isEqualTo(1);
     }
