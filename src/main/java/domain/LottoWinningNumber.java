@@ -16,10 +16,19 @@ public class LottoWinningNumber {
     }
 
     private void validate(LottoTicket lottoWinningTicket, LottoNumber bonusNumber) {
-        if(lottoWinningTicket.isContains(bonusNumber)) {
+        if (lottoWinningTicket.isContains(bonusNumber)) {
             throw new InvalidLottoNumberException();
         }
     }
+
+    public int getMatchedCount(LottoTicket lottoTicket) {
+        return lottoTicket.getMatchedCount(lottoWinningTicket);
+    }
+
+    public boolean isContainsBounusNumber(LottoTicket lottoTicket) {
+        return lottoTicket.isContains(bonusNumber);
+    }
+
 
     @Override
     public boolean equals(Object o) {

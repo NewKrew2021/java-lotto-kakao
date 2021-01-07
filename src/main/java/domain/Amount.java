@@ -19,6 +19,10 @@ public class Amount {
         }
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
     public int getCount() {
         return this.amount / LOTTO_PRICE;
     }

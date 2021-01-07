@@ -43,8 +43,17 @@ public class LottoTicket {
         }
     }
 
-    public boolean isContains(LottoNumber bonusNumber) {
-        return numbers.contains(bonusNumber);
+    public boolean isContains(LottoNumber number) {
+        return numbers.contains(number);
+    }
+
+    public int getMatchedCount(LottoTicket lottoWinningTicket) {
+        int count = 0;
+        for (LottoNumber number : numbers) {
+            count += lottoWinningTicket.isContains(number) ? 1 : 0;
+        }
+
+        return count;
     }
 
     @Override

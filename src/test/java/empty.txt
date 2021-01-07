@@ -23,5 +23,3 @@
     * 총 당첨 금액 합산
     * 금액 대비 당첨금액으로 수익 계산
 
-Controller.createLottoTickets(amount);
-Controller.getLottoResult(입력 번호);
