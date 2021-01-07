@@ -12,25 +12,26 @@ public class LottoGame {
     }
 
     public void makeLottoTickets(int count) {
-        this.tickets = new LottoTickets(count);
-        LottoNumbers[] numbers = getLottoNumbers(count);
+        List<LottoTicket> tickets = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            LottoNumbers numbers = getLottoNumber();
+            tickets.add(generateLottoTicket(numbers));
+        }
 
-        this.tickets.generateTickets(numbers);
+        this.tickets = new LottoTickets(count, tickets);
     }
 
-    private LottoNumbers[] getLottoNumbers(int count) {
-
+    private LottoNumbers getLottoNumber() {
         LottoNumberGenerator generator = new RandomNumberGenerator();
-        LottoNumbers[] numbers = new LottoNumbers[count];
-
-        for(int i = 0; i < count; i++){
-            numbers[i] = generator.generateNumbers();
-        }
+        LottoNumbers numbers = generator.generateNumbers();
         return numbers;
     }
 
+    private LottoTicket generateLottoTicket(LottoNumbers numbers) {
+        return new LottoTicket(numbers);
+    }
 
-    public int getLottoTicketCount(int money){
+    public int getLottoTicketCount(int money) {
         return money / TICKET_PRICE;
     }
 

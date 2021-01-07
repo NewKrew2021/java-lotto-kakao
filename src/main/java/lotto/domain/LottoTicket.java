@@ -4,10 +4,9 @@ import java.util.Objects;
 import java.util.Set;
 
 public class LottoTicket {
-
     private final LottoNumbers numbers;
 
-    public LottoTicket(LottoNumbers numbers){
+    public LottoTicket(LottoNumbers numbers) {
         this.numbers = numbers;
     }
 
