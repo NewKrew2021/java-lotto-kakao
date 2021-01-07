@@ -1,39 +1,27 @@
 package domain;
 
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 public enum LottoRank {
     // 선언 순서 중요
-    FIRST(Arrays.asList(6), Arrays.asList(true, false), new BigInteger("2000000000")),
-    SECOND(Arrays.asList(5), Arrays.asList(true), new BigInteger("30000000")),
-    THIRD(Arrays.asList(5), Arrays.asList(false), new BigInteger("1500000")),
-    FOURTH(Arrays.asList(4), Arrays.asList(true, false), new BigInteger("50000")),
-    FIFTH(Arrays.asList(3), Arrays.asList(true, false), new BigInteger("5000")),
-    NONE(Arrays.asList(0, 1, 2), Arrays.asList(true, false), new BigInteger("0"));
+    FIFTH(Arrays.asList(3), Arrays.asList(true, false), new BigDecimal("5000"),"3개 일치 (5000원)- "),
+    FOURTH(Arrays.asList(4), Arrays.asList(true, false), new BigDecimal("50000"),"4개 일치 (50000원)- "),
+    THIRD(Arrays.asList(5), Arrays.asList(false), new BigDecimal("1500000"),"5개 일치 (1500000원)- "),
+    SECOND(Arrays.asList(5), Arrays.asList(true), new BigDecimal("30000000"),"5개 일치, 보너스 볼 일치(30000000원) - "),
+    FIRST(Arrays.asList(6), Arrays.asList(true, false), new BigDecimal("2000000000"),"6개 일치 (2000000000원)- ");
 
     private final List<Integer> rightCounts;
     private final List<Boolean> rightBonusBalls;
-    private final BigInteger reward;
+    private final BigDecimal reward;
+    private final String resultPrefix;
 
-    LottoRank(List<Integer> rightCounts, List<Boolean> rightBonusBalls, BigInteger reward) {
+    LottoRank(List<Integer> rightCounts, List<Boolean> rightBonusBalls, BigDecimal reward, String resultPrefix) {
         this.rightCounts = rightCounts;
         this.rightBonusBalls = rightBonusBalls;
         this.reward = reward;
-    }
-
-    public static LottoRank calculateLottoRank(int count, boolean rightBonusBall) {
-        Optional<LottoRank> result = Arrays.stream(LottoRank.values())
-                .filter(lottoRank -> lottoRank.checkRank(count, rightBonusBall))
-                .findFirst();
-
-        if (result.isPresent()) {
-            return result.get();
-        }
-
-        throw new IllegalStateException();
+        this.resultPrefix = resultPrefix;
     }
 
     public boolean checkRank(int count, boolean rightBonusBall) {
@@ -54,7 +42,11 @@ public enum LottoRank {
         return rightBonusBalls;
     }
 
-    public BigInteger getReward() {
+    public BigDecimal getReward() {
         return reward;
+    }
+
+    public String getResultPrefix() {
+        return resultPrefix;
     }
 }

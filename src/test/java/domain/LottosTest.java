@@ -3,7 +3,7 @@ package domain;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.math.BigInteger;
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.HashMap;
 
@@ -31,30 +31,27 @@ public class LottosTest {
     @Test
     public void calculateNumberOfRank(){
         assertThat(lottos.calculateNumberOfRank(LottoRank.FIRST, winningLotto))
-                .isEqualTo(new BigInteger("3"));
+                .isEqualTo(new BigDecimal("3"));
         assertThat(lottos.calculateNumberOfRank(LottoRank.SECOND, winningLotto))
-                .isEqualTo(new BigInteger("2"));
+                .isEqualTo(new BigDecimal("2"));
         assertThat(lottos.calculateNumberOfRank(LottoRank.THIRD, winningLotto))
-                .isEqualTo(new BigInteger("1"));
+                .isEqualTo(new BigDecimal("1"));
         assertThat(lottos.calculateNumberOfRank(LottoRank.FOURTH, winningLotto))
-                .isEqualTo(new BigInteger("0"));
+                .isEqualTo(new BigDecimal("0"));
         assertThat(lottos.calculateNumberOfRank(LottoRank.FIFTH, winningLotto))
-                .isEqualTo(new BigInteger("0"));
-        assertThat(lottos.calculateNumberOfRank(LottoRank.NONE, winningLotto))
-                .isEqualTo(new BigInteger("0"));
+                .isEqualTo(new BigDecimal("0"));
     }
 
     @Test
     public void getLottoStatisticsTest() {
-        LottoStatistics lottoStatistics = lottos.getLottoStatistics(winningLotto);
-        HashMap<LottoRank, BigInteger> rankNumbers = lottoStatistics.getRankNumbers();
-        HashMap<LottoRank, BigInteger> trueRankNumbers = new HashMap<>();
-        trueRankNumbers.put(LottoRank.FIRST, new BigInteger("3"));
-        trueRankNumbers.put(LottoRank.SECOND, new BigInteger("2"));
-        trueRankNumbers.put(LottoRank.THIRD, new BigInteger("1"));
-        trueRankNumbers.put(LottoRank.FOURTH, new BigInteger("0"));
-        trueRankNumbers.put(LottoRank.FIFTH, new BigInteger("0"));
-        trueRankNumbers.put(LottoRank.NONE, new BigInteger("0"));
+        LottoStatistics lottoStatistics = lottos.getLottoStatistics(winningLotto,5);
+        HashMap<LottoRank, BigDecimal> rankNumbers = lottoStatistics.getRankNumbers();
+        HashMap<LottoRank, BigDecimal> trueRankNumbers = new HashMap<>();
+        trueRankNumbers.put(LottoRank.FIRST, new BigDecimal("3"));
+        trueRankNumbers.put(LottoRank.SECOND, new BigDecimal("2"));
+        trueRankNumbers.put(LottoRank.THIRD, new BigDecimal("1"));
+        trueRankNumbers.put(LottoRank.FOURTH, new BigDecimal("0"));
+        trueRankNumbers.put(LottoRank.FIFTH, new BigDecimal("0"));
         assertThat(trueRankNumbers).isEqualTo(rankNumbers);
     }
 }
