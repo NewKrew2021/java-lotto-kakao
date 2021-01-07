@@ -12,10 +12,10 @@ public class LottoGame {
         this.totalUserBuyNumbers = new TotalUserBuyNumbers();
     }
 
-    public int buyLotto() {
+    public int possibleNumberBuy() {
         return this.money / 1000;
     }
-
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
