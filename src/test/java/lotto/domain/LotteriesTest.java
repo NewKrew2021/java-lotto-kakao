@@ -1,9 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.Lotteries;
-import lotto.domain.Lottery;
-import lotto.domain.LotteryAnswer;
-import lotto.domain.LotteryRank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -42,5 +38,13 @@ public class LotteriesTest {
         assertThat(lotteryRank.getnthCount(4)).isEqualTo(0);
         assertThat(lotteryRank.getnthCount(5)).isEqualTo(0);
         assertThat(lotteryRank.getnthCount(Lottery.NONE)).isEqualTo(2);
+    }
+
+    @Test
+    void Lotteries_push() {
+        Lotteries lotteries = new Lotteries();
+        Lottery randomLottery = Lottery.createRandomLottery();
+        lotteries.push(randomLottery);
+        assertThat(lotteries).isEqualTo(new Lotteries(Arrays.asList(randomLottery)));
     }
 }

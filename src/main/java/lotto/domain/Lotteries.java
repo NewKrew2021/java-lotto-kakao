@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Lotteries {
     private List<Lottery> lotteries;
@@ -27,6 +28,23 @@ public class Lotteries {
             ranks.put(rank, ranks.get(rank) + 1);
         }
         return new LotteryRank(ranks);
+    }
+
+    public static List<Lottery> getRandomLotteryList(int count) {
+        List<Lottery> lotteryList = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            lotteryList.add(Lottery.createRandomLottery());
+        }
+        return lotteryList;
+    }
+
+    public void push(Lottery lottery) {
+        lotteries.add(lottery);
+    }
+
+    @Override
+    public String toString() {
+        return lotteries.stream().map(Lottery::toString).collect(Collectors.joining("\n"));
     }
 
     @Override

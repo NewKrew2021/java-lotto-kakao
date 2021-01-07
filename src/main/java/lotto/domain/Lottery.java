@@ -16,8 +16,8 @@ public class Lottery {
     public Lottery(int[] ints) {
         this(
                 Arrays.stream(ints)
-                .mapToObj(LotteryNumber::new)
-                .collect(Collectors.toList())
+                        .mapToObj(LotteryNumber::new)
+                        .collect(Collectors.toList())
         );
     }
 
@@ -38,9 +38,9 @@ public class Lottery {
         Collections.shuffle(range_1_45);
         return new Lottery(
                 range_1_45.subList(0, LOTTERY_NUMBER_SIZE)
-                .stream()
-                .map(LotteryNumber::new)
-                .collect(Collectors.toList())
+                        .stream()
+                        .map(LotteryNumber::new)
+                        .collect(Collectors.toList())
         );
     }
 
@@ -74,6 +74,14 @@ public class Lottery {
                 .filter(numbers::contains)
                 .count();
         return LotteryUtil.convertCountToRank(count, bonus);
+    }
+
+    @Override
+    public String toString() {
+        return "[" + numbers.stream()
+                .map(LotteryNumber::toString)
+                .collect(Collectors.joining(", ")) +
+                "]";
     }
 
     @Override

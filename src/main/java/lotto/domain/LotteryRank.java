@@ -14,6 +14,14 @@ public class LotteryRank {
         return lotteryRank.getOrDefault(nthRank, 0);
     }
 
+    public long getTotalIncome() {
+        long total = 0;
+        for (int i = 0; i < LotteryUtil.WINNING_TABLE.length; i++) {
+            total += (long) LotteryUtil.WINNING_TABLE[i][1] * getnthCount(LotteryUtil.WINNING_TABLE[i][2]);
+        }
+        return total;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

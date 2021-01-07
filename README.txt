@@ -32,12 +32,12 @@
 - [x] 1 입력 UI 처리 클래스 InputView class
   - [x] 1.1 구입금액 입력받는 UI 구현
   - [x] 1.2 지난 주 당첨 번호, 보너스 볼 입력 UI 구현
-- [ ] 2 출력 UI 처리 클래스 OutputView class
-  - [ ] 2.1 구매 개수 출력 UI 구현
-  - [ ] 2.2 1개의 Lottery 로부터 발행된 로또 숫자들을 출력 UI 구현
-  - [ ] 2.3 Lotteries 로부터 발행된 로또들의 숫자들을 출력 UI 구현
-  - [ ] 2.4 Lotteries 로부터 통계와 총 수익률 출력 UI 구현
-- [ ] 3 로또 복권 흐름 진행하는 main 구현
+- [x] 2 출력 UI 처리 클래스 OutputView class
+  - [x] 2.1 구매 개수 출력 UI 구현
+  - [x] 2.2 1개의 Lottery 로부터 발행된 로또 숫자들을 출력 UI 구현
+  - [x] 2.3 Lotteries 로부터 발행된 로또들의 숫자들을 출력 UI 구현
+  - [x] 2.4 Lotteries 로부터 통계와 총 수익률 출력 UI 구현
+- [x] 3 로또 복권 흐름 진행하는 main 구현
 
 ## 실행 예시
 ```

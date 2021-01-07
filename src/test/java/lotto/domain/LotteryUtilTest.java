@@ -17,6 +17,14 @@ class LotteryUtilTest {
     }
 
     @Test
+    void calculateProfitRate() {
+        assertThat(LotteryUtil.calculateProfitRate(1, 1000)).isEqualTo(0);
+        assertThat(LotteryUtil.calculateProfitRate(1, 0)).isEqualTo(-100);
+        assertThat(LotteryUtil.calculateProfitRate(1, 2000)).isEqualTo(100);
+        assertThat(LotteryUtil.calculateProfitRate(1, 55000)).isEqualTo(5400);
+    }
+
+    @Test
     void LotteryUtil_구입불가능_로또개수계산() {
         assertThatExceptionOfType(IllegalArgumentException.class)
                 .isThrownBy(() -> LotteryUtil.calculateLotteryCount(-1));
