@@ -30,7 +30,7 @@ public class LotteryTest {
 
     @Test
     void Lottery_수동_유효하지않은수범위() {
-        /*  LotterNumberTest 에서 유효하지 않은 수 범위에 대해 테스트가 진행되기에 여기서는 공백 */
+        /*  LotteryNumberTest 에서 유효하지 않은 수 범위에 대해 테스트가 진행되기에 여기서는 공백 */
     }
 
     @Test

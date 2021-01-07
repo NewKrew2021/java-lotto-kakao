@@ -23,7 +23,7 @@ public class Lottery {
     }
 
     public static List<LotteryNumber> createRandomLotteryNumbers() {
-        List<Integer> range_1_45 = IntStream.rangeClosed(1, 45)
+        List<Integer> range_1_45 = IntStream.rangeClosed(LotteryNumber.MIN_LOTTERYNUMBER, LotteryNumber.MAX_LOTTERYNUMBER)
                 .boxed()
                 .collect(Collectors.toList());
         Collections.shuffle(range_1_45);
