@@ -1,42 +1,43 @@
 package controller;
 
+import domain.Answer;
 import domain.LottoSimulator;
+import domain.Lottos;
 import view.LottoSimulatorView;
 
 public class LottoController {
 
     private LottoSimulator lottoSimulator;
     private LottoSimulatorView lottoSimulatorView;
+    private Lottos lottos;
+    private Answer answer;
 
     public LottoController() {
         lottoSimulatorView = new LottoSimulatorView();
     }
 
     public void startLottoSimulator() {
-        buyAutoLotto();
-        printBuyLottos();
-        getAnswerLottoNumbers();
+        int initial_money = buyLotto();
+        printBuyLotto();
+        getAnswerNumbers();
+        lottoSimulator = new LottoSimulator(initial_money, lottos, answer);
         printLottoResults();
     }
 
-    private void buyAutoLotto() {
-        int lottoMoney = lottoSimulatorView.askMoneyForBuyLotto();
-        lottoSimulator = new LottoSimulator(lottoMoney);
-        while (lottoSimulator.hasMoney()) {
-            lottoSimulator.buyAutoLotto();
-        }
-        lottoSimulatorView.printBuyLottoCount(lottoSimulator.getBuyLottoCount());
+    private int buyLotto() {
+        int initial_money = lottoSimulatorView.askMoneyForBuyLotto();
+        lottos = new Lottos(initial_money);
+        return initial_money;
     }
 
-    private void printBuyLottos() {
-        lottoSimulatorView.printLottos(lottoSimulator.getLottos());
+    private void printBuyLotto() {
+        lottoSimulatorView.printLottos(lottos);
     }
 
-    private void getAnswerLottoNumbers() {
+    private void getAnswerNumbers() {
         String answerLottoNumbers = lottoSimulatorView.askLottoNumberForAnswerLotto();
         int bonusNumber = lottoSimulatorView.askBonusNumberForAnswerLotto();
-        lottoSimulator.addAnswerLotto(answerLottoNumbers, bonusNumber);
-        lottoSimulator.setLottoManager();
+        answer = new Answer(answerLottoNumbers, bonusNumber);
     }
 
     private void printLottoResults() {
