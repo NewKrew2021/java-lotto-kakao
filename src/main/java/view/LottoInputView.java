@@ -1,7 +1,5 @@
 package view;
 
-import com.sun.tools.jdeprscan.scan.Scan;
-import domain.Amount;
 import domain.LottoNumber;
 
 import java.util.Arrays;
@@ -11,18 +9,20 @@ import java.util.stream.Collectors;
 
 public class LottoInputView {
 
+    private LottoInputView() {
+    }
+
     private static Scanner sc = new Scanner(System.in);
 
     public static int inputAmount() {
         System.out.println("구입금액을 입력해 주세요.");
         return Integer.parseInt(sc.nextLine());
-//        return sc.nextInt();
     }
 
     public static List<LottoNumber> inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return Arrays.stream(sc.nextLine().split(","))
-                .map(number -> new LottoNumber(Integer.parseInt(number)))
+                .map(number -> new LottoNumber(Integer.parseInt(number.trim())))
                 .collect(Collectors.toList());
     }
 
