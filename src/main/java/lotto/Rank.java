@@ -1,17 +1,19 @@
 package lotto;
 
 public enum Rank {
-    FIRST(2000000000L),
-    SECOND(30000000L),
-    THIRD(1500000L),
-    FOURTH(50000L),
-    FIFTH(5000L),
-    NOTHING(0L);
+    FIRST(2000000000L, "6개 일치"),
+    SECOND(30000000L, "5개 일치, 보너스 볼 일치"),
+    THIRD(1500000L, "5개 일치"),
+    FOURTH(50000L, "4개 일치"),
+    FIFTH(5000L, "3개 일치"),
+    NOTHING(0L, "꽝");
 
     private Long prize;
+    private String description;
 
-    Rank(Long prize) {
+    Rank(Long prize, String description) {
         this.prize = prize;
+        this.description = description;
     }
 
     public static Rank createRank(int matchedCount, boolean hasBonus) {
@@ -35,5 +37,9 @@ public enum Rank {
 
     public Long getPrize() {
         return prize;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

@@ -3,6 +3,7 @@ package lotto;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class LottoGroup {
     private final List<Lotto> lottoGroup;
@@ -32,6 +33,13 @@ public class LottoGroup {
 
     public int getLottoCount() {
         return lottoGroup.size();
+    }
+
+    @Override
+    public String toString() {
+       return lottoGroup.stream()
+               .map(Lotto::toString)
+               .collect(Collectors.joining("\n"));
     }
 
     @Override

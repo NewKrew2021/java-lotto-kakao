@@ -16,7 +16,7 @@ public class Lotto {
             throw new IllegalArgumentException("로또번호 중복이 있어서는 안된다.");
         }
 
-        if (lottoNumbers.size() > COUNT_OF_NUMBERS) {
+        if (lottoNumbers.size() != COUNT_OF_NUMBERS) {
             throw new IllegalArgumentException("로또번호는 6개여야 합니다.");
         }
 
@@ -28,7 +28,6 @@ public class Lotto {
                 .map(Ball::new)
                 .collect(Collectors.toList());
     }
-
 
     private List<Ball> parseLottoText(String lottoText) {
         return Arrays.stream(lottoText.split(","))
@@ -48,6 +47,14 @@ public class Lotto {
     public int compareWithBalls(List<Ball> counterBalls) {
         return 2 * COUNT_OF_NUMBERS
                 - (int) Stream.concat(lottoBalls.stream(), counterBalls.stream()).distinct().count();
+    }
+
+    @Override
+    public String toString() {
+        return "[" + lottoBalls.stream()
+                .sorted()
+                .map(Ball::toString)
+                .collect(Collectors.joining(", ")) + "]";
     }
 
     @Override
