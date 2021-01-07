@@ -9,15 +9,3 @@
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
 ## 기능구현 목록
-1. 구입 금액 입력
-2. 구매 개수 결정
-3. 갯수만큼 자동발급
-    1. LottoTickets 객체 생성
-    2. 6개 랜덤넘버 생성
-    3. LottoTicket 생성
-    4. LottoTickets 에 LottoTickets 추가
-    5. 2-4를 객수만큼 반복
-4. 당첨번호 입력 및 예외처리
-5. 보너스볼 입력 및 예외처리
-6. 당첨 통계
-7. 수익률 계산
