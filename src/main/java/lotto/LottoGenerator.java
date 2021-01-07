@@ -23,5 +23,16 @@ public class LottoGenerator {
 
     }
 
+    public int generateBonus(Lotto lotto){
+        HashSet<Integer> set = new HashSet<>();
+        set.addAll(lotto.getLotto());
+
+        int bonusNo = RandomUtil.getRandomValue();
+        while(!set.add(bonusNo)){
+            bonusNo = RandomUtil.getRandomValue();
+        }
+
+        return bonusNo;
+    }
 
 }
