@@ -15,12 +15,11 @@ public class LottoReview {
 
     public int getProfitRatio(List<LottoRank> ranks) {
 
-        return caculateRatio(getProfit(ranks),ranks.size()*1000);
+        return calculateRatio(getProfit(ranks),ranks.size()*1000);
     }
 
-    public int caculateRatio(long totalPrize, long totalCost){
-
-        return Math.round(totalPrize/totalCost)*100;
+    private int calculateRatio(long totalPrize, long totalCost){
+        return (int)Math.round((double)(totalPrize)/(double)(totalCost)*100);
     }
 
 }

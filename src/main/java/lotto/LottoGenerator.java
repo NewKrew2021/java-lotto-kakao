@@ -1,6 +1,7 @@
 package lotto;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
@@ -13,6 +14,7 @@ public class LottoGenerator {
         while (set.size() < 6) {
             checkDuplicate(set, RandomUtil.getRandomValue(), lotto);
         }
+        Collections.sort(lotto);
         return new Lotto(lotto);
     }
 
@@ -34,5 +36,16 @@ public class LottoGenerator {
 
         return bonusNo;
     }
+
+    public Lotto lottoStringParser(String lotto){
+
+        String[] lottoNumber=lotto.split(",");
+        List<Integer> parsedLotto=new ArrayList<>();
+        for (String number : lottoNumber) {
+            parsedLotto.add(Integer.parseInt(number.trim()));
+        }
+        return new Lotto(parsedLotto);
+    }
+
 
 }

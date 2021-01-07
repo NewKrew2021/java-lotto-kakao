@@ -1,5 +1,8 @@
 package lotto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class WonLotto {
 
     private Lotto wonLotto;
@@ -44,6 +47,6 @@ public class WonLotto {
     }
 
     private int convertRank(int matchNo){
-        return 8 - matchNo;
+        return 7 - matchNo;
     }
 }
