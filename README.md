@@ -39,6 +39,10 @@
   - [x] 2.4 Lotteries 로부터 통계와 총 수익률 출력 UI 구현
 - [x] 3 로또 복권 흐름 진행하는 main 구현
 
+## 실제 실행 결과
+![image](https://user-images.githubusercontent.com/48780754/103897429-e65efa00-5136-11eb-85d3-e59167630a90.png)
+
+
 ## 실행 예시
 ```
 로또 1장의 가격은 1000원이다.  
