@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoNos;
+import lotto.domain.StatisticsResult;
 
 import java.util.List;
 
@@ -13,8 +14,11 @@ public class LottoOutputView {
         }
     }
 
-    public static void printWinningStatistics(List<LottoNos> lottoTic) {
-
+    public static void printWinningStatistics(StatisticsResult statisticsResult) {
+        System.out.println("당첨 통계");
+        System.out.println("----------");
+        System.out.println(statisticsResult.toString());
+        System.out.println(statisticsResult.benefit());
     }
 
 }

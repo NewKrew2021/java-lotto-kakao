@@ -7,15 +7,24 @@ import java.util.Objects;
 
 public class StatisticsResult {
 
+    private static final int NONE_JACKPOT = 0;
+    private static final int THREE_WINNING_JACKPOT = 5000;
+    private static final int FOUR_WINNING_JACKPOT = 50000;
+    private static final int FIVE_WINNING_JACKPOT = 1500000;
+    private static final int FIVE_BONUS_WINNING_JACKPOT = 30000000;
+    private static final int SIX_WINNING_JACKPOT = 2000000000;
+
     HashMap<StatisticsType, Integer> hashMap = new HashMap<>();
     static HashMap<StatisticsType, Integer> priceHash = new HashMap<>();
+    private int ticketCount = 0;
+
     static {
-        priceHash.put(StatisticsType.NONE, 0);
-        priceHash.put(StatisticsType.THREE, 5000);
-        priceHash.put(StatisticsType.FOUR, 50000);
-        priceHash.put(StatisticsType.FIVE, 1500000);
-        priceHash.put(StatisticsType.FIVE_WITH_BONUS, 30000000);
-        priceHash.put(StatisticsType.SIX, 2000000000);
+        priceHash.put(StatisticsType.NONE, NONE_JACKPOT);
+        priceHash.put(StatisticsType.THREE, THREE_WINNING_JACKPOT);
+        priceHash.put(StatisticsType.FOUR, FOUR_WINNING_JACKPOT);
+        priceHash.put(StatisticsType.FIVE, FIVE_WINNING_JACKPOT);
+        priceHash.put(StatisticsType.FIVE_WITH_BONUS, FIVE_BONUS_WINNING_JACKPOT);
+        priceHash.put(StatisticsType.SIX, SIX_WINNING_JACKPOT);
     }
 
 
@@ -27,6 +36,7 @@ public class StatisticsResult {
 
     public void increaseTypeCount(StatisticsType type) {
         hashMap.put(type, hashMap.get(type) + 1);
+        this.ticketCount++;
     }
 
     @Override
@@ -44,21 +54,20 @@ public class StatisticsResult {
 
     @Override
     public String toString() {
-        return "3개 일치 (5,000원)-" + hashMap.get(StatisticsType.THREE) + "\n" +
-                "4개 일치 (50,000원)-" + hashMap.get(StatisticsType.THREE) + "\n" +
-                "5개 일치 (1,500,000원)-" + hashMap.get(StatisticsType.THREE) + "\n" +
-                "5개 일치, 보너스 볼 일치(30,000,000원)-" + hashMap.get(StatisticsType.THREE) + "\n" +
-                "6개 일치 (2,000,000,000원)-" + hashMap.get(StatisticsType.THREE) + "\n";
-
+        return "3개 일치 ( "+ THREE_WINNING_JACKPOT +" 원)-" + hashMap.get(StatisticsType.THREE) + "\n" +
+                "4개 일치 ("+ FOUR_WINNING_JACKPOT +"원)-" + hashMap.get(StatisticsType.THREE) + "\n" +
+                "5개 일치 ("+ FIVE_WINNING_JACKPOT +"원)-" + hashMap.get(StatisticsType.THREE) + "\n" +
+                "5개 일치, 보너스 볼 일치("+ FIVE_BONUS_WINNING_JACKPOT +"원)-" + hashMap.get(StatisticsType.THREE) + "\n" +
+                "6개 일치 (" + SIX_WINNING_JACKPOT + "원)-" + hashMap.get(StatisticsType.THREE) + "\n";
     }
 
-    private String benefit(int ticketCount) {
+    public String benefit() {
         int sumPrice = 0;
         for( StatisticsType type : StatisticsType.values() ) {
             sumPrice += priceHash.get(type) * hashMap.get(type);
         }
-        sumPrice = sumPrice / ticketCount * 1000;
-        return "총 수익률은 " + sumPrice + "입니다";
+        sumPrice = sumPrice / this.ticketCount * 1000;
+        return "총 수익률은 " + sumPrice + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
     }
 
 }
