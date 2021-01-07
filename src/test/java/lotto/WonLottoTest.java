@@ -5,7 +5,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.HashSet;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class WonLottoTest {
 
@@ -14,7 +17,7 @@ public class WonLottoTest {
 
     @BeforeEach
     void setUp(){
-        wonLotto = new WonLotto();
+        wonLotto = new WonLotto(new Lotto(Arrays.asList(1,2,3,4,5,6)), 7);
     }
 
     @Test
@@ -27,5 +30,16 @@ public class WonLottoTest {
 
         set.add(wonLotto.getBonusNo());
         Assertions.assertTrue(set.size()==7);
+
+    }
+
+    @Test
+    @DisplayName("일치하는 번호에 따른 등수 확인")
+    void testCheckRanking() {
+        LottoRank rank = wonLotto.checkRanking(new Lotto(Arrays.asList(1,2,3,4,5,6)));
+        assertThat(rank).isEqualTo(LottoRank.FIRST);
+
+        rank = wonLotto.checkRanking(new Lotto(Arrays.asList(1,2,3,4,5,7)));
+        assertThat(rank).isEqualTo(LottoRank.SECOND);
     }
 }

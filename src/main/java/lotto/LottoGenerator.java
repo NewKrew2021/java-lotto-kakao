@@ -17,10 +17,10 @@ public class LottoGenerator {
     }
 
     public void checkDuplicate(HashSet<Integer> set, int randomNumber, List<Integer> lotto) {
+
         if (set.add(randomNumber)) {
             lotto.add(randomNumber);
         }
-
     }
 
     public int generateBonus(Lotto lotto){

@@ -18,4 +18,13 @@ public class Lotto {
         return lotto;
     }
 
+    public int checkSameCount(Lotto userLotto){
+        int count = 0;
+        for (Integer number : userLotto.getLotto()) {
+            count += lotto.contains(number) ? 1 : 0;
+        }
+
+        return count;
+    }
+
 }
