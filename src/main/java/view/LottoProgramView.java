@@ -47,6 +47,12 @@ public class LottoProgramView {
         System.out.println(printBuilder.toString());
     }
 
+    public void printLottosNumber(Lottos lottos){
+        for(Lotto lotto : lottos.getLottos()){
+            System.out.println(lotto.toString());
+        }
+    }
+
     public Lotto getWinningLotto(){
         System.out.println(LAST_WEEK_BALLS_PHRASE);
         List<Integer> balls = Arrays.stream(scanner.nextLine().split(","))
