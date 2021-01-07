@@ -1,9 +1,8 @@
 package mission.lotto.controller;
 
-import LottoMission.domain.*;
 import mission.lotto.domain.Number;
-import mission.lotto.util.RandomUtil;
 import mission.lotto.domain.*;
+import mission.lotto.util.RandomUtil;
 
 import java.util.ArrayList;
 import java.util.List;

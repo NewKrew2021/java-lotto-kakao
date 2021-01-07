@@ -30,10 +30,6 @@ public class Lottos {
                 .sum();
     }
 
-    public int getCount() {
-        return lottos.size();
-    }
-
     public List<Lotto> getLottos() {
         return lottos;
     }
