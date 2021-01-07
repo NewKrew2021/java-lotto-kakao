@@ -1,6 +1,5 @@
-package LottoMission;
+package LottoMission.domain;
 
-import java.util.List;
 import java.util.Set;
 
 public class LottoAnswer {

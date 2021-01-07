@@ -1,4 +1,4 @@
-package LottoMission;
+package LottoMission.domain;
 
 import java.util.HashSet;
 import java.util.List;
@@ -9,10 +9,6 @@ public class Lotto implements Comparable<Lotto> {
 
     private final LottoNumbers numbers;
     private LotteryWinnings winnings;
-
-    public Lotto(){
-        this(RandomUtil.getRandomSixIntegerList());
-    }
 
     public Lotto(List<Integer> numbers) {
         this.numbers = new LottoNumbers(numbers);
@@ -63,4 +59,8 @@ public class Lotto implements Comparable<Lotto> {
         return Integer.compare(Objects.hash(this), Objects.hash(lotto));
     }
 
+    @Override
+    public String toString() {
+        return this.numbers.toString();
+    }
 }

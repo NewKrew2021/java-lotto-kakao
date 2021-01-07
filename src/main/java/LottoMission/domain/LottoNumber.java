@@ -1,4 +1,4 @@
-package LottoMission;
+package LottoMission.domain;
 
 import java.util.Objects;
 
@@ -32,4 +32,8 @@ public class LottoNumber {
         return Objects.hash(number);
     }
 
+    @Override
+    public String toString() {
+        return String.valueOf(number);
+    }
 }

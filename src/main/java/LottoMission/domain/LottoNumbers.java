@@ -1,4 +1,4 @@
-package LottoMission;
+package LottoMission.domain;
 
 import java.util.HashSet;
 import java.util.List;
@@ -45,5 +45,10 @@ public class LottoNumbers {
     @Override
     public int hashCode() {
         return Objects.hash(numbers);
+    }
+
+    @Override
+    public String toString() {
+        return this.numbers.toString();
     }
 }

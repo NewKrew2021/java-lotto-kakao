@@ -1,4 +1,4 @@
-package LottoMission;
+package LottoMission.domain;
 
 import java.util.*;
 
@@ -31,7 +31,13 @@ public class Lottos {
                 .sum();
     }
 
+    public int getCount() {
+        return lottos.size();
+    }
 
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
 
     @Override
     public boolean equals(Object o) {

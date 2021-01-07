@@ -1,9 +1,9 @@
-package LottoMission;
+package LottoMission.domain;
 
+import LottoMission.domain.LottoNumbers;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.HashSet;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -23,9 +23,3 @@ public class LottoNumbersTest {
         ).isInstanceOf(IllegalArgumentException.class);
     }
 }
-/*
-* Lotto -> LottoNumbers
-*       -> LotteryWinnings(Enum)
-* */
-
-// 1. 중복이 없어야 됨, 6개 여야함,

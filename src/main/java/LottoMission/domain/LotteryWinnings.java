@@ -1,4 +1,4 @@
-package LottoMission;
+package LottoMission.domain;
 
 public enum LotteryWinnings {
     FIRST(1, 6, false, 2000000000),
@@ -37,7 +37,7 @@ public enum LotteryWinnings {
         return correctNo;
     }
 
-    public boolean isHasBonus() {
+    public boolean getHasBonus() {
         return hasBonus;
     }
 

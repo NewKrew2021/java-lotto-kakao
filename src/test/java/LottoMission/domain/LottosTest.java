@@ -1,10 +1,10 @@
-package LottoMission;
+package LottoMission.domain;
 
+import LottoMission.domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;

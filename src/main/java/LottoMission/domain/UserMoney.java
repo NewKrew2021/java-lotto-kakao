@@ -1,4 +1,4 @@
-package LottoMission;
+package LottoMission.domain;
 
 public class UserMoney {
 
