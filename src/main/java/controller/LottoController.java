@@ -18,11 +18,10 @@ public class LottoController {
         lottoSimulatorView = new LottoSimulatorView();
     }
 
-    public void startLottoSimulator() {
+    public void startLottoSimulation() {
         buyLotto();
         printBuyLotto();
         getAnswerNumbers();
-        lottoSimulator = new LottoSimulator(purchaseInfo, lottos, answer);
         printLottoResults();
     }
 
@@ -43,6 +42,7 @@ public class LottoController {
     }
 
     private void printLottoResults() {
+        lottoSimulator = new LottoSimulator(purchaseInfo, lottos, answer);
         lottoSimulatorView.printResult(lottoSimulator.getLottoResults(), lottoSimulator.profitPercentage());
     }
 }

@@ -56,9 +56,4 @@ public enum LottoStatus {
     public static List<LottoStatus> getLottoStatuses() {
         return lottoStatuses;
     }
-
-    public LottoStatus getInstance() {
-        return this;
-    }
-
 }

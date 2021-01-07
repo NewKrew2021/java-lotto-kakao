@@ -1,7 +1,6 @@
 package domain;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -20,7 +19,6 @@ public class Lottos {
 
     public Map<LottoStatus, Integer> checkResult(Answer answer) {
         Map<LottoStatus, Integer> result = new HashMap<>();
-
         LottoStatus.getLottoStatuses().stream().forEach(lottoStatus -> { result.put(lottoStatus, 0); });
 
         lottos.stream().forEach(lotto -> { addResult(result, lotto.getResult(answer)); });
