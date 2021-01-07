@@ -7,7 +7,7 @@ import java.util.Set;
 public class LottoTicket {
 
     public static final String LOTTO_TICKET_EXCEPTION_MESSAGE = "중복된 숫자는 허용되지 않고, 로또 번호의 개수가 6개여야 합니다.";
-    private static final int LOTTO_TICKET_LENGTH = 6;
+    public static final int LOTTO_TICKET_LENGTH = 6;
 
     private final List<LottoNumber> lottoNumbers;
 
