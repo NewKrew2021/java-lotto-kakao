@@ -3,6 +3,8 @@ package mission.lotto.controller;
 import mission.lotto.domain.Number;
 import mission.lotto.domain.*;
 import mission.lotto.util.RandomUtil;
+import mission.lotto.view.InputView;
+import mission.lotto.view.OutputView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,22 +18,38 @@ public class LottoController {
     private LottoAnswer answer;
     private final int LOTTO_PRICE = 1000;
 
+    public LottoController() {
+
+    }
+
     public LottoController(int userMoney) {
         this.userMoney = new UserMoney(userMoney);
         this.tryNumber = new TryNumber(userMoney / LOTTO_PRICE);
     }
 
-    public void buyLottosAuto() {
+    public void start() {
+        int userMoney = InputView.enterUerMoney();
+
+        LottoController controller = new LottoController(userMoney);
+        controller.buyLottos(RandomUtil::getRandomSixIntegerList);
+
+        OutputView.autoBoughtView(controller);
+
+        controller.setLastWeekWinningNumber(
+                InputView.enterLastWeekWinningNumbers(),
+                InputView.enterLastWeekBonusNumber());
+
+        OutputView.resultView(controller.getAllLottoCount());
+        OutputView.totalEarningsView(controller.getRateOfProfit());
+    }
+
+    public void buyLottos(NumGenerator numberGenerator) {
         List<Lotto> lottoList = new ArrayList<>();
-        while (this.tryNumber.canTry()) {
-            lottoList.add(new Lotto(RandomUtil.getRandomSixIntegerList()));
+        while (this.tryNumber.hasNext()) {
+            lottoList.add(new Lotto(numberGenerator.getSixNumbers()));
             this.tryNumber.useTryNumberCount();
         }
         this.lottos = new Lottos(lottoList);
-    }
-
-    public void buyLottosSelf(Lottos lottos) {
-        this.lottos = lottos;
     }
 
     public void setLastWeekWinningNumber(List<Integer> sixNumberList, int bonusNumber) {

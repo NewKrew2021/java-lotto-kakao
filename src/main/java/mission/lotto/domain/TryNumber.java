@@ -19,7 +19,7 @@ public class TryNumber {
         this.tryNumber -= 1;
     }
 
-    public boolean canTry() {
+    public boolean hasNext() {
         return tryNumber >= 1;
     }
 }
