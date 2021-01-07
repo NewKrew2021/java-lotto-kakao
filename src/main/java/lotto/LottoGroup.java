@@ -1,5 +1,6 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -17,6 +18,20 @@ public class LottoGroup {
             lottoResult.addRank(rank);
         }
         return lottoResult;
+    }
+
+    public static LottoGroup createRandomLottoGroup(int count) {
+        List<Lotto> lottos = new ArrayList<>();
+
+        for (int i = 0; i < count; i++) {
+            lottos.add(new Lotto(new RandomGenerateStrategy()));
+        }
+
+        return new LottoGroup(lottos);
+    }
+
+    public int getLottoCount() {
+        return lottoGroup.size();
     }
 
     @Override
