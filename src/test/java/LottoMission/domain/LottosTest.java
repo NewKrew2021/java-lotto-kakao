@@ -1,6 +1,5 @@
 package LottoMission.domain;
 
-import LottoMission.domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
