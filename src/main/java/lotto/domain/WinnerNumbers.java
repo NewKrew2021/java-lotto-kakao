@@ -3,11 +3,11 @@ package lotto.domain;
 import java.util.List;
 
 public class WinnerNumbers {
-    List<Integer> numbers;
+    private final List<Integer> winnerNo;
     int bonusBall;
 
     public WinnerNumbers(List<Integer> numbers, int bonusBall){
-        this.numbers = numbers;
+        this.winnerNo = numbers;
         this.bonusBall = bonusBall;
     }
 }
