@@ -26,6 +26,7 @@
 - [x] 2 로또 여러 장을 랩핑하는 Lotteries class 구현
   - [x] 2.1 당첨 번호를 입력 시, 맞은 개수 혹은 등수를 정렬해서 반환하는 기능 구현
 - [x] 3 LotteryUtil class 구현 및 구입 금액에서 몇 장의 로또인지 체크하는 기능 구현
+- [x] 4 (구현 추가) LotteryAnswer class 구현 및 당첨 계산 로직 간결화
 
 #### UI 영역
 - [ ] 1 입력 UI 처리 클래스 InputView class
