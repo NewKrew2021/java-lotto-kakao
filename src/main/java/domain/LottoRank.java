@@ -1,4 +1,4 @@
-package lotto;
+package domain;
 
 public enum LottoRank {
     FIFTH(5000, "3개 일치"),
