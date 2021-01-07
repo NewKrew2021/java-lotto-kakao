@@ -2,7 +2,6 @@ package lotto;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -32,6 +31,11 @@ public class LottoGroupTest {
         LottoResult lottoResult = lottoGroup.getLottoResult(winningNumberSet);
         assertThat(lottoResult.getRankCount(Rank.FIRST)).isEqualTo(1);
         assertThat(lottoResult.getRankCount(Rank.SECOND)).isEqualTo(1);
+    }
+
+    @Test
+    void createRandomLottoGroupTest() {
+        assertThat(LottoGroup.createRandomLottoGroup(10).getLottoCount()).isEqualTo(10);
     }
 
 }
