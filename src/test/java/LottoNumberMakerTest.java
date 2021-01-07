@@ -1,7 +1,12 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
+import utils.StringUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -25,12 +30,7 @@ public class LottoNumberMakerTest {
     @Test
     void generateNumberContainsTest() {
         List<Integer> results;
-        LottoStrategy lottoStrategy = new LottoStrategy() {
-            @Override
-            public List<Integer> NumberChoose() {
-                return Arrays.asList(1,2,3,4,5,6);
-            }
-        };
+        LottoStrategy lottoStrategy = () -> Arrays.asList(1,2,3,4,5,6);
         results = lottoNumberMaker.generateLottoNumbers(lottoStrategy);
         assertThat(results).containsExactly(1,2,3,4,5,6);
     }
@@ -41,6 +41,20 @@ public class LottoNumberMakerTest {
         for (Integer result : results) {
             assertThat(result).isBetween(1,45);
         }
+    }
 
+    @Test
+    void StringSplitInvalidStringExceptionTest() {
+        List<String> list = new ArrayList<>(Arrays.asList("abcd","efg"));
+        LottoNumberMaker lottoNumberMaker = new LottoNumberMaker();
+        assertThatThrownBy(()->{
+            lottoNumberMaker.makeLottoNumberFromStrings(list);
+        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("숫자가 아닙니다.");
+    }
+
+    @Test
+    void StringToIntegerMappingTest() {
+        List<String> list = new ArrayList<>(Arrays.asList("1","2","3"));
+        assertThat(lottoNumberMaker.makeLottoNumberFromStrings(list)).containsExactly(1,2,3);
     }
 }

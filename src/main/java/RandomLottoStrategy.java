@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class RandomLottoStrategy implements LottoStrategy{
+public class RandomLottoStrategy implements LottoStrategy {
 
     private static final int END_LOTTO_NUMBER = 45;
     private static final int START_LOTTO_NUMBER = 1;
