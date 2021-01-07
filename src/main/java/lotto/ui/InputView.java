@@ -13,10 +13,7 @@ public class InputView {
     public static int readMoney() {
         try {
             printReadMoneyHelp();
-            int money = Integer.parseInt(sc.nextLine().trim());
-            System.out.printf("%d개를 구매했습니다", money);
-            System.out.println();
-            return money;
+            return Integer.parseInt(sc.nextLine().trim());
         } catch (NumberFormatException e) {
             System.out.println("돈을 올바른 형태로 입력해주세요 ex) 10000");
             return readMoney();

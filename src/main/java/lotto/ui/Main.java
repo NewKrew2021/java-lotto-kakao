@@ -7,6 +7,7 @@ import lotto.domain.LotteryUtil;
 public class Main {
     public static void main(String[] args) {
         final int lotteryCount = LotteryUtil.calculateLotteryCount(InputView.readMoney());
+        OutputView.printLotteryCount(lotteryCount);
 
         Lotteries lotteries = new Lotteries(Lotteries.getRandomLotteryList(lotteryCount));
         OutputView.printLotteries(lotteries);

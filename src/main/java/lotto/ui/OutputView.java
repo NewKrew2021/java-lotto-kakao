@@ -5,6 +5,11 @@ import lotto.domain.LotteryRank;
 import lotto.domain.LotteryUtil;
 
 public class OutputView {
+    public static void printLotteryCount(int count) {
+        System.out.printf("%d개를 구매했습니다", count);
+        System.out.println();
+    }
+
     public static void printLotteries(Lotteries lotteries) {
         System.out.println(lotteries);
         System.out.println();
