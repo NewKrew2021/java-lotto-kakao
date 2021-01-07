@@ -1,6 +1,6 @@
-package text;
+package common;
 
-public class Phrase {
+public class LottoProgramPhrase {
     public static final String BUY_AMOUNT_PHRASE = "구입금액을 입력해 주세요.";
     public static final String LOTTOS_BOUGHT_PHRASE = "개를 구매했습니다.";
     public static final String LAST_WEEK_BALLS_PHRASE = "지난 주 당첨 번호를 입력해 주세.";
