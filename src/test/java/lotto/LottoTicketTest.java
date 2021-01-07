@@ -13,31 +13,31 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottoTicketTest {
 
-    @DisplayName("중복되지 않은 6개의 로또 넘버가 주어 졌을 때 로또 티켓을 생성한다.")
+    @DisplayName("숫자를 생성하는 전략이 주어 졌을 때 로또 티켓을 생성한다.")
     @Test
     void create() {
         //given
-        List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+        NumberGenerateStrategy strategy = new OneToSixGenerator();
 
         //when
-        LottoTicket lottoTicket = new LottoTicket(lottoNumbers);
+        LottoTicket lottoTicket = LottoTicket.from(strategy);
 
         //then
-        assertThat(lottoTicket.getLottoNumbers()).isEqualTo(lottoNumbers);
+        List<LottoNumber> expected = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
+                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+        assertThat(lottoTicket.getLottoNumbers()).isEqualTo(expected);
     }
 
     @DisplayName("중복된 숫자가 있는 6개의 로또 넘버가 주어 졌을 때 로또 티켓을 생성하면 예외가 발생된다.")
     @Test
     void valid() {
         //given
-        List<LottoNumber> lottoNumbers = Arrays.asList(new LottoNumber(1), new LottoNumber(1), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+        NumberGenerateStrategy duplicateStrategy = () -> Arrays.asList(1, 1, 2, 3, 4, 5);
 
         //then
         assertThatIllegalArgumentException()
                 // when
-                .isThrownBy(() -> new LottoTicket(lottoNumbers))
+                .isThrownBy(() -> LottoTicket.from(duplicateStrategy))
                 .withMessage(LOTTO_TICKET_EXCEPTION_MESSAGE);
     }
 

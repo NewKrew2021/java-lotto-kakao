@@ -1,8 +1,10 @@
 package lotto;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
 
@@ -11,11 +13,19 @@ public class LottoTicket {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public LottoTicket(List<LottoNumber> lottoNumbers) {
+    private LottoTicket(List<LottoNumber> lottoNumbers) {
         validateDuplicate(lottoNumbers);
         validateLength(lottoNumbers);
 
         this.lottoNumbers = lottoNumbers;
+    }
+
+    public static LottoTicket from(NumberGenerateStrategy strategy) {
+        List<LottoNumber> lottoNumbers = strategy.generate().stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+
+        return new LottoTicket(lottoNumbers);
     }
 
     private void validateDuplicate(List<LottoNumber> lottoNumbers) {
