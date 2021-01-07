@@ -17,17 +17,9 @@ public class OutputView {
         }
     }
 
-    public static void resultView(Map<Rank, Integer> allLottoRankCount) {
+    public static void resultView(Map<Rank, Integer> allLottoRank) {
         System.out.println("당첨 통계");
-        StringBuilder sb = new StringBuilder();
-        for (Rank lotteryWinnings : allLottoRankCount.keySet()) {
-            String resultLine = lotteryWinnings.getCorrectNo() + "개 일치";
-            if (lotteryWinnings.getHasBonus()) resultLine += ", 보너스 볼 일";
-            resultLine += "(" + lotteryWinnings.getMoney() + "원) - ";
-            resultLine += allLottoRankCount.get(lotteryWinnings) + "개\n";
-            sb.insert(0, resultLine);
-        }
-        System.out.println(sb);
+        System.out.println(Statistics.getPreDefinedLottoReport(allLottoRank));
     }
 
     public static void totalEarningsView(float ratio) {
