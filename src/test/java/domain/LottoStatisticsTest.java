@@ -25,7 +25,7 @@ public class LottoStatisticsTest {
                         new Lotto(Arrays.asList(1, 7, 8, 9, 10, 13), 14)
                 )
         );
-        lottoStatistics = lottos.getLottoStatistics(winningLotto,6);
+        lottoStatistics = lottos.getLottoStatistics(winningLotto, 6);
     }
 
     @Test

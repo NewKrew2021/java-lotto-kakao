@@ -12,7 +12,7 @@ class LottoProgramTest {
     private LottoProgram lottoProgram;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         lottoProgram = new LottoProgram();
     }
 

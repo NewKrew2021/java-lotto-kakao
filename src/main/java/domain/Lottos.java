@@ -6,11 +6,12 @@ import java.util.HashMap;
 import java.util.List;
 
 public class Lottos {
+
     private final List<Lotto> lottos;
 
-    public Lottos(int totalCount){
+    public Lottos(int totalCount) {
         lottos = new ArrayList<>();
-        for(int count = 0; count < totalCount; count++){
+        for (int count = 0; count < totalCount; count++) {
             lottos.add(new Lotto());
         }
     }
@@ -27,14 +28,14 @@ public class Lottos {
                                 .count()));
     }
 
-    public LottoStatistics getLottoStatistics(Lotto winningLotto,int lottoCount) {
+    public LottoStatistics getLottoStatistics(Lotto winningLotto, int lottoCount) {
         HashMap<LottoRank, BigDecimal> rankNumbers = new HashMap<>();
 
         for (LottoRank lottoRank : LottoRank.values()) {
             rankNumbers.put(lottoRank, calculateNumberOfRank(lottoRank, winningLotto));
         }
 
-        return new LottoStatistics(rankNumbers,lottoCount);
+        return new LottoStatistics(rankNumbers, lottoCount);
     }
 
     public List<Lotto> getLottos() {

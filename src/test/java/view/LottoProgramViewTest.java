@@ -8,13 +8,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 class LottoProgramViewTest {
 
     private LottoProgramView lottoProgramView;
+
     @BeforeEach
-    void setUp(){
+    void setUp() {
         lottoProgramView = new LottoProgramView();
     }
 
     @Test
-    void checkValidBuyAmount(){
+    void checkValidBuyAmount() {
         assertThat(lottoProgramView.checkNumberFormat("10000")).isTrue();
         assertThat(lottoProgramView.checkNumberFormat("123asd")).isFalse();
     }

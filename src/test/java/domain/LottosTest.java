@@ -14,22 +14,22 @@ public class LottosTest {
     private Lotto winningLotto;
 
     @BeforeEach
-    public void createLottos(){
-        winningLotto = new Lotto(Arrays.asList(1,7,8,9,10,11), 12);
+    public void createLottos() {
+        winningLotto = new Lotto(Arrays.asList(1, 7, 8, 9, 10, 11), 12);
         lottos = new Lottos(
-            Arrays.asList(
-                    new Lotto(Arrays.asList(1,7,8,9,10,11), 12),
-                    new Lotto(Arrays.asList(1,7,8,9,10,11), 12),
-                    new Lotto(Arrays.asList(1,7,8,9,10,11), 12),
-                    new Lotto(Arrays.asList(1,7,8,9,10,13), 12),
-                    new Lotto(Arrays.asList(1,7,8,9,10,13), 12),
-                    new Lotto(Arrays.asList(1,7,8,9,10,13), 14)
-            )
+                Arrays.asList(
+                        new Lotto(Arrays.asList(1, 7, 8, 9, 10, 11), 12),
+                        new Lotto(Arrays.asList(1, 7, 8, 9, 10, 11), 12),
+                        new Lotto(Arrays.asList(1, 7, 8, 9, 10, 11), 12),
+                        new Lotto(Arrays.asList(1, 7, 8, 9, 10, 13), 12),
+                        new Lotto(Arrays.asList(1, 7, 8, 9, 10, 13), 12),
+                        new Lotto(Arrays.asList(1, 7, 8, 9, 10, 13), 14)
+                )
         );
     }
 
     @Test
-    public void calculateNumberOfRank(){
+    public void calculateNumberOfRank() {
         assertThat(lottos.calculateNumberOfRank(LottoRank.FIRST, winningLotto))
                 .isEqualTo(new BigDecimal("3"));
         assertThat(lottos.calculateNumberOfRank(LottoRank.SECOND, winningLotto))
@@ -44,7 +44,7 @@ public class LottosTest {
 
     @Test
     public void getLottoStatisticsTest() {
-        LottoStatistics lottoStatistics = lottos.getLottoStatistics(winningLotto,5);
+        LottoStatistics lottoStatistics = lottos.getLottoStatistics(winningLotto, 5);
         HashMap<LottoRank, BigDecimal> rankNumbers = lottoStatistics.getRankNumbers();
         HashMap<LottoRank, BigDecimal> trueRankNumbers = new HashMap<>();
         trueRankNumbers.put(LottoRank.FIRST, new BigDecimal("3"));

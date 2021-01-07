@@ -10,11 +10,11 @@ public class LottoProgram {
 
     private LottoProgramView lottoProgramView;
 
-    public LottoProgram(){
+    public LottoProgram() {
         lottoProgramView = new LottoProgramView();
     }
 
-    public void start(){
+    public void start() {
         BigDecimal buyAmount = lottoProgramView.getBuyAmountForUser();
         int buyLottoCount = calculateBuyLottoCount(buyAmount);
 
@@ -24,10 +24,10 @@ public class LottoProgram {
         lottoProgramView.printLottosNumber(lottos);
 
         Lotto winningLotto = lottoProgramView.getWinningLotto();
-        lottoProgramView.printWinningStatistics(lottos.getLottoStatistics(winningLotto,buyAmount.intValue()));
+        lottoProgramView.printWinningStatistics(lottos.getLottoStatistics(winningLotto, buyAmount.intValue()));
     }
 
-    public int calculateBuyLottoCount(BigDecimal buyAmount){
+    public int calculateBuyLottoCount(BigDecimal buyAmount) {
         return buyAmount.divide(new BigDecimal(String.valueOf(Lotto.LOTTO_PRICE))).intValue();
     }
 }

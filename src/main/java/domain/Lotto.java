@@ -5,25 +5,26 @@ import java.util.Collections;
 import java.util.List;
 
 public class Lotto {
-    private final List<Integer> randomPool;
-    private List<Integer> lottoBalls;
-    private int bonusBall;
 
     public static final int LOTTO_COUNT = 6;
     public static final int LOTTO_MIN = 1;
     public static final int LOTTO_MAX = 45;
     public static final int LOTTO_PRICE = 1000;
 
-    public Lotto(){
+    private final List<Integer> randomPool;
+    private List<Integer> lottoBalls;
+    private int bonusBall;
+
+    public Lotto() {
         lottoBalls = new ArrayList<>();
         randomPool = new ArrayList<>();
-        for(int lottoNum = LOTTO_MIN; lottoNum <= LOTTO_MAX; ++lottoNum){
+        for (int lottoNum = LOTTO_MIN; lottoNum <= LOTTO_MAX; ++lottoNum) {
             randomPool.add(lottoNum);
         }
         generateLotto();
     }
 
-    public Lotto(List<Integer> balls, int bonusBall){
+    public Lotto(List<Integer> balls, int bonusBall) {
         lottoBalls = balls;
         randomPool = new ArrayList<>();
         this.bonusBall = bonusBall;
@@ -66,12 +67,12 @@ public class Lotto {
         StringBuilder lottoBuilder = new StringBuilder();
         lottoBuilder.append("[");
 
-        for(int ball : lottoBalls){
+        for (int ball : lottoBalls) {
             lottoBuilder.append(ball);
             lottoBuilder.append(", ");
         }
 
-        lottoBuilder.delete(lottoBuilder.length()-2, lottoBuilder.length()-1);
+        lottoBuilder.delete(lottoBuilder.length() - 2, lottoBuilder.length() - 1);
         lottoBuilder.append("]");
         return lottoBuilder.toString();
     }
