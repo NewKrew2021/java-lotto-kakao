@@ -41,13 +41,13 @@ public enum LottoStatus {
         if (matchedLottoNumberCount == LottoStatus.SECOND.matchedLottoNumberCount) {
             return secondOrThirdPrize(isBonusNumberMatched);
         }
-        return lottoStatuses.stream().filter(lotto ->
-                lotto.getMatchedLottoNumberCount() == matchedLottoNumberCount).findFirst().
-                orElse(null);
+        return lottoStatuses.stream().
+                filter(lotto -> lotto.getMatchedLottoNumberCount() == matchedLottoNumberCount).
+                findFirst().orElse(null);
     }
 
     public static LottoStatus secondOrThirdPrize(boolean isBonusNumberMatched) {
-        if(isBonusNumberMatched) {
+        if (isBonusNumberMatched) {
             return LottoStatus.SECOND;
         }
         return LottoStatus.THIRD;
@@ -55,6 +55,10 @@ public enum LottoStatus {
 
     public static List<LottoStatus> getLottoStatuses() {
         return lottoStatuses;
+    }
+
+    public LottoStatus getInstance() {
+        return this;
     }
 
 }

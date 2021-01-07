@@ -1,15 +1,15 @@
 package domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
-    private static final int LOTTO_PRICE = 1000;
     private final List<Lotto> lottos;
 
-    public Lottos(int lottoMoney) {
+    public Lottos(PurchaseInfo purchaseInfo) {
         lottos = new ArrayList<>();
-        for (int currentMoney = 0; currentMoney < lottoMoney; currentMoney += LOTTO_PRICE) {
+        for (long lottoCount = 0; lottoCount < purchaseInfo.getPurchaseCount(); lottoCount++) {
             lottos.add(new Lotto(new RandomLottoStrategy().NumberChooseStrategy()));
         }
     }
@@ -18,23 +18,20 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public List<Lotto> getLottos() {
-        return lottos;
-    }
-
     public Map<LottoStatus, Integer> checkResult(Answer answer) {
         Map<LottoStatus, Integer> result = new HashMap<>();
 
-        for (LottoStatus lottoStatus : LottoStatus.getLottoStatuses()) {
-            result.put(lottoStatus, 0);
-        }
-        for (Lotto lotto : lottos) {
-            LottoStatus lottoStatus = lotto.getResult(answer);
-            if (lottoStatus != null) {
-                result.put(lottoStatus, result.get(lottoStatus) + 1);
-            }
-        }
+        LottoStatus.getLottoStatuses().stream().forEach(lottoStatus -> { result.put(lottoStatus, 0); });
+
+        lottos.stream().forEach(lotto -> { addResult(result, lotto.getResult(answer)); });
+
         return result;
+    }
+
+    private void addResult(Map<LottoStatus, Integer> result, LottoStatus lottoStatus) {
+        if (lottoStatus != null) {
+            result.put(lottoStatus, result.get(lottoStatus) + 1);
+        }
     }
 
     @Override

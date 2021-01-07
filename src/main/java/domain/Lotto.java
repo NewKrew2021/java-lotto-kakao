@@ -16,7 +16,8 @@ public class Lotto {
     }
 
     public LottoStatus getResult(Answer answer) {
-        return LottoStatus.findStatus(countMatchingNumber(answer.getAnswerNumbers()), isBonusNumberMatching(answer.getBonusNumber()));
+        return LottoStatus.
+                findStatus(countMatchingNumber(answer.getAnswerNumbers()), isBonusNumberMatching(answer.getBonusNumber()));
     }
 
     private boolean isBonusNumberMatching(int bonusNumber) {
@@ -24,7 +25,8 @@ public class Lotto {
     }
 
     private int countMatchingNumber(List<Integer> answerNumbers) {
-        return lottoNumbers.stream().filter(number -> answerNumbers.contains(number)).collect(Collectors.toList()).size();
+        return lottoNumbers.stream().
+                filter(number -> answerNumbers.contains(number)).collect(Collectors.toList()).size();
     }
 
     @Override

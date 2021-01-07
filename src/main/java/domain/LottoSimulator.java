@@ -1,22 +1,17 @@
 package domain;
 
-import utils.StringUtils;
-
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class LottoSimulator {
 
-    private static final long LOTTO_PRICE = 1000;
     private static final long PERCENTAGE = 100;
 
-    private final long initial_money;
+    private PurchaseInfo purchaseInfo;
     private Lottos lottos;
     private Answer answer;
 
-    public LottoSimulator(long initial_money, Lottos lottos, Answer answer) {
-        this.initial_money = initial_money;
+    public LottoSimulator(PurchaseInfo purchaseInfo, Lottos lottos, Answer answer) {
+        this.purchaseInfo = purchaseInfo;
         this.lottos = lottos;
         this.answer = answer;
     }
@@ -31,14 +26,7 @@ public class LottoSimulator {
     }
 
     public long profitPercentage() {
-        return (getWinningMoney() - initial_money) * PERCENTAGE / initial_money;
+        return (getWinningMoney() - purchaseInfo.getInitialPrice()) * PERCENTAGE / purchaseInfo.getInitialPrice();
     }
 
-    public long getBuyLottoCount() {
-        return initial_money / LOTTO_PRICE;
-    }
-
-    public Lottos getLottos() {
-        return lottos;
-    }
 }

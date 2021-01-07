@@ -3,12 +3,14 @@ package controller;
 import domain.Answer;
 import domain.LottoSimulator;
 import domain.Lottos;
+import domain.PurchaseInfo;
 import view.LottoSimulatorView;
 
 public class LottoController {
 
     private LottoSimulator lottoSimulator;
     private LottoSimulatorView lottoSimulatorView;
+    private PurchaseInfo purchaseInfo;
     private Lottos lottos;
     private Answer answer;
 
@@ -17,17 +19,17 @@ public class LottoController {
     }
 
     public void startLottoSimulator() {
-        int initial_money = buyLotto();
+        buyLotto();
         printBuyLotto();
         getAnswerNumbers();
-        lottoSimulator = new LottoSimulator(initial_money, lottos, answer);
+        lottoSimulator = new LottoSimulator(purchaseInfo, lottos, answer);
         printLottoResults();
     }
 
-    private int buyLotto() {
-        int initial_money = lottoSimulatorView.askMoneyForBuyLotto();
-        lottos = new Lottos(initial_money);
-        return initial_money;
+    private void buyLotto() {
+        purchaseInfo = new PurchaseInfo(lottoSimulatorView.askMoneyForBuyLotto());
+        lottos = new Lottos(purchaseInfo);
+        lottoSimulatorView.printBuyLottoCount(purchaseInfo.getPurchaseCount());
     }
 
     private void printBuyLotto() {
