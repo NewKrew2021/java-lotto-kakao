@@ -41,4 +41,11 @@ public class LottoTicketTest {
         assertThatExceptionOfType(InvalidLottoNumberException.class)
                 .isThrownBy(() -> LottoTicket.ofIntegerNumber(Arrays.asList(1, 2, 3, 4, 5, 46)));
     }
+
+    @Test
+    void matchedCount() {
+        LottoTicket lottoTicket = LottoTicket.ofIntegerNumber(Arrays.asList(1, 2, 3, 4, 5, 45));
+        LottoTicket winningLottoTicket = LottoTicket.ofIntegerNumber(Arrays.asList(1, 2, 3, 4, 5, 45));
+        assertThat(lottoTicket.getMatchedCount(winningLottoTicket)).isEqualTo(6);
+    }
 }
