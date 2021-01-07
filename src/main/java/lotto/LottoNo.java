@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.Objects;
+
 public class LottoNo {
 
     int number;
