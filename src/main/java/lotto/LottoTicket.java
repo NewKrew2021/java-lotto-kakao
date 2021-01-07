@@ -1,9 +1,10 @@
 package lotto;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
-    Set<Number> numbers;
+    private Set<Number> numbers;
 
     public LottoTicket(Set<Number> numbers) {
         this.numbers = numbers;
@@ -15,5 +16,13 @@ public class LottoTicket {
 
     public int matchCount(LottoTicket compTicket) {
         return (int) numbers.stream().filter(compTicket::contains).count();
+    }
+
+    @Override
+    public String toString() {
+        return "[" + numbers.stream()
+                .sorted()
+                .map(Number::toString)
+                .collect(Collectors.joining(", ")) + "]";
     }
 }
