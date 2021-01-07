@@ -12,6 +12,7 @@ public class Lotto {
     public static final int LOTTO_COUNT = 6;
     public static final int LOTTO_MIN = 1;
     public static final int LOTTO_MAX = 45;
+    public static final int LOTTO_PRICE = 1000;
 
     public Lotto(){
         lottoBalls = new ArrayList<>();
@@ -60,7 +61,18 @@ public class Lotto {
         return bonusBall;
     }
 
-    public LottoRank findLottoRank(Lotto testLotto) {
-        return LottoRank.calculateLottoRank(calculateSameBall(testLotto),hasSameBonusBall(testLotto));
+    @Override
+    public String toString() {
+        StringBuilder lottoBuilder = new StringBuilder();
+        lottoBuilder.append("[");
+
+        for(int ball : lottoBalls){
+            lottoBuilder.append(ball);
+            lottoBuilder.append(", ");
+        }
+
+        lottoBuilder.delete(lottoBuilder.length()-2, lottoBuilder.length()-1);
+        lottoBuilder.append("]");
+        return lottoBuilder.toString();
     }
 }
