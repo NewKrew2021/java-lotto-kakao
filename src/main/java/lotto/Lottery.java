@@ -9,6 +9,7 @@ public class Lottery {
     private static final String MSG_WRONG_LOTTERY_LENGTH = String.format(
             "로또 숫자의 길이는 %d이여야 합니다.", LOTTERY_NUMBER_SIZE);
     private static final String MSG_DUPLICATED_LOTTERYNUMBER = "로또 숫자는 중복될 수 없습니다.";
+    public static final int NONE = -1;
 
     private final List<LotteryNumber> numbers;
 
@@ -59,5 +60,35 @@ public class Lottery {
     @Override
     public int hashCode() {
         return Objects.hash(numbers);
+    }
+
+    public int checkRank(List<LotteryNumber> answerNumber, LotteryNumber bonusNumber) {
+        int count = 0;
+        boolean bonus = numbers.contains(bonusNumber);
+        for (LotteryNumber lotteryNumber : answerNumber) {
+            if (numbers.contains(lotteryNumber)) {
+                count++;
+            }
+        }
+        return convertCountToRank(count, bonus);
+    }
+
+    private int convertCountToRank(int count, boolean bonus) {
+        if (count == 3) {
+            return 5;
+        }
+        if (count == 4) {
+            return 4;
+        }
+        if (count == 5 && bonus) {
+            return 2;
+        }
+        if (count == 5) {
+            return 3;
+        }
+        if (count == 6) {
+            return 1;
+        }
+        return NONE;
     }
 }
