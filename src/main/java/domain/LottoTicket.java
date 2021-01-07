@@ -43,6 +43,10 @@ public class LottoTicket {
         }
     }
 
+    public boolean isContains(LottoNumber bonusNumber) {
+        return numbers.contains(bonusNumber);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
