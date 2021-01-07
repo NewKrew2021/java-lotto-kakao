@@ -2,21 +2,42 @@ package domain;
 
 import domain.exceptions.InvalidLottoNumberException;
 
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoTicket {
 
     public static final int LOTTO_NUMBERS_LENGTH = 6;
 
-    private final List<Integer> numbers;
+    private final List<LottoNumber> numbers;
 
-    public LottoTicket(List<Integer> numbers) {
+    public static LottoTicket ofLottoNumber(List<LottoNumber> numbers) {
+        return new LottoTicket(numbers);
+    }
+
+    public static LottoTicket ofIntegerNumber(List<Integer> integerNumbers) {
+        List<LottoNumber> numbers = Optional.ofNullable(integerNumbers)
+                .orElseThrow(InvalidLottoNumberException::new)
+                .stream()
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+
+        return new LottoTicket(numbers);
+    }
+
+    private LottoTicket(List<LottoNumber> numbers) {
         validate(numbers);
+        validateDuplicate(numbers);
+
         this.numbers = numbers;
     }
 
-    private void validate(List<Integer> numbers) {
+    private void validateDuplicate(List<LottoNumber> numbers) {
+        Set<LottoNumber> numbersSet = new HashSet<>(numbers);
+        validate(numbersSet);
+    }
+
+    private void validate(Collection<LottoNumber> numbers) {
         if (numbers == null || numbers.size() != LOTTO_NUMBERS_LENGTH) {
             throw new InvalidLottoNumberException();
         }
