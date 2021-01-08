@@ -17,24 +17,6 @@ public class Ticket {
         this.numbers = numbers;
     }
 
-    private void sizeCheck(int size){
-        if(Format.TICKET_SIZE != size){
-            throw new RuntimeException("invalid Ticket size!!");
-        }
-    }
-
-    private void rangeCheck(Set<Integer> numbers){
-        for (Integer number : numbers) {
-            rangeCeckForOneNumber(number);
-        }
-    }
-
-    private void rangeCeckForOneNumber(int number){
-        if(number < Format.LOWER_LIMIT_OF_NUMBER || Format.UPPER_LIMIT_OF_NUMBER < number){
-            throw new RuntimeException("contains invalid number value.");
-        }
-    }
-
     /* 숫자 정보가 변경되는 것을 막기 위해 복사하여 전달한다. */
     public Set<Integer> getNumberData(){
         return new HashSet<>(numbers);
