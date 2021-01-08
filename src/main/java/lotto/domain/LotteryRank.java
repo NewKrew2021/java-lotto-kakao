@@ -21,14 +21,14 @@ public enum LotteryRank {
     public final long winningPrice;
     public final String winningMsg;
 
-    static public LotteryRank toLotteryRank(int rank) {
+    public static LotteryRank toLotteryRank(int rank) {
         return Arrays.stream(LotteryRank.values())
                 .filter(lotteryRank -> lotteryRank.rank == rank)
                 .findAny()
                 .orElse(RANK_NONE);
     }
 
-    static LotteryRank toLotteryRank(int count, boolean bonus) {
+    public static LotteryRank toLotteryRank(int count, boolean bonus) {
         return Arrays.stream(values())
                 .filter(enumValue -> enumValue.correctCount == count)
                 .filter(enumValue -> !enumValue.bonusCheck || bonus)
