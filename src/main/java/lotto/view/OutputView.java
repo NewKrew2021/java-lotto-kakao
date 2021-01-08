@@ -5,18 +5,16 @@ import lotto.domain.*;
 import java.util.stream.Collectors;
 
 public class OutputView {
-    public static void printLottoTicketNum(int investment) {
-        int numTickets = investment / LottoTicketIssuer.TICKET_PRICE;
-        System.out.println(numTickets + "개를 구매했습니다.");
+    public static void printNumberOfLottoTickets(int ticketCount) {
+        System.out.printf("%d개를 구매했습니다.", ticketCount);
     }
 
     public static void printLottoTickets(LottoTickets lottoTickets) {
         StringBuilder message = new StringBuilder();
 
-        lottoTickets.toStream()
-                .forEach(ticket -> {
-                    LottoNumbers lottoNumbers = ticket.getLottoNumbers();
-                    String numbers = lottoNumbers.toStream()
+        lottoTickets.getTickets()
+                .forEach(lottoTicket -> {
+                    String numbers = lottoTicket.toStream()
                             .map(LottoNumber::getNumber)
                             .map(num -> Integer.toString(num))
                             .collect(Collectors.joining(", "));

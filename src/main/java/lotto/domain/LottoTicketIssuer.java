@@ -13,8 +13,8 @@ public final class LottoTicketIssuer {
         throw new IllegalStateException(message);
     }
 
-    public static LottoTickets issue(NumberPickStrategy strategy, int insertPrice) {
-        return new LottoTickets(IntStream.range(0, insertPrice / TICKET_PRICE)
+    public static LottoTickets issue(NumberPickStrategy strategy, int ticketCount) {
+        return new LottoTickets(IntStream.range(0, ticketCount)
                 .boxed()
                 .map(ignore -> new LottoNumbers(strategy.generateLottoNumbers()))
                 .collect(Collectors.toList()));

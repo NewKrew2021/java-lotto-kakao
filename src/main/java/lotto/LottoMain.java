@@ -2,26 +2,54 @@ package lotto;
 
 import lotto.domain.*;
 import lotto.utils.RandomPickStrategy;
+import lotto.utils.TicketCountCalculator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 public class LottoMain {
+    private static int ticketCount;
+    private static LottoNumbers luckyNumber;
+    private static LottoNumber bonusNumber;
+    private static LottoTickets tickets;
+    private static WinningNumbers winningNumbers;
+    private static LottoMatcher lottoMatcher;
+    private static MatchResults matchResults;
+    private static LottoStatistics statistics;
+    private static InsertPrice insertPrice;
+
     public static void main(String[] args) {
-        int investment = InputView.getInsertPrice();
-        InsertPrice insertPrice = new InsertPrice(investment);
-        OutputView.printLottoTicketNum(insertPrice.getPrice());
+        getUserInsertPrice();
+        issueTicketsAndPrintAll();
+        getLuckyNumbersAndBonusNumber();
 
-        LottoTickets tickets = LottoTicketIssuer.issue(new RandomPickStrategy(), insertPrice.getPrice());
+        matchUserTicketsToWinningTicket();
+        printStatistics();
+    }
+
+    private static void getUserInsertPrice() {
+        insertPrice = new InsertPrice(InputView.scanInsertPrice());
+        ticketCount = TicketCountCalculator.getNumberOfTickets(insertPrice);
+        OutputView.printNumberOfLottoTickets(ticketCount);
+    }
+
+    private static void issueTicketsAndPrintAll() {
+        tickets = LottoTicketIssuer.issue(new RandomPickStrategy(), ticketCount);
         OutputView.printLottoTickets(tickets);
+    }
 
-        LottoNumbers luckyNumber = InputView.getLuckyNumber();
-        LottoNumber bonusNumber = InputView.getBonusNumber();
-        WinningNumbers winningNumbers = new WinningNumbers(luckyNumber, bonusNumber);
+    private static void getLuckyNumbersAndBonusNumber() {
+        luckyNumber = InputView.scanLuckyNumber();
+        bonusNumber = InputView.scanBonusNumber();
+        winningNumbers = new WinningNumbers(luckyNumber, bonusNumber);
+    }
 
-        LottoMatcher lottoMatcher = new LottoMatcher(winningNumbers);
-        MatchResults matchResults = lottoMatcher.match(tickets);
+    private static void matchUserTicketsToWinningTicket() {
+        lottoMatcher = new LottoMatcher(winningNumbers);
+        matchResults = lottoMatcher.match(tickets);
+    }
 
-        LottoStatistics statistics = new LottoStatistics(matchResults, insertPrice);
+    private static void printStatistics() {
+        statistics = new LottoStatistics(matchResults, insertPrice);
         OutputView.printStatistics(statistics);
     }
 }
