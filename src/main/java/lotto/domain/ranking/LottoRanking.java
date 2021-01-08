@@ -33,8 +33,8 @@ public enum LottoRanking {
                 .orElse(NOTHING);
     }
 
-    public long earnPrice(Integer value) {
-        return value * price;
+    public long calculatePriceByMultiply(Long count) {
+        return count * price;
     }
 
     public String getContext() {

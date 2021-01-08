@@ -1,6 +1,6 @@
 package lotto.domain.game;
 
-import lotto.domain.ranking.LottoRankingCount;
+import lotto.domain.ranking.LottoStatistics;
 
 public class LottoRevenue {
 
@@ -10,7 +10,7 @@ public class LottoRevenue {
         this.revenue = revenue;
     }
 
-    public static LottoRevenue from(LottoRankingCount lottoRankingCount) {
+    public static LottoRevenue from(LottoStatistics lottoRankingCount) {
         return new LottoRevenue(lottoRankingCount.calculateTotalPrice());
     }
 
