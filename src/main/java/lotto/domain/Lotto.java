@@ -36,8 +36,11 @@ public class Lotto {
                 .collect(Collectors.joining(", ")) + "]";
     }
 
-    public int matchCount(Lotto lotto) {
-        return (int) lottoNumbers.stream().filter(lottoNumber -> lotto.isContain(lottoNumber)).count();
+    public Rank matchLottoRank(Lotto lotto, LottoNumber bonusNumber) {
+        return Rank.checkRank((int) lottoNumbers
+                .stream()
+                .filter(lottoNumber -> lotto.isContain(lottoNumber))
+                .count(), lotto.isContain(bonusNumber));
     }
 
     public static int getLottoPrice() {

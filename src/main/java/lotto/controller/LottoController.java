@@ -28,31 +28,29 @@ public class LottoController {
         lottos = new Lottos(IntStream
                 .range(0, (money.howMany(Lotto.getLottoPrice())))
                 .mapToObj(num -> new Lotto(new LinkedHashSet<>(randomNumberGenerator
-                .getNumbers()
-                .stream()
-                .map(LottoNumber::of)
-                .collect(Collectors.toList()))))
+                        .getNumbers()
+                        .stream()
+                        .map(LottoNumber::of)
+                        .collect(Collectors.toList()))))
                 .collect(Collectors.toList()));
         LottoUI.printLottos(lottos);
     }
 
     public void matchLotto() {
-        String winningNumberText = LottoUI.getWinningNumberFromUser();
-        Lotto winningNumber = new Lotto(new LinkedHashSet<>(Arrays.stream(split(winningNumberText))
+        Lotto winningNumber = new Lotto(new LinkedHashSet<>(Arrays.stream(split(LottoUI.getWinningNumberFromUser()))
                 .map(num -> LottoNumber.of(getParseInt(num)))
                 .collect(Collectors.toList())));
-
         LottoNumber bonusNumber = LottoNumber.of(LottoUI.getBonusNumberFromUser());
 
         Statistics statistics = lottos.raffle(winningNumber, bonusNumber);
         LottoUI.printStatistics(statistics.getRankings(), statistics.getProfitRate(money));
     }
 
-    private int getParseInt(String number) {
-        return Integer.parseInt(number);
-    }
-
     private String[] split(String numbersText) {
         return numbersText.split(SPLIT_DELIMITER);
+    }
+
+    private int getParseInt(String number) {
+        return Integer.parseInt(number);
     }
 }

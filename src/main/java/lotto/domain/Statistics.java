@@ -39,7 +39,7 @@ public class Statistics {
         return (long) rankings.getCountOfRank(rank) * prize.get(rank.getRank());
     }
 
-    public Rankings getRankings(){
+    public Rankings getRankings() {
         return rankings;
     }
 }

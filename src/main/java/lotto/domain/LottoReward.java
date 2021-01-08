@@ -9,11 +9,11 @@ public enum LottoReward {
 
     private final int reward;
 
-    private LottoReward(int reward){
+    private LottoReward(int reward) {
         this.reward = reward;
     }
 
-    public int getReward(){
+    public int getReward() {
         return this.reward;
     }
 }

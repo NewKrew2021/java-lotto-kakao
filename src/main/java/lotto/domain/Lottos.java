@@ -19,12 +19,8 @@ public class Lottos {
 
     public Statistics raffle(Lotto winningNumber, LottoNumber bonusNumber) {
         Map<Rank, Integer> rankingsMap = new TreeMap<>();
-        int count;
-        boolean bonusCount;
         for (Lotto lotto : lottos) {
-            count = winningNumber.matchCount(lotto);
-            bonusCount = lotto.isContain(bonusNumber);
-            Rank rank = Rank.checkRank(count, bonusCount);
+            Rank rank = winningNumber.matchLottoRank(lotto, bonusNumber);
             rankingsMap.put(rank, rankingsMap.getOrDefault(rank, 0) + 1);
         }
         return new Statistics(rankingsMap);
