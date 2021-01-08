@@ -1,21 +1,19 @@
 package lotto.domain;
 
 public enum MatchResult {
-    FIRST(6, 2000000000, "1등"),
-    SECOND(5, 30000000, "2등(보너스 볼 일치)"),
-    THIRD(5, 1500000, "3등"),
-    FOURTH(4, 50000, "4등"),
-    FIFTH(3, 5000, "5등"),
-    NULL(0, 0, "꽝");
+    FIRST(6, 2000000000),
+    SECOND(5, 30000000),
+    THIRD(5, 1500000),
+    FOURTH(4, 50000),
+    FIFTH(3, 5000),
+    NULL(0, 0);
 
-    private int matchCount;
-    private int reward;
-    private String rank;
+    private final int matchCount;
+    private final int reward;
 
-    MatchResult(int matchCount, int reward, String rank) {
+    MatchResult(int matchCount, int reward) {
         this.matchCount = matchCount;
         this.reward = reward;
-        this.rank = rank;
     }
 
     public static MatchResult valueOf(int matchCount, boolean matchBonus) {
@@ -48,9 +46,5 @@ public enum MatchResult {
 
     public int getMatchCount(){
         return this.matchCount;
-    }
-
-    public String getRank() {
-        return this.rank;
     }
 }
