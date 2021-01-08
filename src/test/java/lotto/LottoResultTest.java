@@ -1,11 +1,14 @@
 package lotto;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultTest {
+
     @Test
+    @DisplayName("LottoResult에 추가된 당첨결과에 따라 상금을 올바르게 구하는지 확인한다.")
     void getPrizeTest() {
         LottoResult lottoResult = new LottoResult();
         lottoResult.addRank(Rank.FIRST);
@@ -15,6 +18,7 @@ public class LottoResultTest {
     }
 
     @Test
+    @DisplayName("수익률을 올바르게 구하는지 확인한다.")
     void getProfitRatioTest() {
         LottoResult lottoResult = new LottoResult();
         lottoResult.addRank(Rank.FIFTH);
