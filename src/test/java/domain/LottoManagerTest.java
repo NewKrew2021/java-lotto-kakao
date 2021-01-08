@@ -19,7 +19,7 @@ public class LottoManagerTest {
         ));
         AnswerLotto answerLotto = new AnswerLotto(Arrays.asList(1,2,3,4,5,6),7);
         lottoManager = new LottoManager(lottos, answerLotto);
-        assertThat(lottoManager.resultOfLottos().keySet()).containsAll(Arrays.asList(LottoStatus.FIRST,
+        assertThat(lottoManager.lottosResult().keySet()).containsAll(Arrays.asList(LottoStatus.FIRST,
                 LottoStatus.SECOND, LottoStatus.FOURTH));
     }
 
@@ -32,8 +32,8 @@ public class LottoManagerTest {
         ));
         AnswerLotto answerLotto = new AnswerLotto(Arrays.asList(1,2,3,4,5,6),7);
         lottoManager = new LottoManager(lottos, answerLotto);
-        assertThat(lottoManager.resultOfLottos().get(LottoStatus.FIRST)).isEqualTo(2);
-        assertThat(lottoManager.resultOfLottos().get(LottoStatus.FOURTH)).isEqualTo(1);
+        assertThat(lottoManager.lottosResult().get(LottoStatus.FIRST)).isEqualTo(2);
+        assertThat(lottoManager.lottosResult().get(LottoStatus.FOURTH)).isEqualTo(1);
     }
 
 

@@ -13,7 +13,7 @@ public class LottoManager {
         this.answerLotto = answerLotto;
     }
 
-    public Map<LottoStatus, Integer> resultOfLottos() {
+    public Map<LottoStatus, Integer> lottosResult() {
         Map<LottoStatus, Integer> result = new HashMap<>();
 
         for (LottoStatus lottoStatus : LottoStatus.getLottoStatuses()) {
