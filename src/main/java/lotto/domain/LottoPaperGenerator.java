@@ -28,7 +28,7 @@ public class LottoPaperGenerator {
         Set<Integer> genNumbers = new HashSet<>();
 
         do {
-            genNumbers.add(random.nextInt(45) + 1);
+            genNumbers.add(random.nextInt(Format.UPPER_LIMIT_OF_NUMBER) + 1);
         } while (genNumbers.size() < 6);
 
         return genNumbers;

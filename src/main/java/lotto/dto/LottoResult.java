@@ -1,16 +1,17 @@
 package lotto.dto;
 
+import lotto.setting.Rank;
+
 import java.util.List;
-import java.util.Map;
 
 public class LottoResult {
     final long score;
     final int[] orderCount = new int[10];
 
-    public LottoResult(long score, List<Integer> orderResults){
+    public LottoResult(long score, List<Rank> ranks){
         this.score = score;
-        for (Integer orderResult : orderResults) {
-            orderCount[orderResult]++;
+        for (Rank currentRank : ranks) {
+            orderCount[currentRank.getValue()]++;
         }
     }
 

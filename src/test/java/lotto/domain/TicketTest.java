@@ -1,6 +1,7 @@
 package lotto.domain;
 
 
+import lotto.setting.Rank;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -55,7 +56,7 @@ public class TicketTest {
         Ticket userTicket = new Ticket(numbersForUser);
         WinnerBalls winnerBalls = new WinnerBalls(new Ticket(numbersForWinner), bonusBall);
 
-        assertThat(userTicket.getOrder(winnerBalls)).isEqualTo(1);   //TODO : 몇등인지에 대한 정보를 enum으로 나타내기
+        assertThat(userTicket.getOrder(winnerBalls)).isEqualTo(Rank.FIRST);
     }
 
     @Test
@@ -67,7 +68,7 @@ public class TicketTest {
         Ticket userTicket = new Ticket(numbersForUser);
         WinnerBalls winnerBalls = new WinnerBalls(new Ticket(numbersForWinner), bonusBall);
 
-        assertThat(userTicket.getOrder(winnerBalls)).isEqualTo(2);
+        assertThat(userTicket.getOrder(winnerBalls)).isEqualTo(Rank.SECOND);
     }
 
     @Test
@@ -79,7 +80,7 @@ public class TicketTest {
         Ticket userTicket = new Ticket(numbersForUser);
         WinnerBalls winnerBalls = new WinnerBalls(new Ticket(numbersForWinner), bonusBall);
 
-        assertThat(userTicket.getOrder(winnerBalls)).isEqualTo(3);
+        assertThat(userTicket.getOrder(winnerBalls)).isEqualTo(Rank.THIRD);
     }
 
     @Test
@@ -91,7 +92,7 @@ public class TicketTest {
         Ticket userTicket = new Ticket(numbersForUser);
         WinnerBalls winnerBalls = new WinnerBalls(new Ticket(numbersForWinner), bonusBall);
 
-        assertThat(userTicket.getOrder(winnerBalls)).isEqualTo(4);
+        assertThat(userTicket.getOrder(winnerBalls)).isEqualTo(Rank.FOURTH);
     }
 
     @Test
@@ -103,7 +104,7 @@ public class TicketTest {
         Ticket userTicket = new Ticket(numbersForUser);
         WinnerBalls winnerBalls = new WinnerBalls(new Ticket(numbersForWinner), bonusBall);
 
-        assertThat(userTicket.getOrder(winnerBalls)).isEqualTo(5);
+        assertThat(userTicket.getOrder(winnerBalls)).isEqualTo(Rank.FIFTH);
     }
 
     @Test
@@ -115,6 +116,6 @@ public class TicketTest {
         Ticket userTicket = new Ticket(numbersForUser);
         WinnerBalls winnerBalls = new WinnerBalls(new Ticket(numbersForWinner), bonusBall);
 
-        assertThat(userTicket.getOrder(winnerBalls)).isEqualTo(6);
+        assertThat(userTicket.getOrder(winnerBalls)).isEqualTo(Rank.OUT);
     }
 }

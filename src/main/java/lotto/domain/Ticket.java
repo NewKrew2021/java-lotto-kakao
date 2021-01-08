@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.setting.Format;
+import lotto.setting.Rank;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -29,7 +30,7 @@ public class Ticket {
     }
 
     private void rangeCeckForOneNumber(int number){
-        if(number < Format.LOWER_LIMIT_OF_NUMBER || Format.UPPER_LIMIT_OF_NUMBER < number){ //TODO : 상수로 해보자.
+        if(number < Format.LOWER_LIMIT_OF_NUMBER || Format.UPPER_LIMIT_OF_NUMBER < number){
             throw new RuntimeException("contains invalid number value.");
         }
     }
@@ -39,13 +40,13 @@ public class Ticket {
         return new HashSet<>(numbers);
     }
 
-    public int getOrder(WinnerBalls balls){
-        if(isOrder1_CompareWith(balls)){ return 1; } //TODO use enum to order number
-        if(isOrder2_CompareWith(balls)){ return 2; }
-        if(isOrder3_CompareWith(balls)){ return 3; }
-        if(isOrder4_CompareWith(balls)){ return 4; }
-        if(isOrder5_CompareWith(balls)){ return 5; }
-        return 6;
+    public Rank getOrder(WinnerBalls balls){
+        if(isOrder1_CompareWith(balls)){ return Rank.FIRST; } //TODO use enum to order number
+        if(isOrder2_CompareWith(balls)){ return Rank.SECOND; }
+        if(isOrder3_CompareWith(balls)){ return Rank.THIRD; }
+        if(isOrder4_CompareWith(balls)){ return Rank.FOURTH; }
+        if(isOrder5_CompareWith(balls)){ return Rank.FIFTH; }
+        return Rank.OUT;
     }
 
     /* 1위. 6개 일치 */

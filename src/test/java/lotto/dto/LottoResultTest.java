@@ -1,8 +1,7 @@
 package lotto.dto;
 
-import lotto.domain.LottoPaper;
-import lotto.domain.Ticket;
-import lotto.domain.WinnerBalls;
+import lotto.setting.Format;
+import lotto.setting.Rank;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -11,9 +10,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultTest {
 
-    int testScore = 2000000000 + 30000000 + 30000000 + 5000 + 0 + 0;
-    List<Integer> testOrderList = Arrays.asList(1, 2, 2, 5, 6, 6);
-    LottoResult result = new LottoResult(testScore, testOrderList);
+    long testScore = Rank.FIRST.getPrize() + Rank.SECOND.getPrize() +  Rank.SECOND.getPrize()
+            + Rank.FIFTH.getPrize() + Rank.OUT.getPrize() + Rank.OUT.getPrize();
+
+    List<Rank> testRankList = Arrays.asList(Rank.FIRST, Rank.SECOND, Rank.SECOND, Rank.FIFTH, Rank.OUT, Rank.OUT);
+    LottoResult result = new LottoResult(testScore, testRankList);
 
     @Test
     public void getScoreTest(){
@@ -32,7 +33,7 @@ public class LottoResultTest {
 
     @Test
     public void getRateTest(){
-        int testInputMoney = 1000 * 6;
+        int testInputMoney = Format.TICKET_PRICE * 6;
         double expectedRate = (double)result.getScore() / testInputMoney;
         assertThat(result.getRate(testInputMoney)).isEqualTo(expectedRate);
     }

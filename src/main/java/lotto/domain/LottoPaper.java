@@ -6,12 +6,12 @@ package lotto.domain;
 
 import lotto.dto.LottoNumberData;
 import lotto.dto.LottoResult;
+import lotto.setting.Rank;
 
 import java.util.*;
 
 public class LottoPaper {
 
-    private final static int[] PRIZE = new int[]{0, 2000000000, 30000000, 1500000, 50000, 5000, 0}; //TODO : 뭔가 조치가 필요해 보인다.
     private List<Ticket> tickets;
 
     public LottoPaper(LottoNumberData request){
@@ -35,26 +35,26 @@ public class LottoPaper {
 
     public LottoResult getResultCompareWith(WinnerBalls winnerBalls){
         long score = getScoreCompareWith(winnerBalls);
-        List<Integer> countList = getOrdersCompareWith(winnerBalls);
+        List<Rank> countList = getOrdersCompareWith(winnerBalls);
         return new LottoResult(score, countList);
     }
 
     public long getScoreCompareWith(WinnerBalls winnerBalls) {
-        List<Integer> orders = getOrdersCompareWith(winnerBalls);
+        List<Rank> orders = getOrdersCompareWith(winnerBalls);
 
         long money = 0;
-        for (Integer order : orders) {
-            money += PRIZE[order];
+        for (Rank order : orders) {
+            money += order.getPrize();
         }
 
         return money;
     }
 
-    private List<Integer> getOrdersCompareWith(WinnerBalls winnerBalls){
-        List<Integer> orders = new ArrayList<>();
+    private List<Rank> getOrdersCompareWith(WinnerBalls winnerBalls){
+        List<Rank> orders = new ArrayList<>();
 
         for(Ticket curTicket : tickets){
-            int order = curTicket.getOrder(winnerBalls);
+            Rank order = curTicket.getOrder(winnerBalls);
             orders.add(order);
         }
 

@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.dto.LottoNumberData;
+import lotto.setting.Rank;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -33,7 +34,11 @@ public class LottoPaperTest {
         WinnerBalls winnerBalls = new WinnerBalls(new Ticket(numbersForWinner), bonusBall);
 
         assertThat(paper.getScoreCompareWith(winnerBalls)).isEqualTo(
-                2000000000 + 30000000 + 1500000 + 50000 + 5000 + 0 + 0 + 0); //TODO : 상금부분을 enum으로 빼면 좋을듯?
+                Rank.FIRST.getPrize() + Rank.SECOND.getPrize()
+                        + Rank.THIRD.getPrize() + Rank.FOURTH.getPrize()
+                        + Rank.FIFTH.getPrize() + Rank.OUT.getPrize()
+                        + Rank.OUT.getPrize() + Rank.OUT.getPrize()
+        );
     }
 
     @Test
@@ -90,6 +95,6 @@ public class LottoPaperTest {
         Set<Integer> numbersForWinner = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         WinnerBalls winnerBalls = new WinnerBalls(new Ticket(numbersForWinner), bonusBall);
 
-        assertThat(paper.getScoreCompareWith(winnerBalls)).isEqualTo(2000000000L * 20);
+        assertThat(paper.getScoreCompareWith(winnerBalls)).isEqualTo(Rank.FIRST.getPrize() * 20L);
     }
 }
