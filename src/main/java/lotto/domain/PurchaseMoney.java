@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Objects;
 
@@ -6,7 +6,15 @@ public class PurchaseMoney {
     public static final int LOTTO_PRICE = 1000;
     private final int money;
 
-    public PurchaseMoney(int money) {
+    public PurchaseMoney(String moneyString) {
+        int money;
+
+        try {
+            money = Integer.parseInt(moneyString);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("구입금액은 정수를 입력해야 한다.");
+        }
+
         checkRange(money);
         checkMultiple(money);
         this.money = money;

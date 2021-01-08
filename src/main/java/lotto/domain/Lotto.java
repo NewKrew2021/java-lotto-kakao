@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -6,27 +6,42 @@ import java.util.stream.Stream;
 
 public class Lotto {
     public static final int COUNT_OF_NUMBERS = 6;
-
     private final List<Ball> lottoBalls;
+
+    public Lotto() {
+        this.lottoBalls = autoGenerate().stream()
+                .map(Ball::new)
+                .collect(Collectors.toList());
+    }
 
     public Lotto(String lottoText) {
         List<Ball> lottoNumbers = parseLottoText(lottoText);
-
-        if (lottoNumbers.stream().distinct().count() < lottoNumbers.size()) {
-            throw new IllegalArgumentException("로또번호 중복이 있어서는 안된다.");
-        }
-
-        if (lottoNumbers.size() != COUNT_OF_NUMBERS) {
-            throw new IllegalArgumentException("로또번호는 6개여야 합니다.");
-        }
-
+        checkDuplicate(lottoNumbers);
+        checkCount(lottoNumbers);
         this.lottoBalls = lottoNumbers;
     }
 
-    public Lotto(GenerateStrategy strategy) {
-        this.lottoBalls = strategy.generate().stream()
-                .map(Ball::new)
-                .collect(Collectors.toList());
+    private void checkDuplicate(List<Ball> lottoNumbers) {
+        if (lottoNumbers.stream().distinct().count() < lottoNumbers.size()) {
+            throw new IllegalArgumentException("로또번호 중복이 있어서는 안된다.");
+        }
+    }
+
+    private void checkCount(List<Ball> lottoNumbers) {
+        if (lottoNumbers.size() != COUNT_OF_NUMBERS) {
+            throw new IllegalArgumentException("로또번호는 6개여야 한다.");
+        }
+    }
+
+    public static List<String> autoGenerate() {
+        Set<String> randomNumbers = new HashSet<>();
+
+        while (randomNumbers.size() < COUNT_OF_NUMBERS) {
+            int randomNumber = new Random().nextInt(Ball.UPPER_BOUND) + 1;
+            randomNumbers.add(String.valueOf(randomNumber));
+        }
+
+        return new ArrayList<>(randomNumbers);
     }
 
     private List<Ball> parseLottoText(String lottoText) {

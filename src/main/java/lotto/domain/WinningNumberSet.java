@@ -1,23 +1,28 @@
-package lotto;
+package lotto.domain;
 
 import java.util.List;
 import java.util.Objects;
 
 public class WinningNumberSet {
-    private Lotto winningLotto;
-    private Ball bonusBall;
+    private final Lotto winningLotto;
+    private final Ball bonusBall;
 
-    public WinningNumberSet(Lotto winningLotto, Ball bonusBall){
+    public WinningNumberSet(Lotto winningLotto, Ball bonusBall) {
+        checkDuplicate(winningLotto, bonusBall);
         this.winningLotto = winningLotto;
         this.bonusBall = bonusBall;
-        if(bonusBall.isDuplicated(winningLotto)){
+    }
+
+    private void checkDuplicate(Lotto winningLotto, Ball bonusBall) {
+        if (winningLotto.contains(bonusBall)) {
             throw new IllegalArgumentException("보너스볼에는 당첨 번호가 포함되어서는 안된다.");
         }
     }
 
-    public Rank compare(List<Ball> balls){
+    public Rank compare(List<Ball> balls) {
         int matchedCount = winningLotto.compareWithBalls(balls);
         boolean hasBonus = balls.contains(bonusBall);
+
         return Rank.createRank(matchedCount, hasBonus);
     }
 

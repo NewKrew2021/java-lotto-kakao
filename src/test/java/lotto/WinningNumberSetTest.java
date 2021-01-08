@@ -1,5 +1,8 @@
 package lotto;
 
+import lotto.domain.Ball;
+import lotto.domain.Lotto;
+import lotto.domain.WinningNumberSet;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -20,7 +23,7 @@ public class WinningNumberSetTest {
         assertThatThrownBy(() -> {
             Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
             Ball bonusBall = new Ball("1");
-            WinningNumberSet winningNumberSet = new WinningNumberSet(winningLotto, bonusBall);
+            new WinningNumberSet(winningLotto, bonusBall);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

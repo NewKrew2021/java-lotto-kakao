@@ -1,16 +1,15 @@
 package lotto;
 
-import org.junit.jupiter.api.Test;
+import lotto.domain.Rank;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
 public class RankTest {
-    @Test
-    void createTest() {
-        assertThat(Rank.createRank(6, false)).isEqualTo(Rank.FIRST);
-        assertThat(Rank.createRank(5, true)).isEqualTo(Rank.SECOND);
-        assertThat(Rank.createRank(5, false)).isEqualTo(Rank.THIRD);
-        assertThat(Rank.createRank(4, true)).isEqualTo(Rank.FOURTH);
+    @ParameterizedTest
+    @CsvSource({"6,false,FIRST", "5,true,SECOND", "5,false,THIRD", "4,true,FOURTH"})
+    void createTest(int matchedCount, boolean hasBonus, Rank rank) {
+        assertThat(Rank.createRank(matchedCount, hasBonus)).isEqualTo(rank);
     }
 }

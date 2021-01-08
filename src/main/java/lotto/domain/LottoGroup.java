@@ -1,9 +1,10 @@
-package lotto;
+package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoGroup {
     private final List<Lotto> lottoGroup;
@@ -14,19 +15,17 @@ public class LottoGroup {
 
     public LottoResult getLottoResult(WinningNumberSet winningNumberSet) {
         LottoResult lottoResult = new LottoResult();
-        for (Lotto lotto : lottoGroup) {
-            Rank rank = lotto.compareWithWinning(winningNumberSet);
-            lottoResult.addRank(rank);
-        }
+        lottoGroup.stream()
+                .map(lotto -> lotto.compareWithWinning(winningNumberSet))
+                .forEach(lottoResult::addRank);
+
         return lottoResult;
     }
 
     public static LottoGroup createRandomLottoGroup(int count) {
         List<Lotto> lottos = new ArrayList<>();
-
-        for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto(new RandomGenerateStrategy()));
-        }
+        IntStream.range(0, count)
+                .forEach(i -> lottos.add(new Lotto()));
 
         return new LottoGroup(lottos);
     }
@@ -37,9 +36,9 @@ public class LottoGroup {
 
     @Override
     public String toString() {
-       return lottoGroup.stream()
-               .map(Lotto::toString)
-               .collect(Collectors.joining("\n"));
+        return lottoGroup.stream()
+                .map(Lotto::toString)
+                .collect(Collectors.joining("\n"));
     }
 
     @Override

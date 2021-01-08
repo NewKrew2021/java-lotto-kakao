@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.Ball;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -16,16 +17,12 @@ public class BallTest {
 
     @Test
     void integerTest() {
-        assertThatThrownBy(() -> {
-            Ball ball = new Ball("a");
-        }).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Ball("a")).isInstanceOf(IllegalArgumentException.class);
     }
 
     @ParameterizedTest
     @CsvSource({"0", "46"})
     void rangeTest(String ballString) {
-        assertThatThrownBy(() -> {
-            Ball ball = new Ball(ballString);
-        }).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new Ball(ballString)).isInstanceOf(IllegalArgumentException.class);
     }
 }

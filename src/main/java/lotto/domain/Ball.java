@@ -1,34 +1,35 @@
-package lotto;
+package lotto.domain;
 
 import java.util.Objects;
 
 public class Ball implements Comparable<Ball> {
 
-    private int ballNumber;
+    public static final int LOWER_BOUND = 1;
+    public static final int UPPER_BOUND = 45;
+    private final int ballNumber;
 
     public Ball(String ballString) {
-        int ball = 0;
+        int ball;
+
         try {
             ball = Integer.parseInt(ballString);
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("볼은 정수여야 한다.");
         }
+
         checkRange(ball);
         this.ballNumber = ball;
     }
 
-    public void checkRange(int ballNumber) {
-        if(outOfRange(ballNumber)){
+    private void checkRange(int ballNumber) {
+        if (ballNumber < LOWER_BOUND || ballNumber > UPPER_BOUND) {
             throw new IllegalArgumentException("볼은 1 이상 45 이하여야 한다.");
         }
     }
 
-    public boolean outOfRange(int ballNumber){
-        return 1 > ballNumber || ballNumber > 45;
-    }
-
-    public boolean isDuplicated(Lotto lotto){
-        return lotto.contains(this);
+    @Override
+    public int compareTo(Ball o) {
+        return this.ballNumber - o.ballNumber;
     }
 
     @Override
@@ -47,10 +48,5 @@ public class Ball implements Comparable<Ball> {
     @Override
     public int hashCode() {
         return Objects.hash(ballNumber);
-    }
-
-    @Override
-    public int compareTo(Ball o) {
-        return this.ballNumber - o.ballNumber;
     }
 }

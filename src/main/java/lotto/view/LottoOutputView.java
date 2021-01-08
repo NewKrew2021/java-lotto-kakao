@@ -1,14 +1,20 @@
 package lotto.view;
 
-import lotto.LottoGroup;
-import lotto.LottoResult;
-import lotto.PurchaseMoney;
-import lotto.Rank;
+import lotto.domain.LottoGroup;
+import lotto.domain.LottoResult;
+import lotto.domain.PurchaseMoney;
+import lotto.domain.Rank;
+
+import java.util.Arrays;
 
 public class LottoOutputView {
+    public static final String PURCHASE_COUNT_MESSAGE = "%d개를 구매했습니다.%n";
+    public static final String WINNING_RESULT_MESSAGE = "\n당첨 통계\n---------";
+    public static final String PROFIT_RATIO_MESSAGE = "총 수익률은 %s%%입니다.";
+    public static final String RANK_RESULT_MESSAGE = "%s (%d원) - %d개";
 
     public static void outputPurchaseAmount(int amount) {
-        System.out.println(String.format("%d개를 구매했습니다.", amount));
+        System.out.printf(PURCHASE_COUNT_MESSAGE, amount);
     }
 
     public static void outputLottoGroup(LottoGroup lottoGroup) {
@@ -16,19 +22,16 @@ public class LottoOutputView {
         System.out.println();
     }
 
-    public static void outputLottoResult(LottoResult lottoResult, PurchaseMoney purchaseMoney){
-        System.out.println("\n당첨 통계");
-        System.out.println("---------");
-        System.out.println(getRankResult(lottoResult, Rank.FIFTH));
-        System.out.println(getRankResult(lottoResult, Rank.FOURTH));
-        System.out.println(getRankResult(lottoResult, Rank.THIRD));
-        System.out.println(getRankResult(lottoResult, Rank.SECOND));
-        System.out.println(getRankResult(lottoResult, Rank.FIRST));
-        System.out.println("총 수익률은 " + lottoResult.getProfitRatio(purchaseMoney) + "%입니다.");
+    public static void outputLottoResult(LottoResult lottoResult, PurchaseMoney purchaseMoney) {
+        System.out.println(WINNING_RESULT_MESSAGE);
+        Arrays.stream(Rank.values())
+                .filter(rank -> rank != Rank.NOTHING)
+                .forEach(rank -> System.out.println(getRankResult(lottoResult, rank)));
+        System.out.printf(PROFIT_RATIO_MESSAGE, lottoResult.getProfitRatio(purchaseMoney));
     }
 
-    private static String getRankResult(LottoResult lottoResult, Rank rank){
-        return rank.getDescription() + " (" + rank.getPrize() + "원) - " + lottoResult.getRankCount(rank) + "개";
+    private static String getRankResult(LottoResult lottoResult, Rank rank) {
+        return String.format(RANK_RESULT_MESSAGE,rank.getDescription(),rank.getPrize(),lottoResult.getRankCount(rank));
     }
 
 }

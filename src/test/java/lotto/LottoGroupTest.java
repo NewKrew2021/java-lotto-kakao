@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -8,7 +9,6 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoGroupTest {
-
     @Test
     void createTest() {
         List<Lotto> lottos = Arrays.asList(
@@ -39,5 +39,4 @@ public class LottoGroupTest {
     void createRandomLottoGroupTest() {
         assertThat(LottoGroup.createRandomLottoGroup(10).getLottoCount()).isEqualTo(10);
     }
-
 }

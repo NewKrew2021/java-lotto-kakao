@@ -1,15 +1,15 @@
-package lotto;
+package lotto.domain;
 
 public enum Rank {
-    FIRST(2000000000L, "6개 일치"),
-    SECOND(30000000L, "5개 일치, 보너스 볼 일치"),
-    THIRD(1500000L, "5개 일치"),
-    FOURTH(50000L, "4개 일치"),
+    NOTHING(0L, "꽝"),
     FIFTH(5000L, "3개 일치"),
-    NOTHING(0L, "꽝");
+    FOURTH(50000L, "4개 일치"),
+    THIRD(1500000L, "5개 일치"),
+    SECOND(30000000L, "5개 일치, 보너스 볼 일치"),
+    FIRST(2000000000L, "6개 일치");
 
-    private Long prize;
-    private String description;
+    private final Long prize;
+    private final String description;
 
     Rank(Long prize, String description) {
         this.prize = prize;
