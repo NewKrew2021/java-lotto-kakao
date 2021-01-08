@@ -1,9 +1,9 @@
 package mission.lotto.domain;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
@@ -11,15 +11,15 @@ public class LottoNumbers {
     private static final int MAX_NUMBERS_LENGTH = 6;
 
     public LottoNumbers(List<Integer> numbers) {
-        Set<Number> temp = new HashSet<>();
-        for (int number : numbers) {
-            temp.add(new Number(number));
-        }
+        Set<Number> lttoNums = numbers.stream()
+                .map(Number::new)
+                .collect(Collectors.toSet());
 
-        if (checkNumbersLength(temp)) {
+        if (checkNumbersLength(lttoNums)) {
             throw new IllegalArgumentException("로또는 중복 없는 6자리만 가능합니다.");
         }
-        this.numbers = temp;
+
+        this.numbers = lttoNums;
     }
 
     private boolean checkNumbersLength(Set<Number> temp) {

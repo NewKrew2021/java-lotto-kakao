@@ -1,20 +1,18 @@
 package mission.lotto.domain;
 
 public enum Rank {
-    FIRST(1, 6, false, 2000000000),
-    SECOND(2, 5, true, 30000000),
-    THIRD(3, 5, false, 1500000),
-    FOURTH(4, 4, false, 50000),
-    FIFTH(5, 3, false, 5000),
-    UNRANKED(6, 0, false, 0);
+    FIRST(6, false, 2000000000),
+    SECOND(5, true, 30000000),
+    THIRD(5, false, 1500000),
+    FOURTH(4, false, 50000),
+    FIFTH(3, false, 5000),
+    UNRANKED(0, false, 0);
 
-    private final int rank;
     private final int correctNo;
     private final boolean hasBonus;
     private final int money;
 
-    Rank(int rank, int correctNo, boolean hasBonus, int money) {
-        this.rank = rank;
+    Rank(int correctNo, boolean hasBonus, int money) {
         this.correctNo = correctNo;
         this.hasBonus = hasBonus;
         this.money = money;
@@ -27,10 +25,6 @@ public enum Rank {
         if (correctNo == 4) return FOURTH;
         if (correctNo == 3) return FIFTH;
         return UNRANKED;
-    }
-
-    public int getRank() {
-        return rank;
     }
 
     public int getCorrectNo() {
