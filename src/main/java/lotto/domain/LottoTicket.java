@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 public class LottoTicket {
     private static final int BALL_COUNT = 6;
-    private Set<Number> numbers;
+    private final Set<Number> numbers;
 
     public LottoTicket(Set<Number> numbers) {
         checkBallCount(numbers);
@@ -27,9 +27,7 @@ public class LottoTicket {
     }
 
     public LottoRank getRank(WinnerNumber winnerNumber) {
-        int count = matchCount(winnerNumber);
-        boolean bonus = this.contains(winnerNumber.getBonusNumber());
-        return RankTable.get(count * 10 + (bonus && count == 5 ? 1 : 0));
+        return RankTable.get(new MatchResult(matchCount(winnerNumber), contains(winnerNumber.getBonusNumber())));
     }
 
     @Override
@@ -38,4 +36,5 @@ public class LottoTicket {
                 .map(Number::toString)
                 .collect(Collectors.joining(", ")) + "]";
     }
+
 }

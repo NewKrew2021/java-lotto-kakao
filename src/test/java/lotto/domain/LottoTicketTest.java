@@ -92,19 +92,19 @@ public class LottoTicketTest {
         assertThat(ticket.contains(new Number(1))).isEqualTo(true);
     }
 
-    @Test
+    @ParameterizedTest
     @DisplayName("LottoTicekt간의 일치하는 숫자 갯수 테스트")
-    void matchThree() {
+    @CsvSource({"1,6,3,5,4,2,6", "3,2,1,7,5,4,5", "3,40,30,2,7,5,3"})
+    void matchThree(int n1, int n2, int n3, int n4, int n5, int n6, int count) {
         LottoTicket compTicket = new LottoTicket(
-                Sets.newTreeSet(new Number(1),
-                        new Number(2),
-                        new Number(3),
-                        new Number(7),
-                        new Number(8),
-                        new Number(9))
+                Sets.newTreeSet(new Number(n1),
+                        new Number(n2),
+                        new Number(n3),
+                        new Number(n4),
+                        new Number(n5),
+                        new Number(n6))
         );
-        assertThat(ticket.matchCount(compTicket)).isEqualTo(3);
-        assertThat(ticket.matchCount(compTicket)).isNotEqualTo(4);
+        assertThat(ticket.matchCount(compTicket)).isEqualTo(count);
     }
 
     @ParameterizedTest
@@ -129,6 +129,8 @@ public class LottoTicketTest {
                         new Number(i5),
                         new Number(i6))
         );
+        System.out.println(lottoTicket.getRank(winnerNumber).hashCode());
+        System.out.println(rank.hashCode());
         assertThat(lottoTicket.getRank(winnerNumber)).isEqualTo(rank);
     }
 
