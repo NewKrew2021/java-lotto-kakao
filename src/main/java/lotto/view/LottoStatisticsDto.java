@@ -6,17 +6,17 @@ import lotto.domain.ranking.LottoStatistics;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class LottoRankingCountDto {
+public class LottoStatisticsDto {
     private final Map<LottoRanking, Long> rankingCount;
 
-    private LottoRankingCountDto(Map<LottoRanking, Long> rankingCount) {
+    private LottoStatisticsDto(Map<LottoRanking, Long> rankingCount) {
         Map<LottoRanking, Long> reversedRankingCount = new TreeMap<>(rankingCount).descendingMap();
         reversedRankingCount.remove(LottoRanking.NOTHING);
         this.rankingCount = reversedRankingCount;
     }
 
-    public static LottoRankingCountDto from(LottoStatistics lottoRankingCount) {
-        return new LottoRankingCountDto(lottoRankingCount.getRankingCount());
+    public static LottoStatisticsDto from(LottoStatistics lottoRankingCount) {
+        return new LottoStatisticsDto(lottoRankingCount.getRankingCount());
     }
 
     public Map<LottoRanking, Long> getRankingCount() {
