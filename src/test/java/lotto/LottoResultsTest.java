@@ -11,6 +11,7 @@ public class LottoResultsTest {
     private final int TEST_LOOP_TIMES = 5;
 
     @Test
+    @DisplayName("당첨된 결과 저장 테스트")
     void upsertTest() {
         LottoResults lottoResults = new LottoResults();
         for (int i = 1; i <= TEST_LOOP_TIMES; i++) {
@@ -23,7 +24,6 @@ public class LottoResultsTest {
             lottoResults.upsert(lottoRank);
             assertThat(lottoResults.getCount(lottoRank)).isEqualTo(comp);
         }
-        System.out.println(lottoResults);
     }
 
     @Test

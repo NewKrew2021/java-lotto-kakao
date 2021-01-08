@@ -11,7 +11,7 @@ public class Number implements Comparable<Number> {
 
     private void checkValidNumber(int number) {
         if (1 > number || number > 45) {
-            throw new RuntimeException("숫자가 잘못되었습니다 : " + number);
+            throw new IllegalArgumentException("숫자가 잘못되었습니다 : " + number);
         }
     }
 

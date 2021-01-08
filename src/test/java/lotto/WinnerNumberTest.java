@@ -1,6 +1,7 @@
 package lotto;
 
 import org.assertj.core.util.Sets;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -10,6 +11,7 @@ import static org.assertj.core.api.Assertions.*;
 public class WinnerNumberTest {
 
     @Test
+    @DisplayName("WinnerNumber 클래스 생성 테스트")
     void createWinnerNumberTest() {
         WinnerNumber winnerNumber = new WinnerNumber(Sets.newHashSet(Arrays.asList(
                 new Number(1),
