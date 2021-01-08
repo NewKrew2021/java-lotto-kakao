@@ -29,7 +29,7 @@ public class Lotteries {
         return new LotteryRank(ranks);
     }
 
-    public static List<Lottery> getRandomLotteryList(int count) {
+    public static List<Lottery> getRandomLotteries(int count) {
         List<Lottery> lotteryList = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             lotteryList.add(Lottery.createRandomLottery());

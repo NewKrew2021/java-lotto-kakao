@@ -1,11 +1,14 @@
 package lotto.domain;
 
 import lotto.exception.InvalidLotteryNumberException;
+import org.junit.jupiter.api.DisplayNameGeneration;
+import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
+@DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 class LotteryNumberTest {
     @Test
     void LotteryNumber_유효하지않은수() {

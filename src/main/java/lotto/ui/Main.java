@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
         final int lotteryCount = LotteryUtil.calculateLotteryCount(InputView.readMoney());
 
-        Lotteries lotteries = new Lotteries(Lotteries.getRandomLotteryList(lotteryCount));
+        Lotteries lotteries = new Lotteries(Lotteries.getRandomLotteries(lotteryCount));
         OutputView.printLotteries(lotteries);
 
         LotteryRank lotteryRank = lotteries.calculateRank(InputView.readLotteryAnswer());
