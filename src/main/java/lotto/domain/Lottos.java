@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -26,13 +27,9 @@ public class Lottos {
         return new Statistics(rankingsMap);
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (Lotto lotto : lottos) {
-            sb.append(lotto);
-            sb.append("\n");
-        }
-        return sb.toString();
+    public LottosDto getLottosData() {
+        return new LottosDto(lottos.stream()
+                .map(Lotto::getLottoData)
+                .collect(Collectors.toList()));
     }
 }

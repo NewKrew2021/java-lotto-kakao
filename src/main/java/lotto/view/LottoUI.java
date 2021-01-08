@@ -1,11 +1,9 @@
 package lotto.view;
 
-import lotto.domain.LottoReward;
-import lotto.domain.Lottos;
-import lotto.domain.Rank;
-import lotto.domain.Rankings;
+import lotto.domain.*;
 
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class LottoUI {
     public static final String PRICE_INPUT_TEXT = "구입금액을 입력해 주세요.";
@@ -19,7 +17,11 @@ public class LottoUI {
     public static final String RANK_THIRD_TEXT = "5개 일치 (%d원)- %d개\n";
     public static final String RANK_SECOND_TEXT = "5개 일치, 보너스 볼 일치(%d원)- %d개\n";
     public static final String RANK_FIRST_TEXT = "6개 일치 (%d원)- %d개\n";
-    private static Scanner scanner = new Scanner(System.in);
+    public static final String JOIN_DELIMITER = ", ";
+    public static final String CLOSE_BRACKET = "]";
+    public static final String OPEN_BRACKET = "[";
+
+    private static final Scanner scanner = new Scanner(System.in);
 
     public static int getMoneyFromUser() {
         System.out.println(PRICE_INPUT_TEXT);
@@ -28,7 +30,16 @@ public class LottoUI {
 
     public static void printLottos(Lottos lottos) {
         System.out.println(lottos.getSizeOfLotto() + BUY_SUCCESS_TEXT);
-        System.out.println(lottos);
+        LottosDto lottosDto = lottos.getLottosData();
+        for (LottoDto lottoDto : lottosDto.getLottosDto()) {
+            System.out.println(getLottoText(lottoDto));
+        }
+    }
+
+    private static String getLottoText(LottoDto lottoDto) {
+        return OPEN_BRACKET + lottoDto.getLottoDto().stream().map(LottoNumber::getNumber)
+                .map(lottoNumber -> Integer.toString(lottoNumber))
+                .collect(Collectors.joining(JOIN_DELIMITER)) + CLOSE_BRACKET;
     }
 
     public static String getWinningNumberFromUser() {

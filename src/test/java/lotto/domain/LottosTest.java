@@ -21,13 +21,6 @@ public class LottosTest {
     }
 
     @Test
-    public void toStringTest() {
-        String expected = "[1, 2, 3, 4, 5, 6]\n"
-                + "[7, 8, 9, 10, 11, 12]\n";
-        assertThat(lottos.toString()).isEqualTo(expected);
-    }
-
-    @Test
     public void raffleTest() {
         Lotto winningNumber = new Lotto(new HashSet(Arrays.asList(LottoNumber.of(1),
                 LottoNumber.of(2),

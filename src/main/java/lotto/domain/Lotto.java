@@ -29,17 +29,14 @@ public class Lotto {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    @Override
-    public String toString() {
-        return "[" + lottoNumbers.stream().map(LottoNumber::getNumber)
-                .map(no -> Integer.toString(no))
-                .collect(Collectors.joining(", ")) + "]";
+    public LottoDto getLottoData() {
+        return new LottoDto(Collections.unmodifiableSet(lottoNumbers));
     }
 
     public Rank matchLottoRank(Lotto lotto, LottoNumber bonusNumber) {
         return Rank.checkRank((int) lottoNumbers
                 .stream()
-                .filter(lottoNumber -> lotto.isContain(lottoNumber))
+                .filter(lotto::isContain)
                 .count(), lotto.isContain(bonusNumber));
     }
 
