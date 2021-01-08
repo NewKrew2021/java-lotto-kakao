@@ -18,16 +18,16 @@ public class WinnerTicketTest {
     void create() {
         //given
         LottoNumbers lottoNumbers = LottoNumbers.from(new OneToSixGenerator());
-        LottoNumber bonusNumber = new LottoNumber(7);
+        LottoNumber bonusNumber = LottoNumber.valueOf(7);
 
         //when
         WinnerTicket winnerTicket = new WinnerTicket(lottoNumbers, bonusNumber);
 
         //then
-        List<LottoNumber> expected = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+        List<LottoNumber> expected = Arrays.asList(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6));
         assertThat(winnerTicket.getWinnerNumbers().getLottoNumbers()).isEqualTo(expected);
-        assertThat(winnerTicket.getBonusNumber()).isEqualTo(new LottoNumber(7));
+        assertThat(winnerTicket.getBonusNumber()).isEqualTo(LottoNumber.valueOf(7));
     }
 
     private static Stream<Arguments> generateLottoNumberStrategy() {
@@ -48,7 +48,7 @@ public class WinnerTicketTest {
     void hasBonus(NumberGenerateStrategy strategy, int bonusNumber, boolean expected) {
         //given
         WinnerTicket winnerTicket = new WinnerTicket(LottoNumbers.from(new OneToSixGenerator()),
-                new LottoNumber(bonusNumber));
+                LottoNumber.valueOf(bonusNumber));
         LottoNumbers lottoNumbers = LottoNumbers.from(strategy);
 
         //when

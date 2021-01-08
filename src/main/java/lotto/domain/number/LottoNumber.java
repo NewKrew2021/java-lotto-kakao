@@ -16,20 +16,25 @@ public class LottoNumber {
         this.number = number;
     }
 
+    private static class LottoNumberCache {
+        static final List<LottoNumber> cache = new ArrayList<>();
+
+        static {
+            for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
+                cache.add(new LottoNumber(i));
+            }
+        }
+    }
+
+    public static LottoNumber valueOf(int number) {
+        try {
+            return LottoNumberCache.cache.get(number - 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new IllegalArgumentException("1~45 범위의 숫자만 허용됩니다");
+        }
+    }
+
     public int getNumber() {
         return number;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LottoNumber that = (LottoNumber) o;
-        return number == that.number;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(number);
     }
 }

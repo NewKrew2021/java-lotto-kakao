@@ -24,8 +24,8 @@ public class LottoNumbersTest {
         LottoNumbers lottoNumbers = LottoNumbers.from(strategy);
 
         //then
-        List<LottoNumber> expected = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3),
-                new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+        List<LottoNumber> expected = Arrays.asList(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6));
         assertThat(lottoNumbers.getLottoNumbers()).isEqualTo(expected);
     }
 
