@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.*;
+import lotto.dto.RankingsDto;
 import lotto.util.LottoNumberGenerator;
 import lotto.util.RandomNumberGenerator;
 import lotto.view.LottoUI;
@@ -9,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
-    private LottoUI lottoUI;
-    private LottoNumberGenerator lottoNumberGenerator;
-    private LotteryMachine lotteryMachine;
+    private final LottoUI lottoUI;
+    private final LottoNumberGenerator lottoNumberGenerator;
+    private MatchNumber matchNumber;
     private Lottos lottos;
     private Money money;
 
@@ -36,11 +37,12 @@ public class LottoController {
         String winningNumberText = lottoUI.getWinningNumberFromUser();
         int bonusNumber = lottoUI.getBonusNumberFromUser();
 
-        lotteryMachine = new LotteryMachine(winningNumberText, bonusNumber);
+        matchNumber = MatchNumber.of(winningNumberText, bonusNumber);
     }
 
     public void matchLotto() {
-        Rankings rankings = new Rankings(lottos.raffle(lotteryMachine.getWinningNumber(),lotteryMachine.getBonusNumber()));
+        RankingsDto rankingsDto = lottos.match(matchNumber);
+        Rankings rankings = new Rankings(rankingsDto.getRankings());
         lottoUI.printStatistics(rankings.toString(), rankings.getProfitRate(money));
     }
 }
