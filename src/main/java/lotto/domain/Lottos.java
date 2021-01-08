@@ -1,16 +1,26 @@
 package lotto.domain;
 
 import lotto.dto.RankingsDto;
+import lotto.util.LottoNumberGenerator;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class Lottos {
 
-    private List<Lotto> lottos;
+    private final List<Lotto> lottos;
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = Collections.unmodifiableList(lottos);
+    }
+
+    public static Lottos fromMoney(Money money, LottoNumberGenerator lottoNumberGenerator) {
+        List<Lotto> lottoList = new ArrayList<>();
+        for (int i = 0; i < money.howMany(); i++) {
+            lottoList.add(new Lotto(lottoNumberGenerator));
+        }
+        return new Lottos(lottoList);
     }
 
     public int getNumOfLotto() {
