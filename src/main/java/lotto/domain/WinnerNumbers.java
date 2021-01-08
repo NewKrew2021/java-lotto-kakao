@@ -1,18 +1,19 @@
 package lotto.domain;
 
 import java.util.List;
+import java.util.Set;
 
 public class WinnerNumbers {
-    private final LottoNumbers winnerNo;
+    private final LottoNumbers winnerNumbers;
     int bonusBall;
 
-    public WinnerNumbers(LottoNumbers numbers, int bonusBall){
-        this.winnerNo = numbers;
+    public WinnerNumbers(Set<Integer> numbers, int bonusBall){
+        this.winnerNumbers = new LottoNumbers(numbers);
         this.bonusBall = bonusBall;
     }
 
     public LottoNumbers getWinnerNumber() {
-        return winnerNo;
+        return winnerNumbers;
     }
 
     public int getBonusBall() {

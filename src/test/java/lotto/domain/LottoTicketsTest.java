@@ -6,8 +6,6 @@ import java.util.*;
 
 //import static org.assertj.core.api.Assertions.assertThat;
 
-import org.junit.jupiter.api.Test;
-
 import static org.assertj.core.api.Assertions.*;
 
 public class LottoTicketsTest {
@@ -15,13 +13,14 @@ public class LottoTicketsTest {
     @Test
     public void testCreate(){
         assertThatIllegalArgumentException().isThrownBy(() -> {
-            List<LottoTicket> tickets = new ArrayList<>();
-            Set<Integer> numbers = new HashSet<>(Arrays.asList(1,2,3,4,5,6));
-            LottoNumbers lottoNumbers = new LottoNumbers(numbers);
-            tickets.add(new LottoTicket(lottoNumbers));
+            List<LottoNumbers> tickets = new ArrayList<>();
+            Set<Integer> lottoNumbers = new HashSet<>(Arrays.asList(1,2,3,4,5,6));
+            tickets.add(new LottoNumbers(lottoNumbers));
             new LottoTickets(2, tickets);
         });
     }
+
+
 
 }
 
