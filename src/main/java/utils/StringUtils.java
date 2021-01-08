@@ -19,7 +19,7 @@ public class StringUtils {
         return Arrays.asList(inputText.split(DEFAULT_SPLIT_DELIMITER));
     }
 
-    public static List<Integer> mapStringListToInteger(String inputText) {
+    public static List<Integer> mapStringListToIntegerList(String inputText) {
         List<String> strings = splitText(inputText);
         List<Integer> results = new ArrayList<>();
         for (String string : strings) {

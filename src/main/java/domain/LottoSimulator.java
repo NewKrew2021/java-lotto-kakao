@@ -4,8 +4,6 @@ import java.util.Map;
 
 public class LottoSimulator {
 
-    private static final long PERCENTAGE = 100L;
-
     private PurchaseInfo purchaseInfo;
     private Lottos lottos;
     private Answer answer;
@@ -28,9 +26,9 @@ public class LottoSimulator {
         return lottos.checkResult(answer);
     }
 
-    public long profitPercentage() {
+    public double getProfit() {
         long purchaseMoney = purchaseInfo.getPurchaseCount() * PurchaseInfo.LOTTO_PRICE;
-        return (getWinningMoney() - purchaseMoney) * PERCENTAGE / purchaseMoney;
+        return (double)(getWinningMoney() - purchaseMoney) / (double)purchaseMoney;
     }
 
 }

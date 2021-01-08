@@ -14,8 +14,9 @@ public class LottoSimulatorView {
     public static final String ASK_LOTTO_NUMBER_FOR_ANSWER_LOTTO_MESSAGE = "지난 주 당첨 번호를 입력해주세요.";
     public static final String ASK_BONUS_NUMBER_FOR_ANSWER_LOTTO_MESSAGE = "보너스 볼을 입력해주세요.";
     public static final String RESULT_HEAD_MESSAGE = "\n당첨 통계\n-----------";
-    public static final String TOTAL_EARNINGS_MESSAGE = "총 수익률은 %d%% 입니다.";
+    public static final String TOTAL_EARNINGS_MESSAGE = "총 수익률은 %.2f%% 입니다.";
     public static final String MATCHING_INFORMATION_MESSAGE = "%d개 일치(%d원)- %d개";
+    public static final int PERCENTAGE = 100;
 
     public long askMoneyForBuyLotto() {
         System.out.println(ASK_MONEY_MESSAGE);
@@ -40,14 +41,14 @@ public class LottoSimulatorView {
         System.out.println(lottos);
     }
 
-    public void printResult(Map<LottoStatus, Integer> lottoResult, long profit) {
+    public void printResult(Map<LottoStatus, Integer> lottoResult, double profit) {
         System.out.println(RESULT_HEAD_MESSAGE);
 
         for (LottoStatus lottoStatus : LottoStatus.getLottoStatuses()) {
             System.out.println(getMatchingInformation(lottoResult.get(lottoStatus), lottoStatus));
         }
 
-        System.out.println(String.format(TOTAL_EARNINGS_MESSAGE, profit));
+        System.out.println(String.format(TOTAL_EARNINGS_MESSAGE, profit * PERCENTAGE));
     }
 
     private String getMatchingInformation(int matchedLottoNumberCount, LottoStatus lottoStatus) {

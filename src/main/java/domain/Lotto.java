@@ -16,7 +16,7 @@ public class Lotto {
 
 
     public Lotto(String inputText) {
-        this(StringUtils.mapStringListToInteger(inputText));
+        this(StringUtils.mapStringListToIntegerList(inputText));
     }
 
     public Lotto(List<Integer> numbers) {

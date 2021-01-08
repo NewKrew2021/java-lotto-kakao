@@ -40,6 +40,6 @@ public class LottoController {
 
     private void printLottoResults() {
         lottoSimulator = new LottoSimulator(purchaseInfo, lottos, answer);
-        lottoSimulatorView.printResult(lottoSimulator.getLottoResults(), lottoSimulator.profitPercentage());
+        lottoSimulatorView.printResult(lottoSimulator.getLottoResults(), lottoSimulator.getProfit());
     }
 }
