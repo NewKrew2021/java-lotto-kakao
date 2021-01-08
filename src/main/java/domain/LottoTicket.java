@@ -4,7 +4,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
-    private Set<Number> numbers;
+    private final Set<Number> numbers;
 
     public LottoTicket(Set<Number> numbers) {
         this.numbers = numbers;
@@ -14,14 +14,14 @@ public class LottoTicket {
         return numbers.contains(number);
     }
 
-    public int matchCount(LottoTicket compTicket) {
-        return (int) numbers.stream().filter(compTicket::contains).count();
+    public int matchCount(LottoTicket otherTicket) {
+        return (int) numbers.stream().filter(otherTicket::contains).count();
     }
 
     public LottoRank getRank(WinnerNumber winnerNumber) {
         int count = matchCount(winnerNumber);
         boolean bonus = contains(winnerNumber.getBonusNumber());
-        return RankTable.get(count * 10 + (bonus && count == 5 ? 1 : 0));
+        return RankTable.get(count ,bonus);
     }
 
     @Override
