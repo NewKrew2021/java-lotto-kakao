@@ -19,11 +19,7 @@ public class LottoUI {
     public static final String RANK_THIRD_TEXT = "5개 일치 (%d원)- %d개\n";
     public static final String RANK_SECOND_TEXT = "5개 일치, 보너스 볼 일치(%d원)- %d개\n";
     public static final String RANK_FIRST_TEXT = "6개 일치 (%d원)- %d개\n";
-    private static Scanner scanner;
-
-    public LottoUI() {
-        scanner = new Scanner(System.in);
-    }
+    private static Scanner scanner = new Scanner(System.in);
 
     public static int getMoneyFromUser() {
         System.out.println(PRICE_INPUT_TEXT);
