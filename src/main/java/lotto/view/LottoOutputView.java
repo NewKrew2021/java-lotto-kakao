@@ -12,7 +12,7 @@ public class LottoOutputView {
     }
 
     public static void outputLottoGroup(LottoGroup lottoGroup) {
-        System.out.println(lottoGroup.toString());
+        System.out.println("[" + lottoGroup.toString().replace("\n","]\n[") + "]");
         System.out.println();
     }
 

@@ -8,8 +8,8 @@ public enum Rank {
     FIFTH(5000L, "3개 일치"),
     NOTHING(0L, "꽝");
 
-    private Long prize;
-    private String description;
+    private final Long prize;
+    private final String description;
 
     Rank(Long prize, String description) {
         this.prize = prize;

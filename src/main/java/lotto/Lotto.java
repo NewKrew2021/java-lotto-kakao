@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Lotto {
+
     public static final int COUNT_OF_NUMBERS = 6;
 
     private final List<Ball> lottoBalls;
@@ -58,10 +59,10 @@ public class Lotto {
 
     @Override
     public String toString() {
-        return "[" + lottoBalls.stream()
+        return lottoBalls.stream()
                 .sorted()
                 .map(Ball::toString)
-                .collect(Collectors.joining(", ")) + "]";
+                .collect(Collectors.joining(", "));
     }
 
     @Override

@@ -17,7 +17,7 @@ public class Ball implements Comparable<Ball> {
         int ballNumber = 0;
         try {
             ballNumber = Integer.parseInt(ballString);
-        } catch (InputMismatchException e) {
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException("볼은 정수여야 한다.");
         }
         return ballNumber;

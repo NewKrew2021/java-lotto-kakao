@@ -4,8 +4,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class WinningNumberSet {
-    private Lotto winningLotto;
-    private Ball bonusBall;
+    private final Lotto winningLotto;
+    private final Ball bonusBall;
 
     public WinningNumberSet(Lotto winningLotto, Ball bonusBall){
         this.winningLotto = winningLotto;
