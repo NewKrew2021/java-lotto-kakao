@@ -44,15 +44,20 @@ public class Lotto {
     }
 
     private int countMatchingNumber(Lotto answerLotto) {
-        return lottoNumbers.stream().
-                filter(number -> answerLotto.getLottoNumbers().contains(number)).collect(Collectors.toList()).size();
+        return lottoNumbers.stream()
+                .filter(number -> answerLotto.getLottoNumbers().contains(number))
+                .collect(Collectors.toList()).size();
     }
 
     @Override
     public String toString() {
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append("[");
-        stringBuffer.append(lottoNumbers.stream().map(Object::toString).collect(Collectors.joining(",")));
+
+        stringBuffer.append(lottoNumbers.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(",")));
+
         stringBuffer.append("]");
         return stringBuffer.toString();
     }
