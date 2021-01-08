@@ -40,7 +40,7 @@ public class LottoController {
     }
 
     public void matchLotto() {
-        Statistics statistics = new Statistics(lottos.raffle(lotteryMachine.getWinningNumber(),lotteryMachine.getBonusNumber()));
-        lottoUI.printStatistics(statistics.toString(), statistics.getProfitRate(money));
+        Rankings rankings = new Rankings(lottos.raffle(lotteryMachine.getWinningNumber(),lotteryMachine.getBonusNumber()));
+        lottoUI.printStatistics(rankings.toString(), rankings.getProfitRate(money));
     }
 }
