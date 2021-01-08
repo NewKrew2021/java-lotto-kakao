@@ -49,4 +49,10 @@ public class LottoTest {
         );
     }
 
+    @Test
+    void StringSplitInvalidStringExceptionTest() {
+        assertThatThrownBy(()->{
+            new Lotto("abcdf,egsdd,gwwef");
+        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("숫자가 아닌 입력이 포함되어 있습니다.");
+    }
 }
