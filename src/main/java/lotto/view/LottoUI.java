@@ -1,6 +1,9 @@
 package lotto.view;
 
+import lotto.domain.LottoReward;
 import lotto.domain.Lottos;
+import lotto.domain.Rank;
+import lotto.domain.Rankings;
 
 import java.util.Scanner;
 
@@ -11,6 +14,11 @@ public class LottoUI {
     public static final String BONUS_INPUT_TEXT = "보너스 볼을 입력해 주세요.";
     public static final String STATISTICS_LINE_TEXT = "당첨 통계\n---------";
     public static final String ALL_PROFIT_TEXT = "총 수익률은 %d%% 입니다.\n";
+    public static final String RANK_FIFTH_TEXT = "3개 일치 (%d원)- %d개\n";
+    public static final String RANK_FOURTH_TEXT = "4개 일치 (%d원)- %d개\n";
+    public static final String RANK_THIRD_TEXT = "5개 일치 (%d원)- %d개\n";
+    public static final String RANK_SECOND_TEXT = "5개 일치, 보너스 볼 일치(%d원)- %d개\n";
+    public static final String RANK_FIRST_TEXT = "6개 일치 (%d원)- %d개\n";
     private static Scanner scanner;
 
     public LottoUI() {
@@ -38,9 +46,19 @@ public class LottoUI {
         return scanner.nextInt();
     }
 
-    public static void printStatistics(String statisticsText, int profitRate) {
+    public static void printStatistics(Rankings rankings, int profitRate) {
         System.out.println(STATISTICS_LINE_TEXT);
-        System.out.println(statisticsText);
+        printRaffleResult(rankings);
         System.out.printf(ALL_PROFIT_TEXT, profitRate);
+    }
+
+    private static void printRaffleResult(Rankings rankings) {
+        StringBuilder sb = new StringBuilder();
+        sb.append(String.format(RANK_FIFTH_TEXT, LottoReward.FIFTH.getReward(), rankings.getCountOfRank(Rank.FIFTH)));
+        sb.append(String.format(RANK_FOURTH_TEXT, LottoReward.FOURTH.getReward(), rankings.getCountOfRank(Rank.FOURTH)));
+        sb.append(String.format(RANK_THIRD_TEXT, LottoReward.THIRD.getReward(), rankings.getCountOfRank(Rank.THIRD)));
+        sb.append(String.format(RANK_SECOND_TEXT, LottoReward.SECOND.getReward(), rankings.getCountOfRank(Rank.SECOND)));
+        sb.append(String.format(RANK_FIRST_TEXT, LottoReward.FIRST.getReward(), rankings.getCountOfRank(Rank.FIRST)));
+        System.out.println(sb);
     }
 }
