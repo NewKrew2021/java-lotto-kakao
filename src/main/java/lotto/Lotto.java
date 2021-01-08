@@ -33,14 +33,14 @@ public class Lotto {
 
     public Lotto(GenerateStrategy strategy) {
         this.lottoBalls = strategy.generate().stream()
-                .map(Ball::new)
+                .map(Ball::createBall)
                 .collect(Collectors.toList());
     }
 
     private List<Ball> parseLottoText(String lottoText) {
         return Arrays.stream(lottoText.split(","))
                 .map(String::trim)
-                .map(Ball::new)
+                .map(Ball::createBall)
                 .collect(Collectors.toList());
     }
 

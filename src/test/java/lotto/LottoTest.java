@@ -37,8 +37,8 @@ public class LottoTest {
     @Test
     @DisplayName("Lotto 안에 특정 볼이 포함되었는지 확인하는 containsBall 메서드 테스트한다.")
     void containsBallTest() {
-        Ball includedBall = new Ball("3");
-        Ball excludedBall = new Ball("7");
+        Ball includedBall = Ball.createBall("3");
+        Ball excludedBall = Ball.createBall("7");
         Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
         assertThat(lotto.contains(includedBall)).isTrue();
         assertThat(lotto.contains(excludedBall)).isFalse();
@@ -47,12 +47,12 @@ public class LottoTest {
     @Test
     @DisplayName("List<Ball>가 주어졌을 때 일치하는 볼 개수를 구하는 compareWithBalls 메서드를 테스트한다.")
     void compareWithBallsTest() {
-        List<Ball> balls = Arrays.asList(new Ball("1"),
-                new Ball("2"),
-                new Ball("3"),
-                new Ball("4"),
-                new Ball("5"),
-                new Ball("6"));
+        List<Ball> balls = Arrays.asList(Ball.createBall("1"),
+                Ball.createBall("2"),
+                Ball.createBall("3"),
+                Ball.createBall("4"),
+                Ball.createBall("5"),
+                Ball.createBall("6"));
         Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
         assertThat(lotto.compareWithBalls(balls)).isEqualTo(6);
     }

@@ -13,15 +13,15 @@ public class BallTest {
     @Test
     @DisplayName("Ball 클래스에 올바른 입력이 주어졌을 때 정상적으로 생성되는지 확인한다.")
     void createTest() {
-        Ball ball = new Ball("3");
-        assertThat(ball).isEqualTo(new Ball("3"));
+        Ball ball = Ball.createBall("3");
+        assertThat(ball).isEqualTo(Ball.createBall("3"));
     }
 
     @Test
     @DisplayName("Ball 클래스에 정수가 아닌 문자열이 주어졌을 때 예외가 발생한다.")
     void integerTest() {
         assertThatThrownBy(() -> {
-            Ball ball = new Ball("a");
+            Ball ball = Ball.createBall("a");
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -30,7 +30,7 @@ public class BallTest {
     @CsvSource({"0", "46"})
     void rangeTest(String ballString) {
         assertThatThrownBy(() -> {
-            Ball ball = new Ball(ballString);
+            Ball ball = Ball.createBall(ballString);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }
