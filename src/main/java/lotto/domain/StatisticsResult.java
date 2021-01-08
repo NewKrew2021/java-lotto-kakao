@@ -66,7 +66,7 @@ public class StatisticsResult {
         for( StatisticsType type : StatisticsType.values() ) {
             sumPrice += priceHash.get(type) * hashMap.get(type);
         }
-        sumPrice = sumPrice / (this.ticketCount * 1000);
+        sumPrice = sumPrice / (this.ticketCount * LottoTicket.LOTTO_PRICE );
         return sumPrice;
     }
 

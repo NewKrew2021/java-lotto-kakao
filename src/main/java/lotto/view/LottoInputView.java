@@ -10,16 +10,15 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class LottoInputView {
-    private static Scanner sc = new Scanner(System.in);
 
-    private static final int LOTTO_PRICE = 1000;
+    private static Scanner sc = new Scanner(System.in);
 
     public static int inputMoney() {
         System.out.println("구입금액을 입력해 주세요.");
-        int count = Integer.parseInt(sc.nextLine()) / LOTTO_PRICE;
+        int count = Integer.parseInt(sc.nextLine()) / LottoTicket.LOTTO_PRICE;
         while (count <= 0) {
             System.out.println("구입금액을 잘못 입력하셨습니다. 다시 입력해주세요.");
-            count = Integer.parseInt(sc.nextLine()) / LOTTO_PRICE;
+            count = Integer.parseInt(sc.nextLine()) / LottoTicket.LOTTO_PRICE;
         }
         return count;
     }

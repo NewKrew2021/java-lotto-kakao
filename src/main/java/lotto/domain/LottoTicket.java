@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 public class LottoTicket {
 
     private static final int LOTTO_NUMBER_COUNT_OF_TICKET = 6;
+    public static final int LOTTO_PRICE = 1000;
+
     List<LottoNo> numbers = new ArrayList<>();
 
     public LottoTicket(List<Integer> numbers) {
@@ -35,7 +37,7 @@ public class LottoTicket {
         return this.numbers.contains(lottoNo);
     }
 
-    public int getMatchCount(LottoTicket lottoTicket) {
+    public int matchTickets(LottoTicket lottoTicket) {
         return (int) this.numbers.stream()
                 .filter(lottoTicket::isContains)
                 .count();
