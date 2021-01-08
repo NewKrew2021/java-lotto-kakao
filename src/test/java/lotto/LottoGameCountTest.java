@@ -3,11 +3,11 @@ package lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static lotto.LottoGameNumber.LOTTO_MONEY_EXCEPTION_MESSAGE;
+import static lotto.LottoGameCount.LOTTO_MONEY_EXCEPTION_MESSAGE;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class LottoGameNumberTest {
+public class LottoGameCountTest {
     @DisplayName("금액이 들어오면, 금액의 단위에 맞는 티켓의 갯수를 반환한다.")
     @Test
     void create(){
@@ -15,7 +15,7 @@ public class LottoGameNumberTest {
         int money = 14000;
 
         //when
-        LottoGameNumber lottogame = new LottoGameNumber(money);
+        LottoGameCount lottogame = new LottoGameCount(money);
 
         //then
         assertThat(lottogame.getTicketNumber()).isEqualTo(14);
@@ -30,7 +30,7 @@ public class LottoGameNumberTest {
         //then
         assertThatIllegalArgumentException()
                 // when
-                .isThrownBy(() -> new LottoGameNumber(money))
+                .isThrownBy(() -> new LottoGameCount(money))
                 .withMessage(LOTTO_MONEY_EXCEPTION_MESSAGE);
     }
 
@@ -43,7 +43,7 @@ public class LottoGameNumberTest {
         //then
         assertThatIllegalArgumentException()
                 // when
-                .isThrownBy(() -> new LottoGameNumber(money))
+                .isThrownBy(() -> new LottoGameCount(money))
                 .withMessage(LOTTO_MONEY_EXCEPTION_MESSAGE);
     }
 }

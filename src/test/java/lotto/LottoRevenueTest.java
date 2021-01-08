@@ -26,4 +26,6 @@ public class LottoRevenueTest {
         //then
         assertThat(lottoRevenue.getRevenue()).isEqualTo(60000);
     }
+
+
 }
