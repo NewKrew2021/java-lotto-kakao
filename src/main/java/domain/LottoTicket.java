@@ -56,6 +56,12 @@ public class LottoTicket {
         return count;
     }
 
+    public List<Integer> getLottoTicketInfo(){
+        return numbers.stream()
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toList());
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

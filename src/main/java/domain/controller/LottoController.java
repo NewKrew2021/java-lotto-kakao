@@ -1,5 +1,6 @@
-package domain;
+package domain.controller;
 
+import domain.*;
 import view.LottoInputView;
 import view.LottoOutputView;
 
@@ -10,6 +11,7 @@ public class LottoController {
         LottoOutputView.printTicketsCount(ticketsCount);
 
         LottoTickets lottoTickets = LottoService.generateTickets(amount);
+        LottoOutputView.printLottoTickets(lottoTickets.getLottoTickets());
 
         LottoTicket lottoWinningTicket = LottoTicket.ofLottoNumber(LottoInputView.inputWinningNumbers());
         LottoNumber bonusNumber = new LottoNumber(LottoInputView.inputBonusNumber());

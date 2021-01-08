@@ -1,9 +1,11 @@
 package view;
 
 import domain.Amount;
+import domain.LottoTickets;
 import domain.WinningInfo;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoOutputView {
 
@@ -12,7 +14,7 @@ public class LottoOutputView {
             "4개 일치 (50000원) - %d개",
             "5개 일치 (150000) - %d개",
             "5개 일치, 보너스 볼 일치(30000000원) - %d개",
-            "6개 일치 (200000000워원) - %d개"};
+            "6개 일치 (200000000원) - %d개"};
 
 
     public static void printTicketsCount(int ticketsCount) {
@@ -33,5 +35,22 @@ public class LottoOutputView {
     public static void printYield(Amount amount, Long sum) {
         double yield = (double) sum / amount.getAmount();
         System.out.println(String.format("총 수익률은 %.2f입니다.", yield));
+    }
+
+    public static void printLottoTickets(List<List<Integer>> lottoTickets) {
+        for (List<Integer> lottoTicket : lottoTickets) {
+            printLottoTicket(lottoTicket);
+        }
+        System.out.println();
+    }
+
+    private static void printLottoTicket(List<Integer> lottoTicket) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        sb.append(lottoTicket
+                .stream()
+                .map(i->i.toString())
+                .collect(Collectors.joining(", "))).append("]");
+        System.out.println(sb);
     }
 }

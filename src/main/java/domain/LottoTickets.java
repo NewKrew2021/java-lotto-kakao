@@ -3,6 +3,7 @@ package domain;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoTickets {
 
@@ -13,7 +14,7 @@ public class LottoTickets {
     }
 
     public WinningInfo getWinningInfo(LottoWinningNumber lottoWinningNumber) {
-        List<Integer> winningInfo = new ArrayList<Integer>(Arrays.asList(0, 0, 0, 0, 0));
+        List<Integer> winningInfo = new ArrayList<>(Arrays.asList(0, 0, 0, 0, 0));
 
         for (LottoTicket lottoTicket : lottoTickets) {
             int winningInfoIndex = 0;
@@ -30,6 +31,12 @@ public class LottoTickets {
         }
 
         return new WinningInfo(winningInfo);
+    }
+
+    public List<List<Integer>> getLottoTickets() {
+        return lottoTickets.stream()
+                .map(LottoTicket::getLottoTicketInfo)
+                .collect(Collectors.toList());
     }
 
     public int size() {
