@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 public class Lotto {
 
     public static final int LOTTO_NUMBER_SIZE = 6;
-    private static final String LOTTO_SIZE_EXCEED_ERROR_MESSAGE = "%d개 이하의 숫자를 입력해주세요.";
+    private static final String LOTTO_SIZE_EXCEED_ERROR_MESSAGE = "%d개의 숫자를 입력해주세요.";
 
     private List<LottoNumber> lottoNumbers;
 
@@ -20,7 +20,7 @@ public class Lotto {
     }
 
     public Lotto(List<Integer> numbers) {
-        if(numbers.size() > LOTTO_NUMBER_SIZE) {
+        if(numbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(String.format(LOTTO_SIZE_EXCEED_ERROR_MESSAGE, LOTTO_NUMBER_SIZE));
         }
 

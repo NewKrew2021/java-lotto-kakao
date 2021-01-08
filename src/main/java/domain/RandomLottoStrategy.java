@@ -17,7 +17,7 @@ public class RandomLottoStrategy implements LottoStrategy {
     }
 
     @Override
-    public List<Integer> NumberChooseStrategy() {
+    public List<Integer> numberChooseStrategy() {
         Collections.shuffle(lottoNumbers);
         List<Integer> result = lottoNumbers.stream()
                 .limit(Lotto.LOTTO_NUMBER_SIZE)
