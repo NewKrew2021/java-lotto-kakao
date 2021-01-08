@@ -44,6 +44,33 @@ public class MatchResultsTest {
                 )));
     }
 
+    @Test
+    void testHashCode() {
+        List<MatchResult> results = Arrays.asList(
+                MatchResult.FIRST,
+                MatchResult.SECOND
+        );
+        List<MatchResult> differentResult = Arrays.asList(
+                MatchResult.FIRST,
+                MatchResult.THIRD
+        );
+        MatchResults matchResults = new MatchResults(results);
+
+        assertThat(matchResults.hashCode()).isEqualTo(new MatchResults(results).hashCode());
+        assertThat(matchResults.hashCode()).isNotEqualTo(new MatchResults(differentResult).hashCode());
+    }
+
+    @Test
+    void testDelegate() {
+        MatchResults matchResults = new MatchResults(Arrays.asList(
+                MatchResult.FIRST,
+                MatchResult.THIRD
+        ));
+
+        matchResults.delegate(consumer -> assertThat(consumer.containsKey(MatchResult.FIRST)).isTrue());
+        matchResults.delegate(consumer -> assertThat(consumer.containsKey(MatchResult.SECOND)).isFalse());
+    }
+
     private List<LottoNumber> customLottoNumbers(int... parameters) {
         return Arrays.stream(parameters)
                 .mapToObj(LottoNumber::new)

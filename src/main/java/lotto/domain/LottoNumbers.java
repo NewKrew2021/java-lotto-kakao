@@ -22,6 +22,14 @@ public class LottoNumbers {
         this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
     }
 
+    public void delegate(Consumer<List<LottoNumber>> consumer) {
+        consumer.accept(lottoNumbers);
+    }
+
+    public boolean contains(LottoNumber lottonumber) {
+        return lottoNumbers.contains(lottonumber);
+    }
+
     private boolean areInvalidLottoNumbers(List<LottoNumber> lottoNumbers) {
         return isInvalidSize(lottoNumbers) || !areAllDistinctNumbers(lottoNumbers);
     }
@@ -36,19 +44,11 @@ public class LottoNumbers {
                 .count() == lottoNumbers.size();
     }
 
-    public boolean contains(LottoNumber lottonumber) {
-        return lottoNumbers.contains(lottonumber);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumbers that = (LottoNumbers) o;
         return this.lottoNumbers.containsAll(that.lottoNumbers);
-    }
-
-    public void delegate(Consumer<List<LottoNumber>> consumer) {
-        consumer.accept(lottoNumbers);
     }
 }

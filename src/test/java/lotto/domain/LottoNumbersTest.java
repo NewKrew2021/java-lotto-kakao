@@ -27,6 +27,18 @@ public class LottoNumbersTest {
     }
 
     @Test
+    void testDelegate() {
+        List<LottoNumber> ticket = Stream.of(1, 2, 3, 4, 5, 6)
+                .map(LottoNumber::new)
+                .collect(Collectors.toList());
+        LottoNumbers lottoNumbers = new LottoNumbers(ticket);
+
+        lottoNumbers.delegate(numbers -> assertThat(numbers.stream()
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toList())).contains(6, 5, 4, 3, 2, 1));
+    }
+
+    @Test
     void shouldNotBeEqual() {
         List<LottoNumber> originalNumbers = Stream.of(1, 2, 3, 4, 5, 6)
                 .map(LottoNumber::new)
