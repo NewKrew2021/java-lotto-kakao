@@ -29,12 +29,12 @@ public class LottosTest {
 
     @Test
     public void raffleTest() {
-        WinningNumber winningNumber = new WinningNumber(Set.of(LottoNumber.of(1),
+        WinningNumber winningNumber = new WinningNumber(new HashSet(Arrays.asList(LottoNumber.of(1),
                 LottoNumber.of(2),
                 LottoNumber.of(3),
                 LottoNumber.of(4),
                 LottoNumber.of(5),
-                LottoNumber.of(6)));
+                LottoNumber.of(6))));
         lottos.raffle(winningNumber, LottoNumber.of(6));
         Map<Rank, Integer> expected = new TreeMap<>();
         expected.put(Rank.FIRST, 1);
@@ -43,12 +43,12 @@ public class LottosTest {
 
     @Test
     void bonusTest() {
-        WinningNumber w = new WinningNumber(Set.of(LottoNumber.of(1),
+        WinningNumber w = new WinningNumber(new HashSet(Arrays.asList(LottoNumber.of(1),
                 LottoNumber.of(2),
                 LottoNumber.of(3),
                 LottoNumber.of(4),
                 LottoNumber.of(5),
-                LottoNumber.of(7)));
+                LottoNumber.of(7))));
         Map<Rank,Integer> m = new HashMap<>();
         m.put(Rank.SECOND,1);
         assertThat(lottos.raffle(w, LottoNumber.of(6))).containsEntry(Rank.SECOND,1);

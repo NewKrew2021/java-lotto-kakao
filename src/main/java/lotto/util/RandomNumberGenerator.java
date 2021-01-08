@@ -1,17 +1,18 @@
 package lotto.util;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class RandomNumberGenerator implements LottoNumberGenerator {
 
-    public static final int RANGE = 45;
+    private static final int RANGE_MAX = 45;
+    private static final int RANGE_MIN = 1;
+
+    private static final List<Integer> lottoNumbers =  IntStream.range(RANGE_MIN, RANGE_MAX + 1).boxed().collect(Collectors.toList());
 
     public List<Integer> getNumbers() {
-        Set<Integer> numbers = new TreeSet<>();
-        Random random = new Random();
-        while (numbers.size() < 6) {
-            numbers.add(random.nextInt(RANGE) + 1);
-        }
-        return new ArrayList<>(numbers);
+        Collections.shuffle(lottoNumbers);
+        return new ArrayList<>(lottoNumbers.subList(0,6));
     }
 }

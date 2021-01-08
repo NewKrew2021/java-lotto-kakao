@@ -17,11 +17,7 @@ public class Lotto {
     }
 
     public Lotto() {
-        lottoNumbers = new LinkedHashSet<>();
-        LottoNumberGenerator lottoNumberGenerator = new RandomNumberGenerator();
-        for (int l : lottoNumberGenerator.getNumbers()) {
-            lottoNumbers.add(LottoNumber.of(l));
-        }
+        this(new RandomNumberGenerator());
     }
 
     public boolean isContain(LottoNumber lottoNumber) {
