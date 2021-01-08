@@ -1,15 +1,17 @@
 package lotto.view;
 
 import lotto.domain.game.LottoRevenueRate;
+import lotto.domain.game.LottoTicketCount;
 import lotto.domain.ranking.LottoRanking;
 
 import java.util.Map;
 
 public class OutputView {
+
     private static final String NEW_LINE = System.lineSeparator();
 
-    public static void printTicketCount(int ticketCount) {
-        System.out.printf("%d개를 구매했습니다.%s", ticketCount, NEW_LINE);
+    public static void printTicketCount(LottoTicketCount ticketCount) {
+        System.out.printf("%d개를 구매했습니다.%s", ticketCount.getTicketCount(), NEW_LINE);
     }
 
     public static void printTicketNumbers(LottoNumbersDto lottoNumbers) {
@@ -17,11 +19,17 @@ public class OutputView {
     }
 
     public static void printWinningStatistics(LottoStatisticsDto lottoRankingCount) {
-        System.out.println("당첨 통계");
-        System.out.println("---------");
+        StringBuilder sb = new StringBuilder();
+        sb.append("당첨 통계")
+                .append(NEW_LINE)
+                .append("---------")
+                .append(NEW_LINE);
         for (Map.Entry<LottoRanking, Long> entry : lottoRankingCount.getRankingCount().entrySet()) {
-            System.out.printf("%s %d개%s", entry.getKey().getContext(), entry.getValue(), NEW_LINE);
+            sb.append(entry.getKey().getContext())
+                    .append(entry.getValue())
+                    .append(NEW_LINE);
         }
+        System.out.println(sb.toString());
     }
 
     public static void printRevenueRate(LottoRevenueRate revenueRate) {
