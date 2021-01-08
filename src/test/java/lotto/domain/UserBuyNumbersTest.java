@@ -7,55 +7,32 @@ import java.util.Arrays;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
 public class UserBuyNumbersTest {
 
     @Test
     public void create() {
-        UserBuyNumbers userBuyNumbers = new UserBuyNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-        assertThat(userBuyNumbers).isEqualTo(new UserBuyNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        UserBuyNumbers totalUserBuyNums = new UserBuyNumbers();
+        assertThat(totalUserBuyNums).isEqualTo(new UserBuyNumbers());
     }
 
     @Test
-    public void validateSevenNums() {
-        assertThatThrownBy(() -> {
-            new UserBuyNumbers(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
-        }).isInstanceOf(IllegalArgumentException.class);
+    public void addNewNumbers() {
+        UserBuyNumbers totalUserBuyNums1 = new UserBuyNumbers();
+        totalUserBuyNums1.addBuyNumbers(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        UserBuyNumbers totalUserBuyNums2 = new UserBuyNumbers();
+        totalUserBuyNums2.addBuyNumbers(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        assertThat(totalUserBuyNums1).isEqualTo(totalUserBuyNums2);
     }
 
     @Test
-    public void validateFiveNums() {
-        assertThatThrownBy(() -> {
-            new UserBuyNumbers(Arrays.asList(1, 2, 3, 4, 5));
-        }).isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
-    public void validateDuplication() {
-        assertThatThrownBy(() -> {
-            new UserBuyNumbers(Arrays.asList(1, 1, 2, 3, 4, 5));
-        }).isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
-    public void checkRankSecond() {
-        WinAndBonusNumbers winAndBonusNumbers = new WinAndBonusNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
-        UserBuyNumbers userBuyNumbers = new UserBuyNumbers(Arrays.asList(1, 2, 3, 4, 5, 7));
-        assertThat(userBuyNumbers.calculateRank(winAndBonusNumbers)).isEqualTo(RankState.SECOND);
-    }
-
-    @Test
-    public void checkRankFail() {
-        WinAndBonusNumbers winAndBonusNumbers = new WinAndBonusNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
-        UserBuyNumbers userBuyNumbers = new UserBuyNumbers(Arrays.asList(40, 41, 42, 43, 44, 45));
-        assertThat(userBuyNumbers.calculateRank(winAndBonusNumbers)).isEqualTo(RankState.FAIL);
-    }
-
-    @Test
-    public void intToStringList() {
-        UserBuyNumbers userBuyNumbers = new UserBuyNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
-        List<String> expected = new ArrayList<>(Arrays.asList("1", "2", "3", "4", "5", "6"));
-        assertThat(userBuyNumbers.convertToString()).isEqualTo(expected);
+    public void intToStringMatrix() {
+        UserBuyNumbers totalUserBuyNums = new UserBuyNumbers();
+        totalUserBuyNums.addBuyNumbers(new LottoNumbers(Arrays.asList(30, 31, 32, 33, 34, 35)));
+        totalUserBuyNums.addBuyNumbers(new LottoNumbers(Arrays.asList(20, 21, 22, 23, 24, 25)));
+        List<List<String>> expectedMatrix = new ArrayList<>();
+        expectedMatrix.add(Arrays.asList("30", "31", "32", "33", "34", "35"));
+        expectedMatrix.add(Arrays.asList("20","21","22","23","24","25"));
+        assertThat(totalUserBuyNums.convertToString()).isEqualTo(expectedMatrix);
     }
 }

@@ -10,9 +10,9 @@ public class NumberGeneratorTest {
 
     @Test
     public void generateNumber() {
-        UserBuyNumbers generatedNumbers = NumberGenerator.generateBuyNumbers(() ->
-                new UserBuyNumbers(Arrays.asList(1,2,3,4,5,6))
+        LottoNumbers generatedNumbers = NumberGenerator.generateBuyNumbers(() ->
+                new LottoNumbers(Arrays.asList(1,2,3,4,5,6))
         );
-        assertThat(generatedNumbers).isEqualTo(new UserBuyNumbers(Arrays.asList(1,2,3,4,5,6)));
+        assertThat(generatedNumbers).isEqualTo(new LottoNumbers(Arrays.asList(1,2,3,4,5,6)));
     }
 }

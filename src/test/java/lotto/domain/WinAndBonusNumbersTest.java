@@ -23,14 +23,4 @@ public class WinAndBonusNumbersTest {
             new WinAndBonusNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), 6);
         }).isInstanceOf(IllegalArgumentException.class);
     }
-
-    @Test
-    public void calculateRankState() {
-        WinAndBonusNumbers winAndBonusNums = new WinAndBonusNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
-        List<LottoNumber> userBuyNumbers = new ArrayList<>(Arrays.asList(
-                new LottoNumber(2), new LottoNumber(3), new LottoNumber(4),
-                new LottoNumber(5), new LottoNumber(6), new LottoNumber(7)
-        ));
-        assertThat(winAndBonusNums.getRankState(userBuyNumbers)).isEqualTo(RankState.SECOND);
-    }
 }

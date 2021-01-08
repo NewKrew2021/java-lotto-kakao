@@ -2,61 +2,32 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class UserBuyNumbers {
 
-    private static final int USER_BUY_NUMBERS_SIZE = 6;
+    private List<LottoNumbers> userBuyNumbers;
 
-    private final List<LottoNumber> userBuyNumbers;
-
-    public UserBuyNumbers(List<Integer> userBuyNumbers) {
-        validateUserBuyNumbers(userBuyNumbers);
+    public UserBuyNumbers() {
         this.userBuyNumbers = new ArrayList<>();
-        for (Integer winNum : userBuyNumbers) {
-            this.userBuyNumbers.add(new LottoNumber(winNum));
+    }
+
+    public void addBuyNumbers(LottoNumbers lottoNumbers) {
+        this.userBuyNumbers.add(lottoNumbers);
+    }
+
+//    public List<Integer> checkLottoResult(WinAndBonusNumbers winAndBonusNumbers) {
+//        List<RankState> rankStates = new ArrayList<>();
+//        for (LottoNumbers lottoNumbers : userBuyNumbers) {
+//            rankStates.add(lottoNumbers.calculateRank(winAndBonusNumbers));
+//        }
+//        return tansformToWinCount(rankStates);
+//    }
+
+    public List<List<String>> convertToString() {
+        List<List<String>> allNumbers = new ArrayList<>();
+        for (LottoNumbers lottoNumbers : userBuyNumbers) {
+            allNumbers.add(lottoNumbers.convertToString());
         }
-    }
-
-    public RankState calculateRank(WinAndBonusNumbers winAndBonusNumbers) {
-        return winAndBonusNumbers.getRankState(this.userBuyNumbers);
-    }
-
-    public List<String> convertToString() {
-        List<String> numbers = new ArrayList<>();
-        for (LottoNumber lottoNumber : userBuyNumbers) {
-            numbers.add(lottoNumber.getNumberToString());
-        }
-        return numbers;
-    }
-
-    private void validateUserBuyNumbers(List<Integer> userBuyNumbers) {
-        if (!isValidSize(userBuyNumbers)) {
-            throw new IllegalArgumentException("구매 번호는 6개입니다.");
-        }
-        if (!isUnique(userBuyNumbers)) {
-            throw new IllegalArgumentException("구매 번호는 중복되면 안됩니다.");
-        }
-    }
-
-    private boolean isValidSize(List<Integer> userBuyNumbers) {
-        return userBuyNumbers.size() == USER_BUY_NUMBERS_SIZE;
-    }
-
-    private boolean isUnique(List<Integer> userBuyNumbers) {
-        return userBuyNumbers.stream().distinct().count() == userBuyNumbers.size();
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        UserBuyNumbers that = (UserBuyNumbers) o;
-        return Objects.equals(userBuyNumbers, that.userBuyNumbers);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(userBuyNumbers);
+        return allNumbers;
     }
 }
