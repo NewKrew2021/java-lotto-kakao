@@ -10,6 +10,7 @@ public class LottoMain {
 
         LottoGroup lottoGroup = LottoGroup.createRandomLottoGroup(purchaseMoney.getLottoAmount());
         LottoOutputView.outputLottoGroup(lottoGroup);
+
         Lotto winningLotto = new Lotto(LottoInputView.inputWinningLotto());
         Ball bonusBall = Ball.createBall(LottoInputView.inputBonusBall());
         WinningNumberSet winningNumberSet = new WinningNumberSet(winningLotto, bonusBall);
