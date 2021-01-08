@@ -14,8 +14,8 @@ public class LottoRevenue {
         return new LottoRevenue(lottoRankingCount.calculateTotalPrice());
     }
 
-    public double calculateRevenueRate(LottoGameCount lottoGameCount) {
-        int totalTicketMoney = lottoGameCount.calculateTotalTicketMoney();
+    public double calculateRevenueRate(LottoTicketCount lottoTicketCount) {
+        int totalTicketMoney = lottoTicketCount.calculateTotalTicketMoney();
         return (double) revenue / totalTicketMoney;
     }
 
