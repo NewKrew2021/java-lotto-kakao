@@ -8,7 +8,9 @@ public class Lotto {
     private List<Integer> lotto;
 
     public Lotto(List<Integer> lotto) {
-
+        if (lotto.size() != 6) {
+            throw new IllegalArgumentException("6자리 숫자가 아닙니다.");
+        }
         this.lotto = lotto;
     }
 

@@ -5,7 +5,7 @@ import lotto.domain.Lottos;
 
 import java.util.List;
 
-public class LottoOutputView {
+public class LottoView {
     private final String INPUT_MONEY_PHRASE = "구입금액을 입력해주세요.";
     private final String INPUT_QUANTITY_PHRASE = "개를 구매했습니다.";
     private final String OPEN_BRACKET = "[";
@@ -13,6 +13,8 @@ public class LottoOutputView {
 
     private final String INPUT_WONLOTTO_PHRASE = "지난 주 당첨 번호를 입력해주세요.";
     private final String INPUT_BONUS_BALL_PHRASE = "보너스 볼을 입력해주세요.";
+    private final String INPUT_ERROR_PHRASE = "잘못된 입력입니다 다시 입력해주세요.";
+    private final String INPUT_DUPLICATE_PHRASE = "이미 있는 숫자입니다. 다시 입력해주세요.";
 
     private final String WON_RESULT_PHRASE = "당첨 통계";
     private final String SAME_COUNT_PHRASE = "개 일치";
@@ -43,6 +45,7 @@ public class LottoOutputView {
     }
 
     public void printSameCountPhrase(List<Integer> rankInfo) {
+
         for (int i = 4; i >= 0; i--) {
             System.out.println(LottoRank.values()[i].getMatchedPhrase()
                     + "(" + LottoRank.values()[i].getMoney() + "원)-"
@@ -52,6 +55,14 @@ public class LottoOutputView {
 
     public void printProfitRatio(int ratio) {
         System.out.println(PROFIT_PHRASE + ratio + "% 입니다.");
+    }
+
+    public void printInputErrorPhrase() {
+        System.out.println(INPUT_ERROR_PHRASE);
+    }
+
+    public void printInputDuplicatePhrase() {
+        System.out.println(INPUT_DUPLICATE_PHRASE);
     }
 
 }

@@ -1,5 +1,6 @@
 package lotto.service;
 
+import lotto.domain.LottoFixedValue;
 import lotto.domain.LottoRank;
 
 import java.util.List;
@@ -17,7 +18,7 @@ public class LottoReviewService {
 
     public int getProfitRatio(List<LottoRank> ranks) {
 
-        return calculateRatio(getProfit(ranks), ranks.size() * 1000);
+        return calculateRatio(getProfit(ranks), ranks.size() * LottoFixedValue.LOTTO_PRICE);
     }
 
     private int calculateRatio(long totalPrize, long totalCost) {

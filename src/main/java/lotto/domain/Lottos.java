@@ -33,7 +33,7 @@ public class Lottos {
     }
 
     public List<Integer> lottosRankingResult(List<LottoRank> lottoRank) {
-        int[] rankingResult = new int[6];
+        int[] rankingResult = new int[LottoFixedValue.LOTTO_NUMBER_COUNT];
         Arrays.fill(rankingResult, 0);
 
         for (LottoRank rank : lottoRank) {

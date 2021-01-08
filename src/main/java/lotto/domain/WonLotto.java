@@ -12,10 +12,6 @@ public class WonLotto {
     private final int NON_GRADE_NUMBER = 3;
     private final int BONUS_NUMBER_MATCHING_COUNT = 5;
 
-    public WonLotto() {
-        this.wonLotto = lottoGeneratorService.generateLotto();
-        this.bonusNo = lottoGeneratorService.generateBonus(wonLotto);
-    }
 
     public WonLotto(Lotto lotto, int bonusNo) {
         this.wonLotto = lotto;
@@ -48,4 +44,5 @@ public class WonLotto {
     private int convertRank(int matchNo) {
         return 7 - matchNo;
     }
+
 }

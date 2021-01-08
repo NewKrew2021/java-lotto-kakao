@@ -1,6 +1,7 @@
 package lotto.service;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoFixedValue;
 import lotto.util.RandomUtil;
 
 import java.util.ArrayList;
@@ -10,11 +11,12 @@ import java.util.List;
 
 public class LottoGeneratorService {
 
+
     public Lotto generateLotto() {
 
         List<Integer> lotto = new ArrayList<>();
         HashSet<Integer> set = new HashSet<>();
-        while (set.size() < 6) {
+        while (set.size() < LottoFixedValue.LOTTO_NUMBER_COUNT) {
             checkDuplicate(set, RandomUtil.getRandomValue(), lotto);
         }
         Collections.sort(lotto);
@@ -28,26 +30,40 @@ public class LottoGeneratorService {
         }
     }
 
-    public int generateBonus(Lotto lotto){
-        HashSet<Integer> set = new HashSet<>();
-        set.addAll(lotto.getLotto());
 
-        int bonusNo = RandomUtil.getRandomValue();
-        while(!set.add(bonusNo)){
-            bonusNo = RandomUtil.getRandomValue();
+    public Lotto lottoStringParser(String lotto) {
+
+        String[] lottoNumber = lotto.split(",");
+        List<Integer> parsedLotto = new ArrayList<>();
+        try {
+            convertList(lottoNumber, parsedLotto);
+            return new Lotto(parsedLotto);
+        } catch (Exception e) {
+            return null;
         }
 
-        return bonusNo;
     }
 
-    public Lotto lottoStringParser(String lotto){
-
-        String[] lottoNumber=lotto.split(",");
-        List<Integer> parsedLotto=new ArrayList<>();
+    private void convertList(String[] lottoNumber, List<Integer> parsedLotto) {
         for (String number : lottoNumber) {
-            parsedLotto.add(Integer.parseInt(number.trim()));
+            parsedLotto.add(validateNumber(Integer.parseInt(number.trim()), parsedLotto));
         }
-        return new Lotto(parsedLotto);
+    }
+
+    public int validateNumber(int number, List<Integer> parsedLotto) {
+        if (parsedLotto.contains(number)) {
+            throw new IllegalArgumentException("중복된 숫자입니다.");
+        }
+        return validateRange(number);
+    }
+
+    public int validateRange(int number) {
+
+        if (number > LottoFixedValue.LOTTO_MAX_INT || number <= 0) {
+            throw new IllegalArgumentException("로또 범위 밖의 숫자입니다.");
+        }
+
+        return number;
     }
 
 
