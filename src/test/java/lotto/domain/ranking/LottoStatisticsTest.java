@@ -1,5 +1,6 @@
 package lotto.domain.ranking;
 
+import lotto.domain.game.LottoRevenueRate;
 import lotto.domain.game.WinnerTicket;
 import lotto.domain.number.LottoNumbers;
 import org.junit.jupiter.api.BeforeEach;
@@ -47,16 +48,16 @@ class LottoStatisticsTest {
         assertThat(lottoStatistics.getRankingCount()).isEqualTo(expected);
     }
 
-    @DisplayName("통계가 주어지면 당첨금액의 합을 구한다.")
+    @DisplayName("통계가 주어지면 당첨금액의 수익률 구한다.")
     @Test
     void totalMoney() {
         //given
         LottoStatistics lottoStatistics = LottoStatistics.of(lottoTickets, winnerTicket);
 
         //when
-        long result = lottoStatistics.calculateTotalPrice();
+        LottoRevenueRate result = lottoStatistics.calculateRevenueRate();
 
         //then
-        assertThat(result).isEqualTo(31505000L);
+        assertThat(result.getRate()).isEqualTo(6301000.0);
     }
 }

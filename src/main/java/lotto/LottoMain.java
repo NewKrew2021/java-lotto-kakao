@@ -1,6 +1,5 @@
 package lotto;
 
-import lotto.domain.game.LottoRevenueRate;
 import lotto.domain.game.LottoTicketCount;
 import lotto.domain.game.WinnerTicket;
 import lotto.domain.number.LottoNumbers;
@@ -23,7 +22,7 @@ public class LottoMain {
 
         WinnerTicket winnerTicket = WinnerTicket.of(InputView.inputWinnerNumbers(), InputView.inputBonusNumber());
 
-        calculateLottoResult(lottoTicketCount, lottoTickets, winnerTicket);
+        calculateLottoResult(lottoTickets, winnerTicket);
     }
 
     private static LottoTicketCount getLottoTicketCount() {
@@ -45,18 +44,9 @@ public class LottoMain {
         return lottoTickets;
     }
 
-    private static void calculateLottoResult(
-            LottoTicketCount lottoTicketCount,
-            List<LottoNumbers> lottoTickets,
-            WinnerTicket winnerTicket
-    ) {
+    private static void calculateLottoResult(List<LottoNumbers> lottoTickets, WinnerTicket winnerTicket) {
         LottoStatistics lottoStatistics = LottoStatistics.of(lottoTickets, winnerTicket);
         OutputView.printWinningStatistics(LottoStatisticsDto.from(lottoStatistics));
-
-        LottoRevenueRate lottoRevenueRate = LottoRevenueRate.of(
-                lottoStatistics.calculateTotalPrice(),
-                lottoTicketCount.calculateTotalTicketMoney()
-        );
-        OutputView.printRevenueRate(lottoRevenueRate);
+        OutputView.printRevenueRate(lottoStatistics.calculateRevenueRate());
     }
 }

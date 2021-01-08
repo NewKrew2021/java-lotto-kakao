@@ -1,5 +1,6 @@
 package lotto.domain.ranking;
 
+import lotto.domain.game.LottoRevenueRate;
 import lotto.domain.game.WinnerTicket;
 import lotto.domain.number.LottoNumbers;
 
@@ -13,8 +14,9 @@ import static java.util.stream.Collectors.groupingBy;
 
 public class LottoStatistics {
 
-    private static final long INITIAL_COUNT = 0L;
+    private static final long DEFAULT_COUNT = 0L;
     private static final Long INITIAL_TOTAL_PRICE = 0L;
+    private static final long INITIAL_TOTAL_COUNT = 0L;
 
     private final Map<LottoRanking, Long> rankingCount;
 
@@ -40,11 +42,15 @@ public class LottoStatistics {
 
     private static void fillDefaultCount(Map<LottoRanking, Long> rankingCount) {
         for (LottoRanking ranking : LottoRanking.values()) {
-            rankingCount.putIfAbsent(ranking, INITIAL_COUNT);
+            rankingCount.putIfAbsent(ranking, DEFAULT_COUNT);
         }
     }
 
-    public long calculateTotalPrice() {
+    public LottoRevenueRate calculateRevenueRate() {
+        return LottoRevenueRate.of(calculateTotalPrice(), countTicket());
+    }
+
+    private long calculateTotalPrice() {
         long totalPrice = INITIAL_TOTAL_PRICE;
         for (Map.Entry<LottoRanking, Long> entry : rankingCount.entrySet()) {
             LottoRanking ranking = entry.getKey();
@@ -52,6 +58,11 @@ public class LottoStatistics {
             totalPrice += ranking.calculatePriceByMultiply(count);
         }
         return totalPrice;
+    }
+
+    private long countTicket() {
+        return rankingCount.values().stream()
+                .reduce(INITIAL_TOTAL_COUNT, Long::sum);
     }
 
     public Map<LottoRanking, Long> getRankingCount() {

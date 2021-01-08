@@ -24,10 +24,6 @@ public class LottoTicketCount {
         remainCount--;
     }
 
-    public int calculateTotalTicketMoney() {
-        return ticketCount * UNIT_OF_MONEY;
-    }
-
     public int getTicketCount() {
         return ticketCount;
     }
