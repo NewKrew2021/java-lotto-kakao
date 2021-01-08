@@ -10,25 +10,25 @@ public class LottoNos {
     List<LottoNo> numbers = new ArrayList<>();
 
     public LottoNos(List<Integer> numbers) {
-        if( numbers.size() != 6 ) {
-            throw new IllegalArgumentException();
+        if (numbers.size() != 6) {
+            throw new IllegalArgumentException("갯수는 6개 이어야 합니다.");
         }
 
-        if(checkDuplication(numbers)){
-            throw new IllegalArgumentException();
+        if (checkDuplication(numbers)) {
+            throw new IllegalArgumentException("중복된 숫자가 존재하면 안됩니다.");
         }
 
-        for( int number : numbers ) {
+        for (int number : numbers) {
             this.numbers.add(new LottoNo(number));
         }
     }
 
-    private boolean checkDuplication(List<Integer> numbers){
+    private boolean checkDuplication(List<Integer> numbers) {
         HashSet<Integer> set = new HashSet<>();
         for (int i = 0; i < numbers.size(); i++) {
             set.add(numbers.get(i));
         }
-        if(set.size() != numbers.size())
+        if (set.size() != numbers.size())
             return true;
         return false;
     }
@@ -39,7 +39,7 @@ public class LottoNos {
 
     public int getMatchCount(LottoNos lottoNos) {
         return this.numbers.stream()
-                .filter((lottoNo)->lottoNos.isContains(lottoNo))
+                .filter((lottoNo) -> lottoNos.isContains(lottoNo))
                 .collect(Collectors.toList())
                 .size();
     }
