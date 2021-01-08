@@ -30,7 +30,7 @@ public class LottoGame {
 
     private LottoTickets ticketProcess(int price) {
         LottoGameView.countTicket(price / TICKET_PRICE);
-        LottoTickets tickets = new LottoTickets(price);
+        LottoTickets tickets = new LottoTickets(price / TICKET_PRICE);
         LottoGameView.print(tickets.toString());
         return tickets;
     }

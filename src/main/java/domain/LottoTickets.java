@@ -5,13 +5,12 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoTickets {
-    private List<LottoTicket> lottoTickets;
+    private final List<LottoTicket> lottoTickets;
     private final NumberPool numberPool;
 
-    public LottoTickets(int price) {
+    public LottoTickets(int ticketCount) {
         numberPool = new NumberPool();
-        lottoTickets = new ArrayList<>();
-        lottoTickets = IntStream.range(1, price / 1000 + 1)
+        lottoTickets = IntStream.rangeClosed(1, ticketCount)
                 .mapToObj(val -> new LottoTicket(new HashSet<>(numberPool.getRandomNumbers())))
                 .collect(Collectors.toList());
     }
