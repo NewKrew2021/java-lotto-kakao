@@ -14,13 +14,13 @@ public class LottoTicket {
         return numbers.contains(number);
     }
 
-    public int matchCount(LottoTicket compTicket) {
-        return (int) numbers.stream().filter(compTicket::contains).count();
+    public int matchCount(LottoTicket compareTicket) {
+        return (int) numbers.stream().filter(compareTicket::contains).count();
     }
 
-    public LottoRank getRank(WinnerNumber winnerNumber) {
-        int count = matchCount(winnerNumber);
-        boolean bonus = winnerNumber.contains(numbers);
+    public LottoRank getRank(WinningNumber winningNumber) {
+        int count = matchCount(winningNumber);
+        boolean bonus = winningNumber.contains(numbers);
         return RankTable.get(count * 10 + (bonus && count == 5 ? 1 : 0));
     }
 

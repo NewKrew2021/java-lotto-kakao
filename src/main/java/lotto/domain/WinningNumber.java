@@ -2,11 +2,11 @@ package lotto.domain;
 
 import java.util.Set;
 
-public class WinnerNumber extends LottoTicket {
+public class WinningNumber extends LottoTicket {
     private Number bonusNumber;
 
 
-    public WinnerNumber(Set<Number> numbers, Number bonusNumber) {
+    public WinningNumber(Set<Number> numbers, Number bonusNumber) {
         super(numbers);
         this.bonusNumber = bonusNumber;
     }

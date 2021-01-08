@@ -6,25 +6,25 @@ import java.util.stream.IntStream;
 
 public class LottoTickets {
     private List<LottoTicket> lottoTickets;
-    private LottoNumber numberPool;
+    private LottoNumber lottoNumber;
 
     public LottoTickets(int price) {
-        numberPool = new LottoNumber();
+        lottoNumber = new LottoNumber();
         lottoTickets = new ArrayList<>();
         lottoTickets = IntStream.range(1, price / 1000 + 1)
-                .mapToObj(val -> new LottoTicket(new HashSet<>(numberPool.getRandomNumbers())))
+                .mapToObj(val -> new LottoTicket(new HashSet<>(lottoNumber.getRandomNumbers())))
                 .collect(Collectors.toList());
     }
 
-    public int getTicketCount() {
-        return lottoTickets.size();
+    public List<LottoTicket> getLottoTickets() {
+        return lottoTickets;
     }
 
-    public LottoResults getResults(WinnerNumber winnerNumber) {
+    public LottoResults getResults(WinningNumber winningNumber) {
         LottoResults lottoResults = new LottoResults();
-        for (LottoTicket lottoTicket : lottoTickets) {
-            lottoResults.upsert(lottoTicket.getRank(winnerNumber));
-        }
+        lottoTickets.stream()
+                .filter(lottoTicket -> lottoTicket.getRank(winningNumber) != null)
+                .forEach(lottoTicket -> lottoResults.upsert(lottoTicket.getRank(winningNumber)));
         return lottoResults;
     }
 }

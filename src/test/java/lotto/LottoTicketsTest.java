@@ -8,6 +8,6 @@ public class LottoTicketsTest {
     @Test
     void constructorTest(){
         LottoTickets lottoTickets = new LottoTickets(14000);
-        assertThat(lottoTickets.getTicketCount()).isEqualTo(14);
+        assertThat(lottoTickets.getLottoTickets().size()).isEqualTo(14);
     }
 }

@@ -3,7 +3,7 @@ package lotto;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoTicket;
 import lotto.domain.Number;
-import lotto.domain.WinnerNumber;
+import lotto.domain.WinningNumber;
 import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -79,7 +79,7 @@ public class LottoTicketTest {
                                int i5,
                                int i6,
                                LottoRank rank) {
-        WinnerNumber winnerNumber = new WinnerNumber(Sets.newHashSet(Arrays.asList(
+        WinningNumber winningNumber = new WinningNumber(Sets.newHashSet(Arrays.asList(
                 new Number(1),
                 new Number(2),
                 new Number(3),
@@ -96,6 +96,6 @@ public class LottoTicketTest {
                         new Number(i5),
                         new Number(i6)))
         );
-        assertThat(lottoTicket.getRank(winnerNumber)).isEqualTo(rank);
+        assertThat(lottoTicket.getRank(winningNumber)).isEqualTo(rank);
     }
 }
