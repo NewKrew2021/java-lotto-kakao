@@ -8,7 +8,7 @@ import java.util.HashSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class WinneBallsTest {
+public class WinnerBallsTest {
 
     WinnerBalls testWinnerBalls;
     Ticket testTicket;

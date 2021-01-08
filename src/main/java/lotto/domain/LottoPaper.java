@@ -5,6 +5,7 @@ package lotto.domain;
  */
 
 import lotto.dto.LottoNumberData;
+import lotto.dto.LottoResult;
 
 import java.util.*;
 
@@ -30,6 +31,12 @@ public class LottoPaper {
         }
 
         return new LottoNumberData(responseData);
+    }
+
+    public LottoResult getResultCompareWith(WinnerBalls winnerBalls){
+        long score = getScoreCompareWith(winnerBalls);
+        List<Integer> countList = getOrdersCompareWith(winnerBalls);
+        return new LottoResult(score, countList);
     }
 
     public long getScoreCompareWith(WinnerBalls winnerBalls) {
