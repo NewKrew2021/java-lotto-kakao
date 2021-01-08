@@ -1,0 +1,37 @@
+package lotto.domain;
+
+import java.util.HashMap;
+import java.util.Objects;
+
+public class LotteryRank {
+    HashMap<LotteryPrize, Integer> lotteryRank;
+
+    public LotteryRank(HashMap<LotteryPrize, Integer> ranks) {
+        lotteryRank = ranks;
+    }
+
+    public int getnthCount(LotteryPrize nthRank) {
+        return lotteryRank.getOrDefault(nthRank, 0);
+    }
+
+    public long getTotalIncome() {
+        long total = 0;
+        for (LotteryPrize prize : lotteryRank.keySet()) {
+            total += (long) prize.getRewardMoney() * getnthCount(prize);
+        }
+        return total;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LotteryRank that = (LotteryRank) o;
+        return Objects.equals(lotteryRank, that.lotteryRank);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lotteryRank);
+    }
+}
