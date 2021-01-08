@@ -38,6 +38,7 @@ public class LottosTest {
         lottos.raffle(winningNumber, LottoNumber.of(6));
         Map<Rank, Integer> expected = new TreeMap<>();
         expected.put(Rank.FIRST, 1);
+
         assertThat(lottos.raffle(winningNumber, LottoNumber.of(7)).getRank(Rank.FIRST)).isEqualTo(1);
     }
 
@@ -49,8 +50,9 @@ public class LottosTest {
                 LottoNumber.of(4),
                 LottoNumber.of(5),
                 LottoNumber.of(7))));
-        Map<Rank,Integer> m = new HashMap<>();
-        m.put(Rank.SECOND,1);
+        Map<Rank,Integer> expected = new HashMap<>();
+        expected.put(Rank.SECOND,1);
+
         assertThat(lottos.raffle(w, LottoNumber.of(6)).getRank(Rank.SECOND)).isEqualTo(1);
     }
 }

@@ -13,11 +13,6 @@ public class RandomNumberTest {
     }
 
     @Test
-    void rangeTest(){
-        randomNumberGenerator.getNumbers().stream().forEach(num -> assertThat(num).isBetween(1,45));
-    }
-
-    @Test
     void duplicationTest(){
         assertThat(randomNumberGenerator.getNumbers()).doesNotHaveDuplicates();
     }
