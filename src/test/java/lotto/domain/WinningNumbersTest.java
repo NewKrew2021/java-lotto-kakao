@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.dto.LottoNumber;
+import lotto.domain.dto.WinningNumbers;
 import org.junit.jupiter.api.Test;
 
 import java.util.stream.Collectors;

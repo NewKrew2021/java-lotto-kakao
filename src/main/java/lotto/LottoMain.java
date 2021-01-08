@@ -2,6 +2,7 @@ package lotto;
 
 import lotto.domain.*;
 import lotto.domain.dto.InsertPrice;
+import lotto.domain.dto.WinningNumbers;
 import lotto.utils.RandomPickStrategy;
 import lotto.utils.TicketCountCalculator;
 import lotto.view.InputView;

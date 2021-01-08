@@ -1,9 +1,10 @@
 package lotto.domain;
 
+import lotto.domain.dto.LottoNumber;
+
 import java.util.Collections;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Stream;
+import java.util.function.Consumer;
 
 public class LottoNumbers {
     public static final int ALLOWED_NUMBER_COUNT = 6;
@@ -19,10 +20,6 @@ public class LottoNumbers {
 
         Collections.sort(lottoNumbers);
         this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
-    }
-
-    public Stream<LottoNumber> toStream() {
-        return lottoNumbers.stream();
     }
 
     private boolean areInvalidLottoNumbers(List<LottoNumber> lottoNumbers) {
@@ -49,5 +46,9 @@ public class LottoNumbers {
         if (o == null || getClass() != o.getClass()) return false;
         LottoNumbers that = (LottoNumbers) o;
         return this.lottoNumbers.containsAll(that.lottoNumbers);
+    }
+
+    public void delegate(Consumer<List<LottoNumber>> consumer) {
+        consumer.accept(lottoNumbers);
     }
 }

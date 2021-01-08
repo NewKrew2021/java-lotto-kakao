@@ -19,23 +19,23 @@ public enum MatchResult {
     }
 
     public static MatchResult valueOf(int matchCount, boolean matchBonus) {
-        if (matchCount == 6) {
+        if (MatchResult.FIRST.matchCount == matchCount) {
             return MatchResult.FIRST;
         }
 
-        if (matchCount == 5 && matchBonus) {
+        if (MatchResult.SECOND.matchCount == matchCount && matchBonus) {
             return MatchResult.SECOND;
         }
 
-        if (matchCount == 5) {
+        if (MatchResult.THIRD.matchCount == matchCount) {
             return MatchResult.THIRD;
         }
 
-        if (matchCount == 4) {
+        if (MatchResult.FOURTH.matchCount == matchCount) {
             return MatchResult.FOURTH;
         }
 
-        if (matchCount == 3) {
+        if (MatchResult.FIFTH.matchCount == matchCount) {
             return MatchResult.FIFTH;
         }
 

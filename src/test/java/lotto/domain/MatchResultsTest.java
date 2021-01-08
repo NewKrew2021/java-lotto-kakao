@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import lotto.domain.dto.LottoNumber;
+import lotto.domain.dto.WinningNumbers;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
@@ -43,9 +45,8 @@ public class MatchResultsTest {
     }
 
     private List<LottoNumber> customLottoNumbers(int... parameters) {
-        return Stream.of(parameters[0], parameters[1], parameters[2],
-                parameters[3], parameters[4], parameters[5])
-                .map(LottoNumber::new)
+        return Arrays.stream(parameters)
+                .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 }

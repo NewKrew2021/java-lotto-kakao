@@ -1,4 +1,6 @@
-package lotto.domain;
+package lotto.domain.dto;
+
+import lotto.domain.LottoNumbers;
 
 public class WinningNumbers {
     private final LottoNumbers luckyNumbers;
@@ -9,12 +11,17 @@ public class WinningNumbers {
             String message = "Bonus number already exists in lucky numbers";
             throw new IllegalArgumentException(message);
         }
+
         this.luckyNumbers = luckyNumbers;
         this.bonusNumber = bonusNumber;
     }
 
-    private boolean isDuplicate(LottoNumbers luckyNumbers, LottoNumber bonusNumber) {
-        return luckyNumbers.contains(bonusNumber);
+    public LottoNumbers getLuckyNumbers() {
+        return luckyNumbers;
+    }
+
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
     }
 
     @Override
@@ -26,11 +33,7 @@ public class WinningNumbers {
                 && this.bonusNumber.equals(that.bonusNumber);
     }
 
-    public LottoNumbers getLuckyNumbers() {
-        return luckyNumbers;
-    }
-
-    public LottoNumber getBunusNumber() {
-        return bonusNumber;
+    private boolean isDuplicate(LottoNumbers luckyNumbers, LottoNumber bonusNumber) {
+        return luckyNumbers.contains(bonusNumber);
     }
 }

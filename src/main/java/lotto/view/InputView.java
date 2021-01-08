@@ -1,8 +1,8 @@
 package lotto.view;
 
-import lotto.domain.WinningNumbers;
+import lotto.domain.dto.WinningNumbers;
 import lotto.domain.dto.InsertPrice;
-import lotto.domain.LottoNumber;
+import lotto.domain.dto.LottoNumber;
 import lotto.domain.LottoNumbers;
 
 import java.util.List;

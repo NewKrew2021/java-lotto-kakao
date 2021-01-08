@@ -1,7 +1,9 @@
 package lotto.domain;
 
 import lotto.domain.dto.InsertPrice;
+import lotto.domain.dto.LottoNumber;
 import lotto.domain.dto.Rate;
+import lotto.domain.dto.WinningNumbers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -58,9 +60,8 @@ public class LottoStatisticsTest {
     }
 
     private List<LottoNumber> customLottoNumbers(int... parameters) {
-        return Stream.of(parameters[0], parameters[1], parameters[2],
-                parameters[3], parameters[4], parameters[5])
-                .map(LottoNumber::new)
+        return Arrays.stream(parameters)
+                .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 }

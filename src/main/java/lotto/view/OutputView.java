@@ -1,7 +1,9 @@
 package lotto.view;
 
 import lotto.domain.*;
+import lotto.domain.dto.LottoNumber;
 
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -12,16 +14,14 @@ public class OutputView {
 
     public void printLottoTickets(LottoTickets lottoTickets) {
         StringBuilder message = new StringBuilder();
+        Consumer<LottoNumbers> lottoTicketConsumer = lottoTicket ->
+                lottoTicket.delegate(lottoNumbers ->
+                        message.append(String.format("[%s]\n", lottoNumbers.stream()
+                                .map(LottoNumber::getNumber)
+                                .map(num -> Integer.toString(num))
+                                .collect(Collectors.joining(", ")))));
 
-        lottoTickets.getTickets()
-                .forEach(lottoTicket -> {
-                    String numbers = lottoTicket.toStream()
-                            .map(LottoNumber::getNumber)
-                            .map(num -> Integer.toString(num))
-                            .collect(Collectors.joining(", "));
-
-                    message.append(String.format("[%s]\n", numbers));
-                });
+        lottoTickets.delegate(tickets -> tickets.forEach(lottoTicketConsumer));
 
         System.out.println(message);
     }

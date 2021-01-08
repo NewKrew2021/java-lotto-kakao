@@ -1,5 +1,9 @@
 package lotto.domain;
 
+import lotto.domain.dto.LottoNumber;
+import lotto.domain.dto.WinningNumbers;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,10 +15,12 @@ public class LottoMatcher {
     }
 
     public MatchResults match(LottoTickets lottoTickets) {
-        List<MatchResult> results = lottoTickets.getTickets()
-                .stream()
+        List<MatchResult> results = new ArrayList<>();
+
+        lottoTickets.delegate(tickets -> results.addAll(tickets.stream()
                 .map(this::match)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList())));
+
         return new MatchResults(results);
     }
 
@@ -25,15 +31,19 @@ public class LottoMatcher {
     }
 
     private int calcMatchCount(LottoNumbers lottoTicket) {
+        int[] count = new int[1];
         LottoNumbers luckyNumbers = winningNumbers.getLuckyNumbers();
 
-        return (int) luckyNumbers.toStream()
+        luckyNumbers.delegate(lottoNumbers ->
+                count[0] = (int) lottoNumbers.stream()
                 .filter(lottoTicket::contains)
-                .count();
+                .count());
+
+        return count[0];
     }
 
     private boolean isMatchBonus(LottoNumbers lottoTicket) {
-        LottoNumber bonusNumber = winningNumbers.getBunusNumber();
+        LottoNumber bonusNumber = winningNumbers.getBonusNumber();
         return lottoTicket.contains(bonusNumber);
     }
 }

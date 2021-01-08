@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import lotto.domain.dto.LottoNumber;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
