@@ -1,13 +1,13 @@
 package lotto.controller;
 
-import lotto.domain.*;
+import lotto.domain.Lottos;
+import lotto.domain.MatchNumber;
+import lotto.domain.Money;
+import lotto.domain.Rankings;
 import lotto.dto.RankingsDto;
 import lotto.util.LottoNumberGenerator;
 import lotto.util.RandomNumberGenerator;
 import lotto.view.LottoUI;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class LottoController {
     private final LottoUI lottoUI;
@@ -23,13 +23,7 @@ public class LottoController {
 
     public void buyLotto() {
         money = new Money(lottoUI.getMoneyFromUser());
-
-        List<Lotto> listLottos = new ArrayList<>();
-        for (int i = 0; i < money.howMany(); i++) {
-            listLottos.add(new Lotto(lottoNumberGenerator));
-        }
-
-        lottos = new Lottos(listLottos);
+        lottos = Lottos.fromMoney(money, lottoNumberGenerator);
         lottoUI.printLottos(lottos);
     }
 
