@@ -13,7 +13,6 @@ import lotto.view.LottoRankingCountDto;
 import lotto.view.OutputView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class LottoMain {

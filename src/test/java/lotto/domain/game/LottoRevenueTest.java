@@ -22,7 +22,7 @@ public class LottoRevenueTest {
         rankingCount.put(LottoRanking.RANK_5,2);
 
         //when
-        LottoRevenue lottoRevenue = new LottoRevenue(rankingCount);
+        LottoRevenue lottoRevenue = LottoRevenue.from(new LottoRankingCount(rankingCount));
 
         //then
         assertThat(lottoRevenue.getRevenue()).isEqualTo(60000);

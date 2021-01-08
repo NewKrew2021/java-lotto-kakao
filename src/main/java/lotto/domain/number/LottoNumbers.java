@@ -21,7 +21,7 @@ public class LottoNumbers {
 
     public static LottoNumbers from(NumberGenerateStrategy strategy) {
         List<LottoNumber> lottoNumbers = strategy.generate().stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
 
         return new LottoNumbers(lottoNumbers);
