@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Ticket;
 import lotto.domain.WinnerBalls;
+import lotto.setting.Format;
 import lotto.utils.Utils;
 
 import java.util.*;
@@ -24,10 +25,20 @@ public class Input {
         System.out.println("보너스 볼을 입력해주세요.");
         int ball = scanner.nextInt();
 
-        // TODO : 여기서도 입력된 값에 대한 유효성 검사를 해줘야 한다. (지금은 만들지 않았다.)
-        // ticket의 data, 보너스볼 데이터 등은 generator에서 생성하기도 하고,
-        // 사용자로부터 생성되기도 한다. 그래서 유효성 검사에 대한 코드를 양쪽에 구현해야 한다.
-        // 유효성을 검사해주는 부분을 하나의 클래스에서 담당하고, 기능을 제공해보자.
-        return new WinnerBalls(new Ticket(new HashSet<>(userInputNumbers)), ball);
+        return validationCheckAndWrap(userInputNumbers, ball);
     }
+
+    /* 이 기능을 다른 클래스로 이동시킬지 고민했었는데, UI에 따라서 입력형식이 달라지므로, 이 클래스에 놓는게 좋다고 생각했습니다. */
+    private static WinnerBalls validationCheckAndWrap(List<Integer> userInputNumbers, int bonusBall){
+        Format.validateTicketSizeOf(userInputNumbers.size());
+
+        Set<Integer> extractedUserInputNumbers = new HashSet<>(userInputNumbers);
+        Format.validateTicketSizeOf(extractedUserInputNumbers.size());
+
+        Format.validateNumberRangeOf(extractedUserInputNumbers);
+        Format.validateBonusBall(extractedUserInputNumbers, bonusBall);
+
+        return new WinnerBalls(new Ticket(extractedUserInputNumbers), bonusBall);
+    }
+
 }

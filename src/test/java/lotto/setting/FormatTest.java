@@ -30,4 +30,15 @@ public class FormatTest {
                     new Ticket(testNumbers);
                 }).withMessageMatching("contains invalid number value.");
     }
+
+    @Test
+    public void bonusBallCheck(){
+        Set<Integer> testNumbers = new HashSet<>(Arrays.asList(0, 20, 30, 40, 43, 44));
+        int bonusBall = 20;
+
+        assertThatExceptionOfType(RuntimeException.class)
+                .isThrownBy(() -> {
+                    Format.validateBonusBall(testNumbers, bonusBall);
+                }).withMessageMatching("bonusBall number already included.");
+    }
 }

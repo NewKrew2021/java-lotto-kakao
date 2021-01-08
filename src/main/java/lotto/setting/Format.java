@@ -25,4 +25,10 @@ public class Format {
             throw new RuntimeException("contains invalid number value.");
         }
     }
+
+    public static void validateBonusBall(Set<Integer> numbers, int x){
+        if(numbers.contains(x)){
+            throw new RuntimeException("bonusBall number already included.");
+        }
+    }
 }
