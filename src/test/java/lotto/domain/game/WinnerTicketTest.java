@@ -9,6 +9,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,14 +20,16 @@ public class WinnerTicketTest {
     @Test
     void create() {
         //given
-        LottoNumbers winnerNumbers = LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNumber bonusNumber = LottoNumber.valueOf(7);
+        List<Integer> winnerNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        int bonusNumber = 7;
 
         //when
-        WinnerTicket winnerTicket = new WinnerTicket(winnerNumbers, bonusNumber);
+        WinnerTicket winnerTicket = WinnerTicket.of(winnerNumbers, bonusNumber);
 
         //then
-        assertThat(winnerTicket.getWinnerNumbers().getLottoNumbers()).isEqualTo(winnerNumbers.getLottoNumbers());
+        assertThat(winnerTicket.getWinnerNumbers().getLottoNumbers())
+                .extracting(LottoNumber::getNumber)
+                .isEqualTo(winnerNumbers);
         assertThat(winnerTicket.getBonusNumber()).isEqualTo(LottoNumber.valueOf(7));
     }
 
@@ -35,10 +38,7 @@ public class WinnerTicketTest {
     @MethodSource("generateLottoTicket")
     void matchNumbers(LottoNumbers lottoTicket, int expected) {
         //given
-        WinnerTicket winnerTicket = new WinnerTicket(
-                LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                LottoNumber.valueOf(7)
-        );
+        WinnerTicket winnerTicket = WinnerTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 
         //when
         int matchNumber = winnerTicket.countMatchingNumber(lottoTicket);
@@ -64,10 +64,7 @@ public class WinnerTicketTest {
     @MethodSource("generateLottoTicket2")
     void hasBonus(LottoNumbers lottoTicket, int bonusNumber, boolean expected) {
         //given
-        WinnerTicket winnerTicket = new WinnerTicket(
-                LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                LottoNumber.valueOf(bonusNumber)
-        );
+        WinnerTicket winnerTicket = WinnerTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6), bonusNumber);
 
         //when
         boolean hasBonusNumber = winnerTicket.hasBonus(lottoTicket);
