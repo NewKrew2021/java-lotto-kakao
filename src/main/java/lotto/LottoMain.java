@@ -5,7 +5,7 @@ import lotto.domain.game.LottoTicketCount;
 import lotto.domain.game.WinnerTicket;
 import lotto.domain.number.LottoNumbers;
 import lotto.domain.number.NumberGenerateStrategy;
-import lotto.domain.number.RandomGenerateStrategy;
+import lotto.domain.number.RandomLottoNumberGenerator;
 import lotto.domain.ranking.LottoStatistics;
 import lotto.view.InputView;
 import lotto.view.LottoNumbersDto;
@@ -16,12 +16,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoMain {
-    public static void main(String[] args) {
 
+    public static void main(String[] args) {
         LottoTicketCount lottoTicketCount = new LottoTicketCount(InputView.inputMoney());
         OutputView.printTicketCount(lottoTicketCount.getTicketCount());
 
-        NumberGenerateStrategy randomGenerateStrategy = new RandomGenerateStrategy();
+        NumberGenerateStrategy randomGenerateStrategy = new RandomLottoNumberGenerator();
         List<LottoNumbers> lottoTickets = new ArrayList<>();
 
         while (lottoTicketCount.isTicketRemain()) {
