@@ -19,7 +19,7 @@ public class LottoMain {
 
     public static void main(String[] args) {
         LottoTicketCount lottoTicketCount = new LottoTicketCount(InputView.inputMoney());
-        OutputView.printTicketCount(lottoTicketCount.getTicketCount());
+        OutputView.printTicketCount(lottoTicketCount);
 
         NumberGenerateStrategy randomGenerateStrategy = new RandomLottoNumberGenerator();
         List<LottoNumbers> lottoTickets = new ArrayList<>();
