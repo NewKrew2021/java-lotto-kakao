@@ -1,4 +1,4 @@
-package lotto;
+package lotto.util;
 
 import lotto.util.RandomUtil;
 import org.junit.jupiter.api.DisplayName;

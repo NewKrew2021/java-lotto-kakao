@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 
-public class LottoGenerator {
+public class LottoGeneratorService {
 
     public Lotto generateLotto() {
 

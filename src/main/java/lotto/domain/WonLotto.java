@@ -1,20 +1,20 @@
 package lotto.domain;
 
-import lotto.service.LottoGenerator;
+import lotto.service.LottoGeneratorService;
 
 public class WonLotto {
 
     private Lotto wonLotto;
     private int bonusNo;
 
-    private LottoGenerator lottoGenerator = new LottoGenerator();
+    private LottoGeneratorService lottoGeneratorService = new LottoGeneratorService();
 
     private final int NON_GRADE_NUMBER = 3;
     private final int BONUS_NUMBER_MATCHING_COUNT = 5;
 
     public WonLotto() {
-        this.wonLotto = lottoGenerator.generateLotto();
-        this.bonusNo = lottoGenerator.generateBonus(wonLotto);
+        this.wonLotto = lottoGeneratorService.generateLotto();
+        this.bonusNo = lottoGeneratorService.generateBonus(wonLotto);
     }
 
     public WonLotto(Lotto lotto, int bonusNo) {

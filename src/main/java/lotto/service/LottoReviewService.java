@@ -4,7 +4,7 @@ import lotto.domain.LottoRank;
 
 import java.util.List;
 
-public class LottoReview {
+public class LottoReviewService {
 
     public long getProfit(List<LottoRank> ranks) {
 
