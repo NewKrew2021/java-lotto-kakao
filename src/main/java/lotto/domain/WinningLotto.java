@@ -5,14 +5,14 @@ import lotto.utils.Result;
 import java.util.Objects;
 
 public class WinningLotto {
-    private final Digit bonusBall;
+    private final LottoNumber bonusBall;
     private final Lotto winningLotto;
 
     public WinningLotto(Lotto winningLotto) {
-        this(winningLotto, new Digit(37));
+        this(winningLotto, new LottoNumber(37));
     }
 
-    public WinningLotto(Lotto winningLotto, Digit bonusBall) {
+    public WinningLotto(Lotto winningLotto, LottoNumber bonusBall) {
         if (winningLotto.contains(bonusBall)) {
             throw new IllegalArgumentException("보너스 볼은 당첨번호에 포함될 수 없습니다.");
         }

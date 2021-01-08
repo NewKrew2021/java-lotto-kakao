@@ -31,7 +31,7 @@ public class LottoSimulation {
             lotto.add(Integer.parseInt(digit.trim()));
         }
 
-        return new WinningLotto(new Lotto(lotto), new Digit(Integer.parseInt(bonusBall)));
+        return new WinningLotto(new Lotto(lotto), new LottoNumber(Integer.parseInt(bonusBall)));
     }
 
     public void confirm() {

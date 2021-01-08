@@ -7,7 +7,7 @@ import java.util.StringJoiner;
 import java.util.stream.Collectors;
 
 public class Lotto {
-    private final List<Digit> digits;
+    private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<Integer> digits) {
         if (isInvalidNumberOfDigits(digits)) {
@@ -17,7 +17,7 @@ public class Lotto {
             throw new IllegalArgumentException("숫자는 중복되지 않게 입력해주세요.");
         }
         Collections.sort(digits);
-        this.digits = mapDigit(digits);
+        this.lottoNumbers = mapDigit(digits);
     }
 
     private boolean isDuplicate(List<Integer> digits) {
@@ -26,9 +26,9 @@ public class Lotto {
                 .count() != digits.size();
     }
 
-    private List<Digit> mapDigit(List<Integer> digits) {
+    private List<LottoNumber> mapDigit(List<Integer> digits) {
         return digits.stream()
-                .map(Digit::new)
+                .map(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 
@@ -37,13 +37,13 @@ public class Lotto {
     }
 
     public int matchCount(Lotto lotto) {
-        return (int) digits.stream()
+        return (int) lottoNumbers.stream()
                 .filter(lotto::contains)
                 .count();
     }
 
-    public boolean contains(Digit digit) {
-        return digits.contains(digit);
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoNumbers.contains(lottoNumber);
     }
 
     @Override
@@ -51,20 +51,20 @@ public class Lotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto = (Lotto) o;
-        return Objects.equals(digits, lotto.digits);
+        return Objects.equals(lottoNumbers, lotto.lottoNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(digits);
+        return Objects.hash(lottoNumbers);
     }
 
     @Override
     public String toString() {
         StringJoiner strJoiner = new StringJoiner(", ", "[", "]");
 
-        for (Digit digit : digits) {
-            strJoiner.add(digit.toString());
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            strJoiner.add(lottoNumber.toString());
         }
 
         return strJoiner.toString();
