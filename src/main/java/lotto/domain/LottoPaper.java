@@ -1,9 +1,5 @@
 package lotto.domain;
 
-/*
- * //TODO 클래스 설명같은거 이곳에 있으면 좋겠다. 형식 맞춰서 말이다.
- */
-
 import lotto.dto.LottoNumberData;
 import lotto.dto.LottoResult;
 import lotto.setting.Rank;

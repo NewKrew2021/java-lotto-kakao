@@ -41,7 +41,7 @@ public class Ticket {
     }
 
     public Rank getOrder(WinnerBalls balls){
-        if(isOrder1_CompareWith(balls)){ return Rank.FIRST; } //TODO use enum to order number
+        if(isOrder1_CompareWith(balls)){ return Rank.FIRST; }
         if(isOrder2_CompareWith(balls)){ return Rank.SECOND; }
         if(isOrder3_CompareWith(balls)){ return Rank.THIRD; }
         if(isOrder4_CompareWith(balls)){ return Rank.FOURTH; }
