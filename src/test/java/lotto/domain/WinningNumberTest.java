@@ -27,26 +27,26 @@ class WinningNumberTest {
     @DisplayName("숫자가 6개가 아니면 예외발생.")
     @ValueSource(strings = {"1, 2, 3, 4, 5", "1, 2, 3, 4, 5, 6, 7"})
     void fromNumbersText_wrongNumOfNumbers(String input) {
-        assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> {
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
             WinningNumber.fromNumbersText(input);
-        });
+        }).withMessageMatching("로또 번호를 6개 입력해주세요.");
     }
 
     @Test
     @DisplayName("숫자가 아닌 입력값이 있으면 예외발생.")
     void fromNumbersText_notNumber() {
-        assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> {
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
             WinningNumber.fromNumbersText("1, a, 2, 3, 4, 5");
-        });
+        }).withMessageMatching("입력값이 숫자가 아닙니다.");
     }
 
     @ParameterizedTest
     @DisplayName("1~45 범위가 아닌 숫자가 있으면 예외발생.")
     @ValueSource(strings = {"0, 1, 2, 3, 4, 5", "41, 42, 43, 44, 45, 46"})
     void fromNumbersText_outOfRange(String input) {
-        assertThatExceptionOfType(RuntimeException.class).isThrownBy(() -> {
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
             WinningNumber.fromNumbersText(input);
-        });
+        }).withMessageMatching("로또 번호는 1~45 사이의 정수여야 합니다.");
     }
 
     @ParameterizedTest

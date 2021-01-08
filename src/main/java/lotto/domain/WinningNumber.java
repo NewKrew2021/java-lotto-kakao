@@ -7,8 +7,6 @@ import java.util.stream.Collectors;
 
 public class WinningNumber {
     public static final String SPLIT_DELIMITER = ", ";
-    public static final int MAX_VALUE = 45;
-    public static final int MIN_VALUE = 1;
     public static final int NUM_OF_NUMBERS = 6;
 
     Set<LottoNumber> winningNumber;
@@ -24,17 +22,17 @@ public class WinningNumber {
     }
 
     private static int getParseInt(String number) {
-        int num = Integer.parseInt(number);
-        if (num > MAX_VALUE || num < MIN_VALUE) {
-            throw new IllegalArgumentException("잘못된 입력입니다.");
+        try {
+            return Integer.parseInt(number);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("입력값이 숫자가 아닙니다.");
         }
-        return num;
     }
 
     private static String[] split(String numbersText) {
         String[] splitText = numbersText.split(SPLIT_DELIMITER);
         if (splitText.length != NUM_OF_NUMBERS) {
-            throw new IllegalArgumentException("잘못된 입력입니다.");
+            throw new IllegalArgumentException("로또 번호를 6개 입력해주세요.");
         }
         return splitText;
     }
