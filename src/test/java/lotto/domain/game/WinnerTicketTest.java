@@ -1,5 +1,9 @@
-package lotto;
+package lotto.domain.game;
 
+import lotto.domain.OneToSixGenerator;
+import lotto.domain.number.LottoNumber;
+import lotto.domain.number.LottoNumbers;
+import lotto.domain.number.NumberGenerateStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

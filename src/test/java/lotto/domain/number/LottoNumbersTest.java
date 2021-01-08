@@ -1,12 +1,13 @@
-package lotto;
+package lotto.domain.number;
 
+import lotto.domain.OneToSixGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.List;
 
-import static lotto.LottoNumbers.LOTTO_TICKET_EXCEPTION_MESSAGE;
+import static lotto.domain.number.LottoNumbers.LOTTO_TICKET_EXCEPTION_MESSAGE;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 

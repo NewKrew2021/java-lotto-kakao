@@ -1,9 +1,10 @@
-package lotto;
+package lotto.domain.game;
 
+import lotto.domain.game.LottoGameCount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static lotto.LottoGameCount.LOTTO_MONEY_EXCEPTION_MESSAGE;
+import static lotto.domain.game.LottoGameCount.LOTTO_MONEY_EXCEPTION_MESSAGE;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 

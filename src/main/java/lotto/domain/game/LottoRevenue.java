@@ -1,4 +1,6 @@
-package lotto;
+package lotto.domain.game;
+
+import lotto.domain.ranking.LottoRankingCount;
 
 public class LottoRevenue {
     private static final double PERCENT = 100.0;

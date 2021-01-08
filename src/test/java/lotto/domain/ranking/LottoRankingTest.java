@@ -1,5 +1,6 @@
-package lotto;
+package lotto.domain.ranking;
 
+import lotto.domain.ranking.LottoRanking;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
