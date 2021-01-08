@@ -11,7 +11,7 @@ public class TryNumber {
         this.tryNumber = tryNumber;
     }
 
-    public boolean isNegativeNumber(int number) {
+    private boolean isNegativeNumber(int number) {
         return number < 0;
     }
 
