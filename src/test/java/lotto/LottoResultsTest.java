@@ -1,60 +1,37 @@
 package lotto;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.*;
 
 public class LottoResultsTest {
+    private final int TEST_LOOP_TIMES = 5;
 
     @Test
     void upsertTest() {
         LottoResults lottoResults = new LottoResults();
-        lottoResults.upsert(LottoRank.FIRST);
-        assertThat(lottoResults.getCount(LottoRank.FIRST)).isEqualTo(1);
-        assertThat(lottoResults.toString()).isEqualTo("3개 일치 (5000원) - 0개\n" +
-                "4개 일치 (50000원) - 0개\n" +
-                "5개 일치 (1500000원) - 0개\n" +
-                "5개 일치, 보너스 볼 일치 (30000000원) - 0개\n" +
-                "6개 일치 (2000000000원) - 1개\n");
+        for (int i = 1; i <= TEST_LOOP_TIMES; i++) {
+            upsertAllRanksAndTest(lottoResults, i);
+        }
+    }
 
-        lottoResults.upsert(LottoRank.FIRST);
-        assertThat(lottoResults.getCount(LottoRank.FIRST)).isEqualTo(2);
-        assertThat(lottoResults.toString()).isEqualTo("3개 일치 (5000원) - 0개\n" +
-                "4개 일치 (50000원) - 0개\n" +
-                "5개 일치 (1500000원) - 0개\n" +
-                "5개 일치, 보너스 볼 일치 (30000000원) - 0개\n" +
-                "6개 일치 (2000000000원) - 2개\n");
+    private void upsertAllRanksAndTest(LottoResults lottoResults, int comp) {
+        for (LottoRank lottoRank : LottoRank.values()) {
+            lottoResults.upsert(lottoRank);
+            assertThat(lottoResults.getCount(lottoRank)).isEqualTo(comp);
+        }
+        System.out.println(lottoResults);
     }
 
     @Test
-    void upsertTwoTest() {
-        LottoResults lottoResults = new LottoResults();
-        lottoResults.upsert(LottoRank.FIRST);
-        assertThat(lottoResults.getCount(LottoRank.FIRST)).isEqualTo(1);
-        assertThat(lottoResults.toString()).isEqualTo("3개 일치 (5000원) - 0개\n" +
-                "4개 일치 (50000원) - 0개\n" +
-                "5개 일치 (1500000원) - 0개\n" +
-                "5개 일치, 보너스 볼 일치 (30000000원) - 0개\n" +
-                "6개 일치 (2000000000원) - 1개\n");
-
-        lottoResults.upsert(LottoRank.SECOND);
-        assertThat(lottoResults.getCount(LottoRank.SECOND)).isEqualTo(1);
-        assertThat(lottoResults.toString()).isEqualTo("3개 일치 (5000원) - 0개\n" +
-                "4개 일치 (50000원) - 0개\n" +
-                "5개 일치 (1500000원) - 0개\n" +
-                "5개 일치, 보너스 볼 일치 (30000000원) - 1개\n" +
-                "6개 일치 (2000000000원) - 1개\n");
-    }
-
-    @Test
-    void upsert5thTest() {
+    @DisplayName("수익률 계산 테스트")
+    void calculateRateTest() {
         LottoResults lottoResults = new LottoResults();
         lottoResults.upsert(LottoRank.FIFTH);
-        assertThat(lottoResults.toString()).isEqualTo("3개 일치 (5000원) - 1개\n" +
-                "4개 일치 (50000원) - 0개\n" +
-                "5개 일치 (1500000원) - 0개\n" +
-                "5개 일치, 보너스 볼 일치 (30000000원) - 0개\n" +
-                "6개 일치 (2000000000원) - 0개\n");
+        assertThat(lottoResults.calculateRate(14000)).isEqualTo(0.35);
     }
 
 }

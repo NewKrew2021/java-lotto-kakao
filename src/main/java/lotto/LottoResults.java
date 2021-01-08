@@ -23,12 +23,16 @@ public class LottoResults {
         return results.get(rank);
     }
 
-    public String result(int price) {
+    public double calculateRate(int price) {
+        return Math.floor((sumPrizeMoney() / price * 100)) / 100;
+    }
+
+    private double sumPrizeMoney() {
         double sum = 0;
         for (LottoRank rank : LottoRank.values()) {
             sum += results.get(rank) * rank.getPrice();
         }
-        return this + "총 수익률은 " + (long) (sum / price * 100) + "%입니다.";
+        return sum;
     }
 
     @Override
@@ -46,10 +50,10 @@ public class LottoResults {
 
     @Override
     public String toString() {
-        String s = "";
+        StringBuilder sb = new StringBuilder();
         for (LottoRank rank : LottoRank.values()) {
-            s += rank + " - " + results.get(rank) + "개\n";
+            sb.append(rank).append(" - ").append(results.get(rank)).append("개\n");
         }
-        return s;
+        return sb.toString();
     }
 }

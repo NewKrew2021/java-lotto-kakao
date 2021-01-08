@@ -88,4 +88,5 @@ public class LottoTicketTest {
         );
         assertThat(lottoTicket.getRank(winnerNumber)).isEqualTo(rank);
     }
+
 }
