@@ -67,19 +67,18 @@ class lottoNumberArgumentsProvider implements ArgumentsProvider {
     @Override
     public Stream<? extends Arguments> provideArguments(ExtensionContext context) {
         return Stream.of(
-                Arguments.of(lottoNumberArgument(1, 2, 3, 4, 5, 6), MatchResult.FIRST),
-                Arguments.of(lottoNumberArgument(1, 2, 3, 4, 5, 7), MatchResult.SECOND),
-                Arguments.of(lottoNumberArgument(1, 2, 3, 4, 5, 8), MatchResult.THIRD),
-                Arguments.of(lottoNumberArgument(1, 2, 3, 4, 8, 9), MatchResult.FOURTH),
-                Arguments.of(lottoNumberArgument(1, 2, 3, 8, 9, 10), MatchResult.FIFTH),
-                Arguments.of(lottoNumberArgument(1, 2, 8, 9, 10, 11), MatchResult.NULL)
+                Arguments.of(customLottoNumbers(1, 2, 3, 4, 5, 6), MatchResult.FIRST),
+                Arguments.of(customLottoNumbers(1, 2, 3, 4, 5, 7), MatchResult.SECOND),
+                Arguments.of(customLottoNumbers(1, 2, 3, 4, 5, 8), MatchResult.THIRD),
+                Arguments.of(customLottoNumbers(1, 2, 3, 4, 8, 9), MatchResult.FOURTH),
+                Arguments.of(customLottoNumbers(1, 2, 3, 8, 9, 10), MatchResult.FIFTH),
+                Arguments.of(customLottoNumbers(1, 2, 8, 9, 10, 11), MatchResult.NULL)
         );
     }
 
-    private List<LottoNumber> lottoNumberArgument(int... parameters) {
-        return Stream.of(parameters[0], parameters[1], parameters[2],
-                parameters[3], parameters[4], parameters[5])
-                .map(LottoNumber::new)
+    private List<LottoNumber> customLottoNumbers(int... parameters) {
+        return Arrays.stream(parameters)
+                .mapToObj(LottoNumber::new)
                 .collect(Collectors.toList());
     }
 }
