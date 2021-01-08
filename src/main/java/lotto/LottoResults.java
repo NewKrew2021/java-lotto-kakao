@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class LottoResults {
-    private final Map<LottoRank, Integer> results;
+    private Map<LottoRank, Integer> results;
 
     public LottoResults() {
         results = new HashMap<LottoRank, Integer>() {{
@@ -16,7 +16,13 @@ public class LottoResults {
     }
 
     public void upsert(LottoRank rank) {
+        if(isNothing(rank))
+            return;
         results.put(rank, results.get(rank) + 1);
+    }
+
+    private boolean isNothing(LottoRank rank) {
+        return rank == null;
     }
 
     public int getCount(LottoRank rank) {
