@@ -18,9 +18,30 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 
 public class LottoNumbersTest {
 
-    @DisplayName("숫자를 생성하는 전략이 주어 졌을 때 로또 티켓을 생성한다.")
+    @DisplayName("숫자 리스트가 주어졌을 때 로또 티켓을 생성한다.")
     @Test
     void create() {
+        //given
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+
+        //when
+        LottoNumbers lottoNumbers = LottoNumbers.from(numbers);
+
+        //then
+        List<LottoNumber> expected = Arrays.asList(
+                LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(6)
+        );
+        assertThat(lottoNumbers.getLottoNumbers()).isEqualTo(expected);
+    }
+
+    @DisplayName("숫자를 생성하는 전략이 주어졌을 때 로또 티켓을 생성한다.")
+    @Test
+    void create2() {
         //given
         NumberGenerateStrategy strategy = new OneToSixGenerator();
 
@@ -28,8 +49,14 @@ public class LottoNumbersTest {
         LottoNumbers lottoNumbers = LottoNumbers.from(strategy);
 
         //then
-        List<LottoNumber> expected = Arrays.asList(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
-                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6));
+        List<LottoNumber> expected = Arrays.asList(
+                LottoNumber.valueOf(1),
+                LottoNumber.valueOf(2),
+                LottoNumber.valueOf(3),
+                LottoNumber.valueOf(4),
+                LottoNumber.valueOf(5),
+                LottoNumber.valueOf(6)
+        );
         assertThat(lottoNumbers.getLottoNumbers()).isEqualTo(expected);
     }
 
@@ -37,12 +64,12 @@ public class LottoNumbersTest {
     @Test
     void valid() {
         //given
-        NumberGenerateStrategy duplicateStrategy = () -> Arrays.asList(1, 1, 2, 3, 4, 5);
+        List<Integer> duplicateNumbers = Arrays.asList(1, 1, 2, 3, 4, 5);
 
         //then
         assertThatIllegalArgumentException()
                 // when
-                .isThrownBy(() -> LottoNumbers.from(duplicateStrategy))
+                .isThrownBy(() -> LottoNumbers.from(duplicateNumbers))
                 .withMessage(LOTTO_TICKET_EXCEPTION_MESSAGE);
     }
 
@@ -50,12 +77,12 @@ public class LottoNumbersTest {
     @Test
     void validLength1() {
         //given
-        NumberGenerateStrategy lessLengthStrategy = () -> Arrays.asList(1, 2, 3, 4, 5);
+        List<Integer> lessLengthNumbers = Arrays.asList(1, 2, 3, 4, 5);
 
         //then
         assertThatIllegalArgumentException()
                 // when
-                .isThrownBy(() -> LottoNumbers.from(lessLengthStrategy))
+                .isThrownBy(() -> LottoNumbers.from(lessLengthNumbers))
                 .withMessage(LOTTO_TICKET_EXCEPTION_MESSAGE);
     }
 
@@ -63,12 +90,12 @@ public class LottoNumbersTest {
     @Test
     void validLength2() {
         //given
-        NumberGenerateStrategy overLengthStrategy = () -> Arrays.asList(1, 2, 3, 4, 5, 6, 7);
+        List<Integer> overLengthNumbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7);
 
         //then
         assertThatIllegalArgumentException()
                 // when
-                .isThrownBy(() -> LottoNumbers.from(overLengthStrategy))
+                .isThrownBy(() -> LottoNumbers.from(overLengthNumbers))
                 .withMessage(LOTTO_TICKET_EXCEPTION_MESSAGE);
     }
 
@@ -77,8 +104,8 @@ public class LottoNumbersTest {
     @MethodSource("generateLottoNumbers")
     void countMatchingNumber(List<Integer> compared, int expected) {
         //given
-        LottoNumbers lottoNumbers = LottoNumbers.from(new OneToSixGenerator());
-        LottoNumbers comparedNumbers = LottoNumbers.from(() -> compared);
+        LottoNumbers lottoNumbers = LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumbers comparedNumbers = LottoNumbers.from(compared);
 
         //when
         int result = lottoNumbers.countMatchingNumber(comparedNumbers);
@@ -104,7 +131,7 @@ public class LottoNumbersTest {
     @CsvSource({"1,true", "6,true", "7,false"})
     void contains(int given, boolean expected) {
         //given
-        LottoNumbers lottoNumbers = LottoNumbers.from(new OneToSixGenerator());
+        LottoNumbers lottoNumbers = LottoNumbers.from(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoNumber lottoNumber = LottoNumber.valueOf(given);
 
         //when

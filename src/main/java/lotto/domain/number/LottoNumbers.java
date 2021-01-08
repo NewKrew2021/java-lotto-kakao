@@ -1,9 +1,12 @@
 package lotto.domain.number;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.collectingAndThen;
+import static java.util.stream.Collectors.toList;
 
 public class LottoNumbers {
 
@@ -16,7 +19,7 @@ public class LottoNumbers {
         validateDuplicate(lottoNumbers);
         validateLength(lottoNumbers);
 
-        this.lottoNumbers = lottoNumbers;
+        this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
     }
 
     private void validateDuplicate(List<LottoNumber> lottoNumbers) {
@@ -33,11 +36,13 @@ public class LottoNumbers {
     }
 
     public static LottoNumbers from(NumberGenerateStrategy strategy) {
-        List<LottoNumber> lottoNumbers = strategy.generate().stream()
-                .map(LottoNumber::valueOf)
-                .collect(Collectors.toList());
+        return from(strategy.generate());
+    }
 
-        return new LottoNumbers(lottoNumbers);
+    public static LottoNumbers from(List<Integer> lottoNumbers) {
+        return lottoNumbers.stream()
+                .map(LottoNumber::valueOf)
+                .collect(collectingAndThen(toList(), LottoNumbers::new));
     }
 
     public int countMatchingNumber(LottoNumbers lottoNumbers) {
