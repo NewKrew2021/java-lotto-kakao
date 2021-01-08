@@ -25,7 +25,7 @@ public class LottoTickets {
 
     private void updateWinningInfo(LottoTicket lottoTicket, LottoWinningNumber lottoWinningNumber, List<Integer> winningInfo){
         int winningInfoIndex = 0;
-        int count = lottoTicket.getMatchedCount(lottoTicket);
+        int count =  lottoWinningNumber.getMatchedCount(lottoTicket);
 
         if ((count == 5 && lottoWinningNumber.isContainsBounusNumber(lottoTicket)) || count == 6) {
             winningInfoIndex = 1;

@@ -2,6 +2,7 @@ package domain;
 
 import domain.exceptions.InvalidLottoNumberException;
 
+import java.util.List;
 import java.util.Objects;
 
 public class LottoWinningNumber {
@@ -21,11 +22,17 @@ public class LottoWinningNumber {
         }
     }
 
+    public int getMatchedCount(LottoTicket lottoTicket) {
+        return lottoTicket.getMatchedCount(lottoWinningTicket);
+    }
 
     public boolean isContainsBounusNumber(LottoTicket lottoTicket) {
         return lottoTicket.isContains(bonusNumber);
     }
 
+    public List<Integer> getLottoWinningTicket() {
+        return lottoWinningTicket.getLottoTicketInfo();
+    }
 
     @Override
     public boolean equals(Object o) {
