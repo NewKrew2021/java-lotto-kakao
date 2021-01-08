@@ -19,14 +19,6 @@ public class LottoNumbers {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public static LottoNumbers from(NumberGenerateStrategy strategy) {
-        List<LottoNumber> lottoNumbers = strategy.generate().stream()
-                .map(LottoNumber::valueOf)
-                .collect(Collectors.toList());
-
-        return new LottoNumbers(lottoNumbers);
-    }
-
     private void validateDuplicate(List<LottoNumber> lottoNumbers) {
         Set<LottoNumber> distinctNumbers = new HashSet<>(lottoNumbers);
         if (distinctNumbers.size() != lottoNumbers.size()) {
@@ -38,6 +30,14 @@ public class LottoNumbers {
         if (lottoNumbers.size() != LOTTO_TICKET_LENGTH) {
             throw new IllegalArgumentException(LOTTO_TICKET_EXCEPTION_MESSAGE);
         }
+    }
+
+    public static LottoNumbers from(NumberGenerateStrategy strategy) {
+        List<LottoNumber> lottoNumbers = strategy.generate().stream()
+                .map(LottoNumber::valueOf)
+                .collect(Collectors.toList());
+
+        return new LottoNumbers(lottoNumbers);
     }
 
     public int countMatchingNumber(LottoNumbers lottoNumbers) {
