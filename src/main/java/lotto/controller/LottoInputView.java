@@ -1,25 +1,25 @@
-package lotto;
+package lotto.controller;
 
 import java.util.Scanner;
 
 public class LottoInputView {
     private Scanner scanner;
 
-    public LottoInputView(){
+    public LottoInputView() {
         scanner = new Scanner(System.in);
     }
 
-    public int getLottoBuyAmount(){
+    public int getLottoBuyAmount() {
         int amount = Integer.parseInt(scanner.nextLine());
         return amount;
     }
 
-    public String getWonLotto(){
+    public String getWonLotto() {
         String wonLotto = scanner.nextLine();
         return wonLotto;
     }
 
-    public int getBonusBall(){
+    public int getBonusBall() {
         int bonusBall = Integer.parseInt(scanner.nextLine());
         return bonusBall;
     }

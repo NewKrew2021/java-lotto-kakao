@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 public enum LottoRank {
     FIRST(2000000000, 0, "6개 일치 "), SECOND(30000000, 1, "5개 일치, 보너스 볼 일치"),
@@ -9,20 +9,22 @@ public enum LottoRank {
     private int index;
     private String matchedPhrase;
 
-    LottoRank(int money, int index, String matchedPhrase){
-        this.money=money;
+    LottoRank(int money, int index, String matchedPhrase) {
+        this.money = money;
         this.index = index;
         this.matchedPhrase = matchedPhrase;
     }
 
-    public int getMoney(){
+    public int getMoney() {
         return money;
     }
 
-    public int getIndex(){
+    public int getIndex() {
         return index;
     }
 
-    public String getMatchedPhrase() { return matchedPhrase; }
+    public String getMatchedPhrase() {
+        return matchedPhrase;
+    }
 
 }

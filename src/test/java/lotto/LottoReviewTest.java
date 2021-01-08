@@ -1,15 +1,21 @@
 package lotto;
 
+import lotto.service.LottoReview;
+import lotto.domain.Lotto;
+import lotto.domain.Lottos;
+import lotto.domain.WonLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoReviewTest {
 
     private WonLotto wonLotto;
-    private  LottoReview lottoReview;
+    private LottoReview lottoReview;
+
     @BeforeEach
     void setUp() {
         wonLotto = new WonLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), 7);
@@ -31,7 +37,7 @@ public class LottoReviewTest {
     }
 
     @Test
-    void testLottoProfitRatio(){
+    void testLottoProfitRatio() {
         Lottos lottos = new Lottos();
         lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
         lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));

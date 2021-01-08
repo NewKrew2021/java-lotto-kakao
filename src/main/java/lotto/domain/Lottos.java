@@ -1,6 +1,8 @@
-package lotto;
+package lotto.domain;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lottos {
@@ -14,23 +16,23 @@ public class Lottos {
     }
 
     public Lottos() {
-        this.lottos=new ArrayList<>();
+        this.lottos = new ArrayList<>();
     }
 
-    public void add(Lotto lotto){
+    public void add(Lotto lotto) {
         lottos.add(lotto);
     }
 
-    public List<LottoRank> lottosResult(WonLotto wonLotto){
+    public List<LottoRank> lottosResult(WonLotto wonLotto) {
 
-        List<LottoRank> results=new ArrayList<>();
+        List<LottoRank> results = new ArrayList<>();
         for (Lotto lotto : lottos) {
             results.add(wonLotto.checkRanking(lotto));
         }
         return results;
     }
 
-    public List<Integer> lottosRankingResult(List<LottoRank> lottoRank){
+    public List<Integer> lottosRankingResult(List<LottoRank> lottoRank) {
         int[] rankingResult = new int[6];
         Arrays.fill(rankingResult, 0);
 
@@ -43,7 +45,7 @@ public class Lottos {
 
     @Override
     public String toString() {
-        StringBuilder str=new StringBuilder();
+        StringBuilder str = new StringBuilder();
         for (Lotto lotto : lottos) {
             str.append(lotto.toString());
         }

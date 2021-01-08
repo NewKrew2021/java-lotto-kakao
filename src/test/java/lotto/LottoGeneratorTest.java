@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.domain.Lotto;
+import lotto.service.LottoGenerator;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -23,11 +25,11 @@ public class LottoGeneratorTest {
     public void testLottoSize() {
 
         Lotto lotto = lottoGenerator.generateLotto();
-        Assertions.assertTrue(lotto.getLotto().size()==6);
+        Assertions.assertTrue(lotto.getLotto().size() == 6);
 
         HashSet<Integer> set = new HashSet<>();
         set.addAll(lotto.getLotto());
-        Assertions.assertTrue(set.size()==6);
+        Assertions.assertTrue(set.size() == 6);
     }
 
 

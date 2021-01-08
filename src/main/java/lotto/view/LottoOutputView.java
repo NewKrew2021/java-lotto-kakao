@@ -1,7 +1,8 @@
-package lotto;
+package lotto.view;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import lotto.domain.LottoRank;
+import lotto.domain.Lottos;
+
 import java.util.List;
 
 public class LottoOutputView {
@@ -17,37 +18,39 @@ public class LottoOutputView {
     private final String SAME_COUNT_PHRASE = "개 일치";
     private final String PROFIT_PHRASE = "총 수익률은 ";
 
-    public void printInputMoneyPhrase(){
+    public void printInputMoneyPhrase() {
         System.out.println(INPUT_MONEY_PHRASE);
     }
 
-    public void printInputQuantityPhrase(int quantity){
+    public void printInputQuantityPhrase(int quantity) {
         System.out.println(quantity + INPUT_QUANTITY_PHRASE);
     }
 
-    public void printLottos(Lottos lottos){
+    public void printLottos(Lottos lottos) {
         System.out.println(lottos.toString());
     }
 
-    public void printInputWonlottoPhrase(){
+    public void printInputWonlottoPhrase() {
         System.out.println(INPUT_WONLOTTO_PHRASE);
     }
 
-    public void printInputBonusBallPhrase(){
+    public void printInputBonusBallPhrase() {
         System.out.println(INPUT_BONUS_BALL_PHRASE);
     }
 
-    public void WonResultPhrase(){
+    public void WonResultPhrase() {
         System.out.println(WON_RESULT_PHRASE);
     }
 
-    public void printSameCountPhrase(List<Integer> rankInfo){
+    public void printSameCountPhrase(List<Integer> rankInfo) {
         for (int i = 4; i >= 0; i--) {
-            System.out.println(LottoRank.values()[i].getMatchedPhrase() + "(" + LottoRank.values()[i].getMoney()+ "원)-" + rankInfo.get(i) + "개");
+            System.out.println(LottoRank.values()[i].getMatchedPhrase()
+                    + "(" + LottoRank.values()[i].getMoney() + "원)-"
+                    + rankInfo.get(i) + "개");
         }
     }
 
-    public void printProfitRatio(int ratio){
+    public void printProfitRatio(int ratio) {
         System.out.println(PROFIT_PHRASE + ratio + "% 입니다.");
     }
 
