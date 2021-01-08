@@ -18,16 +18,10 @@ public class StatisticsResult {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof StatisticsResult)) {
-            return false;
-        }
-
-        StatisticsResult result = (StatisticsResult) obj;
-        if (!earningRate.equals(result.earningRate)) {
-            return false;
-        }
-
-        return matchResults.equals(result.matchResults);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        StatisticsResult that = (StatisticsResult) o;
+        return matchResults.equals(that.matchResults) && earningRate.equals(that.earningRate);
     }
 }

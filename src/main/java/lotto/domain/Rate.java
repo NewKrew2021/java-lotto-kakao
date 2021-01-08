@@ -20,11 +20,10 @@ public class Rate {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof Rate) {
-            Rate rate = (Rate) obj;
-            return this.rate == rate.rate;
-        }
-        return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Rate that = (Rate) o;
+        return this.rate == that.rate;
     }
 }

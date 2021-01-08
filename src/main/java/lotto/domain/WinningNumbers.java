@@ -18,13 +18,12 @@ public class WinningNumbers {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof WinningNumbers) {
-            WinningNumbers winningNumbers = (WinningNumbers) obj;
-            return this.luckyNumbers.equals(winningNumbers.luckyNumbers)
-                    && this.bonusNumber.equals(winningNumbers.bonusNumber);
-        }
-        return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        WinningNumbers that = (WinningNumbers) o;
+        return this.luckyNumbers.equals(that.luckyNumbers)
+                && this.bonusNumber.equals(that.bonusNumber);
     }
 
     public LottoNumbers getLuckyNumbers() {

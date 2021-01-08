@@ -20,16 +20,10 @@ public class LottoTickets {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof LottoTickets)) {
-            return false;
-        }
-
-        LottoTickets numbers = (LottoTickets) obj;
-        if (getTicketsNum() != numbers.getTicketsNum()) {
-            return false;
-        }
-
-        return this.tickets.containsAll(numbers.tickets);
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoTickets that = (LottoTickets) o;
+        return (getTicketsNum() == that.getTicketsNum()) && this.tickets.containsAll(that.tickets);
     }
 }
