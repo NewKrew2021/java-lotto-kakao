@@ -66,14 +66,13 @@ public class Lottery {
         return false;
     }
 
-    public int checkRank(LotteryAnswer lotteryAnswer) {
-        boolean bonus = numbers.contains(lotteryAnswer.getBonusNumber());
-        int count = (int) lotteryAnswer.getLottery()
-                .numbers
-                .stream()
-                .filter(numbers::contains)
-                .count();
-        return LotteryUtil.convertCountToRank(count, bonus);
+    public LotteryRank calculateRank(LotteryAnswer lotteryAnswer) {
+        return LotteryRank.toLotteryRank(
+                (int) lotteryAnswer.getLottery().numbers.stream()
+                        .filter(this.numbers::contains)
+                        .count(),
+                numbers.contains(lotteryAnswer.getBonusNumber())
+        );
     }
 
     @Override

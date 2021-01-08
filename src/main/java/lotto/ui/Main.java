@@ -1,7 +1,7 @@
 package lotto.ui;
 
 import lotto.domain.Lotteries;
-import lotto.domain.LotteryRank;
+import lotto.domain.LotteryRankCounter;
 import lotto.domain.LotteryUtil;
 
 public class Main {
@@ -12,10 +12,10 @@ public class Main {
         Lotteries lotteries = new Lotteries(Lotteries.getRandomLotteryList(lotteryCount));
         OutputView.printLotteries(lotteries);
 
-        LotteryRank lotteryRank = lotteries.calculateRank(InputView.readLotteryAnswer());
-        OutputView.printLotteriesRank(lotteryRank);
+        LotteryRankCounter lotteryRankCounter = lotteries.countLotteryResults(InputView.readLotteryAnswer());
+        OutputView.printLotteryResult(lotteryRankCounter);
 
-        int profit = LotteryUtil.calculateProfitRate(lotteryCount, lotteryRank.getTotalIncome());
+        int profit = LotteryUtil.calculateProfitRate(lotteryCount, lotteryRankCounter.getTotalIncome());
         OutputView.printProfitRate(profit);
     }
 }

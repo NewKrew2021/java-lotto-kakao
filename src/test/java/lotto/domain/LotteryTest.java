@@ -35,7 +35,7 @@ public class LotteryTest {
     @Test
     void Lottery_당첨번호_보너스숫자_중복() {
         assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> playerLottery.checkRank(new LotteryAnswer(playerNumbers, 6)));
+                .isThrownBy(() -> playerLottery.calculateRank(new LotteryAnswer(playerNumbers, 6)));
     }
 
     @Test
@@ -55,31 +55,31 @@ public class LotteryTest {
 
     @Test
     void Lottery_당첨_3개일치_5등() {
-        int rank = playerLottery.checkRank(new LotteryAnswer(new int[]{1, 2, 3, 9, 10, 11}, 12));
-        assertThat(rank).isEqualTo(5);
+        LotteryRank lotteryRank = playerLottery.calculateRank(new LotteryAnswer(new int[]{1, 2, 3, 9, 10, 11}, 12));
+        assertThat(lotteryRank.rank).isEqualTo(5);
     }
 
     @Test
     void Lottery_당첨_4개일치_4등() {
-        int rank = playerLottery.checkRank(new LotteryAnswer(new int[]{1, 2, 3, 4, 7, 8}, 10));
-        assertThat(rank).isEqualTo(4);
+        LotteryRank lotteryRank = playerLottery.calculateRank(new LotteryAnswer(new int[]{1, 2, 3, 4, 7, 8}, 10));
+        assertThat(lotteryRank.rank).isEqualTo(4);
     }
 
     @Test
     void Lottery_당첨_5개일치_3등() {
-        int rank = playerLottery.checkRank(new LotteryAnswer(new int[]{1, 2, 3, 4, 5, 7}, 10));
-        assertThat(rank).isEqualTo(3);
+        LotteryRank lotteryRank = playerLottery.calculateRank(new LotteryAnswer(new int[]{1, 2, 3, 4, 5, 7}, 10));
+        assertThat(lotteryRank.rank).isEqualTo(3);
     }
 
     @Test
     void Lottery_당첨_5개_보너스일치_2등() {
-        int rank = playerLottery.checkRank(new LotteryAnswer(new int[]{1, 2, 3, 4, 5, 7}, 6));
-        assertThat(rank).isEqualTo(2);
+        LotteryRank lotteryRank = playerLottery.calculateRank(new LotteryAnswer(new int[]{1, 2, 3, 4, 5, 7}, 6));
+        assertThat(lotteryRank.rank).isEqualTo(2);
     }
 
     @Test
     void Lottery_당첨_6개일치_1등() {
-        int rank = playerLottery.checkRank(new LotteryAnswer(new int[]{1, 2, 3, 4, 5, 6}, 7));
-        assertThat(rank).isEqualTo(1);
+        LotteryRank lotteryRank = playerLottery.calculateRank(new LotteryAnswer(new int[]{1, 2, 3, 4, 5, 6}, 7));
+        assertThat(lotteryRank.rank).isEqualTo(1);
     }
 }

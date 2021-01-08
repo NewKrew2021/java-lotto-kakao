@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -17,17 +16,10 @@ public class Lotteries {
         lotteries = new ArrayList<>();
     }
 
-    public LotteryRank calculateRank(LotteryAnswer lotteryAnswer) {
-        HashMap<Integer, Integer> ranks = new HashMap<>();
-        for (int i = 1; i <= 5; i++) {
-            ranks.put(i, 0);
-        }
-        ranks.put(Lottery.NONE, 0);
-        for (Lottery lottery : lotteries) {
-            int rank = lottery.checkRank(lotteryAnswer);
-            ranks.put(rank, ranks.get(rank) + 1);
-        }
-        return new LotteryRank(ranks);
+    public LotteryRankCounter countLotteryResults(LotteryAnswer lotteryAnswer) {
+        LotteryRankCounter lotteryRanks = new LotteryRankCounter();
+        lotteries.forEach(lottery -> lotteryRanks.count(lottery.calculateRank(lotteryAnswer)));
+        return lotteryRanks;
     }
 
     public static List<Lottery> getRandomLotteryList(int count) {

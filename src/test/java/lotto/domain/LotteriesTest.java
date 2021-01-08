@@ -30,14 +30,13 @@ public class LotteriesTest {
 
     @Test
     void Lotteries_등수반환() {
-        LotteryRank lotteryRank = lotteries.calculateRank(new LotteryAnswer(new int[]{1, 2, 3, 4, 5, 6}, 10));
-
-        assertThat(lotteryRank.getnthCount(1)).isEqualTo(1);
-        assertThat(lotteryRank.getnthCount(2)).isEqualTo(0);
-        assertThat(lotteryRank.getnthCount(3)).isEqualTo(0);
-        assertThat(lotteryRank.getnthCount(4)).isEqualTo(0);
-        assertThat(lotteryRank.getnthCount(5)).isEqualTo(0);
-        assertThat(lotteryRank.getnthCount(Lottery.NONE)).isEqualTo(2);
+        LotteryRankCounter lotteryRankCounter = lotteries.countLotteryResults(new LotteryAnswer(new int[]{1, 2, 3, 4, 5, 6}, 10));
+        assertThat(lotteryRankCounter.getRankCount(1)).isEqualTo(1);
+        assertThat(lotteryRankCounter.getRankCount(2)).isEqualTo(0);
+        assertThat(lotteryRankCounter.getRankCount(3)).isEqualTo(0);
+        assertThat(lotteryRankCounter.getRankCount(4)).isEqualTo(0);
+        assertThat(lotteryRankCounter.getRankCount(5)).isEqualTo(0);
+        assertThat(lotteryRankCounter.getRankCount(Lottery.NONE)).isEqualTo(2);
     }
 
     @Test

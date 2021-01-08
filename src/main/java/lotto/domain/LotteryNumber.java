@@ -18,7 +18,7 @@ public class LotteryNumber {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         return String.valueOf(number);
     }
 

@@ -1,37 +1,50 @@
 package lotto.domain;
 
-import java.util.HashMap;
-import java.util.Objects;
+import java.util.Arrays;
+import java.util.Comparator;
 
-public class LotteryRank {
-    HashMap<Integer, Integer> lotteryRank;
+public enum LotteryRank {
+    RANK1(2000000000, 6, false, 1),
+    RANK2(30000000, 5, true, 2),
+    RANK3(1500000, 5, false, 3),
+    RANK4(50000, 4, false, 4),
+    RANK5(5000, 3, false, 5),
+    RANK_NONE(0, 0, false, LotteryRank.NONE);
 
-    public LotteryRank(HashMap<Integer, Integer> ranks) {
-        lotteryRank = ranks;
+    public final static int NONE = -1;
+    public final static int MIN_RANK = 1;
+    public final static int MAX_RANK = 5;
+
+    public final int rank;
+    public final int correctCount;
+    public final boolean bonusCheck;
+    public final long winningPrice;
+    public final String winningMsg;
+
+    static public LotteryRank toLotteryRank(int rank) {
+        return Arrays.stream(LotteryRank.values())
+                .filter(lotteryRank -> lotteryRank.rank == rank)
+                .findAny()
+                .orElse(RANK_NONE);
     }
 
-    public int getnthCount(int nthRank) {
-        return lotteryRank.getOrDefault(nthRank, 0);
+    static LotteryRank toLotteryRank(int count, boolean bonus) {
+        return Arrays.stream(values())
+                .filter(enumValue -> enumValue.correctCount == count)
+                .filter(enumValue -> !enumValue.bonusCheck || bonus)
+                .max(Comparator.comparingLong(enumValue -> enumValue.winningPrice))
+                .orElse(RANK_NONE);
     }
 
-    public long getTotalIncome() {
-        long total = 0;
-        for (int i = 0; i < LotteryUtil.WINNING_TABLE.length; i++) {
-            total += (long) LotteryUtil.WINNING_TABLE[i][1] * getnthCount(LotteryUtil.WINNING_TABLE[i][2]);
+    LotteryRank(int winningPrice, int correctCount, boolean bonusCheck, int rank) {
+        this.winningPrice = winningPrice;
+        this.correctCount = correctCount;
+        this.bonusCheck = bonusCheck;
+        this.rank = rank;
+        String bonusMsg = "";
+        if (bonusCheck) {
+            bonusMsg = ", 보너스 볼 일치";
         }
-        return total;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LotteryRank that = (LotteryRank) o;
-        return Objects.equals(lotteryRank, that.lotteryRank);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(lotteryRank);
+        this.winningMsg = String.format("%d개 일치%s (%d원)-", correctCount, bonusMsg, winningPrice);
     }
 }

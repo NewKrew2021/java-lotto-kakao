@@ -49,14 +49,11 @@ public class InputView {
 
     private static LotteryNumber getAnswerBonusNumber() {
         System.out.println("보너스 볼 번호를 입력해주세요.");
-        int lotteryNumber;
         try {
-            lotteryNumber = Integer.parseInt(sc.nextLine().trim());
+            return new LotteryNumber(Integer.parseInt(sc.nextLine().trim()));
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("정상적인 정수 포맷을 입력하세요.");
         }
-        return new LotteryNumber(lotteryNumber);
-
     }
 
     private static void handleUnknownError(Exception e) {
