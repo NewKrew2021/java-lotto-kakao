@@ -6,5 +6,5 @@ public enum Rank {
     THIRD,
     FOURTH,
     FIFTH,
-    BOOM
+    NOTHING
 }
