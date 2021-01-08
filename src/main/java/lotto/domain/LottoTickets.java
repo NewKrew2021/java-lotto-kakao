@@ -3,6 +3,8 @@ package lotto.domain;
 import java.util.*;
 
 public class LottoTickets {
+    private static final int TICKET_PRICE = 1000;
+
     private List<LottoTicket> lottoTickets;
 
     public LottoTickets(List<LottoTicket> lottoTickets) {
@@ -11,7 +13,7 @@ public class LottoTickets {
 
     public static LottoTickets fromPrice(int price) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < price / 1000; i++) {
+        for (int i = 0; i < price / TICKET_PRICE; i++) {
             lottoTickets.add(new LottoTicket(new TreeSet<>(NumberPool.getInstance().getRandomNumbers())));
         }
         return new LottoTickets(lottoTickets);

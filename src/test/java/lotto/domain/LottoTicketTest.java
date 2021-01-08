@@ -129,8 +129,6 @@ public class LottoTicketTest {
                         new Number(i5),
                         new Number(i6))
         );
-        System.out.println(lottoTicket.getRank(winnerNumber).hashCode());
-        System.out.println(rank.hashCode());
         assertThat(lottoTicket.getRank(winnerNumber)).isEqualTo(rank);
     }
 
