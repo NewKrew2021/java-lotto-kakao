@@ -1,4 +1,10 @@
-package lotto;
+package lotto.controller;
+
+import lotto.domain.LottoResults;
+import lotto.domain.LottoTickets;
+import lotto.util.StringUtility;
+import lotto.domain.WinnerNumber;
+import lotto.view.LottoGameView;
 
 import java.util.*;
 

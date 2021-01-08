@@ -1,4 +1,7 @@
-package lotto;
+package lotto.view;
+
+import lotto.domain.LottoResults;
+import lotto.domain.LottoTickets;
 
 import java.util.Scanner;
 

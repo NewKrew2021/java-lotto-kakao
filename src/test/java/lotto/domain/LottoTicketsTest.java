@@ -1,5 +1,7 @@
-package lotto;
+package lotto.domain;
 
+import lotto.domain.*;
+import lotto.domain.Number;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -24,7 +26,7 @@ public class LottoTicketsTest {
         lottoTicketList.add(new LottoTicket(makeNumberTreeSet(Arrays.asList(1, 2, 9, 4, 7, 6))));
         lottoTicketList.add(new LottoTicket(makeNumberTreeSet(Arrays.asList(4, 20, 35, 6, 1, 5))));
         LottoTickets lottoTickets = new LottoTickets(lottoTicketList);
-        WinnerNumber winnerNumber = new WinnerNumber(makeNumberTreeSet(Arrays.asList(1, 2, 3, 4, 5, 6)), new Number(9));
+        WinnerNumber winnerNumber = new WinnerNumber(makeNumberTreeSet(Arrays.asList(1, 2, 3, 4, 5, 6)), new lotto.domain.Number(9));
         LottoResults expectedResult = new LottoResults();
         expectedResult.upsert(LottoRank.FIRST);
         expectedResult.upsert(LottoRank.SECOND);
@@ -34,8 +36,8 @@ public class LottoTicketsTest {
 
     }
 
-    private Set<Number> makeNumberTreeSet(List<Integer> intNumbers) {
-        Set<Number> numbers = new TreeSet<>();
+    private Set<lotto.domain.Number> makeNumberTreeSet(List<Integer> intNumbers) {
+        Set<lotto.domain.Number> numbers = new TreeSet<>();
         for (int number : intNumbers) {
             numbers.add(new Number(number));
         }
