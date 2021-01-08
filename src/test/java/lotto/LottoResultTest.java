@@ -3,12 +3,14 @@ package lotto;
 import lotto.domain.LottoResult;
 import lotto.domain.PurchaseMoney;
 import lotto.domain.Rank;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoResultTest {
     @Test
+    @DisplayName("당첨금 합계 테스트")
     void getPrizeTest() {
         LottoResult lottoResult = new LottoResult();
         lottoResult.addRank(Rank.FIRST);
@@ -18,6 +20,7 @@ public class LottoResultTest {
     }
 
     @Test
+    @DisplayName("수익률 테스트")
     void getProfitRatioTest() {
         LottoResult lottoResult = new LottoResult();
         lottoResult.addRank(Rank.FIFTH);
