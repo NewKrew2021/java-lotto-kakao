@@ -2,6 +2,9 @@ package lotto.domain;
 
 
 public class Number implements Comparable<Number> {
+    public static final int MIN_LOTTO_NUMBER = 1;
+    public static final int MAX_LOTTO_NUMBER = 45;
+
     private final int number;
 
     public Number(int number) {
@@ -10,7 +13,7 @@ public class Number implements Comparable<Number> {
     }
 
     private void checkValidNumber(int number) {
-        if (1 > number || number > 45) {
+        if (MIN_LOTTO_NUMBER > number || number > MAX_LOTTO_NUMBER) {
             throw new IllegalArgumentException("숫자가 잘못되었습니다 : " + number);
         }
     }

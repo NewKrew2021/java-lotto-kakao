@@ -56,10 +56,10 @@ public class LottoResults {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder();
         for (LottoRank rank : LottoRank.values()) {
-            sb.append(rank).append(" - ").append(results.get(rank)).append("개\n");
+            stringBuilder.append(rank).append(" - ").append(results.get(rank)).append("개\n");
         }
-        return sb.toString();
+        return stringBuilder.toString();
     }
 }

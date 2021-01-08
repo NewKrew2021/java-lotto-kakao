@@ -31,10 +31,10 @@ public class LottoTickets {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder stringBuilder = new StringBuilder();
         for (LottoTicket lottoTicket : lottoTickets) {
-            sb.append(lottoTicket).append('\n');
+            stringBuilder.append(lottoTicket).append('\n');
         }
-        return sb.toString();
+        return stringBuilder.toString();
     }
 }

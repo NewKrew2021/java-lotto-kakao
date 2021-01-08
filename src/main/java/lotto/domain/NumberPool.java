@@ -8,14 +8,11 @@ import java.util.stream.IntStream;
 public class NumberPool {
     public static final int BALL_COUNT = 6;
 
-    private final int MIN_LOTTO_NUMBER = 1;
-    private final int MAX_LOTTO_NUMBER = 45;
-
     private static NumberPool numberPool;
     private List<Number> numbers;
 
     private NumberPool() {
-        numbers = IntStream.range(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER + 1)
+        numbers = IntStream.range(Number.MIN_LOTTO_NUMBER, Number.MAX_LOTTO_NUMBER + 1)
                 .mapToObj(Number::new)
                 .collect(Collectors.toList());
     }

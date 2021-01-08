@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 public class LottoTicket {
     private static final int BALL_COUNT = 6;
+
     private final Set<Number> numbers;
 
     public LottoTicket(Set<Number> numbers) {
@@ -22,8 +23,8 @@ public class LottoTicket {
         return numbers.contains(number);
     }
 
-    public int matchCount(LottoTicket compTicket) {
-        return (int) numbers.stream().filter(compTicket::contains).count();
+    public int matchCount(LottoTicket comparedTicket) {
+        return (int) numbers.stream().filter(comparedTicket::contains).count();
     }
 
     public LottoRank getRank(WinnerNumber winnerNumber) {
