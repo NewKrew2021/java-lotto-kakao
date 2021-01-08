@@ -19,7 +19,7 @@ public class LottoGame {
         LottoTickets tickets = ticketProcess(price);
         WinnerNumber winnerNumber = new WinnerNumber(
                 winnerNumberProcess(),
-                new Number(bonusProcess()));
+                Number.getNumber(bonusProcess()));
         LottoGameView.result(tickets.getResults(winnerNumber).result(price));
     }
 
@@ -41,7 +41,7 @@ public class LottoGame {
                 .split(","))
                 .map(String::trim)
                 .map(Integer::parseInt)
-                .map(Number::new).collect(Collectors.toSet());
+                .map(Number::getNumber).collect(Collectors.toSet());
     }
 
     private int bonusProcess() {

@@ -9,13 +9,13 @@ import static org.assertj.core.api.Assertions.*;
 public class NumberTest {
     @Test
     void createNumberTest() {
-        Number number = new Number(1);
-        assertThat(number).isEqualTo(new Number(1));
+        Number number = Number.getNumber(1);
+        assertThat(number).isEqualTo(Number.getNumber(1));
     }
 
     @Test
     void exceptionTest() {
-        assertThatThrownBy(() -> new Number(0))
+        assertThatThrownBy(() -> Number.getNumber(0))
                 .isInstanceOf(RuntimeException.class)
                 .hasMessageContaining("숫자가 잘못되었습니다 : 0");
     }
