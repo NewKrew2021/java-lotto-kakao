@@ -1,20 +1,26 @@
 package lotto;
 
+import java.util.InputMismatchException;
 import java.util.Objects;
 
 public class Ball implements Comparable<Ball> {
 
-    private int ballNumber;
+    private final int ballNumber;
 
     public Ball(String ballString) {
-        int ball = 0;
+        int ballNumber = checkInteger(ballString);
+        checkRange(ballNumber);
+        this.ballNumber = ballNumber;
+    }
+
+    public int checkInteger(String ballString){
+        int ballNumber = 0;
         try {
-            ball = Integer.parseInt(ballString);
-        } catch (IllegalArgumentException e) {
+            ballNumber = Integer.parseInt(ballString);
+        } catch (InputMismatchException e) {
             throw new IllegalArgumentException("볼은 정수여야 한다.");
         }
-        checkRange(ball);
-        this.ballNumber = ball;
+        return ballNumber;
     }
 
     public void checkRange(int ballNumber) {

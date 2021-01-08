@@ -12,15 +12,22 @@ public class Lotto {
     public Lotto(String lottoText) {
         List<Ball> lottoNumbers = parseLottoText(lottoText);
 
+        checkDuplicate(lottoNumbers);
+        checkCount(lottoNumbers);
+
+        this.lottoBalls = lottoNumbers;
+    }
+
+    private void checkDuplicate(List<Ball> lottoNumbers) {
         if (lottoNumbers.stream().distinct().count() < lottoNumbers.size()) {
             throw new IllegalArgumentException("로또번호 중복이 있어서는 안된다.");
         }
+    }
 
+    private void checkCount(List<Ball> lottoNumbers) {
         if (lottoNumbers.size() != COUNT_OF_NUMBERS) {
             throw new IllegalArgumentException("로또번호는 6개여야 합니다.");
         }
-
-        this.lottoBalls = lottoNumbers;
     }
 
     public Lotto(GenerateStrategy strategy) {
