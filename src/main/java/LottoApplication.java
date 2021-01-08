@@ -1,4 +1,4 @@
-import domain.controller.LottoController;
+import controller.LottoController;
 
 public class LottoApplication {
     public static void main(String[] args) {
