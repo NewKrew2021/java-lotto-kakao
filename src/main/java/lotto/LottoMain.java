@@ -16,10 +16,7 @@ public class LottoMain {
 
         int bonusNumber = 7;
         List<Integer> winnerNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
-        NumberGenerateStrategy manualInputStrategy = new ManualInputStrategy(winnerNumbers);
-        //리스트랑 보너스번호만 받아서 위너 티켓을 만드는 방법.
-        WinnerTicket winnerTicket = new WinnerTicket(LottoNumbers.from(manualInputStrategy),
-                new LottoNumber(bonusNumber));
+        WinnerTicket winnerTicket = WinnerTicket.of(winnerNumbers, bonusNumber);
 
         //안쪽에서 만드는것이 좋을 것으로 생각.
         Map<LottoRanking, Integer> rankingCount = new HashMap<>();
