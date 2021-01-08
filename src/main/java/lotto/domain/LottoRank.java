@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 public enum LottoRank {
     FIFTH(5000, "3개 일치"),
@@ -9,6 +9,7 @@ public enum LottoRank {
 
     private final long price;
     private final String message;
+
 
     LottoRank(long price, String message) {
         this.price = price;

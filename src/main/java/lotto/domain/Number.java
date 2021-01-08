@@ -1,8 +1,13 @@
-package lotto;
+package lotto.domain;
 
+
+import lotto.exception.InvalidNumberException;
 
 public class Number implements Comparable<Number> {
     private final int number;
+    private static final int BOUNDARY_START_NUM = 1;
+    private static final int BOUNDARY_END_NUM = 45;
+
 
     public Number(int number) {
         checkValidNumber(number);
@@ -10,8 +15,8 @@ public class Number implements Comparable<Number> {
     }
 
     private void checkValidNumber(int number) {
-        if (1 > number || number > 45) {
-            throw new RuntimeException("숫자가 잘못되었습니다 : " + number);
+        if (BOUNDARY_START_NUM > number || number > BOUNDARY_END_NUM) {
+            throw new InvalidNumberException();
         }
     }
 

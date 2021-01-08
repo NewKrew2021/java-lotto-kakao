@@ -1,5 +1,7 @@
 package lotto;
 
+import lotto.domain.Number;
+import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -22,7 +24,7 @@ public class NumberTest {
 
     @Test
     void tempTest(){
-        NumberPool pool = new NumberPool();
+        LottoNumber pool = new LottoNumber();
         for(int i=0;i<10;i++){
             List<Number> numbers = pool.getRandomNumbers();
             numbers.forEach(System.out::println);
