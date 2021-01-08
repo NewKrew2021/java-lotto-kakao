@@ -1,4 +1,8 @@
-package lotto;
+package lotto.service;
+
+import lotto.domain.*;
+import lotto.view.LottoInputView;
+import lotto.view.LottoOutputView;
 
 public class LottoManager {
 

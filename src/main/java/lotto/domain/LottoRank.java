@@ -1,4 +1,4 @@
-package lotto;
+package lotto.domain;
 
 public enum LottoRank {
     FIRST(2000000000, 0, "6개 일치 "), SECOND(30000000, 1, "5개 일치, 보너스 볼 일치"),

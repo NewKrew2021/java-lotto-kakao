@@ -1,7 +1,4 @@
-package lotto;
-
-import java.util.ArrayList;
-import java.util.List;
+package lotto.domain;
 
 public class WonLotto {
 
