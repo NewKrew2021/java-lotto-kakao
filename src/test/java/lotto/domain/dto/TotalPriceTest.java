@@ -1,6 +1,5 @@
 package lotto.domain.dto;
 
-import lotto.domain.dto.TotalPrice;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;

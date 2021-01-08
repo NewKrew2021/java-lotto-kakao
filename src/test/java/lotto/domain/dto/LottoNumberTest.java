@@ -1,6 +1,5 @@
-package lotto.domain;
+package lotto.domain.dto;
 
-import lotto.domain.dto.LottoNumber;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -13,6 +12,24 @@ public class LottoNumberTest {
     void invalidNumbers(int value) {
         assertThatThrownBy(() -> new LottoNumber(value))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void testGetNumber() {
+        assertThat(new LottoNumber(1).getNumber()).isEqualTo(1);
+    }
+
+    @Test
+    void testCompare() {
+        assertThat(new LottoNumber(5).compareTo(new LottoNumber(3))).isPositive();
+        assertThat(new LottoNumber(5).compareTo(new LottoNumber(5))).isZero();
+        assertThat(new LottoNumber(5).compareTo(new LottoNumber(7))).isNegative();
+    }
+
+    @Test
+    void testHashCode() {
+        assertThat(new LottoNumber(5).hashCode()).isEqualTo(new LottoNumber(5).hashCode());
+        assertThat(new LottoNumber(5).hashCode()).isNotEqualTo(new LottoNumber(4).hashCode());
     }
 
     @ParameterizedTest
