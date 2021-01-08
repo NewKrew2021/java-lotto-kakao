@@ -14,7 +14,7 @@ public class LottoSimulatorTest {
         Answer answer = new Answer(new Lotto("1,2,3,4,5,6"), 7);
         PurchaseInfo purchaseInfo = new PurchaseInfo(10000);
         LottoSimulator lottoSimulator = new LottoSimulator(purchaseInfo, lottos, answer);
-        assertThat(lottoSimulator.profitPercentage()).isEqualTo(-50);
+        assertThat(lottoSimulator.getProfit()).isEqualTo(-50);
 
     }
 

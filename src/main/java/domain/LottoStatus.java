@@ -41,9 +41,10 @@ public enum LottoStatus {
         if (matchedLottoNumberCount == LottoStatus.SECOND.matchedLottoNumberCount) {
             return secondOrThirdPrize(isBonusNumberMatched);
         }
-        return lottoStatuses.stream().
-                filter(lotto -> lotto.getMatchedLottoNumberCount() == matchedLottoNumberCount).
-                findFirst().orElse(null);
+        return lottoStatuses.stream()
+                .filter(lotto -> lotto.getMatchedLottoNumberCount() == matchedLottoNumberCount)
+                .findFirst()
+                .orElse(null);
     }
 
     public static LottoStatus secondOrThirdPrize(boolean isBonusNumberMatched) {

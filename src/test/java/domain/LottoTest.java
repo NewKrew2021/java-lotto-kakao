@@ -17,7 +17,7 @@ public class LottoTest {
     private Lotto lotto;
 
     @Test
-    void createTest() {
+    void eqaulTest() {
         lotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
         assertThat(lotto).isEqualTo(new Lotto(Arrays.asList(1,2,3,4,5,6)));
     }
@@ -30,10 +30,17 @@ public class LottoTest {
     }
 
     @Test
+    void lottoSizeInsufficientTest() {
+        assertThatThrownBy(() -> { new Lotto(Arrays.asList(1,2,3,4,5)); })
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageMatching("[0-9]*개의 숫자를 입력해주세요.");
+    }
+
+    @Test
     void lottoSizeExceedTest() {
         assertThatThrownBy(()->{
             new Lotto(Arrays.asList(1,2,3,4,5,6,7));
-        }).hasMessageMatching("[0-9]*개 이하의 숫자를 입력해주세요.");
+        }).hasMessageMatching("[0-9]*개의 숫자를 입력해주세요.");
     }
 
     private static Stream<Arguments> provideLottosAndResults() {
@@ -49,4 +56,10 @@ public class LottoTest {
         );
     }
 
+    @Test
+    void StringSplitInvalidStringExceptionTest() {
+        assertThatThrownBy(()->{
+            new Lotto("abcdf,egsdd,gwwef");
+        }).isInstanceOf(IllegalArgumentException.class).hasMessageContaining("숫자가 아닌 입력이 포함되어 있습니다.");
+    }
 }

@@ -10,17 +10,17 @@ import java.util.stream.Collectors;
 public class Lotto {
 
     public static final int LOTTO_NUMBER_SIZE = 6;
-    private static final String LOTTO_SIZE_EXCEED_ERROR_MESSAGE = "%d개 이하의 숫자를 입력해주세요.";
+    private static final String LOTTO_SIZE_EXCEED_ERROR_MESSAGE = "%d개의 숫자를 입력해주세요.";
 
     private List<LottoNumber> lottoNumbers;
 
 
     public Lotto(String inputText) {
-        this(StringUtils.mapStringListToInteger(inputText));
+        this(StringUtils.mapStringListToIntegerList(inputText));
     }
 
     public Lotto(List<Integer> numbers) {
-        if(numbers.size() > LOTTO_NUMBER_SIZE) {
+        if(numbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(String.format(LOTTO_SIZE_EXCEED_ERROR_MESSAGE, LOTTO_NUMBER_SIZE));
         }
 
@@ -44,15 +44,20 @@ public class Lotto {
     }
 
     private int countMatchingNumber(Lotto answerLotto) {
-        return lottoNumbers.stream().
-                filter(number -> answerLotto.getLottoNumbers().contains(number)).collect(Collectors.toList()).size();
+        return lottoNumbers.stream()
+                .filter(number -> answerLotto.getLottoNumbers().contains(number))
+                .collect(Collectors.toList()).size();
     }
 
     @Override
     public String toString() {
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append("[");
-        stringBuffer.append(lottoNumbers.stream().map(Object::toString).collect(Collectors.joining(",")));
+
+        stringBuffer.append(lottoNumbers.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(",")));
+
         stringBuffer.append("]");
         return stringBuffer.toString();
     }

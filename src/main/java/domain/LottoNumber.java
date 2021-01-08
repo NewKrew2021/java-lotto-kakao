@@ -12,8 +12,8 @@ public class LottoNumber {
 
     public LottoNumber(int lottoNumber) {
         if (lottoNumber < START_LOTTO_NUMBER || lottoNumber > END_LOTTO_NUMBER) {
-            throw new IllegalArgumentException(String.
-                    format(INVALID_RANGE_ERROR_MESSAGE, START_LOTTO_NUMBER, END_LOTTO_NUMBER));
+            throw new IllegalArgumentException(String
+                    .format(INVALID_RANGE_ERROR_MESSAGE, START_LOTTO_NUMBER, END_LOTTO_NUMBER));
         }
         this.lottoNumber = lottoNumber;
     }

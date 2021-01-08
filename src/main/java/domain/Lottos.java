@@ -9,7 +9,7 @@ public class Lottos {
     public Lottos(PurchaseInfo purchaseInfo) {
         lottos = new ArrayList<>();
         for (long lottoCount = 0; lottoCount < purchaseInfo.getPurchaseCount(); lottoCount++) {
-            lottos.add(new Lotto(new RandomLottoStrategy().NumberChooseStrategy()));
+            lottos.add(new Lotto(new RandomLottoStrategy().numberChooseStrategy()));
         }
     }
 
