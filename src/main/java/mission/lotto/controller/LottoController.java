@@ -15,35 +15,29 @@ public class LottoController {
     private UserMoney userMoney;
     private TryNumber tryNumber;
     private Lottos lottos;
-    private LottoAnswer answer;
-    private final int LOTTO_PRICE = 1000;
-
-    public LottoController() {
-
-    }
-
-    public LottoController(int userMoney) {
-        this.userMoney = new UserMoney(userMoney);
-        this.tryNumber = new TryNumber(userMoney / LOTTO_PRICE);
-    }
 
     public void start() {
-        int userMoney = InputView.enterUerMoney();
+        registerUserMoney(InputView.enterUerMoney());
 
-        LottoController controller = new LottoController(userMoney);
-        controller.buyLottos(RandomUtil::getRandomSixIntegerList);
+        buyLottos(RandomUtil::getRandomSixIntegerList);
 
-        OutputView.autoBoughtView(controller);
+        OutputView.autoBoughtView(lottos);
 
-        controller.setLastWeekWinningNumber(
+        LottoAnswer lottoAnswer = makeLottoAnswer(
                 InputView.enterLastWeekWinningNumbers(),
                 InputView.enterLastWeekBonusNumber());
 
-        OutputView.resultView(controller.getAllLottoCount());
-        OutputView.totalEarningsView(controller.getRateOfProfit());
+        OutputView.resultView(getAllLottoRank(lottoAnswer));
+        OutputView.totalEarningsView(getRateOfProfit(lottoAnswer));
     }
 
-    public void buyLottos(NumGenerator numberGenerator) {
+    private void registerUserMoney(int userMoney) {
+        this.userMoney = new UserMoney(userMoney);
+        int LOTTO_PRICE = 1000;
+        this.tryNumber = new TryNumber(userMoney / LOTTO_PRICE);
+    }
+
+    private void buyLottos(NumGenerator numberGenerator) {
         List<Lotto> lottoList = new ArrayList<>();
         while (this.tryNumber.hasNext()) {
             lottoList.add(new Lotto(numberGenerator.getSixNumbers()));
@@ -52,21 +46,18 @@ public class LottoController {
         this.lottos = new Lottos(lottoList);
     }
 
-    public void setLastWeekWinningNumber(List<Integer> sixNumberList, int bonusNumber) {
-        this.answer = new LottoAnswer(
+    private LottoAnswer makeLottoAnswer(List<Integer> sixNumberList, int bonusNumber) {
+        return new LottoAnswer(
                 new LottoNumbers(sixNumberList),
                 new Number(bonusNumber));
     }
 
-    public Map<Rank, Integer> getAllLottoCount() {
-        return lottos.getAllLottoRank(answer);
+    private Map<Rank, Integer> getAllLottoRank(LottoAnswer lottoAnswer) {
+        return lottos.getAllLottoRank(lottoAnswer);
     }
 
-    public float getRateOfProfit() {
-        return (float) lottos.getSumAllWinningMoney(answer) / userMoney.getUserMoney();
+    private float getRateOfProfit(LottoAnswer lottoAnswer) {
+        return (float) lottos.getSumAllWinningMoney(lottoAnswer) / userMoney.getUserMoney();
     }
 
-    public List<Lotto> getLottos() {
-        return lottos.getLottos();
-    }
 }

@@ -1,18 +1,18 @@
 package mission.lotto.view;
 
-import mission.lotto.controller.LottoController;
-import mission.lotto.domain.Rank;
 import mission.lotto.domain.Lotto;
+import mission.lotto.domain.Lottos;
+import mission.lotto.domain.Rank;
 
 import java.util.List;
 import java.util.Map;
 
 public class OutputView {
 
-    public static void autoBoughtView(LottoController lottoController) {
-        List<Lotto> lottos = lottoController.getLottos();
-        System.out.println(lottos.size() + "개를 구매했습니다.");
-        for (Lotto lotto : lottos) {
+    public static void autoBoughtView(Lottos lottos) {
+        List<Lotto> unPacked = lottos.getLottos();
+        System.out.println(unPacked.size() + "개를 구매했습니다.");
+        for (Lotto lotto : unPacked) {
             System.out.println(lotto);
         }
     }
