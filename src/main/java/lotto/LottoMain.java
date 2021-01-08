@@ -18,23 +18,38 @@ import java.util.List;
 public class LottoMain {
 
     public static void main(String[] args) {
+        LottoTicketCount lottoTicketCount = getLottoTicketCount();
+        List<LottoNumbers> lottoTickets = buyLottoTickets(lottoTicketCount);
+
+        WinnerTicket winnerTicket = WinnerTicket.of(InputView.inputWinnerNumbers(), InputView.inputBonusNumber());
+
+        calculateLottoResult(lottoTicketCount, lottoTickets, winnerTicket);
+    }
+
+    private static LottoTicketCount getLottoTicketCount() {
         LottoTicketCount lottoTicketCount = new LottoTicketCount(InputView.inputMoney());
         OutputView.printTicketCount(lottoTicketCount);
+        return lottoTicketCount;
+    }
 
+    private static List<LottoNumbers> buyLottoTickets(LottoTicketCount lottoTicketCount) {
         NumberGenerateStrategy randomGenerateStrategy = new RandomLottoNumberGenerator();
-        List<LottoNumbers> lottoTickets = new ArrayList<>();
 
+        List<LottoNumbers> lottoTickets = new ArrayList<>();
         while (lottoTicketCount.isTicketRemain()) {
             LottoNumbers lottoTicket = LottoNumbers.from(randomGenerateStrategy);
             lottoTickets.add(lottoTicket);
             lottoTicketCount.useTicket();
             OutputView.printTicketNumbers(LottoNumbersDto.from(lottoTicket));
         }
+        return lottoTickets;
+    }
 
-        List<Integer> winnerNumbers = InputView.inputWinnerNumbers();
-        int bonusNumber = InputView.inputBonusNumber();
-        WinnerTicket winnerTicket = WinnerTicket.of(winnerNumbers, bonusNumber);
-
+    private static void calculateLottoResult(
+            LottoTicketCount lottoTicketCount,
+            List<LottoNumbers> lottoTickets,
+            WinnerTicket winnerTicket
+    ) {
         LottoStatistics lottoStatistics = LottoStatistics.of(lottoTickets, winnerTicket);
         OutputView.printWinningStatistics(LottoStatisticsDto.from(lottoStatistics));
 
