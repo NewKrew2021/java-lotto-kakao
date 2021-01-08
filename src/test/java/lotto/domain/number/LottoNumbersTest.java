@@ -1,6 +1,5 @@
 package lotto.domain.number;
 
-import lotto.domain.OneToSixGenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -43,7 +42,7 @@ public class LottoNumbersTest {
     @Test
     void create2() {
         //given
-        NumberGenerateStrategy strategy = new OneToSixGenerator();
+        NumberGenerateStrategy strategy = () -> Arrays.asList(1, 2, 3, 4, 5, 6);
 
         //when
         LottoNumbers lottoNumbers = LottoNumbers.from(strategy);
