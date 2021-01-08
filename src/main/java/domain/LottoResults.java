@@ -14,7 +14,7 @@ public class LottoResults {
         }};
     }
 
-    public void upsert(LottoRank rank) {
+    public void updateOrInsert(LottoRank rank) {
         results.put(rank, results.get(rank) + 1);
     }
 

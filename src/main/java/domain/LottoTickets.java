@@ -22,8 +22,9 @@ public class LottoTickets {
     public LottoResults getResults(WinnerNumber winnerNumber) {
         LottoResults lottoResults = new LottoResults();
         lottoTickets.stream()
-                .filter(ticket->ticket.getRank(winnerNumber)!=null)
-                .forEach(ticket->lottoResults.upsert(ticket.getRank(winnerNumber)));
+                .map(ticket->ticket.getRank(winnerNumber))
+                .filter(Objects::nonNull)
+                .forEach(lottoResults::updateOrInsert);
         return lottoResults;
     }
 
