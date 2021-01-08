@@ -10,20 +10,21 @@ public class LottoMatcher {
         this.winningNumbers = winningNumbers;
     }
 
-    public MatchResult match(LottoTicket ticket) {
-        int matchCount = calcMatchCount(ticket);
-        boolean matchBonus = isMatchBonus(ticket);
-        return MatchResult.valueOf(matchCount, matchBonus);
-    }
-
     public MatchResults match(LottoTickets lottoTickets) {
-        List<MatchResult> results = lottoTickets.toStream()
+        List<MatchResult> results = lottoTickets.getTickets()
+                .stream()
                 .map(this::match)
                 .collect(Collectors.toList());
         return new MatchResults(results);
     }
 
-    private int calcMatchCount(LottoTicket lottoTicket) {
+    public MatchResult match(LottoNumbers lottoTicket) {
+        int matchCount = calcMatchCount(lottoTicket);
+        boolean matchBonus = isMatchBonus(lottoTicket);
+        return MatchResult.valueOf(matchCount, matchBonus);
+    }
+
+    private int calcMatchCount(LottoNumbers lottoTicket) {
         LottoNumbers luckyNumbers = winningNumbers.getLuckyNumbers();
 
         return (int) luckyNumbers.toStream()
@@ -31,7 +32,7 @@ public class LottoMatcher {
                 .count();
     }
 
-    private boolean isMatchBonus(LottoTicket lottoTicket) {
+    private boolean isMatchBonus(LottoNumbers lottoTicket) {
         LottoNumber bonusNumber = winningNumbers.getBunusNumber();
         return lottoTicket.contains(bonusNumber);
     }

@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -10,7 +11,7 @@ import static org.assertj.core.api.Assertions.*;
 
 public class MatchResultsTest {
     @Test
-    public void matchesAreCorrect() {
+    void matchesAreCorrect() {
         LottoNumbers luckyNumbers = new LottoNumbers(Stream.of(1, 2, 3, 4, 5, 6)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList()));
@@ -19,14 +20,14 @@ public class MatchResultsTest {
         LottoMatcher lottoMatcher = new LottoMatcher(winningNumbers);
 
         LottoTickets lottoTickets = new LottoTickets(Arrays.asList(
-                new LottoTicket(customLottoNumbers(1, 2, 3, 4, 5, 6)),
-                new LottoTicket(customLottoNumbers(1, 2, 3, 4, 5, 7)),
-                new LottoTicket(customLottoNumbers(1, 2, 3, 4, 5, 8)),
-                new LottoTicket(customLottoNumbers(1, 2, 3, 4, 8, 9)),
-                new LottoTicket(customLottoNumbers(1, 2, 3, 8, 9, 10)),
-                new LottoTicket(customLottoNumbers(1, 2, 3, 7, 8, 9)),
-                new LottoTicket(customLottoNumbers(1, 2, 7, 8, 9, 10)),
-                new LottoTicket(customLottoNumbers(1, 2, 8, 9, 10, 11))));
+                new LottoNumbers(customLottoNumbers(1, 2, 3, 4, 5, 6)),
+                new LottoNumbers(customLottoNumbers(1, 2, 3, 4, 5, 7)),
+                new LottoNumbers(customLottoNumbers(1, 2, 3, 4, 5, 8)),
+                new LottoNumbers(customLottoNumbers(1, 2, 3, 4, 8, 9)),
+                new LottoNumbers(customLottoNumbers(1, 2, 3, 8, 9, 10)),
+                new LottoNumbers(customLottoNumbers(1, 2, 3, 7, 8, 9)),
+                new LottoNumbers(customLottoNumbers(1, 2, 7, 8, 9, 10)),
+                new LottoNumbers(customLottoNumbers(1, 2, 8, 9, 10, 11))));
 
         assertThat(lottoMatcher.match(lottoTickets))
                 .isEqualTo(new MatchResults(Arrays.asList(
@@ -41,10 +42,10 @@ public class MatchResultsTest {
                 )));
     }
 
-    private LottoNumbers customLottoNumbers(int... parameters) {
-        return new LottoNumbers(Stream.of(parameters[0], parameters[1], parameters[2],
+    private List<LottoNumber> customLottoNumbers(int... parameters) {
+        return Stream.of(parameters[0], parameters[1], parameters[2],
                 parameters[3], parameters[4], parameters[5])
                 .map(LottoNumber::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
     }
 }

@@ -2,10 +2,11 @@ package lotto.domain;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 public class LottoNumbers {
-    static final int ALLOWED_NUMBER_COUNT = 6;
+    public static final int ALLOWED_NUMBER_COUNT = 6;
 
     private final List<LottoNumber> lottoNumbers;
 
@@ -42,11 +43,10 @@ public class LottoNumbers {
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj instanceof LottoNumbers) {
-            LottoNumbers numbers = (LottoNumbers) obj;
-            return this.lottoNumbers.containsAll(numbers.lottoNumbers);
-        }
-        return false;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoNumbers that = (LottoNumbers) o;
+        return this.lottoNumbers.containsAll(that.lottoNumbers);
     }
 }

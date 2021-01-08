@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.*;
 
 public class WinningNumbersTest {
     @Test
-    public void bonusIsNotDuplicated() {
+    void bonusIsNotDuplicated() {
         LottoNumbers luckyNumbers = new LottoNumbers(Stream.of(1, 2, 3, 4, 5, 6)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList()));
@@ -20,7 +20,7 @@ public class WinningNumbersTest {
     }
 
     @Test
-    public void bonusIsDuplicatedShouldThrowError() {
+    void bonusIsDuplicatedShouldThrowError() {
         LottoNumbers luckyNumbers = new LottoNumbers(Stream.of(1, 2, 3, 4, 5, 6)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList()));

@@ -1,19 +1,22 @@
 package lotto.domain;
 
-import java.util.List;
+import lotto.utils.NumberPickStrategy;
+
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public final class LottoTicketIssuer {
     public static final int TICKET_PRICE = 1000;
 
-    private LottoTicketIssuer() {}
+    private LottoTicketIssuer() {
+        String message = String.format("Static util class(%s) should not be instantiated", this.getClass());
+        throw new IllegalStateException(message);
+    }
 
-    public static LottoTickets issue(int insertPrice) {
-        List<LottoTicket> tickets = IntStream.range(0, insertPrice / TICKET_PRICE)
+    public static LottoTickets issue(NumberPickStrategy strategy, int insertPrice) {
+        return new LottoTickets(IntStream.range(0, insertPrice / TICKET_PRICE)
                 .boxed()
-                .map(x -> new LottoTicket())
-                .collect(Collectors.toList());
-        return new LottoTickets(tickets);
+                .map(ignore -> new LottoNumbers(strategy.generateLottoNumbers()))
+                .collect(Collectors.toList()));
     }
 }

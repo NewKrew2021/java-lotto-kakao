@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -17,7 +18,7 @@ public class LottoStatisticsTest {
     private InsertPrice insertPrice;
 
     @BeforeEach
-    public void setUp() {
+    void setUp() {
         luckyNumbers = new LottoNumbers(Stream.of(1, 2, 3, 4, 5, 6)
                 .map(LottoNumber::new)
                 .collect(Collectors.toList()));
@@ -28,10 +29,10 @@ public class LottoStatisticsTest {
     }
 
     @Test
-    public void firstSecondFifthMatchStatistics() {
-        LottoTicket firstPlace = new LottoTicket(customLottoNumbers(1, 2, 3, 4, 5, 6));
-        LottoTicket secondPlace = new LottoTicket(customLottoNumbers(1, 2, 3, 4, 5, 7));
-        LottoTicket fifthPlace = new LottoTicket(customLottoNumbers(1, 2, 3, 8, 9, 10));
+    void firstSecondFifthMatchStatistics() {
+        LottoNumbers firstPlace = new LottoNumbers(customLottoNumbers(1, 2, 3, 4, 5, 6));
+        LottoNumbers secondPlace = new LottoNumbers(customLottoNumbers(1, 2, 3, 4, 5, 7));
+        LottoNumbers fifthPlace = new LottoNumbers(customLottoNumbers(1, 2, 3, 8, 9, 10));
         LottoTickets tickets = new LottoTickets(
                 Arrays.asList(
                         firstPlace,
@@ -41,7 +42,6 @@ public class LottoStatisticsTest {
 
         LottoStatistics statistics = new LottoStatistics(matcher.match(tickets), insertPrice);
         StatisticsResult statisticsResult = statistics.getStatisticsResult();
-
         double expectedRateInRealNumber = (double) ((long) MatchResult.FIRST.getReward()
                 + MatchResult.SECOND.getReward() + MatchResult.FIFTH.getReward()) / insertPrice.getPrice();
         MatchResults expectedMatches = new MatchResults(Arrays.asList(
@@ -49,15 +49,16 @@ public class LottoStatisticsTest {
                 MatchResult.SECOND,
                 MatchResult.FIFTH
         ));
-        Rate expectedRate = new Rate((int) (expectedRateInRealNumber ));
+        Rate expectedRate = new Rate((int) (Math.round(expectedRateInRealNumber * 100)));
+
         assertThat(statisticsResult)
                 .isEqualTo(new StatisticsResult(expectedMatches, expectedRate));
     }
 
-    private LottoNumbers customLottoNumbers(int... parameters) {
-        return new LottoNumbers(Stream.of(parameters[0], parameters[1], parameters[2],
+    private List<LottoNumber> customLottoNumbers(int... parameters) {
+        return Stream.of(parameters[0], parameters[1], parameters[2],
                 parameters[3], parameters[4], parameters[5])
                 .map(LottoNumber::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
     }
 }

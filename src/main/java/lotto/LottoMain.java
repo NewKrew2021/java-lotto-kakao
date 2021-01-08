@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.*;
+import lotto.utils.RandomPickStrategy;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -10,7 +11,7 @@ public class LottoMain {
         InsertPrice insertPrice = new InsertPrice(investment);
         OutputView.printLottoTicketNum(insertPrice.getPrice());
 
-        LottoTickets tickets = LottoTicketIssuer.issue(insertPrice.getPrice());
+        LottoTickets tickets = LottoTicketIssuer.issue(new RandomPickStrategy(), insertPrice.getPrice());
         OutputView.printLottoTickets(tickets);
 
         LottoNumbers luckyNumber = InputView.getLuckyNumber();

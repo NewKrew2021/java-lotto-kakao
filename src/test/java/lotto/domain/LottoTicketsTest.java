@@ -11,16 +11,15 @@ import static org.assertj.core.api.Assertions.*;
 
 public class LottoTicketsTest {
     @Test
-    public void ticketsSuccessfullyIssued() {
-        LottoNumbers lottoNumbers = new LottoNumbers(
-                IntStream.range(1, 7)
+    void ticketsSuccessfullyIssued() {
+        List<LottoNumber> lottoNumbers = IntStream.range(1, 7)
                         .boxed()
                         .map(LottoNumber::new)
-                        .collect(Collectors.toList()));
-        List<LottoTicket> tickets = Arrays.asList(
-                new LottoTicket(lottoNumbers),
-                new LottoTicket(lottoNumbers),
-                new LottoTicket(lottoNumbers));
+                        .collect(Collectors.toList());
+        List<LottoNumbers> tickets = Arrays.asList(
+                new LottoNumbers(lottoNumbers),
+                new LottoNumbers(lottoNumbers),
+                new LottoNumbers(lottoNumbers));
 
         LottoTickets lottoTickets = new LottoTickets(tickets);
 
