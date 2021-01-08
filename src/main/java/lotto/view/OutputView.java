@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.game.LottoRevenueRate;
 import lotto.domain.ranking.LottoRanking;
 
 import java.util.Map;
@@ -15,7 +16,7 @@ public class OutputView {
         System.out.println(lottoNumbers.getLottoNumbers());
     }
 
-    public static void printWinningStatistics(LottoRankingCountDto lottoRankingCount) {
+    public static void printWinningStatistics(LottoStatisticsDto lottoRankingCount) {
         System.out.println("당첨 통계");
         System.out.println("---------");
         for (Map.Entry<LottoRanking, Long> entry : lottoRankingCount.getRankingCount().entrySet()) {
@@ -23,7 +24,7 @@ public class OutputView {
         }
     }
 
-    public static void printRevenueRate(double revenueRate) {
-        System.out.printf("총 수익률은 %.2f입니다.", revenueRate);
+    public static void printRevenueRate(LottoRevenueRate revenueRate) {
+        System.out.printf("총 수익률은 %.2f입니다.", revenueRate.getRate());
     }
 }

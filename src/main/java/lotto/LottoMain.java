@@ -1,7 +1,7 @@
 package lotto;
 
+import lotto.domain.game.LottoRevenueRate;
 import lotto.domain.game.LottoTicketCount;
-import lotto.domain.game.LottoRevenue;
 import lotto.domain.game.WinnerTicket;
 import lotto.domain.number.LottoNumbers;
 import lotto.domain.number.NumberGenerateStrategy;
@@ -9,7 +9,7 @@ import lotto.domain.number.RandomGenerateStrategy;
 import lotto.domain.ranking.LottoStatistics;
 import lotto.view.InputView;
 import lotto.view.LottoNumbersDto;
-import lotto.view.LottoRankingCountDto;
+import lotto.view.LottoStatisticsDto;
 import lotto.view.OutputView;
 
 import java.util.ArrayList;
@@ -35,10 +35,13 @@ public class LottoMain {
         int bonusNumber = InputView.inputBonusNumber();
         WinnerTicket winnerTicket = WinnerTicket.of(winnerNumbers, bonusNumber);
 
-        LottoStatistics lottoRankingCount = LottoStatistics.of(lottoTickets, winnerTicket);
-        OutputView.printWinningStatistics(LottoRankingCountDto.from(lottoRankingCount));
+        LottoStatistics lottoStatistics = LottoStatistics.of(lottoTickets, winnerTicket);
+        OutputView.printWinningStatistics(LottoStatisticsDto.from(lottoStatistics));
 
-        double lottoRevenueRate = LottoRevenue.from(lottoRankingCount).calculateRevenueRate(lottoTicketCount);
+        LottoRevenueRate lottoRevenueRate = LottoRevenueRate.of(
+                lottoStatistics.calculateTotalPrice(),
+                lottoTicketCount.calculateTotalTicketMoney()
+        );
         OutputView.printRevenueRate(lottoRevenueRate);
     }
 }
