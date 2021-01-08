@@ -1,7 +1,7 @@
 package domain;
 
 public class PurchaseInfo {
-    private static final long LOTTO_PRICE = 1000L;
+    public static final long LOTTO_PRICE = 1000L;
     private final long initialPrice;
     private long purchaseCount;
 

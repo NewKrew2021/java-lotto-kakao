@@ -13,7 +13,7 @@ public class LottoSimulatorView {
     public static final String LOTTO_COUNT_MESSAGE = "개를 구입했습니다.";
     public static final String ASK_LOTTO_NUMBER_FOR_ANSWER_LOTTO_MESSAGE = "지난 주 당첨 번호를 입력해주세요.";
     public static final String ASK_BONUS_NUMBER_FOR_ANSWER_LOTTO_MESSAGE = "보너스 볼을 입력해주세요.";
-    public static final String RESULT_HEAD_MESSAGE = "당첨 통계\n-----------";
+    public static final String RESULT_HEAD_MESSAGE = "\n당첨 통계\n-----------";
     public static final String TOTAL_EARNINGS_MESSAGE = "총 수익률은 %d%% 입니다.";
     public static final String MATCHING_INFORMATION_MESSAGE = "%d개 일치(%d원)- %d개";
 
