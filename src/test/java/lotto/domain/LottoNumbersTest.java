@@ -2,10 +2,12 @@ package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottoNumbersTest {
     @Test
@@ -24,6 +26,15 @@ public class LottoNumbersTest {
             new LottoNumbers(numbers);
         }).withMessageMatching("로또 번호는 1부터 45까지의 숫자 중 하나여야 합니다.");
         ;
+    }
+
+    @Test
+    public void testCalculateRanking(){
+        Set<Integer> winnerNumbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinnerNumbers winner = new WinnerNumbers(winnerNumbers, 8);
+        Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 8));
+        LottoNumbers lottoNumbers = new LottoNumbers(numbers);
+        assertThat(lottoNumbers.calculateRanking(winner)).isEqualTo(2);
     }
 
     @Test

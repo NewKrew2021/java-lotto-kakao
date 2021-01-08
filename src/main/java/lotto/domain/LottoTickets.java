@@ -1,18 +1,16 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class LottoTickets {
-    private final List<LottoTicket> tickets;
+    private final List<LottoNumbers> tickets;
 
-    public LottoTickets(int count, List<LottoTicket> tickets){
+    public LottoTickets(int count, List<LottoNumbers> tickets){
         isValid(count, tickets);
         this.tickets = tickets;
     }
 
-    private void isValid(int count, List<LottoTicket> tickets) {
+    private void isValid(int count, List<LottoNumbers> tickets) {
         if(tickets.size() != count)
             throw new IllegalArgumentException();
     }

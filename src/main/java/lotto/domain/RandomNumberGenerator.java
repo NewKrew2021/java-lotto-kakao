@@ -10,7 +10,7 @@ public class RandomNumberGenerator implements LottoNumberGenerator {
     private static final int SIZE = 6;
     private static final Random random = new Random();
 
-    public LottoNumbers generateNumbers(){
+    public Set<Integer> generateNumbers(){
         Set<Integer> integers = new HashSet<>();
 
         for(int i = 0; i < SIZE; i++){
@@ -18,7 +18,7 @@ public class RandomNumberGenerator implements LottoNumberGenerator {
             integers.add(nextVal);
         }
 
-        return new LottoNumbers(integers);
+        return integers;
     }
 
     private int getOtherInt(Set<Integer> integers){
