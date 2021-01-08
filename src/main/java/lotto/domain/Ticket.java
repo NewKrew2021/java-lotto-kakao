@@ -1,14 +1,14 @@
 package lotto.domain;
 
+import lotto.setting.Format;
+
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
 public class Ticket {
 
-    private static final int TICKET_SIZE = 6;
-    private final Set<Integer> numbers; //TODO 일급 콜렉션
+    private final Set<Integer> numbers;
 
     public Ticket(Set<Integer> numbers){
         sizeCheck(numbers.size());
@@ -17,7 +17,7 @@ public class Ticket {
     }
 
     private void sizeCheck(int size){
-        if(TICKET_SIZE != size){
+        if(Format.TICKET_SIZE != size){
             throw new RuntimeException("invalid Ticket size!!");
         }
     }
@@ -29,7 +29,7 @@ public class Ticket {
     }
 
     private void rangeCeckForOneNumber(int number){
-        if(number < 1 || 45 < number){
+        if(number < Format.LOWER_LIMIT_OF_NUMBER || Format.UPPER_LIMIT_OF_NUMBER < number){ //TODO : 상수로 해보자.
             throw new RuntimeException("contains invalid number value.");
         }
     }
@@ -58,7 +58,7 @@ public class Ticket {
     private boolean isOrder2_CompareWith(WinnerBalls balls){
         int duplicatedNumberCount = getDuplicatedNumberCount(balls.getTicket());
         boolean haveBonusBall = numbers.contains(balls.getBonusBall());
-        return (5 == duplicatedNumberCount) && haveBonusBall;
+        return (haveBonusBall && (5 == duplicatedNumberCount));
     }
 
     /* 3위. 5개 일치 */

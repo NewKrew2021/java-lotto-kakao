@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -34,14 +33,14 @@ public class TicketTest {
     }
 
     @Test
-    public void isContains_test_1(){
+    public void isContains_test_true(){
         Set<Integer> testNumbers = new HashSet<>(Arrays.asList(1, 2, 10, 30, 44, 45));
         Ticket curTicket = new Ticket(testNumbers);
         assertThat(curTicket.isContain(45)).isEqualTo(true);
     }
 
     @Test
-    public void isContains_test_2(){
+    public void isContains_test_false(){
         Set<Integer> testNumbers = new HashSet<>(Arrays.asList(1, 2, 10, 30, 44, 45));
         Ticket curTicket = new Ticket(testNumbers);
         assertThat(curTicket.isContain(3)).isEqualTo(false);

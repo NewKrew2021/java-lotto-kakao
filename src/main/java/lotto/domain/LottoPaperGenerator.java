@@ -1,12 +1,12 @@
 package lotto.domain;
 
 import lotto.dto.LottoNumberData;
+import lotto.setting.Format;
 
 import java.util.*;
 
 public class LottoPaperGenerator {
 
-    private final static int TICKET_PRICE = 1000;
     private final int inputMoney;
 
     public LottoPaperGenerator(int inputMoney){
@@ -17,7 +17,7 @@ public class LottoPaperGenerator {
         List<Set<Integer>> numbers = new ArrayList<>();
         Random random = new Random();
 
-        for(int i = 0; i < inputMoney / TICKET_PRICE; i++) {
+        for(int i = 0; i < inputMoney / Format.TICKET_PRICE; i++) {
             numbers.add(getAutomaticallyGeneratedNumbers(random));
         }
 

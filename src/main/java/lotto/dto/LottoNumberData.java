@@ -6,7 +6,7 @@ public class LottoNumberData {
 
     private final List<Set<Integer>> numberData;
 
-    public LottoNumberData(List<Set<Integer>> numberData){
+    public LottoNumberData(List<Set<Integer>> numberData){ //TODO: 보너스볼이 추첨번호에 포함되면 안된다. exception이 필요하다.
         this.numberData = numberData;
     }
 

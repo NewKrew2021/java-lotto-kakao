@@ -1,14 +1,12 @@
 package lotto.domain;
 
 import lotto.dto.LottoNumberData;
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.HashSet;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 
 public class LottoPaperGeneratorTest {
 

@@ -4,20 +4,18 @@ import lotto.domain.LottoPaper;
 import lotto.domain.LottoPaperGenerator;
 import lotto.domain.WinnerBalls;
 import lotto.dto.LottoResult;
+import lotto.setting.Format;
 import lotto.view.Input;
 import lotto.view.Output;
 
-import java.util.*;
-
 public class LottoMachine {
-    private static final int TICKET_PRICE = 1000; //TODO 프로퍼티가 너무 많나??
     private int userMoney;
     private LottoPaper userLottoPaper;
     private WinnerBalls winnerBalls;
 
     public void inputPrice(){
         userMoney = Input.getPriceFromUser();
-        Output.printCountOfPurchase(userMoney / TICKET_PRICE);
+        Output.printCountOfPurchase(userMoney / Format.TICKET_PRICE);
     }
 
     public void generateAuto(){
