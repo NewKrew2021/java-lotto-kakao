@@ -11,8 +11,8 @@ public class WinnerNumber extends LottoTicket {
         this.bonusNumber = bonusNumber;
     }
 
-    public Number getBonusNumber() {
-        return this.bonusNumber;
+    public boolean contains(Set<Number> numbers) {
+        return numbers.contains(bonusNumber);
     }
 
     @Override
