@@ -14,14 +14,13 @@ public class MoneyTest {
     @Test
     public void exceptionTest(){
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(()->{
-            new Money(999);
             new Money(-1000);
-        }).withMessageMatching("천원 이상의 금액을 입력해 주세요");
+        }).withMessageContaining("원 이상의 금액을 입력해 주세요");
     }
 
     @Test
     public void howManyTest() {
         Money money = new Money(14000);
-        assertThat(money.howMany()).isEqualTo(14);
+        assertThat(money.howMany(Lotto.getLottoPrice())).isEqualTo(14);
     }
 }

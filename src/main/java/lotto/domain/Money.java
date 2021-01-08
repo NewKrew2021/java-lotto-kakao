@@ -3,12 +3,12 @@ package lotto.domain;
 import java.util.Objects;
 
 public class Money {
-    private static final int LOTTO_PRICE = 1000;
+    private static final int MIN_MONEY = 10;
     private int money;
 
     public Money(int money) {
-        if (money < LOTTO_PRICE) {
-            throw new IllegalArgumentException("천원 이상의 금액을 입력해 주세요");
+        if (money < MIN_MONEY) {
+            throw new IllegalArgumentException(MIN_MONEY+"원 이상의 금액을 입력해 주세요");
         }
         this.money = money;
     }
@@ -17,8 +17,8 @@ public class Money {
         return money;
     }
 
-    public int howMany() {
-        return money / LOTTO_PRICE;
+    public int howMany(int productPrice) {
+        return money / productPrice;
     }
 
     @Override

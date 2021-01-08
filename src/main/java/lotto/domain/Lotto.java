@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 public class Lotto {
     private Set<LottoNumber> lottoNumbers;
+    private static final int LOTTO_PRICE = 1000;
 
     public Lotto(LottoNumberGenerator lottoNumberGenerator) {
         lottoNumbers = new LinkedHashSet<>();
@@ -37,5 +38,9 @@ public class Lotto {
 
     public int matchCount(Lotto lotto) {
         return (int) lottoNumbers.stream().filter(lottoNumber -> lotto.isContain(lottoNumber)).count();
+    }
+
+    public static int getLottoPrice(){
+        return LOTTO_PRICE;
     }
 }

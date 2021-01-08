@@ -31,7 +31,7 @@ public class LottoController {
         money = new Money(LottoUI.getMoneyFromUser());
         List<Lotto> listLottos = new ArrayList<>();
 
-        for (int i = 0; i < money.howMany(); i++) {
+        for (int i = 0; i < money.howMany(Lotto.getLottoPrice()); i++) {
             listLottos.add(new Lotto(new TreeSet<>(randomNumberGenerator.getNumbers().stream()
                     .map(num -> LottoNumber.of(num))
                     .collect(Collectors.toList()))));
@@ -49,7 +49,7 @@ public class LottoController {
 
         LottoNumber bonusNumber = LottoNumber.of(LottoUI.getBonusNumberFromUser());
 
-        Statistics statistics = new Statistics(lottos.raffle(winningNumber, bonusNumber));
+        Statistics statistics = lottos.raffle(winningNumber, bonusNumber);
         LottoUI.printStatistics(statistics.toString(), statistics.getProfitRate(money));
     }
 

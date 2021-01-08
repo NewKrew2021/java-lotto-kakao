@@ -13,38 +13,19 @@ public class Lottos {
         this.lottos = Collections.unmodifiableList(lottos);
     }
 
-    public int getNumOfLotto() {
+    public int getSizeOfLotto() {
         return lottos.size();
     }
 
-    public Map<Rank, Integer> raffle(Lotto winningNumber, LottoNumber bonusNumber) {
+    public Statistics raffle(Lotto winningNumber, LottoNumber bonusNumber) {
         Map<Rank, Integer> rankingsMap = new TreeMap<>();
         for (Lotto lotto : lottos) {
             int count = winningNumber.matchCount(lotto);
-            int bonusCount = lotto.isContain(bonusNumber) ? 1 : 0;
-            Rank rank = getRank(count, bonusCount);
+            boolean bonusCount = lotto.isContain(bonusNumber);
+            Rank rank = Rank.checkRank(count, bonusCount);
             rankingsMap.put(rank, rankingsMap.getOrDefault(rank, 0) + 1);
         }
-        return rankingsMap;
-    }
-
-    private Rank getRank(int count, int bonusCount) {
-        if (count == 6) {
-            return Rank.FIRST;
-        }
-        if (count == 5 && bonusCount == 1) {
-            return Rank.SECOND;
-        }
-        if (count == 5) {
-            return Rank.THIRD;
-        }
-        if (count == 4) {
-            return Rank.FOURTH;
-        }
-        if (count == 3) {
-            return Rank.FIFTH;
-        }
-        return Rank.BOOM;
+        return new Statistics(rankingsMap);
     }
 
     @Override

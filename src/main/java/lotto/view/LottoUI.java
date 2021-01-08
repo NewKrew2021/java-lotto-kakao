@@ -17,7 +17,7 @@ public class LottoUI {
     }
 
     public static void printLottos(Lottos lottos) {
-        System.out.println(lottos.getNumOfLotto() + "개를 구매했습니다.");
+        System.out.println(lottos.getSizeOfLotto() + "개를 구매했습니다.");
         System.out.println(lottos);
     }
 

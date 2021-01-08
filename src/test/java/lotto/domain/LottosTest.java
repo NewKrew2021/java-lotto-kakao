@@ -38,7 +38,7 @@ public class LottosTest {
         lottos.raffle(winningNumber, LottoNumber.of(6));
         Map<Rank, Integer> expected = new TreeMap<>();
         expected.put(Rank.FIRST, 1);
-        assertThat(lottos.raffle(winningNumber, LottoNumber.of(7))).containsAllEntriesOf(expected);
+        assertThat(lottos.raffle(winningNumber, LottoNumber.of(7)).getRank(Rank.FIRST)).isEqualTo(1);
     }
 
     @Test
@@ -51,6 +51,6 @@ public class LottosTest {
                 LottoNumber.of(7))));
         Map<Rank,Integer> m = new HashMap<>();
         m.put(Rank.SECOND,1);
-        assertThat(lottos.raffle(w, LottoNumber.of(6))).containsEntry(Rank.SECOND,1);
+        assertThat(lottos.raffle(w, LottoNumber.of(6)).getRank(Rank.SECOND)).isEqualTo(1);
     }
 }
