@@ -11,21 +11,13 @@ public class LottoTicket {
 
     private final List<LottoNumber> numbers;
 
-    public static LottoTicket ofLottoNumber(List<LottoNumber> numbers) {
-        return new LottoTicket(numbers);
-    }
-
-    public static LottoTicket ofIntegerNumber(List<Integer> integerNumbers) {
+    public LottoTicket(List<Integer> integerNumbers) {
         List<LottoNumber> numbers = Optional.ofNullable(integerNumbers)
-                .orElseThrow(InvalidLottoNumberException::new)
-                .stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
+            .orElseThrow(InvalidLottoNumberException::new)
+            .stream()
+            .map(LottoNumber::new)
+            .collect(Collectors.toList());
 
-        return new LottoTicket(numbers);
-    }
-
-    private LottoTicket(List<LottoNumber> numbers) {
         validateLength(numbers);
         validateDuplicate(numbers);
 
@@ -57,7 +49,9 @@ public class LottoTicket {
     }
 
     public List<Integer> getLottoTicketInfo() {
-        return numbers.stream().map(LottoNumber::getNumber).collect(Collectors.toList());
+        return numbers.stream()
+            .map(LottoNumber::getNumber)
+            .collect(Collectors.toList());
     }
 
     @Override

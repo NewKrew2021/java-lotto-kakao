@@ -12,40 +12,40 @@ public class LottoTicketTest {
 
     @Test
     public void create() {
-        LottoTicket lottoTicket = LottoTicket.ofIntegerNumber(Arrays.asList(1, 2, 3, 4, 5, 45));
-        assertThat(lottoTicket).isEqualTo(LottoTicket.ofIntegerNumber(Arrays.asList(1, 2, 3, 4, 5, 45)));
+        LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 45));
+        assertThat(lottoTicket).isEqualTo(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 45)));
     }
 
     @Test
     public void isInValidLength() {
         assertThatExceptionOfType(InvalidLottoNumberException.class)
-                .isThrownBy(() -> LottoTicket.ofIntegerNumber(Arrays.asList(1, 2, 3, 4, 5)));
+                .isThrownBy(() -> new LottoTicket(Arrays.asList(1, 2, 3, 4, 5)));
         assertThatExceptionOfType(InvalidLottoNumberException.class)
-                .isThrownBy(() -> LottoTicket.ofIntegerNumber(Arrays.asList(1, 2, 3, 4, 5, 6, 7)));
+                .isThrownBy(() -> new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6, 7)));
         assertThatExceptionOfType(InvalidLottoNumberException.class)
-                .isThrownBy(() -> LottoTicket.ofIntegerNumber(Arrays.asList()));
+                .isThrownBy(() -> new LottoTicket(Arrays.asList()));
         assertThatExceptionOfType(InvalidLottoNumberException.class)
-                .isThrownBy(() -> LottoTicket.ofIntegerNumber(null));
+                .isThrownBy(() -> new LottoTicket(null));
     }
 
     @Test
     void isDuplicateNumber() {
         assertThatExceptionOfType(InvalidLottoNumberException.class)
-                .isThrownBy(() -> LottoTicket.ofIntegerNumber(Arrays.asList(1, 1, 2, 3, 4, 5)));
+                .isThrownBy(() -> new LottoTicket(Arrays.asList(1, 1, 2, 3, 4, 5)));
     }
 
     @Test
     void isInvalidNumber() {
         assertThatExceptionOfType(InvalidLottoNumberException.class)
-                .isThrownBy(() -> LottoTicket.ofIntegerNumber(Arrays.asList(0, 2, 3, 4, 5, 6)));
+                .isThrownBy(() -> new LottoTicket(Arrays.asList(0, 2, 3, 4, 5, 6)));
         assertThatExceptionOfType(InvalidLottoNumberException.class)
-                .isThrownBy(() -> LottoTicket.ofIntegerNumber(Arrays.asList(1, 2, 3, 4, 5, 46)));
+                .isThrownBy(() -> new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 46)));
     }
 
     @Test
     void matchedCount() {
-        LottoTicket lottoTicket = LottoTicket.ofIntegerNumber(Arrays.asList(1, 2, 3, 4, 5, 45));
-        LottoTicket winningLottoTicket = LottoTicket.ofIntegerNumber(Arrays.asList(1, 2, 3, 4, 5, 45));
+        LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 45));
+        LottoTicket winningLottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 45));
         assertThat(lottoTicket.getMatchedCount(winningLottoTicket)).isEqualTo(6);
     }
 }

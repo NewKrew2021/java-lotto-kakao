@@ -1,9 +1,17 @@
-package domain;
+package controller;
 
+import domain.Amount;
+import domain.LottoNumber;
+import domain.LottoService;
+import domain.LottoTicket;
+import domain.LottoTickets;
+import domain.LottoWinningNumber;
+import domain.WinningInfo;
 import view.LottoInputView;
 import view.LottoOutputView;
 
 public class LottoController {
+
     public static void startLotto() {
         Amount amount = new Amount(LottoInputView.inputAmount());
         int ticketCount = amount.getCount();
@@ -11,7 +19,7 @@ public class LottoController {
 
         LottoTickets lottoTickets = createLottoTickets(ticketCount);
 
-        LottoTicket lottoWinningTicket = LottoTicket.ofLottoNumber(LottoInputView.inputWinningNumbers());
+        LottoTicket lottoWinningTicket = new LottoTicket(LottoInputView.inputWinningNumbers());
         LottoNumber bonusNumber = new LottoNumber(LottoInputView.inputBonusNumber());
 
         LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(lottoWinningTicket, bonusNumber);

@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 public class LottoTickets {
 
     public static final int MIN_MATCH_COUNT = 3;
+
     private List<LottoTicket> lottoTickets;
 
     public LottoTickets(List<LottoTicket> lottoTickets) {
@@ -40,7 +41,6 @@ public class LottoTickets {
         if (isSecond(lottoWinningNumber, lottoTicket, matchedCount) || isFirst(matchedCount)) {
             winningInfoIndex = 1;
         }
-
         updateWinningInfo(winningInfo, winningInfoIndex, matchedCount);
     }
 

@@ -5,7 +5,9 @@ import domain.exceptions.InvalidAmountException;
 import java.util.Objects;
 
 public class Amount {
-    public static final int LOTTO_PRICE = 1000;
+
+    private static final int LOTTO_PRICE = 1000;
+
     private final int amount;
 
     public Amount(int amount) {

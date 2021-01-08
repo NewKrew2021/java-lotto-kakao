@@ -6,14 +6,11 @@ import java.util.List;
 
 public class LottoService {
 
-    private static final int LOWER_BOUND = 1;
-    private static final int UPPER_BOUND = 45;
-
     private static final List<Integer> randomNumbers;
 
     static {
         randomNumbers = new ArrayList<>();
-        for (int i = LOWER_BOUND; i <= UPPER_BOUND; i++) {
+        for (int i = LottoNumber.LOWER_BOUND; i <= LottoNumber.UPPER_BOUND; i++) {
             randomNumbers.add(i);
         }
     }
@@ -29,12 +26,12 @@ public class LottoService {
 
     private static LottoTicket generateRandomLottoTicket() {
         Collections.shuffle(randomNumbers);
-        List<LottoNumber> numbers = new ArrayList<>();
+        List<Integer> numbers = new ArrayList<>();
         for (int i = 0; i < LottoTicket.LOTTO_NUMBERS_LENGTH; i++) {
-            numbers.add(new LottoNumber(randomNumbers.get(i)));
+            numbers.add((randomNumbers.get(i)));
         }
         Collections.sort(numbers);
 
-        return LottoTicket.ofLottoNumber(numbers);
+        return new LottoTicket(numbers);
     }
 }

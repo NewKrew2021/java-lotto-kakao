@@ -6,6 +6,9 @@ import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
+    static final int LOWER_BOUND = 1;
+    static final int UPPER_BOUND = 45;
+
     private final int number;
 
     public LottoNumber(int number) {
@@ -14,9 +17,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     private void validateRange(int number) {
-        if (number < 1 || number > 45) {
+        if (number < LOWER_BOUND || number > UPPER_BOUND) {
             throw new InvalidLottoNumberException();
         }
+    }
+
+    public int getNumber() {
+        return number;
     }
 
     @Override
@@ -30,10 +37,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
     @Override
     public int hashCode() {
         return Objects.hash(number);
-    }
-
-    public int getNumber() {
-        return number;
     }
 
     @Override
