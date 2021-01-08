@@ -18,7 +18,7 @@ public class LottoGameCountTest {
         LottoGameCount lottogame = new LottoGameCount(money);
 
         //then
-        assertThat(lottogame.getTicketNumber()).isEqualTo(14);
+        assertThat(lottogame.getTicketCount()).isEqualTo(14);
     }
 
     @DisplayName("1000원 단위가 아닌 금액이 들어오면, 예외가 발생한다.")

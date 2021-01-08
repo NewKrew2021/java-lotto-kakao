@@ -8,9 +8,10 @@ public class LottoMain {
         LottoGameCount lottoGameCount = new LottoGameCount(inputMoney);
         NumberGenerateStrategy randomGenerateStrategy = new RandomGenerateStrategy();
         List<LottoNumbers> lottoTickets = new ArrayList<>();
-        // while(isend) 로 바꿀만 하다.
-        for (int i = 0; i < lottoGameCount.getTicketNumber(); i++) {
+
+        while (lottoGameCount.isTicketRemain()) {
             lottoTickets.add(LottoNumbers.from(randomGenerateStrategy));
+            lottoGameCount.useTicket();
         }
 
         int bonusNumber = 7;
