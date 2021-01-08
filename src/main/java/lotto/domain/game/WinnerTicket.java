@@ -20,19 +20,19 @@ public class WinnerTicket {
         return new WinnerTicket(lottoNumbers, LottoNumber.valueOf(bonusNumber));
     }
 
-    public LottoNumbers getWinnerNumbers() {
-        return winnerNumbers;
-    }
-
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
-    }
-
     public int countMatchingNumber(LottoNumbers lottoNumbers) {
         return winnerNumbers.countMatchingNumber(lottoNumbers);
     }
 
     public boolean hasBonus(LottoNumbers lottoNumbers) {
         return lottoNumbers.contains(bonusNumber);
+    }
+
+    public LottoNumbers getWinnerNumbers() {
+        return winnerNumbers;
+    }
+
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
     }
 }
