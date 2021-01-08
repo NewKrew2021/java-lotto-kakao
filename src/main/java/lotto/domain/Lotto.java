@@ -40,7 +40,7 @@ public class Lotto {
         return (int) lottoNumbers.stream().filter(lottoNumber -> lotto.isContain(lottoNumber)).count();
     }
 
-    public static int getLottoPrice(){
+    public static int getLottoPrice() {
         return LOTTO_PRICE;
     }
 }

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.TooLowMoneyException;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
@@ -12,8 +13,8 @@ public class MoneyTest {
     }
 
     @Test
-    public void exceptionTest(){
-        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(()->{
+    public void exceptionTest() {
+        assertThatExceptionOfType(TooLowMoneyException.class).isThrownBy(() -> {
             new Money(-1000);
         }).withMessageContaining("원 이상의 금액을 입력해 주세요");
     }

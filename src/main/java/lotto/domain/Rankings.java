@@ -1,25 +1,17 @@
 package lotto.domain;
 
+import java.util.Collections;
 import java.util.Map;
-import java.util.TreeMap;
 
 public class Rankings {
 
-    Map<Rank, Integer> rankings;
-
-    public Rankings() {
-        rankings = new TreeMap<>();
-        for (Rank rank : Rank.values()) {
-            rankings.put(rank, 0);
-        }
-    }
+    private Map<Rank, Integer> rankings;
 
     public Rankings(Map<Rank, Integer> rankings) {
-        this.rankings = rankings;
+        this.rankings = Collections.unmodifiableMap(rankings);
     }
 
-    public int getRank(Rank rank) {
+    public int getCountOfRank(Rank rank) {
         return rankings.get(rank);
     }
-
 }

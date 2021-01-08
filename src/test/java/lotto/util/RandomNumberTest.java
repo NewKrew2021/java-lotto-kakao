@@ -7,13 +7,14 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class RandomNumberTest {
     RandomNumberGenerator randomNumberGenerator;
+
     @BeforeEach
-    void setUp(){
+    void setUp() {
         randomNumberGenerator = new RandomNumberGenerator();
     }
 
     @Test
-    void duplicationTest(){
+    void duplicationTest() {
         assertThat(randomNumberGenerator.getNumbers()).doesNotHaveDuplicates();
     }
 }

@@ -13,8 +13,6 @@ import java.util.stream.Collectors;
 
 public class LottoController {
     private static final String SPLIT_DELIMITER = ",";
-    private static final int MAX_VALUE = 45;
-    private static final int MIN_VALUE = 1;
 
     private Lottos lottos;
     private Money money;

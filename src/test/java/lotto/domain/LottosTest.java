@@ -50,8 +50,8 @@ public class LottosTest {
                 LottoNumber.of(4),
                 LottoNumber.of(5),
                 LottoNumber.of(7))));
-        Map<Rank,Integer> expected = new HashMap<>();
-        expected.put(Rank.SECOND,1);
+        Map<Rank, Integer> expected = new HashMap<>();
+        expected.put(Rank.SECOND, 1);
 
         assertThat(lottos.raffle(w, LottoNumber.of(6)).getRank(Rank.SECOND)).isEqualTo(1);
     }
