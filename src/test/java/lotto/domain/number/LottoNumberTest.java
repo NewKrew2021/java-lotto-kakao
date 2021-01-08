@@ -1,12 +1,11 @@
 package lotto.domain.number;
 
-import lotto.domain.number.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottoNumberTest {
     @DisplayName("1~45 범위의 숫자가 주어졌을 때, 숫자로 로또 번호를 만들면, 로또 번호가 생성된다")
