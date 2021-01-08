@@ -54,20 +54,20 @@ public class StatisticsResult {
 
     @Override
     public String toString() {
-        return "3개 일치 ( "+ THREE_WINNING_JACKPOT +" 원)-" + hashMap.get(StatisticsType.THREE) + "\n" +
-                "4개 일치 ("+ FOUR_WINNING_JACKPOT +"원)-" + hashMap.get(StatisticsType.THREE) + "\n" +
-                "5개 일치 ("+ FIVE_WINNING_JACKPOT +"원)-" + hashMap.get(StatisticsType.THREE) + "\n" +
-                "5개 일치, 보너스 볼 일치("+ FIVE_BONUS_WINNING_JACKPOT +"원)-" + hashMap.get(StatisticsType.THREE) + "\n" +
-                "6개 일치 (" + SIX_WINNING_JACKPOT + "원)-" + hashMap.get(StatisticsType.THREE) + "\n";
+        return "3개 일치 ("+ THREE_WINNING_JACKPOT +"원)-" + hashMap.get(StatisticsType.THREE) + "\n" +
+                "4개 일치 ("+ FOUR_WINNING_JACKPOT +"원)-" + hashMap.get(StatisticsType.FOUR) + "\n" +
+                "5개 일치 ("+ FIVE_WINNING_JACKPOT +"원)-" + hashMap.get(StatisticsType.FIVE) + "\n" +
+                "5개 일치, 보너스 볼 일치("+ FIVE_BONUS_WINNING_JACKPOT +"원)-" + hashMap.get(StatisticsType.FIVE_WITH_BONUS) + "\n" +
+                "6개 일치 (" + SIX_WINNING_JACKPOT + "원)-" + hashMap.get(StatisticsType.SIX) + "\n";
     }
 
-    public String benefit() {
-        int sumPrice = 0;
+    public double benefit() {
+        double sumPrice = 0;
         for( StatisticsType type : StatisticsType.values() ) {
             sumPrice += priceHash.get(type) * hashMap.get(type);
         }
-        sumPrice = sumPrice / this.ticketCount * 1000;
-        return "총 수익률은 " + sumPrice + "입니다.(기준이 1이기 때문에 결과적으로 손해라는 의미임)";
+        sumPrice = sumPrice / (this.ticketCount * 1000);
+        return sumPrice;
     }
 
 }

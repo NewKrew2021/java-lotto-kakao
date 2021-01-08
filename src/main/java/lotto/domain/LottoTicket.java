@@ -1,16 +1,18 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.HashSet;
 import java.util.stream.Collectors;
 
-public class LottoNos {
+public class LottoTicket {
 
+    private static final int LOTTO_NUMBER_COUNT_OF_TICKET = 6;
     List<LottoNo> numbers = new ArrayList<>();
 
-    public LottoNos(List<Integer> numbers) {
-        if( numbers.size() != 6 ) {
+    public LottoTicket(List<Integer> numbers) {
+        if( numbers.size() != LOTTO_NUMBER_COUNT_OF_TICKET ) {
             throw new IllegalArgumentException();
         }
 
@@ -18,30 +20,25 @@ public class LottoNos {
             throw new IllegalArgumentException();
         }
 
+        Collections.sort(numbers);
         for( int number : numbers ) {
             this.numbers.add(new LottoNo(number));
         }
     }
 
     private boolean checkDuplication(List<Integer> numbers){
-        HashSet<Integer> set = new HashSet<>();
-        for (int i = 0; i < numbers.size(); i++) {
-            set.add(numbers.get(i));
-        }
-        if(set.size() != numbers.size())
-            return true;
-        return false;
+        HashSet<Integer> set = new HashSet<>(numbers);
+        return set.size() != numbers.size();
     }
 
     public boolean isContains(LottoNo lottoNo) {
         return this.numbers.contains(lottoNo);
     }
 
-    public int getMatchCount(LottoNos lottoNos) {
-        return this.numbers.stream()
-                .filter((lottoNo)->lottoNos.isContains(lottoNo))
-                .collect(Collectors.toList())
-                .size();
+    public int getMatchCount(LottoTicket lottoTicket) {
+        return (int) this.numbers.stream()
+                .filter(lottoTicket::isContains)
+                .count();
     }
 
     @Override

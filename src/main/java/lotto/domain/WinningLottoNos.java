@@ -1,31 +1,28 @@
 package lotto.domain;
 
 import lotto.StatisticsType;
-import lotto.domain.LottoNo;
-import lotto.domain.LottoNos;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class WinningLottoNos {
 
-    private LottoNos lottoNos;
+    private LottoTicket lottoTicket;
     private LottoNo bonusNo;
 
     public WinningLottoNos( List<Integer> numbers, int bonusNo ) {
 
-        this.lottoNos = new LottoNos(numbers);
+        this.lottoTicket = new LottoTicket(numbers);
         this.bonusNo = new LottoNo(bonusNo);
 
-        if ( this.lottoNos.isContains(this.bonusNo) ) {
+        if ( this.lottoTicket.isContains(this.bonusNo) ) {
             throw new IllegalArgumentException();
         }
 
     }
 
-    public StatisticsType isWinning(LottoNos lottoNos) {
-        int matchCount = this.lottoNos.getMatchCount(lottoNos);
-        boolean isBonusMatch = lottoNos.isContains(bonusNo);
+    public StatisticsType isWinning(LottoTicket lottoTicket) {
+        int matchCount = this.lottoTicket.getMatchCount(lottoTicket);
+        boolean isBonusMatch = lottoTicket.isContains(bonusNo);
         return checkEnum(matchCount, isBonusMatch);
     }
 

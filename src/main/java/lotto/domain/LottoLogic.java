@@ -2,16 +2,14 @@ package lotto.domain;
 
 import java.util.*;
 
-import lotto.StatisticsType;
-
 public class LottoLogic {
 
-    public static List<LottoNos> makeRandomLottos(int howmany) {
-        List<LottoNos> lottoTickets = new ArrayList<>();
+    public static List<LottoTicket> buyLottoTicketsAuto(int count) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
         List<Integer> nums = makeLottoNumber();
-        for (int i = 0; i < howmany; i++) {
+        for (int i = 0; i < count; i++) {
             Collections.shuffle(nums);
-            lottoTickets.add(new LottoNos(nums.subList(0, 6)));
+            lottoTickets.add(new LottoTicket(nums.subList(0, 6)));
         }
         return lottoTickets;
     }
@@ -24,11 +22,11 @@ public class LottoLogic {
         return nums;
     }
 
-    public static StatisticsResult winningStatistics(List<LottoNos> lottoTickets, WinningLottoNos winningLottoNos ) {
+    public static StatisticsResult winningStatistics(List<LottoTicket> lottoTickets, WinningLottoNos winningLottoNos ) {
         StatisticsResult statisticsResult = new StatisticsResult();
 
-        for (LottoNos lottoNos: lottoTickets) {
-            statisticsResult.increaseTypeCount(winningLottoNos.isWinning(lottoNos));
+        for (LottoTicket lottoTicket : lottoTickets) {
+            statisticsResult.increaseTypeCount(winningLottoNos.isWinning(lottoTicket));
         }
         return statisticsResult;
     }
