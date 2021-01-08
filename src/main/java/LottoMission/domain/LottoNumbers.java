@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
 
@@ -12,7 +13,7 @@ public class LottoNumbers {
 
     public LottoNumbers(List<Integer> numbers) {
         Set<LottoNumber> temp = new HashSet<>();
-        for(int number: numbers){
+        for (int number : numbers) {
             temp.add(new LottoNumber(number));
         }
 
@@ -26,12 +27,19 @@ public class LottoNumbers {
         return temp.size() != MAX_NUMBERS_LENGTH;
     }
 
-    public boolean isContainLottoNumber(LottoNumber lottoNumber){
+    public boolean isContainLottoNumber(LottoNumber lottoNumber) {
         return numbers.contains(lottoNumber);
     }
 
     public Set<LottoNumber> getNumbers() {
         return numbers;
+    }
+
+    public List<Integer> getNumbersList() {
+        return numbers
+                .stream()
+                .map(i -> i.getNumber())
+                .collect(Collectors.toList());
     }
 
     @Override

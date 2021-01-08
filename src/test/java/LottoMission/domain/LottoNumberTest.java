@@ -1,8 +1,6 @@
 package LottoMission.domain;
 
-import LottoMission.domain.LottoNumber;
 import org.junit.jupiter.api.Test;
-
 import static org.assertj.core.api.Assertions.*;
 
 public class LottoNumberTest {
@@ -18,5 +16,4 @@ public class LottoNumberTest {
         assertThatThrownBy(() -> new LottoNumber(46))
                 .isInstanceOf(IllegalArgumentException.class);
     }
-
 }

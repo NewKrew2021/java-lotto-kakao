@@ -1,9 +1,6 @@
 package LottoMission.domain;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 public class Lotto implements Comparable<Lotto> {
 
@@ -26,12 +23,12 @@ public class Lotto implements Comparable<Lotto> {
         winnings = LotteryWinnings.getState(correctNo, hasBonusNo);
     }
 
-    public LotteryWinnings getWinningsStat(){
+    public LotteryWinnings getWinningsStat() {
         return this.winnings;
     }
 
-    public int getWinningMoney(LottoAnswer answer){
-        if(isNullWinnings()){
+    public int getWinningMoney(LottoAnswer answer) {
+        if (isNullWinnings()) {
             winningPrize(answer);
         }
         return this.winnings.getMoney();
@@ -39,6 +36,10 @@ public class Lotto implements Comparable<Lotto> {
 
     private boolean isNullWinnings() {
         return this.winnings == null;
+    }
+
+    public List<Integer> getLottoNumberList() {
+        return numbers.getNumbersList();
     }
 
     @Override

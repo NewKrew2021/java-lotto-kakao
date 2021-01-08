@@ -1,12 +1,9 @@
 package LottoMission.controller;
 
-import LottoMission.controller.LottoController;
 import LottoMission.domain.Lotto;
 import LottoMission.domain.Lottos;
 import org.junit.jupiter.api.Test;
-
 import java.util.Arrays;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoControllerTest {

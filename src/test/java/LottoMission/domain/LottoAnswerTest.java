@@ -1,10 +1,7 @@
 package LottoMission.domain;
 
-import LottoMission.domain.*;
 import org.junit.jupiter.api.Test;
-
 import java.util.Arrays;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoAnswerTest {
@@ -17,7 +14,6 @@ public class LottoAnswerTest {
         lottoNumbers.winningPrize(lottoAnswer);
         assertThat(lottoNumbers.getWinningsStat()).isEqualTo(LotteryWinnings.SECOND);
     }
-
 }
 
 

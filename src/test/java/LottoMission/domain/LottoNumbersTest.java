@@ -1,10 +1,7 @@
 package LottoMission.domain;
 
-import LottoMission.domain.LottoNumbers;
 import org.junit.jupiter.api.Test;
-
 import java.util.Arrays;
-
 import static org.assertj.core.api.Assertions.*;
 
 public class LottoNumbersTest {

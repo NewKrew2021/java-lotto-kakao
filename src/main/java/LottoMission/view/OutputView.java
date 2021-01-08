@@ -9,15 +9,15 @@ import java.util.Map;
 
 public class OutputView {
 
-    public static void autoBoughtView(LottoController lottoController) {
-        List<Lotto> lottos = lottoController.getLottos();
+    public static void autoBoughtView(LottoController controller) {
+        List<List<Integer>> lottos = controller.getLottosList();
         System.out.println(lottos.size() + "개를 구매했습니다.");
-        for (Lotto lotto : lottos) {
-            System.out.println(lotto);
-        }
+        lottos.stream().forEach(i -> System.out.println(i));
+        System.out.println();
     }
 
-    public static void resultView(Map<LotteryWinnings, Integer> allLottoRankCount) {
+    public static void resultView(LottoController controller) {
+        Map<LotteryWinnings, Integer> allLottoRankCount = controller.getAllLottoCount();
         System.out.println("당첨 통계");
         StringBuilder sb = new StringBuilder();
         for (LotteryWinnings lotteryWinnings : allLottoRankCount.keySet()) {
@@ -30,10 +30,9 @@ public class OutputView {
         System.out.println(sb);
     }
 
-    public static void totalEarningsView(float ratio) {
+    public static void totalEarningsView(LottoController controller) {
         String result = "총 수익률은 ";
-        result += Math.floor(ratio * 100);
+        result += (int) Math.floor(controller.getRateOfProfit() * 100);
         System.out.println(result + "%입니다.");
     }
-
 }
