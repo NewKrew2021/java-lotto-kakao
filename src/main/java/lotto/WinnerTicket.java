@@ -1,5 +1,7 @@
 package lotto;
 
+import java.util.List;
+
 public class WinnerTicket {
     private final LottoNumbers winnerNumbers;
     private final LottoNumber bonusNumber;
@@ -7,6 +9,11 @@ public class WinnerTicket {
     public WinnerTicket(LottoNumbers winnerNumbers, LottoNumber bonusNumber) {
         this.winnerNumbers = winnerNumbers;
         this.bonusNumber = bonusNumber;
+    }
+
+    public static WinnerTicket of(List<Integer> winnerNumbers, int bonusNumber) {
+        LottoNumbers lottoNumbers = LottoNumbers.from(new ManualInputStrategy(winnerNumbers));
+        return new WinnerTicket(lottoNumbers, new LottoNumber(bonusNumber));
     }
 
     public LottoNumbers getWinnerNumbers() {
