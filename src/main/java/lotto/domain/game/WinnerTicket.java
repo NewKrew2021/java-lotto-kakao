@@ -6,6 +6,7 @@ import lotto.domain.number.LottoNumbers;
 import java.util.List;
 
 public class WinnerTicket {
+
     private final LottoNumbers winnerNumbers;
     private final LottoNumber bonusNumber;
 
