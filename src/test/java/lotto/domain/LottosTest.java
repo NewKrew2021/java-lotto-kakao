@@ -2,6 +2,7 @@ package lotto.domain;
 
 
 import lotto.dto.RankingsDto;
+import lotto.util.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

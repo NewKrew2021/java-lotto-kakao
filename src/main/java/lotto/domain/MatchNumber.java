@@ -1,11 +1,13 @@
 package lotto.domain;
 
+import lotto.util.MatchResult;
+
 public class MatchNumber {
     public static final int MAX_VALUE = 45;
     public static final int MIN_VALUE = 1;
 
-    private WinningNumber winningNumber;
-    private LottoNumber bonusNumber;
+    private final WinningNumber winningNumber;
+    private final LottoNumber bonusNumber;
 
     private MatchNumber(WinningNumber winningNumber, int bonusNumber) {
         this.winningNumber = winningNumber;

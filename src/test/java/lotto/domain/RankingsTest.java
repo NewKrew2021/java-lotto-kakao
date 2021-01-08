@@ -1,7 +1,9 @@
 package lotto.domain;
 
 import lotto.dto.RankingsDto;
+import lotto.util.Rank;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -19,6 +21,7 @@ public class RankingsTest {
     }
 
     @Test
+    @DisplayName("Rankings를 문자열로 반환한다.")
     void toStringTest() {
         assertThat(rankings.toString())
                 .isEqualTo("3개 일치 (5000원)- 1개\n" +
@@ -29,6 +32,7 @@ public class RankingsTest {
     }
 
     @Test
+    @DisplayName("수익률을 계산하여 반환한다.")
     void profitTest(){
         assertThat(rankings.getProfitRate(new Money(14000))).isEqualTo(214678);
     }

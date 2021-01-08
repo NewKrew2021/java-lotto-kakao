@@ -1,7 +1,5 @@
 package lotto.util;
 
-import lotto.domain.Rank;
-
 public class Prize {
     private static final int FOR_FIRST = 2000000000;
     private static final int FOR_SECOND = 30000000;

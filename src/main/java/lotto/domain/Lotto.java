@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import lotto.util.LottoNumberGenerator;
+import lotto.util.MatchResult;
+import lotto.util.Rank;
 
 import java.util.Comparator;
 import java.util.Set;
