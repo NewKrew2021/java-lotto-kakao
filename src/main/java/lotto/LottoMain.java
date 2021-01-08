@@ -1,6 +1,8 @@
 package lotto;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class LottoMain {
     public static void main(String[] args) {
@@ -18,17 +20,10 @@ public class LottoMain {
         List<Integer> winnerNumbers = Arrays.asList(1, 2, 3, 4, 5, 6);
         WinnerTicket winnerTicket = WinnerTicket.of(winnerNumbers, bonusNumber);
 
-        //안쪽에서 만드는것이 좋을 것으로 생각.
-        Map<LottoRanking, Integer> rankingCount = new HashMap<>();
+        LottoRankingCount lottoRankingCount = LottoRankingCount.of(lottoTickets, winnerTicket);
 
-        for (LottoNumbers lottoTicket : lottoTickets) {
-            LottoRanking ranking = LottoRanking.find(winnerTicket.countMatchingNumber(lottoTicket),
-                    winnerTicket.hasBonus(lottoTicket));
-            rankingCount.compute(ranking, (rank, count) -> count == null ? 1 : count + 1);
-        }
-
-        //inputMoney를 없애는게 좋을 것 같음. Rate를 Revenue안으로 넣
-        long lottoRevenue = new LottoRevenue(rankingCount).getRevenue();
+        //inputMoney를 없애는게 좋을 것 같음. Rate를 Revenue안으로 넣는다.
+        long lottoRevenue = new LottoRevenue(lottoRankingCount.getRankingCount()).getRevenue();
         double lottoRevenueRate = ((double) (lottoRevenue - inputMoney) / inputMoney) * 100.0;
 
     }
