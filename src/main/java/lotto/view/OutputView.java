@@ -18,7 +18,7 @@ public class OutputView {
     public static void printWinningStatistics(LottoRankingCountDto lottoRankingCount) {
         System.out.println("당첨 통계");
         System.out.println("---------");
-        for (Map.Entry<LottoRanking, Integer> entry : lottoRankingCount.getRankingCount().entrySet()) {
+        for (Map.Entry<LottoRanking, Long> entry : lottoRankingCount.getRankingCount().entrySet()) {
             System.out.printf("%s %d개%s", entry.getKey().getContext(), entry.getValue(), NEW_LINE);
         }
     }

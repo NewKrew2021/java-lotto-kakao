@@ -6,7 +6,7 @@ import lotto.domain.game.WinnerTicket;
 import lotto.domain.number.LottoNumbers;
 import lotto.domain.number.NumberGenerateStrategy;
 import lotto.domain.number.RandomGenerateStrategy;
-import lotto.domain.ranking.LottoRankingCount;
+import lotto.domain.ranking.LottoStatistics;
 import lotto.view.InputView;
 import lotto.view.LottoNumbersDto;
 import lotto.view.LottoRankingCountDto;
@@ -35,7 +35,7 @@ public class LottoMain {
         int bonusNumber = InputView.inputBonusNumber();
         WinnerTicket winnerTicket = WinnerTicket.of(winnerNumbers, bonusNumber);
 
-        LottoRankingCount lottoRankingCount = LottoRankingCount.of(lottoTickets, winnerTicket);
+        LottoStatistics lottoRankingCount = LottoStatistics.of(lottoTickets, winnerTicket);
         OutputView.printWinningStatistics(LottoRankingCountDto.from(lottoRankingCount));
 
         double lottoRevenueRate = LottoRevenue.from(lottoRankingCount).calculateRevenueRate(lottoTicketCount);
