@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -9,12 +10,33 @@ public class Ticket {
     private final Set<Integer> numbers; //TODO 일급 콜렉션
 
     public Ticket(Set<Integer> numbers){
-        if(TICKET_SIZE != numbers.size()){
+        sizeCheck(numbers.size());
+        rangeCheck(numbers);
+
+        this.numbers = numbers;
+    }
+
+    private void sizeCheck(int size){
+        if(TICKET_SIZE != size){
             throw new RuntimeException("invalid Ticket size!!");
         }
+    }
 
-        //TODO 그대로 넣지 말고, 값 복사가 되도록 하자.
-        this.numbers = numbers;
+    private void rangeCheck(Set<Integer> numbers){
+        for (Integer number : numbers) {
+            rangeCeckForOneNumber(number);
+        }
+    }
+
+    private void rangeCeckForOneNumber(int number){
+        if(number < 1 || 45 < number){
+            throw new RuntimeException("contains invalid number value.");
+        }
+    }
+
+    /* 숫자 정보가 변경되는 것을 막기 위해 복사하여 전달한다. */
+    public Set<Integer> getNumberData(){
+        return new HashSet<>(numbers);
     }
 
     public int getOrder(WinnerBalls balls){
