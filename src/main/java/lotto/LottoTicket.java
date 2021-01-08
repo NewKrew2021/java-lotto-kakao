@@ -27,7 +27,6 @@ public class LottoTicket {
     @Override
     public String toString() {
         return "[" + numbers.stream()
-                .sorted()
                 .map(Number::toString)
                 .collect(Collectors.joining(", ")) + "]";
     }

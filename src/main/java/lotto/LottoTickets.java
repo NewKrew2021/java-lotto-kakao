@@ -14,7 +14,7 @@ public class LottoTickets {
     public static LottoTickets fromPrice(int price) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < price / 1000; i++) {
-            lottoTickets.add(new LottoTicket(new HashSet<>(NumberPool.getInstance().getRandomNumbers())));
+            lottoTickets.add(new LottoTicket(new TreeSet<>(NumberPool.getInstance().getRandomNumbers())));
         }
         return new LottoTickets(lottoTickets);
     }

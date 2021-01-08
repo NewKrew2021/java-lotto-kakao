@@ -1,8 +1,7 @@
 package lotto;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.*;
 
@@ -10,20 +9,22 @@ import static org.assertj.core.api.Assertions.*;
 
 public class LottoTicketsTest {
     @Test
-    void constructorTest(){
+    @DisplayName("가격에 따른 티켓 갯수 테스트")
+    void lottoTicketCountTest(){
         LottoTickets lottoTickets = LottoTickets.fromPrice(14000);
         assertThat(lottoTickets.getTicketCount()).isEqualTo(14);
     }
 
     @Test
+    @DisplayName("구매한 티켓들의 총 등수 결과 테스트")
     void lottoTicketsResultTest() {
         List<LottoTicket> lottoTicketList = new ArrayList<>();
-        lottoTicketList.add(new LottoTicket(makeNumberHashSet(Arrays.asList(1, 2, 3, 4, 5, 6))));
-        lottoTicketList.add(new LottoTicket(makeNumberHashSet(Arrays.asList(1, 2, 3, 4, 5, 9))));
-        lottoTicketList.add(new LottoTicket(makeNumberHashSet(Arrays.asList(1, 2, 9, 4, 7, 6))));
-        lottoTicketList.add(new LottoTicket(makeNumberHashSet(Arrays.asList(4, 20, 35, 6, 1, 5))));
+        lottoTicketList.add(new LottoTicket(makeNumberTreeSet(Arrays.asList(1, 2, 3, 4, 5, 6))));
+        lottoTicketList.add(new LottoTicket(makeNumberTreeSet(Arrays.asList(1, 2, 3, 4, 5, 9))));
+        lottoTicketList.add(new LottoTicket(makeNumberTreeSet(Arrays.asList(1, 2, 9, 4, 7, 6))));
+        lottoTicketList.add(new LottoTicket(makeNumberTreeSet(Arrays.asList(4, 20, 35, 6, 1, 5))));
         LottoTickets lottoTickets = new LottoTickets(lottoTicketList);
-        WinnerNumber winnerNumber = new WinnerNumber(makeNumberHashSet(Arrays.asList(1, 2, 3, 4, 5, 6)), new Number(9));
+        WinnerNumber winnerNumber = new WinnerNumber(makeNumberTreeSet(Arrays.asList(1, 2, 3, 4, 5, 6)), new Number(9));
         LottoResults expectedResult = new LottoResults();
         expectedResult.upsert(LottoRank.FIRST);
         expectedResult.upsert(LottoRank.SECOND);
@@ -33,8 +34,8 @@ public class LottoTicketsTest {
 
     }
 
-    private Set<Number> makeNumberHashSet(List<Integer> intNumbers) {
-        Set<Number> numbers = new HashSet<>();
+    private Set<Number> makeNumberTreeSet(List<Integer> intNumbers) {
+        Set<Number> numbers = new TreeSet<>();
         for (int number : intNumbers) {
             numbers.add(new Number(number));
         }
