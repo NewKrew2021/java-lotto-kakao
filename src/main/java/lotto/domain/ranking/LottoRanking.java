@@ -1,8 +1,8 @@
-package lotto;
+package lotto.domain.ranking;
 
 import java.util.Arrays;
 
-import static lotto.LottoBonusType.*;
+import static lotto.domain.ranking.LottoBonusType.*;
 
 public enum LottoRanking {
     RANK_1(6, DONTCARE, 2_000_000_000L, "6개 일치"),

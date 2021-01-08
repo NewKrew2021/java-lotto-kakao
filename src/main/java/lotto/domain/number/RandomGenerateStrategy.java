@@ -1,10 +1,12 @@
-package lotto;
+package lotto.domain.number;
+
+import lotto.domain.number.NumberGenerateStrategy;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static lotto.LottoNumbers.LOTTO_TICKET_LENGTH;
+import static lotto.domain.number.LottoNumbers.LOTTO_TICKET_LENGTH;
 
 public class RandomGenerateStrategy implements NumberGenerateStrategy {
 

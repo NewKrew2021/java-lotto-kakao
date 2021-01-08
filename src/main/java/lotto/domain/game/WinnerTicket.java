@@ -1,4 +1,8 @@
-package lotto;
+package lotto.domain.game;
+
+import lotto.domain.number.LottoNumber;
+import lotto.domain.number.LottoNumbers;
+import lotto.domain.number.ManualInputStrategy;
 
 import java.util.List;
 

@@ -1,4 +1,7 @@
-package lotto;
+package lotto.domain.ranking;
+
+import lotto.domain.number.LottoNumbers;
+import lotto.domain.game.WinnerTicket;
 
 import java.util.HashMap;
 import java.util.List;
