@@ -6,13 +6,11 @@ import domain.WinnerNumber;
 import view.LottoGameView;
 
 import java.util.Arrays;
-import java.util.Scanner;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoGame {
     private static final int TICKET_PRICE = 1000;
-    private static final Scanner sc = new Scanner(System.in);
 
     public void run() {
         int price = priceProcess();

@@ -13,7 +13,7 @@ import static domain.LottoConstant.LOTTO_MIN_NUMBER;
 
 public class Number implements Comparable<Number> {
     private final int number;
-    private static List<Number> numbers = IntStream
+    private static final List<Number> numbers = IntStream
             .rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
             .mapToObj(Number::new)
             .collect(Collectors.toList());

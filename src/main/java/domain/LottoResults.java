@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,9 +9,8 @@ public class LottoResults {
 
     public LottoResults() {
         results = new HashMap<LottoRank, Integer>() {{
-            for (LottoRank rank : LottoRank.values()) {
-                put(rank, 0);
-            }
+            Arrays.stream(LottoRank.values())
+                    .forEach(rank -> put(rank, 0));
         }};
     }
 
@@ -23,19 +23,16 @@ public class LottoResults {
     }
 
     public String result(int price) {
-        double sum = 0;
-        for (LottoRank rank : LottoRank.values()) {
-            sum += results.get(rank) * rank.getPrice();
-        }
-        return this + "총 수익률은 " + (long) (sum / price * 100) + "%입니다.";
+        double sum = Arrays.stream(LottoRank.values())
+                .map(rank -> ((double) results.get(rank)) * rank.getPrice())
+                .reduce(0.0, Double::sum);
+        return this + "총 수익률은 " + (long) ((sum - price) / price * 100) + "%입니다.";
     }
 
     @Override
     public String toString() {
-        String s = "";
-        for (LottoRank rank : LottoRank.values()) {
-            s += rank + " - " + results.get(rank) + "개\n";
-        }
-        return s;
+        return Arrays.stream(LottoRank.values())
+                .map(rank -> rank + " - " + results.get(rank) + "개\n")
+                .reduce("", (total, rankString) -> total + rankString);
     }
 }
