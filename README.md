@@ -7,3 +7,23 @@
 
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
+
+##구현 클래스
+* controller
+  * LottoGame : 로또 게임의 동작을 관리하는 컨트롤러
+    
+* domain
+  * LottoRank : 로또 등수에 대한 enum 클래스
+  * LottoResults : 구입한 로또들에 대한 등수 결과 클래스
+  * LottoTicket : 로또 한 장에 대한 클래스
+  * LottoTickets : 구입한 로또 여러 장에 대한 클래스
+  * MatchResult : 로또 결과를 비교하기 위한 클래스
+  * Number : 로또 번호 하나에 대한 클래스
+  * NumberPool : 로또 번호들을 캐싱해놓은 클래스
+  * Price : 유저로부터 입력받는 금액을 저장하는 클래  
+  * RankTable : 일치한 번호 갯수, 보너스 일치 여부로 등수를 판단하기 위한 클래스
+  * WinnerNumber : 정답 번호를 저장하는 클래스로 LottoTicket을 상속
+* util
+  * StringUtility : String을 가공하기 위한 클래스
+* view
+  * LottoGameView : 입, 출력을 담당하는 클래스

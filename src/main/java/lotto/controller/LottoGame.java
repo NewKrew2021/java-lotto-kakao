@@ -2,6 +2,7 @@ package lotto.controller;
 
 import lotto.domain.LottoResults;
 import lotto.domain.LottoTickets;
+import lotto.domain.Price;
 import lotto.util.StringUtility;
 import lotto.domain.WinnerNumber;
 import lotto.view.LottoGameView;
@@ -9,7 +10,7 @@ import lotto.view.LottoGameView;
 import java.util.*;
 
 public class LottoGame {
-    private int price;
+    private Price price;
     private LottoTickets lottoTickets;
     private WinnerNumber winnerNumber;
 
@@ -21,11 +22,11 @@ public class LottoGame {
     }
 
     private void requestPrice() {
-        price = LottoGameView.inputPrice();
+        price = new Price(LottoGameView.inputPrice());
     }
 
     private void makeAndPrintLottoTickets() {
-        lottoTickets = LottoTickets.fromPrice(price);
+        lottoTickets = LottoTickets.fromPrice(price.getPrice());
         LottoGameView.printLottoTickets(lottoTickets);
     }
 
@@ -38,7 +39,7 @@ public class LottoGame {
 
     private void makeAndPrintResult() {
         LottoResults lottoResults = lottoTickets.getResults(winnerNumber);
-        LottoGameView.printResult(lottoResults, price);
+        LottoGameView.printResult(lottoResults, price.getPrice());
     }
 
 }
