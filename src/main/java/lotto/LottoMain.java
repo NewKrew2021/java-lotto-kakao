@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.game.LottoGameCount;
+import lotto.domain.game.LottoTicketCount;
 import lotto.domain.game.LottoRevenue;
 import lotto.domain.game.WinnerTicket;
 import lotto.domain.number.LottoNumbers;
@@ -18,16 +18,16 @@ import java.util.List;
 public class LottoMain {
     public static void main(String[] args) {
 
-        LottoGameCount lottoGameCount = new LottoGameCount(InputView.inputMoney());
-        OutputView.printTicketCount(lottoGameCount.getTicketCount());
+        LottoTicketCount lottoTicketCount = new LottoTicketCount(InputView.inputMoney());
+        OutputView.printTicketCount(lottoTicketCount.getTicketCount());
 
         NumberGenerateStrategy randomGenerateStrategy = new RandomGenerateStrategy();
         List<LottoNumbers> lottoTickets = new ArrayList<>();
 
-        while (lottoGameCount.isTicketRemain()) {
+        while (lottoTicketCount.isTicketRemain()) {
             LottoNumbers lottoTicket = LottoNumbers.from(randomGenerateStrategy);
             lottoTickets.add(lottoTicket);
-            lottoGameCount.useTicket();
+            lottoTicketCount.useTicket();
             OutputView.printTicketNumbers(LottoNumbersDto.from(lottoTicket));
         }
 
@@ -38,7 +38,7 @@ public class LottoMain {
         LottoRankingCount lottoRankingCount = LottoRankingCount.of(lottoTickets, winnerTicket);
         OutputView.printWinningStatistics(LottoRankingCountDto.from(lottoRankingCount));
 
-        double lottoRevenueRate = LottoRevenue.from(lottoRankingCount).calculateRevenueRate(lottoGameCount);
+        double lottoRevenueRate = LottoRevenue.from(lottoRankingCount).calculateRevenueRate(lottoTicketCount);
         OutputView.printRevenueRate(lottoRevenueRate);
     }
 }
