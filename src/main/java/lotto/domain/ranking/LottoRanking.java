@@ -5,6 +5,7 @@ import java.util.Arrays;
 import static lotto.domain.ranking.LottoBonusApplicable.*;
 
 public enum LottoRanking {
+
     RANK_1(6, DONT_CARE, 2_000_000_000L, "6개 일치 (2000000000원)-"),
     RANK_2(5, TRUE, 30_000_000L, "5개 일치, 보너스 볼 일치(30000000원)-"),
     RANK_3(5, FALSE, 1_500_000L, "5개 일치 (1500000원)-"),
