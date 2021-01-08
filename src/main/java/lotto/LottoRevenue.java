@@ -1,18 +1,21 @@
 package lotto;
 
-import java.util.Map;
-
 public class LottoRevenue {
+    private static final double PERCENT = 100.0;
+
     private final long revenue;
 
-    public LottoRevenue(Map<LottoRanking, Integer> rankingCount) {
-        long revenue = 0;
-
-        for (Map.Entry<LottoRanking, Integer> entry : rankingCount.entrySet()) {
-            revenue += entry.getKey().earnPrice(entry.getValue());
-        }
-
+    public LottoRevenue(long revenue) {
         this.revenue = revenue;
+    }
+
+    public static LottoRevenue from(LottoRankingCount lottoRankingCount) {
+        return new LottoRevenue(lottoRankingCount.calculateTotalPrice());
+    }
+
+    public double calculateRevenueRate(LottoGameCount lottoGameCount) {
+        int totalTicketMoney = lottoGameCount.calculateTotalTicketMoney();
+        return ((double) (revenue - totalTicketMoney) / totalTicketMoney) * PERCENT;
     }
 
     public long getRevenue() {
