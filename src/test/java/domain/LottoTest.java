@@ -10,27 +10,30 @@ import java.util.Arrays;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoTest {
 
     private Lotto lotto;
 
     @Test
-    void lottoNumberTest() {
-        Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
-        assertThat(lotto.getLottoNumbers()).containsExactly(1,2,3,4,5,6);
+    void createTest() {
+        lotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
+        assertThat(lotto).isEqualTo(new Lotto(Arrays.asList(1,2,3,4,5,6)));
     }
 
     @ParameterizedTest
     @MethodSource("provideLottosAndResults")
     void lottoPrizeResultTest(Lotto lotto, LottoStatus lottoStatus) {
-        Answer answer = new Answer("1,2,3,4,5,6",7);
+        Answer answer = new Answer(new Lotto("1,2,3,4,5,6"),7);
         assertThat(lotto.getResult(answer)).isEqualTo(lottoStatus);
     }
 
     @Test
-    void lottoPrizeCountResultTest() {
-
+    void lottoSizeExceedTest() {
+        assertThatThrownBy(()->{
+            new Lotto(Arrays.asList(1,2,3,4,5,6,7));
+        }).hasMessageMatching("[0-9]*개 이하의 숫자를 입력해주세요.");
     }
 
     private static Stream<Arguments> provideLottosAndResults() {

@@ -22,7 +22,6 @@ public class Lottos {
         LottoStatus.getLottoStatuses().stream().forEach(lottoStatus -> { result.put(lottoStatus, 0); });
 
         lottos.stream().forEach(lotto -> { addResult(result, lotto.getResult(answer)); });
-
         return result;
     }
 

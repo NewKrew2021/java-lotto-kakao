@@ -7,20 +7,19 @@ import java.util.stream.IntStream;
 
 public class RandomLottoStrategy implements LottoStrategy {
 
-    private static final int END_LOTTO_NUMBER = 45;
-    private static final int START_LOTTO_NUMBER = 1;
-    private static final int LOTTO_NUMBER_SIZE = 6;
-
-    private final List<Integer> LottoNumbers;
+    private final List<Integer> lottoNumbers;
 
     public RandomLottoStrategy() {
-        LottoNumbers = IntStream.rangeClosed(START_LOTTO_NUMBER, END_LOTTO_NUMBER).boxed().collect(Collectors.toList());
+        lottoNumbers = IntStream.
+                rangeClosed(LottoNumber.START_LOTTO_NUMBER, LottoNumber.END_LOTTO_NUMBER).
+                boxed().collect(Collectors.toList());
     }
 
     @Override
     public List<Integer> NumberChooseStrategy() {
-        Collections.shuffle(LottoNumbers);
-        List<Integer> result = LottoNumbers.stream().limit(LOTTO_NUMBER_SIZE).collect(Collectors.toList());
+        Collections.shuffle(lottoNumbers);
+        List<Integer> result = lottoNumbers.stream().
+                limit(Lotto.LOTTO_NUMBER_SIZE).collect(Collectors.toList());
         Collections.sort(result);
         return result;
     }

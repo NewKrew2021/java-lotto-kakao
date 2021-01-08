@@ -1,9 +1,6 @@
 package controller;
 
-import domain.Answer;
-import domain.LottoSimulator;
-import domain.Lottos;
-import domain.PurchaseInfo;
+import domain.*;
 import view.LottoSimulatorView;
 
 public class LottoController {
@@ -36,9 +33,9 @@ public class LottoController {
     }
 
     private void getAnswerNumbers() {
-        String answerLottoNumbers = lottoSimulatorView.askLottoNumberForAnswerLotto();
+        Lotto answerLotto = new Lotto(lottoSimulatorView.askLottoNumberForAnswerLotto());
         int bonusNumber = lottoSimulatorView.askBonusNumberForAnswerLotto();
-        answer = new Answer(answerLottoNumbers, bonusNumber);
+        answer = new Answer(answerLotto, bonusNumber);
     }
 
     private void printLottoResults() {

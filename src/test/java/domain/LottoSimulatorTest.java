@@ -11,8 +11,9 @@ public class LottoSimulatorTest {
     @Test
     void profitPercentageTest() {
         Lottos lottos = new Lottos(Arrays.asList( new Lotto(Arrays.asList(1,2,3,14,15,16))));
-        Answer answer = new Answer("1,2,3,4,5,6", 7);
-        LottoSimulator lottoSimulator = new LottoSimulator(10000, lottos, answer);
+        Answer answer = new Answer(new Lotto("1,2,3,4,5,6"), 7);
+        PurchaseInfo purchaseInfo = new PurchaseInfo(10000);
+        LottoSimulator lottoSimulator = new LottoSimulator(purchaseInfo, lottos, answer);
         assertThat(lottoSimulator.profitPercentage()).isEqualTo(-50);
 
     }
@@ -21,8 +22,9 @@ public class LottoSimulatorTest {
     void getWinningMoneyTest() {
         Lottos lottos = new Lottos(Arrays.asList(new Lotto(Arrays.asList(1,2,3,4,5,6)),
                 new Lotto(Arrays.asList(1,2,3,4,5,7))));
-        Answer answer = new Answer("1,2,3,4,5,6", 7);
-        LottoSimulator lottoSimulator = new LottoSimulator(10000, lottos, answer);
+        Answer answer = new Answer(new Lotto("1,2,3,4,5,6"), 7);
+        PurchaseInfo purchaseInfo = new PurchaseInfo(10000);
+        LottoSimulator lottoSimulator = new LottoSimulator(purchaseInfo, lottos, answer);
 
         assertThat(lottoSimulator.getWinningMoney()).
                 isEqualTo(LottoStatus.FIRST.getWinnings() + LottoStatus.SECOND.getWinnings());

@@ -6,13 +6,13 @@ import java.util.Comparator;
 import java.util.List;
 
 public enum LottoStatus {
-    FIRST(2000000000, 6),
-    SECOND(30000000, 5),
-    THIRD(1500000, 5),
-    FOURTH(50000, 4),
-    FIFTH(5000, 3);
+    FIRST(2000000000L, 6),
+    SECOND(30000000L, 5),
+    THIRD(1500000L, 5),
+    FOURTH(50000L, 4),
+    FIFTH(5000L, 3);
 
-    private final int winnings;
+    private final long winnings;
     private final int matchedLottoNumberCount;
 
     private static final List<LottoStatus> lottoStatuses = new ArrayList<>();
@@ -24,12 +24,12 @@ public enum LottoStatus {
         Collections.sort(lottoStatuses, Comparator.reverseOrder());
     }
 
-    LottoStatus(int winnings, int matchedLottoNumberCount) {
+    LottoStatus(long winnings, int matchedLottoNumberCount) {
         this.winnings = winnings;
         this.matchedLottoNumberCount = matchedLottoNumberCount;
     }
 
-    public int getWinnings() {
+    public long getWinnings() {
         return winnings;
     }
 

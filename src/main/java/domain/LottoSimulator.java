@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class LottoSimulator {
 
-    private static final long PERCENTAGE = 100;
+    private static final long PERCENTAGE = 100L;
 
     private PurchaseInfo purchaseInfo;
     private Lottos lottos;
@@ -16,9 +16,9 @@ public class LottoSimulator {
         this.answer = answer;
     }
 
-    public int getWinningMoney() {
+    public long getWinningMoney() {
         Map<LottoStatus, Integer> lottoResult = lottos.checkResult(answer);
-        return lottoResult.entrySet().stream().map(e -> e.getValue() * e.getKey().getWinnings()).reduce(Integer::sum).get();
+        return lottoResult.entrySet().stream().map(e -> e.getValue() * e.getKey().getWinnings()).reduce(Long::sum).get();
     }
 
     public Map<LottoStatus, Integer> getLottoResults() {
