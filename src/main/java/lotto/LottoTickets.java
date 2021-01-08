@@ -30,4 +30,13 @@ public class LottoTickets {
         }
         return lottoResults;
     }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (LottoTicket lottoTicket : lottoTickets) {
+            sb.append(lottoTicket).append('\n');
+        }
+        return sb.toString();
+    }
 }
