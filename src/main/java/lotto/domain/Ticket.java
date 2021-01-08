@@ -12,8 +12,8 @@ public class Ticket {
     private final Set<Integer> numbers;
 
     public Ticket(Set<Integer> numbers){
-        sizeCheck(numbers.size());
-        rangeCheck(numbers);
+        Format.validateTicketSizeOf(numbers.size());
+        Format.validateNumberRangeOf(numbers);
         this.numbers = numbers;
     }
 
