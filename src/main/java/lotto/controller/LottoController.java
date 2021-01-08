@@ -54,11 +54,7 @@ public class LottoController {
     }
 
     private int getParseInt(String number) {
-        int num = Integer.parseInt(number);
-        if (num > MAX_VALUE || num < MIN_VALUE) {
-            throw new IllegalArgumentException("잘못된 숫자를 입력하셨습니다.");
-        }
-        return num;
+        return Integer.parseInt(number);
     }
 
     private String[] split(String numbersText) {

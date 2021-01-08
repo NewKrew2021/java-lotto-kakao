@@ -22,10 +22,14 @@ public class LottoNumber {
     }
 
     public static LottoNumber of(int number) {  // LottoNumber를 반환하는 정적 팩토리 메서드
+        if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
+            throw new IllegalArgumentException("잘못된 숫자를 입력하셨습니다.");
+        }
         return lottoNumberCache.get(number);
     }
 
     public int getNumber() {
         return number;
     }
+
 }
