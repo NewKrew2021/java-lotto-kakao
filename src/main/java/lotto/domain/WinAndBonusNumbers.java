@@ -6,12 +6,20 @@ import java.util.Objects;
 public class WinAndBonusNumbers {
 
     private final LottoNumbers winNumbers;
-    private final BonusNumber bonusNumber;
+    private final LottoNumber bonusNumber;
 
     public WinAndBonusNumbers(List<Integer> winNumbers, int bonusNumber) {
         validateWinAndBonusNumbers(winNumbers, bonusNumber);
         this.winNumbers = new LottoNumbers(winNumbers);
-        this.bonusNumber = new BonusNumber(bonusNumber);
+        this.bonusNumber = new LottoNumber(bonusNumber);
+    }
+
+    public LottoNumbers getWinNumbers() {
+        return this.winNumbers;
+    }
+
+    public LottoNumber getBonusNumber() {
+        return this.bonusNumber;
     }
 
     private void validateWinAndBonusNumbers(List<Integer> winNumbers, int bonusNumber) {
