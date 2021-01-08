@@ -2,11 +2,30 @@ package lotto.domain;
 
 import java.util.*;
 
-import lotto.StatisticsType;
+import lotto.view.LottoInputView;
+import lotto.view.LottoOutputView;
 
 public class LottoLogic {
+    static LottoInputView inputView;
 
-    public static List<LottoNos> makeRandomLottos(int howmany) {
+    static {
+        inputView = new LottoInputView();
+    }
+
+    public void play() {
+        int lottoCount = inputView.getLottoCountFromUser();
+        List<LottoNos> tickets = makeRandomLottos(lottoCount);
+        LottoOutputView.printLottoCount(tickets);
+
+        StatisticsResult result = LottoLogic.winningStatistics(tickets,
+                new WinningLottoNos(
+                        inputView.inputWinningNumbers(),
+                        inputView.inputBonusNumber()));
+        System.out.println(result.toString());
+        System.out.println(tickets.size());
+    }
+
+    private static List<LottoNos> makeRandomLottos(int howmany) {
         List<LottoNos> lottoTickets = new ArrayList<>();
         List<Integer> nums = makeLottoNumber();
         for (int i = 0; i < howmany; i++) {
@@ -24,10 +43,10 @@ public class LottoLogic {
         return nums;
     }
 
-    public static StatisticsResult winningStatistics(List<LottoNos> lottoTickets, WinningLottoNos winningLottoNos ) {
+    public static StatisticsResult winningStatistics(List<LottoNos> lottoTickets, WinningLottoNos winningLottoNos) {
         StatisticsResult statisticsResult = new StatisticsResult();
 
-        for (LottoNos lottoNos: lottoTickets) {
+        for (LottoNos lottoNos : lottoTickets) {
             statisticsResult.increaseTypeCount(winningLottoNos.isWinning(lottoNos));
         }
         return statisticsResult;

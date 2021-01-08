@@ -9,13 +9,15 @@ import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class LottoInputView {
-    private static Scanner sc = new Scanner(System.in);
-
+    private static Scanner sc;
     private static final int LOTTO_PRICE = 1000;
+    static {
+        sc = new Scanner(System.in);
+    }
 
-    public static int inputMoney() {
+    public int getLottoCountFromUser() {
         System.out.println("구입금액을 입력해 주세요.");
-        int count = sc.nextInt() / LOTTO_PRICE;
+        int count = new Scanner(System.in).nextInt() / LOTTO_PRICE;
         while (count <= 0) {
             System.out.println("구입금액을 잘못 입력하셨습니다. 다시 입력해주세요.");
             count = sc.nextInt() / LOTTO_PRICE;
@@ -23,18 +25,18 @@ public class LottoInputView {
         return count;
     }
 
-    public static List<Integer> inputWinningNumbers() {
+    public List<Integer> inputWinningNumbers() {
         List<Integer> nums;
         do{
             System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-            nums = Arrays.stream(sc.next().split(", "))
+            nums = Arrays.stream(sc.nextLine().split(", "))
                     .map((num) -> Integer.parseInt(num))
                     .collect(Collectors.toList());
         }while(!checkValidWinningNumber(nums));
         return nums;
     }
 
-    private static boolean checkValidWinningNumber(List<Integer> nums){
+    private boolean checkValidWinningNumber(List<Integer> nums){
         try{
             LottoNos lottoNos = new LottoNos(nums);
         } catch (Exception e){
@@ -44,7 +46,7 @@ public class LottoInputView {
         return true;
     }
 
-    public static int inputBonusNumber() {
+    public int inputBonusNumber() {
         int bonusNum;
         do{
             System.out.println("보너스 볼을 입력해 주세요.");
@@ -53,7 +55,7 @@ public class LottoInputView {
         return bonusNum;
     }
 
-    private static boolean checkValidBonusNumber(int bonusNum){
+    private boolean checkValidBonusNumber(int bonusNum){
         try{
             LottoNo lottoNo = new LottoNo(bonusNum);
         } catch (Exception e){

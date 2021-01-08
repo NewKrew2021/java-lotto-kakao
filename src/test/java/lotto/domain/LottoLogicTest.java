@@ -13,12 +13,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.*;
 public class LottoLogicTest {
 
     @Test
-    void lottoNosLengthValidTest() {
-        List<LottoNos> lottoTickets = LottoLogic.makeRandomLottos(10);
-        assertThat(lottoTickets.size()).isEqualTo(10);
-    }
-
-    @Test
     void statisticTest() {
         WinningLottoNos winningLottoNos = new WinningLottoNos(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
         LottoNos lottoNos2 = new LottoNos(Arrays.asList(1, 2, 9, 10, 11, 12)); // 2

@@ -13,7 +13,7 @@ public class LottoOutputView {
         }
     }
 
-    public static void printWinningStatistics(List<LottoNos> lottoTic) {
+    public static void printWinningStatistics(List<LottoNos> lottos) {
 
     }
 

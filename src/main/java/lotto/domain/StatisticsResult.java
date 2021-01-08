@@ -45,11 +45,10 @@ public class StatisticsResult {
     @Override
     public String toString() {
         return "3개 일치 (5,000원)-" + hashMap.get(StatisticsType.THREE) + "\n" +
-                "4개 일치 (50,000원)-" + hashMap.get(StatisticsType.THREE) + "\n" +
-                "5개 일치 (1,500,000원)-" + hashMap.get(StatisticsType.THREE) + "\n" +
-                "5개 일치, 보너스 볼 일치(30,000,000원)-" + hashMap.get(StatisticsType.THREE) + "\n" +
-                "6개 일치 (2,000,000,000원)-" + hashMap.get(StatisticsType.THREE) + "\n";
-
+                "4개 일치 (50,000원)-" + hashMap.get(StatisticsType.FOUR) + "\n" +
+                "5개 일치 (1,500,000원)-" + hashMap.get(StatisticsType.FIVE) + "\n" +
+                "5개 일치, 보너스 볼 일치(30,000,000원)-" + hashMap.get(StatisticsType.FIVE_WITH_BONUS) + "\n" +
+                "6개 일치 (2,000,000,000원)-" + hashMap.get(StatisticsType.SIX) + "\n";
     }
 
     private String benefit(int ticketCount) {
