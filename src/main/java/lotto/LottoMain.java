@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.*;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
 

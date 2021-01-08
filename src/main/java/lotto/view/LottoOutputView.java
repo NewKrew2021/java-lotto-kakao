@@ -1,9 +1,9 @@
 package lotto.view;
 
-import lotto.LottoGroup;
-import lotto.LottoResult;
-import lotto.PurchaseMoney;
-import lotto.Rank;
+import lotto.domain.LottoGroup;
+import lotto.domain.LottoResult;
+import lotto.domain.PurchaseMoney;
+import lotto.domain.Rank;
 
 public class LottoOutputView {
 
