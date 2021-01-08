@@ -23,17 +23,15 @@ public class LottoStatistics {
         return new StatisticsResult(results, rate);
     }
 
-    private TotalPrice getTotalPrice(MatchResults results) {
-        return new TotalPrice(results.getResultCounts()
-                .entrySet()
-                .stream()
-                .map(entry -> {
-                    MatchResult result = entry.getKey();
-                    int count = entry.getValue();
+    protected TotalPrice getTotalPrice(MatchResults results) {
+        long[] total = new long[1];
 
-                    return (long) result.getReward() * count;
-                })
-                .reduce(Long::sum)
-                .orElseThrow(NoSuchElementException::new));
+        results.delegate(resultCounter ->
+                total[0] = resultCounter.entrySet()
+                .stream()
+                .mapToLong(entry -> (long) entry.getKey().getReward() * entry.getValue())
+                .sum());
+
+        return new TotalPrice(total[0]);
     }
 }

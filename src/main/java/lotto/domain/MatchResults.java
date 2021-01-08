@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.function.Consumer;
 
 public class MatchResults {
     private Map<MatchResult, Integer> resultCounter;
@@ -12,8 +13,8 @@ public class MatchResults {
         }
     }
 
-    public Map<MatchResult, Integer> getResultCounts() {
-        return resultCounter;
+    public void delegate(Consumer<Map<MatchResult, Integer>> consumer) {
+        consumer.accept(resultCounter);
     }
 
     private void insertResult(MatchResult result) {

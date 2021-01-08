@@ -11,20 +11,16 @@ public class LottoMain {
     private static int ticketCount;
     private static InputView inputView;
     private static OutputView outputView;
-    private static LottoNumbers luckyNumber;
-    private static LottoNumber bonusNumber;
     private static LottoTickets tickets;
     private static WinningNumbers winningNumbers;
-    private static LottoMatcher lottoMatcher;
     private static MatchResults matchResults;
-    private static LottoStatistics statistics;
     private static InsertPrice insertPrice;
 
     public static void main(String[] args) {
         initializeIO();
         getUserInsertPrice();
         issueTicketsAndPrintAll();
-        getLuckyNumbersAndBonusNumber();
+        getWinningNumbers();
 
         matchUserTicketsToWinningTicket();
         printStatistics();
@@ -46,19 +42,15 @@ public class LottoMain {
         outputView.printLottoTickets(tickets);
     }
 
-    private static void getLuckyNumbersAndBonusNumber() {
-        luckyNumber = inputView.scanLuckyNumber();
-        bonusNumber = inputView.scanBonusNumber();
-        winningNumbers = new WinningNumbers(luckyNumber, bonusNumber);
+    private static void getWinningNumbers() {
+        winningNumbers = inputView.scanWinningNumbers();
     }
 
     private static void matchUserTicketsToWinningTicket() {
-        lottoMatcher = new LottoMatcher(winningNumbers);
-        matchResults = lottoMatcher.match(tickets);
+        matchResults = new LottoMatcher(winningNumbers).match(tickets);
     }
 
     private static void printStatistics() {
-        statistics = new LottoStatistics(matchResults, insertPrice);
-        outputView.printStatistics(statistics);
+        outputView.printStatistics(new LottoStatistics(matchResults, insertPrice));
     }
 }

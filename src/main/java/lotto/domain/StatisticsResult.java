@@ -2,21 +2,29 @@ package lotto.domain;
 
 import lotto.domain.dto.Rate;
 
+import java.util.Optional;
+
 public class StatisticsResult {
     private final MatchResults matchResults;
     private final Rate earningRate;
 
-    public StatisticsResult(MatchResults matchResults, Rate earningRate){
+    public StatisticsResult(MatchResults matchResults, Rate earningRate) {
         this.matchResults = matchResults;
         this.earningRate = earningRate;
     }
 
-    public MatchResults getMatchResults() {
-        return matchResults;
+    public int getResultCountOfSomeMatch(MatchResult matchResult) {
+        int[] count = new int[1];
+
+        matchResults.delegate(resultCounter ->
+                count[0] = Optional.ofNullable(resultCounter.get(matchResult))
+                        .orElse(0));
+
+        return count[0];
     }
 
-    public Rate getEarningRate() {
-        return earningRate;
+    public int getEarningRate() {
+        return earningRate.getRate();
     }
 
     @Override

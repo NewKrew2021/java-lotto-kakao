@@ -3,13 +3,14 @@ package lotto.view;
 import lotto.domain.*;
 
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class OutputView {
-    public static void printNumberOfLottoTickets(int ticketCount) {
-        System.out.printf("%d개를 구매했습니다.", ticketCount);
+    public void printNumberOfLottoTickets(int ticketCount) {
+        System.out.printf("%d개를 구매했습니다.\n", ticketCount);
     }
 
-    public static void printLottoTickets(LottoTickets lottoTickets) {
+    public void printLottoTickets(LottoTickets lottoTickets) {
         StringBuilder message = new StringBuilder();
 
         lottoTickets.getTickets()
@@ -19,42 +20,28 @@ public class OutputView {
                             .map(num -> Integer.toString(num))
                             .collect(Collectors.joining(", "));
 
-                    message.append("[")
-                            .append(numbers)
-                            .append("]")
-                            .append(System.lineSeparator());
+                    message.append(String.format("[%s]\n", numbers));
                 });
 
         System.out.println(message);
     }
 
-    public static void printStatistics(LottoStatistics statistics) {
+    public void printStatistics(LottoStatistics statistics) {
         StringBuilder message = new StringBuilder();
+        StatisticsResult statisticsResult = statistics.getStatisticsResult();
 
-        message.append("당첨 통계")
-                .append(System.lineSeparator())
+        message.append("당첨 통계\n")
                 .append("---------\n");
 
-        StatisticsResult statisticsResult = statistics.getStatisticsResult();
-        MatchResults matchResults = statisticsResult.getMatchResults();
-        Rate earningRate = statisticsResult.getEarningRate();
-
-        matchResults.getResultCounts()
-                .entrySet()
-                .stream()
-                .map(entry -> {
-                    MatchResult result = entry.getKey();
-                    int count = entry.getValue();
-
-                    return String.format("%d개 일치 (%d원) - %d개\n",
-                            result.getMatchCount(),
-                            result.getReward(),
-                            count);
+        Stream.of(MatchResult.values())
+                .filter(result -> result != MatchResult.NULL)
+                .map(result -> {
+                    int count = statisticsResult.getResultCountOfSomeMatch(result);
+                    return String.format("%s (%d원) - %d개%n", result.getInfo(), result.getReward(), count);
                 })
                 .forEach(message::append);
 
-        message.append(
-                String.format("총 수익률은 %d%%입니다.", earningRate.getRate()));
+        message.append(String.format("총 수익률은 %d%%입니다.", statisticsResult.getEarningRate()));
 
         System.out.println(message);
     }
