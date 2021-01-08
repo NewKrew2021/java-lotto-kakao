@@ -22,9 +22,8 @@ public class LottoMain {
 
         LottoRankingCount lottoRankingCount = LottoRankingCount.of(lottoTickets, winnerTicket);
 
-        //inputMoney를 없애는게 좋을 것 같음. Rate를 Revenue안으로 넣는다.
-        long lottoRevenue = new LottoRevenue(lottoRankingCount.getRankingCount()).getRevenue();
-        double lottoRevenueRate = ((double) (lottoRevenue - inputMoney) / inputMoney) * 100.0;
+        double lottoRevenueRate = LottoRevenue.from(lottoRankingCount).calculateRevenueRate(lottoGameCount);
+
 
     }
 }

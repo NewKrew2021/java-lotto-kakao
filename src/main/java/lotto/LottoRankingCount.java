@@ -11,7 +11,7 @@ public class LottoRankingCount {
         this.rankingCount = rankingCount;
     }
 
-    public static LottoRankingCount of(List<LottoNumbers> lottoTickets , WinnerTicket winnerTicket){
+    public static LottoRankingCount of(List<LottoNumbers> lottoTickets, WinnerTicket winnerTicket) {
         Map<LottoRanking, Integer> rankingCount = new HashMap<>();
 
         for (LottoNumbers lottoTicket : lottoTickets) {
@@ -22,7 +22,11 @@ public class LottoRankingCount {
         return new LottoRankingCount(rankingCount);
     }
 
-    public Map<LottoRanking, Integer> getRankingCount() {
-        return rankingCount;
+    public long calculateTotalPrice() {
+        long totalPrice = 0;
+        for (Map.Entry<LottoRanking, Integer> entry : rankingCount.entrySet()) {
+            totalPrice += entry.getKey().earnPrice(entry.getValue());
+        }
+        return totalPrice;
     }
 }
