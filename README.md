@@ -8,7 +8,7 @@
 ## 온라인 코드 리뷰 과정
 * [텍스트와 이미지로 살펴보는 온라인 코드 리뷰 과정](https://github.com/next-step/nextstep-docs/tree/master/codereview)
 
-##구현 클래스
+## 구현 클래스
 * controller
   * LottoGame : 로또 게임의 동작을 관리하는 컨트롤러
     
