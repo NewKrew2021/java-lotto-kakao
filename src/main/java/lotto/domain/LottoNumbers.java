@@ -17,6 +17,7 @@ public class LottoNumbers {
             throw new IllegalArgumentException(message);
         }
 
+        Collections.sort(lottoNumbers);
         this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
     }
 
