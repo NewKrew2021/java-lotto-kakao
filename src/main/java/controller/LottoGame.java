@@ -25,7 +25,7 @@ public class LottoGame {
 
     private int priceProcess() {
         LottoGameView.startMessage();
-        return LottoGameView.getPrice();
+        return LottoGameView.getInt();
     }
 
     private LottoTickets ticketProcess(int price) {
@@ -37,7 +37,7 @@ public class LottoGame {
 
     private Set<Number> winnerNumberProcess() {
         LottoGameView.insertWinnerNumber();
-        return Arrays.stream(sc.nextLine()
+        return Arrays.stream(LottoGameView.getStringLine()
                 .split(","))
                 .map(String::trim)
                 .map(Integer::parseInt)
@@ -46,6 +46,6 @@ public class LottoGame {
 
     private int bonusProcess() {
         LottoGameView.insertBonus();
-        return sc.nextInt();
+        return LottoGameView.getInt();
     }
 }

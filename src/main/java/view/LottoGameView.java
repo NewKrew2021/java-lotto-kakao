@@ -5,10 +5,14 @@ import java.util.Scanner;
 public class LottoGameView {
     private static final Scanner sc = new Scanner(System.in);
 
-    public static int getPrice() {
+    public static int getInt() {
         int num = sc.nextInt();
         sc.nextLine();
         return num;
+    }
+
+    public static String getStringLine() {
+        return sc.nextLine();
     }
 
     public static void print(String str) {
