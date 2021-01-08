@@ -1,6 +1,6 @@
 package utils;
 
-import lotto.domain.InsertPrice;
+import lotto.domain.dto.InsertPrice;
 import lotto.utils.TicketCountCalculator;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;

@@ -1,5 +1,9 @@
 package lotto.domain;
 
+import lotto.domain.dto.InsertPrice;
+import lotto.domain.dto.Rate;
+import lotto.domain.dto.TotalPrice;
+
 import java.util.NoSuchElementException;
 
 public class LottoStatistics {

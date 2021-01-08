@@ -1,6 +1,7 @@
 package lotto;
 
 import lotto.domain.*;
+import lotto.domain.dto.InsertPrice;
 import lotto.utils.RandomPickStrategy;
 import lotto.utils.TicketCountCalculator;
 import lotto.view.InputView;
@@ -8,6 +9,8 @@ import lotto.view.OutputView;
 
 public class LottoMain {
     private static int ticketCount;
+    private static InputView inputView;
+    private static OutputView outputView;
     private static LottoNumbers luckyNumber;
     private static LottoNumber bonusNumber;
     private static LottoTickets tickets;
@@ -18,6 +21,7 @@ public class LottoMain {
     private static InsertPrice insertPrice;
 
     public static void main(String[] args) {
+        initializeIO();
         getUserInsertPrice();
         issueTicketsAndPrintAll();
         getLuckyNumbersAndBonusNumber();
@@ -26,20 +30,25 @@ public class LottoMain {
         printStatistics();
     }
 
+    private static void initializeIO() {
+        inputView = new InputView();
+        outputView = new OutputView();
+    }
+
     private static void getUserInsertPrice() {
-        insertPrice = new InsertPrice(InputView.scanInsertPrice());
+        insertPrice = inputView.scanInsertPrice();
         ticketCount = TicketCountCalculator.getNumberOfTickets(insertPrice);
-        OutputView.printNumberOfLottoTickets(ticketCount);
+        outputView.printNumberOfLottoTickets(ticketCount);
     }
 
     private static void issueTicketsAndPrintAll() {
         tickets = LottoTicketIssuer.issue(new RandomPickStrategy(), ticketCount);
-        OutputView.printLottoTickets(tickets);
+        outputView.printLottoTickets(tickets);
     }
 
     private static void getLuckyNumbersAndBonusNumber() {
-        luckyNumber = InputView.scanLuckyNumber();
-        bonusNumber = InputView.scanBonusNumber();
+        luckyNumber = inputView.scanLuckyNumber();
+        bonusNumber = inputView.scanBonusNumber();
         winningNumbers = new WinningNumbers(luckyNumber, bonusNumber);
     }
 
@@ -50,6 +59,6 @@ public class LottoMain {
 
     private static void printStatistics() {
         statistics = new LottoStatistics(matchResults, insertPrice);
-        OutputView.printStatistics(statistics);
+        outputView.printStatistics(statistics);
     }
 }

@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.dto.Rate;
+
 public class StatisticsResult {
     private final MatchResults matchResults;
     private final Rate earningRate;

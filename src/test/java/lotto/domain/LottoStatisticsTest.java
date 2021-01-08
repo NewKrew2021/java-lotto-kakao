@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.dto.InsertPrice;
+import lotto.domain.dto.Rate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

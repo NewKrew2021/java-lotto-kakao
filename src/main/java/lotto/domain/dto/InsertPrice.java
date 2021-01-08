@@ -1,4 +1,4 @@
-package lotto.domain;
+package lotto.domain.dto;
 
 public class InsertPrice {
     private final int price;

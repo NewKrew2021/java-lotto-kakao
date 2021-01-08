@@ -1,6 +1,6 @@
 package lotto.utils;
 
-import lotto.domain.InsertPrice;
+import lotto.domain.dto.InsertPrice;
 import lotto.domain.LottoTicketIssuer;
 
 public class TicketCountCalculator {
