@@ -20,6 +20,10 @@ public class Lotto {
         this(new RandomNumberGenerator());
     }
 
+    public Lotto(Set<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = lottoNumbers;
+    }
+
     public boolean isContain(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
@@ -29,5 +33,9 @@ public class Lotto {
         return "[" + lottoNumbers.stream().map(LottoNumber::getNumber)
                 .map(no -> Integer.toString(no))
                 .collect(Collectors.joining(", ")) + "]";
+    }
+
+    public int matchCount(Lotto lotto) {
+        return (int) lottoNumbers.stream().filter(lottoNumber -> lotto.isContain(lottoNumber)).count();
     }
 }

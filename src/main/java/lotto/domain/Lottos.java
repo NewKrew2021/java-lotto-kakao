@@ -17,7 +17,7 @@ public class Lottos {
         return lottos.size();
     }
 
-    public Map<Rank, Integer> raffle(WinningNumber winningNumber, LottoNumber bonusNumber) {
+    public Map<Rank, Integer> raffle(Lotto winningNumber, LottoNumber bonusNumber) {
         Map<Rank, Integer> rankingsMap = new TreeMap<>();
         for (Lotto lotto : lottos) {
             int count = winningNumber.matchCount(lotto);

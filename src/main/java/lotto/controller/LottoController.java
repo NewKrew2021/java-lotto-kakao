@@ -8,15 +8,18 @@ import lotto.view.LottoUI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class LottoController {
-    public static final String SPLIT_DELIMITER = ",";
-    public static final int MAX_VALUE = 45;
-    public static final int MIN_VALUE = 1;
+    private static final String SPLIT_DELIMITER = ",";
+    private static final int MAX_VALUE = 45;
+    private static final int MIN_VALUE = 1;
 
     private Lottos lottos;
     private Money money;
+
+    private LottoNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
 
     public static void main(String[] args) {
         LottoController lottoController = new LottoController();
@@ -29,7 +32,9 @@ public class LottoController {
         List<Lotto> listLottos = new ArrayList<>();
 
         for (int i = 0; i < money.howMany(); i++) {
-            listLottos.add(new Lotto());
+            listLottos.add(new Lotto(new TreeSet<>(randomNumberGenerator.getNumbers().stream()
+                    .map(num -> LottoNumber.of(num))
+                    .collect(Collectors.toList()))));
         }
 
         lottos = new Lottos(listLottos);
@@ -38,9 +43,10 @@ public class LottoController {
 
     public void matchLotto() {
         String winningNumberText = LottoUI.getWinningNumberFromUser();
-        WinningNumber winningNumber = new WinningNumber(Arrays.stream(split(winningNumberText))
-                .map(number -> LottoNumber.of(getParseInt(number)))
-                .collect(Collectors.toSet()));
+        Lotto winningNumber = new Lotto(new TreeSet<>(Arrays.stream(split(winningNumberText))
+                .map(num -> LottoNumber.of(getParseInt(num)))
+                .collect(Collectors.toList())));
+
         LottoNumber bonusNumber = LottoNumber.of(LottoUI.getBonusNumberFromUser());
 
         Statistics statistics = new Statistics(lottos.raffle(winningNumber, bonusNumber));

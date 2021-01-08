@@ -29,7 +29,7 @@ public class LottosTest {
 
     @Test
     public void raffleTest() {
-        WinningNumber winningNumber = new WinningNumber(new HashSet(Arrays.asList(LottoNumber.of(1),
+        Lotto winningNumber = new Lotto(new HashSet(Arrays.asList(LottoNumber.of(1),
                 LottoNumber.of(2),
                 LottoNumber.of(3),
                 LottoNumber.of(4),
@@ -43,7 +43,7 @@ public class LottosTest {
 
     @Test
     void bonusTest() {
-        WinningNumber w = new WinningNumber(new HashSet(Arrays.asList(LottoNumber.of(1),
+        Lotto w = new Lotto(new HashSet(Arrays.asList(LottoNumber.of(1),
                 LottoNumber.of(2),
                 LottoNumber.of(3),
                 LottoNumber.of(4),
