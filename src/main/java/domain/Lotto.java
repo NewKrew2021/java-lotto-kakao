@@ -5,15 +5,22 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lotto {
-
+    private static final int BASE_LOTTO_LENGTH = 6;
     private List<Integer> lotto;
 
     public Lotto(List<Integer> lotto) {
+        lottoLengthNotSatisfied(lotto);
         this.lotto = lotto;
     }
 
     public List<Integer> getLotto() {
         return lotto;
+    }
+
+    private void lottoLengthNotSatisfied(List<Integer> lotto) {
+        if (lotto.size() != BASE_LOTTO_LENGTH) {
+            throw new IllegalStateException("로또의 길이가 6이 아닙니다.");
+        }
     }
 
     @Override

@@ -41,11 +41,18 @@ public class LottoSimulatorView {
         System.out.println("당첨 통계\n-----------");
 
         for (LottoStatus lottoStatus : LottoStatus.getLottoStatuses()) {
-            System.out.println(lottoStatus.getMatchedLottoNumberCount() +"개 일치 (" + lottoStatus.getWinngs()
-                    + "원)- " + lottoResult.get(lottoStatus) + " 개");
+            System.out.println(lottoStatus.getMatchedLottoNumberCount() + "개 일치" + printBonus(lottoStatus)
+                    + " (" + lottoStatus.getWinngs() + "원)- " + lottoResult.get(lottoStatus) + " 개");
         }
 
         System.out.println("총 수익률은 " + profit + "% 입니다.");
+    }
+
+    private String printBonus(LottoStatus lottoStatus) {
+        if (lottoStatus.getRank() == 2) {
+            return ", 보너스 볼 일치";
+        }
+        return "";
     }
 
 }
