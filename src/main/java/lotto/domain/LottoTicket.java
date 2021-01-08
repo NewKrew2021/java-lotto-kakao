@@ -4,10 +4,18 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
+    private static final int BALL_COUNT = 6;
     private Set<Number> numbers;
 
     public LottoTicket(Set<Number> numbers) {
+        checkBallCount(numbers);
         this.numbers = numbers;
+    }
+
+    private void checkBallCount(Set<Number> numbers) {
+        if(numbers.size() != BALL_COUNT) {
+            throw new IllegalArgumentException("로또 번호는 6개만 입력해 주세요.");
+        }
     }
 
     public boolean contains(Number number) {
