@@ -2,7 +2,6 @@ package lotto.domain.game;
 
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoNumbers;
-import lotto.domain.number.ManualInputStrategy;
 
 import java.util.List;
 
@@ -16,8 +15,7 @@ public class WinnerTicket {
     }
 
     public static WinnerTicket of(List<Integer> winnerNumbers, int bonusNumber) {
-        LottoNumbers lottoNumbers = LottoNumbers.from(new ManualInputStrategy(winnerNumbers));
-        return new WinnerTicket(lottoNumbers, LottoNumber.valueOf(bonusNumber));
+        return new WinnerTicket(LottoNumbers.from(winnerNumbers), LottoNumber.valueOf(bonusNumber));
     }
 
     public int countMatchingNumber(LottoNumbers lottoNumbers) {
