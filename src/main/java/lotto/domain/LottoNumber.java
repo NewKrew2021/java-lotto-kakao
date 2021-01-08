@@ -22,6 +22,9 @@ public class LottoNumber {
     }
 
     public static LottoNumber of(int number) {  // LottoNumber를 반환하는 정적 팩토리 메서드
+        if (number < MIN_LOTTO_NUMBER || MAX_LOTTO_NUMBER < number) {
+            throw new IllegalArgumentException("로또 번호는 1~45 사이의 정수여야 합니다.");
+        }
         return lottoNumberCache.get(number);
     }
 
