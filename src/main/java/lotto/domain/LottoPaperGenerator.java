@@ -1,0 +1,40 @@
+package lotto.domain;
+
+import lotto.dto.LottoNumberData;
+
+import java.util.*;
+
+public class LottoPaperGenerator {
+
+    private final static int TICKET_PRICE = 1000;
+    private final int inputMoney;
+
+    public LottoPaperGenerator(int inputMoney){
+        this.inputMoney = inputMoney;
+    }
+
+    public LottoPaper generateAuto(){
+        List<Set<Integer>> numbers = new ArrayList<>();
+        Random random = new Random();
+
+        for(int i = 0; i < inputMoney / TICKET_PRICE; i++) {
+            numbers.add(getAutomaticallyGeneratedNumbers(random));
+        }
+
+        return generateManually(new LottoNumberData(numbers));
+    }
+
+    private Set<Integer> getAutomaticallyGeneratedNumbers(Random random) {
+        Set<Integer> genNumbers = new HashSet<>();
+
+        do {
+            genNumbers.add(random.nextInt(45) + 1);
+        } while (genNumbers.size() < 6);
+
+        return genNumbers;
+    }
+
+    public LottoPaper generateManually(LottoNumberData enteredNumber){
+        return new LottoPaper(enteredNumber);
+    }
+}
