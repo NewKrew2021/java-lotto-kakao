@@ -17,7 +17,7 @@ public class WinnerTicket {
 
     public static WinnerTicket of(List<Integer> winnerNumbers, int bonusNumber) {
         LottoNumbers lottoNumbers = LottoNumbers.from(new ManualInputStrategy(winnerNumbers));
-        return new WinnerTicket(lottoNumbers, new LottoNumber(bonusNumber));
+        return new WinnerTicket(lottoNumbers, LottoNumber.valueOf(bonusNumber));
     }
 
     public LottoNumbers getWinnerNumbers() {

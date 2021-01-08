@@ -14,10 +14,10 @@ public class LottoNumberTest {
     @ValueSource(ints = {1, 45})
     void create(int number) {
         // when
-        LottoNumber lottoNumber = new LottoNumber(number);
+        LottoNumber lottoNumber = LottoNumber.valueOf(number);
 
         // then
-        assertThat(lottoNumber).isEqualTo(new LottoNumber(number));
+        assertThat(lottoNumber).isEqualTo(LottoNumber.valueOf(number));
     }
 
     @DisplayName("1~45 범위를 벗어나는 숫자가 주어졌을 때, 숫자로 로또 번호를 만들면, 예외가 발생한다")
@@ -27,7 +27,7 @@ public class LottoNumberTest {
         // then
         assertThatIllegalArgumentException()
                 // when
-                .isThrownBy(() -> new LottoNumber(number))
+                .isThrownBy(() -> LottoNumber.valueOf(number))
                 .withMessage("1~45 범위의 숫자만 허용됩니다");
     }
 }
