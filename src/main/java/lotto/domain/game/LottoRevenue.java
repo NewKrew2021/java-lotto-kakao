@@ -3,7 +3,6 @@ package lotto.domain.game;
 import lotto.domain.ranking.LottoRankingCount;
 
 public class LottoRevenue {
-    private static final double PERCENT = 100.0;
 
     private final long revenue;
 
@@ -17,7 +16,7 @@ public class LottoRevenue {
 
     public double calculateRevenueRate(LottoGameCount lottoGameCount) {
         int totalTicketMoney = lottoGameCount.calculateTotalTicketMoney();
-        return ((double) (revenue - totalTicketMoney) / totalTicketMoney) * PERCENT;
+        return (double) revenue / totalTicketMoney;
     }
 
     public long getRevenue() {
