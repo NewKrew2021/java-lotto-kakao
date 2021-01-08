@@ -5,7 +5,7 @@ import lotto.domain.Lottos;
 import java.util.Scanner;
 
 public class LottoUI {
-    private Scanner scanner;
+    private final Scanner scanner;
 
     public LottoUI() {
         scanner = new Scanner(System.in);

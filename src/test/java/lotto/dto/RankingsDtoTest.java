@@ -1,14 +1,15 @@
 package lotto.dto;
 
-import lotto.domain.Rank;
+import lotto.util.Rank;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 class RankingsDtoTest {
 
     @Test
+    @DisplayName("등수에 대한 당첨횟수를 추가한다.")
     void addRank() {
         RankingsDto rankingsDto = new RankingsDto();
         rankingsDto.addRank(Rank.FIRST);
