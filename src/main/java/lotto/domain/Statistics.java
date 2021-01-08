@@ -31,10 +31,6 @@ public class Statistics {
         prize = Arrays.asList(ZERO, RANK_ONE, RANK_TWO, RANK_THREE, RANK_FOUR, RANK_FIVE);
     }
 
-    public void addRank(Rank rank) {
-        rankings.addRank(rank);
-    }
-
     public int getRank(Rank rank) {
         return rankings.getRank(rank);
     }
@@ -44,13 +40,16 @@ public class Statistics {
     }
 
     private long getProfitAmount() {
-        return Rank.stream().mapToLong(this::getProfitPerRank).sum();
+        return Rank.stream()
+                .mapToLong(this::getProfitPerRank)
+                .sum();
     }
 
     private long getProfitPerRank(Rank rank) {
         return (long) rankings.getRank(rank) * prize.get(rank.getRank());
     }
 
+    //TODO UI로 옮기기
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

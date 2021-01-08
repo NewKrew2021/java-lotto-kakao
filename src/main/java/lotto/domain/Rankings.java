@@ -18,13 +18,6 @@ public class Rankings {
         this.rankings = rankings;
     }
 
-    public void addRank(Rank rank) {
-        if (rank.equals(Rank.BOOM)) {
-            return;
-        }
-        rankings.compute(rank, (k, v) -> v + 1);
-    }
-
     public int getRank(Rank rank) {
         return rankings.get(rank);
     }

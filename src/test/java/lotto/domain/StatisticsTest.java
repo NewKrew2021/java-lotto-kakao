@@ -19,10 +19,7 @@ public class StatisticsTest {
     void toStringTest() {
         Map m = new TreeMap<>();
         m.put(Rank.FIRST,3);
-        m.put(Rank.SECOND,0);
         m.put(Rank.THIRD,2);
-        m.put(Rank.FOURTH,0);
-        m.put(Rank.FIFTH,0);
         statistics = new Statistics(m);
         assertThat(statistics.toString())
                 .isEqualTo("3개 일치 (5000원)- 0개\n" +
@@ -34,16 +31,17 @@ public class StatisticsTest {
 
     @Test
     void getRankTest(){
-        statistics.addRank(Rank.FIRST);
-        statistics.addRank(Rank.FIRST);
-        statistics.addRank(Rank.FIRST);
+        Map m = new TreeMap<>();
+        m.put(Rank.FIRST,3);
+        statistics = new Statistics(m);
         assertThat(statistics.getRank(Rank.FIRST)).isEqualTo(3);
     }
 
     @Test
     void profitTest(){
-        statistics.addRank(Rank.FIRST);
-        statistics.addRank(Rank.FIRST);
+        Map m = new TreeMap<>();
+        m.put(Rank.FIRST,2);
+        statistics = new Statistics(m);
         assertThat(statistics.getProfitRate(new Money(14000))).isEqualTo(28571428);
     }
 }
