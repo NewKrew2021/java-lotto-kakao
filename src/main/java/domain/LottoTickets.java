@@ -17,20 +17,25 @@ public class LottoTickets {
         List<Integer> winningInfo = new ArrayList<>(Arrays.asList(0, 0, 0, 0, 0));
 
         for (LottoTicket lottoTicket : lottoTickets) {
-            int winningInfoIndex = 0;
-            int count = lottoWinningNumber.getMatchedCount(lottoTicket);
-
-            if ((count == 5 && lottoWinningNumber.isContainsBounusNumber(lottoTicket)) || count == 6) {
-                winningInfoIndex = 1;
-            }
-
-            winningInfoIndex += count - 3;
-            if (winningInfoIndex >= 0) {
-                winningInfo.set(winningInfoIndex, winningInfo.get(winningInfoIndex) + 1);
-            }
+            updateWinningInfo(lottoTicket, lottoWinningNumber, winningInfo);
         }
 
         return new WinningInfo(winningInfo);
+    }
+
+    private void updateWinningInfo(LottoTicket lottoTicket, LottoWinningNumber lottoWinningNumber, List<Integer> winningInfo){
+        int winningInfoIndex = 0;
+        int count = lottoTicket.getMatchedCount(lottoTicket);
+
+        if ((count == 5 && lottoWinningNumber.isContainsBounusNumber(lottoTicket)) || count == 6) {
+            winningInfoIndex = 1;
+        }
+
+        winningInfoIndex += count - 3;
+
+        if (winningInfoIndex >= 0) {
+            winningInfo.set(winningInfoIndex, winningInfo.get(winningInfoIndex) + 1);
+        }
     }
 
     public List<List<Integer>> getLottoTickets() {

@@ -21,9 +21,6 @@ public class LottoWinningNumber {
         }
     }
 
-    public int getMatchedCount(LottoTicket lottoTicket) {
-        return lottoTicket.getMatchedCount(lottoWinningTicket);
-    }
 
     public boolean isContainsBounusNumber(LottoTicket lottoTicket) {
         return lottoTicket.isContains(bonusNumber);
