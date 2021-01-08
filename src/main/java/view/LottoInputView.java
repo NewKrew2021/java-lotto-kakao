@@ -1,7 +1,5 @@
 package view;
 
-import com.sun.tools.jdeprscan.scan.Scan;
-import domain.Amount;
 import domain.LottoNumber;
 
 import java.util.Arrays;
@@ -16,7 +14,6 @@ public class LottoInputView {
     public static int inputAmount() {
         System.out.println("구입금액을 입력해 주세요.");
         return Integer.parseInt(sc.nextLine());
-//        return sc.nextInt();
     }
 
     public static List<LottoNumber> inputWinningNumbers() {

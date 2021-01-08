@@ -1,14 +1,12 @@
 package view;
 
 import domain.Amount;
-import domain.LottoTickets;
 import domain.WinningInfo;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class LottoOutputView {
-
 
     private static final String[] RESULT_FORMAT = {"3개 일치 (5000원) - %d개",
             "4개 일치 (50000원) - %d개",
@@ -49,7 +47,7 @@ public class LottoOutputView {
         sb.append("[");
         sb.append(lottoTicket
                 .stream()
-                .map(i->i.toString())
+                .map(i -> i.toString())
                 .collect(Collectors.joining(", "))).append("]");
         System.out.println(sb);
     }
