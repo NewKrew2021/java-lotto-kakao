@@ -1,15 +1,18 @@
 package lotto.domain;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lottery {
-    public static final int NONE = -1;
     public static final String MSG_DUPLICATED_LOTTERYNUMBER = "로또 숫자는 중복될 수 없습니다.";
     static final int LOTTERY_NUMBER_SIZE = 6;
-    public static final String MSG_WRONG_LOTTERY_LENGTH = String.format(
-            "로또 숫자의 길이는 %d이여야 합니다.", LOTTERY_NUMBER_SIZE);
+    public static final String MSG_WRONG_LOTTERY_LENGTH = "로또 숫자의 길이는 6이여야 합니다.";
 
     private final List<LotteryNumber> numbers;
 
@@ -66,7 +69,7 @@ public class Lottery {
         return false;
     }
 
-    public int checkRank(LotteryAnswer lotteryAnswer) {
+    public LotteryPrize checkRank(LotteryAnswer lotteryAnswer) {
         boolean bonus = numbers.contains(lotteryAnswer.getBonusNumber());
         int count = (int) lotteryAnswer.getLottery()
                 .numbers

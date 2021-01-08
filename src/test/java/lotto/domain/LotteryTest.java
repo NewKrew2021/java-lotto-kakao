@@ -18,7 +18,6 @@ public class LotteryTest {
     @Test
     void Lottery_자동_생성() {
         Lottery randomLottery = Lottery.createRandomLottery();
-
         assertThat(randomLottery).isEqualTo(randomLottery);
     }
 
@@ -55,31 +54,31 @@ public class LotteryTest {
 
     @Test
     void Lottery_당첨_3개일치_5등() {
-        int rank = playerLottery.checkRank(new LotteryAnswer(new int[]{1, 2, 3, 9, 10, 11}, 12));
-        assertThat(rank).isEqualTo(5);
+        LotteryPrize rank = playerLottery.checkRank(new LotteryAnswer(new int[]{1, 2, 3, 9, 10, 11}, 12));
+        assertThat(rank).isEqualTo(LotteryPrize.FIFTH);
     }
 
     @Test
     void Lottery_당첨_4개일치_4등() {
-        int rank = playerLottery.checkRank(new LotteryAnswer(new int[]{1, 2, 3, 4, 7, 8}, 10));
-        assertThat(rank).isEqualTo(4);
+        LotteryPrize rank = playerLottery.checkRank(new LotteryAnswer(new int[]{1, 2, 3, 4, 7, 8}, 10));
+        assertThat(rank).isEqualTo(LotteryPrize.FORTH);
     }
 
     @Test
     void Lottery_당첨_5개일치_3등() {
-        int rank = playerLottery.checkRank(new LotteryAnswer(new int[]{1, 2, 3, 4, 5, 7}, 10));
-        assertThat(rank).isEqualTo(3);
+        LotteryPrize rank = playerLottery.checkRank(new LotteryAnswer(new int[]{1, 2, 3, 4, 5, 7}, 10));
+        assertThat(rank).isEqualTo(LotteryPrize.THIRD);
     }
 
     @Test
     void Lottery_당첨_5개_보너스일치_2등() {
-        int rank = playerLottery.checkRank(new LotteryAnswer(new int[]{1, 2, 3, 4, 5, 7}, 6));
-        assertThat(rank).isEqualTo(2);
+        LotteryPrize rank = playerLottery.checkRank(new LotteryAnswer(new int[]{1, 2, 3, 4, 5, 7}, 6));
+        assertThat(rank).isEqualTo(LotteryPrize.SECOND);
     }
 
     @Test
     void Lottery_당첨_6개일치_1등() {
-        int rank = playerLottery.checkRank(new LotteryAnswer(new int[]{1, 2, 3, 4, 5, 6}, 7));
-        assertThat(rank).isEqualTo(1);
+        LotteryPrize rank = playerLottery.checkRank(new LotteryAnswer(new int[]{1, 2, 3, 4, 5, 6}, 7));
+        assertThat(rank).isEqualTo(LotteryPrize.FIRST);
     }
 }

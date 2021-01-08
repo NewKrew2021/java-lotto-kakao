@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.LotteryNumber;
+import lotto.exception.InvalidLotteryNumberException;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -9,9 +9,9 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 class LotteryNumberTest {
     @Test
     void LotteryNumber_유효하지않은수() {
-        assertThatExceptionOfType(IllegalArgumentException.class)
+        assertThatExceptionOfType(InvalidLotteryNumberException.class)
                 .isThrownBy(() -> new LotteryNumber(LotteryNumber.MIN_LOTTERYNUMBER - 1));
-        assertThatExceptionOfType(IllegalArgumentException.class)
+        assertThatExceptionOfType(InvalidLotteryNumberException.class)
                 .isThrownBy(() -> new LotteryNumber(LotteryNumber.MAX_LOTTERYNUMBER + 1));
     }
 

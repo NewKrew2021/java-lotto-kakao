@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.LotteryUtil;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -12,7 +11,7 @@ class LotteryUtilTest {
     @ParameterizedTest
     @CsvSource({"0, 0", "999, 0", "1000, 1", "1001,1", "1999, 1", "2000 , 2"})
     void LotteryUtil_구입가능_로또개수계산(int money, int count) {
-        int LotteryCount = LotteryUtil.calculateLotteryCount(money);
+        int LotteryCount = LotteryUtil.calculateLotteryCount(new Money(money));
         assertThat(LotteryCount).isEqualTo(count);
     }
 
@@ -26,7 +25,7 @@ class LotteryUtilTest {
 
     @Test
     void LotteryUtil_구입불가능_로또개수계산() {
-        assertThatExceptionOfType(IllegalArgumentException.class)
-                .isThrownBy(() -> LotteryUtil.calculateLotteryCount(-1));
+        assertThatExceptionOfType(NullPointerException.class)
+                .isThrownBy(() -> LotteryUtil.calculateLotteryCount(null));
     }
 }

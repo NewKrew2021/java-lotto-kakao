@@ -1,28 +1,26 @@
 package lotto.ui;
 
-import lotto.domain.Lottery;
-import lotto.domain.LotteryAnswer;
-import lotto.domain.LotteryNumber;
-import lotto.domain.LotteryUtil;
+import lotto.domain.*;
+import lotto.exception.InvalidLotteryNumberException;
 
 import java.util.Scanner;
 
 public class InputView {
     private static final Scanner sc = new Scanner(System.in);
 
-    public static int readMoney() {
+    public static Money readMoney() {
         try {
             printReadMoneyHelp();
-            int money = Integer.parseInt(sc.nextLine().trim());
-            System.out.printf("%d개를 구매했습니다", money);
+            Money money = new Money(Integer.parseInt(sc.nextLine().trim()));
+            System.out.printf("%d개를 구매했습니다", LotteryUtil.calculateLotteryCount(money));
             System.out.println();
             return money;
-        } catch (NumberFormatException e) {
-            System.out.println("돈을 올바른 형태로 입력해주세요 ex) 10000");
+        } catch (RuntimeException e) {
+            System.out.println(e.getMessage());
             return readMoney();
         } catch (Exception e) {
             handleUnknownError(e);
-            return -1;
+            return null;
         }
     }
 
@@ -31,7 +29,7 @@ public class InputView {
             Lottery numbers = getAnswerLotteryNumbers();
             LotteryNumber bonusBallNumber = getAnswerBonusNumber();
             return new LotteryAnswer(numbers, bonusBallNumber);
-        } catch (IllegalArgumentException e) {
+        } catch (RuntimeException e) {
             System.out.println(e.getMessage());
             return readLotteryAnswer();
         } catch (Exception e) {
@@ -56,7 +54,7 @@ public class InputView {
         try {
             lotteryNumber = Integer.parseInt(sc.nextLine().trim());
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("정상적인 정수 포맷을 입력하세요.");
+            throw new InvalidLotteryNumberException();
         }
         return new LotteryNumber(lotteryNumber);
 

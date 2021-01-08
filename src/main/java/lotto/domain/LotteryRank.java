@@ -4,20 +4,20 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class LotteryRank {
-    HashMap<Integer, Integer> lotteryRank;
+    HashMap<LotteryPrize, Integer> lotteryRank;
 
-    public LotteryRank(HashMap<Integer, Integer> ranks) {
+    public LotteryRank(HashMap<LotteryPrize, Integer> ranks) {
         lotteryRank = ranks;
     }
 
-    public int getnthCount(int nthRank) {
+    public int getnthCount(LotteryPrize nthRank) {
         return lotteryRank.getOrDefault(nthRank, 0);
     }
 
     public long getTotalIncome() {
         long total = 0;
-        for (int i = 0; i < LotteryUtil.WINNING_TABLE.length; i++) {
-            total += (long) LotteryUtil.WINNING_TABLE[i][1] * getnthCount(LotteryUtil.WINNING_TABLE[i][2]);
+        for (LotteryPrize prize : lotteryRank.keySet()) {
+            total += (long) prize.getRewardMoney() * getnthCount(prize);
         }
         return total;
     }

@@ -1,8 +1,10 @@
 package lotto.ui;
 
 import lotto.domain.Lotteries;
+import lotto.domain.LotteryPrize;
 import lotto.domain.LotteryRank;
-import lotto.domain.LotteryUtil;
+
+import java.util.Arrays;
 
 public class OutputView {
     public static void printLotteries(Lotteries lotteries) {
@@ -14,12 +16,10 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("-------");
 
-        for (int i = 0; i < 5; i++) {
-            System.out.println(String.format(
-                    "%s %d개",
-                    LotteryUtil.WINNING_MSG[i],
-                    lotteryRank.getnthCount(LotteryUtil.WINNING_TABLE[i][2])));
-        }
+        Arrays.stream(LotteryPrize.values()).
+                filter(lotteryPrize -> lotteryPrize != LotteryPrize.NONE).
+                forEach(lotteryPrize -> System.out.println(lotteryPrize.makeLotteryPrizeMessage(lotteryPrize) +
+                        lotteryRank.getnthCount(lotteryPrize) + "개"));
     }
 
     public static void printProfitRate(int profit) {

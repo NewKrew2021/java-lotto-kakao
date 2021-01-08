@@ -18,13 +18,12 @@ public class Lotteries {
     }
 
     public LotteryRank calculateRank(LotteryAnswer lotteryAnswer) {
-        HashMap<Integer, Integer> ranks = new HashMap<>();
-        for (int i = 1; i <= 5; i++) {
-            ranks.put(i, 0);
+        HashMap<LotteryPrize, Integer> ranks = new HashMap<>();
+        for (LotteryPrize value : LotteryPrize.values()) {
+            ranks.put(value,0);
         }
-        ranks.put(Lottery.NONE, 0);
         for (Lottery lottery : lotteries) {
-            int rank = lottery.checkRank(lotteryAnswer);
+            LotteryPrize rank = lottery.checkRank(lotteryAnswer);
             ranks.put(rank, ranks.get(rank) + 1);
         }
         return new LotteryRank(ranks);
