@@ -8,14 +8,14 @@ public class LottoGame {
     private final Money money;
     private final TotalUserBuyNumbers totalUserBuyNumbers;
 
-    public LottoGame(int money) {
-        this.money = new Money(money);
+    public LottoGame(Money money) {
+        this.money = money;
         this.totalUserBuyNumbers = new TotalUserBuyNumbers();
     }
 
-    public List<List<String>> buyLotto() {
+    public List<List<String>> buyLotto(GenerateStrategy generateStrategy) {
         for (int i = 0; i < money.possibleNumberBuy(); i++) {
-            totalUserBuyNumbers.addBuyNumbers(NumberGenerator.generateBuyNumbers(new RandomGenerateStrategy()));
+            totalUserBuyNumbers.addBuyNumbers(NumberGenerator.generateBuyNumbers(generateStrategy));
         }
         return totalUserBuyNumbers.convertToString();
     }
