@@ -7,15 +7,15 @@ public class WinningNumberSet {
     private final Lotto winningLotto;
     private final Ball bonusBall;
 
-    public WinningNumberSet(Lotto winningLotto, Ball bonusBall){
+    public WinningNumberSet(Lotto winningLotto, Ball bonusBall) {
         this.winningLotto = winningLotto;
         this.bonusBall = bonusBall;
-        if(bonusBall.isDuplicated(winningLotto)){
+        if (bonusBall.isDuplicated(winningLotto)) {
             throw new IllegalArgumentException("보너스볼에는 당첨 번호가 포함되어서는 안된다.");
         }
     }
 
-    public Rank compare(List<Ball> balls){
+    public Rank compare(List<Ball> balls) {
         int matchedCount = winningLotto.compareWithBalls(balls);
         boolean hasBonus = balls.contains(bonusBall);
         return Rank.createRank(matchedCount, hasBonus);

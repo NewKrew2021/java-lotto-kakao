@@ -12,11 +12,11 @@ public class LottoOutputView {
     }
 
     public static void outputLottoGroup(LottoGroup lottoGroup) {
-        System.out.println("[" + lottoGroup.toString().replace("\n","]\n[") + "]");
+        System.out.println("[" + lottoGroup.toString().replace("\n", "]\n[") + "]");
         System.out.println();
     }
 
-    public static void outputLottoResult(LottoResult lottoResult, PurchaseMoney purchaseMoney){
+    public static void outputLottoResult(LottoResult lottoResult, PurchaseMoney purchaseMoney) {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
         System.out.println(getRankResult(lottoResult, Rank.FIFTH));
@@ -27,7 +27,7 @@ public class LottoOutputView {
         System.out.println("총 수익률은 " + lottoResult.getProfitRatio(purchaseMoney) + "%입니다.");
     }
 
-    private static String getRankResult(LottoResult lottoResult, Rank rank){
+    private static String getRankResult(LottoResult lottoResult, Rank rank) {
         return rank.getDescription() + " (" + rank.getPrize() + "원) - " + lottoResult.getRankCount(rank) + "개";
     }
 

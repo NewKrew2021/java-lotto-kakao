@@ -37,9 +37,9 @@ public class LottoGroup {
 
     @Override
     public String toString() {
-       return lottoGroup.stream()
-               .map(Lotto::toString)
-               .collect(Collectors.joining("\n"));
+        return lottoGroup.stream()
+                .map(Lotto::toString)
+                .collect(Collectors.joining("\n"));
     }
 
     @Override

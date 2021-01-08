@@ -4,6 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class LottoInputView {
+
     private final static Scanner scanner = new Scanner(System.in);
 
     public static int inputPurchaseMoney() {
