@@ -15,9 +15,9 @@ public class WinningNumberSet {
         }
     }
 
-    public Rank compare(List<LottoNumber> lottoNumbers) {
-        int matchedCount = winningLotto.compareWithLottoNumbers(lottoNumbers);
-        boolean hasBonus = lottoNumbers.contains(bonusLottoNumber);
+    public Rank compareWithLotto(Lotto lotto) {
+        int matchedCount = lotto.compareWithCounter(winningLotto);
+        boolean hasBonus = lotto.contains(bonusLottoNumber);
         return Rank.createRank(matchedCount, hasBonus);
     }
 

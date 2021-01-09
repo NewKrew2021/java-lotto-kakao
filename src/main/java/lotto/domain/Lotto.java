@@ -54,7 +54,11 @@ public class Lotto {
     }
 
     public Rank compareWithWinning(WinningNumberSet winningNumberSet) {
-        return winningNumberSet.compare(lottoNumbers);
+        return winningNumberSet.compareWithLotto(this);
+    }
+
+    public int compareWithCounter(Lotto lotto){
+        return lotto.compareWithLottoNumbers(lottoNumbers);
     }
 
     public int compareWithLottoNumbers(List<LottoNumber> counterLottoNumbers) {
