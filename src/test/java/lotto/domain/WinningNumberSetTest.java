@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.Ball;
-import lotto.domain.Lotto;
-import lotto.domain.WinningNumberSet;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,9 +12,9 @@ public class WinningNumberSetTest {
     @DisplayName("WinningNumberSet 클래스에 올바른 입력이 주어졌을 때 정상적으로 생성되는지 확인한다.")
     void createTest() {
         Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
-        Ball bonusBall = Ball.createBall("7");
-        WinningNumberSet winningNumberSet = new WinningNumberSet(winningLotto, bonusBall);
-        assertThat(winningNumberSet).isEqualTo(new WinningNumberSet(winningLotto, bonusBall));
+        LottoNumber bonusLottoNumber = LottoNumber.createLottoNumber("7");
+        WinningNumberSet winningNumberSet = new WinningNumberSet(winningLotto, bonusLottoNumber);
+        assertThat(winningNumberSet).isEqualTo(new WinningNumberSet(winningLotto, bonusLottoNumber));
     }
 
     @Test
@@ -25,8 +22,8 @@ public class WinningNumberSetTest {
     void duplicateTest() {
         assertThatThrownBy(() -> {
             Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
-            Ball bonusBall = Ball.createBall("1");
-            WinningNumberSet winningNumberSet = new WinningNumberSet(winningLotto, bonusBall);
+            LottoNumber bonusLottoNumber = LottoNumber.createLottoNumber("1");
+            WinningNumberSet winningNumberSet = new WinningNumberSet(winningLotto, bonusLottoNumber);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

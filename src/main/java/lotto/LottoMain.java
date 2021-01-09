@@ -13,8 +13,8 @@ public class LottoMain {
         LottoOutputView.outputLottoGroup(lottoGroup);
 
         Lotto winningLotto = new Lotto(LottoInputView.inputWinningLotto());
-        Ball bonusBall = Ball.createBall(LottoInputView.inputBonusBall());
-        WinningNumberSet winningNumberSet = new WinningNumberSet(winningLotto, bonusBall);
+        LottoNumber bonusLottoNumber = LottoNumber.createLottoNumber(LottoInputView.inputBonusBall());
+        WinningNumberSet winningNumberSet = new WinningNumberSet(winningLotto, bonusLottoNumber);
 
         LottoResult lottoResult = lottoGroup.getLottoResult(winningNumberSet);
         LottoOutputView.outputLottoResult(lottoResult, purchaseMoney);

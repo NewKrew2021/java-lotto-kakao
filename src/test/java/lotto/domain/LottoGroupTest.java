@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -31,8 +30,8 @@ public class LottoGroupTest {
         LottoGroup lottoGroup = new LottoGroup(lottos);
 
         Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
-        Ball bonusBall = Ball.createBall("7");
-        WinningNumberSet winningNumberSet = new WinningNumberSet(winningLotto, bonusBall);
+        LottoNumber bonusLottoNumber = LottoNumber.createLottoNumber("7");
+        WinningNumberSet winningNumberSet = new WinningNumberSet(winningLotto, bonusLottoNumber);
 
         LottoResult lottoResult = lottoGroup.getLottoResult(winningNumberSet);
         assertThat(lottoResult.getRankCount(Rank.FIRST)).isEqualTo(1);

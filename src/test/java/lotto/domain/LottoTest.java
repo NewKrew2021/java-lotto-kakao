@@ -2,8 +2,6 @@ package lotto.domain;
 
 import java.util.*;
 
-import lotto.domain.Ball;
-import lotto.domain.Lotto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -36,25 +34,25 @@ public class LottoTest {
     }
 
     @Test
-    @DisplayName("Lotto 안에 특정 볼이 포함되었는지 확인하는 containsBall 메서드 테스트한다.")
-    void containsBallTest() {
-        Ball includedBall = Ball.createBall("3");
-        Ball excludedBall = Ball.createBall("7");
+    @DisplayName("Lotto 안에 특정 로또 숫자가 포함되었는지 확인하는 contains 메서드 테스트한다.")
+    void containsLottoNumberTest() {
+        LottoNumber includedLottoNumber = LottoNumber.createLottoNumber("3");
+        LottoNumber excludedLottoNumber = LottoNumber.createLottoNumber("7");
         Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
-        assertThat(lotto.contains(includedBall)).isTrue();
-        assertThat(lotto.contains(excludedBall)).isFalse();
+        assertThat(lotto.contains(includedLottoNumber)).isTrue();
+        assertThat(lotto.contains(excludedLottoNumber)).isFalse();
     }
 
     @Test
-    @DisplayName("List<Ball>가 주어졌을 때 일치하는 볼 개수를 구하는 compareWithBalls 메서드를 테스트한다.")
-    void compareWithBallsTest() {
-        List<Ball> balls = Arrays.asList(Ball.createBall("1"),
-                Ball.createBall("2"),
-                Ball.createBall("3"),
-                Ball.createBall("4"),
-                Ball.createBall("5"),
-                Ball.createBall("6"));
+    @DisplayName("List<LottoNumber>가 주어졌을 때 일치하는 로또 숫자의 개수를 구하는 compareWithLottoNumber 메서드를 테스트한다.")
+    void compareWithLottoNumbersTest() {
+        List<LottoNumber> lottoNumbers = Arrays.asList(LottoNumber.createLottoNumber("1"),
+                LottoNumber.createLottoNumber("2"),
+                LottoNumber.createLottoNumber("3"),
+                LottoNumber.createLottoNumber("4"),
+                LottoNumber.createLottoNumber("5"),
+                LottoNumber.createLottoNumber("6"));
         Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
-        assertThat(lotto.compareWithBalls(balls)).isEqualTo(6);
+        assertThat(lotto.compareWithLottoNumbers(lottoNumbers)).isEqualTo(6);
     }
 }

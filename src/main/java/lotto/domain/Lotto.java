@@ -8,60 +8,60 @@ public class Lotto {
 
     public static final int COUNT_OF_NUMBERS = 6;
 
-    private final List<Ball> lottoBalls;
+    private final List<LottoNumber> lottoLottoNumbers;
 
     public Lotto(String lottoText) {
-        List<Ball> lottoNumbers = parseLottoText(lottoText);
+        List<LottoNumber> lottoNumbers = parseLottoText(lottoText);
 
         checkDuplicate(lottoNumbers);
         checkCount(lottoNumbers);
 
-        this.lottoBalls = lottoNumbers;
+        this.lottoLottoNumbers = lottoNumbers;
     }
 
-    private void checkDuplicate(List<Ball> lottoNumbers) {
+    private void checkDuplicate(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.stream().distinct().count() < lottoNumbers.size()) {
             throw new IllegalArgumentException("로또번호 중복이 있어서는 안된다.");
         }
     }
 
-    private void checkCount(List<Ball> lottoNumbers) {
+    private void checkCount(List<LottoNumber> lottoNumbers) {
         if (lottoNumbers.size() != COUNT_OF_NUMBERS) {
             throw new IllegalArgumentException("로또번호는 6개여야 합니다.");
         }
     }
 
     public Lotto(GenerateStrategy strategy) {
-        this.lottoBalls = strategy.generate().stream()
-                .map(Ball::createBall)
+        this.lottoLottoNumbers = strategy.generate().stream()
+                .map(LottoNumber::createLottoNumber)
                 .collect(Collectors.toList());
     }
 
-    private List<Ball> parseLottoText(String lottoText) {
+    private List<LottoNumber> parseLottoText(String lottoText) {
         return Arrays.stream(lottoText.split(","))
                 .map(String::trim)
-                .map(Ball::createBall)
+                .map(LottoNumber::createLottoNumber)
                 .collect(Collectors.toList());
     }
 
-    public boolean contains(Ball ball) {
-        return lottoBalls.contains(ball);
+    public boolean contains(LottoNumber lottoNumber) {
+        return lottoLottoNumbers.contains(lottoNumber);
     }
 
     public Rank compareWithWinning(WinningNumberSet winningNumberSet) {
-        return winningNumberSet.compare(lottoBalls);
+        return winningNumberSet.compare(lottoLottoNumbers);
     }
 
-    public int compareWithBalls(List<Ball> counterBalls) {
+    public int compareWithLottoNumbers(List<LottoNumber> counterLottoNumbers) {
         return 2 * COUNT_OF_NUMBERS
-                - (int) Stream.concat(lottoBalls.stream(), counterBalls.stream()).distinct().count();
+                - (int) Stream.concat(lottoLottoNumbers.stream(), counterLottoNumbers.stream()).distinct().count();
     }
 
     @Override
     public String toString() {
-        return lottoBalls.stream()
+        return lottoLottoNumbers.stream()
                 .sorted()
-                .map(Ball::toString)
+                .map(LottoNumber::toString)
                 .collect(Collectors.joining(", "));
     }
 
@@ -70,11 +70,11 @@ public class Lotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Lotto lotto = (Lotto) o;
-        return Objects.equals(lottoBalls, lotto.lottoBalls);
+        return Objects.equals(lottoLottoNumbers, lotto.lottoLottoNumbers);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(lottoBalls);
+        return Objects.hash(lottoLottoNumbers);
     }
 }

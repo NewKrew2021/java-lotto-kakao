@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class RankTest {
 
     @ParameterizedTest
-    @DisplayName("매치되는 볼 개수와 보너스볼 여부에 따라 랭크가 정상적으로 생성되는지 확인한다.")
+    @DisplayName("매치되는 로또 번호 개수와 보너스볼 여부에 따라 랭크가 정상적으로 생성되는지 확인한다.")
     @CsvSource({"6, false, FIRST",
             "5, true, SECOND",
             "5, false, THIRD",
