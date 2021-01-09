@@ -34,4 +34,13 @@ public class LottoNumberTest {
             LottoNumber lottoNumber = LottoNumber.valueOf(lottoNumberString);
         }).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("LottoNumber 대소관계를 나타내는 compareTo 메서드를 테스트한다.")
+    void compareToTest() {
+        String smaller = "1";
+        String greater = "3";
+        assertThat(LottoNumber.valueOf(smaller)).isLessThan(LottoNumber.valueOf(greater));
+        assertThat(LottoNumber.valueOf(greater)).isGreaterThan(LottoNumber.valueOf(smaller));
+    }
 }
