@@ -21,17 +21,23 @@ public class LottoGame {
         return userBuyNumbers.convertToString();
     }
 
-//    public LottoResultDTO checkLotto(WinAndBonusNumbers winAndBonusNumbers) {
+    public LottoResultDTO checkLotto(WinAndBonusNumbers winAndBonusNumbers) {
+        List<RankState> eachLottoResult = userBuyNumbers.checkLottoResult(winAndBonusNumbers);
+
 //        LottoResult lottoResult = new LottoResult();
 //        LottoResultDTO lottoResultDto = new LottoResultDTO();
 //        lottoResultDto.setRankCount(lottoResult.checkLottoResult(this.totalUserBuyNumbers, winAndBonusNumbers));
 //        lottoResultDto.setProfitRate(lottoResult.checkProfitRate(money));
-//
-////        lottoResult.setRankCount(totalUserBuyNumbers.checkLottoResult(winAndBonusNumbers));
-////        lottoResult.setProfitRate(totalUserBuyNumbers.checkProfitRate(winAndBonusNumbers));
 //        return lottoResult.getLottoResult();
-//    }
+        return new LottoResultDTO();
+    }
+    /*
+    // List<RankState> --> LottoResult(생성자로 넘기기 or 메소드로 넘기기) --> LottoResult 안에 카운트 리스트, 수익률
 
+    두가지 방법
+            *****1. resultCalculator 의 public method에 List<RankState>, Money를 넘겨서 List<integer> 순이익? 을 얻고 이것을 DTO로 만들어 checkLotto 의 리턴값으로 사용
+            2. 계산로직은 LottoGame 내,혹은 별도의 클래스에서 계싼하고, DTO사용 없이 LottoResult 라는 녀석에
+    */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -15,13 +15,29 @@ public class UserBuyNumbers {
         this.userBuyNumbers.add(lottoNumbers);
     }
 
-//    public List<Integer> checkLottoResult(WinAndBonusNumbers winAndBonusNumbers) {
-//        List<RankState> rankStates = new ArrayList<>();
-//        for (LottoNumbers lottoNumbers : userBuyNumbers) {
-//            rankStates.add(lottoNumbers.calculateRank(winAndBonusNumbers));
-//        }
-//        return tansformToWinCount(rankStates);
-//    }
+    public List<RankState> checkLottoResult(WinAndBonusNumbers winAndBonusNumbers) {
+        List<RankState> rankStates = new ArrayList<>();
+        for (LottoNumbers lottoNumbers : this.userBuyNumbers) {
+            int matchCount = lottoNumbers.getMatchCountWith(winAndBonusNumbers.getWinNumbers());
+            boolean bonusMatched = lottoNumbers.isContains(winAndBonusNumbers.getBonusNumber());
+            rankStates.add(CalculateRank(matchCount, bonusMatched));
+        }
+        return rankStates;
+    }
+
+    private RankState CalculateRank(int matchCount, boolean bonusMatched) {
+        if (matchCount == 6)
+            return RankState.FIRST;
+        if (matchCount == 5 && bonusMatched)
+            return RankState.SECOND;
+        if (matchCount == 5)
+            return RankState.THIRD;
+        if (matchCount == 4)
+            return RankState.FOURTH;
+        if (matchCount == 3)
+            return RankState.FIFTH;
+        return RankState.FAIL;
+    }
 
     public List<List<String>> convertToString() {
         List<List<String>> allNumbers = new ArrayList<>();
