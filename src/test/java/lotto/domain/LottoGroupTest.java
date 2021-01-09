@@ -14,8 +14,8 @@ public class LottoGroupTest {
     @DisplayName("LottoGroup 클래스에 올바른 입력이 주어졌을 때 정상적으로 생성되는지 확인한다.")
     void createTest() {
         List<Lotto> lottos = Arrays.asList(
-                new Lotto("1, 2, 3, 4, 5, 6"),
-                new Lotto("1, 2, 3, 4, 5, 7"));
+                Lotto.createLottoWithText("1, 2, 3, 4, 5, 6"),
+                Lotto.createLottoWithText("1, 2, 3, 4, 5, 7"));
 
         LottoGroup lottoGroup = new LottoGroup(lottos);
         assertThat(lottoGroup).isEqualTo(new LottoGroup(lottos));
@@ -25,12 +25,12 @@ public class LottoGroupTest {
     @DisplayName("당첨번호 세트(당첨번호+보너스볼)이 주어졌을 때, 당첨 결과를 올바르게 구하는지 확인한다.")
     void getLottoResultTest() {
         List<Lotto> lottos = Arrays.asList(
-                new Lotto("1, 2, 3, 4, 5, 6"),
-                new Lotto("1, 2, 3, 4, 5, 7"));
+                Lotto.createLottoWithText("1, 2, 3, 4, 5, 6"),
+                Lotto.createLottoWithText("1, 2, 3, 4, 5, 7"));
         LottoGroup lottoGroup = new LottoGroup(lottos);
 
-        Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
-        LottoNumber bonusLottoNumber = LottoNumber.createLottoNumber("7");
+        Lotto winningLotto = Lotto.createLottoWithText("1, 2, 3, 4, 5, 6");
+        LottoNumber bonusLottoNumber = LottoNumber.valueOf("7");
         WinningNumberSet winningNumberSet = new WinningNumberSet(winningLotto, bonusLottoNumber);
 
         LottoResult lottoResult = lottoGroup.getLottoResult(winningNumberSet);

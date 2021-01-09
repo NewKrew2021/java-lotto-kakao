@@ -12,8 +12,8 @@ public class LottoMain {
         LottoGroup lottoGroup = LottoGroup.createRandomLottoGroup(purchaseMoney.getLottoAmount());
         LottoOutputView.outputLottoGroup(lottoGroup);
 
-        Lotto winningLotto = new Lotto(LottoInputView.inputWinningLotto());
-        LottoNumber bonusLottoNumber = LottoNumber.createLottoNumber(LottoInputView.inputBonusBall());
+        Lotto winningLotto = Lotto.createLottoWithText(LottoInputView.inputWinningLotto());
+        LottoNumber bonusLottoNumber = LottoNumber.valueOf(LottoInputView.inputBonusBall());
         WinningNumberSet winningNumberSet = new WinningNumberSet(winningLotto, bonusLottoNumber);
 
         LottoResult lottoResult = lottoGroup.getLottoResult(winningNumberSet);

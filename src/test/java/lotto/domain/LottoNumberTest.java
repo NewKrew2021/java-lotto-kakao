@@ -13,15 +13,16 @@ public class LottoNumberTest {
     @Test
     @DisplayName("LottoNumber 클래스에 올바른 입력이 주어졌을 때 정상적으로 생성되는지 확인한다.")
     void createTest() {
-        LottoNumber lottoNumber = LottoNumber.createLottoNumber("3");
-        assertThat(lottoNumber).isEqualTo(LottoNumber.createLottoNumber("3"));
+        LottoNumber lottoNumber = LottoNumber.valueOf("3");
+        assertThat(lottoNumber).isEqualTo(LottoNumber.valueOf("3"));
+        assertThat(lottoNumber).isSameAs(LottoNumber.valueOf("3"));
     }
 
     @Test
     @DisplayName("LottoNumber 클래스에 정수가 아닌 문자열이 주어졌을 때 예외가 발생한다.")
     void integerTest() {
         assertThatThrownBy(() -> {
-            LottoNumber lottoNumber = LottoNumber.createLottoNumber("a");
+            LottoNumber lottoNumber = LottoNumber.valueOf("a");
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -30,7 +31,7 @@ public class LottoNumberTest {
     @CsvSource({"0", "46"})
     void rangeTest(String lottoNumberString) {
         assertThatThrownBy(() -> {
-            LottoNumber lottoNumber = LottoNumber.createLottoNumber(lottoNumberString);
+            LottoNumber lottoNumber = LottoNumber.valueOf(lottoNumberString);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

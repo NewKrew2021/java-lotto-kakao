@@ -15,8 +15,8 @@ public class LottoTest {
     @Test
     @DisplayName("Lotto 클래스에 올바른 입력이 주어졌을 때 정상적으로 생성되는지 확인한다.")
     void createTest() {
-        Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
-        assertThat(lotto).isEqualTo(new Lotto("1, 2, 3, 4, 5, 6"));
+        Lotto lotto = Lotto.createLottoWithText("1, 2, 3, 4, 5, 6");
+        assertThat(lotto).isEqualTo(Lotto.createLottoWithText("1, 2, 3, 4, 5, 6"));
     }
 
     @ParameterizedTest
@@ -29,16 +29,16 @@ public class LottoTest {
             "1, 1, 2, 3, 4, 5, 6"})
     void checkLottoValidationTest(String lottoText) {
         assertThatThrownBy(() -> {
-            Lotto lotto = new Lotto(lottoText);
+            Lotto lotto = Lotto.createLottoWithText(lottoText);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     @DisplayName("Lotto 안에 특정 로또 숫자가 포함되었는지 확인하는 contains 메서드 테스트한다.")
     void containsLottoNumberTest() {
-        LottoNumber includedLottoNumber = LottoNumber.createLottoNumber("3");
-        LottoNumber excludedLottoNumber = LottoNumber.createLottoNumber("7");
-        Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
+        LottoNumber includedLottoNumber = LottoNumber.valueOf("3");
+        LottoNumber excludedLottoNumber = LottoNumber.valueOf("7");
+        Lotto lotto = Lotto.createLottoWithText("1, 2, 3, 4, 5, 6");
         assertThat(lotto.contains(includedLottoNumber)).isTrue();
         assertThat(lotto.contains(excludedLottoNumber)).isFalse();
     }
@@ -46,13 +46,13 @@ public class LottoTest {
     @Test
     @DisplayName("List<LottoNumber>가 주어졌을 때 일치하는 로또 숫자의 개수를 구하는 compareWithLottoNumber 메서드를 테스트한다.")
     void compareWithLottoNumbersTest() {
-        List<LottoNumber> lottoNumbers = Arrays.asList(LottoNumber.createLottoNumber("1"),
-                LottoNumber.createLottoNumber("2"),
-                LottoNumber.createLottoNumber("3"),
-                LottoNumber.createLottoNumber("4"),
-                LottoNumber.createLottoNumber("5"),
-                LottoNumber.createLottoNumber("6"));
-        Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
+        List<LottoNumber> lottoNumbers = Arrays.asList(LottoNumber.valueOf("1"),
+                LottoNumber.valueOf("2"),
+                LottoNumber.valueOf("3"),
+                LottoNumber.valueOf("4"),
+                LottoNumber.valueOf("5"),
+                LottoNumber.valueOf("6"));
+        Lotto lotto = Lotto.createLottoWithText("1, 2, 3, 4, 5, 6");
         assertThat(lotto.compareWithLottoNumbers(lottoNumbers)).isEqualTo(6);
     }
 }

@@ -23,9 +23,10 @@ public class LottoGroup {
 
     public static LottoGroup createRandomLottoGroup(int count) {
         List<Lotto> lottos = new ArrayList<>();
+        RandomGenerateStrategy randomGenerateStrategy = new RandomGenerateStrategy();
 
         for (int i = 0; i < count; i++) {
-            lottos.add(new Lotto(new RandomGenerateStrategy()));
+            lottos.add(Lotto.createLottoRandomly(randomGenerateStrategy));
         }
 
         return new LottoGroup(lottos);
