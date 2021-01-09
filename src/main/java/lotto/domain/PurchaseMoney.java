@@ -8,7 +8,6 @@ public class PurchaseMoney {
 
     public PurchaseMoney(int money) {
         checkRange(money);
-        checkMultiple(money);
         this.money = money;
     }
 
@@ -19,12 +18,6 @@ public class PurchaseMoney {
     private void checkRange(int money) {
         if (money <= 0) {
             throw new IllegalArgumentException("구입 금액은 양수여야 한다.");
-        }
-    }
-
-    private void checkMultiple(int money) {
-        if (money % LOTTO_PRICE != 0) {
-            throw new IllegalArgumentException("구입 금액은 1000의 배수여야 한다.");
         }
     }
 

@@ -20,7 +20,7 @@ public class PurchaseMoneyTest {
 
     @ParameterizedTest
     @DisplayName("PurchaseMoney 클래스에 잘못된 입력이 주어졌을 때 예외가 발생하는지 확인한다.")
-    @ValueSource(ints = {1500, -1000})
+    @ValueSource(ints = {-1000, 0})
     void inputTest(int money) {
         assertThatThrownBy(() -> {
             new PurchaseMoney(money);
