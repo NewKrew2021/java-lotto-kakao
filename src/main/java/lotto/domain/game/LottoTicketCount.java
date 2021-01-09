@@ -3,7 +3,7 @@ package lotto.domain.game;
 public class LottoTicketCount {
 
     public static final String LOTTO_MONEY_EXCEPTION_MESSAGE = "1000원 단위이며 양의 정수로 된 금액만 허용됩니다.";
-    private static final int UNIT_OF_MONEY = 1000;
+    public static final int UNIT_OF_MONEY = 1000;
 
     private final int ticketCount;
     private int remainCount;
