@@ -9,7 +9,7 @@ public class LottoNumbers {
 
     public static final String LOTTO_TICKET_EXCEPTION_MESSAGE = "중복된 숫자는 허용되지 않고, 로또 번호의 개수가 6개여야 합니다.";
     public static final int LOTTO_TICKET_LENGTH = 6;
-
+    //List 보단 Set 이 나을 것 같다는 생, 또한 입력된 번호는 모두 정렬되어있어야 한다.
     private final List<LottoNumber> lottoNumbers;
 
     private LottoNumbers(List<LottoNumber> lottoNumbers) {
@@ -26,7 +26,7 @@ public class LottoNumbers {
 
         return new LottoNumbers(lottoNumbers);
     }
-
+    //Duplicate를 Set으로 줄일 수 있음. (첨부터 없는 과정으로 할 수 있을 것이라 보임
     private void validateDuplicate(List<LottoNumber> lottoNumbers) {
         Set<LottoNumber> distinctNumbers = new HashSet<>(lottoNumbers);
         if (distinctNumbers.size() != lottoNumbers.size()) {

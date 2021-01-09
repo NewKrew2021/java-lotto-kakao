@@ -15,6 +15,7 @@ class RandomGenerateStrategyTest {
     void create(){
         //given
         NumberGenerateStrategy strategy = new RandomGenerateStrategy();
+
         //when
         List<Integer> randomNumbers = strategy.generate();
 

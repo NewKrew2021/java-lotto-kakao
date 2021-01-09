@@ -17,3 +17,4 @@ public enum LottoBonusType {
         return bonusMatching.apply(bonus);
     }
 }
+//Function의 이름과 apply보다 좋은 이름에 대해서 고민해본다.

@@ -13,14 +13,21 @@ public class RandomGenerateStrategy implements NumberGenerateStrategy {
     private static final int MAX_NUMBER_RANGE = 45;
     private static final int MIN_NUMBER_RANGE = 1;
 
+    private static class GenerateNumberCache{
+        private static final List<Integer> cache = new ArrayList<>();
+
+        static {
+            for (int i = MIN_NUMBER_RANGE; i <= MAX_NUMBER_RANGE; i++) {
+                cache.add(i);
+            }
+        }
+    }
+
     @Override
     public List<Integer> generate() {
-        List<Integer> randomNumbers = new ArrayList<>();
-        for (int i = MIN_NUMBER_RANGE; i <= MAX_NUMBER_RANGE; i++) {
-            randomNumbers.add(i);
-        }
-        Collections.shuffle(randomNumbers);
 
-        return randomNumbers.subList(0, LOTTO_TICKET_LENGTH);
+        Collections.shuffle(GenerateNumberCache.cache);
+
+        return GenerateNumberCache.cache.subList(0, LOTTO_TICKET_LENGTH);
     }
 }

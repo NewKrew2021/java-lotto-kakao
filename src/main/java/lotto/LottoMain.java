@@ -17,7 +17,7 @@ import java.util.List;
 
 public class LottoMain {
     public static void main(String[] args) {
-
+        //main에 들어가 있는 로직을 컨트롤러로서 최대한 분리해주도록 노력해보자
         LottoGameCount lottoGameCount = new LottoGameCount(InputView.inputMoney());
         OutputView.printTicketCount(lottoGameCount.getTicketCount());
 

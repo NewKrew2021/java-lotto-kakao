@@ -5,6 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import static lotto.domain.number.LottoNumber.LOTTO_NUMBER_EXCEPTION_MESSAGE;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -28,6 +29,6 @@ public class LottoNumberTest {
         assertThatIllegalArgumentException()
                 // when
                 .isThrownBy(() -> LottoNumber.valueOf(number))
-                .withMessage("1~45 범위의 숫자만 허용됩니다");
+                .withMessage(LOTTO_NUMBER_EXCEPTION_MESSAGE);
     }
 }
