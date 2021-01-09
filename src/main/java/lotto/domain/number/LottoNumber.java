@@ -3,7 +3,7 @@ package lotto.domain.number;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LottoNumber {
+public class LottoNumber implements Comparable<LottoNumber> {
 
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
@@ -15,6 +15,7 @@ public class LottoNumber {
     }
 
     private static class LottoNumberCache {
+
         static final List<LottoNumber> cache = new ArrayList<>();
 
         static {
@@ -22,14 +23,19 @@ public class LottoNumber {
                 cache.add(new LottoNumber(i));
             }
         }
-    }
 
+    }
     public static LottoNumber valueOf(int number) {
         try {
             return LottoNumberCache.cache.get(number - 1);
         } catch (IndexOutOfBoundsException e) {
             throw new IllegalArgumentException("1~45 범위의 숫자만 허용됩니다");
         }
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return number - o.number;
     }
 
     public int getNumber() {
