@@ -11,6 +11,7 @@ import java.util.function.Function;
 
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
+import static lotto.domain.game.LottoTicketCount.UNIT_OF_MONEY;
 
 public class LottoStatistics {
 
@@ -47,7 +48,7 @@ public class LottoStatistics {
     }
 
     public LottoRevenueRate calculateRevenueRate() {
-        return LottoRevenueRate.of(calculateTotalPrice(), countTicket());
+        return LottoRevenueRate.of(calculateTotalPrice(), countTicket() * UNIT_OF_MONEY);
     }
 
     private long calculateTotalPrice() {
