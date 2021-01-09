@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.Constant;
 import lotto.StatisticsType;
 
 import java.util.HashMap;
@@ -56,7 +57,7 @@ public class StatisticsResult {
         for( StatisticsType type : StatisticsType.values() ) {
             sumPrice += priceHash.get(type) * hashMap.get(type);
         }
-        sumPrice = sumPrice / ticketCount * 1000;
+        sumPrice = sumPrice / (ticketCount * Constant.LOTTO_PRICE);
         return "총 수익률은 " + sumPrice + "입니다";
     }
 
