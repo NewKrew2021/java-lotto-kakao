@@ -10,7 +10,7 @@ public class WinningNumberSet {
     public WinningNumberSet(Lotto winningLotto, LottoNumber bonusLottoNumber) {
         this.winningLotto = winningLotto;
         this.bonusLottoNumber = bonusLottoNumber;
-        if (bonusLottoNumber.isDuplicated(winningLotto)) {
+        if (winningLotto.contains(bonusLottoNumber)) {
             throw new IllegalArgumentException("보너스볼에는 당첨 번호가 포함되어서는 안된다.");
         }
     }
