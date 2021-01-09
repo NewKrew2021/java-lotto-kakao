@@ -30,10 +30,6 @@ public class LottoWinningNumber {
         return lottoTicket.isContains(bonusNumber);
     }
 
-    public List<Integer> getLottoWinningTicket() {
-        return lottoWinningTicket.getLottoTicketInfo();
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

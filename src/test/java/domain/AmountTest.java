@@ -1,6 +1,7 @@
 package domain;
 
 import domain.exceptions.InvalidAmountException;
+import dto.Amount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

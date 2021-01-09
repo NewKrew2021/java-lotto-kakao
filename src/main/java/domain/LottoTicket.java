@@ -11,6 +11,12 @@ public class LottoTicket {
 
     private final List<LottoNumber> numbers;
 
+    private LottoTicket(List<LottoNumber> numbers) {
+        validateDuplicate(numbers);
+
+        this.numbers = numbers;
+    }
+
     public static LottoTicket ofLottoNumber(List<LottoNumber> numbers) {
         return new LottoTicket(numbers);
     }
@@ -25,11 +31,6 @@ public class LottoTicket {
         return new LottoTicket(numbers);
     }
 
-    private LottoTicket(List<LottoNumber> numbers) {
-        validateDuplicate(numbers);
-
-        this.numbers = numbers;
-    }
 
     private void validateDuplicate(List<LottoNumber> numbers) {
         Set<LottoNumber> numbersSet = new HashSet<>(numbers);

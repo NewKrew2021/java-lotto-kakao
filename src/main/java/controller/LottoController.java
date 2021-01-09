@@ -1,6 +1,7 @@
 package controller;
 
 import domain.*;
+import dto.Amount;
 import view.LottoInputView;
 import view.LottoOutputView;
 

@@ -1,6 +1,6 @@
 package view;
 
-import domain.Amount;
+import dto.Amount;
 import domain.WinningInfo;
 
 import java.util.List;
