@@ -21,42 +21,28 @@ public class LottoNumbersTest {
     @Test
     void create() {
         //given
-        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5, 6);
+        List<Integer> numbers = Arrays.asList(2, 1, 3, 5, 4, 6);
 
         //when
         LottoNumbers lottoNumbers = LottoNumbers.from(numbers);
 
         //then
-        List<LottoNumber> expected = Arrays.asList(
-                LottoNumber.valueOf(1),
-                LottoNumber.valueOf(2),
-                LottoNumber.valueOf(3),
-                LottoNumber.valueOf(4),
-                LottoNumber.valueOf(5),
-                LottoNumber.valueOf(6)
-        );
-        assertThat(lottoNumbers.getLottoNumbers()).isEqualTo(expected);
+        assertThat(lottoNumbers.getLottoNumbers()).extracting(LottoNumber::getNumber)
+                .isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 
     @DisplayName("숫자를 생성하는 전략이 주어졌을 때 로또 티켓을 생성한다.")
     @Test
     void create2() {
         //given
-        NumberGenerateStrategy strategy = () -> Arrays.asList(1, 2, 3, 4, 5, 6);
+        NumberGenerateStrategy strategy = () -> Arrays.asList(3, 2, 1, 5, 4, 6);
 
         //when
         LottoNumbers lottoNumbers = LottoNumbers.from(strategy);
 
         //then
-        List<LottoNumber> expected = Arrays.asList(
-                LottoNumber.valueOf(1),
-                LottoNumber.valueOf(2),
-                LottoNumber.valueOf(3),
-                LottoNumber.valueOf(4),
-                LottoNumber.valueOf(5),
-                LottoNumber.valueOf(6)
-        );
-        assertThat(lottoNumbers.getLottoNumbers()).isEqualTo(expected);
+        assertThat(lottoNumbers.getLottoNumbers()).extracting(LottoNumber::getNumber)
+                .isEqualTo(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 
     @DisplayName("중복된 숫자가 있는 6개의 로또 넘버가 주어 졌을 때 로또 티켓을 생성하면 예외가 발생된다.")
