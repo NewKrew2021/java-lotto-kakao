@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.*;
 
+import lotto.input.BuyingMoneyValidInputGuaranteer;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
 
@@ -22,7 +23,7 @@ public class LottoLogic {
                         inputView.inputWinningNumbers(),
                         inputView.inputBonusNumber()));
         System.out.println(result.toString());
-        System.out.println(tickets.size());
+        System.out.println(result.benefit(tickets.size()));
     }
 
     private static List<LottoNos> makeRandomLottos(int howmany) {
