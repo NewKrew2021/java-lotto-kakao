@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertAll;
 
-class LottoBonusApplicableTest {
+class BonusConditionTest {
 
     @DisplayName("보너스 번호가 포함되어있다면(참이라면) 로또 보너스에 적용되는지 여부를 판단한다.")
     @Test
@@ -15,9 +15,9 @@ class LottoBonusApplicableTest {
         boolean bonus = true;
 
         //when
-        boolean resultTrue = LottoBonusApplicable.TRUE.apply(bonus);
-        boolean resultFalse = LottoBonusApplicable.FALSE.apply(bonus);
-        boolean resultDontCare = LottoBonusApplicable.DONT_CARE.apply(bonus);
+        boolean resultTrue = BonusCondition.SHOULD_CONTAIN_BONUS.findConditionOf(bonus);
+        boolean resultFalse = BonusCondition.NOT_CONTAIN_BONUS.findConditionOf(bonus);
+        boolean resultDontCare = BonusCondition.DONT_CARE.findConditionOf(bonus);
 
         //then
         assertAll(
@@ -34,9 +34,9 @@ class LottoBonusApplicableTest {
         boolean bonus = false;
 
         //when
-        boolean resultTrue = LottoBonusApplicable.TRUE.apply(bonus);
-        boolean resultFalse = LottoBonusApplicable.FALSE.apply(bonus);
-        boolean resultDontCare = LottoBonusApplicable.DONT_CARE.apply(bonus);
+        boolean resultTrue = BonusCondition.SHOULD_CONTAIN_BONUS.findConditionOf(bonus);
+        boolean resultFalse = BonusCondition.NOT_CONTAIN_BONUS.findConditionOf(bonus);
+        boolean resultDontCare = BonusCondition.DONT_CARE.findConditionOf(bonus);
 
         //then
         assertAll(
