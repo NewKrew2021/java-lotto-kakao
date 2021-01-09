@@ -17,7 +17,7 @@ public class LottoTicket {
 
     public static LottoTicket ofIntegerNumber(List<Integer> integerNumbers) {
         List<LottoNumber> numbers = Optional.ofNullable(integerNumbers)
-                .orElseThrow(InvalidLottoNumberException::new)
+                .orElseThrow(() -> new InvalidLottoNumberException("null일 수 없습니다."))
                 .stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
@@ -38,7 +38,7 @@ public class LottoTicket {
 
     private void validateLength(Collection<LottoNumber> numbers) {
         if (numbers == null || numbers.size() != LOTTO_NUMBERS_LENGTH) {
-            throw new InvalidLottoNumberException();
+            throw new InvalidLottoNumberException("로또 번호가 중복이거나 개수가 올바르지 않습니다.");
         }
     }
 

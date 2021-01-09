@@ -16,7 +16,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private void validate(int number) {
         if (number < LOWER_BOUND|| number > UPPER_BOUND) {
-            throw new InvalidLottoNumberException();
+            throw new InvalidLottoNumberException("로또 번호는 "+LOWER_BOUND+"이상 "+UPPER_BOUND+"이하 이여야 합니다.");
         }
     }
 

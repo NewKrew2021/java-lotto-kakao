@@ -22,4 +22,13 @@ public class AmountTest {
         assertThatExceptionOfType(InvalidAmountException.class)
                 .isThrownBy(() -> new Amount(999));
     }
+
+    @Test
+    @DisplayName("input이 숫자가 아니면 NumberFormatException을 던진다.")
+    public void testInputIsNotNumber(){
+        assertThatExceptionOfType(NumberFormatException.class)
+                .isThrownBy(()->new Amount(Integer.parseInt("")));
+        assertThatExceptionOfType(NumberFormatException.class)
+                .isThrownBy(()->new Amount(Integer.parseInt("a")));
+    }
 }
