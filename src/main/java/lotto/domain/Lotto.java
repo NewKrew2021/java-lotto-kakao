@@ -10,7 +10,7 @@ public class Lotto {
 
     private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<LottoNumber> lottoNumbers){
+    public Lotto(List<LottoNumber> lottoNumbers) {
         this.lottoNumbers = lottoNumbers;
     }
 
@@ -57,7 +57,7 @@ public class Lotto {
         return winningNumberSet.compareWithLotto(this);
     }
 
-    public int compareWithCounter(Lotto lotto){
+    public int compareWithCounter(Lotto lotto) {
         return lotto.compareWithLottoNumbers(lottoNumbers);
     }
 

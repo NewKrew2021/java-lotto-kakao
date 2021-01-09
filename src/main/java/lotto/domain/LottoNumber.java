@@ -46,7 +46,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     private static boolean outOfRange(int lottoNumber) {
         return 1 > lottoNumber || lottoNumber > 45;
     }
-    
+
     @Override
     public String toString() {
         return String.valueOf(lottoNumber);
