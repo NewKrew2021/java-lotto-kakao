@@ -12,14 +12,24 @@ public class RandomLottoNumberGenerator implements NumberGenerateStrategy {
 
     private static final int FIRST_INDEX = 0;
 
-    @Override
-    public List<Integer> generate() {
+    private final List<Integer> lottoNumberPools;
+
+    private RandomLottoNumberGenerator(List<Integer> lottoNumberPools) {
+        this.lottoNumberPools = Collections.synchronizedList(lottoNumberPools);
+    }
+
+    public static RandomLottoNumberGenerator initialize() {
         List<Integer> randomNumbers = new ArrayList<>();
         for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
             randomNumbers.add(i);
         }
-        Collections.shuffle(randomNumbers);
 
-        return randomNumbers.subList(FIRST_INDEX, LOTTO_TICKET_LENGTH);
+        return new RandomLottoNumberGenerator(randomNumbers);
+    }
+
+    @Override
+    public List<Integer> generate() {
+        Collections.shuffle(lottoNumberPools);
+        return lottoNumberPools.subList(FIRST_INDEX, LOTTO_TICKET_LENGTH);
     }
 }

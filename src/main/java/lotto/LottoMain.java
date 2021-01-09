@@ -32,7 +32,7 @@ public class LottoMain {
     }
 
     private static List<LottoNumbers> buyLottoTickets(LottoTicketCount lottoTicketCount) {
-        NumberGenerateStrategy randomGenerateStrategy = new RandomLottoNumberGenerator();
+        NumberGenerateStrategy randomGenerateStrategy = RandomLottoNumberGenerator.initialize();
 
         List<LottoNumbers> lottoTickets = new ArrayList<>();
         while (lottoTicketCount.isTicketRemain()) {
