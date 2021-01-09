@@ -9,10 +9,11 @@ public class LottoTicket {
 
     public static final int LOTTO_NUMBERS_LENGTH = 6;
 
-    private final List<LottoNumber> numbers;
+    private final TreeSet<LottoNumber> numbers;
 
-    private LottoTicket(List<LottoNumber> numbers) {
-        validateDuplicate(numbers);
+    private LottoTicket(List<LottoNumber> lottoNumbers) {
+        TreeSet<LottoNumber> numbers = new TreeSet<>(lottoNumbers);
+        validateLength(numbers);
 
         this.numbers = numbers;
     }
@@ -29,12 +30,6 @@ public class LottoTicket {
                 .collect(Collectors.toList());
 
         return new LottoTicket(numbers);
-    }
-
-
-    private void validateDuplicate(List<LottoNumber> numbers) {
-        Set<LottoNumber> numbersSet = new HashSet<>(numbers);
-        validateLength(numbersSet);
     }
 
     private void validateLength(Collection<LottoNumber> numbers) {

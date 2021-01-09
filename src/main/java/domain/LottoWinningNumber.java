@@ -2,7 +2,6 @@ package domain;
 
 import domain.exceptions.InvalidLottoNumberException;
 
-import java.util.List;
 import java.util.Objects;
 
 public class LottoWinningNumber {
