@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.Arrays;
+import java.util.Map;
 
 public enum Ranking {
     FIFTH(3, false, 5000),
@@ -24,6 +25,14 @@ public enum Ranking {
                 .filter(ranking -> (ranking.matchCount == matchCountount) && ranking.matchBonus == matchBonus)
                 .findFirst()
                 .orElse(null);
+    }
+    
+    public static long getReward(Map<Ranking, Integer> statistics){
+        long reward = 0;
+        for (Ranking ranking : statistics.keySet()) {
+            reward += ranking.prize * statistics.get(ranking);
+        }
+        return reward;
     }
 
 }
