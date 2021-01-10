@@ -31,13 +31,13 @@ public final class InputView {
 
         return new LottoNumbers(parseToIntegers(SC.nextLine())
                 .stream()
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toList()));
     }
 
     private LottoNumber scanBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return new LottoNumber(tryToParseInt(SC.nextLine()));
+        return LottoNumber.valueOf(tryToParseInt(SC.nextLine()));
     }
 
     private int tryToParseInt(final String value) {

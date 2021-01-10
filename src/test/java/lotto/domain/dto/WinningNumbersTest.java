@@ -17,9 +17,9 @@ public class WinningNumbersTest {
     @BeforeEach
     void setUp() {
         luckyNumbers = new LottoNumbers(Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toList()));
-        bonusNumber = new LottoNumber(7);
+        bonusNumber = LottoNumber.valueOf(7);
         winningNumbers = new WinningNumbers(luckyNumbers, bonusNumber);
     }
 
@@ -30,7 +30,7 @@ public class WinningNumbersTest {
 
     @Test
     void bonusIsDuplicatedShouldThrowError() {
-        bonusNumber = new LottoNumber(6);
+        bonusNumber = LottoNumber.valueOf(6);
         assertThatThrownBy(() -> new WinningNumbers(luckyNumbers, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class);
     }
@@ -39,21 +39,21 @@ public class WinningNumbersTest {
     void testGetLuckyNumbers() {
         assertThat(winningNumbers.getLuckyNumbers())
                 .isEqualTo(new LottoNumbers(Stream.of(1, 2, 3, 4, 5, 6)
-                        .map(LottoNumber::new)
+                        .map(LottoNumber::valueOf)
                         .collect(Collectors.toList())));
 
         assertThat(winningNumbers.getLuckyNumbers())
                 .isNotEqualTo(new LottoNumbers(Stream.of(1, 2, 3, 4, 5, 7)
-                        .map(LottoNumber::new)
+                        .map(LottoNumber::valueOf)
                         .collect(Collectors.toList())));
     }
 
     @Test
     void testGetBonusNumber() {
         assertThat(winningNumbers.getBonusNumber())
-                .isEqualTo(new LottoNumber(7));
+                .isEqualTo(LottoNumber.valueOf(7));
 
         assertThat(winningNumbers.getBonusNumber())
-                .isNotEqualTo(new LottoNumber(6));
+                .isNotEqualTo(LottoNumber.valueOf(6));
     }
 }

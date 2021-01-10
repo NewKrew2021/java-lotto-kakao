@@ -13,7 +13,7 @@ public class RandomPickStrategy implements NumberPickStrategy {
         List<LottoNumber> digits = IntStream
             .rangeClosed(LottoNumber.LOWER_BOUND, LottoNumber.UPPER_BOUND)
             .boxed()
-            .map(LottoNumber::new)
+            .map(LottoNumber::valueOf)
             .collect(Collectors.toList());
 
         Collections.shuffle(digits);

@@ -15,10 +15,10 @@ public class LottoNumbersTest {
     @Test
     void isEqualAndValid() {
         List<LottoNumber> ticket = Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
         List<LottoNumber> numbersWithDifferentOrder = Stream.of(6, 5, 4, 3, 2, 1)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
         LottoNumbers lottoNumbers = new LottoNumbers(ticket);
 
@@ -29,7 +29,7 @@ public class LottoNumbersTest {
     @Test
     void testDelegate() {
         List<LottoNumber> ticket = Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
         LottoNumbers lottoNumbers = new LottoNumbers(ticket);
 
@@ -41,10 +41,10 @@ public class LottoNumbersTest {
     @Test
     void shouldNotBeEqual() {
         List<LottoNumber> originalNumbers = Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
         List<LottoNumber> differentNumbers = Stream.of(1, 2, 3, 4, 5, 7)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
         LottoNumbers lottoNumbers = new LottoNumbers(originalNumbers);
 
@@ -56,17 +56,17 @@ public class LottoNumbersTest {
     @CsvSource({"1,true", "7,false"})
     void testContains(int number, boolean expected) {
         List<LottoNumber> ticket = Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
 
         assertThat(new LottoNumbers(ticket)
-                .contains(new LottoNumber(number))).isEqualTo(expected);
+                .contains(LottoNumber.valueOf(number))).isEqualTo(expected);
     }
 
     @Test
     void duplicateNumbersShouldThrowError() {
         List<LottoNumber> ticket = Stream.of(1, 2, 3, 4, 5, 5)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
 
         assertThatThrownBy(() -> new LottoNumbers(ticket))
@@ -76,7 +76,7 @@ public class LottoNumbersTest {
     @Test
     void fiveElementsShouldThrowError() {
         List<LottoNumber> ticket = Stream.of(1, 2, 3, 4, 5)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
 
         assertThatThrownBy(() -> new LottoNumbers(ticket))

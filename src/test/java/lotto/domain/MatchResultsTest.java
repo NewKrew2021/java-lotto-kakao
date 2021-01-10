@@ -15,9 +15,9 @@ public class MatchResultsTest {
     @Test
     void matchesAreCorrect() {
         LottoNumbers luckyNumbers = new LottoNumbers(Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toList()));
-        LottoNumber bonusNumber = new LottoNumber(7);
+        LottoNumber bonusNumber = LottoNumber.valueOf(7);
         WinningNumbers winningNumbers = new WinningNumbers(luckyNumbers, bonusNumber);
         LottoMatcher lottoMatcher = new LottoMatcher(winningNumbers);
 
@@ -73,7 +73,7 @@ public class MatchResultsTest {
 
     private List<LottoNumber> customLottoNumbers(int... parameters) {
         return Arrays.stream(parameters)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toList());
     }
 }

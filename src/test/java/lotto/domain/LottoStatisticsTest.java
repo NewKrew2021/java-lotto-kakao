@@ -24,9 +24,9 @@ public class LottoStatisticsTest {
     @BeforeEach
     void setUp() {
         luckyNumbers = new LottoNumbers(Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toList()));
-        bonusNumber = new LottoNumber(7);
+        bonusNumber = LottoNumber.valueOf(7);
         winningNumbers = new WinningNumbers(luckyNumbers, bonusNumber);
         matcher = new LottoMatcher(winningNumbers);
         investedMoney = 3000;
@@ -61,7 +61,7 @@ public class LottoStatisticsTest {
 
     private List<LottoNumber> customLottoNumbers(int... parameters) {
         return Arrays.stream(parameters)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toList());
     }
 }

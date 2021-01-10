@@ -19,7 +19,7 @@ public class LottoTicketIssuerTest {
     void testIssue() {
         LottoTicketIssuer issuer = new LottoTicketIssuer(new InsertPrice(2000));
         LottoTickets tickets = issuer.issue(() -> Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toList()));
 
         assertThat(tickets).isEqualTo(new LottoTickets(Arrays.asList(
@@ -52,7 +52,7 @@ public class LottoTicketIssuerTest {
 
     private List<LottoNumber> customLottoNumbers(int... parameters) {
         return Arrays.stream(parameters)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toList());
     }
 }

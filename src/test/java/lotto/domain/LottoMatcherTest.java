@@ -25,11 +25,11 @@ public class LottoMatcherTest {
     @BeforeEach
     void setUp() {
         answer = Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::new)
+                .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
 
         luckyNumbers = new LottoNumbers(answer);
-        bonusNumber = new LottoNumber(7);
+        bonusNumber = LottoNumber.valueOf(7);
         winningNumbers = new WinningNumbers(luckyNumbers, bonusNumber);
         matcher = new LottoMatcher(winningNumbers);
     }
@@ -58,7 +58,7 @@ public class LottoMatcherTest {
 
     private List<LottoNumber> customLottoNumbers(int... parameters) {
         return Arrays.stream(parameters)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toList());
     }
 }
@@ -78,7 +78,7 @@ class lottoNumberArgumentsProvider implements ArgumentsProvider {
 
     private List<LottoNumber> customLottoNumbers(int... parameters) {
         return Arrays.stream(parameters)
-                .mapToObj(LottoNumber::new)
+                .mapToObj(LottoNumber::valueOf)
                 .collect(Collectors.toList());
     }
 }
