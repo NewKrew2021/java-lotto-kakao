@@ -1,12 +1,10 @@
 package domain;
 
-import dto.Amount;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoService {
+public class LottoRandomGenerator implements NumberGenerateStrategy {
 
     private static final List<Integer> randomNumbers;
 
@@ -17,16 +15,8 @@ public class LottoService {
         }
     }
 
-    public static LottoTickets generateTickets(Amount amount) {
-        int count = amount.getCount();
-        List<Lotto> tickets = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            tickets.add(generateRandomTicket());
-        }
-        return new LottoTickets(tickets);
-    }
-
-    private static Lotto generateRandomTicket() {
+    @Override
+    public Lotto generate() {
         Collections.shuffle(randomNumbers);
         List<LottoNumber> numbers = new ArrayList<>();
         for (int i = 0; i < Lotto.LOTTO_NUMBERS_LENGTH; i++) {
@@ -37,4 +27,5 @@ public class LottoService {
 
         return Lotto.ofLottoNumber(numbers);
     }
+
 }

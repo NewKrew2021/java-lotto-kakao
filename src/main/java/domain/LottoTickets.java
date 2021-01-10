@@ -1,5 +1,7 @@
 package domain;
 
+import dto.Amount;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,6 +15,15 @@ public class LottoTickets {
         this.lottos = lottos;
     }
 
+    public static LottoTickets of(NumberGenerateStrategy strategy, Amount amount) {
+        int count = amount.getCount();
+        List<Lotto> tickets = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            tickets.add(strategy.generate());
+        }
+        return new LottoTickets(tickets);
+    }
+
     public WinningInfo getWinningInfo(LottoWinningNumber lottoWinningNumber) {
         List<Integer> winningInfo = new ArrayList<>(Arrays.asList(0, 0, 0, 0, 0));
 
@@ -23,9 +34,9 @@ public class LottoTickets {
         return new WinningInfo(winningInfo);
     }
 
-    private void updateWinningInfo(Lotto lotto, LottoWinningNumber lottoWinningNumber, List<Integer> winningInfo){
+    private void updateWinningInfo(Lotto lotto, LottoWinningNumber lottoWinningNumber, List<Integer> winningInfo) {
         int winningInfoIndex = 0;
-        int count =  lottoWinningNumber.getMatchedCount(lotto);
+        int count = lottoWinningNumber.getMatchedCount(lotto);
 
         if ((count == 5 && lottoWinningNumber.isContainsBounusNumber(lotto)) || count == 6) {
             winningInfoIndex = 1;

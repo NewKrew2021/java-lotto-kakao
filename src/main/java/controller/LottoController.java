@@ -10,7 +10,8 @@ public class LottoController {
         Amount amount = new Amount(LottoInputView.inputAmount());
         LottoOutputView.printTicketsCount(amount);
 
-        LottoTickets lottoTickets = LottoService.generateTickets(amount);
+        NumberGenerateStrategy strategy = new LottoRandomGenerator();
+        LottoTickets lottoTickets = LottoTickets.of(strategy, amount);
         LottoOutputView.printLottoTickets(lottoTickets.getLottoTickets());
 
         LottoWinningNumber lottoWinningNumber

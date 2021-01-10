@@ -15,6 +15,9 @@ public class WinningInfo {
         this.winningInfo = winningInfo;
     }
 
+//    public static WinningInfo of(LottoTickets lottoTickets, LottoWinningNumber lottoWinningNumber){
+//    }
+
     public List<Integer> getWinningInfo() {
         return winningInfo;
     }
