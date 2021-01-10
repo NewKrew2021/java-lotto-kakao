@@ -66,6 +66,7 @@ class lottoNumberArgumentsProvider implements ArgumentsProvider {
                 Arguments.of(LottoNumberArray.asList(1, 2, 3, 4, 5, 8), MatchResult.THIRD),
                 Arguments.of(LottoNumberArray.asList(1, 2, 3, 4, 8, 9), MatchResult.FOURTH),
                 Arguments.of(LottoNumberArray.asList(1, 2, 3, 8, 9, 10), MatchResult.FIFTH),
+                Arguments.of(LottoNumberArray.asList(1, 2, 7, 8, 9, 10), MatchResult.LOSE),
                 Arguments.of(LottoNumberArray.asList(1, 2, 8, 9, 10, 11), MatchResult.LOSE)
         );
     }
