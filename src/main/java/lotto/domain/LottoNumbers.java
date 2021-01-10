@@ -25,24 +25,10 @@ public class LottoNumbers {
             throw new IllegalArgumentException("로또 번호는 1부터 45까지의 숫자 중 하나여야 합니다.");
     }
 
-    public int calculateRanking(WinnerNumbers winner) {
+    public Ranking calculateRanking(WinnerNumbers winner) {
         int count = countIntersection(winner.getWinnerNumber());
         boolean matchBonus = numbers.contains(winner.getBonusBall());
-        return Ranking(count, matchBonus);
-    }
-
-    private int Ranking(int count, boolean matchBonus) {
-        if (count == 6)
-            return 1;
-        if (count == 5 && matchBonus)
-            return 2;
-        if (count == 5 && !matchBonus)
-            return 3;
-        if (count == 4)
-            return 4;
-        if (count == 3)
-            return 5;
-        return 6;
+        return Ranking.getRank(count, matchBonus);
     }
 
     public int countIntersection(LottoNumbers winnerNumbers) {

@@ -29,12 +29,12 @@ public class LottoNumbersTest {
     }
 
     @Test
-    public void testCalculateRanking(){
+    public void testCalculateRanking() {
         Set<Integer> winnerNumbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
         WinnerNumbers winner = new WinnerNumbers(winnerNumbers, 8);
         Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 8));
         LottoNumbers lottoNumbers = new LottoNumbers(numbers);
-        assertThat(lottoNumbers.calculateRanking(winner)).isEqualTo(2);
+        assertThat(lottoNumbers.calculateRanking(winner)).isEqualTo(Ranking.SECOND);
     }
 
     @Test
