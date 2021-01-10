@@ -1,6 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoStat;
+import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTickets;
 import lotto.domain.WinnerNumbers;
 import lotto.view.InputView;
@@ -22,8 +22,8 @@ public class LottoMain {
         Set<Integer> numbers = InputView.getWinnerNumber();
         int bonusBall = InputView.getBonusBall();
         WinnerNumbers winnerNumbers = new WinnerNumbers(numbers, bonusBall);
-        LottoStat lottoStat = game.getStatistics(winnerNumbers);
-        OutputView.printLottoStatistics(lottoStat);
+        LottoStatistics lottoStatistics = game.getStatistics(winnerNumbers);
+        OutputView.printLottoStatistics(lottoStatistics);
 
         float earningRatio = game.getEarningRatio();
         OutputView.printEarningRatio(earningRatio);

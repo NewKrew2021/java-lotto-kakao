@@ -32,7 +32,7 @@ public class LottoTicketsTest {
         tickets.add(new LottoNumbers(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6))));//1등
         LottoTickets lottoTickets = new LottoTickets(6, tickets);
 
-        LottoStat statistics = new LottoStat();
+        LottoStatistics statistics = new LottoStatistics();
         for (Ranking value : Ranking.values()) {
             statistics.addValue(value, 1);
         }

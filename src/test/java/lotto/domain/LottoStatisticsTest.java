@@ -2,15 +2,12 @@ package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.EnumMap;
-import java.util.Map;
-
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
-public class LottoStatTest {
+public class LottoStatisticsTest {
     @Test
     public void testGetReward(){
-        LottoStat statistics = new LottoStat();
+        LottoStatistics statistics = new LottoStatistics();
         for (Ranking rank : Ranking.values()) {
             statistics.addValue(rank, 1);
         }

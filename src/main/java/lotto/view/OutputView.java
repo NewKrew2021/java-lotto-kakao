@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoStat;
+import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTickets;
 
 public class OutputView {
@@ -8,10 +8,10 @@ public class OutputView {
         System.out.println(count + "개를 구매했습니다.");
     }
 
-    public static void printLottoStatistics(LottoStat lottoStat) {
+    public static void printLottoStatistics(LottoStatistics lottoStatistics) {
         System.out.println("당첨통계");
         System.out.println("---------");
-        System.out.print(lottoStat.toString());
+        System.out.print(lottoStatistics.toString());
     }
 
     public static void printEarningRatio(float earningRatio) {

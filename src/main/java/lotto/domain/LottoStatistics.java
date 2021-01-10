@@ -4,10 +4,10 @@ import java.util.EnumMap;
 import java.util.Map;
 import java.util.Objects;
 
-public class LottoStat {
+public class LottoStatistics {
     private Map<Ranking, Integer> statistics = new EnumMap<>(Ranking.class);
 
-    public LottoStat() {
+    public LottoStatistics() {
         for (Ranking ranking : Ranking.values()) {
             statistics.put(ranking, 0);
         }
@@ -45,8 +45,8 @@ public class LottoStat {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoStat lottoStat = (LottoStat) o;
-        return Objects.equals(statistics, lottoStat.statistics);
+        LottoStatistics lottoStatistics = (LottoStatistics) o;
+        return Objects.equals(statistics, lottoStatistics.statistics);
     }
 
     @Override

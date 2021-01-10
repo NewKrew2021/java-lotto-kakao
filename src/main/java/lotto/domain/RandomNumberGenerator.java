@@ -1,33 +1,28 @@
 package lotto.domain;
 
-import java.util.HashSet;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
-public class RandomNumberGenerator implements LottoNumberGenerator {
+public class RandomNumberGenerator {
     private static final int MINIMUM_LIMIT = 1;
     private static final int MAXIMUM_LIMIT = 45;
     private static final int SIZE = 6;
-    private static final Random random = new Random();
+    private final List<Integer> availableNumbers;
+
+    public RandomNumberGenerator(){
+        this.availableNumbers = new ArrayList<>();
+        for(int i = MINIMUM_LIMIT; i <= MAXIMUM_LIMIT; i++){
+            availableNumbers.add(i);
+        }
+    }
 
     public Set<Integer> generateNumbers(){
-        Set<Integer> integers = new HashSet<>();
-
+        Collections.shuffle(availableNumbers);
+        Set<Integer> numbers = new HashSet<>();
         for(int i = 0; i < SIZE; i++){
-            int nextVal = getOtherInt(integers);
-            integers.add(nextVal);
+            numbers.add(availableNumbers.get(i));
         }
 
-        return integers;
+        return numbers;
     }
 
-    private int getOtherInt(Set<Integer> integers){
-        int number;
-
-        do{
-            number = random.nextInt(MAXIMUM_LIMIT + 1 - MINIMUM_LIMIT) + MINIMUM_LIMIT;
-        }while(integers.contains(number));
-
-        return number;
-    }
 }
