@@ -33,5 +33,9 @@ public class LottoTickets {
         }
     }
 
+    public int getTicketsCount(){
+        return tickets.size();
+    }
+
 }
 

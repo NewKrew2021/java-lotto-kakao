@@ -41,7 +41,15 @@ public class LottoTicketsTest {
                 .equals(statistics)).isTrue();
     }
 
+    @Test
+    public void testGetTicketsCount(){
+        List<LottoNumbers> tickets = new ArrayList<>();
+        tickets.add(new LottoNumbers(new HashSet<>(Arrays.asList(1, 2, 7, 8, 9, 11))));
+        tickets.add(new LottoNumbers(new HashSet<>(Arrays.asList(1, 2, 3, 7, 8, 9))));
+        LottoTickets lottoTickets = new LottoTickets(2, tickets);
 
+        assertThat(lottoTickets.getTicketsCount()).isEqualTo(2);
+    }
 }
 
 

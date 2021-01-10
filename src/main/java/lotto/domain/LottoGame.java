@@ -37,9 +37,15 @@ public class LottoGame {
         return money / TICKET_PRICE;
     }
 
-    
+    public LottoStat getStatistics(WinnerNumbers winner) {
+        this.statistics = tickets.calculateLottoStatistics(winner);
+        return this.statistics;
+    }
 
+    public float getEarningRatio(){
+        long reward = statistics.getReward();
+        int count = tickets.getTicketsCount();
 
-
-
+        return (float)reward / (float)(TICKET_PRICE * count);
+    }
 }
