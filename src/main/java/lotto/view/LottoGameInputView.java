@@ -1,11 +1,8 @@
 package lotto.view;
 
-import lotto.domain.LottoResults;
-import lotto.domain.LottoTickets;
-
 import java.util.Scanner;
 
-public class LottoGameView {
+public class LottoGameInputView {
 
     private static Scanner scan = new Scanner(System.in);
 
@@ -14,11 +11,6 @@ public class LottoGameView {
         int price = scan.nextInt();
         scan.nextLine();
         return price;
-    }
-
-    public static void printLottoTickets(LottoTickets lottoTickets) {
-        System.out.println(lottoTickets.getTicketCount() + "개를 구매했습니다.");
-        System.out.println(lottoTickets);
     }
 
     public static String inputWinnerNumbers() {
@@ -31,13 +23,6 @@ public class LottoGameView {
         System.out.println("보너스 볼을 입력해 주세요.");
         int bonus = scan.nextInt();
         return bonus;
-    }
-
-    public static void printResult(LottoResults lottoResults, int price) {
-        System.out.println("당첨 통계");
-        System.out.println("--------------");
-        System.out.println(lottoResults);
-        System.out.println("총 수익률은 " + lottoResults.calculateRate(price) + " 입니다.");
     }
 
 }

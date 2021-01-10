@@ -4,31 +4,15 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
-    private static final int BALL_COUNT = 6;
-
     private final Set<Number> numbers;
 
     public LottoTicket(Set<Number> numbers) {
-        checkBallCount(numbers);
+        BallCountChecker.checkBallCount(numbers);
         this.numbers = numbers;
-    }
-
-    private void checkBallCount(Set<Number> numbers) {
-        if(numbers.size() != BALL_COUNT) {
-            throw new IllegalArgumentException("로또 번호는 6개만 입력해 주세요.");
-        }
     }
 
     public boolean contains(Number number) {
         return numbers.contains(number);
-    }
-
-    public int matchCount(LottoTicket comparedTicket) {
-        return (int) numbers.stream().filter(comparedTicket::contains).count();
-    }
-
-    public LottoRank getRank(WinnerNumber winnerNumber) {
-        return RankTable.get(new MatchResult(matchCount(winnerNumber), contains(winnerNumber.getBonusNumber())));
     }
 
     @Override

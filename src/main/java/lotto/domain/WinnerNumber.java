@@ -5,12 +5,14 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
-public class WinnerNumber extends LottoTicket {
+public class WinnerNumber {
+    private final Set<Number> numbers;
     private final Number bonusNumber;
 
 
     public WinnerNumber(Set<Number> numbers, Number bonusNumber) {
-        super(numbers);
+        BallCountChecker.checkBallCount(numbers);
+        this.numbers = numbers;
         this.bonusNumber = bonusNumber;
     }
 
@@ -18,12 +20,18 @@ public class WinnerNumber extends LottoTicket {
         return new WinnerNumber(new TreeSet<Number>(numbers.stream().map(Number::new).collect(Collectors.toList())), new Number(bonusNumber));
     }
 
-    public Number getBonusNumber() {
-        return this.bonusNumber;
+    public LottoRank getRank(LottoTicket lottoTicket) {
+        return LottoRank.get(new MatchResult(matchCount(lottoTicket), lottoTicket.contains(bonusNumber)));
+    }
+
+    private int matchCount(LottoTicket comparedTicket) {
+        return (int) numbers.stream().filter(comparedTicket::contains).count();
     }
 
     @Override
     public String toString() {
-        return super.toString() + " bonusNumber : " + bonusNumber;
+        return "[" + numbers.stream()
+                .map(Number::toString)
+                .collect(Collectors.joining(", ")) + "]" + " bonusNumber : " + bonusNumber;
     }
 }

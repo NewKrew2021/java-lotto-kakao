@@ -14,7 +14,7 @@ public class LottoTickets {
     public static LottoTickets fromPrice(int price) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         for (int i = 0; i < price / TICKET_PRICE; i++) {
-            lottoTickets.add(new LottoTicket(new TreeSet<>(NumberPool.getInstance().getRandomNumbers())));
+            lottoTickets.add(new LottoTicket(new TreeSet<>(NumberPool.getRandomNumbers())));
         }
         return new LottoTickets(lottoTickets);
     }
@@ -26,7 +26,7 @@ public class LottoTickets {
     public LottoResults getResults(WinnerNumber winnerNumber) {
         LottoResults lottoResults = new LottoResults();
         for (LottoTicket lottoTicket : lottoTickets) {
-            lottoResults.upsert(lottoTicket.getRank(winnerNumber));
+            lottoResults.upsert(winnerNumber.getRank(lottoTicket));
         }
         return lottoResults;
     }
