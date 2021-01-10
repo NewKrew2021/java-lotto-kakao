@@ -11,12 +11,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public final class InputView {
-    private final int INVALID_INPUT = -1;
     private final static Scanner SC = new Scanner(System.in);
 
     public InsertPrice scanInsertPrice() {
         System.out.println("구입금액을 입력해 주세요.");
-        return new InsertPrice(tryToParseInt(SC.nextLine()));
+        return new InsertPrice(Integer.parseInt(SC.nextLine().trim()));
     }
 
     public WinningNumbers scanWinningNumbers() {
@@ -37,24 +36,12 @@ public final class InputView {
 
     private LottoNumber scanBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return LottoNumber.valueOf(tryToParseInt(SC.nextLine()));
-    }
-
-    private int tryToParseInt(final String value) {
-        int num = INVALID_INPUT;
-
-        try {
-            num = Integer.parseInt(value.trim());
-        } catch (NumberFormatException ignored) {
-
-        }
-
-        return num;
+        return LottoNumber.valueOf(Integer.parseInt(SC.nextLine().trim()));
     }
 
     private List<Integer> parseToIntegers(String input) {
         return Stream.of(input.split(","))
-                .map(this::tryToParseInt)
+                .map(value -> Integer.parseInt(value.trim()))
                 .collect(Collectors.toList());
     }
 }
