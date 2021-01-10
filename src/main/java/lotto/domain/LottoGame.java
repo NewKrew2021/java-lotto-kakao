@@ -13,7 +13,7 @@ public class LottoGame {
         return this.tickets != null;
     }
 
-    public void makeLottoTickets(int count) {
+    public LottoTickets makeLottoTickets(int count) {
         List<LottoNumbers> tickets = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             Set<Integer> numbers = getLottoNumber();
@@ -21,6 +21,7 @@ public class LottoGame {
         }
 
         this.tickets = new LottoTickets(count, tickets);
+        return this.tickets;
     }
 
     private Set<Integer> getLottoNumber() {

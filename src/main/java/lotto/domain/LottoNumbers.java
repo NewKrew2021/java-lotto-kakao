@@ -40,6 +40,11 @@ public class LottoNumbers {
     }
 
     @Override
+    public String toString() {
+        return numbers.toString();
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof LottoNumbers)) return false;
