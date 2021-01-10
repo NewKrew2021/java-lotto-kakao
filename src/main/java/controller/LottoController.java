@@ -17,8 +17,8 @@ public class LottoController {
         LottoWinningNumber lottoWinningNumber
                 = LottoWinningNumber.of(LottoInputView.inputWinningNumbers(), LottoInputView.inputBonusNumber());
 
-        WinningInfo winningInfo = lottoTickets.getWinningInfo(lottoWinningNumber);
-        LottoOutputView.printResult(winningInfo);
-        LottoOutputView.printYield(amount, winningInfo.getSum());
+        WinningInfo winningInfo = new WinningInfo(lottoTickets, lottoWinningNumber);
+        LottoOutputView.printResult(winningInfo.getWinningInfo());
+        LottoOutputView.printYield(amount, winningInfo.getTotalPrize());
     }
 }

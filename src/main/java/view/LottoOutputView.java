@@ -1,9 +1,11 @@
 package view;
 
+import domain.Rank;
 import dto.Amount;
 import domain.WinningInfo;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoOutputView {
@@ -22,13 +24,22 @@ public class LottoOutputView {
         System.out.println(sb.toString());
     }
 
-    public static void printResult(WinningInfo winningInfo) {
-        String resultText = "당첨 통계\n---------\n";
-        List<Integer> result = winningInfo.getWinningInfo();
-        for (int i = 0; i < result.size(); i++) {
-            resultText += String.format(RESULT_FORMAT[i], result.get(i)) + '\n';
+    public static void printResult(Map<Rank, Long> winningResult) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("당첨 통계\n---------\n");
+        for (Rank rank : Rank.values()) {
+            appendResultMsg(winningResult, sb, rank);
         }
-        System.out.println(resultText);
+        System.out.println(sb);
+    }
+
+    private static void appendResultMsg(Map<Rank, Long> winningResult, StringBuilder sb, Rank rank) {
+        if (rank == Rank.NONE) {
+            return;
+        }
+        sb.append(rank.getResultMsg())
+                .append(winningResult.get(rank))
+                .append("개\n");
     }
 
     public static void printYield(Amount amount, Long sum) {

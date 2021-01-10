@@ -1,34 +1,52 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public class WinningInfo {
+    private static final long DEFAULT_COUNT = 0;
+    private final Map<Rank, Long> winningInfo;
+    private final long totalPrize;
 
-    private final List<Long> PRIZE = Arrays.asList(5000l, 50000l, 1500000l, 30000000l, 2000000000l);
+    public WinningInfo(LottoTickets lottoTickets, LottoWinningNumber lottoWinningNumber) {
+        Map<Rank, Long> countMap = toMap(lottoTickets.getLottos(), lottoWinningNumber);
+        fillDefaultCount(countMap);
 
-    private final List<Integer> winningInfo;
-
-    public WinningInfo(List<Integer> winningInfo) {
-        this.winningInfo = winningInfo;
+        this.winningInfo = countMap;
+        this.totalPrize = calculatePrize();
     }
 
-//    public static WinningInfo of(LottoTickets lottoTickets, LottoWinningNumber lottoWinningNumber){
-//    }
+    private long calculatePrize() {
+        long sum = 0;
+        for (Rank rank : winningInfo.keySet()) {
+            sum += rank.getPrize() * winningInfo.get(rank);
+        }
+        return sum;
+    }
 
-    public List<Integer> getWinningInfo() {
+    private void fillDefaultCount(Map<Rank, Long> countMap) {
+        for (Rank value : Rank.values()) {
+            countMap.putIfAbsent(value, DEFAULT_COUNT);
+        }
+    }
+
+    private Map<Rank, Long> toMap(List<Lotto> lottos, LottoWinningNumber winning) {
+        return lottos.stream()
+                .map(lotto -> findRank(lotto, winning))
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()));
+    }
+
+    private Rank findRank(Lotto lotto, LottoWinningNumber winning) {
+        return Rank.getRank(winning.getMatchedCount(lotto), winning.isContainsBounusNumber(lotto));
+    }
+
+    public Map<Rank, Long> getWinningInfo() {
         return winningInfo;
     }
 
-    public long getSum() {
-        long sum = 0;
-        for (int i = 0; i < winningInfo.size(); i++) {
-            sum += winningInfo.get(i) * PRIZE.get(i);
-        }
-
-        return sum;
+    public long getTotalPrize() {
+        return totalPrize;
     }
 
     @Override
