@@ -2,6 +2,7 @@ package domain;
 
 import domain.exceptions.InvalidLottoNumberException;
 
+import java.util.List;
 import java.util.Objects;
 
 public class LottoWinningNumber {
@@ -13,6 +14,10 @@ public class LottoWinningNumber {
         validate(lottoWinningTicket, bonusNumber);
         this.lottoWinningTicket = lottoWinningTicket;
         this.bonusNumber = bonusNumber;
+    }
+
+    public static LottoWinningNumber of(List<Integer> numbers, int bonusNumber){
+        return new LottoWinningNumber(Lotto.ofIntegerNumber(numbers), new LottoNumber(bonusNumber));
     }
 
     private void validate(Lotto lottoWinningTicket, LottoNumber bonusNumber) {

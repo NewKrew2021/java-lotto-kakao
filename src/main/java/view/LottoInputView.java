@@ -16,10 +16,10 @@ public class LottoInputView {
         return Integer.parseInt(sc.nextLine());
     }
 
-    public static List<LottoNumber> inputWinningNumbers() {
+    public static List<Integer> inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return Arrays.stream(sc.nextLine().split(","))
-                .map(number -> new LottoNumber(Integer.parseInt(number)))
+                .map(i->Integer.parseInt(i))
                 .collect(Collectors.toList());
     }
 

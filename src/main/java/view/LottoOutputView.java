@@ -16,9 +16,9 @@ public class LottoOutputView {
             "6개 일치 (200000000원) - %d개"};
 
 
-    public static void printTicketsCount(int ticketsCount) {
+    public static void printTicketsCount(Amount amount) {
         StringBuilder sb = new StringBuilder();
-        sb.append(ticketsCount).append("개를 구매했습니다.");
+        sb.append(amount.getCount()).append("개를 구매했습니다.");
         System.out.println(sb.toString());
     }
 
