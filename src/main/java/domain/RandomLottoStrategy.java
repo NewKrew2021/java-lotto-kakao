@@ -10,8 +10,8 @@ public class RandomLottoStrategy implements LottoStrategy {
     private final List<Integer> lottoNumbers;
 
     public RandomLottoStrategy() {
-        lottoNumbers = IntStream.
-                rangeClosed(LottoNumber.START_LOTTO_NUMBER, LottoNumber.END_LOTTO_NUMBER)
+        lottoNumbers = IntStream
+                .rangeClosed(LottoNumber.START_LOTTO_NUMBER, LottoNumber.END_LOTTO_NUMBER)
                 .boxed()
                 .collect(Collectors.toList());
     }

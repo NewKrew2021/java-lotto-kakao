@@ -26,7 +26,7 @@ public class Lottos {
     }
 
     private void addResult(Map<LottoStatus, Integer> result, LottoStatus lottoStatus) {
-        if (lottoStatus != null) {
+        if (lottoStatus != lottoStatus.NONE) {
             result.put(lottoStatus, result.get(lottoStatus) + 1);
         }
     }

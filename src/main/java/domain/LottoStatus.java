@@ -6,11 +6,12 @@ import java.util.Comparator;
 import java.util.List;
 
 public enum LottoStatus {
-    FIRST(2000000000L, 6),
-    SECOND(30000000L, 5),
-    THIRD(1500000L, 5),
-    FOURTH(50000L, 4),
-    FIFTH(5000L, 3);
+    FIRST(2_000_000_000L, 6),
+    SECOND(30_000_000L, 5),
+    THIRD(1_500_000L, 5),
+    FOURTH(50_000L, 4),
+    FIFTH(5_000L, 3),
+    NONE(0, 0);
 
     private final long winnings;
     private final int matchedLottoNumberCount;
@@ -21,6 +22,7 @@ public enum LottoStatus {
         for (LottoStatus e : values()) {
             lottoStatuses.add(e);
         }
+        lottoStatuses.remove(LottoStatus.NONE);
         Collections.sort(lottoStatuses, Comparator.reverseOrder());
     }
 
@@ -44,7 +46,7 @@ public enum LottoStatus {
         return lottoStatuses.stream()
                 .filter(lotto -> lotto.getMatchedLottoNumberCount() == matchedLottoNumberCount)
                 .findFirst()
-                .orElse(null);
+                .orElse(NONE);
     }
 
     public static LottoStatus secondOrThirdPrize(boolean isBonusNumberMatched) {
