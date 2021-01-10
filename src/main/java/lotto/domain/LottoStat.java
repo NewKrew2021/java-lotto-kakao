@@ -17,6 +17,14 @@ public class LottoStat {
         statistics.put(key, statistics.get(key) + value);
     }
 
+    public long getReward(){
+        long reward = 0;
+        for (Ranking ranking : statistics.keySet()) {
+            reward += ranking.getPrize() * statistics.get(ranking);
+        }
+        return reward;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

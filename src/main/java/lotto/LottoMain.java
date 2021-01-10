@@ -1,4 +1,4 @@
-package lotto.controller;
+package lotto;
 
 import lotto.domain.WinnerNumbers;
 import lotto.view.InputView;
