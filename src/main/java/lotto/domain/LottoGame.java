@@ -7,7 +7,7 @@ import java.util.Set;
 public class LottoGame {
     private static final int TICKET_PRICE = 1000;
     private LottoTickets tickets;
-    private LottoStat statistics;
+    private LottoStatistics statistics;
 
     public boolean isAssignedTickets() {
         return this.tickets != null;
@@ -25,7 +25,7 @@ public class LottoGame {
     }
 
     private Set<Integer> getLottoNumber() {
-        LottoNumberGenerator generator = new RandomNumberGenerator();
+        RandomNumberGenerator generator = new RandomNumberGenerator();
         Set<Integer> numbers = generator.generateNumbers();
         return numbers;
     }
@@ -38,7 +38,7 @@ public class LottoGame {
         return money / TICKET_PRICE;
     }
 
-    public LottoStat getStatistics(WinnerNumbers winner) {
+    public LottoStatistics getStatistics(WinnerNumbers winner) {
         this.statistics = tickets.calculateLottoStatistics(winner);
         return this.statistics;
     }

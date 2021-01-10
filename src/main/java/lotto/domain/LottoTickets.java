@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
 
 public class LottoTickets {
     private final List<LottoNumbers> tickets;
@@ -17,8 +15,8 @@ public class LottoTickets {
             throw new IllegalArgumentException();
     }
 
-    public LottoStat calculateLottoStatistics(WinnerNumbers winner) {
-        LottoStat statistics = new LottoStat();
+    public LottoStatistics calculateLottoStatistics(WinnerNumbers winner) {
+        LottoStatistics statistics = new LottoStatistics();
 
         for (LottoNumbers numbers : tickets) {
             updateStatistics(statistics, numbers, winner);
@@ -26,7 +24,7 @@ public class LottoTickets {
         return statistics;
     }
 
-    private void updateStatistics(LottoStat statistics, LottoNumbers numbers, WinnerNumbers winner) {
+    private void updateStatistics(LottoStatistics statistics, LottoNumbers numbers, WinnerNumbers winner) {
         Ranking rank = numbers.calculateRanking(winner);
         if (rank != null) {
             statistics.addValue(rank, 1);
