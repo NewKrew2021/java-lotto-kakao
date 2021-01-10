@@ -5,10 +5,13 @@ import java.util.stream.Collectors;
 
 public class Lotto {
 
+
+    public final int LOTTO_NUMBER_COUNT = 6;
+
     private List<Integer> lotto;
 
     public Lotto(List<Integer> lotto) {
-        if (lotto.size() != 6) {
+        if (lotto.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("6자리 숫자가 아닙니다.");
         }
         this.lotto = lotto;

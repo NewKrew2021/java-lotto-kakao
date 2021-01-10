@@ -1,7 +1,6 @@
 package lotto.controller;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoFixedValue;
 import lotto.domain.Lottos;
 import lotto.domain.WonLotto;
 import lotto.service.LottoGeneratorService;
@@ -15,6 +14,8 @@ public class LottoController {
     private final LottoView lottoView = new LottoView();
     private final LottoGeneratorService lottoGeneratorService = new LottoGeneratorService();
     private final Scanner scanner = new Scanner(System.in);
+    private final int LOTTO_PRICE = 1000;
+
 
     public void lottoController() {
 
@@ -34,10 +35,10 @@ public class LottoController {
         lottoView.printInputMoneyPhrase();
         int amount;
         while ((amount = getLottoBuyAmount()) == -1) ;
-        int buyCount = amount / LottoFixedValue.LOTTO_PRICE;
+        int buyCount = amount / LOTTO_PRICE;
         lottoView.printInputQuantityPhrase(buyCount);
         Lottos lottos = new Lottos();
-        for (int i = 0; i < amount / LottoFixedValue.LOTTO_PRICE; i++) {
+        for (int i = 0; i < amount / LOTTO_PRICE; i++) {
             lottos.add(lottoGeneratorService.generateLotto());
         }
         return lottos;

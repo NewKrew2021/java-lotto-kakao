@@ -1,7 +1,6 @@
 package lotto.service;
 
 import lotto.domain.Lotto;
-import lotto.domain.LottoFixedValue;
 import lotto.util.RandomUtil;
 
 import java.util.ArrayList;
@@ -10,13 +9,15 @@ import java.util.HashSet;
 import java.util.List;
 
 public class LottoGeneratorService {
+    private final int LOTTO_NUMBER_COUNT = 6;
+    private final int LOTTO_MAX_INT=45;
 
 
     public Lotto generateLotto() {
 
         List<Integer> lotto = new ArrayList<>();
         HashSet<Integer> set = new HashSet<>();
-        while (set.size() < LottoFixedValue.LOTTO_NUMBER_COUNT) {
+        while (set.size() < LOTTO_NUMBER_COUNT) {
             checkDuplicate(set, RandomUtil.getRandomValue(), lotto);
         }
         Collections.sort(lotto);
@@ -59,7 +60,7 @@ public class LottoGeneratorService {
 
     public int validateRange(int number) {
 
-        if (number > LottoFixedValue.LOTTO_MAX_INT || number <= 0) {
+        if (number > LOTTO_MAX_INT || number <= 0) {
             throw new IllegalArgumentException("로또 범위 밖의 숫자입니다.");
         }
 
