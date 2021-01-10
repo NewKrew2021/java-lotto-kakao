@@ -38,7 +38,6 @@ public class OutputView {
                 .append("---------\n");
 
         Stream.of(MatchResult.values())
-                .filter(result -> result != MatchResult.NULL)
                 .map(result -> {
                     int count = statisticsResult.getResultCountOfSomeMatch(result);
                     return String.format("%s (%d원) - %d개%n", result.getInfo(), result.getReward(), count);

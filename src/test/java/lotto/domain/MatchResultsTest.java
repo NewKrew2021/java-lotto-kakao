@@ -39,8 +39,8 @@ public class MatchResultsTest {
                         MatchResult.FOURTH,
                         MatchResult.FIFTH,
                         MatchResult.FIFTH,
-                        MatchResult.NULL,
-                        MatchResult.NULL
+                        MatchResult.LOSE,
+                        MatchResult.LOSE
                 )));
     }
 

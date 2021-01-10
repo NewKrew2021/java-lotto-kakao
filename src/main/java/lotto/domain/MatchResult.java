@@ -1,11 +1,21 @@
 package lotto.domain;
 
-public enum MatchResult {
-    NULL(0, 0, "꽝!"),
+public enum MatchResult implements EnumMatcher {
+    LOSE(0, 0, "꽝!"),
     FIFTH(3, 5000, "3개 일치"),
     FOURTH(4, 50000, "4개 일치"),
-    THIRD(5, 1500000, "5개 일치"),
-    SECOND(5, 30000000, "5개 일치, 보너스 볼 일치"),
+    THIRD(5, 1500000, "5개 일치") {
+        @Override
+        public boolean match(int matchCount, boolean matchBonus) {
+            return (this.getMatchCount() == matchCount) && !matchBonus;
+        }
+    },
+    SECOND(5, 30000000, "5개 일치, 보너스 볼 일치") {
+        @Override
+        public boolean match(int matchCount, boolean matchBonus) {
+            return (this.getMatchCount() == matchCount) && matchBonus;
+        }
+    },
     FIRST(6, 2000000000, "6개 일치");
 
     private final int matchCount;
@@ -19,27 +29,17 @@ public enum MatchResult {
     }
 
     public static MatchResult valueOf(int matchCount, boolean matchBonus) {
-        if (MatchResult.FIRST.matchCount == matchCount) {
-            return MatchResult.FIRST;
+        for (MatchResult result : values()) {
+            if (result.match(matchCount, matchBonus)) {
+                return result;
+            }
         }
 
-        if (MatchResult.SECOND.matchCount == matchCount && matchBonus) {
-            return MatchResult.SECOND;
-        }
+        return MatchResult.LOSE;
+    }
 
-        if (MatchResult.THIRD.matchCount == matchCount) {
-            return MatchResult.THIRD;
-        }
-
-        if (MatchResult.FOURTH.matchCount == matchCount) {
-            return MatchResult.FOURTH;
-        }
-
-        if (MatchResult.FIFTH.matchCount == matchCount) {
-            return MatchResult.FIFTH;
-        }
-
-        return MatchResult.NULL;
+    public int getMatchCount() {
+        return this.matchCount;
     }
 
     public int getReward() {
@@ -48,5 +48,10 @@ public enum MatchResult {
 
     public String getInfo() {
         return this.info;
+    }
+
+    @Override
+    public boolean match(int matchCount, boolean matchBonus) {
+        return this.getMatchCount() == matchCount;
     }
 }

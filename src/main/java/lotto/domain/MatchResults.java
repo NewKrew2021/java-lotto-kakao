@@ -18,9 +18,7 @@ public class MatchResults {
     }
 
     private void insertResult(MatchResult result) {
-        int count = Optional.ofNullable(resultCounter.get(result))
-                .orElse(0);
-
+        int count = resultCounter.getOrDefault(result, 0);
         resultCounter.put(result, count + 1);
     }
 
