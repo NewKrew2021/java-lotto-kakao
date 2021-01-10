@@ -2,8 +2,8 @@ package lotto.domain;
 
 import lotto.domain.dto.InsertPrice;
 
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public final class LottoTicketIssuer {
     public static final int TICKET_PRICE = 1000;
@@ -14,10 +14,13 @@ public final class LottoTicketIssuer {
     }
 
     public LottoTickets issue(NumberPickStrategy strategy) {
-        return new LottoTickets(IntStream.range(0, getTicketCount())
-                .boxed()
-                .map(ignore -> new LottoNumbers(strategy.generateLottoNumbers()))
-                .collect(Collectors.toList()));
+        List<LottoNumbers> numbers = new ArrayList<>();
+
+        for (int ignored = 0; ignored < getTicketCount(); ignored++) {
+            numbers.add(new LottoNumbers(strategy.generateLottoNumbers()));
+        }
+
+        return new LottoTickets(numbers);
     }
 
     public int getInvestedMoney() {
