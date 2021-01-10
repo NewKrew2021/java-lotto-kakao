@@ -7,11 +7,12 @@ import java.util.stream.IntStream;
 
 public class LottoNumber {
     private List<Number> numbers;
-    private static final int BOUNDARY_START_NUM = 1;
-    private static final int BOUNDARY_END_NUM = 46;
+    private static final int BOUNDARY_START_NUMBER = 1;
+    private static final int BOUNDARY_END_NUMBER = 45;
+    private static final int LOTTO_BALL_NUMBER = 6;
 
     public LottoNumber() {
-        numbers = IntStream.range(BOUNDARY_START_NUM, BOUNDARY_END_NUM)
+        numbers = IntStream.rangeClosed(BOUNDARY_START_NUMBER, BOUNDARY_END_NUMBER)
                 .mapToObj(Number::new)
                 .collect(Collectors.toList());
     }
@@ -19,7 +20,7 @@ public class LottoNumber {
     public List<Number> getRandomNumbers(){
         Collections.shuffle(numbers);
         return numbers.stream()
-                .limit(6)
+                .limit(LOTTO_BALL_NUMBER)
                 .collect(Collectors.toList());
     }
 }

@@ -7,7 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.Set;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -26,7 +25,7 @@ public class WinningNumberTest {
 
     @Test
     void containBonusNumberTest(){
-        assertThat(winningNumber.contains(Sets.newHashSet(Arrays.asList(
+        assertThat(winningNumber.bonusNumberContain(Sets.newHashSet(Arrays.asList(
                 new Number(1),
                 new Number(2),
                 new Number(3),

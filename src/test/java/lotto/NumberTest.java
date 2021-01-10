@@ -2,7 +2,10 @@ package lotto;
 
 import lotto.domain.Number;
 import lotto.domain.LottoNumber;
+import lotto.exception.InvalidNumberException;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.List;
 
@@ -15,20 +18,11 @@ public class NumberTest {
         assertThat(number).isEqualTo(new Number(1));
     }
 
-    @Test
-    void exceptionTest() {
-        assertThatThrownBy(() -> new Number(0))
-                .isInstanceOf(RuntimeException.class)
-                .hasMessageContaining("숫자가 잘못되었습니다");
+    @ParameterizedTest
+    @ValueSource(ints = {0, 46})
+    void exceptionTest(int invalidNumber) {
+        assertThatThrownBy(() -> new Number(invalidNumber))
+                .isInstanceOf(InvalidNumberException.class);
     }
 
-    @Test
-    void tempTest(){
-        LottoNumber pool = new LottoNumber();
-        for(int i=0;i<10;i++){
-            List<Number> numbers = pool.getRandomNumbers();
-            numbers.forEach(System.out::println);
-            System.out.println();
-        }
-    }
 }
