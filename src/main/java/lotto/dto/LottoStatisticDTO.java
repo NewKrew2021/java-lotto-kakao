@@ -2,7 +2,7 @@ package lotto.dto;
 
 import java.util.List;
 
-public class LottoResultDTO {
+public class LottoStatisticDTO {
 
     private List<Integer> rankCount;
     private double profitRate;
@@ -19,7 +19,7 @@ public class LottoResultDTO {
         return profitRate;
     }
 
-    public void setProfitRate(int profitRate) {
+    public void setProfitRate(double profitRate) {
         this.profitRate = profitRate;
     }
 }

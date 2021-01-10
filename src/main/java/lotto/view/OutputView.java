@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.Money;
-import lotto.dto.LottoResultDTO;
+import lotto.dto.LottoStatisticDTO;
 
 import java.util.List;
 
@@ -18,11 +18,11 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printResult(LottoResultDTO lottoResultDTO) {
+    public static void printResult(LottoStatisticDTO lottoStatisticDTO) {
         System.out.println("\n당첨 통계");
         System.out.println("---------");
-        printRankCount(lottoResultDTO.getRankCount());
-        printProfitRate(lottoResultDTO.getProfitRate());
+        printRankCount(lottoStatisticDTO.getRankCount());
+        printProfitRate(lottoStatisticDTO.getProfitRate());
     }
 
     private static void printRankCount(List<Integer> rankCount) {

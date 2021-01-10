@@ -15,8 +15,8 @@ public class Money {
         return this.money / 1000;
     }
 
-    public double getProfitRate(int profitMoney) {
-        return (double)profitMoney / (double)money;
+    public double getProfitRate(int earnedMoney) {
+        return (double)earnedMoney / (double)money;
     }
 
     private void validateMoney(int money) {
