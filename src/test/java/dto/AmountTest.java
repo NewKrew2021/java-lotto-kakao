@@ -1,9 +1,10 @@
-package domain;
+package dto;
 
 import domain.exceptions.InvalidAmountException;
-import dto.Amount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
@@ -24,12 +25,13 @@ public class AmountTest {
                 .isThrownBy(() -> new Amount(999));
     }
 
-    @Test
+    @ParameterizedTest
+    @ValueSource(strings = {"", "a"})
     @DisplayName("input이 숫자가 아니면 NumberFormatException을 던진다.")
-    public void testInputIsNotNumber(){
+    public void testInputIsNotNumber(String input){
         assertThatExceptionOfType(NumberFormatException.class)
-                .isThrownBy(()->new Amount(Integer.parseInt("")));
+                .isThrownBy(()->new Amount(Integer.parseInt(input)));
         assertThatExceptionOfType(NumberFormatException.class)
-                .isThrownBy(()->new Amount(Integer.parseInt("a")));
+                .isThrownBy(()->new Amount(Integer.parseInt(input)));
     }
 }

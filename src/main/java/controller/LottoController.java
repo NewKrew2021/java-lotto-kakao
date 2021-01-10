@@ -14,7 +14,7 @@ public class LottoController {
         LottoTickets lottoTickets = LottoService.generateTickets(amount);
         LottoOutputView.printLottoTickets(lottoTickets.getLottoTickets());
 
-        LottoTicket lottoWinningTicket = LottoTicket.ofLottoNumber(LottoInputView.inputWinningNumbers());
+        Lotto lottoWinningTicket = Lotto.ofLottoNumber(LottoInputView.inputWinningNumbers());
         LottoNumber bonusNumber = new LottoNumber(LottoInputView.inputBonusNumber());
         LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(lottoWinningTicket, bonusNumber);
 

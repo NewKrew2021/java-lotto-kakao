@@ -6,27 +6,27 @@ import java.util.Objects;
 
 public class LottoWinningNumber {
 
-    private final LottoTicket lottoWinningTicket;
+    private final Lotto lottoWinningTicket;
     private final LottoNumber bonusNumber;
 
-    public LottoWinningNumber(LottoTicket lottoWinningTicket, LottoNumber bonusNumber) {
+    public LottoWinningNumber(Lotto lottoWinningTicket, LottoNumber bonusNumber) {
         validate(lottoWinningTicket, bonusNumber);
         this.lottoWinningTicket = lottoWinningTicket;
         this.bonusNumber = bonusNumber;
     }
 
-    private void validate(LottoTicket lottoWinningTicket, LottoNumber bonusNumber) {
+    private void validate(Lotto lottoWinningTicket, LottoNumber bonusNumber) {
         if (lottoWinningTicket.isContains(bonusNumber)) {
             throw new InvalidLottoNumberException("보너스 번호는 중복이 될 수 없습니다.");
         }
     }
 
-    public int getMatchedCount(LottoTicket lottoTicket) {
-        return lottoTicket.getMatchedCount(lottoWinningTicket);
+    public int getMatchedCount(Lotto lotto) {
+        return lotto.getMatchedCount(lottoWinningTicket);
     }
 
-    public boolean isContainsBounusNumber(LottoTicket lottoTicket) {
-        return lottoTicket.isContains(bonusNumber);
+    public boolean isContainsBounusNumber(Lotto lotto) {
+        return lotto.isContains(bonusNumber);
     }
 
     @Override

@@ -5,31 +5,31 @@ import domain.exceptions.InvalidLottoNumberException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class LottoTicket {
+public class Lotto {
 
     public static final int LOTTO_NUMBERS_LENGTH = 6;
 
     private final TreeSet<LottoNumber> numbers;
 
-    private LottoTicket(List<LottoNumber> lottoNumbers) {
+    private Lotto(List<LottoNumber> lottoNumbers) {
         TreeSet<LottoNumber> numbers = new TreeSet<>(lottoNumbers);
         validateLength(numbers);
 
         this.numbers = numbers;
     }
 
-    public static LottoTicket ofLottoNumber(List<LottoNumber> numbers) {
-        return new LottoTicket(numbers);
+    public static Lotto ofLottoNumber(List<LottoNumber> numbers) {
+        return new Lotto(numbers);
     }
 
-    public static LottoTicket ofIntegerNumber(List<Integer> integerNumbers) {
+    public static Lotto ofIntegerNumber(List<Integer> integerNumbers) {
         List<LottoNumber> numbers = Optional.ofNullable(integerNumbers)
                 .orElseThrow(() -> new InvalidLottoNumberException("null일 수 없습니다."))
                 .stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList());
 
-        return new LottoTicket(numbers);
+        return new Lotto(numbers);
     }
 
     private void validateLength(Collection<LottoNumber> numbers) {
@@ -42,10 +42,10 @@ public class LottoTicket {
         return numbers.contains(number);
     }
 
-    public int getMatchedCount(LottoTicket lottoWinningTicket) {
+    public int getMatchedCount(Lotto target) {
         int count = 0;
         for (LottoNumber number : numbers) {
-            count += lottoWinningTicket.isContains(number) ? 1 : 0;
+            count += target.isContains(number) ? 1 : 0;
         }
 
         return count;
@@ -61,7 +61,7 @@ public class LottoTicket {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoTicket that = (LottoTicket) o;
+        Lotto that = (Lotto) o;
         return Objects.equals(numbers, that.numbers);
     }
 

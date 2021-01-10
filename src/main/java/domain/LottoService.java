@@ -19,22 +19,22 @@ public class LottoService {
 
     public static LottoTickets generateTickets(Amount amount) {
         int count = amount.getCount();
-        List<LottoTicket> tickets = new ArrayList<>();
+        List<Lotto> tickets = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             tickets.add(generateRandomTicket());
         }
         return new LottoTickets(tickets);
     }
 
-    private static LottoTicket generateRandomTicket() {
+    private static Lotto generateRandomTicket() {
         Collections.shuffle(randomNumbers);
         List<LottoNumber> numbers = new ArrayList<>();
-        for (int i = 0; i < LottoTicket.LOTTO_NUMBERS_LENGTH; i++) {
+        for (int i = 0; i < Lotto.LOTTO_NUMBERS_LENGTH; i++) {
             numbers.add(new LottoNumber(randomNumbers.get(i)));
         }
 
         Collections.sort(numbers);
 
-        return LottoTicket.ofLottoNumber(numbers);
+        return Lotto.ofLottoNumber(numbers);
     }
 }

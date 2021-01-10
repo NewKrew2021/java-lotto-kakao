@@ -7,27 +7,27 @@ import java.util.stream.Collectors;
 
 public class LottoTickets {
 
-    private final List<LottoTicket> lottoTickets;
+    private final List<Lotto> lottos;
 
-    public LottoTickets(List<LottoTicket> lottoTickets) {
-        this.lottoTickets = lottoTickets;
+    public LottoTickets(List<Lotto> lottos) {
+        this.lottos = lottos;
     }
 
     public WinningInfo getWinningInfo(LottoWinningNumber lottoWinningNumber) {
         List<Integer> winningInfo = new ArrayList<>(Arrays.asList(0, 0, 0, 0, 0));
 
-        for (LottoTicket lottoTicket : lottoTickets) {
-            updateWinningInfo(lottoTicket, lottoWinningNumber, winningInfo);
+        for (Lotto lotto : lottos) {
+            updateWinningInfo(lotto, lottoWinningNumber, winningInfo);
         }
 
         return new WinningInfo(winningInfo);
     }
 
-    private void updateWinningInfo(LottoTicket lottoTicket, LottoWinningNumber lottoWinningNumber, List<Integer> winningInfo){
+    private void updateWinningInfo(Lotto lotto, LottoWinningNumber lottoWinningNumber, List<Integer> winningInfo){
         int winningInfoIndex = 0;
-        int count =  lottoWinningNumber.getMatchedCount(lottoTicket);
+        int count =  lottoWinningNumber.getMatchedCount(lotto);
 
-        if ((count == 5 && lottoWinningNumber.isContainsBounusNumber(lottoTicket)) || count == 6) {
+        if ((count == 5 && lottoWinningNumber.isContainsBounusNumber(lotto)) || count == 6) {
             winningInfoIndex = 1;
         }
 
@@ -39,12 +39,12 @@ public class LottoTickets {
     }
 
     public List<List<Integer>> getLottoTickets() {
-        return lottoTickets.stream()
-                .map(LottoTicket::getLottoTicketInfo)
+        return lottos.stream()
+                .map(Lotto::getLottoTicketInfo)
                 .collect(Collectors.toList());
     }
 
     public int size() {
-        return this.lottoTickets.size();
+        return this.lottos.size();
     }
 }
