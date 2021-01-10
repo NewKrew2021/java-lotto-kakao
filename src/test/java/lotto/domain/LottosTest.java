@@ -22,30 +22,25 @@ public class LottosTest {
 
     @Test
     public void raffleTest() {
-        Lotto winningNumber = new Lotto(new HashSet(Arrays.asList(LottoNumber.of(1),
+        WinningLotto winningNumber = new WinningLotto(new HashSet(Arrays.asList(LottoNumber.of(1),
                 LottoNumber.of(2),
                 LottoNumber.of(3),
                 LottoNumber.of(4),
                 LottoNumber.of(5),
                 LottoNumber.of(6))));
-        lottos.raffle(winningNumber, LottoNumber.of(6));
-        Map<Rank, Integer> expected = new TreeMap<>();
-        expected.put(Rank.FIRST, 1);
 
         assertThat(lottos.raffle(winningNumber, LottoNumber.of(7)).getRank(Rank.FIRST)).isEqualTo(1);
     }
 
     @Test
     void bonusTest() {
-        Lotto w = new Lotto(new HashSet(Arrays.asList(LottoNumber.of(1),
+        WinningLotto winningNumber = new WinningLotto(new HashSet(Arrays.asList(LottoNumber.of(1),
                 LottoNumber.of(2),
                 LottoNumber.of(3),
                 LottoNumber.of(4),
                 LottoNumber.of(5),
                 LottoNumber.of(7))));
-        Map<Rank, Integer> expected = new HashMap<>();
-        expected.put(Rank.SECOND, 1);
 
-        assertThat(lottos.raffle(w, LottoNumber.of(6)).getRank(Rank.SECOND)).isEqualTo(1);
+        assertThat(lottos.raffle(winningNumber, LottoNumber.of(6)).getRank(Rank.SECOND)).isEqualTo(1);
     }
 }

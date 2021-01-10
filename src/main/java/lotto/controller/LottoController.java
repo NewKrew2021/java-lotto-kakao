@@ -37,7 +37,7 @@ public class LottoController {
     }
 
     public void matchLotto() {
-        Lotto winningNumber = new Lotto(new LinkedHashSet<>(Arrays.stream(split(LottoUI.getWinningNumberFromUser()))
+        WinningLotto winningNumber = new WinningLotto(new LinkedHashSet<>(Arrays.stream(split(LottoUI.getWinningNumberFromUser()))
                 .map(num -> LottoNumber.of(getParseInt(num)))
                 .collect(Collectors.toList())));
         LottoNumber bonusNumber = LottoNumber.of(LottoUI.getBonusNumberFromUser());

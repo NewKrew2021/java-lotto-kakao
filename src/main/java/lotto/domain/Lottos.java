@@ -18,10 +18,10 @@ public class Lottos {
         return lottos.size();
     }
 
-    public Statistics raffle(Lotto winningNumber, LottoNumber bonusNumber) {
+    public Statistics raffle(WinningLotto winningNumber, LottoNumber bonusNumber) {
         Map<Rank, Integer> rankingsMap = new TreeMap<>();
         for (Lotto lotto : lottos) {
-            Rank rank = winningNumber.matchLottoRank(lotto, bonusNumber);
+            Rank rank = winningNumber.getRankOfLotto(lotto, bonusNumber);
             rankingsMap.put(rank, rankingsMap.getOrDefault(rank, 0) + 1);
         }
         return new Statistics(rankingsMap);

@@ -33,11 +33,11 @@ public class Lotto {
         return new LottoDto(Collections.unmodifiableSet(lottoNumbers));
     }
 
-    public Rank matchLottoRank(Lotto lotto, LottoNumber bonusNumber) {
-        return Rank.checkRank((int) lottoNumbers
+    public int matchCount(Lotto lotto) {
+        return (int) lottoNumbers
                 .stream()
                 .filter(lotto::isContain)
-                .count(), lotto.isContain(bonusNumber));
+                .count();
     }
 
     public static int getLottoPrice() {
