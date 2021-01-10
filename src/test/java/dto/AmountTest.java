@@ -36,4 +36,12 @@ public class AmountTest {
         assertThatExceptionOfType(NumberFormatException.class)
                 .isThrownBy(()->new Amount(Integer.parseInt(input)));
     }
+
+    @ParameterizedTest
+    @CsvSource({"12345,12", "3456,3","1000,1"})
+    @DisplayName("구입 금액에 맞는 로또 티켓 수를 반환한다.")
+    public void testGetCount(int input, int count){
+        Amount amount = new Amount(input);
+        assertThat(amount.getCount()).isEqualTo(count);
+    }
 }
