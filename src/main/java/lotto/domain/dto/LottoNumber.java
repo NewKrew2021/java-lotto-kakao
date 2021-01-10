@@ -18,10 +18,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public static LottoNumber valueOf(int number) {
         if (!isInRange(number)) {
-            String message = String.format("Number should be between %d~%d.",
+            throw new IllegalArgumentException(String.format("Number should be between %d~%d.",
                     LOWER_BOUND,
-                    UPPER_BOUND);
-            throw new IllegalArgumentException(message);
+                    UPPER_BOUND));
         }
 
         return LOTTONUMBERS_CACHE[number - 1];

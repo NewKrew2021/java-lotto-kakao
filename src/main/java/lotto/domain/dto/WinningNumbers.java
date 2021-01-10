@@ -8,8 +8,7 @@ public class WinningNumbers {
 
     public WinningNumbers(LottoNumbers luckyNumbers, LottoNumber bonusNumber) {
         if (isDuplicate(luckyNumbers, bonusNumber)) {
-            String message = "Bonus number already exists in lucky numbers";
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException("Bonus number already exists in lucky numbers");
         }
 
         this.luckyNumbers = luckyNumbers;

@@ -5,8 +5,7 @@ public class Rate {
 
     public Rate(int rate) {
         if (isNegative(rate)) {
-            String message = "rate cannot be negative";
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException("rate cannot be negative");
         }
         this.rate = rate;
     }

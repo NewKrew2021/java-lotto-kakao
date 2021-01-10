@@ -5,8 +5,7 @@ public class TotalPrice {
 
     public TotalPrice(long price) {
         if (isNegative(price)) {
-            String message = "Total price cannot be negative";
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException("Total price cannot be negative");
         }
 
         this.price = price;

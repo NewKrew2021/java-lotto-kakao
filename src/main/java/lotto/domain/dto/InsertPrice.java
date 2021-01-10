@@ -5,8 +5,7 @@ public class InsertPrice {
 
     public InsertPrice(int price) {
         if (isNegative(price)) {
-            String message = "price cannot be negative.";
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException("price cannot be negative.");
         }
         this.price = price;
     }

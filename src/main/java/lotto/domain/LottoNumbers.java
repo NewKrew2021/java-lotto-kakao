@@ -13,9 +13,8 @@ public class LottoNumbers {
 
     public LottoNumbers(List<LottoNumber> lottoNumbers) {
         if (areInvalidLottoNumbers(lottoNumbers)) {
-            String message = String.format("Size of lottoNumbers should be %d.",
-                    ALLOWED_NUMBER_COUNT);
-            throw new IllegalArgumentException(message);
+            throw new IllegalArgumentException(String.format("Size of lottoNumbers should be %d.",
+                    ALLOWED_NUMBER_COUNT));
         }
 
         Collections.sort(lottoNumbers);
