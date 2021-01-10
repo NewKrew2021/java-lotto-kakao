@@ -32,9 +32,9 @@ public class LottoTicketsTest {
         tickets.add(new LottoNumbers(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6))));//1등
         LottoTickets lottoTickets = new LottoTickets(6, tickets);
 
-        Map<Ranking, Integer> statistics = new EnumMap<>(Ranking.class);
+        LottoStat statistics = new LottoStat();
         for (Ranking value : Ranking.values()) {
-            statistics.put(value, 1);
+            statistics.addValue(value, 1);
         }
 
         assertThat(lottoTickets.calculateLottoStatistics(winner)

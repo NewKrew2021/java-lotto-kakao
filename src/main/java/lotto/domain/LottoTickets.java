@@ -17,21 +17,19 @@ public class LottoTickets {
             throw new IllegalArgumentException();
     }
 
-    public Map<Ranking, Integer> calculateLottoStatistics(WinnerNumbers winner) {
-        Map<Ranking, Integer> statistics = new EnumMap<Ranking, Integer>(Ranking.class);
-        for (Ranking value : Ranking.values()) {
-            statistics.put(value, 0);
-        }
+    public LottoStat calculateLottoStatistics(WinnerNumbers winner) {
+        LottoStat statistics = new LottoStat();
+
         for (LottoNumbers numbers : tickets) {
             updateStatistics(statistics, numbers, winner);
         }
         return statistics;
     }
 
-    private void updateStatistics(Map<Ranking, Integer> statistics, LottoNumbers numbers, WinnerNumbers winner) {
+    private void updateStatistics(LottoStat statistics, LottoNumbers numbers, WinnerNumbers winner) {
         Ranking rank = numbers.calculateRanking(winner);
         if (rank != null) {
-            statistics.put(rank, statistics.get(rank) + 1);
+            statistics.addValue(rank, 1);
         }
     }
 
