@@ -21,7 +21,7 @@ public class LottoGame {
         return userBuyNumbers.convertToString();
     }
 
-    public lotto.dto.LottoStatisticDTO checkLotto(WinAndBonusNumbers winAndBonusNumbers) {
+    public LottoStatisticDTO checkLotto(WinAndBonusNumbers winAndBonusNumbers) {
         LottoStatisticDTO responseLottoStatistic = new LottoStatisticDTO();
 
         StatisticCalculator statCalculator = new StatisticCalculator(

@@ -19,5 +19,10 @@ public class LottoMain {
 
         String winNumbers = InputView.enterWinNumbers();
         int bonusNumber = InputView.enterBonusNumber();
+        WinAndBonusNumbers winAndBonusNumbers = new WinAndBonusNumbers(
+                Splitter.splitToNumberBy(winNumbers, ","), bonusNumber
+        );
+
+        OutputView.printResult(lotto.checkLotto(winAndBonusNumbers));
     }
 }
