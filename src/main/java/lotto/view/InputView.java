@@ -9,7 +9,7 @@ public class InputView {
 
     public static int getMoneyFromUser(){
         System.out.println("구입금액을 입력해 주세요.");
-        int money = scan.nextInt();
+        int money = Integer.parseInt(scan.nextLine());
         return money;
     }
 

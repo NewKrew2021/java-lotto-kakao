@@ -37,5 +37,13 @@ public class LottoTickets {
         return tickets.size();
     }
 
+    public String toString(){
+        String result = "";
+        for (LottoNumbers numbers : tickets) {
+            result += numbers.toString() + "\n";
+        }
+        return result;
+    }
+
 }
 
