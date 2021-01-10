@@ -12,28 +12,16 @@ import lotto.domain.Number;
 
 public class LottoGame {
     private static LottoTickets lottoTickets;
+    private static WinningNumber winningNumber;
 
     public static void main(String[] argv){
         int price = InputView.inputPurchasePrice();
 
         setLottoTickets(price);
-        WinningNumber winningNumber = setWinningNumber();
+        winningNumber = new WinningNumber(InputView.winningNumber(), InputView.bonusNumber());
 
         ResultView.printResult(lottoTickets.getResults(winningNumber).result(price));
 
-    }
-
-    private static WinningNumber setWinningNumber() {
-        Set<Number> winningNumber = Arrays.stream(InputView.winningNumber()
-                .replaceAll(" ", "")
-                .split(","))
-                .map(Integer::valueOf)
-                .map(Number::new)
-                .collect(Collectors.toSet());;
-
-        Number bonusNumber = new Number(InputView.bonusNumber());
-
-        return new WinningNumber(winningNumber, bonusNumber);
     }
 
     private static void setLottoTickets(int price) {
