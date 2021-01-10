@@ -8,7 +8,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -23,8 +22,8 @@ public class LottoTicketIssuerTest {
                 .collect(Collectors.toList()));
 
         assertThat(tickets).isEqualTo(new LottoTickets(Arrays.asList(
-                new LottoNumbers(customLottoNumbers(1, 2, 3, 4, 5, 6)),
-                new LottoNumbers(customLottoNumbers(1, 2, 3, 4, 5, 6))
+                new LottoNumbers(LottoNumberArray.asList(1, 2, 3, 4, 5, 6)),
+                new LottoNumbers(LottoNumberArray.asList(1, 2, 3, 4, 5, 6))
         )));
     }
 
@@ -48,11 +47,5 @@ public class LottoTicketIssuerTest {
     void testGetTicketCount(int price, int expected) {
         LottoTicketIssuer issuer = new LottoTicketIssuer(new InsertPrice(price));
         assertThat(issuer.getTicketCount()).isEqualTo(expected);
-    }
-
-    private List<LottoNumber> customLottoNumbers(int... parameters) {
-        return Arrays.stream(parameters)
-                .mapToObj(LottoNumber::valueOf)
-                .collect(Collectors.toList());
     }
 }

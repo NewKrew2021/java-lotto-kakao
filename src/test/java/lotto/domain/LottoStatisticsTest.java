@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.dto.InsertPrice;
 import lotto.domain.dto.LottoNumber;
 import lotto.domain.dto.Rate;
 import lotto.domain.dto.WinningNumbers;
@@ -8,7 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -34,9 +32,9 @@ public class LottoStatisticsTest {
 
     @Test
     void firstSecondFifthMatchStatistics() {
-        LottoNumbers firstPlace = new LottoNumbers(customLottoNumbers(1, 2, 3, 4, 5, 6));
-        LottoNumbers secondPlace = new LottoNumbers(customLottoNumbers(1, 2, 3, 4, 5, 7));
-        LottoNumbers fifthPlace = new LottoNumbers(customLottoNumbers(1, 2, 3, 8, 9, 10));
+        LottoNumbers firstPlace = new LottoNumbers(LottoNumberArray.asList(1, 2, 3, 4, 5, 6));
+        LottoNumbers secondPlace = new LottoNumbers(LottoNumberArray.asList(1, 2, 3, 4, 5, 7));
+        LottoNumbers fifthPlace = new LottoNumbers(LottoNumberArray.asList(1, 2, 3, 8, 9, 10));
         LottoTickets tickets = new LottoTickets(
                 Arrays.asList(
                         firstPlace,
@@ -57,11 +55,5 @@ public class LottoStatisticsTest {
 
         assertThat(statisticsResult)
                 .isEqualTo(new StatisticsResult(expectedMatches, expectedRate));
-    }
-
-    private List<LottoNumber> customLottoNumbers(int... parameters) {
-        return Arrays.stream(parameters)
-                .mapToObj(LottoNumber::valueOf)
-                .collect(Collectors.toList());
     }
 }

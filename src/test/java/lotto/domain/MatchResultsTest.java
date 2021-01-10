@@ -22,14 +22,14 @@ public class MatchResultsTest {
         LottoMatcher lottoMatcher = new LottoMatcher(winningNumbers);
 
         LottoTickets lottoTickets = new LottoTickets(Arrays.asList(
-                new LottoNumbers(customLottoNumbers(1, 2, 3, 4, 5, 6)),
-                new LottoNumbers(customLottoNumbers(1, 2, 3, 4, 5, 7)),
-                new LottoNumbers(customLottoNumbers(1, 2, 3, 4, 5, 8)),
-                new LottoNumbers(customLottoNumbers(1, 2, 3, 4, 8, 9)),
-                new LottoNumbers(customLottoNumbers(1, 2, 3, 8, 9, 10)),
-                new LottoNumbers(customLottoNumbers(1, 2, 3, 7, 8, 9)),
-                new LottoNumbers(customLottoNumbers(1, 2, 7, 8, 9, 10)),
-                new LottoNumbers(customLottoNumbers(1, 2, 8, 9, 10, 11))));
+                new LottoNumbers(LottoNumberArray.asList(1, 2, 3, 4, 5, 6)),
+                new LottoNumbers(LottoNumberArray.asList(1, 2, 3, 4, 5, 7)),
+                new LottoNumbers(LottoNumberArray.asList(1, 2, 3, 4, 5, 8)),
+                new LottoNumbers(LottoNumberArray.asList(1, 2, 3, 4, 8, 9)),
+                new LottoNumbers(LottoNumberArray.asList(1, 2, 3, 8, 9, 10)),
+                new LottoNumbers(LottoNumberArray.asList(1, 2, 3, 7, 8, 9)),
+                new LottoNumbers(LottoNumberArray.asList(1, 2, 7, 8, 9, 10)),
+                new LottoNumbers(LottoNumberArray.asList(1, 2, 8, 9, 10, 11))));
 
         assertThat(lottoMatcher.match(lottoTickets))
                 .isEqualTo(new MatchResults(Arrays.asList(
@@ -69,11 +69,5 @@ public class MatchResultsTest {
 
         matchResults.delegate(consumer -> assertThat(consumer.containsKey(MatchResult.FIRST)).isTrue());
         matchResults.delegate(consumer -> assertThat(consumer.containsKey(MatchResult.SECOND)).isFalse());
-    }
-
-    private List<LottoNumber> customLottoNumbers(int... parameters) {
-        return Arrays.stream(parameters)
-                .mapToObj(LottoNumber::valueOf)
-                .collect(Collectors.toList());
     }
 }
