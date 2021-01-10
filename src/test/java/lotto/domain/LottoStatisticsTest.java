@@ -19,7 +19,7 @@ public class LottoStatisticsTest {
     private LottoNumber bonusNumber;
     private WinningNumbers winningNumbers;
     private LottoMatcher matcher;
-    private InsertPrice insertPrice;
+    private int investedMoney;
 
     @BeforeEach
     void setUp() {
@@ -29,7 +29,7 @@ public class LottoStatisticsTest {
         bonusNumber = new LottoNumber(7);
         winningNumbers = new WinningNumbers(luckyNumbers, bonusNumber);
         matcher = new LottoMatcher(winningNumbers);
-        insertPrice = new InsertPrice(3000);
+        investedMoney = 3000;
     }
 
     @Test
@@ -44,10 +44,10 @@ public class LottoStatisticsTest {
                         fifthPlace
                 ));
 
-        LottoStatistics statistics = new LottoStatistics(matcher.match(tickets), insertPrice);
+        LottoStatistics statistics = new LottoStatistics(matcher.match(tickets), investedMoney);
         StatisticsResult statisticsResult = statistics.getStatisticsResult();
         double expectedRateInRealNumber = (double) ((long) MatchResult.FIRST.getReward()
-                + MatchResult.SECOND.getReward() + MatchResult.FIFTH.getReward()) / insertPrice.getPrice();
+                + MatchResult.SECOND.getReward() + MatchResult.FIFTH.getReward()) / investedMoney;
         MatchResults expectedMatches = new MatchResults(Arrays.asList(
                 MatchResult.FIRST,
                 MatchResult.SECOND,

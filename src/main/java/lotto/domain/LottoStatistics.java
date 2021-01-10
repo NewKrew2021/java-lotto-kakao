@@ -8,17 +8,17 @@ import java.util.NoSuchElementException;
 
 public class LottoStatistics {
     private final MatchResults results;
-    private final InsertPrice insertPrice;
     private final TotalPrice totalPrice;
+    private final int investedMoney;
 
-    public LottoStatistics(MatchResults results, InsertPrice insertPrice) {
+    public LottoStatistics(MatchResults results, int investedMoney) {
         this.results = results;
-        this.insertPrice = insertPrice;
+        this.investedMoney = investedMoney;
         this.totalPrice = getTotalPrice(results);
     }
 
     public StatisticsResult getStatisticsResult() {
-        double rateInRealNumber = (double) totalPrice.getTotalPrice() / insertPrice.getPrice();
+        double rateInRealNumber = (double) totalPrice.getTotalPrice() / investedMoney;
         Rate rate = new Rate((int) Math.round(rateInRealNumber * 100));
         return new StatisticsResult(results, rate);
     }

@@ -8,8 +8,12 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class OutputView {
-    public void printNumberOfLottoTickets(int ticketCount) {
+    public void printNumberOfLottoTickets(int ticketCount, int change) {
         System.out.printf("%d개를 구매했습니다.\n", ticketCount);
+
+        if (hasChange(change)) {
+            System.out.printf("잔돈 %d원은 반환되었습니다.\n", change);
+        }
     }
 
     public void printLottoTickets(LottoTickets lottoTickets) {
@@ -44,5 +48,9 @@ public class OutputView {
         message.append(String.format("총 수익률은 %d%%입니다.", statisticsResult.getEarningRate()));
 
         System.out.println(message);
+    }
+
+    private boolean hasChange(int change) {
+        return change > 0;
     }
 }
