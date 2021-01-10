@@ -2,6 +2,7 @@ package lotto.domain;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class RankTable {
 
@@ -13,8 +14,8 @@ public class RankTable {
         put(30, LottoRank.FIFTH);
     }};
 
-    public static LottoRank get(int code) {
-        return RANK_TABLE.get(code);
+    public static LottoRank get(int matchCount, boolean bonusNumber) {
+        return RANK_TABLE.get(matchCount * 10 + (bonusNumber && matchCount == 5 ? 1 : 0));
     }
 
 }

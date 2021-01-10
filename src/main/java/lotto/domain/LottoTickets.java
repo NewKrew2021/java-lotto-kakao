@@ -23,8 +23,11 @@ public class LottoTickets {
     public LottoResults getResults(WinningNumber winningNumber) {
         LottoResults lottoResults = new LottoResults();
         lottoTickets.stream()
-                .filter(lottoTicket -> lottoTicket.getRank(winningNumber) != null)
-                .forEach(lottoTicket -> lottoResults.upsert(lottoTicket.getRank(winningNumber)));
+                .filter(lottoTicket -> lottoTicket.matchCount(winningNumber) >= 3)
+                .forEach(lottoTicket -> {
+                    lottoResults.upsert(RankTable.get(lottoTicket.matchCount(winningNumber),
+                            lottoTicket.contains(winningNumber.getBonusNumber())));
+                });
         return lottoResults;
     }
 }

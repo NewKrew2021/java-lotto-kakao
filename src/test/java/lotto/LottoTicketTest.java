@@ -69,33 +69,5 @@ public class LottoTicketTest {
         assertThat(ticket.matchCount(compTicket)).isEqualTo(3);
         assertThat(ticket.matchCount(compTicket)).isNotEqualTo(4);
     }
-
-    @ParameterizedTest
-    @CsvSource({"1,6,3,5,4,2,FIRST", "3,2,1,7,5,4,SECOND", "3,40,30,2,7,5,FIFTH"})
-    void matchWinnerNumberTest(int i1,
-                               int i2,
-                               int i3,
-                               int i4,
-                               int i5,
-                               int i6,
-                               LottoRank rank) {
-        WinningNumber winningNumber = new WinningNumber(Sets.newHashSet(Arrays.asList(
-                new Number(1),
-                new Number(2),
-                new Number(3),
-                new Number(4),
-                new Number(5),
-                new Number(6)))
-                , new Number(7));
-        LottoTicket lottoTicket = new LottoTicket(
-                Sets.newHashSet(Arrays.asList(
-                        new Number(i1),
-                        new Number(i2),
-                        new Number(i3),
-                        new Number(i4),
-                        new Number(i5),
-                        new Number(i6)))
-        );
-        assertThat(lottoTicket.getRank(winningNumber)).isEqualTo(rank);
-    }
+    
 }

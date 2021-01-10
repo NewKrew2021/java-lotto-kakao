@@ -20,7 +20,11 @@ public class WinningNumber extends LottoTicket {
 
     }
 
-    public boolean contains(Set<Number> numbers) {
+    public Number getBonusNumber() {
+        return bonusNumber;
+    }
+
+    public boolean bonusNumberContain(Set<Number> numbers) {
         return numbers.contains(bonusNumber);
     }
 
