@@ -44,7 +44,7 @@ public class LottoSimulatorView {
     public void printResult(Map<LottoStatus, Integer> lottoResult, double profit) {
         System.out.println(RESULT_HEAD_MESSAGE);
 
-        for (LottoStatus lottoStatus : LottoStatus.getLottoStatuses()) {
+        for (LottoStatus lottoStatus : LottoStatus.getLottoStatusesExceptNone()) {
             System.out.println(getMatchingInformation(lottoResult.get(lottoStatus), lottoStatus));
         }
 

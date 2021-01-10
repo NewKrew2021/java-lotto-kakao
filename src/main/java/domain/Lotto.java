@@ -15,11 +15,10 @@ public class Lotto {
     private List<LottoNumber> lottoNumbers;
 
 
-    public Lotto(String inputText) {
-        this(StringUtils.mapStringListToIntegerList(inputText));
-    }
 
-    public Lotto(List<Integer> numbers) {
+    public Lotto(LottoStrategy lottoStrategy) {
+        List<Integer> numbers = lottoStrategy.numberChooseStrategy();
+
         if(numbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(String.format(LOTTO_SIZE_EXCEED_ERROR_MESSAGE, LOTTO_NUMBER_SIZE));
         }

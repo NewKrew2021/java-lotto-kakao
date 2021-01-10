@@ -9,7 +9,7 @@ public class Lottos {
     public Lottos(PurchaseInfo purchaseInfo) {
         lottos = new ArrayList<>();
         for (long lottoCount = 0; lottoCount < purchaseInfo.getPurchaseCount(); lottoCount++) {
-            lottos.add(new Lotto(new RandomLottoStrategy().numberChooseStrategy()));
+            lottos.add(new Lotto(new RandomLottoStrategy()));
         }
     }
 
@@ -19,7 +19,7 @@ public class Lottos {
 
     public Map<LottoStatus, Integer> checkResult(Answer answer) {
         Map<LottoStatus, Integer> result = new HashMap<>();
-        LottoStatus.getLottoStatuses().stream().forEach(lottoStatus -> { result.put(lottoStatus, 0); });
+        LottoStatus.getLottoStatusesExceptNone().stream().forEach(lottoStatus -> { result.put(lottoStatus, 0); });
 
         lottos.stream().forEach(lotto -> { addResult(result, lotto.getResult(answer)); });
         return result;

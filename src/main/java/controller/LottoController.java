@@ -33,7 +33,7 @@ public class LottoController {
     }
 
     private void getAnswerNumbers() {
-        Lotto answerLotto = new Lotto(lottoSimulatorView.askLottoNumberForAnswerLotto());
+        Lotto answerLotto = new Lotto(new SelfLottoStrategy(lottoSimulatorView.askLottoNumberForAnswerLotto()));
         int bonusNumber = lottoSimulatorView.askBonusNumberForAnswerLotto();
         answer = new Answer(answerLotto, bonusNumber);
     }

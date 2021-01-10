@@ -8,8 +8,8 @@ public class AnswerTest {
 
     @Test
     void answerLottoTest() {
-        Lotto lotto = new Lotto(Arrays.asList(1,2,3,4,5,6));
-        Answer answer = new Answer(new Lotto(Arrays.asList(1,2,3,4,5,6)), 7);
+        Lotto lotto = new Lotto(new SelfLottoStrategy("1,2,3,4,5,6"));
+        Answer answer = new Answer(new Lotto(new SelfLottoStrategy("1,2,3,4,5,6")), 7);
         assertThat(answer.getBonusNumber()).isEqualTo(new LottoNumber(7));
         assertThat(answer.getAnswerLotto()).isEqualTo(lotto);
     }
