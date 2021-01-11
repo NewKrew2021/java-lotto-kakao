@@ -16,7 +16,6 @@ public class LottoNumbersTest {
             Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5));
             new LottoNumbers(numbers);
         }).withMessageMatching("로또 번호는 6개의 숫자여야 합니다.");
-        ;
     }
 
     @Test
@@ -25,16 +24,18 @@ public class LottoNumbersTest {
             Set<Integer> numbers = new HashSet<>(Arrays.asList(0, 2, 3, 4, 5, 49));
             new LottoNumbers(numbers);
         }).withMessageMatching("로또 번호는 1부터 45까지의 숫자 중 하나여야 합니다.");
-        ;
     }
 
     @Test
     public void testCalculateRanking() {
-        Set<Integer> winnerNumbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-        WinnerNumbers winner = new WinnerNumbers(winnerNumbers, 8);
-        Set<Integer> numbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 8));
-        LottoNumbers lottoNumbers = new LottoNumbers(numbers);
-        assertThat(lottoNumbers.calculateRanking(winner)).isEqualTo(Ranking.SECOND);
+        WinnerNumbers winner = new WinnerNumbers(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)), 8);
+        LottoNumbers secondLottoNumbers = new LottoNumbers(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 8)));
+        LottoNumbers thirdLottoNumbers = new LottoNumbers(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 10)));
+        LottoNumbers fifthLottoNumbers = new LottoNumbers(new HashSet<>(Arrays.asList(1, 2, 3, 7, 8, 10)));
+
+        assertThat(secondLottoNumbers.calculateRanking(winner)).isEqualTo(Ranking.SECOND);
+        assertThat(thirdLottoNumbers.calculateRanking(winner)).isEqualTo(Ranking.THIRD);
+        assertThat(fifthLottoNumbers.calculateRanking(winner)).isEqualTo(Ranking.FIFTH);
     }
 
     @Test
