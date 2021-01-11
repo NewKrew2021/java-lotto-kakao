@@ -13,7 +13,7 @@ public class NumberPool {
 
     public NumberPool() {
         numbers = IntStream.rangeClosed(LOTTO_MIN_NUMBER, LOTTO_MAX_NUMBER)
-                .mapToObj(Number::getNumber)
+                .mapToObj(Number::from)
                 .collect(Collectors.toList());
     }
 

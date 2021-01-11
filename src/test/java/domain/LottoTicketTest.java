@@ -18,12 +18,12 @@ public class LottoTicketTest {
     void init() {
         ticket = new LottoTicket(
                 Sets.newHashSet(Arrays.asList(
-                        Number.getNumber(1),
-                        Number.getNumber(2),
-                        Number.getNumber(3),
-                        Number.getNumber(4),
-                        Number.getNumber(5),
-                        Number.getNumber(6)))
+                        Number.from(1),
+                        Number.from(2),
+                        Number.from(3),
+                        Number.from(4),
+                        Number.from(5),
+                        Number.from(6)))
         );
     }
 
@@ -36,31 +36,31 @@ public class LottoTicketTest {
     void toStringOrderTest() {
         ticket = new LottoTicket(
                 Sets.newHashSet(Arrays.asList(
-                        Number.getNumber(7),
-                        Number.getNumber(2),
-                        Number.getNumber(10),
-                        Number.getNumber(4),
-                        Number.getNumber(36),
-                        Number.getNumber(6)))
+                        Number.from(7),
+                        Number.from(2),
+                        Number.from(10),
+                        Number.from(4),
+                        Number.from(36),
+                        Number.from(6)))
         );
         assertThat(ticket.toString()).isEqualTo("[2, 4, 6, 7, 10, 36]");
     }
 
     @Test
     void matchOne() {
-        assertThat(ticket.contains(Number.getNumber(1))).isEqualTo(true);
+        assertThat(ticket.contains(Number.from(1))).isEqualTo(true);
     }
 
     @Test
     void matchThree() {
         LottoTicket compTicket = new LottoTicket(
                 Sets.newHashSet(Arrays.asList(
-                        Number.getNumber(1),
-                        Number.getNumber(2),
-                        Number.getNumber(3),
-                        Number.getNumber(7),
-                        Number.getNumber(8),
-                        Number.getNumber(9)))
+                        Number.from(1),
+                        Number.from(2),
+                        Number.from(3),
+                        Number.from(7),
+                        Number.from(8),
+                        Number.from(9)))
         );
         assertThat(ticket.matchCount(compTicket)).isEqualTo(3);
         assertThat(ticket.matchCount(compTicket)).isNotEqualTo(4);
@@ -76,21 +76,21 @@ public class LottoTicketTest {
                                int i6,
                                LottoRank rank) {
         WinnerNumber winnerNumber = new WinnerNumber(Sets.newHashSet(Arrays.asList(
-                Number.getNumber(1),
-                Number.getNumber(2),
-                Number.getNumber(3),
-                Number.getNumber(4),
-                Number.getNumber(5),
-                Number.getNumber(6)))
-                , Number.getNumber(7));
+                Number.from(1),
+                Number.from(2),
+                Number.from(3),
+                Number.from(4),
+                Number.from(5),
+                Number.from(6)))
+                , Number.from(7));
         LottoTicket lottoTicket = new LottoTicket(
                 Sets.newHashSet(Arrays.asList(
-                        Number.getNumber(i1),
-                        Number.getNumber(i2),
-                        Number.getNumber(i3),
-                        Number.getNumber(i4),
-                        Number.getNumber(i5),
-                        Number.getNumber(i6)))
+                        Number.from(i1),
+                        Number.from(i2),
+                        Number.from(i3),
+                        Number.from(i4),
+                        Number.from(i5),
+                        Number.from(i6)))
         );
         assertThat(lottoTicket.getRank(winnerNumber)).isEqualTo(rank);
     }
