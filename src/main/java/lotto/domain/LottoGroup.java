@@ -12,13 +12,10 @@ public class LottoGroup {
         this.lottoGroup = lottoGroup;
     }
 
-    public LottoResult getLottoResult(WinningNumberSet winningNumberSet) {
-        LottoResult lottoResult = new LottoResult();
-        for (Lotto lotto : lottoGroup) {
-            Rank rank = lotto.compareWithWinning(winningNumberSet);
-            lottoResult.addRank(rank);
-        }
-        return lottoResult;
+    public static LottoGroup createManualLottoGroup(List<String> manualLottoStrings) {
+        return new LottoGroup(manualLottoStrings.stream()
+                .map(Lotto::createLottoWithText)
+                .collect(Collectors.toList()));
     }
 
     public static LottoGroup createRandomLottoGroup(int count) {
@@ -30,6 +27,15 @@ public class LottoGroup {
         }
 
         return new LottoGroup(lottos);
+    }
+
+    public LottoResult getLottoResult(WinningNumberSet winningNumberSet) {
+        LottoResult lottoResult = new LottoResult();
+        for (Lotto lotto : lottoGroup) {
+            Rank rank = lotto.compareWithWinning(winningNumberSet);
+            lottoResult.addRank(rank);
+        }
+        return lottoResult;
     }
 
     public int getLottoCount() {
