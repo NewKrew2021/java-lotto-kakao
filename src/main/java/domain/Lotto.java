@@ -14,8 +14,6 @@ public class Lotto {
 
     private List<LottoNumber> lottoNumbers;
 
-
-
     public Lotto(LottoStrategy lottoStrategy) {
         List<Integer> numbers = lottoStrategy.numberChooseStrategy();
 
@@ -25,7 +23,7 @@ public class Lotto {
 
         lottoNumbers = new ArrayList<>();
         for (Integer number : numbers) {
-            lottoNumbers.add(new LottoNumber(number));
+            lottoNumbers.add(LottoNumber.of(number));
         }
     }
 

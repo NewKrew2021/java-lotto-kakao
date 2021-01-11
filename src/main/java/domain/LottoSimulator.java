@@ -4,12 +4,10 @@ import java.util.Map;
 
 public class LottoSimulator {
 
-    private PurchaseInfo purchaseInfo;
     private Lottos lottos;
     private Answer answer;
 
-    public LottoSimulator(PurchaseInfo purchaseInfo, Lottos lottos, Answer answer) {
-        this.purchaseInfo = purchaseInfo;
+    public LottoSimulator(Lottos lottos, Answer answer) {
         this.lottos = lottos;
         this.answer = answer;
     }
@@ -27,8 +25,8 @@ public class LottoSimulator {
     }
 
     public double getProfit() {
-        long purchaseMoney = purchaseInfo.getPurchaseCount() * PurchaseInfo.LOTTO_PRICE;
-        return (double)(getWinningMoney() - purchaseMoney) / (double)purchaseMoney;
+        long purchaseMoney = lottos.getTotalPurchaseCount() * PurchaseInfo.LOTTE_PRICE;
+        return (double) (getWinningMoney() - purchaseMoney) / (double) purchaseMoney;
     }
 
 }

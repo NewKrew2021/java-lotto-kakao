@@ -1,20 +1,35 @@
 package domain;
 
 public class PurchaseInfo {
-    public static final long LOTTO_PRICE = 1000L;
+
+    public static long LOTTE_PRICE = 1000L;
+
     private final long initialPrice;
-    private long purchaseCount;
+    private final long selfLottoPurchaseCount;
+    private long currentBuyLottoCount;
 
-    public PurchaseInfo(long initialPrice) {
+    public PurchaseInfo(long initialPrice, long selfLottoPurchaseCount) {
+        if((initialPrice - selfLottoPurchaseCount * LOTTE_PRICE) < 0) {
+            throw new IllegalArgumentException("잔액이 부족합니다.");
+        }
         this.initialPrice = initialPrice;
-        this.purchaseCount = initialPrice / LOTTO_PRICE;
+        this.selfLottoPurchaseCount = selfLottoPurchaseCount;
     }
 
-    public long getPurchaseCount() {
-        return purchaseCount;
+    public void buyLotto() {
+        currentBuyLottoCount++;
     }
 
-    public long getInitialPrice() {
-        return initialPrice;
+    public boolean buyAllSelfLottos() {
+        return currentBuyLottoCount >= selfLottoPurchaseCount;
     }
+
+    public boolean buyAllAutoLottos() {
+        return currentBuyLottoCount >= (initialPrice / LOTTE_PRICE);
+    }
+
+    public long getSelfLottoPurchaseCount() {
+        return selfLottoPurchaseCount;
+    }
+
 }

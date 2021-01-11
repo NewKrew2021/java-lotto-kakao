@@ -16,19 +16,31 @@ public class LottoController {
     }
 
     public void startLottoSimulation() {
+        getLottoInformation();
         buyLotto();
-        printBuyLotto();
+        printBuyLottoList();
         getAnswerNumbers();
         printLottoResults();
     }
 
-    private void buyLotto() {
-        purchaseInfo = new PurchaseInfo(lottoSimulatorView.askMoneyForBuyLotto());
+    private void getLottoInformation() {
+        purchaseInfo = new PurchaseInfo(lottoSimulatorView.askMoneyForBuyLotto(), lottoSimulatorView.askCountForBuySelfLotto());
         lottos = new Lottos(purchaseInfo);
-        lottoSimulatorView.printBuyLottoCount(purchaseInfo.getPurchaseCount());
     }
 
-    private void printBuyLotto() {
+    private void buyLotto() {
+        lottoSimulatorView.printAskLottoNumberMakeSelfLotto();
+        while(!lottos.buyAllSelfLottos()) {
+            lottos.buyLotto(new SelfLottoStrategy(lottoSimulatorView.askLottoNumberForMakeSelfLotto()));
+        }
+        while(!lottos.buyAllAutoLottos()) {
+            lottos.buyLotto(new RandomLottoStrategy());
+        }
+        lottoSimulatorView.printBuyLottoCount(purchaseInfo.getSelfLottoPurchaseCount(),
+                lottos.getTotalPurchaseCount() - purchaseInfo.getSelfLottoPurchaseCount());
+    }
+
+    private void printBuyLottoList() {
         lottoSimulatorView.printLottos(lottos);
     }
 
@@ -39,7 +51,7 @@ public class LottoController {
     }
 
     private void printLottoResults() {
-        lottoSimulator = new LottoSimulator(purchaseInfo, lottos, answer);
+        lottoSimulator = new LottoSimulator(lottos, answer);
         lottoSimulatorView.printResult(lottoSimulator.getLottoResults(), lottoSimulator.getProfit());
     }
 }

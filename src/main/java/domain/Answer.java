@@ -7,7 +7,7 @@ public class Answer {
 
     public Answer(Lotto answerLotto, int bonusNumber) {
         this.answerLotto = answerLotto;
-        this.bonusNumber = new LottoNumber(bonusNumber);
+        this.bonusNumber = LottoNumber.of(bonusNumber);
     }
 
     public LottoNumber getBonusNumber() {
