@@ -19,8 +19,8 @@ public class LottoStatistics {
 
     public long getReward() {
         long reward = 0;
-        for (Ranking ranking : statistics.keySet()) {
-            reward += ranking.getPrize() * statistics.get(ranking);
+        for (Map.Entry<Ranking, Integer> entry : statistics.entrySet()) {
+            reward += entry.getKey().getPrize() * entry.getValue();
         }
         return reward;
     }
