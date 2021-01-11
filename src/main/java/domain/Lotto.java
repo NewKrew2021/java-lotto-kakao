@@ -11,6 +11,7 @@ public class Lotto {
 
     public static final int LOTTO_NUMBER_SIZE = 6;
     private static final String LOTTO_SIZE_EXCEED_ERROR_MESSAGE = "%d개의 숫자를 입력해주세요.";
+    public static final String LOTTO_CONTAINS_DUPLICATE_NUMBER_ERROR_MESSAGE = "중복된 숫자가 포함되어 있습니다.";
 
     private List<LottoNumber> lottoNumbers;
 
@@ -23,8 +24,12 @@ public class Lotto {
 
         lottoNumbers = new ArrayList<>();
         for (Integer number : numbers) {
-            lottoNumbers.add(LottoNumber.of(number));
+            addNumber(number);
         }
+    }
+
+    public boolean contains(int number) {
+        return lottoNumbers.contains(LottoNumber.of(number));
     }
 
     public List<LottoNumber> getLottoNumbers() {
@@ -34,6 +39,13 @@ public class Lotto {
     public LottoStatus getResult(Answer answer) {
         return LottoStatus.
                 findStatus(countMatchingNumber(answer.getAnswerLotto()), isBonusNumberMatching(answer.getBonusNumber()));
+    }
+
+    private void addNumber(int number) {
+        if(lottoNumbers.contains(LottoNumber.of(number))) {
+            throw new IllegalArgumentException(LOTTO_CONTAINS_DUPLICATE_NUMBER_ERROR_MESSAGE);
+        }
+        lottoNumbers.add(LottoNumber.of(number));
     }
 
     private boolean isBonusNumberMatching(LottoNumber bonusNumber) {

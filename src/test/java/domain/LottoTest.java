@@ -22,6 +22,12 @@ public class LottoTest {
         assertThat(lotto).isEqualTo(new Lotto(new SelfLottoStrategy("1,2,3,4,5,6")));
     }
 
+    @Test
+    void duplicateNumberTest() {
+        assertThatThrownBy(()->{new Lotto(new SelfLottoStrategy("1,2,3,4,5,1"));})
+                .hasMessage("중복된 숫자가 포함되어 있습니다.");
+    }
+
     @ParameterizedTest
     @MethodSource("provideLottosAndResults")
     void lottoPrizeResultTest(Lotto lotto, LottoStatus lottoStatus) {
