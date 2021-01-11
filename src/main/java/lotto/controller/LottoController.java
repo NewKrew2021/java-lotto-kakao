@@ -8,32 +8,29 @@ import lotto.view.OutputView;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class LottoController {
-    private static final String SPLIT_DELIMITER = ", ";
-
-    private Lottos lottos;
-    private Money money;
+    private static Lottos lottos;
+    private static Money money;
 
     public static void main(String[] args) {
-        LottoController lottoController = new LottoController();
-        lottoController.buyLotto();
-        lottoController.matchLotto();
+        buyLotto();
+        matchLotto();
     }
 
-    private void buyLotto() {
+    private static void buyLotto() {
         money = new Money(InputView.getMoneyFromUser());
         LottoKind lottoKind = getLottoKind(money);
-        lottos = new Lottos(Stream.concat(buySelfLottos(lottoKind.getSelfLottoCount()).stream(), buyRandomLottos(lottoKind.getRandomLottoCount()).stream())
-                .collect(Collectors.toList()));
-
+        List<Lotto> lottosList = new ArrayList<>();
+        lottosList.addAll(buySelfLottos(lottoKind.getSelfLottoCount()));
+        lottosList.addAll(buyRandomLottos(lottoKind.getRandomLottoCount()));
+        lottos = new Lottos(lottosList);
         OutputView.printLottoCount(lottoKind);
         OutputView.printLottos(lottos);
     }
 
-    private LottoKind getLottoKind(Money money) {
-        int selfLottoCount = getSelfLottoCount();
+    private static LottoKind getLottoKind(Money money) {
+        int selfLottoCount = InputView.getSelfLottoCountFromUser();
         int randomLottoCount = money.howMany(Lotto.LOTTO_PRICE) - selfLottoCount;
         if (randomLottoCount < 0) {
             throw new FailBuyLottoException();
@@ -41,50 +38,21 @@ public class LottoController {
         return new LottoKind(selfLottoCount, randomLottoCount);
     }
 
-    private List<Lotto> buySelfLottos(int selfLottoCount) {
+    private static List<Lotto> buySelfLottos(int selfLottoCount) {
         OutputView.printSelfLottoNumberInputGuide();
         return IntStream.range(0, selfLottoCount)
-                .mapToObj(num -> new Lotto(makeUserLotto()))
+                .mapToObj(num -> new Lotto(InputView.getSelfLottoNumberFromUser()))
                 .collect(Collectors.toList());
     }
 
-    private List<Integer> makeUserLotto() {
-        return Arrays.stream(split(InputView.getSelfLottoNumberFromUser()))
-                .map(this::getParseInt)
-                .sorted()
-                .collect(Collectors.toList());
-    }
-
-    private int getSelfLottoCount() {
-        return InputView.getSelfLottoCountFromUser();
-    }
-
-    private List<Lotto> buyRandomLottos(int randomLottoCount) {
+    private static List<Lotto> buyRandomLottos(int randomLottoCount) {
         return IntStream.range(0, randomLottoCount)
                 .mapToObj(num -> new Lotto())
                 .collect(Collectors.toList());
     }
 
-    private void matchLotto() {
-        WinningLotto winningNumber = getWinningLotto();
+    private static void matchLotto() {
+        WinningLotto winningNumber = new WinningLotto(InputView.getWinningNumberFromUser(), InputView.getBonusNumberFromUser());
         OutputView.printStatistics(new Statistics(lottos.raffle(winningNumber), money));
-    }
-
-    private WinningLotto getWinningLotto() {
-        return new WinningLotto(Arrays.stream(split(InputView.getWinningNumberFromUser()))
-                .map(this::getParseInt)
-                .collect(Collectors.toList()), getBonusNumber());
-    }
-
-    private int getBonusNumber() {
-        return InputView.getBonusNumberFromUser();
-    }
-
-    private String[] split(String numbersText) {
-        return numbersText.split(SPLIT_DELIMITER);
-    }
-
-    private int getParseInt(String number) {
-        return Integer.parseInt(number);
     }
 }
