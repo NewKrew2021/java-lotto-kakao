@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.utils.Result;
 import lotto.utils.StringUtils;
 
 import java.util.ArrayList;

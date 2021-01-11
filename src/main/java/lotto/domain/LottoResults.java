@@ -16,6 +16,10 @@ public class LottoResults {
         return Result.values()[count - 2];
     }
 
+    public List<Result> getLottoResults() {
+        return lottoResults;
+    }
+
     public int getResultCount(Result result) {
         return (int) lottoResults.stream()
                 .filter(lottoResult -> lottoResult.equals(result))
