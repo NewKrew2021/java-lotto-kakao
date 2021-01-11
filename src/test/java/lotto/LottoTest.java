@@ -70,22 +70,22 @@ public class LottoTest {
     void containsBallTest() {
         Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
 
-        Ball includedBall = new Ball("3");
+        Ball includedBall = Ball.of("3");
         assertThat(lotto.contains(includedBall)).isTrue();
 
-        Ball excludedBall = new Ball("7");
+        Ball excludedBall = Ball.of("7");
         assertThat(lotto.contains(excludedBall)).isFalse();
     }
 
     @Test
     @DisplayName("Lotto 번호와 여러 Ball 번호 사이의 일치개수 테스트")
     void compareWithBallsTest() {
-        List<Ball> balls = Arrays.asList(new Ball("1"),
-                new Ball("2"),
-                new Ball("3"),
-                new Ball("4"),
-                new Ball("5"),
-                new Ball("6"));
+        List<Ball> balls = Arrays.asList(Ball.of("1"),
+                Ball.of("2"),
+                Ball.of("3"),
+                Ball.of("4"),
+                Ball.of("5"),
+                Ball.of("6"));
         Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
         assertThat(lotto.compareWithBalls(balls)).isEqualTo(6);
     }

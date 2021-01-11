@@ -10,7 +10,7 @@ public class Lotto {
 
     public Lotto() {
         this.lottoBalls = autoGenerate().stream()
-                .map(Ball::new)
+                .map(Ball::of)
                 .collect(Collectors.toList());
     }
 
@@ -47,7 +47,7 @@ public class Lotto {
     private List<Ball> parseLottoText(String lottoText) {
         return Arrays.stream(lottoText.split(","))
                 .map(String::trim)
-                .map(Ball::new)
+                .map(Ball::of)
                 .collect(Collectors.toList());
     }
 

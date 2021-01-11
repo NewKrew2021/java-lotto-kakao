@@ -15,7 +15,7 @@ public class WinningNumberSetTest {
     @DisplayName("WinningNumber 생성 테스트")
     void createTest() {
         Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
-        Ball bonusBall = new Ball("7");
+        Ball bonusBall = Ball.of("7");
         WinningNumberSet winningNumberSet = new WinningNumberSet(winningLotto, bonusBall);
         assertThat(winningNumberSet).isEqualTo(new WinningNumberSet(winningLotto, bonusBall));
     }
@@ -25,7 +25,7 @@ public class WinningNumberSetTest {
     void duplicateTest() {
         assertThatThrownBy(() -> {
             Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
-            Ball bonusBall = new Ball("1");
+            Ball bonusBall = Ball.of("1");
             new WinningNumberSet(winningLotto, bonusBall);
         }).isInstanceOf(IllegalArgumentException.class);
     }

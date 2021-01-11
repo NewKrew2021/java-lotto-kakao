@@ -13,7 +13,7 @@ public class LottoController {
         LottoOutputView.outputLottoGroup(lottoGroup);
 
         Lotto winningLotto = new Lotto(LottoInputView.inputWinningLotto());
-        Ball bonusBall = new Ball(LottoInputView.inputBonusBall());
+        Ball bonusBall = Ball.of(LottoInputView.inputBonusBall());
         WinningNumberSet winningNumberSet = new WinningNumberSet(winningLotto, bonusBall);
 
         LottoResult lottoResult = lottoGroup.getLottoResult(winningNumberSet);

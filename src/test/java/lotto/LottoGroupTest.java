@@ -30,7 +30,7 @@ public class LottoGroupTest {
         LottoGroup lottoGroup = new LottoGroup(lottos);
 
         Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
-        Ball bonusBall = new Ball("7");
+        Ball bonusBall = Ball.of("7");
         WinningNumberSet winningNumberSet = new WinningNumberSet(winningLotto, bonusBall);
 
         LottoResult lottoResult = lottoGroup.getLottoResult(winningNumberSet);

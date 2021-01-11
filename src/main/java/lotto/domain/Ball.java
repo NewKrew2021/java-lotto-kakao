@@ -1,28 +1,40 @@
 package lotto.domain;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
 public class Ball implements Comparable<Ball> {
-
     public static final int LOWER_BOUND = 1;
     public static final int UPPER_BOUND = 45;
+    private static final Map<Integer, Ball> balls = new HashMap<>();
     private final int ballNumber;
 
-    public Ball(String ballString) {
-        int ball;
+    static {
+        IntStream.rangeClosed(Ball.LOWER_BOUND, Ball.UPPER_BOUND)
+                .forEach(ballNumber -> balls.put(ballNumber, new Ball(ballNumber)));
+    }
+
+    public Ball(int ballNumber) {
+        this.ballNumber = ballNumber;
+    }
+
+    public static Ball of(String ballString) {
+        int ballNumber;
 
         try {
-            ball = Integer.parseInt(ballString);
+            ballNumber = Integer.parseInt(ballString);
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("볼은 정수여야 한다.");
         }
 
-        checkRange(ball);
-        this.ballNumber = ball;
+        checkRange(ballNumber);
+        return balls.get(ballNumber);
     }
 
-    private void checkRange(int ballNumber) {
-        if (ballNumber < LOWER_BOUND || ballNumber > UPPER_BOUND) {
+    private static void checkRange(int ballNumber) {
+        if (ballNumber < Ball.LOWER_BOUND || ballNumber > Ball.UPPER_BOUND) {
             throw new IllegalArgumentException("볼은 1 이상 45 이하여야 한다.");
         }
     }
