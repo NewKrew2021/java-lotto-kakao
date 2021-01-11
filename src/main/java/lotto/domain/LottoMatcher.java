@@ -8,10 +8,10 @@ public class LottoMatcher {
     }
 
     public MatchResults match(LottoTickets lottoTickets) {
-        return winningNumbers.matchLotto(lottoTickets);
+        return lottoTickets.matchWinning(winningNumbers);
     }
 
     public MatchResult match(LottoNumbers lottoTicket) {
-        return winningNumbers.matchLotto(lottoTicket);
+        return lottoTicket.matchWinning(winningNumbers);
     }
 }

@@ -27,6 +27,10 @@ public class LottoNumbers {
                 .collect(Collectors.toList());
     }
 
+    public MatchResult matchWinning(WinningNumbers winningNumbers) {
+        return winningNumbers.getMatchResult(this);
+    }
+
     public int getMatchCount(LottoNumbers luckyNumbers) {
         int count = 0;
 
@@ -40,7 +44,7 @@ public class LottoNumbers {
     }
 
     public boolean isMatchBonus(LottoNumber bonusNumber) {
-        return lottoNumbers.contains(bonusNumber);
+        return contains(bonusNumber);
     }
 
     public boolean contains(LottoNumber lottonumber) {

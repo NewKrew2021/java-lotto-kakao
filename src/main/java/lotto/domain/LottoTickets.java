@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.vo.LottoNumber;
-
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,21 +11,15 @@ public class LottoTickets {
         this.tickets = Collections.unmodifiableList(tickets);
     }
 
+    public MatchResults matchWinning(WinningNumbers winningNumbers) {
+        return new MatchResults(tickets.stream()
+                .map(ticket -> ticket.matchWinning(winningNumbers))
+                .collect(Collectors.toList()));
+    }
+
     public List<List<Integer>> getAllTicketNumbers() {
         return tickets.stream()
                 .map(LottoNumbers::getNumbersInTicket)
-                .collect(Collectors.toList());
-    }
-
-    public List<Integer> getMatchCountsInOrder(LottoNumbers luckyNumbers) {
-        return tickets.stream()
-                .map(ticket -> ticket.getMatchCount(luckyNumbers))
-                .collect(Collectors.toList());
-    }
-
-    public List<Boolean> getContainsBonusNumberInOrder(LottoNumber bonusNumber) {
-        return tickets.stream()
-                .map(ticket -> ticket.isMatchBonus(bonusNumber))
                 .collect(Collectors.toList());
     }
 

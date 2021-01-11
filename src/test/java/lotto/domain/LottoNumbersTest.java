@@ -19,16 +19,6 @@ public class LottoNumbersTest {
                 .isNotEqualTo(new LottoNumbers(LottoNumberArray.asList(1, 2, 3, 4, 5, 7)));
     }
 
-    @Test
-    void testGetMatchCount() {
-        LottoNumbers lottoNumbers = new LottoNumbers(LottoNumberArray.asList(1, 2, 3, 4, 5, 6));
-        LottoNumbers luckyNumbers6Matches = new LottoNumbers(LottoNumberArray.asList(1, 2, 3, 4, 5, 6));
-        LottoNumbers luckyNumbers2Matches = new LottoNumbers(LottoNumberArray.asList(1, 2, 7, 8, 9, 10));
-
-        assertThat(lottoNumbers.getMatchCount(luckyNumbers6Matches)).isEqualTo(6);
-        assertThat(lottoNumbers.getMatchCount(luckyNumbers2Matches)).isEqualTo(2);
-    }
-
     @ParameterizedTest
     @CsvSource({"1,true", "7,false"})
     void testContains(int number, boolean expected) {

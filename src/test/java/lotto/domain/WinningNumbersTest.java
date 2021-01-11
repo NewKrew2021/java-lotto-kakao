@@ -20,6 +20,18 @@ public class WinningNumbersTest {
     }
 
     @Test
+    void testGetMatchResult() {
+        LottoNumbers lottoNumbers = new LottoNumbers(LottoNumberArray.asList(1, 2, 3, 4, 5, 6));
+        LottoNumbers luckyNumbers6Matches = new LottoNumbers(LottoNumberArray.asList(1, 2, 3, 4, 5, 6));
+        LottoNumbers luckyNumbers2Matches = new LottoNumbers(LottoNumberArray.asList(1, 2, 7, 8, 9, 10));
+        WinningNumbers winningNumbersIsFirst = new WinningNumbers(luckyNumbers6Matches, LottoNumber.valueOf(7));
+        WinningNumbers winningNumbersIsLose = new WinningNumbers(luckyNumbers2Matches, LottoNumber.valueOf(3));
+
+        assertThat(winningNumbersIsFirst.getMatchResult(lottoNumbers)).isEqualTo(MatchResult.FIRST);
+        assertThat(winningNumbersIsLose.getMatchResult(lottoNumbers)).isEqualTo(MatchResult.LOSE);
+    }
+
+    @Test
     void bonusIsNotDuplicated() {
         assertThat(winningNumbers).isEqualTo(new WinningNumbers(luckyNumbers, bonusNumber));
     }
@@ -29,17 +41,5 @@ public class WinningNumbersTest {
         bonusNumber = LottoNumber.valueOf(6);
         assertThatThrownBy(() -> new WinningNumbers(luckyNumbers, bonusNumber))
                 .isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
-    void testMatchLotto() {
-        assertThat(winningNumbers.matchLotto(new LottoNumbers(LottoNumberArray.asList(1, 2, 3, 4, 5, 7))))
-                .isEqualTo(MatchResult.SECOND);
-
-        assertThat(winningNumbers.matchLotto(new LottoNumbers(LottoNumberArray.asList(1, 2, 3, 4, 5, 8))))
-                .isEqualTo(MatchResult.THIRD);
-
-        assertThat(winningNumbers.matchLotto(new LottoNumbers(LottoNumberArray.asList(1, 2, 3, 7, 8, 9))))
-                .isEqualTo(MatchResult.FIFTH);
     }
 }
