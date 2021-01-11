@@ -6,8 +6,6 @@ import domain.Lottos;
 import domain.WinningLotto;
 import view.LottoProgramView;
 
-import java.math.BigDecimal;
-
 public class LottoProgram {
 
     private LottoProgramView lottoProgramView;
@@ -25,9 +23,10 @@ public class LottoProgram {
 
         lottoProgramView.printLottosNumber(lottos);
 
-        WinningLotto winningLotto = lottoProgramView.getWinningLotto();
-        LottoStatistics lottoStatistics = new LottoStatistics(lottos.getRankCounts(winningLotto),buyAmount);
+        WinningLotto winningLotto = new WinningLotto(lottoProgramView.getWinningLottoForUser()
+                , lottoProgramView.getBonusBallForUser());
 
+        LottoStatistics lottoStatistics = new LottoStatistics(lottos.getRankCounts(winningLotto),buyAmount);
         lottoProgramView.printWinningStatistics(lottoStatistics);
     }
 

@@ -53,21 +53,17 @@ public class LottoProgramView {
         }
     }
 
-    public WinningLotto getWinningLotto() {
+    public int getBonusBallForUser(){
+        System.out.println(BONUS_BALL_INPUT_PHRASE);
+        return scanner.nextInt();
+    }
+
+    public List<Integer> getWinningLottoForUser() {
         System.out.println(LAST_WEEK_BALLS_PHRASE);
-        List<Integer> balls = Arrays.stream(scanner.nextLine().split(","))
+        return Arrays.stream(scanner.nextLine().split(","))
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .collect(Collectors.toList());
-
-        System.out.println(BONUS_BALL_INPUT_PHRASE);
-        String bonusBall = scanner.nextLine();
-
-        if (!checkNumberFormat(bonusBall)) {
-            throw new InputMismatchException("입력 값은 숫자이어야 합니다.");
-        }
-
-        return new WinningLotto(balls, Integer.parseInt(bonusBall));
     }
 
     public void printWinningStatistics(LottoStatistics statistics) {
