@@ -50,14 +50,12 @@ public class InputView {
 
     private static LotteryNumber getAnswerBonusNumber() {
         System.out.println("보너스 볼 번호를 입력해주세요.");
-        int lotteryNumber;
         try {
-            lotteryNumber = Integer.parseInt(sc.nextLine().trim());
+            int lotteryNumber = Integer.parseInt(sc.nextLine().trim());
+            return new LotteryNumber(lotteryNumber);
         } catch (NumberFormatException e) {
             throw new InvalidLotteryNumberException();
         }
-        return new LotteryNumber(lotteryNumber);
-
     }
 
     private static void handleUnknownError(Exception e) {

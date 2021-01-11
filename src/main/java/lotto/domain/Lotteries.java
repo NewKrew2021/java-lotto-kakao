@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lotteries {
-    private List<Lottery> lotteries;
+    private final List<Lottery> lotteries;
 
     public Lotteries(List<Lottery> lotteries) {
         this.lotteries = lotteries;
@@ -19,12 +19,9 @@ public class Lotteries {
 
     public LotteryRank calculateRank(LotteryAnswer lotteryAnswer) {
         HashMap<LotteryPrize, Integer> ranks = new HashMap<>();
-        for (LotteryPrize value : LotteryPrize.values()) {
-            ranks.put(value,0);
-        }
         for (Lottery lottery : lotteries) {
             LotteryPrize rank = lottery.checkRank(lotteryAnswer);
-            ranks.put(rank, ranks.get(rank) + 1);
+            ranks.put(rank, ranks.getOrDefault(rank,0) + 1);
         }
         return new LotteryRank(ranks);
     }
