@@ -50,14 +50,4 @@ public class Lottos {
         return Objects.hash(lottos);
     }
 
-    @Override
-    public String toString() {
-        StringBuilder lottosString = new StringBuilder();
-        for (Lotto lotto : lottos) {
-            lottosString.append(lotto);
-            lottosString.append('\n');
-        }
-
-        return lottosString.toString();
-    }
 }

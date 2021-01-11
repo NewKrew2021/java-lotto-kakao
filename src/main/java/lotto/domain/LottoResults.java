@@ -28,12 +28,4 @@ public class LottoResults {
                 .sum();
     }
 
-    @Override
-    public String toString() {
-        return "3개 일치 (" + Result.THREE.getReward() + "원)- " + getResultCount(Result.THREE) + "개\n" +
-                "4개 일치 (" + Result.FOUR.getReward() + "원)- " + getResultCount(Result.FOUR) + "개\n" +
-                "5개 일치 (" + Result.FIVE.getReward() + "원)- " + getResultCount(Result.FIVE) + "개\n" +
-                "5개 일치, 보너스 볼 일치(" + Result.BONUSFIVE.getReward() + "원)- " + getResultCount(Result.BONUSFIVE) + "개\n" +
-                "6개 일치 (" + Result.SIX.getReward() + "원)- " + getResultCount(Result.SIX) + "개";
-    }
 }

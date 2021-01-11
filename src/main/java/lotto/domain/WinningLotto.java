@@ -8,10 +8,6 @@ public class WinningLotto {
     private final LottoNumber bonusBall;
     private final Lotto winningLotto;
 
-    public WinningLotto(Lotto winningLotto) {
-        this(winningLotto, new LottoNumber(37));
-    }
-
     public WinningLotto(Lotto winningLotto, LottoNumber bonusBall) {
         if (winningLotto.contains(bonusBall)) {
             throw new IllegalArgumentException("보너스 볼은 당첨번호에 포함될 수 없습니다.");
