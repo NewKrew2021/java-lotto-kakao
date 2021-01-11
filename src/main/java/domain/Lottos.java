@@ -5,29 +5,17 @@ import java.util.*;
 public class Lottos {
 
     private final List<Lotto> lottos;
-    private final PurchaseInfo purchaseInfo;
 
-    public Lottos(PurchaseInfo purchaseInfo) {
-        this.purchaseInfo = purchaseInfo;
-        lottos = new ArrayList<>();
+    public Lottos() {
+        this(new ArrayList<>());
     }
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
-        this.purchaseInfo = new PurchaseInfo(PurchaseInfo.LOTTE_PRICE * lottos.size(), lottos.size());
     }
 
     public void buyLotto(LottoStrategy lottoStrategy) {
         lottos.add(new Lotto(lottoStrategy));
-        purchaseInfo.buyLotto();
-    }
-
-    public boolean buyAllSelfLottos() {
-        return purchaseInfo.buyAllSelfLottos();
-    }
-
-    public boolean buyAllAutoLottos() {
-        return purchaseInfo.buyAllAutoLottos();
     }
 
     public long getTotalPurchaseCount() {
