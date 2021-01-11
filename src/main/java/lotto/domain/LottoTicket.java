@@ -5,8 +5,11 @@ import java.util.stream.Collectors;
 
 public class LottoTicket {
     public static final int BALL_COUNT = 6;
+
     private static final String DELIMITER = ",";
     private static final String BLANK = " ";
+
+    private final String NUMBER_COUNT_ERROR = "로또 번호는 " + BALL_COUNT + "개만 입력해 주세요.";
 
     private final Set<Number> numbers;
 
@@ -16,7 +19,9 @@ public class LottoTicket {
     }
 
     public static LottoTicket from(String rawNumbers) {
-        List<Number> list = stringToIntegerList(preProcessing(rawNumbers)).stream().map(Number::of).collect(Collectors.toList());
+        List<Number> list = stringToIntegerList(preProcessing(rawNumbers)).stream()
+                .map(Number::of)
+                .collect(Collectors.toList());
         return new LottoTicket(new TreeSet<>(list));
     }
 
@@ -30,7 +35,7 @@ public class LottoTicket {
 
     private void checkBallCount(Set<Number> numbers) {
         if(numbers.size() != BALL_COUNT) {
-            throw new IllegalArgumentException("로또 번호는 6개만 입력해 주세요.");
+            throw new IllegalArgumentException(NUMBER_COUNT_ERROR);
         }
     }
 

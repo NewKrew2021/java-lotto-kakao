@@ -29,6 +29,14 @@ public class WinnerNumberTest {
         assertThat(winnerNumber.toString()).isEqualTo("[1, 2, 3, 4, 5, 6] bonusNumber : 7");
     }
 
+    @Test
+    @DisplayName("당첨 숫자와 보너스 숫자 중복 테스트")
+    void checkDuplicationTest() {
+        assertThatThrownBy(() -> WinnerNumber.from("1, 2, 3, 4, 5, 6", 6))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("중복된 숫자가 있습니다.");
+    }
+
     @ParameterizedTest
     @DisplayName("LottoTicket의 등수 테스트")
     @CsvSource({"'1,6,3,5,4,2',FIRST", "'3,2,1,7,5,4',SECOND", "'3,40,30,2,7,5',FIFTH"})

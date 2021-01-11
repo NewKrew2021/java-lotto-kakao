@@ -10,6 +10,7 @@ public class Number implements Comparable<Number> {
     public static final int MIN_LOTTO_NUMBER = 1;
     public static final int MAX_LOTTO_NUMBER = 45;
 
+    private static final String WRONG_NUMBER_ERROR = "숫자가 잘못되었습니다. : ";
     private static final List<Number> numberPool;
 
     private final int number;
@@ -27,7 +28,7 @@ public class Number implements Comparable<Number> {
         return numberPool.stream()
                 .filter(value -> value.number == number)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("숫자가 잘못되었습니다. : " + number));
+                .orElseThrow(() -> new IllegalArgumentException(WRONG_NUMBER_ERROR + number));
     }
 
     public static List<Number> randomNumbers(int count) {

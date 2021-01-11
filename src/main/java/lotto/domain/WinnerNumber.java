@@ -1,14 +1,16 @@
 package lotto.domain;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class WinnerNumber {
-    private LottoTicket numbers;
+    private final String DUPLICATE_NUMBER_ERROR = "중복된 숫자가 있습니다.";
+
+    private final LottoTicket winnerNumbers;
     private final Number bonusNumber;
 
-    public WinnerNumber(LottoTicket numbers, Number bonusNumber) {
-        this.numbers = numbers;
+    public WinnerNumber(LottoTicket winnerNumbers, Number bonusNumber) {
+        checkDuplication(winnerNumbers, bonusNumber);
+        this.winnerNumbers = winnerNumbers;
         this.bonusNumber = bonusNumber;
     }
 
@@ -17,7 +19,13 @@ public class WinnerNumber {
     }
 
     public LottoRank getRank(LottoTicket lottoTicket) {
-        return LottoRank.get(new MatchResult(numbers.matchCount(lottoTicket), lottoTicket.contains(bonusNumber)));
+        return LottoRank.get(winnerNumbers.matchCount(lottoTicket), lottoTicket.contains(bonusNumber));
+    }
+
+    private void checkDuplication(LottoTicket winnerNumbers, Number bonusNumber) {
+        if(winnerNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException(DUPLICATE_NUMBER_ERROR);
+        }
     }
 
     @Override
@@ -25,16 +33,16 @@ public class WinnerNumber {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         WinnerNumber that = (WinnerNumber) o;
-        return Objects.equals(numbers, that.numbers) && Objects.equals(bonusNumber, that.bonusNumber);
+        return Objects.equals(winnerNumbers, that.winnerNumbers) && Objects.equals(bonusNumber, that.bonusNumber);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(numbers, bonusNumber);
+        return Objects.hash(winnerNumbers, bonusNumber);
     }
 
     @Override
     public String toString() {
-        return numbers + " bonusNumber : " + bonusNumber;
+        return winnerNumbers + " bonusNumber : " + bonusNumber;
     }
 }
