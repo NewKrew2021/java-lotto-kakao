@@ -26,7 +26,8 @@ public class LottoNumbersTest {
         //then
         List<LottoNumber> expected = Arrays.asList(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
                 LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6));
-        assertThat(lottoNumbers.getLottoNumbers()).usingRecursiveComparison().isEqualTo(expected);
+        assertThat(lottoNumbers.getLottoNumbers()).usingRecursiveComparison().
+                ignoringCollectionOrder().isEqualTo(expected);
     }
 
     @DisplayName("중복된 숫자가 있는 6개의 로또 넘버가 주어 졌을 때 로또 티켓을 생성하면 예외가 발생된다.")
