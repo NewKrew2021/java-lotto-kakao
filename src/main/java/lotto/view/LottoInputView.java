@@ -31,12 +31,12 @@ public class LottoInputView {
 
     public static List<String> inputManualLottoStrings(int amount) {
         scanner.nextLine();
-        if(amount == 0){
+        if (amount == 0) {
             return new ArrayList<>();
         }
         System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
         List<String> manualLottoStrings = new ArrayList<>();
-        for (int i = 0; i < amount; ++i){
+        for (int i = 0; i < amount; ++i) {
             manualLottoStrings.add(scanner.nextLine());
         }
         return manualLottoStrings;

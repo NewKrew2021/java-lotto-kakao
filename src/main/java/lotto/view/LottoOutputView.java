@@ -12,7 +12,7 @@ public class LottoOutputView {
     }
 
     public static void outputLottoGroup(LottoGroup lottoGroup) {
-        if(lottoGroup.getLottoCount() > 0){
+        if (lottoGroup.getLottoCount() > 0) {
             System.out.println("[" + lottoGroup.toString().replace("\n", "]\n[") + "]");
         }
     }
