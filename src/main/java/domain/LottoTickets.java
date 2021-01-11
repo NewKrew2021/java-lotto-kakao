@@ -3,6 +3,7 @@ package domain;
 import dto.Amount;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,7 +31,7 @@ public class LottoTickets {
     }
 
     public List<Lotto> getLottos(){
-        return lottos;
+        return Collections.unmodifiableList(lottos);
     }
 
     public int size() {
