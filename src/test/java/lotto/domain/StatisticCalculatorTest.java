@@ -9,7 +9,6 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
-
 public class StatisticCalculatorTest {
 
     List<RankState> eachLottoResult;
