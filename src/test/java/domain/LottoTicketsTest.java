@@ -6,7 +6,7 @@ import static org.assertj.core.api.Assertions.*;
 public class LottoTicketsTest {
     @Test
     void constructorTest(){
-        LottoTickets lottoTickets = new LottoTickets(14000);
+        LottoTickets lottoTickets = LottoTickets.of(14000);
         assertThat(lottoTickets.getTicketCount()).isEqualTo(14);
     }
 }

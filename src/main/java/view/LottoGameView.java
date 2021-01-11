@@ -25,10 +25,6 @@ public class LottoGameView {
         System.out.println(INSERT_PRICE);
     }
 
-    public static void countTicket(int count) {
-        System.out.println(count + BUYING);
-    }
-
     public static void insertWinnerNumber() {
         System.out.println(INSERT_WINNER_NUMBER);
     }
@@ -41,5 +37,17 @@ public class LottoGameView {
         System.out.println("\n" + WINNING_STATISTICS);
         System.out.println(SEPARATOR);
         System.out.println(resultString);
+    }
+
+    public static void insertLotto() {
+        System.out.println("\n" + INSERT_LOTTO_COUNT);
+    }
+
+    public static void insertLottoNumbers() {
+        System.out.println("\n" + INSERT_LOTTO_NUMBERS);
+    }
+
+    public static void ticketCount(int manualTicketCount, int autoTicketCount) {
+        System.out.println("\n수동으로 " + manualTicketCount + "장, 자동으로 " + autoTicketCount + "개를 구매했습니다.");
     }
 }
