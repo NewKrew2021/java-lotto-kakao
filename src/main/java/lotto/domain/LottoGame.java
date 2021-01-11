@@ -26,8 +26,7 @@ public class LottoGame {
 
     private Set<Integer> getLottoNumber() {
         RandomNumberGenerator generator = new RandomNumberGenerator();
-        Set<Integer> numbers = generator.generateNumbers();
-        return numbers;
+        return generator.generateNumbers();
     }
 
     private LottoNumbers generateLottoTicket(Set<Integer> numbers) {
