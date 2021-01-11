@@ -41,11 +41,7 @@ public class LottoGame {
         }
         LottoGameView.insertLottoNumbers();
         return LottoTickets.ofList(IntStream.rangeClosed(1, ticketCount)
-                .mapToObj(val -> new LottoTicket(Arrays.stream(LottoGameView.getStringLine()
-                        .split(","))
-                        .map(String::trim)
-                        .map(Integer::parseInt)
-                        .map(Number::from).collect(Collectors.toSet())))
+                .mapToObj(val -> LottoTicket.of(LottoGameView.getStringLine()))
                 .collect(Collectors.toList()));
     }
 

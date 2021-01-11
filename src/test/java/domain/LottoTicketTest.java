@@ -16,7 +16,7 @@ public class LottoTicketTest {
 
     @BeforeEach
     void init() {
-        ticket = new LottoTicket(
+        ticket = LottoTicket.ofSet(
                 Sets.newHashSet(Arrays.asList(
                         Number.from(1),
                         Number.from(2),
@@ -34,7 +34,7 @@ public class LottoTicketTest {
 
     @Test
     void toStringOrderTest() {
-        ticket = new LottoTicket(
+        ticket = LottoTicket.ofSet(
                 Sets.newHashSet(Arrays.asList(
                         Number.from(7),
                         Number.from(2),
@@ -53,7 +53,7 @@ public class LottoTicketTest {
 
     @Test
     void matchThree() {
-        LottoTicket compTicket = new LottoTicket(
+        LottoTicket compTicket = LottoTicket.ofSet(
                 Sets.newHashSet(Arrays.asList(
                         Number.from(1),
                         Number.from(2),
@@ -83,7 +83,7 @@ public class LottoTicketTest {
                 Number.from(5),
                 Number.from(6)))
                 , Number.from(7));
-        LottoTicket lottoTicket = new LottoTicket(
+        LottoTicket lottoTicket = LottoTicket.ofSet(
                 Sets.newHashSet(Arrays.asList(
                         Number.from(i1),
                         Number.from(i2),
