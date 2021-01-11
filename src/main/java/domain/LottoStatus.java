@@ -11,6 +11,10 @@ public enum LottoStatus {
     FIFTH(5_000L, 3),
     NONE(0, 0);
 
+    private static final Comparator<LottoStatus> compareByMatchNumberAndWinnings = Comparator
+            .comparing(LottoStatus::getMatchedLottoNumberCount)
+            .thenComparing(LottoStatus::getWinnings);
+
     private final long winnings;
     private final int matchedLottoNumberCount;
 
@@ -46,7 +50,7 @@ public enum LottoStatus {
 
     public static List<LottoStatus> getLottoStatusesExceptNone() {
         return Arrays.stream(LottoStatus.values())
-                .sorted(Comparator.comparing(LottoStatus::getMatchedLottoNumberCount))
+                .sorted(compareByMatchNumberAndWinnings)
                 .filter(lottoStatus -> lottoStatus != LottoStatus.NONE)
                 .collect(Collectors.toList());
     }
