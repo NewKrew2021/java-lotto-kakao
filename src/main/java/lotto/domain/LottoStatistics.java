@@ -35,7 +35,7 @@ public class LottoStatistics {
 
     private String makeString(Ranking ranking) {
         String result = ranking.getMatchCount() + "개 일치";
-        if(ranking.isMatchBonus()) {
+        if (ranking.isMatchBonus()) {
             result += ", 보너스 볼 일치";
         }
         result += " (" + ranking.getPrize() + "원) - " + statistics.get(ranking) + "개";

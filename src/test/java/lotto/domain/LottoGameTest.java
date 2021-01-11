@@ -8,7 +8,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoGameTest {
     public static LottoGame game;
@@ -16,7 +16,7 @@ public class LottoGameTest {
     public static LottoTickets lottoTickets;
 
     @BeforeAll
-    public static void setUp(){
+    public static void setUp() {
         game = new LottoGame();
         winner = new WinnerNumbers(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)), 10);
 
@@ -60,7 +60,7 @@ public class LottoGameTest {
         game.setTickets(lottoTickets);
         game.getStatistics(winner);
 
-        assertThat(game.getEarningRatio()).isEqualTo((float)338592.5);
+        assertThat(game.getEarningRatio()).isEqualTo((float) 338592.5);
 
 
     }

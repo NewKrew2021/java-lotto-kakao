@@ -42,11 +42,11 @@ public class LottoGame {
         return this.statistics;
     }
 
-    public float getEarningRatio(){
+    public float getEarningRatio() {
         long reward = statistics.getReward();
         int count = tickets.getTicketsCount();
 
-        return (float)reward / (float)(TICKET_PRICE * count);
+        return (float) reward / (float) (TICKET_PRICE * count);
     }
 
     public void setTickets(LottoTickets tickets) {

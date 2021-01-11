@@ -7,12 +7,12 @@ import java.util.Set;
 public class InputView {
     public static Scanner scan = new Scanner(System.in);
 
-    public static int getMoneyFromUser(){
+    public static int getMoneyFromUser() {
         System.out.println("구입금액을 입력해 주세요.");
         return Integer.parseInt(scan.nextLine());
     }
 
-    public static Set<Integer> getWinnerNumber(){
+    public static Set<Integer> getWinnerNumber() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요");
         String beforeSplit = scan.nextLine();
         String[] splitedNumbers = beforeSplit.split(",");

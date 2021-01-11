@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import java.util.Arrays;
-import java.util.Map;
 
 public enum Ranking {
     FIFTH(3, false, 5000),
@@ -21,7 +20,7 @@ public enum Ranking {
     }
 
     public static Ranking getRank(int matchCountount, boolean matchBonus) {
-        if(matchCountount == 5){
+        if (matchCountount == 5) {
             return getSecondOrThird(matchBonus);
         }
         return Arrays.stream(values())
@@ -31,7 +30,7 @@ public enum Ranking {
     }
 
     private static Ranking getSecondOrThird(boolean matchBonus) {
-        if(matchBonus){
+        if (matchBonus) {
             return SECOND;
         }
         return THIRD;
