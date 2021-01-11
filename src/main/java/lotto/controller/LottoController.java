@@ -2,21 +2,20 @@ package lotto.controller;
 
 import lotto.domain.*;
 import lotto.service.LottoGeneratorService;
+import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
-
-import java.util.Scanner;
 
 public class LottoController {
 
     private final LottoOutputView lottoOutputView;
+    private final LottoInputView lottoInputView;
     private final LottoGeneratorService lottoGeneratorService;
-    private final Scanner scanner;
 
     public LottoController() {
 
         lottoGeneratorService = new LottoGeneratorService();
         lottoOutputView = new LottoOutputView();
-        scanner = new Scanner(System.in);
+        lottoInputView = new LottoInputView();
     }
 
     public void startLottoGame() {
@@ -25,7 +24,7 @@ public class LottoController {
         lottoOutputView.printLottos(lottos);
 
         WonLotto wonLotto = createWonLotto();
-        LottoRanks lottoRanks=new LottoRanks(lottos.lottosResult(wonLotto));
+        LottoRanks lottoRanks = new LottoRanks(lottos.lottosResult(wonLotto));
         lottoOutputView.printSameCountPhrase(lottoRanks.toString());
         lottoOutputView.printProfitRatio(lottoRanks.profitRatio());
 
@@ -36,10 +35,10 @@ public class LottoController {
 
         lottoOutputView.printInputMoneyPhrase();
         Amount amount;
-        do{
-            amount=getLottoBuyAmount();
+        do {
+            amount = lottoInputView.getLottoBuyAmount();
         }
-        while (amount==null);
+        while (amount == null);
         lottoOutputView.printInputQuantityPhrase(amount.BuyCount());
         Lottos lottos = new Lottos();
         for (int i = 0; i < amount.BuyCount(); i++) {
@@ -50,41 +49,20 @@ public class LottoController {
 
     public WonLotto createWonLotto() {
 
-        lottoOutputView.printInputWonlottoPhrase();
         Lotto lotto;
-        while ((lotto = lottoGeneratorService.lottoStringParser(getWonLotto())) == null) {
-            lottoOutputView.printInputErrorPhrase();
+        lottoOutputView.printInputWonlottoPhrase();
+        do {
+            lotto = lottoGeneratorService.lottoStringParser(lottoInputView.getWonLotto());
         }
+        while (lotto == null);
         lottoOutputView.printInputBonusBallPhrase();
-        LottoNumber bonusBall = getBonusBall();
+        LottoNumber bonusBall = lottoInputView.getBonusBall();
         while (lotto.getLottoNumbers().contains(bonusBall)) {
             lottoOutputView.printInputDuplicatePhrase();
-            bonusBall = getBonusBall();
+            bonusBall = lottoInputView.getBonusBall();
         }
         return new WonLotto(lotto, bonusBall);
     }
 
-    public Amount getLottoBuyAmount() {
-
-        try {
-            int money = Integer.parseInt(scanner.nextLine());
-            return new Amount(money);
-        } catch (Exception e) {
-            lottoOutputView.printInputErrorPhrase();
-            return null;
-        }
-    }
-
-    public String getWonLotto() {
-
-        String wonLotto = scanner.nextLine();
-        return wonLotto;
-    }
-
-    public LottoNumber getBonusBall() {
-
-        int bonusBall = Integer.parseInt(scanner.nextLine());
-        return new LottoNumber(bonusBall);
-    }
 
 }

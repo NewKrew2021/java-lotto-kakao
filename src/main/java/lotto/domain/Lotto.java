@@ -8,7 +8,6 @@ public class Lotto {
 
 
     public final int LOTTO_NUMBER_COUNT = 6;
-
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
@@ -34,8 +33,9 @@ public class Lotto {
         return count;
     }
 
-    public int contain(LottoNumber number){
-        if(lottoNumbers.contains(number)){
+    public int contain(LottoNumber number) {
+
+        if (lottoNumbers.contains(number)) {
             return 1;
         }
         return 0;

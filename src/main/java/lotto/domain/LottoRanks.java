@@ -6,9 +6,9 @@ import java.util.stream.Collectors;
 
 public class LottoRanks {
 
-    private final int LOTTO_PRICE=1000;
+    private final int LOTTO_PRICE = 1000;
     private final int LOTTO_NUMBER_COUNT = 6;
-    private List<LottoRank> lottoRanks;
+    private final List<LottoRank> lottoRanks;
 
     public LottoRanks(List<LottoRank> lottoRanks) {
 
@@ -26,7 +26,7 @@ public class LottoRanks {
 
     public double profitRatio() {
 
-        double ratio=(double) totalPrize()/(double) (lottoRanks.size() * LOTTO_PRICE);
+        double ratio = (double) totalPrize() / (double) (lottoRanks.size() * LOTTO_PRICE);
         return ratio;
     }
 
@@ -45,8 +45,8 @@ public class LottoRanks {
     @Override
     public String toString() {
 
-        StringBuilder stringBuilder=new StringBuilder();
-        List<Integer> rankInfo=rankStatistics();
+        StringBuilder stringBuilder = new StringBuilder();
+        List<Integer> rankInfo = rankStatistics();
         for (int i = 4; i >= 0; i--) {
             stringBuilder.append(LottoRank.values()[i].getMatchedPhrase());
             stringBuilder.append("(");

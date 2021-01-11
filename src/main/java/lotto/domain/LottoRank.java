@@ -5,9 +5,9 @@ public enum LottoRank {
     THIRD(1_500_000, 2, "5개 일치 "), FOURTH(50_000, 3, "4개 일치 "),
     FIFTH(5_000, 4, "3개 일치 "), NONE(0, 5, "");
 
-    private int money;
-    private int index;
-    private String matchedPhrase;
+    private final int money;
+    private final int index;
+    private final String matchedPhrase;
 
     LottoRank(int money, int index, String matchedPhrase) {
         this.money = money;
