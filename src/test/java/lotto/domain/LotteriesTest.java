@@ -36,6 +36,6 @@ public class LotteriesTest {
         assertThat(lotteryRankCounter.getRankCount(3)).isEqualTo(0);
         assertThat(lotteryRankCounter.getRankCount(4)).isEqualTo(0);
         assertThat(lotteryRankCounter.getRankCount(5)).isEqualTo(0);
-        assertThat(lotteryRankCounter.getRankCount(Lottery.NONE)).isEqualTo(2);
+        assertThat(lotteryRankCounter.getRankCount(LotteryRank.RANK_NONE)).isEqualTo(2);
     }
 }
