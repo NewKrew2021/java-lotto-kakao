@@ -14,7 +14,7 @@ public class WinningInfo {
   public long getSumPrize() {
     long sum = 0;
     for (LottoRank lottoRank : info.keySet()) {
-      sum += lottoRank.getPrize(info.get(lottoRank));
+      sum += lottoRank.sumPrize(info.get(lottoRank));
     }
 
     return sum;

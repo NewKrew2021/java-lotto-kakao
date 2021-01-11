@@ -26,9 +26,6 @@ public class LottoTickets {
 
     for (LottoTicket lottoTicket : lottoTickets) {
       int matchedCount = lottoWinningNumber.getMatchedCount(lottoTicket);
-        if (matchedCount < MIN_MATCH_COUNT) {
-            continue;
-        }
       boolean matchedBounus = lottoWinningNumber.isContainsBounusNumber(lottoTicket);
 
       LottoRank rank = LottoRank.of(getRank(matchedCount, matchedBounus));
