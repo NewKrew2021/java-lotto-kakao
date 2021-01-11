@@ -1,7 +1,9 @@
 package controller;
 
 import domain.Lotto;
+import domain.LottoStatistics;
 import domain.Lottos;
+import domain.WinningLotto;
 import view.LottoProgramView;
 
 import java.math.BigDecimal;
@@ -15,7 +17,7 @@ public class LottoProgram {
     }
 
     public void start() {
-        BigDecimal buyAmount = lottoProgramView.getBuyAmountForUser();
+        int buyAmount = lottoProgramView.getBuyAmountForUser();
         int buyLottoCount = calculateBuyLottoCount(buyAmount);
 
         lottoProgramView.printBoughtLottosCount(buyLottoCount);
@@ -23,11 +25,16 @@ public class LottoProgram {
 
         lottoProgramView.printLottosNumber(lottos);
 
-        Lotto winningLotto = lottoProgramView.getWinningLotto();
-        lottoProgramView.printWinningStatistics(lottos.getLottoStatistics(winningLotto, buyAmount.intValue()));
+        WinningLotto winningLotto = lottoProgramView.getWinningLotto();
+        LottoStatistics lottoStatistics = new LottoStatistics(lottos.getRankCounts(winningLotto),buyAmount);
+
+        lottoProgramView.printWinningStatistics(lottoStatistics);
     }
 
-    public int calculateBuyLottoCount(BigDecimal buyAmount) {
-        return buyAmount.divide(new BigDecimal(String.valueOf(Lotto.LOTTO_PRICE))).intValue();
+    public int calculateBuyLottoCount(int buyAmount) {
+        if(buyAmount < 1000){
+            throw new IllegalArgumentException("구입 금액이 1000원 이상이어야 합니다.");
+        }
+        return buyAmount / Lotto.LOTTO_PRICE;
     }
 }

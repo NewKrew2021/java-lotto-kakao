@@ -18,6 +18,6 @@ class LottoProgramTest {
 
     @Test
     void calculateBuyLottoCount() {
-        assertThat(lottoProgram.calculateBuyLottoCount(new BigDecimal("14500"))).isEqualTo(14);
+        assertThat(lottoProgram.calculateBuyLottoCount(14500)).isEqualTo(14);
     }
 }
