@@ -25,6 +25,7 @@ public class LottoController {
 
         WonLotto wonLotto = createWonLotto();
         LottoRanks lottoRanks = new LottoRanks(lottos.lottosResult(wonLotto));
+        lottoOutputView.WonResultPhrase();
         lottoOutputView.printSameCountPhrase(lottoRanks.toString());
         lottoOutputView.printProfitRatio(lottoRanks.profitRatio());
 
@@ -57,10 +58,7 @@ public class LottoController {
         while (lotto == null);
         lottoOutputView.printInputBonusBallPhrase();
         LottoNumber bonusBall = lottoInputView.getBonusBall();
-        while (lotto.getLottoNumbers().contains(bonusBall)) {
-            lottoOutputView.printInputDuplicatePhrase();
-            bonusBall = lottoInputView.getBonusBall();
-        }
+
         return new WonLotto(lotto, bonusBall);
     }
 
