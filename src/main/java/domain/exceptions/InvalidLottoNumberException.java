@@ -1,4 +1,5 @@
 package domain.exceptions;
 
-public class InvalidLottoNumberException extends RuntimeException{
+public class InvalidLottoNumberException extends RuntimeException {
+
 }

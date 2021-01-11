@@ -1,45 +1,49 @@
 package domain;
 
 import domain.exceptions.InvalidLottoNumberException;
-
 import java.util.Objects;
 
 public class LottoWinningNumber {
 
-    private final LottoTicket lottoWinningTicket;
-    private final LottoNumber bonusNumber;
+  private final LottoTicket lottoWinningTicket;
+  private final LottoNumber bonusNumber;
 
-    public LottoWinningNumber(LottoTicket lottoWinningTicket, LottoNumber bonusNumber) {
-        validateInclude(lottoWinningTicket, bonusNumber);
-        this.lottoWinningTicket = lottoWinningTicket;
-        this.bonusNumber = bonusNumber;
+  public LottoWinningNumber(LottoTicket lottoWinningTicket, LottoNumber bonusNumber) {
+    validateInclude(lottoWinningTicket, bonusNumber);
+    this.lottoWinningTicket = lottoWinningTicket;
+    this.bonusNumber = bonusNumber;
+  }
+
+  private void validateInclude(LottoTicket lottoWinningTicket, LottoNumber bonusNumber) {
+    if (lottoWinningTicket.isContains(bonusNumber)) {
+      throw new InvalidLottoNumberException();
     }
+  }
 
-    private void validateInclude(LottoTicket lottoWinningTicket, LottoNumber bonusNumber) {
-        if (lottoWinningTicket.isContains(bonusNumber)) {
-            throw new InvalidLottoNumberException();
-        }
+  public int getMatchedCount(LottoTicket lottoTicket) {
+    return lottoTicket.getMatchedCount(lottoWinningTicket);
+  }
+
+  public boolean isContainsBounusNumber(LottoTicket lottoTicket) {
+    return lottoTicket.isContains(bonusNumber);
+  }
+
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
     }
-
-    public int getMatchedCount(LottoTicket lottoTicket) {
-        return lottoTicket.getMatchedCount(lottoWinningTicket);
+    if (o == null || getClass() != o.getClass()) {
+      return false;
     }
+    LottoWinningNumber that = (LottoWinningNumber) o;
+    return bonusNumber == that.bonusNumber && Objects
+        .equals(lottoWinningTicket, that.lottoWinningTicket);
+  }
 
-    public boolean isContainsBounusNumber(LottoTicket lottoTicket) {
-        return lottoTicket.isContains(bonusNumber);
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        LottoWinningNumber that = (LottoWinningNumber) o;
-        return bonusNumber == that.bonusNumber && Objects.equals(lottoWinningTicket, that.lottoWinningTicket);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(lottoWinningTicket, bonusNumber);
-    }
+  @Override
+  public int hashCode() {
+    return Objects.hash(lottoWinningTicket, bonusNumber);
+  }
 }

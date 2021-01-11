@@ -7,52 +7,54 @@ import java.util.stream.Collectors;
 
 public class LottoTickets {
 
-    public static final int MIN_MATCH_COUNT = 3;
+  public static final int MIN_MATCH_COUNT = 3;
 
-    private List<LottoTicket> lottoTickets;
+  private List<LottoTicket> lottoTickets;
 
-    public LottoTickets(List<LottoTicket> lottoTickets) {
-        this.lottoTickets = lottoTickets;
-    }
+  public LottoTickets(List<LottoTicket> lottoTickets) {
+    this.lottoTickets = lottoTickets;
+  }
 
-    public List<List<Integer>> getLottoTicketsInfo() {
-        return lottoTickets.stream()
-            .map(LottoTicket::getLottoTicketInfo)
-            .collect(Collectors.toList());
-    }
+  public List<List<Integer>> getLottoTicketsInfo() {
+    return lottoTickets.stream()
+        .map(LottoTicket::getLottoTicketInfo)
+        .collect(Collectors.toList());
+  }
 
-    public WinningInfo getWinningInfo(LottoWinningNumber lottoWinningNumber) {
-        Map<LottoRank, Integer> winningInfo = new HashMap<>();
+  public WinningInfo getWinningInfo(LottoWinningNumber lottoWinningNumber) {
+    Map<LottoRank, Integer> winningInfo = new HashMap<>();
 
-        for (LottoTicket lottoTicket : lottoTickets) {
-            int matchedCount = lottoWinningNumber.getMatchedCount(lottoTicket);
-            if(matchedCount < MIN_MATCH_COUNT) continue;
-            boolean matchedBounus = lottoWinningNumber.isContainsBounusNumber(lottoTicket);
-
-            LottoRank rank = LottoRank.of(getRank(matchedCount, matchedBounus));
-            winningInfo.put(rank, winningInfo.getOrDefault(rank, 0) + 1 );
+    for (LottoTicket lottoTicket : lottoTickets) {
+      int matchedCount = lottoWinningNumber.getMatchedCount(lottoTicket);
+        if (matchedCount < MIN_MATCH_COUNT) {
+            continue;
         }
+      boolean matchedBounus = lottoWinningNumber.isContainsBounusNumber(lottoTicket);
 
-        return new WinningInfo(winningInfo);
+      LottoRank rank = LottoRank.of(getRank(matchedCount, matchedBounus));
+      winningInfo.put(rank, winningInfo.getOrDefault(rank, 0) + 1);
     }
 
-    private int getRank(int matchedCount, boolean matchedBounus) {
-        if (matchedCount == LottoTicket.LOTTO_NUMBERS_LENGTH) {
-            return 1;
-        }
+    return new WinningInfo(winningInfo);
+  }
 
-        if(matchedCount == LottoTicket.LOTTO_NUMBERS_LENGTH - 1 && matchedBounus) {
-            return 2;
-        }
-
-        if(matchedCount > 2) {
-            return LottoTicket.LOTTO_NUMBERS_LENGTH - matchedCount + 2;
-        }
-
-        return 0;
+  private int getRank(int matchedCount, boolean matchedBounus) {
+    if (matchedCount == LottoTicket.LOTTO_NUMBERS_LENGTH) {
+      return 1;
     }
 
-    public int size() {
-        return this.lottoTickets.size();
+    if (matchedCount == LottoTicket.LOTTO_NUMBERS_LENGTH - 1 && matchedBounus) {
+      return 2;
     }
+
+    if (matchedCount > 2) {
+      return LottoTicket.LOTTO_NUMBERS_LENGTH - matchedCount + 2;
+    }
+
+    return 0;
+  }
+
+  public int size() {
+    return this.lottoTickets.size();
+  }
 }
