@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -15,7 +16,7 @@ public class StatisticCalculator {
     }
 
     public List<Integer> getRankCount() {
-        List<Integer> rankCount = new ArrayList<>(6);
+        List<Integer> rankCount = new ArrayList<>(Arrays.asList(0, 0, 0, 0, 0, 0));
         for (RankState rankState : this.eachLottoResult) {
             int rankIndex = getRankIndex(rankState);
             rankCount.set(rankIndex, rankCount.get(rankIndex) + 1);
