@@ -19,7 +19,7 @@ public class LottoTicket {
     List<LottoNumber> numbers = Optional.ofNullable(integerNumbers)
         .orElseThrow(InvalidLottoNumberException::new)
         .stream()
-        .map(LottoNumber::new)
+        .map(LottoNumber::of)
         .collect(Collectors.toList());
 
     validateLength(numbers);

@@ -20,7 +20,7 @@ public class LottoController {
     LottoTickets lottoTickets = createLottoTickets(ticketCount);
 
     LottoTicket lottoWinningTicket = new LottoTicket(LottoInputView.inputWinningNumbers());
-    LottoNumber bonusNumber = new LottoNumber(LottoInputView.inputBonusNumber());
+    LottoNumber bonusNumber = LottoNumber.of(LottoInputView.inputBonusNumber());
 
     LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(lottoWinningTicket, bonusNumber);
     WinningInfo winningInfo = lottoTickets.getWinningInfo(lottoWinningNumber);

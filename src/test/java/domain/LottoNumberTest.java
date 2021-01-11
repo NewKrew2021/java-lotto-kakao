@@ -13,20 +13,26 @@ public class LottoNumberTest {
   @ParameterizedTest
   @ValueSource(ints = {1, 45})
   void create(int number) {
-    LottoNumber lottoNumber = new LottoNumber(number);
-    assertThat(lottoNumber).isEqualTo(new LottoNumber(number));
+    LottoNumber lottoNumber = LottoNumber.of(number);
+    assertThat(lottoNumber).isEqualTo(LottoNumber.of(number));
   }
 
   @ParameterizedTest
   @ValueSource(ints = {0, 46})
   void invalidNumber(int number) {
     assertThatExceptionOfType(InvalidLottoNumberException.class)
-        .isThrownBy(() -> new LottoNumber(number));
+        .isThrownBy(() -> LottoNumber.of(number));
   }
 
   @Test
   void nullTest() {
     assertThatExceptionOfType(InvalidLottoNumberException.class)
-        .isThrownBy(() -> new LottoNumber(null));
+        .isThrownBy(() -> LottoNumber.of(null));
+  }
+
+  @Test
+  void cache() {
+    LottoNumber lottoNumber = LottoNumber.of(1);
+    assertThat(lottoNumber == LottoNumber.of(1)).isTrue();
   }
 }
