@@ -8,7 +8,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,7 +37,7 @@ class LottoStatisticsTest {
         LottoStatistics lottoStatistics = LottoStatistics.of(lottoTickets, winnerTicket);
 
         //then
-        Map<LottoRanking, Long> expected = new HashMap<>();
+        Map<LottoRanking, Long> expected = new EnumMap<>(LottoRanking.class);
         expected.put(LottoRanking.RANK_1, 0L);
         expected.put(LottoRanking.RANK_2, 0L);
         expected.put(LottoRanking.RANK_3, 0L);
