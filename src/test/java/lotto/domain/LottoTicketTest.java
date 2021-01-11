@@ -26,42 +26,36 @@ public class LottoTicketTest {
     @Test
     @DisplayName("로또번호 수 테스트")
     void numberCountTest() {
-        assertThatThrownBy(() -> {
-            new LottoTicket(
-                    Sets.newTreeSet(new Number(1),
-                            new Number(2),
-                            new Number(3),
-                            new Number(4),
-                            new Number(5))
-            );
-        }).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new LottoTicket(
+                Sets.newTreeSet(new Number(1),
+                        new Number(2),
+                        new Number(3),
+                        new Number(4),
+                        new Number(5))
+        )).isInstanceOf(IllegalArgumentException.class);
 
-        assertThatThrownBy(() -> {
-            new LottoTicket(
-                    Sets.newTreeSet(new Number(1),
-                            new Number(2),
-                            new Number(3),
-                            new Number(4),
-                            new Number(5),
-                            new Number(6),
-                            new Number(7))
-            );
-        }).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new LottoTicket(
+                Sets.newTreeSet(new Number(1),
+                        new Number(2),
+                        new Number(3),
+                        new Number(4),
+                        new Number(5),
+                        new Number(6),
+                        new Number(7))
+        )).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     @DisplayName("중복 숫자 테스트")
     void duplicatedNumberTest() {
-        assertThatThrownBy(() -> {
-            new LottoTicket(
-                    Sets.newTreeSet(new Number(1),
-                            new Number(2),
-                            new Number(3),
-                            new Number(4),
-                            new Number(5),
-                            new Number(5))
-            );
-        }).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new LottoTicket(
+                Sets.newTreeSet(new Number(1),
+                        new Number(2),
+                        new Number(3),
+                        new Number(4),
+                        new Number(5),
+                        new Number(5))
+        )).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
