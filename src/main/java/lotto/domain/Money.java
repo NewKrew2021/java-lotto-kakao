@@ -7,7 +7,7 @@ import java.util.Objects;
 public class Money {
 
     private static final int SINGLE_PRICE = 1000;
-    private static final String INSUFFICIENT_MONEY_EXCEPTION_MESSAGE = "1000원 이상의 금액이 필요합니다.";
+    private static final String INSUFFICIENT_MONEY_EXCEPTION_MESSAGE = SINGLE_PRICE+"원 이상의 금액이 필요합니다.";
 
     private final int money;
 

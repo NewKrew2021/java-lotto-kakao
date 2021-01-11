@@ -10,7 +10,7 @@ import java.util.Objects;
 public class LottoNumbers {
 
     private static final int POSSIBLE_NUMBERS_SIZE = 6;
-    private static final String SIZE_EXCEPTION_MESSAGE = "로또 번호는 6개입니다.";
+    private static final String SIZE_EXCEPTION_MESSAGE = "로또 번호는 "+POSSIBLE_NUMBERS_SIZE+"개입니다.";
     private static final String DUPLICATE_EXCEPTION_MESSAGE = "로또 번호는 중복되면 안됩니다.";
 
     private final List<LottoNumber> lottoNumbers;
