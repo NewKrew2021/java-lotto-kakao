@@ -1,16 +1,18 @@
-package LottoMission;
+package lottoMission;
 
-import LottoMission.controller.LottoController;
-import LottoMission.view.InputView;
-import LottoMission.view.OutputView;
+import lottoMission.controller.LottoController;
+import lottoMission.view.InputView;
+import lottoMission.view.OutputView;
 
 public class Main {
 
     public static void main(String[] args) {
 
         int userMoney = InputView.enterUerMoney();
+
         LottoController controller = new LottoController(userMoney);
-        controller.buyLottosAuto();
+        controller.buyLottos();
+
         OutputView.autoBoughtView(controller);
         controller.setLastWeekWinningNumber(
                 InputView.enterLastWeekWinningNumbers(),

@@ -1,7 +1,7 @@
-package LottoMission.controller;
+package lottoMission.controller;
 
-import LottoMission.domain.Lotto;
-import LottoMission.domain.Lottos;
+import lottoMission.domain.Lotto;
+import lottoMission.domain.Lottos;
 import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThat;

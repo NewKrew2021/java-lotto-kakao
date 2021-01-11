@@ -1,4 +1,4 @@
-package LottoMission.domain;
+package lottoMission.domain;
 
 import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
@@ -22,9 +22,7 @@ public class LottoTest {
         int bonusNumber = 6;
         LottoAnswer answer = new LottoAnswer(
                 new LottoNumbers(answerList), new LottoNumber(bonusNumber));
-
-        lotto.winningPrize(answer);
-        assertThat(lotto.getWinningsStat()).isEqualTo(LotteryWinnings.SECOND);
+        assertThat(lotto.winningPrize(answer)).isEqualTo(LotteryWinnings.SECOND);
     }
 
 }

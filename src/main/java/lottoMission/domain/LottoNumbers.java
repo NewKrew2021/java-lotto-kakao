@@ -1,4 +1,4 @@
-package LottoMission.domain;
+package lottoMission.domain;
 
 import java.util.HashSet;
 import java.util.List;
@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class LottoNumbers {
 
     private final Set<LottoNumber> numbers;
-    private static final int MAX_NUMBERS_LENGTH = 6;
+    public static final int MAX_NUMBERS_LENGTH = 6;
 
     public LottoNumbers(List<Integer> numbers) {
         Set<LottoNumber> temp = new HashSet<>();

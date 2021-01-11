@@ -1,4 +1,4 @@
-package LottoMission.domain;
+package lottoMission.domain;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -18,8 +18,7 @@ public class Lottos {
             result.put(lotteryWinnings, 0);
         }
         for (Lotto lotto : lottos) {
-            lotto.winningPrize(lottoAnswer);
-            LotteryWinnings winningsStat = lotto.getWinningsStat();
+            LotteryWinnings winningsStat = lotto.winningPrize(lottoAnswer);
             result.put(winningsStat, result.get(winningsStat) + 1);
         }
         result.remove(LotteryWinnings.UNRANKED);
@@ -29,14 +28,14 @@ public class Lottos {
     public int getSumAllWinningMoney(LottoAnswer answer) {
         return lottos
                 .stream()
-                .mapToInt(lotto -> lotto.getWinningMoney(answer))
+                .mapToInt(lotto -> lotto.winningPrize(answer).getMoney())
                 .sum();
     }
 
     public List<List<Integer>> getLottosNumberList() {
         return lottos
                 .stream()
-                .map(i -> i.getLottoNumberList())
+                .map(Lotto::getLottoNumberList)
                 .collect(Collectors.toList());
     }
 

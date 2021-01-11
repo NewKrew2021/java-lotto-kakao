@@ -1,8 +1,7 @@
-package LottoMission.view;
+package lottoMission.view;
 
-import LottoMission.controller.LottoController;
-import LottoMission.domain.LotteryWinnings;
-import LottoMission.domain.Lotto;
+import lottoMission.controller.LottoController;
+import lottoMission.domain.LotteryWinnings;
 
 import java.util.List;
 import java.util.Map;
