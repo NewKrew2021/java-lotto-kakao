@@ -7,35 +7,17 @@ import java.util.Objects;
 
 public class StatisticsResult {
 
-    private static final int NONE_JACKPOT = 0;
-    private static final int THREE_WINNING_JACKPOT = 5000;
-    private static final int FOUR_WINNING_JACKPOT = 50000;
-    private static final int FIVE_WINNING_JACKPOT = 1500000;
-    private static final int FIVE_BONUS_WINNING_JACKPOT = 30000000;
-    private static final int SIX_WINNING_JACKPOT = 2000000000;
-
-    HashMap<StatisticsType, Integer> hashMap = new HashMap<>();
-    static HashMap<StatisticsType, Integer> priceHash = new HashMap<>();
+    HashMap<StatisticsType, Integer> rankCount = new HashMap<>();
     private int ticketCount = 0;
-
-    static {
-        priceHash.put(StatisticsType.NONE, NONE_JACKPOT);
-        priceHash.put(StatisticsType.THREE, THREE_WINNING_JACKPOT);
-        priceHash.put(StatisticsType.FOUR, FOUR_WINNING_JACKPOT);
-        priceHash.put(StatisticsType.FIVE, FIVE_WINNING_JACKPOT);
-        priceHash.put(StatisticsType.FIVE_WITH_BONUS, FIVE_BONUS_WINNING_JACKPOT);
-        priceHash.put(StatisticsType.SIX, SIX_WINNING_JACKPOT);
-    }
-
 
     public StatisticsResult() {
         for( StatisticsType type : StatisticsType.values() ) {
-            hashMap.put(type, 0);
+            rankCount.put(type, 0);
         }
     }
 
     public void increaseTypeCount(StatisticsType type) {
-        hashMap.put(type, hashMap.get(type) + 1);
+        rankCount.put(type, rankCount.get(type) + 1);
         this.ticketCount++;
     }
 
@@ -44,27 +26,27 @@ public class StatisticsResult {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StatisticsResult that = (StatisticsResult) o;
-        return hashMap.equals(that.hashMap);
+        return rankCount.equals(that.rankCount);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(hashMap);
+        return Objects.hash(rankCount);
     }
 
     @Override
     public String toString() {
-        return "3개 일치 ("+ THREE_WINNING_JACKPOT +"원)-" + hashMap.get(StatisticsType.THREE) + "\n" +
-                "4개 일치 ("+ FOUR_WINNING_JACKPOT +"원)-" + hashMap.get(StatisticsType.FOUR) + "\n" +
-                "5개 일치 ("+ FIVE_WINNING_JACKPOT +"원)-" + hashMap.get(StatisticsType.FIVE) + "\n" +
-                "5개 일치, 보너스 볼 일치("+ FIVE_BONUS_WINNING_JACKPOT +"원)-" + hashMap.get(StatisticsType.FIVE_WITH_BONUS) + "\n" +
-                "6개 일치 (" + SIX_WINNING_JACKPOT + "원)-" + hashMap.get(StatisticsType.SIX) + "\n";
+        return "3개 일치 ("+ StatisticsType.THREE.getJackpot() +"원)-" + rankCount.get(StatisticsType.THREE) + "\n" +
+                "4개 일치 ("+ StatisticsType.FOUR.getJackpot()  +"원)-" + rankCount.get(StatisticsType.FOUR) + "\n" +
+                "5개 일치 ("+ StatisticsType.FIVE.getJackpot()  +"원)-" + rankCount.get(StatisticsType.FIVE) + "\n" +
+                "5개 일치, 보너스 볼 일치("+ StatisticsType.FIVE_WITH_BONUS.getJackpot()  +"원)-" + rankCount.get(StatisticsType.FIVE_WITH_BONUS) + "\n" +
+                "6개 일치 (" + StatisticsType.SIX.getJackpot()  + "원)-" + rankCount.get(StatisticsType.SIX) + "\n";
     }
 
     public double benefit() {
         double sumPrice = 0;
         for( StatisticsType type : StatisticsType.values() ) {
-            sumPrice += priceHash.get(type) * hashMap.get(type);
+            sumPrice += type.getJackpot() * rankCount.get(type);
         }
         sumPrice = sumPrice / (this.ticketCount * LottoTicket.LOTTO_PRICE );
         return sumPrice;

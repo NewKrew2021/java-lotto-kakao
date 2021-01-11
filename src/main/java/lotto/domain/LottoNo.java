@@ -7,11 +7,15 @@ public class LottoNo implements Comparable<LottoNo>{
     int number;
 
     public LottoNo(Integer number) {
-        if( number < 1 || number > 45 ) {
+        if( !checkValidationLottoNo(number) ) {
             throw new IllegalArgumentException();
         }
 
         this.number = number;
+    }
+
+    public static boolean checkValidationLottoNo(Integer number) {
+        return number >= 1 && number <= 45;
     }
 
     @Override
@@ -29,11 +33,7 @@ public class LottoNo implements Comparable<LottoNo>{
 
     @Override
     public int compareTo(LottoNo o) {
-        if(this.number < o.number)
-            return 1;
-        if(this.number > o.number)
-            return -1;
-        return 0;
+        return Integer.compare(o.number, this.number);
     }
 
     @Override

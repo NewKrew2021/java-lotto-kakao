@@ -73,12 +73,11 @@ public class LottoInputView {
     }
 
     private static boolean checkValidBonusNumber(int bonusNum){
-        try{
-            LottoNo lottoNo = new LottoNo(bonusNum);
-        } catch (Exception e){
+        if( !LottoNo.checkValidationLottoNo(bonusNum) ) {
             System.out.println("보너스볼 번호가 적절하지 않습니다.");
             return false;
         }
+
         return true;
     }
 }
