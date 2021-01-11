@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.BonusNumberException;
 import lotto.util.LottoNumberGenerator;
 
 import java.util.List;
@@ -8,14 +9,16 @@ public class WinningLotto extends Lotto {
 
     private final LottoNumber bonusNumber;
 
-    public WinningLotto(List<Integer> LottoNumbers, int bonusNumber) {
-        super(LottoNumbers);
+    public WinningLotto(List<Integer> lottoNumbers, int bonusNumber) {
+        super(lottoNumbers);
+        if(lottoNumbers.contains(bonusNumber)){
+            throw new BonusNumberException();
+        }
         this.bonusNumber = LottoNumber.of(bonusNumber);
     }
 
     public WinningLotto(LottoNumberGenerator lottoNumberGenerator, int bonusNumber) {
-        super(lottoNumberGenerator);
-        this.bonusNumber = LottoNumber.of(bonusNumber);
+        this(lottoNumberGenerator.getNumbers(), bonusNumber);
     }
 
     public Rank getRankOfLotto(Lotto lotto) {

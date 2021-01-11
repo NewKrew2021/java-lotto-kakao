@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.BonusNumberException;
 import lotto.exception.HasDuplicateNumberException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -43,9 +44,16 @@ public class LottoTest {
 
     @Test
     void lottoSizeExceptionTest() {
-        assertThatExceptionOfType(HasDuplicateNumberException.class).isThrownBy(() -> {
-            new Lotto(Arrays.asList(1, 2, 3, 4, 5, 1));
-        }).withMessageMatching("로또 번호를 잘못 입력하셨습니다.");
+        assertThatExceptionOfType(HasDuplicateNumberException.class)
+                .isThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, 1)))
+                .withMessageMatching("로또 번호를 잘못 입력하셨습니다.");
+    }
+
+    @Test
+    void bonusNumberExceptionTest() {
+        assertThatExceptionOfType(BonusNumberException.class)
+                .isThrownBy(()-> new WinningLotto(Arrays.asList(1,2,3,4,5,6),6))
+                .withMessageMatching("보너스 번호를 잘못 입력하셨습니다.");
     }
 
 }
