@@ -17,28 +17,12 @@ public class Lottos {
         this.lottos=new ArrayList<>();
     }
 
+    public List<Lotto> getLottos(){
+        return lottos;
+    }
+
     public void add(Lotto lotto){
         lottos.add(lotto);
-    }
-
-    public List<LottoRank> lottosResult(WonLotto wonLotto){
-
-        List<LottoRank> results=new ArrayList<>();
-        for (Lotto lotto : lottos) {
-            results.add(wonLotto.checkRanking(lotto));
-        }
-        return results;
-    }
-
-    public List<Integer> lottosRankingResult(List<LottoRank> lottoRank){
-        int[] rankingResult = new int[6];
-        Arrays.fill(rankingResult, 0);
-
-        for (LottoRank rank : lottoRank) {
-            rankingResult[rank.getIndex()]++;
-        }
-
-        return Arrays.stream(rankingResult).boxed().collect(Collectors.toList());
     }
 
     @Override

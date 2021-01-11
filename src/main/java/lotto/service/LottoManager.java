@@ -20,9 +20,12 @@ public class LottoManager {
         int bonusBall=lottoInputView.getBonusBall();
         WonLotto wonLotto=new WonLotto(lotto,bonusBall);
 
-        lottoOutputView.printSameCountPhrase(lottos.lottosRankingResult(lottos.lottosResult(wonLotto)));
-        lottoOutputView.printProfitRatio(new LottoReview().getProfitRatio(lottos.lottosResult(wonLotto)));
+        LottoReview review = new LottoReview(lottos, wonLotto);
 
+        //lottoOutputView.printSameCountPhrase(lottos.lottosRankingResult(lottos.lottosResult(wonLotto)));
+        //lottoOutputView.printProfitRatio(new LottoReview().getProfitRatio(lottos.lottosResult(wonLotto)));
+        lottoOutputView.printSameCountPhrase(review.getSameCountList());
+        lottoOutputView.printProfitRatio(review.getProfitRatio());
     }
 
 
