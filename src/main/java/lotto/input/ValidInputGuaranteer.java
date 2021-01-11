@@ -2,7 +2,7 @@ package lotto.input;
 
 import java.util.Scanner;
 
-public class ValidInputGuaranteer {
+public abstract class ValidInputGuaranteer {
     protected Scanner scanner = new Scanner(System.in);
 
     public String getFromUser(){
@@ -17,11 +17,7 @@ public class ValidInputGuaranteer {
         }
     }
 
-    protected String getComment(){
-        return "";
-    }
+    abstract String getComment();
 
-    protected void checkValid(String input){
-
-    }
+    abstract void checkValid(String input);
 }
