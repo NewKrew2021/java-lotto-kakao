@@ -6,21 +6,20 @@ import java.util.List;
 
 public class Lotto {
 
-    private List<Integer> lotto;
+    private List<LottoNumber> lotto;
 
-    public Lotto(List<Integer> lotto) {
+    public Lotto(List<LottoNumber> lotto) {
         Collections.sort(lotto);
         this.lotto = lotto;
     }
 
-    public List<Integer> getLotto(){
-        final List<Integer> lotto = new ArrayList<>(this.lotto);
-        return lotto;
+    public final List<LottoNumber> getLotto(){
+        return new ArrayList<>(lotto);
     }
 
     public int checkSameCount(Lotto userLotto){
         int count = 0;
-        for (Integer number : userLotto.lotto) {
+        for (LottoNumber number : userLotto.lotto) {
             count += lotto.contains(number) ? 1 : 0;
         }
 

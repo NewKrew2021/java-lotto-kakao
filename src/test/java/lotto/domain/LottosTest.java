@@ -17,7 +17,7 @@ public class LottosTest {
 
     @BeforeEach
     void setUp(){
-        lottos.add(new Lotto(Arrays.asList(1,2,3,4,5,6)));
+        lottos.add(LottoGenerator.getInstance().generateLotto());
     }
 
     @Test

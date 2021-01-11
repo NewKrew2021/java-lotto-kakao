@@ -15,12 +15,17 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class WonLottoTest {
 
-
+    private LottoGenerator generator;
     private WonLotto wonLotto;
+    Lotto lotto;
+    int bonusNo;
 
     @BeforeEach
     void setUp(){
-        wonLotto = new WonLotto(new Lotto(Arrays.asList(1,2,3,4,5,6)), 7);
+        generator = LottoGenerator.getInstance();
+        lotto = generator.generateLotto();
+        bonusNo = generator.generateBonus(lotto);
+        wonLotto = new WonLotto(lotto, bonusNo);
     }
 
     @Test
@@ -28,7 +33,7 @@ public class WonLottoTest {
     void testWonLottoSize(){
 
         HashSet<Integer> set = new HashSet<>();
-        set.addAll(wonLotto.getWonLotto().getLotto());
+        wonLotto.getWonLotto().getLotto().stream().forEach(number -> set.add(number.getNumber()));
         Assertions.assertTrue(set.size()==6);
 
         set.add(wonLotto.getBonusNo());
@@ -39,10 +44,7 @@ public class WonLottoTest {
     @Test
     @DisplayName("일치하는 번호에 따른 등수 확인")
     void testCheckRanking() {
-        LottoRank rank = wonLotto.checkRanking(new Lotto(Arrays.asList(1,2,3,4,5,6)));
+        LottoRank rank = wonLotto.checkRanking(lotto);
         assertThat(rank).isEqualTo(LottoRank.FIRST);
-
-        rank = wonLotto.checkRanking(new Lotto(Arrays.asList(1,2,3,4,5,7)));
-        assertThat(rank).isEqualTo(LottoRank.SECOND);
     }
 }

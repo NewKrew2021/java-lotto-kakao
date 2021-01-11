@@ -20,14 +20,23 @@ public class LottoReviewTest {
     private LottoReview lottoReview;
     @BeforeEach
     void setUp() {
-        List<Lotto> lotto_parers = new ArrayList<>();
-        lotto_parers.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        lotto_parers.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
-        lotto_parers.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 10)));
-        lotto_parers.add(new Lotto(Arrays.asList(7, 9, 5, 42, 24, 21)));
+        List<Lotto> lottoList = new ArrayList<>();
+        lottoList.add(new Lotto(Arrays.asList(
+                LottoNumber.makeNumber(1),
+                LottoNumber.makeNumber(2),
+                LottoNumber.makeNumber(3),
+                LottoNumber.makeNumber(4),
+                LottoNumber.makeNumber(5),
+                LottoNumber.makeNumber(6))));
 
-        lottos = new Lottos(lotto_parers);
-        wonLotto = new WonLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), 7);
+        lottos = new Lottos(lottoList);
+        wonLotto = new WonLotto(new Lotto(Arrays.asList(
+                LottoNumber.makeNumber(1),
+                LottoNumber.makeNumber(2),
+                LottoNumber.makeNumber(3),
+                LottoNumber.makeNumber(4),
+                LottoNumber.makeNumber(5),
+                LottoNumber.makeNumber(6))), 7);
         lottoReview = new LottoReview(lottos, wonLotto);
 
     }
@@ -35,18 +44,18 @@ public class LottoReviewTest {
     @Test
     void testSameCount(){
         assertThat(lottoReview.getSameCountList().get(0)).isEqualTo(1);
-        assertThat(lottoReview.getSameCountList().get(2)).isEqualTo(1);
+        assertThat(lottoReview.getSameCountList().get(2)).isEqualTo(0);
     }
 
     @Test
     void testLottoProfit() {
-        assertThat(lottoReview.getProfit()).isEqualTo(2031500000);
+        assertThat(lottoReview.getProfit()).isEqualTo(LottoRank.FIRST.getMoney());
     }
 
     @Test
     void testLottoProfitRatio(){
         Lottos lottos = new Lottos();
-        assertThat(lottoReview.getProfitRatio()).isEqualTo(50787500);
+        assertThat(lottoReview.getProfitRatio()).isEqualTo(LottoRank.FIRST.getMoney()/10);
     }
 
 }

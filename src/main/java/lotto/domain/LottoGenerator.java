@@ -8,18 +8,21 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoGenerator {
 
-    private static List<Integer> allLottoNumbers = new ArrayList<>();
+    private static List<LottoNumber> allLottoNumbers =
+            IntStream.rangeClosed(
+                    LottoNumber.LOTTO_MIN_NUMBER,
+                    LottoNumber.LOTTO_MAX_NUMBER)
+            .mapToObj(number -> LottoNumber.makeNumber(number))
+            .collect(Collectors.toList());
     public static LottoGenerator instance = null;
 
     public static final int LOTTO_MAX_SIZE = 6;
 
     private LottoGenerator(){
-        for (int i = LottoNumber.LOTTO_MIN_NUMBER; i <= LottoNumber.LOTTO_MAX_NUMBER; i++) {
-            allLottoNumbers.add(i);
-        }
     }
 
     public static LottoGenerator getInstance(){
@@ -41,7 +44,7 @@ public class LottoGenerator {
 
     public int generateBonus(Lotto lotto){
         HashSet<Integer> set = new HashSet<>();
-        set.addAll(lotto.getLotto());
+        lotto.getLotto().stream().forEach(number -> set.add(number.getNumber()));
 
         int bonusNo = RandomUtil.getRandomValue();
         while(!set.add(bonusNo)){
@@ -54,9 +57,9 @@ public class LottoGenerator {
     public Lotto lottoStringParser(String lotto){
 
         String[] lottoNumber=lotto.split(",");
-        List<Integer> parsedLotto=new ArrayList<>();
+        List<LottoNumber> parsedLotto=new ArrayList<>();
         for (String number : lottoNumber) {
-            parsedLotto.add(Integer.parseInt(number.trim()));
+            parsedLotto.add(LottoNumber.makeNumber(Integer.parseInt(number.trim())));
         }
         return new Lotto(parsedLotto);
     }

@@ -17,9 +17,8 @@ public class Lottos {
         this.lottos=new ArrayList<>();
     }
 
-    public List<Lotto> getLottos(){
-        final List<Lotto> lottos = new ArrayList<>(this.lottos);
-        return lottos;
+    public final List<Lotto> getLottos(){
+        return new ArrayList<>(lottos);
     }
 
     public void add(Lotto lotto){
