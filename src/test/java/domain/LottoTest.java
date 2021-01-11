@@ -2,7 +2,6 @@ package domain;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -16,16 +15,18 @@ public class LottoTest {
 
     @BeforeEach
     public void setUpLotto() {
-        lotto = new Lotto(Arrays.asList(1, 7, 8, 9, 10, 11));
-        winningLotto = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 12);
+        lotto = new Lotto(Arrays.asList(new Ball(1), new Ball(7), new Ball(8),
+                new Ball(9), new Ball(10), new Ball(11)));
+        winningLotto = new WinningLotto(Arrays.asList(new Ball(1), new Ball(2), new Ball(3),
+                new Ball(4), new Ball(5), new Ball(6)), 12);
     }
 
     @RepeatedTest(100)
     public void generateLottoTest() {
         Lotto randomLotto = new Lotto();
-        List<Integer> lottoNumbers = randomLotto.getLottoBalls();
+        List<Ball> lottoNumbers = randomLotto.getLottoBalls();
         assertThat(lottoNumbers.size()).isEqualTo(Lotto.LOTTO_COUNT);
-        for (int lottoNumber : lottoNumbers) {
+        for (Object lottoNumber : lottoNumbers) {
             assertThat(Collections.frequency(lottoNumbers, lottoNumber)).isEqualTo(1);
         }
     }

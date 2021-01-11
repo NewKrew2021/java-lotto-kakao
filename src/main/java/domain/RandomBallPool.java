@@ -10,16 +10,16 @@ public class RandomBallPool {
     public static final int LOTTO_MIN = 1;
     public static final int LOTTO_MAX = 45;
 
-    private static List<Integer> randomPool;
+    private static List<Ball> randomPool;
 
     static {
-        randomPool = new ArrayList<>();
+        randomPool = new ArrayList<Ball>();
         for (int lottoNum = LOTTO_MIN; lottoNum <= LOTTO_MAX; ++lottoNum) {
-            randomPool.add(lottoNum);
+            randomPool.add(new Ball(lottoNum));
         }
     }
 
-    public static List<Integer> getLottoBallList(int count){
+    public static List<Ball> getLottoBallList(int count){
         Collections.shuffle(randomPool);
         return randomPool.stream()
                 .limit(count)

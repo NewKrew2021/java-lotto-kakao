@@ -7,26 +7,25 @@ public class Lotto {
     public static final int LOTTO_COUNT = 6;
     public static final int LOTTO_PRICE = 1000;
 
-    private List<Integer> lottoBalls;
+    private List<Ball> lottoBalls;
 
     public Lotto(){
         lottoBalls = RandomBallPool.getLottoBallList(LOTTO_COUNT);
     }
 
-    public Lotto(List<Integer> balls) {
+    public Lotto(List<Ball> balls) {
         lottoBalls = balls;
     }
 
-    public List<Integer> getLottoBalls() {
+    public List<Ball> getLottoBalls() {
         return lottoBalls;
     }
 
-    public boolean hasBall(int ball) {
+    public boolean hasBall(Ball ball) {
         return lottoBalls.contains(ball);
     }
 
-
-    public boolean contains(int ball){
+    public boolean contains(Ball ball){
         return lottoBalls.contains(ball);
     }
 
@@ -35,7 +34,7 @@ public class Lotto {
         StringBuilder lottoBuilder = new StringBuilder();
         lottoBuilder.append("[");
 
-        for (int ball : lottoBalls) {
+        for (Ball ball : lottoBalls) {
             lottoBuilder.append(ball);
             lottoBuilder.append(", ");
         }

@@ -1,9 +1,6 @@
 package view;
 
-import domain.Lotto;
-import domain.LottoStatistics;
-import domain.Lottos;
-import domain.WinningLotto;
+import domain.*;
 
 import java.util.Arrays;
 import java.util.InputMismatchException;
@@ -58,11 +55,10 @@ public class LottoProgramView {
         return scanner.nextInt();
     }
 
-    public List<Integer> getWinningLottoForUser() {
+    public List<Ball> getWinningLottoForUser() {
         System.out.println(LAST_WEEK_BALLS_PHRASE);
         return Arrays.stream(scanner.nextLine().split(","))
-                .mapToInt(Integer::parseInt)
-                .boxed()
+                .map(Ball::map)
                 .collect(Collectors.toList());
     }
 

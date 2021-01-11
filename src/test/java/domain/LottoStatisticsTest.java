@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoStatisticsTest {
 
@@ -14,15 +13,22 @@ public class LottoStatisticsTest {
 
     @BeforeEach
     public void createLottos() {
-        WinningLotto winningLotto = new WinningLotto(Arrays.asList(1, 7, 8, 9, 10, 11),15);
+        WinningLotto winningLotto = new WinningLotto(Arrays.asList(new Ball(1), new Ball(7), new Ball(8),
+                new Ball(9), new Ball(10), new Ball(11)),34);
         Lottos lottos = new Lottos(
                 Arrays.asList(
-                        new Lotto(Arrays.asList(1, 7, 8, 9, 10, 11)),
-                        new Lotto(Arrays.asList(1, 7, 8, 9, 10, 11)),
-                        new Lotto(Arrays.asList(1, 7, 8, 9, 10, 11)),
-                        new Lotto(Arrays.asList(1, 7, 8, 9, 10, 13)),
-                        new Lotto(Arrays.asList(1, 7, 8, 9, 10, 13)),
-                        new Lotto(Arrays.asList(1, 7, 8, 9, 10, 13))
+                        new Lotto(Arrays.asList(new Ball(1), new Ball(7), new Ball(8),
+                                new Ball(9), new Ball(10), new Ball(11))),
+                        new Lotto(Arrays.asList(new Ball(1), new Ball(7), new Ball(8),
+                                new Ball(9), new Ball(10), new Ball(11))),
+                        new Lotto(Arrays.asList(new Ball(1), new Ball(7), new Ball(8),
+                                new Ball(9), new Ball(10), new Ball(11))),
+                        new Lotto(Arrays.asList(new Ball(1), new Ball(7), new Ball(8),
+                                new Ball(9), new Ball(10), new Ball(13))),
+                        new Lotto(Arrays.asList(new Ball(1), new Ball(7), new Ball(8),
+                                new Ball(9), new Ball(10), new Ball(13))),
+                        new Lotto(Arrays.asList(new Ball(1), new Ball(7), new Ball(8),
+                                new Ball(9), new Ball(10), new Ball(13)))
                 )
         );
         lottoStatistics = new LottoStatistics(lottos.getRankCounts(winningLotto),lottos.getLottos().size());
