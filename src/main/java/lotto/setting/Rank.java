@@ -11,7 +11,7 @@ public enum Rank {
    private int valueOfRank;
    private long prizeMoney;
 
-   Rank(int value, long prizeMoney){
+   Rank(int value, long prizeMoney) {
       this.valueOfRank = value;
       this.prizeMoney = prizeMoney;
    }

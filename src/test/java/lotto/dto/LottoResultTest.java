@@ -22,7 +22,7 @@ public class LottoResultTest {
     }
 
     @Test
-    public void getCountOfOrderTest(){
+    public void getCountOfOrderTest() {
         List<Integer> countList = new ArrayList<>();
         for(int order = 1; order <= 6; order++){
             countList.add(result.getCountOfOrder(order));
@@ -32,7 +32,7 @@ public class LottoResultTest {
     }
 
     @Test
-    public void getRateTest(){
+    public void getRateTest() {
         int testInputMoney = Format.TICKET_PRICE * 6;
         double expectedRate = (double)result.getScore() / testInputMoney;
         assertThat(result.getRate(testInputMoney)).isEqualTo(expectedRate);

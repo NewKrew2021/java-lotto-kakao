@@ -15,7 +15,7 @@ public class Output {
         System.out.println(count + "개를 구매했습니다.");
     }
 
-    public static void printPurchasedLottoToUser(LottoPaper paper){
+    public static void printPurchasedLottoToUser(LottoPaper paper) {
         LottoNumberData data = paper.getLottoNumberData();
         List<Set<Integer>> rawData = data.getNumberData();
         for (Set<Integer> integers : rawData) {
@@ -25,7 +25,7 @@ public class Output {
         }
     }
 
-    public static void printStatisticsToUser(int userMoney, LottoResult result){
+    public static void printStatisticsToUser(int userMoney, LottoResult result) {
         System.out.println("당첨 통계");
         System.out.println("----------");
         System.out.println("3개 일치 (5,000원) - " + result.getCountOfOrder(5) + "개");
@@ -35,5 +35,4 @@ public class Output {
         System.out.println("6개 일치 (2,000,000,000원) - " + result.getCountOfOrder(1) + "개");
         System.out.println("총 수익률은 " + result.getRate(userMoney) + "입니다.");
     }
-
 }

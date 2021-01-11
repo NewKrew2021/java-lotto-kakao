@@ -1,7 +1,8 @@
 package lotto.controller;
 
 public class Main {
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         LottoMachine machine = new LottoMachine();
         machine.inputPrice();
         machine.generateAuto();

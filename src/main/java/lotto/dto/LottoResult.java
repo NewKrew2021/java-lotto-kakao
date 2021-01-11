@@ -8,7 +8,7 @@ public class LottoResult {
     final long score;
     final int[] orderCount = new int[10];
 
-    public LottoResult(long score, List<Rank> ranks){
+    public LottoResult(long score, List<Rank> ranks) {
         this.score = score;
         for (Rank currentRank : ranks) {
             orderCount[currentRank.getValue()]++;

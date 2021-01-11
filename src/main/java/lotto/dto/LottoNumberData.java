@@ -3,15 +3,14 @@ package lotto.dto;
 import java.util.*;
 
 public class LottoNumberData {
-
     private final List<Set<Integer>> numberData;
 
-    public LottoNumberData(List<Set<Integer>> numberData){
+    public LottoNumberData(List<Set<Integer>> numberData) {
         this.numberData = numberData;
     }
 
     /* return copied numberData */
-    public List<Set<Integer>> getNumberData(){
+    public List<Set<Integer>> getNumberData() {
         List<Set<Integer>> copiedNumbers = new ArrayList<>();
 
         for(Set<Integer> currentLine : numberData){

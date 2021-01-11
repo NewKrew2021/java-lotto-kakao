@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 public class FormatTest {
 
     @Test
-    public void ticketSizeExceptionCheck(){
+    public void ticketSizeExceptionCheck() {
         Set<Integer> testNumbers = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
 
         assertThatExceptionOfType(RuntimeException.class)
@@ -22,7 +22,7 @@ public class FormatTest {
     }
 
     @Test
-    public void invalidNumberCheck(){
+    public void invalidNumberCheck() {
         Set<Integer> testNumbers = new HashSet<>(Arrays.asList(0, 20, 30, 40, 43, 44));
 
         assertThatExceptionOfType(RuntimeException.class)
@@ -32,7 +32,7 @@ public class FormatTest {
     }
 
     @Test
-    public void bonusBallCheck(){
+    public void bonusBallCheck() {
         Set<Integer> testNumbers = new HashSet<>(Arrays.asList(0, 20, 30, 40, 43, 44));
         int bonusBall = 20;
 

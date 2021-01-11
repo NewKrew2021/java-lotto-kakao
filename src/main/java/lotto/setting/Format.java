@@ -8,25 +8,25 @@ public class Format {
     public static final int LOWER_LIMIT_OF_NUMBER = 1;
     public static final int UPPER_LIMIT_OF_NUMBER = 45;
 
-    public static void validateTicketSizeOf(int testTicketSize){
+    public static void validateTicketSizeOf(int testTicketSize) {
         if(TICKET_SIZE != testTicketSize){
             throw new RuntimeException("invalid Ticket size!!");
         }
     }
 
-    public static void validateNumberRangeOf(Set<Integer> numbers){
+    public static void validateNumberRangeOf(Set<Integer> numbers) {
         for (int number : numbers) {
             rangeCheckForOneNumber(number);
         }
     }
 
-    private static void rangeCheckForOneNumber(int number){
+    private static void rangeCheckForOneNumber(int number) {
         if(number < LOWER_LIMIT_OF_NUMBER || UPPER_LIMIT_OF_NUMBER < number){
             throw new RuntimeException("contains invalid number value.");
         }
     }
 
-    public static void validateBonusBall(Set<Integer> numbers, int x){
+    public static void validateBonusBall(Set<Integer> numbers, int x) {
         if(numbers.contains(x)){
             throw new RuntimeException("bonusBall number already included.");
         }

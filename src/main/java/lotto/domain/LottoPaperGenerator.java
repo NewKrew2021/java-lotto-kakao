@@ -6,14 +6,13 @@ import lotto.setting.Format;
 import java.util.*;
 
 public class LottoPaperGenerator {
-
     private final int inputMoney;
 
     public LottoPaperGenerator(int inputMoney){
         this.inputMoney = inputMoney;
     }
 
-    public LottoPaper generateAuto(){
+    public LottoPaper generateAuto() {
         List<Set<Integer>> numbers = new ArrayList<>();
         Random random = new Random();
 

@@ -15,7 +15,7 @@ public class WinnerBallsTest {
     int testBonusBall;
 
     @BeforeEach
-    public void setUp(){
+    public void setUp() {
         testTicket = new Ticket(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
         testBonusBall = 7;
         testWinnerBalls = new WinnerBalls(testTicket, testBonusBall);

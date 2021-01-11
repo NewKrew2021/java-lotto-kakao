@@ -4,7 +4,7 @@ public class WinnerBalls {
     private final Ticket ticket;
     private final int bonusBall;
 
-    public WinnerBalls(Ticket ticket, int bonusBall){
+    public WinnerBalls(Ticket ticket, int bonusBall) {
         this.ticket = ticket;
         this.bonusBall = bonusBall;
     }

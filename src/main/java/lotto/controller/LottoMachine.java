@@ -13,12 +13,12 @@ public class LottoMachine {
     private LottoPaper userLottoPaper;
     private WinnerBalls winnerBalls;
 
-    public void inputPrice(){
+    public void inputPrice() {
         userMoney = Input.getPriceFromUser();
         Output.printCountOfPurchase(userMoney / Format.TICKET_PRICE);
     }
 
-    public void generateAuto(){
+    public void generateAuto() {
         userLottoPaper = new LottoPaperGenerator(userMoney).generateAuto();
     }
 
@@ -30,7 +30,7 @@ public class LottoMachine {
         winnerBalls = Input.getWinnerBallsFromUser();
     }
 
-    public void outputStatisticsAboutPurchasedLotto(){
+    public void outputStatisticsAboutPurchasedLotto() {
         LottoResult result = userLottoPaper.getResultCompareWith(winnerBalls);
         Output.printStatisticsToUser(userMoney, result);
     }

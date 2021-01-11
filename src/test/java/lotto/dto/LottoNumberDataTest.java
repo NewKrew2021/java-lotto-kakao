@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoNumberDataTest {
 
     @Test
-    public void getNumberDataTest(){
+    public void getNumberDataTest() {
 
         List<Set<Integer>> testNumberData = Arrays.asList(
                 new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)),
