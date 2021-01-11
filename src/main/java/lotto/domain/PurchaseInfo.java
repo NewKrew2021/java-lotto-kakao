@@ -22,6 +22,14 @@ public class PurchaseInfo {
         }
     }
 
+    public int getManualLottoAmount() {
+        return manualLottoAmount;
+    }
+
+    public int getAutoLottoAmount() {
+        return purchaseMoney.getLottoAmount() - manualLottoAmount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
