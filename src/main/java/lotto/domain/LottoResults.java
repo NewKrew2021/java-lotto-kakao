@@ -1,42 +1,45 @@
 package lotto.domain;
 
+import com.sun.org.apache.xml.internal.utils.res.XResources_zh_TW;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 public class LottoResults {
-    private static LottoResults lottoResults;
-    private static final Map<LottoRank, Integer> results;
-    static {
-        results = new HashMap<LottoRank, Integer>() {{
-            for (LottoRank rank : LottoRank.values()) {
-                put(rank, 0);
-            }
-        }};
-    }
+    private static Map<LottoRank, Integer> results;
 
     private LottoResults(List<LottoTicket> lottoTickets, WinningNumber winningNumber) {
+        results = new HashMap<LottoRank, Integer>();
         lottoTickets.stream()
-                .filter(lottoTicket -> lottoTicket.matchCount(winningNumber) >= 3)
                 .forEach(lottoTicket -> {
-                    LottoRank rank = RankTable.get(lottoTicket.matchCount(winningNumber),
-                            lottoTicket.contains(winningNumber.getBonusNumber()));
+                    LottoRank rank = LottoRank.getRank(lottoTicket.matchCount(winningNumber),
+                            winningNumber.bonusNumberContain(lottoTicket));
+                    results.putIfAbsent(rank, 0);
                     results.put(rank, results.get(rank)+1);
                 });
+        for (LottoRank rank : LottoRank.values()) {
+        }
     }
 
     public static LottoResults createLottoResults(List<LottoTicket> lottoTickets, WinningNumber winningNumber){
-        lottoResults = new LottoResults(lottoTickets, winningNumber);
-        return lottoResults;
+        return new LottoResults(lottoTickets, winningNumber);
     }
 
-    public Map<LottoRank, Integer> getLottoResults(){
-        return lottoResults.getResults();
+    public int getCountLottoRank(LottoRank rank){
+        if (results.get(rank) != null){
+            return results.get(rank);
+        }
+        return 0;
     }
 
-    private Map<LottoRank, Integer> getResults(){
-        return results;
+    public long earningRate(int price) {
+        double sum = 0;
+        for (LottoRank rank : LottoRank.values()) {
+            sum += getCountLottoRank(rank) * rank.getPrice();
+        }
+        return (long) (sum / price * 100);
     }
 
     @Override

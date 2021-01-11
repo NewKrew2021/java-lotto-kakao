@@ -24,9 +24,6 @@ public class WinningNumber extends LottoTicket {
         return lottoTicket.contains(bonusNumber);
     }
 
-    public boolean bonusNumberContain(Set<Number> numbers) {
-        return numbers.contains(bonusNumber);
-    }
 
     @Override
     public String toString() {
