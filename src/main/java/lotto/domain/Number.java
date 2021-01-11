@@ -1,8 +1,6 @@
 package lotto.domain;
 
 
-import lotto.exception.InvalidNumberException;
-
 public class Number implements Comparable<Number> {
     private final int number;
     private static final int BOUNDARY_START_NUM = 1;
