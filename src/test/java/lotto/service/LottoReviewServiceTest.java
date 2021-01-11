@@ -1,5 +1,6 @@
 package lotto.service;
 
+import lotto.domain.LottoNumber;
 import lotto.service.LottoReviewService;
 import lotto.domain.Lotto;
 import lotto.domain.Lottos;
@@ -18,7 +19,7 @@ public class LottoReviewServiceTest {
 
     @BeforeEach
     void setUp() {
-        wonLotto = new WonLotto(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), 7);
+        wonLotto = new WonLotto(new Lotto(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))), new LottoNumber(7));
         lottoReviewService = new LottoReviewService();
 
     }
@@ -28,21 +29,22 @@ public class LottoReviewServiceTest {
     void testLottoProfit() {
 
         Lottos lottos = new Lottos();
-        lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
-        lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 10)));
-        lottos.add(new Lotto(Arrays.asList(7, 9, 5, 42, 24, 21)));
+        lottos.add(new Lotto(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))));
+        lottos.add(new Lotto(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(7))));
+        lottos.add(new Lotto(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(10))));
+        lottos.add(new Lotto(Arrays.asList(new LottoNumber(7), new LottoNumber(9), new LottoNumber(5), new LottoNumber(42), new LottoNumber(24), new LottoNumber(21))));
 
         assertThat(lottoReviewService.getProfit(lottos.lottosResult(wonLotto))).isEqualTo(2031500000);
     }
 
     @Test
     void testLottoProfitRatio() {
+
         Lottos lottos = new Lottos();
-        lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
-        lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)));
-        lottos.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 10)));
-        lottos.add(new Lotto(Arrays.asList(7, 9, 5, 42, 24, 21)));
+        lottos.add(new Lotto(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))));
+        lottos.add(new Lotto(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(7))));
+        lottos.add(new Lotto(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(10))));
+        lottos.add(new Lotto(Arrays.asList(new LottoNumber(7), new LottoNumber(9), new LottoNumber(5), new LottoNumber(42), new LottoNumber(24), new LottoNumber(21))));
 
         assertThat(lottoReviewService.getProfitRatio(lottos.lottosResult(wonLotto))).isEqualTo(50787500);
     }

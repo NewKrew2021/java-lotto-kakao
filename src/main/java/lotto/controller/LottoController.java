@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import lotto.domain.Lottos;
 import lotto.domain.WonLotto;
 import lotto.service.LottoGeneratorService;
@@ -52,8 +53,8 @@ public class LottoController {
             lottoView.printInputErrorPhrase();
         }
         lottoView.printInputBonusBallPhrase();
-        int bonusBall = getBonusBall();
-        while (lotto.getLotto().contains(bonusBall)) {
+        LottoNumber bonusBall = getBonusBall();
+        while (lotto.getLottoNumbers().contains(bonusBall)) {
             lottoView.printInputDuplicatePhrase();
             bonusBall = getBonusBall();
         }
@@ -77,10 +78,10 @@ public class LottoController {
         return wonLotto;
     }
 
-    public int getBonusBall() {
+    public LottoNumber getBonusBall() {
 
         int bonusBall = Integer.parseInt(scanner.nextLine());
-        return bonusBall;
+        return new LottoNumber(bonusBall);
     }
 
 

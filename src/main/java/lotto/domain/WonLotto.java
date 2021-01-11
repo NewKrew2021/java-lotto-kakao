@@ -4,8 +4,8 @@ import lotto.service.LottoGeneratorService;
 
 public class WonLotto {
 
-    private Lotto wonLotto;
-    private int bonusNo;
+    private final Lotto wonLotto;
+    private final LottoNumber bonusNo;
 
     private LottoGeneratorService lottoGeneratorService = new LottoGeneratorService();
 
@@ -13,7 +13,7 @@ public class WonLotto {
     private final int BONUS_NUMBER_MATCHING_COUNT = 5;
 
 
-    public WonLotto(Lotto lotto, int bonusNo) {
+    public WonLotto(Lotto lotto, LottoNumber bonusNo) {
         this.wonLotto = lotto;
         this.bonusNo = bonusNo;
     }
@@ -22,7 +22,7 @@ public class WonLotto {
         return wonLotto;
     }
 
-    public int getBonusNo() {
+    public LottoNumber getBonusNo() {
         return bonusNo;
     }
 
@@ -33,7 +33,7 @@ public class WonLotto {
             return LottoRank.NONE;
 
         if (matchNo == BONUS_NUMBER_MATCHING_COUNT)
-            return lotto.getLotto().contains(bonusNo) ? LottoRank.SECOND : LottoRank.THIRD;
+            return lotto.getLottoNumbers().contains(bonusNo) ? LottoRank.SECOND : LottoRank.THIRD;
 
         if (matchNo < BONUS_NUMBER_MATCHING_COUNT)
             return LottoRank.values()[convertRank(matchNo)];

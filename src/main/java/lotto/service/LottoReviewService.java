@@ -6,7 +6,7 @@ import java.util.List;
 
 public class LottoReviewService {
 
-    private final int LOTTO_PRICE = 1000;
+    private final int LOTTO_MAX_INT=45;
 
     public long getProfit(List<LottoRank> ranks) {
 
@@ -19,7 +19,7 @@ public class LottoReviewService {
 
     public int getProfitRatio(List<LottoRank> ranks) {
 
-        return calculateRatio(getProfit(ranks), ranks.size() * LOTTO_PRICE);
+        return calculateRatio(getProfit(ranks), ranks.size() * LOTTO_MAX_INT);
     }
 
     private int calculateRatio(long totalPrize, long totalCost) {

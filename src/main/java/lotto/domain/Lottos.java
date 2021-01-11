@@ -8,14 +8,8 @@ import java.util.stream.Collectors;
 public class Lottos {
 
     private final int LOTTO_NUMBER_COUNT = 6;
-
     private List<Lotto> lottos;
 
-
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
-
-    }
 
     public Lottos() {
         this.lottos = new ArrayList<>();
