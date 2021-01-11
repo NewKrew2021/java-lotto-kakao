@@ -12,6 +12,10 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.lottoNumber = lottoNumber;
     }
 
+    public int getLottoNumber() {
+        return lottoNumber;
+    }
+
     private boolean isInvalidRange(int digit) {
         return digit < 1 || digit > 45;
     }
@@ -28,12 +32,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public int hashCode() {
         return Objects.hash(lottoNumber);
     }
-
-    @Override
-    public String toString() {
-        return String.valueOf(lottoNumber);
-    }
-
 
     @Override
     public int compareTo(LottoNumber o) {

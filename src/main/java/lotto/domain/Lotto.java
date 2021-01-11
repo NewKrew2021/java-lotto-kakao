@@ -20,6 +20,10 @@ public class Lotto {
         this.lottoNumbers = digits;
     }
 
+    public List<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
     private boolean isDuplicate(List<LottoNumber> digits) {
         return digits.stream()
                 .distinct()
@@ -51,16 +55,5 @@ public class Lotto {
     @Override
     public int hashCode() {
         return Objects.hash(lottoNumbers);
-    }
-
-    @Override
-    public String toString() {
-        StringJoiner strJoiner = new StringJoiner(", ", "[", "]");
-
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            strJoiner.add(lottoNumber.toString());
-        }
-
-        return strJoiner.toString();
     }
 }

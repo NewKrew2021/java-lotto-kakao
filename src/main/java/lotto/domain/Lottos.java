@@ -28,6 +28,10 @@ public class Lottos {
         return lottos.size();
     }
 
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
+
     public LottoResults allCompare(WinningLotto winningLotto) {
         List<Result> results = new ArrayList<>();
 
