@@ -7,7 +7,7 @@ import view.LottoOutputView;
 
 public class LottoController {
     public static void startLotto() {
-        Amount amount = new Amount(LottoInputView.inputAmount());
+        Amount amount = LottoInputView.inputAmount();
         LottoOutputView.printTicketsCount(amount);
 
         NumberGenerateStrategy strategy = new LottoRandomGenerator();

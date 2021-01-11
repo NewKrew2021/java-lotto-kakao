@@ -1,5 +1,7 @@
 package view;
 
+import dto.Amount;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -9,9 +11,9 @@ public class LottoInputView {
 
     private static Scanner sc = new Scanner(System.in);
 
-    public static int inputAmount() {
+    public static Amount inputAmount() {
         System.out.println("구입금액을 입력해 주세요.");
-        return Integer.parseInt(sc.nextLine());
+        return new Amount(Integer.parseInt(sc.nextLine()));
     }
 
     public static List<Integer> inputWinningNumbers() {
