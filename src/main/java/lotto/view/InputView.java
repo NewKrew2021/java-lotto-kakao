@@ -6,15 +6,14 @@ public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
 
     public static int getMoneyFromUser() {
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 
     public static int getSelfLottoCountFromUser() {
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 
     public static String getSelfLottoNumberFromUser() {
-        scanner.nextLine();
         return scanner.nextLine();
     }
 

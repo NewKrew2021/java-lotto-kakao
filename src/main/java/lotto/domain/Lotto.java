@@ -15,10 +15,6 @@ public class Lotto {
         this(lottoNumberGenerator.getNumbers());
     }
 
-    public Lotto() {
-        this(new RandomNumberGenerator());
-    }
-
     public Lotto(List<Integer> numbers) {
         lottoNumbers = new LinkedHashSet<>();
         for (Integer number : numbers) {

@@ -22,15 +22,15 @@ public class LottosTest {
 
     @Test
     public void raffleTest() {
-        WinningLotto winningNumber = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        WinningLotto winningNumber = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 8);
 
-        assertThat(lottos.raffle(winningNumber, LottoNumber.of(7)).getRank(Rank.FIRST)).isEqualTo(1);
+        assertThat(lottos.raffle(winningNumber).getRank(Rank.FIRST)).isEqualTo(1);
     }
 
     @Test
     void bonusTest() {
-        WinningLotto winningNumber = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 7));
+        WinningLotto winningNumber = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 7), 6);
 
-        assertThat(lottos.raffle(winningNumber, LottoNumber.of(6)).getRank(Rank.SECOND)).isEqualTo(1);
+        assertThat(lottos.raffle(winningNumber).getRank(Rank.SECOND)).isEqualTo(1);
     }
 }

@@ -37,10 +37,10 @@ public class LottoController {
         OutputView.printLottos(lottos);
     }
 
-    private LottoKind getLottoKind(Money money){
+    private LottoKind getLottoKind(Money money) {
         int selfLottoCount = getSelfLottoCount();
         int randomLottoCount = money.howMany(Lotto.getLottoPrice()) - selfLottoCount;
-        if(randomLottoCount < 0){
+        if (randomLottoCount < 0) {
             throw new FailBuyLottoException();
         }
         return new LottoKind(selfLottoCount, randomLottoCount);
@@ -73,21 +73,20 @@ public class LottoController {
 
     private void matchLotto() {
         WinningLotto winningNumber = getWinningLotto();
-        LottoNumber bonusNumber = getBonusNumber();
-        Statistics statistics = lottos.raffle(winningNumber, bonusNumber);
+        Statistics statistics = lottos.raffle(winningNumber);
         OutputView.printStatistics(statistics.getRankings(), statistics.getProfitRate(money));
-    }
-
-    private LottoNumber getBonusNumber() {
-        OutputView.printBonusNumberInputGuide();
-        return LottoNumber.of(InputView.getBonusNumberFromUser());
     }
 
     private WinningLotto getWinningLotto() {
         OutputView.printWinningNumberInputGuide();
         return new WinningLotto(Arrays.stream(split(InputView.getWinningNumberFromUser()))
-                .map(num -> getParseInt(num))
-                .collect(Collectors.toList()));
+                .map(this::getParseInt)
+                .collect(Collectors.toList()), getBonusNumber());
+    }
+
+    private int getBonusNumber() {
+        OutputView.printBonusNumberInputGuide();
+        return InputView.getBonusNumberFromUser();
     }
 
     private String[] split(String numbersText) {
