@@ -1,8 +1,6 @@
 package lotto.view;
 
-import lotto.Constant;
-import lotto.domain.LottoNo;
-import lotto.domain.LottoNos;
+import lotto.domain.LottoMoney;
 import lotto.input.BonusNumberValidInputGuaranteer;
 import lotto.input.BuyingMoneyValidInputGuaranteer;
 import lotto.input.WinningLottoNumsValidInputGuaranteer;
@@ -14,12 +12,15 @@ import java.util.stream.Collectors;
 
 public class LottoInputView {
     private static Scanner sc;
+
     static {
         sc = new Scanner(System.in);
     }
 
     public int getLottoCountFromUser() {
-        return Integer.parseInt(new BuyingMoneyValidInputGuaranteer().getFromUser()) / Constant.LOTTO_PRICE;
+        return new LottoMoney(
+                Integer.parseInt(new BuyingMoneyValidInputGuaranteer().getFromUser()))
+                .getLottoTicketCount();
     }
 
     public List<Integer> inputWinningNumbers() {

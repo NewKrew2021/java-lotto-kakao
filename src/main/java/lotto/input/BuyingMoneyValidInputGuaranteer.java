@@ -1,6 +1,6 @@
 package lotto.input;
 
-import lotto.Constant;
+import lotto.domain.LottoMoney;
 
 public class BuyingMoneyValidInputGuaranteer extends ValidInputGuaranteer{
 
@@ -11,8 +11,6 @@ public class BuyingMoneyValidInputGuaranteer extends ValidInputGuaranteer{
 
     @Override
     protected void checkValid(String input){
-        int count = Integer.parseInt(input) / Constant.LOTTO_PRICE;
-        if(count <= 0)
-            throw new IllegalArgumentException("구입금액을 잘못 입력하셨습니다. 다시 입력해주세요.");
+        new LottoMoney(Integer.parseInt(input));
     }
 }
