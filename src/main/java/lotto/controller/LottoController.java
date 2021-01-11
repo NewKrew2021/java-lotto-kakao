@@ -7,9 +7,9 @@ import lotto.view.LottoOutputView;
 public class LottoController {
     public static void main(String[] args) {
         PurchaseMoney purchaseMoney = new PurchaseMoney(LottoInputView.inputPurchaseMoney());
-        LottoOutputView.outputPurchaseAmount(purchaseMoney.getLottoAmount());
+        LottoGroup lottoGroup = LottoGroup.createRandomLottoGroup(purchaseMoney);
 
-        LottoGroup lottoGroup = LottoGroup.createRandomLottoGroup(purchaseMoney.getLottoAmount());
+        LottoOutputView.outputPurchaseAmount(lottoGroup);
         LottoOutputView.outputLottoGroup(lottoGroup);
 
         Lotto winningLotto = new Lotto(LottoInputView.inputWinningLotto());

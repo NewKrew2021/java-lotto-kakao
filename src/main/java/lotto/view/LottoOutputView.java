@@ -13,8 +13,8 @@ public class LottoOutputView {
     public static final String PROFIT_RATIO_MESSAGE = "총 수익률은 %s%%입니다.";
     public static final String RANK_RESULT_MESSAGE = "%s (%d원) - %d개";
 
-    public static void outputPurchaseAmount(int amount) {
-        System.out.printf(PURCHASE_COUNT_MESSAGE, amount);
+    public static void outputPurchaseAmount(LottoGroup lottoGroup) {
+        System.out.printf(PURCHASE_COUNT_MESSAGE, lottoGroup.getLottoCount());
     }
 
     public static void outputLottoGroup(LottoGroup lottoGroup) {

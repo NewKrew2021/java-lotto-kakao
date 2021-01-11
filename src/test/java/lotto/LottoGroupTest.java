@@ -41,6 +41,6 @@ public class LottoGroupTest {
     @Test
     @DisplayName("구입 개수만큼 Lotto를 생성하는지 테스트")
     void createRandomLottoGroupTest() {
-        assertThat(LottoGroup.createRandomLottoGroup(10).getLottoCount()).isEqualTo(10);
+        assertThat(LottoGroup.createRandomLottoGroup(new PurchaseMoney("10000")).getLottoCount()).isEqualTo(10);
     }
 }

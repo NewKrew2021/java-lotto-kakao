@@ -37,7 +37,7 @@ public class PurchaseMoney {
     }
 
     public double getProfitRatio(long prize) {
-        return ((double) prize / money) * 100;
+        return ((double) (prize - money) / money) * 100;
     }
 
     @Override

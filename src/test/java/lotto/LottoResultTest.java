@@ -24,7 +24,7 @@ public class LottoResultTest {
     void getProfitRatioTest() {
         LottoResult lottoResult = new LottoResult();
         lottoResult.addRank(Rank.FIFTH);
-        PurchaseMoney purchaseMoney = new PurchaseMoney("9000");
-        assertThat(lottoResult.getProfitRatio(purchaseMoney)).isEqualTo("55.56");
+        PurchaseMoney purchaseMoney = new PurchaseMoney("1000");
+        assertThat(lottoResult.getProfitRatio(purchaseMoney)).isEqualTo("400.00");
     }
 }

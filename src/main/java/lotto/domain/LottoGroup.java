@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -22,12 +21,10 @@ public class LottoGroup {
         return lottoResult;
     }
 
-    public static LottoGroup createRandomLottoGroup(int count) {
-        List<Lotto> lottos = new ArrayList<>();
-        IntStream.range(0, count)
-                .forEach(i -> lottos.add(new Lotto()));
-
-        return new LottoGroup(lottos);
+    public static LottoGroup createRandomLottoGroup(PurchaseMoney purchaseMoney) {
+        return new LottoGroup(IntStream.range(0, purchaseMoney.getLottoAmount())
+                .mapToObj(value -> new Lotto())
+                .collect(Collectors.toList()));
     }
 
     public int getLottoCount() {
