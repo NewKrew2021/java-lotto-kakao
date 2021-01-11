@@ -12,7 +12,7 @@ public class OutputView {
 
     public static void printTicketCounts(LottoTicketCounts ticketCounts) {
         System.out.printf("수동으로 %d장, 자동으로 %d장 구매했습니다.%s",
-                ticketCounts.getAutoCount(), ticketCounts.getManualCount(), NEW_LINE);
+                ticketCounts.getManualCount(), ticketCounts.getAutoCount(), NEW_LINE);
     }
 
     public static void printTicketNumbers(LottoNumbersDto lottoNumbers) {
