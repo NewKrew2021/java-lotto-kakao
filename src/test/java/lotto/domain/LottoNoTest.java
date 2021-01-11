@@ -31,4 +31,17 @@ public class LottoNoTest {
         LottoNo lotto3_2 = new LottoNo(3);
         assertThat(lotto3_2).isEqualTo(lotto3_1);
     }
+
+    @Test
+    void integerTest() {
+        Integer a = 127;
+        Integer b = 127;
+        assertThat(a == b).isTrue();
+        assertThat(a.equals(b)).isTrue();
+        Integer c = 128;
+        Integer d = 128;
+        assertThat(c == d).isFalse();
+        assertThat(c.equals(d)).isTrue();
+    }
+
 }

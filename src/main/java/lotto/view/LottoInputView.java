@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.LottoNo;
 import lotto.domain.LottoTicket;
+import lotto.domain.Money;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -14,13 +15,24 @@ public class LottoInputView {
     private static Scanner sc = new Scanner(System.in);
 
     public static int inputMoney() {
-        System.out.println("구입금액을 입력해 주세요.");
-        int count = Integer.parseInt(sc.nextLine()) / LottoTicket.LOTTO_PRICE;
-        while (count <= 0) {
-            System.out.println("구입금액을 잘못 입력하셨습니다. 다시 입력해주세요.");
-            count = Integer.parseInt(sc.nextLine()) / LottoTicket.LOTTO_PRICE;
+        String money;
+
+        do {
+            System.out.println("구입금액을 입력해 주세요.");
+            money = sc.nextLine();
+        } while(!checkValidMoney(money));
+
+        return Integer.parseInt(money);
+    }
+
+    private static boolean checkValidMoney(String money) {
+        try {
+            Money.checkValidationInputMoney(money);
+        } catch (Exception e) {
+            System.out.println("잘못된 금액을 입력하셨습니다.");
+            return false;
         }
-        return count;
+        return true;
     }
 
     public static List<Integer> inputWinningNumbers() {
