@@ -21,23 +21,9 @@ public class UserBuyNumbers {
         for (LottoNumbers lottoNumbers : this.userBuyNumbers) {
             int matchCount = lottoNumbers.getMatchCountWith(winningNumbers.getWinNumbers());
             boolean bonusMatched = lottoNumbers.isContains(winningNumbers.getBonusNumber());
-            rankStates.add(CalculateRank(matchCount, bonusMatched));
+            rankStates.add(RankState.rank(matchCount, bonusMatched));
         }
         return rankStates;
-    }
-
-    private RankState CalculateRank(int matchCount, boolean bonusMatched) {
-        if (matchCount == 6)
-            return RankState.FIRST;
-        if (matchCount == 5 && bonusMatched)
-            return RankState.SECOND;
-        if (matchCount == 5)
-            return RankState.THIRD;
-        if (matchCount == 4)
-            return RankState.FOURTH;
-        if (matchCount == 3)
-            return RankState.FIFTH;
-        return RankState.FAIL;
     }
 
     public List<List<String>> convertToString() {
