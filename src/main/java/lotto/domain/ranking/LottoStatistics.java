@@ -49,7 +49,7 @@ public class LottoStatistics {
     }
 
     public LottoRevenueRate calculateRevenueRate() {
-        return LottoRevenueRate.of(calculateTotalPrice(), countTicket());
+        return LottoRevenueRate.of(calculateTotalPrice(), calculateTotalTicketMoney());
     }
 
     private long calculateTotalPrice() {
@@ -62,7 +62,7 @@ public class LottoStatistics {
         return totalPrice;
     }
 
-    private int countTicket() {
+    private int calculateTotalTicketMoney() {
         long totalCount = rankingCount.values().stream()
                 .reduce(INITIAL_TOTAL_COUNT, Long::sum);
         return new LottoTicketCount((int) totalCount).calculatePrice();
