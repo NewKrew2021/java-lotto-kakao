@@ -2,7 +2,7 @@ package lotto.domain.ranking;
 
 import java.util.Arrays;
 
-import static lotto.domain.ranking.LottoBonusCalculator.*;
+import static lotto.domain.ranking.LottoBonusMatcher.*;
 
 public enum LottoRanking {
     RANK_1(6, DONTCARE, 2_000_000_000L, "6개 일치 (2000000000원)-"),
@@ -13,13 +13,13 @@ public enum LottoRanking {
     NOTHING(0, DONTCARE, 0L, "");
 
     private final int matchNumber;
-    private final LottoBonusCalculator bonusType;
+    private final LottoBonusMatcher matchType;
     private final long price;
     private final String context;
 
-    LottoRanking(int matchNumber, LottoBonusCalculator bonusType, long price, String context) {
+    LottoRanking(int matchNumber, LottoBonusMatcher matchType, long price, String context) {
         this.matchNumber = matchNumber;
-        this.bonusType = bonusType;
+        this.matchType = matchType;
         this.price = price;
         this.context = context;
     }
@@ -27,7 +27,7 @@ public enum LottoRanking {
     public static LottoRanking find(int matchNumber, boolean bonus) {
         return Arrays.stream(values())
                 .filter(lottoRanking ->
-                        (lottoRanking.matchNumber == matchNumber) && lottoRanking.bonusType.calculate(bonus)
+                        (lottoRanking.matchNumber == matchNumber) && lottoRanking.matchType.calculate(bonus)
                 )
                 .findFirst()
                 .orElse(NOTHING);
