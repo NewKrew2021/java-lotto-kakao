@@ -6,13 +6,13 @@ import lotto.domain.Lottos;
 import lotto.domain.WonLotto;
 import lotto.service.LottoGeneratorService;
 import lotto.service.LottoReviewService;
-import lotto.view.LottoView;
+import lotto.view.LottoOutputView;
 
 import java.util.Scanner;
 
 public class LottoController {
 
-    private final LottoView lottoView;
+    private final LottoOutputView lottoOutputView;
     private final LottoGeneratorService lottoGeneratorService;
     private final Scanner scanner;
     private final int LOTTO_PRICE = 1000;
@@ -20,30 +20,30 @@ public class LottoController {
     public LottoController() {
 
         lottoGeneratorService = new LottoGeneratorService();
-        lottoView = new LottoView();
+        lottoOutputView = new LottoOutputView();
         scanner = new Scanner(System.in);
     }
 
     public void startLottoGame() {
 
         Lottos lottos = buyLotto();
-        lottoView.printLottos(lottos);
+        lottoOutputView.printLottos(lottos);
 
         WonLotto wonLotto = createWonLotto();
 
-        lottoView.printSameCountPhrase(lottos.lottosRankingResult(lottos.lottosResult(wonLotto)));
-        lottoView.printProfitRatio(new LottoReviewService().getProfitRatio(lottos.lottosResult(wonLotto)));
+        lottoOutputView.printSameCountPhrase(lottos.lottosRankingResult(lottos.lottosResult(wonLotto)));
+        lottoOutputView.printProfitRatio(new LottoReviewService().getProfitRatio(lottos.lottosResult(wonLotto)));
 
     }
 
 
     public Lottos buyLotto() {
 
-        lottoView.printInputMoneyPhrase();
+        lottoOutputView.printInputMoneyPhrase();
         int amount;
         while ((amount = getLottoBuyAmount()) == -1) ;
         int buyCount = amount / LOTTO_PRICE;
-        lottoView.printInputQuantityPhrase(buyCount);
+        lottoOutputView.printInputQuantityPhrase(buyCount);
         Lottos lottos = new Lottos();
         for (int i = 0; i < amount / LOTTO_PRICE; i++) {
             lottos.add(lottoGeneratorService.generateLotto());
@@ -53,15 +53,15 @@ public class LottoController {
 
     public WonLotto createWonLotto() {
 
-        lottoView.printInputWonlottoPhrase();
+        lottoOutputView.printInputWonlottoPhrase();
         Lotto lotto;
         while ((lotto = lottoGeneratorService.lottoStringParser(getWonLotto())) == null) {
-            lottoView.printInputErrorPhrase();
+            lottoOutputView.printInputErrorPhrase();
         }
-        lottoView.printInputBonusBallPhrase();
+        lottoOutputView.printInputBonusBallPhrase();
         LottoNumber bonusBall = getBonusBall();
         while (lotto.getLottoNumbers().contains(bonusBall)) {
-            lottoView.printInputDuplicatePhrase();
+            lottoOutputView.printInputDuplicatePhrase();
             bonusBall = getBonusBall();
         }
         return new WonLotto(lotto, bonusBall);
@@ -73,7 +73,7 @@ public class LottoController {
             int amount = Integer.parseInt(scanner.nextLine());
             return validateLottoBuyAmount(amount);
         } catch (Exception e) {
-            lottoView.printInputErrorPhrase();
+            lottoOutputView.printInputErrorPhrase();
             return -1;
         }
     }
@@ -92,8 +92,8 @@ public class LottoController {
 
 
     public int validateLottoBuyAmount(int amount) {
-        if (amount == 0 || amount % 1000 != 0) {
-            throw new IllegalArgumentException("잘못된 입력금액입니다.");
+        if (amount< 1000) {
+            throw new IllegalArgumentException("로또를 구매할 수 없습니다.");
         }
         return amount;
     }

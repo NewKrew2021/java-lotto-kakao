@@ -1,9 +1,9 @@
 package lotto.domain;
 
 public enum LottoRank {
-    FIRST(2000000000, 0, "6개 일치 "), SECOND(30000000, 1, "5개 일치, 보너스 볼 일치"),
-    THIRD(1500000, 2, "5개 일치 "), FOURTH(50000, 3, "4개 일치 "),
-    FIFTH(5000, 4, "3개 일치 "), NONE(0, 5, "");
+    FIRST(2_000_000_000, 0, "6개 일치 "), SECOND(30_000_000, 1, "5개 일치, 보너스 볼 일치"),
+    THIRD(1_500_000, 2, "5개 일치 "), FOURTH(50_000, 3, "4개 일치 "),
+    FIFTH(5_000, 4, "3개 일치 "), NONE(0, 5, "");
 
     private int money;
     private int index;

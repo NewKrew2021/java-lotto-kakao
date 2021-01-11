@@ -5,7 +5,7 @@ import lotto.domain.Lottos;
 
 import java.util.List;
 
-public class LottoView {
+public class LottoOutputView {
     private final String INPUT_MONEY_PHRASE = "구입금액을 입력해주세요.";
     private final String INPUT_QUANTITY_PHRASE = "개를 구매했습니다.";
     private final String OPEN_BRACKET = "[";
@@ -53,8 +53,8 @@ public class LottoView {
         }
     }
 
-    public void printProfitRatio(int ratio) {
-        System.out.println(PROFIT_PHRASE + ratio + "% 입니다.");
+    public void printProfitRatio(double ratio) {
+        System.out.println(PROFIT_PHRASE + String.format("%.2f",ratio) + "입니다.");
     }
 
     public void printInputErrorPhrase() {

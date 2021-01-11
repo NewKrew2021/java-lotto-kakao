@@ -45,8 +45,19 @@ public class LottoReviewServiceTest {
         lottos.add(new Lotto(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(7))));
         lottos.add(new Lotto(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(10))));
         lottos.add(new Lotto(Arrays.asList(new LottoNumber(7), new LottoNumber(9), new LottoNumber(5), new LottoNumber(42), new LottoNumber(24), new LottoNumber(21))));
+        double profitRatio=2031500000.0/4000.0;
+        assertThat(lottoReviewService.getProfitRatio(lottos.lottosResult(wonLotto))).isEqualTo(profitRatio);
+    }
+    @Test
+    void testLottoProfitRatioUnderOne() {
 
-        assertThat(lottoReviewService.getProfitRatio(lottos.lottosResult(wonLotto))).isEqualTo(50787500);
+        Lottos lottos = new Lottos();
+        lottos.add(new Lotto(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(7), new LottoNumber(8), new LottoNumber(9))));
+        lottos.add(new Lotto(Arrays.asList(new LottoNumber(7), new LottoNumber(9), new LottoNumber(5), new LottoNumber(42), new LottoNumber(24), new LottoNumber(21))));
+        lottos.add(new Lotto(Arrays.asList(new LottoNumber(7), new LottoNumber(9), new LottoNumber(5), new LottoNumber(42), new LottoNumber(24), new LottoNumber(21))));
+        lottos.add(new Lotto(Arrays.asList(new LottoNumber(7), new LottoNumber(9), new LottoNumber(5), new LottoNumber(42), new LottoNumber(24), new LottoNumber(21))));
+
+        assertThat(lottoReviewService.getProfitRatio(lottos.lottosResult(wonLotto))).isEqualTo(1.25);
     }
 
 }
