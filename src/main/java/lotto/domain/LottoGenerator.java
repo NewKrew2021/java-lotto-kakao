@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoGenerator {
 
@@ -30,15 +31,12 @@ public class LottoGenerator {
 
     public Lotto generateLotto() {
 
-        List<Integer> lotto = new ArrayList<>();
-
         Collections.shuffle(allLottoNumbers);
 
-        for (int i = 0; i < LOTTO_MAX_SIZE; i++) {
-            lotto.add(allLottoNumbers.get(i));
-        }
-
-        return new Lotto(lotto);
+        return new Lotto(
+                allLottoNumbers.stream()
+                .limit(LOTTO_MAX_SIZE)
+                .collect(Collectors.toList()));
     }
 
     public int generateBonus(Lotto lotto){

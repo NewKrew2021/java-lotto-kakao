@@ -15,13 +15,11 @@ public class LottoReview {
         this.lottos = lottos;
         this.wonLotto = wonLotto;
 
-        for (Lotto lotto : lottos.getLottos()) {
-            rankResult.add(wonLotto.checkRanking(lotto));
-        }
+        lottos.getLottos().stream()
+                .forEach(lotto -> rankResult.add(wonLotto.checkRanking(lotto)));
     }
 
     public long getProfit(){
-
         long totalPrize=0;
         for (LottoRank rank : rankResult) {
             totalPrize+=rank.getMoney();
@@ -43,9 +41,7 @@ public class LottoReview {
         int[] rankingResult = new int[6];
         Arrays.fill(rankingResult, 0);
 
-        for (LottoRank rank : rankResult) {
-            rankingResult[rank.getIndex()]++;
-        }
+        rankResult.stream().forEach(rank -> rankingResult[rank.getIndex()]++);
 
         return Arrays.stream(rankingResult).boxed().collect(Collectors.toList());
     }
