@@ -19,10 +19,10 @@ public class LottoTicketsTest {
     @DisplayName("구매한 티켓들의 총 등수 결과 테스트")
     void lottoTicketsResultTest() {
         List<LottoTicket> lottoTicketList = new ArrayList<>();
-        lottoTicketList.add(new LottoTicket(makeNumberTreeSet(Arrays.asList(1, 2, 3, 4, 5, 6))));
-        lottoTicketList.add(new LottoTicket(makeNumberTreeSet(Arrays.asList(1, 2, 3, 4, 5, 9))));
-        lottoTicketList.add(new LottoTicket(makeNumberTreeSet(Arrays.asList(1, 2, 9, 4, 7, 6))));
-        lottoTicketList.add(new LottoTicket(makeNumberTreeSet(Arrays.asList(4, 20, 35, 6, 1, 5))));
+        lottoTicketList.add(LottoTicket.from("1, 2, 3, 4, 5, 6"));
+        lottoTicketList.add(LottoTicket.from("1, 2, 3, 4, 5, 9"));
+        lottoTicketList.add(LottoTicket.from("1, 2, 9, 4, 7, 6"));
+        lottoTicketList.add(LottoTicket.from("4, 20, 35, 6, 1, 5"));
         LottoTickets lottoTickets = new LottoTickets(lottoTicketList);
         WinnerNumber winnerNumber = WinnerNumber.from("1, 2, 3, 4, 5, 6", 9);
 
@@ -33,13 +33,5 @@ public class LottoTicketsTest {
         expectedResult.upsert(LottoRank.FOURTH);
         assertThat(lottoTickets.getResults(winnerNumber)).isEqualTo(expectedResult);
 
-    }
-
-    private Set<lotto.domain.Number> makeNumberTreeSet(List<Integer> intNumbers) {
-        Set<lotto.domain.Number> numbers = new TreeSet<>();
-        for (int number : intNumbers) {
-            numbers.add(Number.of(number));
-        }
-        return numbers;
     }
 }

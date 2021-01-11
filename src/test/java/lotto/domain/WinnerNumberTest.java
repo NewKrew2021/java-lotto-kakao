@@ -20,13 +20,7 @@ public class WinnerNumberTest {
     @Test
     @DisplayName("팩토리 메소드 테스트")
     void factoryMethodTest() {
-        assertThat(winnerNumber).isEqualTo(new WinnerNumber(
-                Sets.newTreeSet(Number.of(1),
-                        Number.of(2),
-                        Number.of(3),
-                        Number.of(4),
-                        Number.of(5),
-                        Number.of(6)), Number.of(7)));
+        assertThat(winnerNumber).isEqualTo(new WinnerNumber(LottoTicket.from("1, 2, 3, 4, 5, 6"), Number.of(7)));
     }
 
     @Test
@@ -37,17 +31,9 @@ public class WinnerNumberTest {
 
     @ParameterizedTest
     @DisplayName("LottoTicket의 등수 테스트")
-    @CsvSource({"1,6,3,5,4,2,FIRST", "3,2,1,7,5,4,SECOND", "3,40,30,2,7,5,FIFTH"})
-    void matchWinnerNumberTest(int i1, int i2, int i3, int i4, int i5, int i6, LottoRank rank) {
-        LottoTicket lottoTicket = new LottoTicket(
-                Sets.newTreeSet(
-                        Number.of(i1),
-                        Number.of(i2),
-                        Number.of(i3),
-                        Number.of(i4),
-                        Number.of(i5),
-                        Number.of(i6))
-        );
+    @CsvSource({"'1,6,3,5,4,2',FIRST", "'3,2,1,7,5,4',SECOND", "'3,40,30,2,7,5',FIFTH"})
+    void matchWinnerNumberTest(String rawNumbers, LottoRank rank) {
+        LottoTicket lottoTicket = LottoTicket.from(rawNumbers);
         assertThat(winnerNumber.getRank(lottoTicket)).isEqualTo(rank);
     }
 }

@@ -18,7 +18,6 @@ public class LottoRankTest {
         assertThat(LottoRank.get(new MatchResult(4, false))).isEqualTo(LottoRank.FOURTH);
         assertThat(LottoRank.get(new MatchResult(3, false))).isEqualTo(LottoRank.FIFTH);
 
-        assertThat(new MatchResult(4, true).hashCode()).isEqualTo(new MatchResult(4, false).hashCode());
         assertThat(LottoRank.get(new MatchResult(4, true))).isEqualTo(LottoRank.FOURTH);
         assertThat(LottoRank.get(new MatchResult(3, true))).isEqualTo(LottoRank.FIFTH);
     }
@@ -34,5 +33,15 @@ public class LottoRankTest {
 
         assertThat(LottoRank.valuesExceptNothing()).containsExactlyInAnyOrderElementsOf(lottoRanks);
         assertThat(LottoRank.valuesExceptNothing()).doesNotContain(LottoRank.NOTHING);
+    }
+
+    @Test
+    @DisplayName("getPrice 테스트")
+    void getPriceTest() {
+        assertThat(LottoRank.FIRST.getPrice()).isEqualTo(2_000_000_000);
+        assertThat(LottoRank.SECOND.getPrice()).isEqualTo(30_000_000);
+        assertThat(LottoRank.THIRD.getPrice()).isEqualTo(1_500_000);
+        assertThat(LottoRank.FOURTH.getPrice()).isEqualTo(50_000);
+        assertThat(LottoRank.FIFTH.getPrice()).isEqualTo(5_000);
     }
 }

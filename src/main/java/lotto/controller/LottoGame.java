@@ -20,7 +20,6 @@ public class LottoGame {
     }
 
     private void requestPrice() {
-        LottoGameOutputView.askPrice();
         price = new Price(LottoGameInputView.inputPrice());
     }
 
@@ -30,9 +29,7 @@ public class LottoGame {
     }
 
     private void makeWinnerNumber() {
-        LottoGameOutputView.askWinnerNumber();
         String inputNumbers = LottoGameInputView.inputWinnerNumbers();
-        LottoGameOutputView.askBonusNumber();
         int bonus = LottoGameInputView.inputBonusNumber();
         winnerNumber = WinnerNumber.from(inputNumbers, bonus);
     }

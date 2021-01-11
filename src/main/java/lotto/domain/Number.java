@@ -3,7 +3,6 @@ package lotto.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.stream.IntStream;
 
@@ -25,11 +24,10 @@ public class Number implements Comparable<Number> {
     }
 
     public static Number of(int number) {
-        Collections.sort(numberPool);
-        if(numberPool.get(number - 1) == null) {
-            throw new IllegalArgumentException("숫자가 잘못되었습니다 : " + number);
-        }
-        return numberPool.get(number - 1);
+        return numberPool.stream()
+                .filter(value -> value.number == number)
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("숫자가 잘못되었습니다. : " + number));
     }
 
     public static List<Number> randomNumbers(int count) {

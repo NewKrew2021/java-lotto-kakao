@@ -34,4 +34,15 @@ public class LottoResultsTest {
         assertThat(lottoResults.calculateRate(14000)).isEqualTo(new BigDecimal("0.35"));
     }
 
+    @Test
+    @DisplayName("equals 테스트")
+    void equalsTest() {
+        LottoResults lottoResults = new LottoResults();
+        lottoResults.upsert(LottoRank.FIRST);
+
+        LottoResults comparedResults = new LottoResults();
+        comparedResults.upsert(LottoRank.FIRST);
+        assertThat(lottoResults).isEqualTo(comparedResults);
+    }
+
 }
