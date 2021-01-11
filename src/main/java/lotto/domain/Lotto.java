@@ -1,32 +1,40 @@
 package lotto.domain;
 
+import lotto.exception.FailBuyLottoException;
 import lotto.exception.HasDuplicateNumberException;
-import lotto.util.LottoNumberGenerator;
 import lotto.util.RandomNumberGenerator;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Lotto {
-    private static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_PRICE = 1000;
     public static final int LOTTO_NUMBER_LENGTH = 6;
     private Set<LottoNumber> lottoNumbers;
 
-    public Lotto(LottoNumberGenerator lottoNumberGenerator) {
-        this(lottoNumberGenerator.getNumbers());
+    public Lotto() {
+        this(RandomNumberGenerator.getNumbers());
     }
 
     public Lotto(List<Integer> numbers) {
-        lottoNumbers = new LinkedHashSet<>();
-        for (Integer number : numbers) {
-            lottoNumbers.add(LottoNumber.of(number));
-        }
+        lottoNumbers = numbers.stream()
+                .map(LottoNumber::of)
+                .sorted(Comparator.comparingInt(LottoNumber::getNumber))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
         if (isDuplicateNumber()) {
             throw new HasDuplicateNumberException();
+        }
+        if (isTooManyNumber()) {
+            throw new FailBuyLottoException();
         }
     }
 
     private boolean isDuplicateNumber() {
         return lottoNumbers.size() < LOTTO_NUMBER_LENGTH;
+    }
+
+    private boolean isTooManyNumber() {
+        return lottoNumbers.size() > LOTTO_NUMBER_LENGTH;
     }
 
     public boolean contains(LottoNumber lottoNumber) {
@@ -42,9 +50,5 @@ public class Lotto {
                 .stream()
                 .filter(lotto::contains)
                 .count();
-    }
-
-    public static int getLottoPrice() {
-        return LOTTO_PRICE;
     }
 }

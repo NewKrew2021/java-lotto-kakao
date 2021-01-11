@@ -13,7 +13,7 @@ public class StatisticsTest {
     void getRankTest() {
         Map m = new TreeMap<>();
         m.put(Rank.FIRST, 3);
-        Statistics statistics = new Statistics(m);
+        Statistics statistics = new Statistics(new Rankings(m), new Money(10000));
         assertThat(statistics.getCountOfRank(Rank.FIRST)).isEqualTo(3);
     }
 
@@ -21,7 +21,7 @@ public class StatisticsTest {
     void profitTest() {
         Map m = new TreeMap<>();
         m.put(Rank.FIRST, 2);
-        Statistics statistics = new Statistics(m);
-        assertThat(statistics.getProfitRate(new Money(14000))).isEqualTo(28571428);
+        Statistics statistics = new Statistics(new Rankings(m), new Money(14000));
+        assertThat(statistics.getProfitRate()).isEqualTo(28571428);
     }
 }

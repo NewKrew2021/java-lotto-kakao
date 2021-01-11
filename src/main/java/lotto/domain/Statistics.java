@@ -6,7 +6,8 @@ public class Statistics {
     public static final int ZERO = 0;
     public static final int HUNDRED = 100;
 
-    private final Map<Rank, Integer> rankings;
+    private final Rankings rankings;
+    private final Money money;
 
     private static final List<Integer> prize = new ArrayList<>(Arrays.asList(ZERO, Rank.FIRST.getReward(),
             Rank.SECOND.getReward(),
@@ -14,17 +15,16 @@ public class Statistics {
             Rank.FOURTH.getReward(),
             Rank.FIFTH.getReward()));
 
-
-    public Statistics(Map<Rank, Integer> rankingsMap) {
-        this.rankings = Collections.unmodifiableMap(rankingsMap);
-
+    public Statistics(Rankings rankings, Money money) {
+        this.rankings = rankings;
+        this.money = money;
     }
 
     public int getCountOfRank(Rank rank) {
-        return rankings.getOrDefault(rank, ZERO);
+        return rankings.getCountOfRank(rank);
     }
 
-    public int getProfitRate(Money money) {
+    public int getProfitRate() {
         return (int) ((getProfitAmount() / (double) money.getMoney()) * HUNDRED);
     }
 

@@ -14,13 +14,13 @@ public class Lottos {
         this.lottos = Collections.unmodifiableList(lottos);
     }
 
-    public Statistics raffle(WinningLotto winningNumber) {
+    public Rankings raffle(WinningLotto winningNumber) {
         Map<Rank, Integer> rankingsMap = new TreeMap<>();
         for (Lotto lotto : lottos) {
             Rank rank = winningNumber.getRankOfLotto(lotto);
             rankingsMap.put(rank, rankingsMap.getOrDefault(rank, 0) + 1);
         }
-        return new Statistics(rankingsMap);
+        return new Rankings(rankingsMap);
     }
 
     public LottosDto getLottosData() {

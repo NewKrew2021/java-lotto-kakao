@@ -2,8 +2,6 @@ package lotto.controller;
 
 import lotto.domain.*;
 import lotto.exception.FailBuyLottoException;
-import lotto.util.LottoNumberGenerator;
-import lotto.util.RandomNumberGenerator;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -18,8 +16,6 @@ public class LottoController {
     private Lottos lottos;
     private Money money;
 
-    private final LottoNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
-
     public static void main(String[] args) {
         LottoController lottoController = new LottoController();
         lottoController.buyLotto();
@@ -27,7 +23,6 @@ public class LottoController {
     }
 
     private void buyLotto() {
-        OutputView.printMoneyInputGuide();
         money = new Money(InputView.getMoneyFromUser());
         LottoKind lottoKind = getLottoKind(money);
         lottos = new Lottos(Stream.concat(buySelfLottos(lottoKind.getSelfLottoCount()).stream(), buyRandomLottos(lottoKind.getRandomLottoCount()).stream())
@@ -39,7 +34,7 @@ public class LottoController {
 
     private LottoKind getLottoKind(Money money) {
         int selfLottoCount = getSelfLottoCount();
-        int randomLottoCount = money.howMany(Lotto.getLottoPrice()) - selfLottoCount;
+        int randomLottoCount = money.howMany(Lotto.LOTTO_PRICE) - selfLottoCount;
         if (randomLottoCount < 0) {
             throw new FailBuyLottoException();
         }
@@ -61,31 +56,27 @@ public class LottoController {
     }
 
     private int getSelfLottoCount() {
-        OutputView.printSelfLottoCountInputGuide();
         return InputView.getSelfLottoCountFromUser();
     }
 
     private List<Lotto> buyRandomLottos(int randomLottoCount) {
         return IntStream.range(0, randomLottoCount)
-                .mapToObj(num -> new Lotto(randomNumberGenerator))
+                .mapToObj(num -> new Lotto())
                 .collect(Collectors.toList());
     }
 
     private void matchLotto() {
         WinningLotto winningNumber = getWinningLotto();
-        Statistics statistics = lottos.raffle(winningNumber);
-        OutputView.printStatistics(statistics, statistics.getProfitRate(money));
+        OutputView.printStatistics(new Statistics(lottos.raffle(winningNumber), money));
     }
 
     private WinningLotto getWinningLotto() {
-        OutputView.printWinningNumberInputGuide();
         return new WinningLotto(Arrays.stream(split(InputView.getWinningNumberFromUser()))
                 .map(this::getParseInt)
                 .collect(Collectors.toList()), getBonusNumber());
     }
 
     private int getBonusNumber() {
-        OutputView.printBonusNumberInputGuide();
         return InputView.getBonusNumberFromUser();
     }
 

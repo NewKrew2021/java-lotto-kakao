@@ -22,6 +22,6 @@ public class MoneyTest {
     @Test
     public void howManyTest() {
         Money money = new Money(14000);
-        assertThat(money.howMany(Lotto.getLottoPrice())).isEqualTo(14);
+        assertThat(money.howMany(Lotto.LOTTO_PRICE)).isEqualTo(14);
     }
 }
