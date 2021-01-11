@@ -3,23 +3,22 @@ package lotto.view;
 import java.util.Scanner;
 
 public class LottoInputView {
-    private Scanner scanner;
+    private static Scanner scanner = new Scanner(System.in);
 
-    public LottoInputView(){
-        scanner = new Scanner(System.in);
-    }
-
-    public int getLottoBuyAmount(){
+    public static int getLottoBuyAmount(){
+        LottoOutputView.printInputMoneyPhrase();
         int amount = Integer.parseInt(scanner.nextLine());
         return amount;
     }
 
-    public String getWonLotto(){
+    public static String getWonLotto(){
+        LottoOutputView.printInputWonlottoPhrase();
         String wonLotto = scanner.nextLine();
         return wonLotto;
     }
 
-    public int getBonusBall(){
+    public static int getBonusBall(){
+        LottoOutputView.printInputBonusBallPhrase();
         int bonusBall = Integer.parseInt(scanner.nextLine());
         return bonusBall;
     }
