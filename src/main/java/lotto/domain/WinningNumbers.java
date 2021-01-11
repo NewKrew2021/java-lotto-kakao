@@ -15,7 +15,7 @@ public class WinningNumbers {
     public WinningNumbers(List<Integer> winNumbers, int bonusNumber) {
         validateWinAndBonusNumbers(winNumbers, bonusNumber);
         this.winNumbers = new LottoNumbers(winNumbers);
-        this.bonusNumber = new LottoNumber(bonusNumber);
+        this.bonusNumber = LottoNumber.of(bonusNumber);
     }
 
     public LottoNumbers getWinNumbers() {

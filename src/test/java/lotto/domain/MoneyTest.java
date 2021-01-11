@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.InsufficientMoneyException;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -17,7 +18,7 @@ public class MoneyTest {
     public void validateNoBuyable() {
         assertThatThrownBy(() -> {
             Money money = new Money(999);
-        }).isInstanceOf(IllegalArgumentException.class);
+        }).isInstanceOf(InsufficientMoneyException.class);
     }
 
     @Test

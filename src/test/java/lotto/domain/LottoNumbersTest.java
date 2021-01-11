@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.NumberDuplicateException;
+import lotto.exception.NumbersSizeException;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -19,33 +21,33 @@ public class LottoNumbersTest {
     public void validateSevenOfWins() {
         assertThatThrownBy(() -> {
             new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
-        }).isInstanceOf(IllegalArgumentException.class);
+        }).isInstanceOf(NumbersSizeException.class);
     }
 
     @Test
     public void validateFiveOfWins() {
         assertThatThrownBy(() -> {
             new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5));
-        }).isInstanceOf(IllegalArgumentException.class);
+        }).isInstanceOf(NumbersSizeException.class);
     }
 
     @Test
     public void validateDuplication() {
         assertThatThrownBy(() -> {
             new LottoNumbers(Arrays.asList(1, 1, 2, 3, 4, 5));
-        }).isInstanceOf(IllegalArgumentException.class);
+        }).isInstanceOf(NumberDuplicateException.class);
     }
 
     @Test
     public void containTrue() {
         LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1,2,3,4,5,6));
-        assertThat(lottoNumbers.isContains(new LottoNumber(3))).isTrue();
+        assertThat(lottoNumbers.isContains(LottoNumber.of(3))).isTrue();
     }
 
     @Test
     public void containFalse() {
         LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1,2,3,4,5,6));
-        assertThat(lottoNumbers.isContains(new LottoNumber(7))).isFalse();
+        assertThat(lottoNumbers.isContains(LottoNumber.of(7))).isFalse();
     }
 
     @Test

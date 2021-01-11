@@ -1,10 +1,9 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.Test;
+import lotto.exception.BonusDuplicateException;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
@@ -21,6 +20,6 @@ public class WinningNumbersTest {
     public void validateDuplicationBetweenWinNumbersAndBonusNumber() {
         assertThatThrownBy(() -> {
             new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), 6);
-        }).isInstanceOf(IllegalArgumentException.class);
+        }).isInstanceOf(BonusDuplicateException.class);
     }
 }

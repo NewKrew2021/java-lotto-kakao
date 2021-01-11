@@ -19,7 +19,7 @@ public class LottoNumbers {
         validateLottoNumbers(numbers);
         this.lottoNumbers = new ArrayList<>();
         for (Integer num : numbers) {
-            this.lottoNumbers.add(new LottoNumber(num));
+            this.lottoNumbers.add(LottoNumber.of(num));
         }
     }
 
