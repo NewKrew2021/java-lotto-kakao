@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -13,13 +14,13 @@ public class Lotto {
     }
 
     public List<Integer> getLotto(){
-
+        final List<Integer> lotto = new ArrayList<>(this.lotto);
         return lotto;
     }
 
     public int checkSameCount(Lotto userLotto){
         int count = 0;
-        for (Integer number : userLotto.getLotto()) {
+        for (Integer number : userLotto.lotto) {
             count += lotto.contains(number) ? 1 : 0;
         }
 

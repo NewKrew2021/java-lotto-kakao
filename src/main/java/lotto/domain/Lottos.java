@@ -18,6 +18,7 @@ public class Lottos {
     }
 
     public List<Lotto> getLottos(){
+        final List<Lotto> lottos = new ArrayList<>(this.lottos);
         return lottos;
     }
 
