@@ -2,18 +2,26 @@ package lotto.domain.game;
 
 public class LottoTicketCount {
 
-    public static final String LOTTO_MONEY_EXCEPTION_MESSAGE = "1000원 단위이며 양의 정수로 된 금액만 허용됩니다.";
-    public static final int UNIT_OF_MONEY = 1000;
+    public static final int MONEY_PER_LOTTO = 1000;
 
     private final int ticketCount;
     private int remainCount;
 
-    public LottoTicketCount(int money) {
-        if (money % UNIT_OF_MONEY != 0 || money <= 0) {
-            throw new IllegalArgumentException(LOTTO_MONEY_EXCEPTION_MESSAGE);
+    LottoTicketCount(int ticketCount) {
+        if (ticketCount <= 0) {
+            throw new IllegalArgumentException("티켓의 갯수는 양의 정수여야 합니다.");
         }
-        this.ticketCount = money / UNIT_OF_MONEY;
-        this.remainCount = this.ticketCount;
+
+        this.ticketCount = ticketCount;
+        this.remainCount = ticketCount;
+    }
+
+    public static LottoTicketCount fromMoney(int money) {
+        if (money % MONEY_PER_LOTTO != 0) {
+            throw new IllegalArgumentException("1000원 단위의 금액만 허용됩니다.");
+        }
+
+        return new LottoTicketCount(money / MONEY_PER_LOTTO);
     }
 
     public boolean isTicketRemain() {
