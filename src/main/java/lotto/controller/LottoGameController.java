@@ -1,6 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.game.LottoTicketCount;
+import lotto.domain.game.LottoTicketCounts;
 import lotto.domain.game.WinnerTicket;
 import lotto.domain.number.LottoNumbers;
 import lotto.domain.number.NumberGenerateStrategy;
@@ -19,21 +19,31 @@ public class LottoGameController {
         this.numberGenerateStrategy = numberGenerateStrategy;
     }
 
-    public LottoTicketCount getLottoTicketCount() {
-        LottoTicketCount lottoTicketCount = LottoTicketCount.fromMoney(InputView.inputMoney());
-        OutputView.printTicketCount(lottoTicketCount);
-        return lottoTicketCount;
+    public LottoTicketCounts getLottoTicketCounts() {
+        return LottoTicketCounts.from(InputView.inputMoney(), InputView.inputManualTicketCount());
     }
 
-    public List<LottoNumbers> buyLottoTickets(LottoTicketCount lottoTicketCount) {
+    public List<LottoNumbers> buyLottoTickets(LottoTicketCounts lottoTicketCounts) {
         List<LottoNumbers> lottoTickets = new ArrayList<>();
-        while (lottoTicketCount.isTicketRemain()) {
+        buyManualLottoTickets(lottoTicketCounts, lottoTickets);
+        buyAutoLottoTickets(lottoTicketCounts, lottoTickets);
+        return lottoTickets;
+    }
+
+    private void buyManualLottoTickets(LottoTicketCounts lottoTicketCounts, List<LottoNumbers> lottoTickets) {
+        while (lottoTicketCounts.isManualTicketRemain()) {
+            lottoTickets.add(LottoNumbers.from(InputView.inputLottoNumbers()));
+            lottoTicketCounts.useManualTicket();
+        }
+    }
+
+    private void buyAutoLottoTickets(LottoTicketCounts lottoTicketCounts, List<LottoNumbers> lottoTickets) {
+        while (lottoTicketCounts.isAutoTicketRemain()) {
             LottoNumbers lottoTicket = LottoNumbers.from(numberGenerateStrategy);
             lottoTickets.add(lottoTicket);
-            lottoTicketCount.useTicket();
+            lottoTicketCounts.useAutoTicket();
             OutputView.printTicketNumbers(LottoNumbersDto.from(lottoTicket));
         }
-        return lottoTickets;
     }
 
     public WinnerTicket getWinnerTicket() {
