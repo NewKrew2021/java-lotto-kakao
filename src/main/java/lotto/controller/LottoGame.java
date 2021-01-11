@@ -1,14 +1,10 @@
 package lotto.controller;
 
 import lotto.domain.LottoTickets;
+import lotto.domain.CreateTicket;
 import lotto.domain.WinningNumber;
 import lotto.view.InputView;
 import lotto.view.ResultView;
-
-import java.util.Arrays;
-import java.util.Set;
-import java.util.stream.Collectors;
-import lotto.domain.Number;
 
 public class LottoGame {
     private static LottoTickets lottoTickets;
@@ -26,7 +22,8 @@ public class LottoGame {
 
     private static void setLottoTickets(int price) {
         ResultView.purchaseLottoNumber(price);
-        lottoTickets = new LottoTickets(price);
+        CreateTicket makeTicket = new CreateTicket(price);
+        lottoTickets = new LottoTickets(makeTicket.allocateTicket());
         ResultView.purchaseLottoTicket(lottoTickets);
 
     }

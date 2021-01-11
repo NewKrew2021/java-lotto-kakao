@@ -8,12 +8,8 @@ public class LottoTickets {
     private List<LottoTicket> lottoTickets;
     private LottoNumber lottoNumber;
 
-    public LottoTickets(int price) {
-        lottoNumber = new LottoNumber();
-        lottoTickets = new ArrayList<>();
-        lottoTickets = IntStream.range(1, price / 1000 + 1)
-                .mapToObj(val -> new LottoTicket(new HashSet<>(lottoNumber.getRandomNumbers())))
-                .collect(Collectors.toList());
+    public LottoTickets(List<LottoTicket> makeLottoTickets){
+        lottoTickets = makeLottoTickets;
     }
 
     public List<LottoTicket> getLottoTickets() {
