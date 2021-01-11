@@ -3,21 +3,26 @@ package lotto.domain;
 import java.util.stream.Stream;
 
 public enum Rank {
-    FIRST(1),
-    SECOND(2),
-    THIRD(3),
-    FOURTH(4),
-    FIFTH(5),
-    BOOM(0);
+    FIRST(1, 2_000_000_000),
+    SECOND(2, 30_000_000),
+    THIRD(3, 1_500_000),
+    FOURTH(4, 50_000),
+    FIFTH(5, 5_000),
+    BOOM(0, 0);
 
     private final int rank;
-
-    Rank(int rank) {
+    private final int reward;
+    Rank(int rank, int reward) {
         this.rank = rank;
+        this.reward = reward;
     }
 
     public int getRank() {
         return rank;
+    }
+
+    public int getReward() {
+        return reward;
     }
 
     public static Stream<Rank> stream() {

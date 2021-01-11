@@ -61,11 +61,11 @@ public class LottoUI {
 
     private static void printRaffleResult(Rankings rankings) {
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format(RANK_FIFTH_TEXT, LottoReward.FIFTH.getReward(), rankings.getCountOfRank(Rank.FIFTH)));
-        sb.append(String.format(RANK_FOURTH_TEXT, LottoReward.FOURTH.getReward(), rankings.getCountOfRank(Rank.FOURTH)));
-        sb.append(String.format(RANK_THIRD_TEXT, LottoReward.THIRD.getReward(), rankings.getCountOfRank(Rank.THIRD)));
-        sb.append(String.format(RANK_SECOND_TEXT, LottoReward.SECOND.getReward(), rankings.getCountOfRank(Rank.SECOND)));
-        sb.append(String.format(RANK_FIRST_TEXT, LottoReward.FIRST.getReward(), rankings.getCountOfRank(Rank.FIRST)));
+        sb.append(String.format(RANK_FIFTH_TEXT, Rank.FIFTH.getReward(), rankings.getCountOfRank(Rank.FIFTH)));
+        sb.append(String.format(RANK_FOURTH_TEXT, Rank.FOURTH.getReward(), rankings.getCountOfRank(Rank.FOURTH)));
+        sb.append(String.format(RANK_THIRD_TEXT, Rank.THIRD.getReward(), rankings.getCountOfRank(Rank.THIRD)));
+        sb.append(String.format(RANK_SECOND_TEXT, Rank.SECOND.getReward(), rankings.getCountOfRank(Rank.SECOND)));
+        sb.append(String.format(RANK_FIRST_TEXT, Rank.FIRST.getReward(), rankings.getCountOfRank(Rank.FIRST)));
         System.out.println(sb);
     }
 }

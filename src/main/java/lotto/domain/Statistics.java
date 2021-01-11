@@ -10,11 +10,11 @@ public class Statistics {
     public static final int HUNDRED = 100;
 
     private final Rankings rankings;
-    private static final List<Integer> prize = new ArrayList<>(Arrays.asList(ZERO, LottoReward.FIRST.getReward(),
-            LottoReward.SECOND.getReward(),
-            LottoReward.THIRD.getReward(),
-            LottoReward.FOURTH.getReward(),
-            LottoReward.FIFTH.getReward()));
+    private static final List<Integer> prize = new ArrayList<>(Arrays.asList(ZERO, Rank.FIRST.getReward(),
+            Rank.SECOND.getReward(),
+            Rank.THIRD.getReward(),
+            Rank.FOURTH.getReward(),
+            Rank.FIFTH.getReward()));
 
 
     public Statistics(Map<Rank, Integer> rankingsMap) {

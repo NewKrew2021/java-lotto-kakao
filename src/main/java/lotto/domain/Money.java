@@ -10,7 +10,7 @@ public class Money {
 
     public Money(int money) {
         if (money < MIN_MONEY) {
-            throw new TooLowMoneyException(MIN_MONEY + "원 이상의 금액을 입력해 주세요");
+            throw new TooLowMoneyException(MIN_MONEY);
         }
         this.money = money;
     }
