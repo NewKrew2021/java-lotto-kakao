@@ -1,9 +1,7 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public enum LottoStatus {
     FIRST(2_000_000_000L, 6),
@@ -15,16 +13,6 @@ public enum LottoStatus {
 
     private final long winnings;
     private final int matchedLottoNumberCount;
-
-    private static final List<LottoStatus> lottoStatusesExceptNone = new ArrayList<>();
-
-    static {
-        for (LottoStatus e : values()) {
-            lottoStatusesExceptNone.add(e);
-        }
-        lottoStatusesExceptNone.remove(LottoStatus.NONE);
-        Collections.sort(lottoStatusesExceptNone, Comparator.reverseOrder());
-    }
 
     LottoStatus(long winnings, int matchedLottoNumberCount) {
         this.winnings = winnings;
@@ -43,8 +31,8 @@ public enum LottoStatus {
         if (matchedLottoNumberCount == LottoStatus.SECOND.matchedLottoNumberCount) {
             return secondOrThirdPrize(isBonusNumberMatched);
         }
-        return lottoStatusesExceptNone.stream()
-                .filter(lotto -> lotto.getMatchedLottoNumberCount() == matchedLottoNumberCount)
+        return Arrays.stream(LottoStatus.values())
+                .filter(lotto -> (lotto.getMatchedLottoNumberCount() == matchedLottoNumberCount && lotto != LottoStatus.NONE))
                 .findFirst()
                 .orElse(NONE);
     }
@@ -57,6 +45,9 @@ public enum LottoStatus {
     }
 
     public static List<LottoStatus> getLottoStatusesExceptNone() {
-        return lottoStatusesExceptNone;
+        return Arrays.stream(LottoStatus.values())
+                .sorted(Comparator.comparing(LottoStatus::getMatchedLottoNumberCount))
+                .filter(lottoStatus -> lottoStatus != LottoStatus.NONE)
+                .collect(Collectors.toList());
     }
 }

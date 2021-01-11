@@ -12,6 +12,11 @@ public class Lottos {
         lottos = new ArrayList<>();
     }
 
+    public Lottos(List<Lotto> lottos) {
+        this.lottos = lottos;
+        this.purchaseInfo = new PurchaseInfo(PurchaseInfo.LOTTE_PRICE * lottos.size(), lottos.size());
+    }
+
     public void buyLotto(LottoStrategy lottoStrategy) {
         lottos.add(new Lotto(lottoStrategy));
         purchaseInfo.buyLotto();
@@ -27,11 +32,6 @@ public class Lottos {
 
     public long getTotalPurchaseCount() {
         return lottos.size();
-    }
-
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = lottos;
-        this.purchaseInfo = new PurchaseInfo(PurchaseInfo.LOTTE_PRICE * lottos.size(), lottos.size());
     }
 
     public Map<LottoStatus, Integer> checkResult(Answer answer) {
