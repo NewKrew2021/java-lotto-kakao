@@ -17,6 +17,22 @@ public class LottoTicketCounts {
         return new LottoTicketCounts(manualTicketCount, autoTicketCount);
     }
 
+    public boolean isManualTicketRemain() {
+        return manualCount.isTicketRemain();
+    }
+
+    public void useManualTicket() {
+        manualCount.useTicket();
+    }
+
+    public boolean isAutoTicketRemain() {
+        return autoCount.isTicketRemain();
+    }
+
+    public void useAutoTicket() {
+        autoCount.useTicket();
+    }
+
     public int getManualCount() {
         return manualCount.getTicketCount();
     }
