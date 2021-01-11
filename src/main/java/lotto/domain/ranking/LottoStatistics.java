@@ -5,6 +5,7 @@ import lotto.domain.game.WinnerTicket;
 import lotto.domain.number.LottoNumbers;
 
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -34,7 +35,7 @@ public class LottoStatistics {
     private static Map<LottoRanking, Long> findRankingCount(List<LottoNumbers> lottoTickets, WinnerTicket winnerTicket) {
         return lottoTickets.stream()
                 .map(ticket -> findRanking(winnerTicket, ticket))
-                .collect(groupingBy(Function.identity(), counting()));
+                .collect(groupingBy(Function.identity(), () -> new EnumMap<>(LottoRanking.class), counting()));
     }
 
     private static LottoRanking findRanking(WinnerTicket winnerTicket, LottoNumbers ticket) {
