@@ -1,6 +1,7 @@
 package lottomission.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class LottoGame {
 
@@ -19,14 +20,15 @@ public class LottoGame {
     }
 
     public Map<LotteryWinnings, Integer> getAllLottoRankCount() {
-        Map<LotteryWinnings, Integer> result = new TreeMap<>();
-        for (LotteryWinnings lotteryWinnings : LotteryWinnings.values()) {
-            result.put(lotteryWinnings, 0);
-        }
-        for (Lotto lotto : lottos.getLottos()) {
-            LotteryWinnings winningsStat = lotto.winningPrize(answer);
-            result.put(winningsStat, result.get(winningsStat) + 1);
-        }
+        Map<LotteryWinnings, Integer> result = Arrays
+                .stream(LotteryWinnings.values())
+                .collect(Collectors.toMap(lotteryWinnings -> lotteryWinnings, lotteryWinnings -> 0, (a, b) -> b, TreeMap::new));
+
+        lottos.getLottos()
+                .stream()
+                .map(lotto -> lotto.winningPrize(answer))
+                .forEach(winningsStat -> result.put(winningsStat, result.get(winningsStat) + 1));
+
         result.remove(LotteryWinnings.UNRANKED);
         return result;
     }
