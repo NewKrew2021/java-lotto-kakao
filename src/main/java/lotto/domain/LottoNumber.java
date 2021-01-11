@@ -6,6 +6,9 @@ import java.util.Objects;
 
 public class LottoNumber implements Comparable<LottoNumber> {
 
+    private static final int LOTTO_NUMBER_MIN = 1;
+    private static final int LOTTO_NUMBER_MAX = 45;
+
     private final int lottoNumber;
 
     private LottoNumber(int lottoNumber) {
@@ -39,12 +42,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private static void checkRange(int lottoNumber) {
         if (outOfRange(lottoNumber)) {
-            throw new IllegalArgumentException("볼은 1 이상 45 이하여야 한다.");
+            throw new IllegalArgumentException(String.format("볼은 %d 이상 %d 이하여야 한다.", LOTTO_NUMBER_MIN, LOTTO_NUMBER_MAX));
         }
     }
 
     private static boolean outOfRange(int lottoNumber) {
-        return 1 > lottoNumber || lottoNumber > 45;
+        return LOTTO_NUMBER_MIN > lottoNumber || lottoNumber > LOTTO_NUMBER_MAX;
     }
 
     @Override
