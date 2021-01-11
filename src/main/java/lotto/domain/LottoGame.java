@@ -48,4 +48,8 @@ public class LottoGame {
 
         return (float)reward / (float)(TICKET_PRICE * count);
     }
+
+    public void setTickets(LottoTickets tickets) {
+        this.tickets = tickets;
+    }
 }

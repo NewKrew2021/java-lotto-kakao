@@ -21,10 +21,20 @@ public enum Ranking {
     }
 
     public static Ranking getRank(int matchCountount, boolean matchBonus) {
+        if(matchCountount == 5){
+            return getSecondOrThird(matchBonus);
+        }
         return Arrays.stream(values())
-                .filter(ranking -> (ranking.matchCount == matchCountount) && ranking.matchBonus == matchBonus)
-                .findFirst()
-                .orElse(null);
+                .filter(ranking -> (ranking.matchCount == matchCountount))
+                        .findFirst()
+                        .orElse(null);
+    }
+
+    private static Ranking getSecondOrThird(boolean matchBonus) {
+        if(matchBonus){
+            return SECOND;
+        }
+        return THIRD;
     }
 
     public int getPrize() {
