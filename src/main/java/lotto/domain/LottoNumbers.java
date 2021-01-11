@@ -4,7 +4,7 @@ import lotto.domain.dto.LottoNumber;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public class LottoNumbers {
     public static final int ALLOWED_NUMBER_COUNT = 6;
@@ -21,8 +21,26 @@ public class LottoNumbers {
         this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
     }
 
-    public void delegate(Consumer<List<LottoNumber>> consumer) {
-        consumer.accept(lottoNumbers);
+    public List<Integer> getNumbersInTicket() {
+        return lottoNumbers.stream()
+                .map(LottoNumber::getNumber)
+                .collect(Collectors.toList());
+    }
+
+    public int getMatchCount(LottoNumbers luckyNumbers) {
+        int count = 0;
+
+        for (LottoNumber lottoNumber : lottoNumbers) {
+            if (luckyNumbers.contains(lottoNumber)) {
+                count++;
+            }
+        }
+
+        return count;
+    }
+
+    public boolean isMatchBonus(LottoNumber bonusNumber) {
+        return lottoNumbers.contains(bonusNumber);
     }
 
     public boolean contains(LottoNumber lottonumber) {

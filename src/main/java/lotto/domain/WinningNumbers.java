@@ -1,6 +1,9 @@
-package lotto.domain.dto;
+package lotto.domain;
 
-import lotto.domain.LottoNumbers;
+import lotto.domain.dto.LottoNumber;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class WinningNumbers {
     private final LottoNumbers luckyNumbers;
@@ -15,12 +18,23 @@ public class WinningNumbers {
         this.bonusNumber = bonusNumber;
     }
 
-    public LottoNumbers getLuckyNumbers() {
-        return luckyNumbers;
+    public MatchResults matchLotto(LottoTickets lottoTickets) {
+        List<MatchResult> results = new ArrayList<>();
+        List<Integer> calcMatchCounts = lottoTickets.getMatchCountsInOrder(luckyNumbers);
+        List<Boolean> areMatchBonuses = lottoTickets.getContainsBonusNumberInOrder(bonusNumber);
+
+        for (int i = 0; i < calcMatchCounts.size(); i++) {
+            results.add(MatchResult.valueOf(calcMatchCounts.get(i), areMatchBonuses.get(i)));
+        }
+
+        return new MatchResults(results);
     }
 
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
+    public MatchResult matchLotto(LottoNumbers lottoTicket) {
+        int matchCount = lottoTicket.getMatchCount(luckyNumbers);
+        boolean isMatchBonus = lottoTicket.isMatchBonus(bonusNumber);
+
+        return MatchResult.valueOf(matchCount, isMatchBonus);
     }
 
     @Override

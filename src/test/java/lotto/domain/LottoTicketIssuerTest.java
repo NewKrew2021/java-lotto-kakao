@@ -1,25 +1,20 @@
 package lotto.domain;
 
 import lotto.domain.dto.InsertPrice;
-import lotto.domain.dto.LottoNumber;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import java.util.Arrays;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTicketIssuerTest {
     @Test
     void testIssue() {
         LottoTicketIssuer issuer = new LottoTicketIssuer(new InsertPrice(2000));
-        LottoTickets tickets = issuer.issue(() -> Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::valueOf)
-                .collect(Collectors.toList()));
+        LottoTickets tickets = issuer.issue(() -> LottoNumberArray.asList(1, 2, 3, 4, 5, 6));
 
         assertThat(tickets).isEqualTo(new LottoTickets(Arrays.asList(
                 new LottoNumbers(LottoNumberArray.asList(1, 2, 3, 4, 5, 6)),

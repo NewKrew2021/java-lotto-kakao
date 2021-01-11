@@ -1,7 +1,9 @@
 package lotto.domain;
 
-import java.util.*;
-import java.util.function.Consumer;
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class MatchResults {
     private Map<MatchResult, Integer> resultCounter;
@@ -13,8 +15,18 @@ public class MatchResults {
         }
     }
 
-    public void delegate(Consumer<Map<MatchResult, Integer>> consumer) {
-        consumer.accept(resultCounter);
+    public Map<MatchResult, Integer> getResult() {
+        return resultCounter;
+    }
+
+    public long getTotalEarnings() {
+        long total = 0;
+
+        for (Map.Entry<MatchResult, Integer> entry : resultCounter.entrySet()) {
+            total += (long) entry.getKey().getReward() * entry.getValue();
+        }
+
+        return total;
     }
 
     private void insertResult(MatchResult result) {

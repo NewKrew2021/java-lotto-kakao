@@ -1,19 +1,19 @@
 package lotto.domain;
 
 import lotto.domain.dto.LottoNumber;
-import lotto.domain.dto.WinningNumbers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.*;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.ArgumentsProvider;
+import org.junit.jupiter.params.provider.ArgumentsSource;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoMatcherTest {
     private List<LottoNumber> answer;
@@ -24,9 +24,7 @@ public class LottoMatcherTest {
 
     @BeforeEach
     void setUp() {
-        answer = Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::valueOf)
-                .collect(Collectors.toList());
+        answer = LottoNumberArray.asList(1, 2, 3, 4, 5, 6);
 
         luckyNumbers = new LottoNumbers(answer);
         bonusNumber = LottoNumber.valueOf(7);

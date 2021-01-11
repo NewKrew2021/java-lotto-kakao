@@ -1,8 +1,10 @@
 package lotto.domain;
 
+import lotto.domain.dto.LottoNumber;
+
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 public class LottoTickets {
     private final List<LottoNumbers> tickets;
@@ -11,8 +13,22 @@ public class LottoTickets {
         this.tickets = Collections.unmodifiableList(tickets);
     }
 
-    public void delegate(Consumer<List<LottoNumbers>> consumer) {
-        consumer.accept(tickets);
+    public List<List<Integer>> getAllTicketNumbers() {
+        return tickets.stream()
+                .map(LottoNumbers::getNumbersInTicket)
+                .collect(Collectors.toList());
+    }
+
+    public List<Integer> getMatchCountsInOrder(LottoNumbers luckyNumbers) {
+        return tickets.stream()
+                .map(ticket -> ticket.getMatchCount(luckyNumbers))
+                .collect(Collectors.toList());
+    }
+
+    public List<Boolean> getContainsBonusNumberInOrder(LottoNumber bonusNumber) {
+        return tickets.stream()
+                .map(ticket -> ticket.isMatchBonus(bonusNumber))
+                .collect(Collectors.toList());
     }
 
     @Override
