@@ -7,12 +7,13 @@ import lotto.domain.Money;
 public class Main {
     public static void main(String[] args) {
         OutputView.printReadMoneyHelp();
-        int lotteryCount = Money.calculateLotteryCount(InputView.readMoney());
-        int manualCount = InputView.readManualLotteryCount();
+        final int lotteryCount = Money.calculateLotteryCount(InputView.readMoney());
+        final int manualLotteriesCount = InputView.readManualLotteryCount();
+        final int autoLotteriesCount = lotteryCount - manualLotteriesCount;
 
-        Lotteries lotteries = InputView.readManualLotteries(manualCount);
-        lotteries.addRandomLotteries(lotteryCount - manualCount);
-        OutputView.printLotteries(lotteries, manualCount, lotteryCount - manualCount);
+        Lotteries lotteries = InputView.readManualLotteries(manualLotteriesCount);
+        lotteries.addRandomLotteries(autoLotteriesCount);
+        OutputView.printLotteries(lotteries, manualLotteriesCount, autoLotteriesCount);
 
         LotteryRank lotteryRank = lotteries.calculateRank(InputView.readLotteryAnswer());
         OutputView.printLotteriesRank(lotteryRank);

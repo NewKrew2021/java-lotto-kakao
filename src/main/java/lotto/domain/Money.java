@@ -27,10 +27,7 @@ public class Money {
     }
 
     public static boolean isInvalidMoneyValue(Money money){
-        if(money.value < 0){
-            return true;
-        }
-        return false;
+        return money.value < LOTTERY_PRICE;
     }
 
 }
