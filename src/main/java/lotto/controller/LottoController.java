@@ -49,6 +49,6 @@ public class LottoController {
     }
 
     public double getLottoRevenueRate() {
-        return LottoRevenue.of(lottoRankingCount,lottoGameCount).calculateRevenueRate();
+        return LottoRevenue.of(lottoRankingCount, lottoGameCount).calculateRevenueRate();
     }
 }

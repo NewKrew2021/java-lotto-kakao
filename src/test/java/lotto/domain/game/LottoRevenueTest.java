@@ -17,12 +17,12 @@ public class LottoRevenueTest {
     void create() {
         //given
         Map<LottoRanking, Integer> rankingCount = new HashMap<>();
-        rankingCount.put(LottoRanking.RANK_4,1);
-        rankingCount.put(LottoRanking.RANK_5,2);
+        rankingCount.put(LottoRanking.RANK_4, 1);
+        rankingCount.put(LottoRanking.RANK_5, 2);
         int inputMoney = 10000;
 
         //when
-        LottoRevenue lottoRevenue = LottoRevenue.of(new LottoRankingCount(rankingCount),new LottoGameCount(inputMoney));
+        LottoRevenue lottoRevenue = LottoRevenue.of(new LottoRankingCount(rankingCount), new LottoGameCount(inputMoney));
 
         //then
         assertThat(lottoRevenue.calculateRevenueRate()).isEqualTo(6.0);

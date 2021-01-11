@@ -1,7 +1,5 @@
 package lotto.domain.number;
 
-import lotto.domain.number.NumberGenerateStrategy;
-import lotto.domain.number.RandomGenerateStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +10,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 class RandomGenerateStrategyTest {
     @DisplayName("랜덤 전략이 주어지면 만들어진 배열의 길이가 6이 맞는지 확인합니다.")
     @Test
-    void create(){
+    void create() {
         //given
         NumberGenerateStrategy strategy = new RandomGenerateStrategy();
 

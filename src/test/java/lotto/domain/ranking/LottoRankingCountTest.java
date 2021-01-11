@@ -1,33 +1,24 @@
 package lotto.domain.ranking;
 
-import lotto.domain.OneToSixGenerator;
 import lotto.domain.game.WinnerTicket;
-import lotto.domain.game.WinnerTicketTest;
-import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoNumbers;
 import lotto.domain.number.ManualInputStrategy;
-import lotto.domain.number.NumberGenerateStrategy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoRankingCountTest {
 
     private WinnerTicket winnerTicket;
     private List<LottoNumbers> lottoTickets;
+
     @BeforeEach
     void beforeStart() {
 
@@ -39,11 +30,12 @@ public class LottoRankingCountTest {
                 LottoNumbers.from(new ManualInputStrategy(Arrays.asList(1, 2, 3, 4, 5, 6)))
         );
     }
+
     @DisplayName("당첨 티켓과 로또에 참여한 게임 숫자들 배열이 주어지면 그에 따른 당첨 등수 개수를 반환한다.")
     @Test
-    void create(){
+    void create() {
         //when
-        LottoRankingCount lottoRankingCount = LottoRankingCount.of(lottoTickets,winnerTicket);
+        LottoRankingCount lottoRankingCount = LottoRankingCount.of(lottoTickets, winnerTicket);
 
         //then
         Map<LottoRanking, Integer> expected = new HashMap<>();
@@ -60,9 +52,9 @@ public class LottoRankingCountTest {
 
     @DisplayName("당첨 티켓과 로또에 참여한 게임 숫자들 배열이 주어지면 그에 따른 총 당첨금액을 구한다.")
     @Test
-    void calculateTotalPrice(){
+    void calculateTotalPrice() {
         //when
-        LottoRankingCount lottoRankingCount = LottoRankingCount.of(lottoTickets,winnerTicket);
+        LottoRankingCount lottoRankingCount = LottoRankingCount.of(lottoTickets, winnerTicket);
 
         //then
         long expected = 2_001_555_000L;

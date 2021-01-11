@@ -1,7 +1,7 @@
 package lotto.domain.ranking;
 
-import lotto.domain.number.LottoNumbers;
 import lotto.domain.game.WinnerTicket;
+import lotto.domain.number.LottoNumbers;
 
 import java.util.HashMap;
 import java.util.List;
