@@ -4,6 +4,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
 import domain.exceptions.InvalidLottoNumberException;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -21,5 +22,11 @@ public class LottoNumberTest {
   void invalidNumber(int number) {
     assertThatExceptionOfType(InvalidLottoNumberException.class)
         .isThrownBy(() -> new LottoNumber(number));
+  }
+
+  @Test
+  void nullTest() {
+    assertThatExceptionOfType(InvalidLottoNumberException.class)
+        .isThrownBy(() -> new LottoNumber(null));
   }
 }

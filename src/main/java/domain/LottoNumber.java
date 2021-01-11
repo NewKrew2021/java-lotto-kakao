@@ -10,13 +10,13 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
   private final int number;
 
-  public LottoNumber(int number) {
+  public LottoNumber(Integer number) {
     validateRange(number);
     this.number = number;
   }
 
-  private void validateRange(int number) {
-    if (number < LOWER_BOUND || number > UPPER_BOUND) {
+  private void validateRange(Integer number) {
+    if (number == null || number < LOWER_BOUND || number > UPPER_BOUND) {
       throw new InvalidLottoNumberException();
     }
   }
