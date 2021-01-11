@@ -1,12 +1,14 @@
 package lotto.domain;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class LottoResults {
-    private final Map<LottoRank, Integer> results;
-
-    public LottoResults() {
+    private static LottoResults lottoResults;
+    private static final Map<LottoRank, Integer> results;
+    static {
         results = new HashMap<LottoRank, Integer>() {{
             for (LottoRank rank : LottoRank.values()) {
                 put(rank, 0);
@@ -14,28 +16,36 @@ public class LottoResults {
         }};
     }
 
-    public void upsert(LottoRank rank) {
-        results.put(rank, results.get(rank) + 1);
+    private LottoResults(List<LottoTicket> lottoTickets, WinningNumber winningNumber) {
+        lottoTickets.stream()
+                .filter(lottoTicket -> lottoTicket.matchCount(winningNumber) >= 3)
+                .forEach(lottoTicket -> {
+                    LottoRank rank = RankTable.get(lottoTicket.matchCount(winningNumber),
+                            lottoTicket.contains(winningNumber.getBonusNumber()));
+                    results.put(rank, results.get(rank)+1);
+                });
     }
 
-    public int getCount(LottoRank rank) {
-        return results.get(rank);
+    public static LottoResults createLottoResults(List<LottoTicket> lottoTickets, WinningNumber winningNumber){
+        lottoResults = new LottoResults(lottoTickets, winningNumber);
+        return lottoResults;
     }
 
-    public String result(int price) {
-        double sum = 0;
-        for (LottoRank rank : LottoRank.values()) {
-            sum += results.get(rank) * rank.getPrice();
-        }
-        return this + "총 수익률은 " + (long) (sum / price * 100) + "%입니다.";
+    public Map<LottoRank, Integer> getLottoResults(){
+        return lottoResults.getResults();
+    }
+
+    private Map<LottoRank, Integer> getResults(){
+        return results;
     }
 
     @Override
-    public String toString() {
-        String s = "";
-        for (LottoRank rank : LottoRank.values()) {
-            s += rank + " - " + results.get(rank) + "개\n";
-        }
-        return s;
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoResults that = (LottoResults) o;
+        return Objects.equals(results, that.results);
     }
+
+
 }
