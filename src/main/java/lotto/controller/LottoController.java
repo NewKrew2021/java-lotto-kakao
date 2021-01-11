@@ -27,11 +27,7 @@ public class LottoController {
         money = new Money(LottoUI.getMoneyFromUser());
         lottos = new Lottos(IntStream
                 .range(0, (money.howMany(Lotto.getLottoPrice())))
-                .mapToObj(num -> new Lotto(new LinkedHashSet<>(randomNumberGenerator
-                        .getNumbers()
-                        .stream()
-                        .map(LottoNumber::of)
-                        .collect(Collectors.toList()))))
+                .mapToObj(num -> new Lotto(randomNumberGenerator))
                 .collect(Collectors.toList()));
         LottoUI.printLottos(lottos);
     }

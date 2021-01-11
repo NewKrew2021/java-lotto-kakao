@@ -1,16 +1,15 @@
 package lotto.util;
 
+import lotto.domain.LottoNumber;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class RandomNumberGenerator implements LottoNumberGenerator {
 
-    private static final int RANGE_MAX = 45;
-    private static final int RANGE_MIN = 1;
-
     private static final List<Integer> lottoNumbers = IntStream
-            .range(RANGE_MIN, RANGE_MAX + 1)
+            .range(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER + 1)
             .boxed()
             .collect(Collectors.toList());
 

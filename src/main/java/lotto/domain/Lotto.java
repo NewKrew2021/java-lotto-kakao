@@ -4,11 +4,10 @@ import lotto.util.LottoNumberGenerator;
 import lotto.util.RandomNumberGenerator;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Lotto {
-    private Set<LottoNumber> lottoNumbers;
     private static final int LOTTO_PRICE = 1000;
+    private Set<LottoNumber> lottoNumbers;
 
     public Lotto(LottoNumberGenerator lottoNumberGenerator) {
         lottoNumbers = new LinkedHashSet<>();
@@ -25,7 +24,7 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public boolean isContain(LottoNumber lottoNumber) {
+    public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 
@@ -36,7 +35,7 @@ public class Lotto {
     public int matchCount(Lotto lotto) {
         return (int) lottoNumbers
                 .stream()
-                .filter(lotto::isContain)
+                .filter(lotto::contains)
                 .count();
     }
 

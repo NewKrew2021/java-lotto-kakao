@@ -12,11 +12,11 @@ public class LottoUI {
     public static final String BONUS_INPUT_TEXT = "보너스 볼을 입력해 주세요.";
     public static final String STATISTICS_LINE_TEXT = "당첨 통계\n---------";
     public static final String ALL_PROFIT_TEXT = "총 수익률은 %d%% 입니다.\n";
-    public static final String RANK_FIFTH_TEXT = "3개 일치 (%d원)- %d개\n";
-    public static final String RANK_FOURTH_TEXT = "4개 일치 (%d원)- %d개\n";
-    public static final String RANK_THIRD_TEXT = "5개 일치 (%d원)- %d개\n";
-    public static final String RANK_SECOND_TEXT = "5개 일치, 보너스 볼 일치(%d원)- %d개\n";
-    public static final String RANK_FIRST_TEXT = "6개 일치 (%d원)- %d개\n";
+    public static final String RANK_FIFTH_TEXT = "%d개 일치 (%d원)- %d개\n";
+    public static final String RANK_FOURTH_TEXT = "%d개 일치 (%d원)- %d개\n";
+    public static final String RANK_THIRD_TEXT = "%d개 일치 (%d원)- %d개\n";
+    public static final String RANK_SECOND_TEXT = "%d개 일치, 보너스 볼 일치(%d원)- %d개\n";
+    public static final String RANK_FIRST_TEXT = "%d개 일치 (%d원)- %d개\n";
     public static final String JOIN_DELIMITER = ", ";
     public static final String CLOSE_BRACKET = "]";
     public static final String OPEN_BRACKET = "[";
@@ -61,11 +61,11 @@ public class LottoUI {
 
     private static void printRaffleResult(Rankings rankings) {
         StringBuilder sb = new StringBuilder();
-        sb.append(String.format(RANK_FIFTH_TEXT, Rank.FIFTH.getReward(), rankings.getCountOfRank(Rank.FIFTH)));
-        sb.append(String.format(RANK_FOURTH_TEXT, Rank.FOURTH.getReward(), rankings.getCountOfRank(Rank.FOURTH)));
-        sb.append(String.format(RANK_THIRD_TEXT, Rank.THIRD.getReward(), rankings.getCountOfRank(Rank.THIRD)));
-        sb.append(String.format(RANK_SECOND_TEXT, Rank.SECOND.getReward(), rankings.getCountOfRank(Rank.SECOND)));
-        sb.append(String.format(RANK_FIRST_TEXT, Rank.FIRST.getReward(), rankings.getCountOfRank(Rank.FIRST)));
+        sb.append(String.format(RANK_FIFTH_TEXT, Rank.FIFTH.getMatchCount(), Rank.FIFTH.getReward(), rankings.getCountOfRank(Rank.FIFTH)));
+        sb.append(String.format(RANK_FOURTH_TEXT, Rank.FOURTH.getMatchCount(), Rank.FOURTH.getReward(), rankings.getCountOfRank(Rank.FOURTH)));
+        sb.append(String.format(RANK_THIRD_TEXT, Rank.THIRD.getMatchCount(), Rank.THIRD.getReward(), rankings.getCountOfRank(Rank.THIRD)));
+        sb.append(String.format(RANK_SECOND_TEXT, Rank.SECOND.getMatchCount(), Rank.SECOND.getReward(), rankings.getCountOfRank(Rank.SECOND)));
+        sb.append(String.format(RANK_FIRST_TEXT, Rank.FIRST.getMatchCount(), Rank.FIRST.getReward(), rankings.getCountOfRank(Rank.FIRST)));
         System.out.println(sb);
     }
 }
