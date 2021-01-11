@@ -74,4 +74,18 @@ public class LottoTicketCountTest {
         //then
         assertThat(count.isTicketRemain()).isEqualTo(expected);
     }
+
+    @DisplayName("티켓이 주어지면 원래 가격을 구한다.")
+    @Test
+    void calculatePrice() {
+        //given
+        int money = 3000;
+        LottoTicketCount count = LottoTicketCount.fromMoney(money);
+
+        //when
+        int result = count.calculatePrice();
+
+        //then
+        assertThat(result).isEqualTo(money);
+    }
 }

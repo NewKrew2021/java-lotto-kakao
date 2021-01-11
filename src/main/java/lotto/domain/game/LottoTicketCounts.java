@@ -1,7 +1,5 @@
 package lotto.domain.game;
 
-import static lotto.domain.game.LottoTicketCount.MONEY_PER_LOTTO;
-
 public class LottoTicketCounts {
 
     private final LottoTicketCount manualCount;
@@ -14,10 +12,9 @@ public class LottoTicketCounts {
 
     public static LottoTicketCounts from(int money, int manualCount) {
         LottoTicketCount manualTicketCount = new LottoTicketCount(manualCount);
+        LottoTicketCount autoTicketCount = LottoTicketCount.fromMoney(money - manualTicketCount.calculatePrice());
 
-        int autoCount = money / MONEY_PER_LOTTO - manualTicketCount.getTicketCount();
-
-        return new LottoTicketCounts(manualTicketCount, new LottoTicketCount(autoCount));
+        return new LottoTicketCounts(manualTicketCount, autoTicketCount);
     }
 
     public int getManualCount() {

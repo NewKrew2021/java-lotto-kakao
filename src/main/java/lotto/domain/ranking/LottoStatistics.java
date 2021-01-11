@@ -1,6 +1,7 @@
 package lotto.domain.ranking;
 
 import lotto.domain.game.LottoRevenueRate;
+import lotto.domain.game.LottoTicketCount;
 import lotto.domain.game.WinnerTicket;
 import lotto.domain.number.LottoNumbers;
 
@@ -12,7 +13,6 @@ import java.util.function.Function;
 
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
-import static lotto.domain.game.LottoTicketCount.MONEY_PER_LOTTO;
 
 public class LottoStatistics {
 
@@ -49,7 +49,7 @@ public class LottoStatistics {
     }
 
     public LottoRevenueRate calculateRevenueRate() {
-        return LottoRevenueRate.of(calculateTotalPrice(), countTicket() * MONEY_PER_LOTTO);
+        return LottoRevenueRate.of(calculateTotalPrice(), countTicket());
     }
 
     private long calculateTotalPrice() {
@@ -62,9 +62,10 @@ public class LottoStatistics {
         return totalPrice;
     }
 
-    private long countTicket() {
-        return rankingCount.values().stream()
+    private int countTicket() {
+        long totalCount = rankingCount.values().stream()
                 .reduce(INITIAL_TOTAL_COUNT, Long::sum);
+        return new LottoTicketCount((int) totalCount).calculatePrice();
     }
 
     public Map<LottoRanking, Long> getRankingCount() {
