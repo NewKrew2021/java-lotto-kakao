@@ -16,7 +16,7 @@ public class LottoGeneratorTest {
 
     @BeforeEach
     public void setUp() {
-        lottoGenerator = new LottoGenerator();
+        lottoGenerator = LottoGenerator.getInstance();
 
     }
 
@@ -31,6 +31,4 @@ public class LottoGeneratorTest {
         set.addAll(lotto.getLotto());
         Assertions.assertTrue(set.size()==6);
     }
-
-
 }

@@ -10,22 +10,35 @@ import java.util.List;
 
 public class LottoGenerator {
 
+    private static List<Integer> allLottoNumbers = new ArrayList<>();
+    public static LottoGenerator instance = null;
+
+    public static final int LOTTO_MAX_SIZE = 6;
+
+    private LottoGenerator(){
+        for (int i = LottoNumber.LOTTO_MIN_NUMBER; i <= LottoNumber.LOTTO_MAX_NUMBER; i++) {
+            allLottoNumbers.add(i);
+        }
+    }
+
+    public static LottoGenerator getInstance(){
+        if(instance == null)
+            return new LottoGenerator();
+
+        return instance;
+    }
+
     public Lotto generateLotto() {
 
         List<Integer> lotto = new ArrayList<>();
-        HashSet<Integer> set = new HashSet<>();
-        while (set.size() < 6) {
-            checkDuplicate(set, RandomUtil.getRandomValue(), lotto);
+
+        Collections.shuffle(allLottoNumbers);
+
+        for (int i = 0; i < LOTTO_MAX_SIZE; i++) {
+            lotto.add(allLottoNumbers.get(i));
         }
-        Collections.sort(lotto);
+
         return new Lotto(lotto);
-    }
-
-    public void checkDuplicate(HashSet<Integer> set, int randomNumber, List<Integer> lotto) {
-
-        if (set.add(randomNumber)) {
-            lotto.add(randomNumber);
-        }
     }
 
     public int generateBonus(Lotto lotto){

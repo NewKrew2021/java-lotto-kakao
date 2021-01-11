@@ -5,7 +5,7 @@ public class WonLotto {
     private Lotto wonLotto;
     private int bonusNo;
 
-    private LottoGenerator lottoGenerator = new LottoGenerator();
+    private LottoGenerator lottoGenerator = LottoGenerator.getInstance();
 
     private final int NON_GRADE_NUMBER = 3;
     private final int BONUS_NUMBER_MATCHING_COUNT = 5;

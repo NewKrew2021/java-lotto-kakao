@@ -8,7 +8,7 @@ public class LottoManager {
 
     LottoInputView lottoInputView=new LottoInputView();
     LottoOutputView lottoOutputView=new LottoOutputView();
-    LottoGenerator lottoGenerator=new LottoGenerator();
+    LottoGenerator lottoGenerator=LottoGenerator.getInstance();
 
     public void runLottoManager(){
 
