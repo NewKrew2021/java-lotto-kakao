@@ -26,16 +26,18 @@ public class Lotteries {
         return new LotteryRank(ranks);
     }
 
-    public static List<Lottery> getRandomLotteries(int count) {
-        List<Lottery> lotteryList = new ArrayList<>();
+    public void addRandomLotteries(int count) {
         for (int i = 0; i < count; i++) {
-            lotteryList.add(Lottery.createRandomLottery());
+            lotteries.add(Lottery.createRandomLottery());
         }
-        return lotteryList;
     }
 
     public void push(Lottery lottery) {
         lotteries.add(lottery);
+    }
+
+    public void pushAll(List<Lottery> lotteries){
+        this.lotteries.addAll(lotteries);
     }
 
     @Override

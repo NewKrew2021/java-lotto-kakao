@@ -1,13 +1,6 @@
 package lotto.domain;
 
-import lotto.exception.InvalidLotteryNumberException;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -19,10 +12,16 @@ public class Lottery {
     private final List<LotteryNumber> numbers;
 
     public Lottery(int[] ints) {
-        this(
-                Arrays.stream(ints)
+        this(Arrays.stream(ints)
                         .mapToObj(LotteryNumber::new)
                         .collect(Collectors.toList())
+        );
+    }
+
+    public Lottery(String[] strings) {
+        this(Arrays.stream(strings)
+                .map(string -> new LotteryNumber(Integer.parseInt(string.trim())))
+                .collect(Collectors.toList())
         );
     }
 
@@ -65,15 +64,7 @@ public class Lottery {
         return numbers.size() != LOTTERY_NUMBER_SIZE;
     }
 
-    public static Lottery convertStringsToLottery(String[] strings) {
-        try {
-            return new Lottery(Arrays.stream(strings)
-                    .map(string -> new LotteryNumber(Integer.parseInt(string.trim())))
-                    .collect(Collectors.toList()));
-        } catch (NumberFormatException e) {
-            throw new InvalidLotteryNumberException();
-        }
-    }
+
 
     public LotteryPrize checkRank(LotteryAnswer lotteryAnswer) {
         boolean bonus = numbers.contains(lotteryAnswer.getBonusNumber());
