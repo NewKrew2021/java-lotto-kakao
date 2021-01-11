@@ -6,11 +6,11 @@ import java.util.Arrays;
 
 public enum RankState {
 
-    FIRST(2000000000, 5,6),
-    SECOND(30000000, 4,5),
-    THIRD(1500000, 3,5),
-    FOURTH(50000, 2,4),
-    FIFTH(5000, 1,3),
+    FIRST(2_000_000_000, 5,6),
+    SECOND(30_000_000, 4,5),
+    THIRD(1_500_000, 3,5),
+    FOURTH(50_000, 2,4),
+    FIFTH(5_000, 1,3),
     FAIL(0, 0,2);
 
     private final int winMoney;
