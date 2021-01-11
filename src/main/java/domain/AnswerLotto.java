@@ -1,16 +1,17 @@
 package domain;
 
+import utils.LottoException;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class AnswerLotto {
-    private static final int BASE_LOTTO_LENGTH = 6;
-    private final List<Integer> answerLotto;
-    private final int bonusNumber;
+    private final Lotto answerLotto;
+    private final LottoNumber bonusNumber;
 
-    public AnswerLotto(List<Integer> answerLotto, int bonusNumber) {
-        checkLottoLength(answerLotto);
+    public AnswerLotto(Lotto answerLotto, LottoNumber bonusNumber) {
         checkLottoHasBonus(answerLotto, bonusNumber);
         this.answerLotto = answerLotto;
         this.bonusNumber = bonusNumber;
@@ -20,27 +21,19 @@ public class AnswerLotto {
         return LottoStatus.findStatus(getMatchingNumber(lotto.getLotto()), isMatchedBonusNumber(lotto.getLotto()));
     }
 
-    private boolean isMatchedBonusNumber(List<Integer> lotto) {
-        return lotto.stream().anyMatch(number -> number == bonusNumber);
+    private boolean isMatchedBonusNumber(List<LottoNumber> lotto) {
+        return lotto.contains(bonusNumber);
     }
 
-    private int getMatchingNumber(List<Integer> lotto) {
-        return lotto.stream().filter(number -> answerLotto.contains(number)).collect(Collectors.toList()).size();
+    private int getMatchingNumber(List<LottoNumber> lotto) {
+        return lotto.stream()
+                .filter(number -> answerLotto.contains(number))
+                .collect(Collectors.toList()).size();
     }
 
-    List<Integer> getAnswerLotto() {
-        return answerLotto;
-    }
-
-    private void checkLottoLength(List<Integer> answerLotto) {
-        if (answerLotto.size() != BASE_LOTTO_LENGTH) {
-            throw new IllegalStateException("로또 길이가 6이 아닙니다.");
-        }
-    }
-
-    private void checkLottoHasBonus(List<Integer> answerLotto, int bonus) {
+    private void checkLottoHasBonus(Lotto answerLotto, LottoNumber bonus) {
         if (answerLotto.contains(bonus)) {
-            throw new IllegalStateException("로또번호에 보너스가 포함되어있습니다.");
+            throw new LottoException("로또번호에 보너스가 포함되어있습니다.");
         }
     }
 
@@ -49,8 +42,7 @@ public class AnswerLotto {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AnswerLotto that = (AnswerLotto) o;
-        return bonusNumber == that.bonusNumber &&
-                Objects.equals(answerLotto, that.answerLotto);
+        return Objects.equals(answerLotto, that.answerLotto) && Objects.equals(bonusNumber, that.bonusNumber);
     }
 
     @Override

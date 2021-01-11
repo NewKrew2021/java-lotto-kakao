@@ -14,7 +14,9 @@ public class StringUtilsTest {
     @Test
     void StringSplitTest() {
         String inputText = "1 , 2, 3, 4, 5, 6";
+
         List<String> results = StringUtils.splitText(inputText);
+
         assertThat(results).containsExactly("1", "2", "3", "4", "5", "6");
     }
 

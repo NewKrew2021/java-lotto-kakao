@@ -1,11 +1,11 @@
 package controller;
 
-import domain.LottoSimulator;
+import domain.LottoGame;
 import view.LottoSimulatorView;
 
 public class LottoController {
 
-    private LottoSimulator lottoSimulator;
+    private LottoGame lottoGame;
     private LottoSimulatorView lottoSimulatorView;
 
     public LottoController() {
@@ -21,25 +21,29 @@ public class LottoController {
 
     private void buyAutoLotto() {
         int lottoMoney = lottoSimulatorView.askMoneyToBuyLotto();
-        lottoSimulator = new LottoSimulator(lottoMoney);
-        while (lottoSimulator.hasMoney()) {
-            lottoSimulator.buyAutoLotto();
+        lottoGame = new LottoGame(lottoMoney);
+        while (lottoGame.hasMoney()) {
+            lottoGame.buyAutoLotto();
         }
-        lottoSimulatorView.printBuyLottoCount(lottoSimulator.getBuyLottoCount());
+        lottoSimulatorView.printBuyLottoCount(lottoGame.getBuyLottoCount());
     }
 
     private void printBuyLottos() {
-        lottoSimulatorView.printLottos(lottoSimulator.getLottos());
+        lottoSimulatorView.printLottos(lottoGame.getLottos());
     }
 
     private void getAnswerLottoNumbers() {
         String answerLottoNumbers = lottoSimulatorView.askLottoNumberToAnswerLotto();
         int bonusNumber = lottoSimulatorView.askBonusNumberToAnswerLotto();
-        lottoSimulator.addAnswerLotto(answerLottoNumbers, bonusNumber);
-        lottoSimulator.setLottoManager();
+        lottoGame.addAnswerLotto(answerLottoNumbers, bonusNumber);
     }
 
     private void printLottoResults() {
-        lottoSimulatorView.printResult(lottoSimulator.getLottoResults(), lottoSimulator.profitPercentage());
+        lottoSimulatorView.printResult(lottoGame.getLottoResults(), lottoGame.profitPercentage());
+    }
+
+    public static void main(String[] args) {
+        LottoController lottoController = new LottoController();
+        lottoController.startLottoSimulator();
     }
 }

@@ -9,28 +9,25 @@ import java.util.Scanner;
 public class LottoSimulatorView {
 
     private static final Scanner scanner = new Scanner(System.in);
-    public static final String ASK_MONEY_MESSAGE = "구입금액을 입력해주세요.";
-    public static final String LOTTO_COUNT_MESSAGE = "개를 구입했습니다.";
-    public static final String ASK_LOTTO_NUMBER_FOR_ANSWER_LOTTO_MESSAGE = "지난 주 당첨 번호를 입력해주세요.";
-    public static final String ASK_BONUS_NUMBER_FOR_ANSWER_LOTTO_MESSAGE = "보너스 볼을 입력해주세요.";
+
 
     public int askMoneyToBuyLotto() {
-        System.out.println(ASK_MONEY_MESSAGE);
+        System.out.println(Message.ASK_MONEY_MESSAGE);
         return Integer.parseInt(scanner.nextLine());
     }
 
     public String askLottoNumberToAnswerLotto() {
-        System.out.println(ASK_LOTTO_NUMBER_FOR_ANSWER_LOTTO_MESSAGE);
+        System.out.println(Message.ASK_LOTTO_NUMBER_FOR_ANSWER_LOTTO_MESSAGE);
         return scanner.nextLine();
     }
 
     public int askBonusNumberToAnswerLotto() {
-        System.out.println(ASK_BONUS_NUMBER_FOR_ANSWER_LOTTO_MESSAGE);
+        System.out.println(Message.ASK_BONUS_NUMBER_FOR_ANSWER_LOTTO_MESSAGE);
         return Integer.parseInt(scanner.nextLine());
     }
 
     public void printBuyLottoCount(long lottoCount) {
-        System.out.println(lottoCount + LOTTO_COUNT_MESSAGE);
+        System.out.println(lottoCount + Message.LOTTO_COUNT_MESSAGE);
     }
 
     public void printLottos(Lottos lottos) {
@@ -41,15 +38,15 @@ public class LottoSimulatorView {
         System.out.println("당첨 통계\n-----------");
 
         for (LottoStatus lottoStatus : LottoStatus.getLottoStatuses()) {
-            System.out.println(lottoStatus.getMatchedLottoNumberCount() + "개 일치" + printBonus(lottoStatus)
-                    + " (" + lottoStatus.getWinngs() + "원)- " + lottoResult.get(lottoStatus) + " 개");
+            System.out.printf(Message.RESULT_MESSAGE, lottoStatus.getMatchedLottoNumberCount(),
+                    printBonus(lottoStatus), lottoStatus.getWinngs(), lottoResult.get(lottoStatus));
         }
 
         System.out.println("총 수익률은 " + profit + "% 입니다.");
     }
 
     private String printBonus(LottoStatus lottoStatus) {
-        if (lottoStatus.getRank() == 2) {
+        if (lottoStatus.getWinngs() == LottoStatus.SECOND.getWinngs()) {
             return ", 보너스 볼 일치";
         }
         return "";
