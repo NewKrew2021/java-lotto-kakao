@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.Lotto;
-import lotto.domain.LottoNumber;
-import lotto.domain.Lottos;
-import lotto.domain.WonLotto;
+import lotto.domain.*;
 import lotto.service.LottoGeneratorService;
 import lotto.service.LottoReviewService;
 import lotto.view.LottoOutputView;
@@ -15,7 +12,6 @@ public class LottoController {
     private final LottoOutputView lottoOutputView;
     private final LottoGeneratorService lottoGeneratorService;
     private final Scanner scanner;
-    private final int LOTTO_PRICE = 1000;
 
     public LottoController() {
 
@@ -40,12 +36,14 @@ public class LottoController {
     public Lottos buyLotto() {
 
         lottoOutputView.printInputMoneyPhrase();
-        int amount;
-        while ((amount = getLottoBuyAmount()) == -1) ;
-        int buyCount = amount / LOTTO_PRICE;
-        lottoOutputView.printInputQuantityPhrase(buyCount);
+        Amount amount;
+        do{
+            amount=getLottoBuyAmount();
+        }
+        while (amount==null);
+        lottoOutputView.printInputQuantityPhrase(amount.BuyCount());
         Lottos lottos = new Lottos();
-        for (int i = 0; i < amount / LOTTO_PRICE; i++) {
+        for (int i = 0; i < amount.BuyCount(); i++) {
             lottos.add(lottoGeneratorService.generateLotto());
         }
         return lottos;
@@ -67,14 +65,14 @@ public class LottoController {
         return new WonLotto(lotto, bonusBall);
     }
 
-    public int getLottoBuyAmount() {
+    public Amount getLottoBuyAmount() {
 
         try {
-            int amount = Integer.parseInt(scanner.nextLine());
-            return validateLottoBuyAmount(amount);
+            int money = Integer.parseInt(scanner.nextLine());
+            return new Amount(money);
         } catch (Exception e) {
             lottoOutputView.printInputErrorPhrase();
-            return -1;
+            return null;
         }
     }
 
@@ -90,11 +88,4 @@ public class LottoController {
         return new LottoNumber(bonusBall);
     }
 
-
-    public int validateLottoBuyAmount(int amount) {
-        if (amount< 1000) {
-            throw new IllegalArgumentException("로또를 구매할 수 없습니다.");
-        }
-        return amount;
-    }
 }

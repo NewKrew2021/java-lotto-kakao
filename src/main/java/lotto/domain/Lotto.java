@@ -28,10 +28,17 @@ public class Lotto {
 
         int count = 0;
         for (LottoNumber number : userLotto.getLottoNumbers()) {
-            count += lottoNumbers.contains(number) ? 1 : 0;
+            count += contain(number);
         }
 
         return count;
+    }
+
+    public int contain(LottoNumber number){
+        if(lottoNumbers.contains(number)){
+            return 1;
+        }
+        return 0;
     }
 
     @Override
