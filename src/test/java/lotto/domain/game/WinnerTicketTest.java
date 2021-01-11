@@ -62,7 +62,7 @@ public class WinnerTicketTest {
         );
     }
 
-    @DisplayName("당첨 티켓과 로또 티켓이 주어지면, 보너스 여부를 확인한.")
+    @DisplayName("당첨 티켓과 로또 티켓이 주어지면, 보너스 여부를 확인한다.")
     @ParameterizedTest
     @MethodSource("generateLottoNumberStrategy2")
     void hasBonus(NumberGenerateStrategy strategy, int bonusNumber, boolean expected) {
