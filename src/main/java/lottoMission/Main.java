@@ -1,8 +1,8 @@
-package lottoMission;
+package lottomission;
 
-import lottoMission.controller.LottoController;
-import lottoMission.view.InputView;
-import lottoMission.view.OutputView;
+import lottomission.controller.LottoController;
+import lottomission.view.InputView;
+import lottomission.view.OutputView;
 
 public class Main {
 
@@ -18,6 +18,7 @@ public class Main {
                 InputView.enterLastWeekWinningNumbers(),
                 InputView.enterLastWeekBonusNumber());
 
+        controller.calLottoResult();
         OutputView.resultView(controller);
         OutputView.totalEarningsView(controller);
     }

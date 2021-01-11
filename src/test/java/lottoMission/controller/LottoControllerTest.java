@@ -1,7 +1,7 @@
-package lottoMission.controller;
+package lottomission.controller;
 
-import lottoMission.domain.Lotto;
-import lottoMission.domain.Lottos;
+import lottomission.domain.Lotto;
+import lottomission.domain.Lottos;
 import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -12,7 +12,7 @@ public class LottoControllerTest {
     public void 수익률Test(){
         LottoController controller = new LottoController(14000);
 
-        Lottos lottos1 = new Lottos(Arrays.asList(
+        controller.buyLottoSelf(Arrays.asList(
                 new Lotto(Arrays.asList(8, 21, 23, 41, 42, 43)),
                 new Lotto(Arrays.asList(3, 5, 11, 16, 32, 38)),
                 new Lotto(Arrays.asList(7, 11, 16, 35, 36, 44)),
@@ -29,10 +29,8 @@ public class LottoControllerTest {
                 new Lotto(Arrays.asList(3, 8, 27, 30, 35, 44))
         ));
 
-        controller.buyLottosSelf(lottos1);
-
         controller.setLastWeekWinningNumber(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
-
+        controller.calLottoResult();
         float rate = controller.getRateOfProfit();
         assertThat((int) (rate*100)).isEqualTo(35);
     }

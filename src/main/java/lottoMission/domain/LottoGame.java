@@ -1,31 +1,37 @@
-package lottoMission.domain;
+package lottomission.domain;
 
-import lottoMission.util.RandomForLotto;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class LottoGame {
-    private UserMoney userMoney;
-    private TryNumber tryNumber;
 
-    private final int LOTTO_PRICE = 1000;
+    private Lottos lottos;
+    private LottoAnswer answer;
 
-    public LottoGame(int userMoney){
-        this.userMoney = new UserMoney(userMoney);
-        this.tryNumber = new TryNumber(userMoney/LOTTO_PRICE);
+
+    public void buyLottos(List<Lotto> lottoList){
+        this.lottos = new Lottos(lottoList);
     }
 
-    public Lottos buyLottosAuto(){
-        List<Lotto> lottoList = new ArrayList<>();
-        while(this.tryNumber.canTry()){
-            lottoList.add(new Lotto(RandomForLotto.getRandomSixIntegerList()));
-            this.tryNumber.useTryNumberCount();
+    public void setLottoAnswer(List<Integer> sixNumberList, int bonusNumber){
+        this.answer = new LottoAnswer(
+                new LottoNumbers(sixNumberList),
+                new LottoNumber(bonusNumber));
+    }
+
+    public Map<LotteryWinnings, Integer> getAllLottoRankCount() {
+        Map<LotteryWinnings, Integer> result = new TreeMap<>();
+        for (LotteryWinnings lotteryWinnings : LotteryWinnings.values()) {
+            result.put(lotteryWinnings, 0);
         }
-        return new Lottos(lottoList);
+        for (Lotto lotto : lottos.getLottos()) {
+            LotteryWinnings winningsStat = lotto.winningPrize(answer);
+            result.put(winningsStat, result.get(winningsStat) + 1);
+        }
+        result.remove(LotteryWinnings.UNRANKED);
+        return result;
     }
 
-    public int getUserMoney() {
-        return userMoney.getUserMoney();
+    public List<List<Integer>> getLottosList() {
+        return lottos.getLottosNumberList();
     }
 }

@@ -1,4 +1,4 @@
-package lottoMission.util;
+package lottomission.util;
 
 import java.util.Collections;
 import java.util.List;

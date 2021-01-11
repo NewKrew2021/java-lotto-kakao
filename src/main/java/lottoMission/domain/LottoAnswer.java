@@ -1,7 +1,4 @@
-package lottoMission.domain;
-
-import java.util.HashSet;
-import java.util.Set;
+package lottomission.domain;
 
 public class LottoAnswer {
 
@@ -17,9 +14,7 @@ public class LottoAnswer {
     }
 
     public int getMatchNumberCount(LottoNumbers numbers) {
-        Set<LottoNumber> combine = new HashSet<>(numbers.getNumbers());
-        combine.addAll(this.answerNumbers.getNumbers());
-        return LottoNumbers.MAX_NUMBERS_LENGTH * 2 - combine.size();
+        return LottoNumbers.MAX_NUMBERS_LENGTH * 2 - answerNumbers.getCombineSetLength(numbers);
     }
 
     public boolean isMatchBonusNumber(LottoNumbers numbers) {

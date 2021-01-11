@@ -1,4 +1,4 @@
-package lottoMission.domain;
+package lottomission.domain;
 
 public enum LotteryWinnings {
     FIRST(1, 6, false, 2000000000),

@@ -1,4 +1,4 @@
-package lottoMission.domain;
+package lottomission.domain;
 
 import java.util.HashSet;
 import java.util.List;
@@ -29,6 +29,12 @@ public class LottoNumbers {
 
     public boolean isContainLottoNumber(LottoNumber lottoNumber) {
         return numbers.contains(lottoNumber);
+    }
+
+    public int getCombineSetLength(LottoNumbers lottoNumbers) {
+        Set<LottoNumber> combineSet = new HashSet<>(this.numbers);
+        combineSet.addAll(lottoNumbers.getNumbers());
+        return combineSet.size();
     }
 
     public Set<LottoNumber> getNumbers() {

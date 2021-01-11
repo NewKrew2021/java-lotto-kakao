@@ -1,4 +1,6 @@
-package lottoMission.domain;
+package lottomission.domain;
+
+import lottomission.controller.LottoController;
 
 public class UserMoney {
 
@@ -11,12 +13,16 @@ public class UserMoney {
         this.userMoney = userMoney;
     }
 
+    public int getUserMoney(){
+        return this.userMoney;
+    }
+
     private boolean isNotPositive(int userMoney) {
         return userMoney <= 0;
     }
 
-    public int getUserMoney() {
-        return userMoney;
+    public int getPossibleCount() {
+        return userMoney/ LottoController.LOTTO_PRICE;
     }
 
 }
