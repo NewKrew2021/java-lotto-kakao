@@ -2,6 +2,7 @@ package view;
 
 import domain.Lotto;
 import domain.LottoBall;
+import domain.LottoBalls;
 import text.Text;
 
 import java.util.Arrays;
@@ -26,12 +27,30 @@ public class Input {
         return getLottoSpent(amount);
     }
 
+    public static int getLottoManualBuyNumber(int allowedMaxBuy) {
+        int number;
+        try {
+            number = scanner.nextInt();
+            scanner.nextLine();
+        } catch (Exception e) {
+            throw new InputMismatchException(Text.ILLEGAL_INPUT);
+        }
+        validateManualBuyNumber(number, allowedMaxBuy);
+        return number;
+    }
+
+    private static void validateManualBuyNumber(int number, int allowedMaxBuy) {
+        if (number < 0 | number > allowedMaxBuy) {
+            throw new InputMismatchException(Text.ILLEGAL_INPUT);
+        }
+    }
+
     private static int getLottoSpent(int amount) {
         return amount - amount % Lotto.LOTTO_PRICE;
     }
 
-    private static void validateAmount(int amount) {
-        if (amount < Lotto.LOTTO_PRICE) {
+    private static void validateAmount(int allowedMaxAmount) {
+        if (allowedMaxAmount < Lotto.LOTTO_PRICE) {
             throw new InputMismatchException(Text.ILLEGAL_INPUT);
         }
     }
@@ -47,14 +66,14 @@ public class Input {
         return previousBonus;
     }
 
-    public static List<LottoBall> getPreviousWinBalls() {
+    public static LottoBalls getLottoBalls() {
         List<LottoBall> lottoBalls;
         try {
             lottoBalls = splitToLottoBalls(scanner.nextLine());
         } catch (Exception e) {
             throw new InputMismatchException(Text.ILLEGAL_INPUT);
         }
-        return lottoBalls;
+        return new LottoBalls(lottoBalls);
     }
 
     public static List<LottoBall> splitToLottoBalls(String userInput) {

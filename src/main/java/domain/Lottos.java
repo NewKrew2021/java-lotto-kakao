@@ -1,14 +1,17 @@
 package domain;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Lottos {
-    private List<Lotto> lottos = new ArrayList<>();
+    private final List<Lotto> lottos;
 
     public Lottos(int buyNumber) {
+        lottos = new ArrayList<>();
         for (int i = 0; i < buyNumber; ++i) {
             lottos.add(new Lotto());
         }
@@ -18,20 +21,26 @@ public class Lottos {
         this.lottos = lottos;
     }
 
+    public Lottos(Lottos lottos1, Lottos lottos2) {
+        lottos = Stream.of(lottos1.getLottos(), lottos2.getLottos())
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+    }
+
     public List<Lotto> getLottos() {
         return new ArrayList<>(lottos);
     }
 
-    public BigInteger calculateNumberOfRank(LottoRank lottoRank, Lotto winningLotto) {
-        return new BigInteger(
-                String.valueOf(
-                        lottos.stream()
-                                .filter(lotto -> lottoRank.checkRank(lotto, winningLotto))
-                                .count()));
+    public int calculateNumberOfRank(LottoRank lottoRank, WinningLotto winningLotto) {
+        return (int) lottos.stream()
+                .filter(lotto -> lottoRank.checkRank(
+                        lotto.calculateSameBall(winningLotto),
+                        lotto.hasBonusBall(winningLotto.getBonusBall())))
+                .count();
     }
 
-    public LottoStatistics getLottoStatistics(Lotto winningLotto) {
-        HashMap<LottoRank, BigInteger> rankNumbers = new HashMap<>();
+    public LottoStatistics getLottoStatistics(WinningLotto winningLotto) {
+        HashMap<LottoRank, Integer> rankNumbers = new HashMap<>();
 
         for (LottoRank lottoRank : LottoRank.values()) {
             rankNumbers.put(lottoRank, calculateNumberOfRank(lottoRank, winningLotto));

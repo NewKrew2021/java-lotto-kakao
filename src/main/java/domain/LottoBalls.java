@@ -1,58 +1,45 @@
 package domain;
 
+import text.Text;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class LottoBalls {
-    private final List<LottoBall> LottoBalls;
+    private final List<LottoBall> lottoBalls;
 
-    public LottoBalls(List<LottoBall> LottoBalls) {
-        Collections.sort(LottoBalls);
-        this.LottoBalls = LottoBalls;
+    public LottoBalls(List<LottoBall> lottoBalls) {
+        Collections.sort(lottoBalls);
+        this.lottoBalls = lottoBalls;
+        validateLottoBalls();
     }
 
-    public static List<LottoBall> asList(Integer... args) {
-        List<LottoBall> LottoBalls = new ArrayList<>();
-        for (int i : args) {
-            LottoBalls.add(LottoBall.valueOf(i));
+    private void validateLottoBalls() {
+        if (isIllegal()) {
+            throw new IllegalArgumentException(Text.ILLEGAL_LOTTO_ARGUMENT);
         }
-        return LottoBalls;
     }
 
     public boolean contains(LottoBall bonusBall) {
-        return LottoBalls.contains(bonusBall);
+        return lottoBalls.contains(bonusBall);
     }
 
-    public boolean hasDuplicate() {
-        int count = (int) LottoBalls.stream().distinct().count();
-        return count != LottoBalls.size();
-    }
-
-    public Stream<LottoBall> stream() {
-        return LottoBalls.stream();
-    }
-
-    public int size() {
-        return LottoBalls.size();
+    private boolean hasDuplicate() {
+        int count = (int) lottoBalls.stream().distinct().count();
+        return count != lottoBalls.size();
     }
 
     public List<LottoBall> getLottoNumbers() {
-        return new ArrayList<>(LottoBalls);
+        return new ArrayList<>(lottoBalls);
     }
 
-    public boolean isIllegal(LottoBall bonusBall) {
-        return this.contains(bonusBall) || this.hasDuplicate() ||
-                this.size() != Lotto.LOTTO_COUNT || this.hasIllegalNumber();
-    }
-
-    public boolean hasIllegalNumber() {
-        return LottoBalls.stream().anyMatch(LottoBall::isIllegalNumber);
+    private boolean isIllegal() {
+        return this.hasDuplicate() || lottoBalls.size() != Lotto.LOTTO_COUNT;
     }
 
     @Override
     public String toString() {
-        return LottoBalls.toString();
+        return lottoBalls.toString();
     }
 }
