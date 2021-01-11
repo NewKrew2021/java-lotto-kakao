@@ -15,11 +15,10 @@ public class LottoGeneratorServiceTest {
 
     private LottoGeneratorService lottoGeneratorService;
 
-
     @BeforeEach
     public void setUp() {
-        lottoGeneratorService = new LottoGeneratorService();
 
+        lottoGeneratorService = new LottoGeneratorService();
     }
 
     @Test
@@ -36,11 +35,12 @@ public class LottoGeneratorServiceTest {
 
     @Test
     @DisplayName("문자열 입력이 제대로 파싱되었는지 확인")
-    public void testLottoStringParser(){
-        Lotto lotto=lottoGeneratorService.lottoStringParser("1,2,3,4,5,6");
-        List<LottoNumber> userLottoNumber= Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5),new LottoNumber(6));
-        Lotto userLotto=new Lotto(userLottoNumber);
-        Assertions.assertTrue(lotto.checkSameCount(userLotto)==6);
+    public void testLottoStringParser() {
+
+        Lotto lotto = lottoGeneratorService.lottoStringParser("1,2,3,4,5,6");
+        List<LottoNumber> userLottoNumber = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
+        Lotto userLotto = new Lotto(userLottoNumber);
+        Assertions.assertTrue(lotto.checkSameCount(userLotto) == 6);
     }
 
 }
