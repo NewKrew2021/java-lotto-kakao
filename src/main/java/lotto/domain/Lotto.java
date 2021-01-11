@@ -21,19 +21,19 @@ public class Lotto {
         this.lottoBalls = lottoNumbers;
     }
 
-    private void checkDuplicate(List<Ball> lottoNumbers) {
+    public void checkDuplicate(List<Ball> lottoNumbers) {
         if (lottoNumbers.stream().distinct().count() < lottoNumbers.size()) {
             throw new IllegalArgumentException("로또번호 중복이 있어서는 안된다.");
         }
     }
 
-    private void checkCount(List<Ball> lottoNumbers) {
+    public void checkCount(List<Ball> lottoNumbers) {
         if (lottoNumbers.size() != COUNT_OF_NUMBERS) {
             throw new IllegalArgumentException("로또번호는 6개여야 한다.");
         }
     }
 
-    private List<Ball> parseLottoText(String lottoText) {
+    public List<Ball> parseLottoText(String lottoText) {
         return Arrays.stream(lottoText.split(","))
                 .map(String::trim)
                 .map(Ball::of)

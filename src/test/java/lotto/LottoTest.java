@@ -21,6 +21,28 @@ public class LottoTest {
         assertThat(lotto).isEqualTo(new Lotto("1, 2, 3, 4, 5, 6"));
     }
 
+    @Test
+    @DisplayName("Lotto 번호가 중복되었을 경우 예외 발생")
+    void checkDuplicateTest() {
+        assertThatThrownBy(() -> {
+            new Lotto().checkDuplicate(
+                    Arrays.asList(Ball.of("1"), Ball.of("2"), Ball.of("3"),
+                            Ball.of("4"), Ball.of("5"), Ball.of("5"))
+            );
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("Lotto 번가 6개가 아닌 경우 예외 발생")
+    void checkCountTest() {
+        assertThatThrownBy(() -> {
+            new Lotto().checkCount(
+                    Arrays.asList(Ball.of("1"), Ball.of("2"), Ball.of("3"),
+                            Ball.of("4"), Ball.of("5"))
+            );
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
     @ParameterizedTest
     @CsvSource({"0, 1, 2, 3, 4, 5", "1, 2, 3, 4, 5, 46"})
     @DisplayName("Lotto 번호가 범위를 벗어났을 경우 예외 발생")
@@ -81,12 +103,8 @@ public class LottoTest {
     @Test
     @DisplayName("Lotto 번호와 여러 Ball 번호 사이의 일치개수 테스트")
     void compareWithBallsTest() {
-        List<Ball> balls = Arrays.asList(Ball.of("1"),
-                Ball.of("2"),
-                Ball.of("3"),
-                Ball.of("4"),
-                Ball.of("5"),
-                Ball.of("6"));
+        List<Ball> balls = Arrays.asList(Ball.of("1"), Ball.of("2"), Ball.of("3"),
+                Ball.of("4"), Ball.of("5"), Ball.of("6"));
         Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
         assertThat(lotto.compareWithBalls(balls)).isEqualTo(6);
     }
