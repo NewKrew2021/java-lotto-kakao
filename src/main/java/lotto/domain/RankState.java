@@ -24,10 +24,6 @@ public enum RankState {
     }
 
     public static RankState rank(int matchCount, boolean bonusMatched) {
-        if (matchCount < FIFTH.matchCount) {
-            return FAIL;
-        }
-
         if (SECOND.isMatchCount(matchCount)) {
             return chooseSecondOrThird(bonusMatched);
         }
@@ -35,7 +31,7 @@ public enum RankState {
         return Arrays.stream(values())
                 .filter(rank -> rank.isMatchCount(matchCount))
                 .findFirst()
-                .orElseThrow(IllegalRankStateException::new);
+                .orElse(FAIL);
     }
 
     private boolean isMatchCount(int matchCount) {

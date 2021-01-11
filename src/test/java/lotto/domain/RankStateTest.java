@@ -9,12 +9,6 @@ import static org.assertj.core.api.Assertions.*;
 
 public class RankStateTest {
 
-    @Test
-    public void invalidRank() {
-        assertThatThrownBy(() -> {
-            RankState.rank(7, true);
-        }).isInstanceOf(IllegalRankStateException.class);
-    }
 
     @ParameterizedTest
     @ValueSource(booleans = {true, false})
@@ -42,5 +36,13 @@ public class RankStateTest {
     @ValueSource(booleans = {true, false})
     public void rankFIFTH(boolean bonus) {
         assertThat(RankState.rank(3, bonus)).isEqualTo(RankState.FIFTH);
+    }
+
+    @ParameterizedTest
+    @ValueSource(booleans = {true, false})
+    public void rankFAIL(boolean bonus) {
+        assertThat(RankState.rank(2, bonus)).isEqualTo(RankState.FAIL);
+        assertThat(RankState.rank(1, bonus)).isEqualTo(RankState.FAIL);
+        assertThat(RankState.rank(0, bonus)).isEqualTo(RankState.FAIL);
     }
 }
