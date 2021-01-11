@@ -7,7 +7,14 @@ public class InputView {
 
     public static int getPrice() {
         System.out.println("구입금액을 입력해 주세요.");
-        return Integer.parseInt(input.nextLine());
+        int price = 0;
+        try {
+            price = Integer.parseInt(input.nextLine());
+        } catch (IllegalArgumentException e) {
+            System.out.println("금액 정보가 올바르지 않습니다.");
+            System.exit(-1);
+        }
+        return price;
     }
 
     public static String getText() {
