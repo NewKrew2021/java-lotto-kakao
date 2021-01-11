@@ -1,6 +1,10 @@
 package mission.lotto.domain;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Lottos {
 
@@ -11,23 +15,14 @@ public class Lottos {
         Collections.sort(this.lottos);
     }
 
-    public Map<Rank, Integer> getAllLottoRank(LottoAnswer lottoAnswer) {
-        Map<Rank, Integer> result = new TreeMap<>();
-        for (Rank lotteryWinnings : Rank.values()) {
-            result.put(lotteryWinnings, 0);
-        }
-        for (Lotto lotto : lottos) {
-            Rank rank = lotto.calculateRank(lottoAnswer);
-            result.put(rank, result.get(rank) + 1);
-        }
-        return result;
+    public static Lottos buyLottos(NumGenerator numGenerator, UserMoney userMoney) {
+        return new Lottos(IntStream.range(0, lottoAmount(userMoney))
+                .mapToObj(value -> new Lotto(numGenerator.getSixNumbers()))
+                .collect(Collectors.toList()));
     }
 
-    public int getSumAllWinningMoney(LottoAnswer answer) {
-        return lottos.stream()
-                .map(e -> e.calculateRank(answer))
-                .mapToInt(Rank::getMoney)
-                .sum();
+    private static int lottoAmount(UserMoney userMoney) {
+        return userMoney.getUserMoney() / Lotto.LOTTO_PRICE;
     }
 
     public List<Lotto> getLottos() {

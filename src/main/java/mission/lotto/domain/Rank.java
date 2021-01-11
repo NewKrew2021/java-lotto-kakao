@@ -1,5 +1,7 @@
 package mission.lotto.domain;
 
+import java.util.Arrays;
+
 public enum Rank {
     FIRST(6, false, 2000000000),
     SECOND(5, true, 30000000),
@@ -19,12 +21,15 @@ public enum Rank {
     }
 
     public static Rank getRank(int correctNo, boolean hasBonus) {
-        if (correctNo == 6) return FIRST;
-        if (correctNo == 5 && hasBonus) return SECOND;
-        if (correctNo == 5) return THIRD;
-        if (correctNo == 4) return FOURTH;
-        if (correctNo == 3) return FIFTH;
-        return UNRANKED;
+        return Arrays.stream(Rank.values())
+                .filter(rank -> rank.isSameCorrectNo(correctNo))
+                .filter(rank -> !rank.equals(SECOND) || hasBonus)
+                .findFirst()
+                .orElse(UNRANKED);
+    }
+
+    private boolean isSameCorrectNo(int correctNo) {
+        return correctNo == this.correctNo;
     }
 
     public int getCorrectNo() {

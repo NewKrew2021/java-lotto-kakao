@@ -3,24 +3,21 @@ package mission.lotto.controller;
 import mission.lotto.domain.Number;
 import mission.lotto.domain.*;
 import mission.lotto.util.RandomUtil;
+import mission.lotto.util.Statistics;
 import mission.lotto.view.InputView;
 import mission.lotto.view.OutputView;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class LottoController {
 
     private UserMoney userMoney;
-    private TryNumber tryNumber;
     private Lottos lottos;
 
     public void start() {
         registerUserMoney(InputView.enterUerMoney());
-
-        buyLottos(RandomUtil::getRandomSixIntegerList);
-
+        buyLottos(new RandomUtil(), userMoney);
         OutputView.autoBoughtView(lottos);
 
         LottoAnswer lottoAnswer = makeLottoAnswer(
@@ -33,31 +30,24 @@ public class LottoController {
 
     private void registerUserMoney(int userMoney) {
         this.userMoney = new UserMoney(userMoney);
-        int LOTTO_PRICE = 1000;
-        this.tryNumber = new TryNumber(userMoney / LOTTO_PRICE);
     }
 
-    private void buyLottos(NumGenerator numberGenerator) {
-        List<Lotto> lottoList = new ArrayList<>();
-        while (this.tryNumber.hasNext()) {
-            lottoList.add(new Lotto(numberGenerator.getSixNumbers()));
-            this.tryNumber.useTryNumberCount();
-        }
-        this.lottos = new Lottos(lottoList);
+    private void buyLottos(NumGenerator numGenerator, UserMoney userMoney) {
+        this.lottos = Lottos.buyLottos(numGenerator, userMoney);
     }
 
     private LottoAnswer makeLottoAnswer(List<Integer> sixNumberList, int bonusNumber) {
         return new LottoAnswer(
-                new LottoNumbers(sixNumberList),
+                new Lotto(sixNumberList),
                 new Number(bonusNumber));
     }
 
     private Map<Rank, Integer> getAllLottoRank(LottoAnswer lottoAnswer) {
-        return lottos.getAllLottoRank(lottoAnswer);
+        return Statistics.getAllLottoRank(lottos, lottoAnswer);
     }
 
     private float getRateOfProfit(LottoAnswer lottoAnswer) {
-        return (float) lottos.getSumAllWinningMoney(lottoAnswer) / userMoney.getUserMoney();
+        return (float) Statistics.getSumAllWinningMoney(lottos, lottoAnswer) / userMoney.getUserMoney();
     }
 
 }

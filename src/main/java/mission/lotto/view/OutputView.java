@@ -3,6 +3,7 @@ package mission.lotto.view;
 import mission.lotto.domain.Lotto;
 import mission.lotto.domain.Lottos;
 import mission.lotto.domain.Rank;
+import mission.lotto.util.Statistics;
 
 import java.util.List;
 import java.util.Map;

@@ -5,8 +5,8 @@ import java.util.Objects;
 public class Number {
 
     private final int number;
-    private static final int MIN_NUMBER_VALUE = 1;
-    private static final int MAX_NUMBER_VALUE = 45;
+    public static final int MIN_NUMBER_VALUE = 1;
+    public static final int MAX_NUMBER_VALUE = 45;
 
     public Number(int number) {
         if (isInvalidNumber(number)) {
