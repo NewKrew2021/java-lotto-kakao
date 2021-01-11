@@ -18,7 +18,7 @@ public class OutputView {
 
         Arrays.stream(LotteryPrize.values()).
                 filter(lotteryPrize -> lotteryPrize != LotteryPrize.NONE).
-                forEach(lotteryPrize -> System.out.println(lotteryPrize.makeLotteryPrizeMessage(lotteryPrize) +
+                forEach(lotteryPrize -> System.out.println(lotteryPrize.makeLotteryPrizeMessage() +
                         lotteryRank.getnthCount(lotteryPrize) + "개"));
     }
 

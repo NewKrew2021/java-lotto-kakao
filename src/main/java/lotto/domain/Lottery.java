@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.InvalidLotteryNumberException;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
@@ -56,17 +58,21 @@ public class Lottery {
 
     private static boolean isDuplicatedLotteryNumbers(List<LotteryNumber> numbers) {
         Set<LotteryNumber> set = new HashSet<>(numbers);
-        if (set.size() != numbers.size()) {
-            return true;
-        }
-        return false;
+        return set.size() != numbers.size();
     }
 
     private static boolean isInvalidSizeLotteryNumbers(List<LotteryNumber> numbers) {
-        if (numbers.size() != LOTTERY_NUMBER_SIZE) {
-            return true;
+        return numbers.size() != LOTTERY_NUMBER_SIZE;
+    }
+
+    public static Lottery convertStringsToLottery(String[] strings) {
+        try {
+            return new Lottery(Arrays.stream(strings)
+                    .map(string -> new LotteryNumber(Integer.parseInt(string.trim())))
+                    .collect(Collectors.toList()));
+        } catch (NumberFormatException e) {
+            throw new InvalidLotteryNumberException();
         }
-        return false;
     }
 
     public LotteryPrize checkRank(LotteryAnswer lotteryAnswer) {
@@ -76,7 +82,7 @@ public class Lottery {
                 .stream()
                 .filter(numbers::contains)
                 .count();
-        return LotteryUtil.convertCountToRank(count, bonus);
+        return LotteryPrize.findRank(count, bonus);
     }
 
     @Override

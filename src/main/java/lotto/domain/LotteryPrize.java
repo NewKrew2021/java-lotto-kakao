@@ -21,13 +21,13 @@ public enum LotteryPrize {
         this.bonus = bonus;
     }
 
-    public String makeLotteryPrizeMessage(LotteryPrize prize){
+    public String makeLotteryPrizeMessage(){
         StringBuilder stb = new StringBuilder();
-        stb.append(prize.correctCount).append(" 개 일치");
-        if(prize.bonus){
+        stb.append(correctCount).append(" 개 일치");
+        if(bonus){
             stb.append(", 보너스볼 일치");
         }
-        stb.append(" (").append(prize.rewardMoney).append("원) - ");
+        stb.append(" (").append(rewardMoney).append("원) - ");
         return stb.toString();
     }
 
@@ -38,8 +38,8 @@ public enum LotteryPrize {
                 .orElse(NONE);
     }
 
-    public int getRewardMoney() {
-        return rewardMoney;
+    public long calculateRewardMoney(int count) {
+        return (long) rewardMoney * count;
     }
 
 }

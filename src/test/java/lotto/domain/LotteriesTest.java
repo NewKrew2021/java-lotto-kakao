@@ -6,14 +6,15 @@ import org.junit.jupiter.api.DisplayNameGenerator;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 public class LotteriesTest {
-    Lotteries lotteries;
-    List<Lottery> lotteryList;
+    private Lotteries lotteries;
+    private List<Lottery> lotteryList;
 
     @BeforeEach
     void setUp() {
@@ -48,6 +49,6 @@ public class LotteriesTest {
         Lotteries lotteries = new Lotteries();
         Lottery randomLottery = Lottery.createRandomLottery();
         lotteries.push(randomLottery);
-        assertThat(lotteries).isEqualTo(new Lotteries(Arrays.asList(randomLottery)));
+        assertThat(lotteries).isEqualTo(new Lotteries(Collections.singletonList(randomLottery)));
     }
 }
