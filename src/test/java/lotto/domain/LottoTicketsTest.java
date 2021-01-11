@@ -38,7 +38,7 @@ public class LottoTicketsTest {
     private Set<lotto.domain.Number> makeNumberTreeSet(List<Integer> intNumbers) {
         Set<lotto.domain.Number> numbers = new TreeSet<>();
         for (int number : intNumbers) {
-            numbers.add(new Number(number));
+            numbers.add(Number.of(number));
         }
         return numbers;
     }

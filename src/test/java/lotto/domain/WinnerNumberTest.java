@@ -21,12 +21,12 @@ public class WinnerNumberTest {
     @DisplayName("팩토리 메소드 테스트")
     void factoryMethodTest() {
         assertThat(winnerNumber).isEqualTo(new WinnerNumber(
-                Sets.newTreeSet(new Number(1),
-                        new Number(2),
-                        new Number(3),
-                        new Number(4),
-                        new Number(5),
-                        new Number(6)), new Number(7)));
+                Sets.newTreeSet(Number.of(1),
+                        Number.of(2),
+                        Number.of(3),
+                        Number.of(4),
+                        Number.of(5),
+                        Number.of(6)), Number.of(7)));
     }
 
     @Test
@@ -41,12 +41,12 @@ public class WinnerNumberTest {
     void matchWinnerNumberTest(int i1, int i2, int i3, int i4, int i5, int i6, LottoRank rank) {
         LottoTicket lottoTicket = new LottoTicket(
                 Sets.newTreeSet(
-                        new Number(i1),
-                        new Number(i2),
-                        new Number(i3),
-                        new Number(i4),
-                        new Number(i5),
-                        new Number(i6))
+                        Number.of(i1),
+                        Number.of(i2),
+                        Number.of(i3),
+                        Number.of(i4),
+                        Number.of(i5),
+                        Number.of(i6))
         );
         assertThat(winnerNumber.getRank(lottoTicket)).isEqualTo(rank);
     }

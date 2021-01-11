@@ -9,17 +9,17 @@ public class NumberTest {
     @Test
     @DisplayName("Number 클래스 생성 테스트")
     void createNumberTest() {
-        Number number = new Number(1);
-        assertThat(number).isEqualTo(new Number(1));
+        Number number = Number.of(1);
+        assertThat(number).isEqualTo(Number.of(1));
     }
 
     @Test
     @DisplayName("예외 숫자 테스트")
     void exceptionTest() {
-        assertThatThrownBy(() -> new Number(0))
+        assertThatThrownBy(() -> Number.of(0))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("숫자가 잘못되었습니다");
-        assertThatThrownBy(() -> new Number(46))
+        assertThatThrownBy(() -> Number.of(46))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("숫자가 잘못되었습니다");
     }

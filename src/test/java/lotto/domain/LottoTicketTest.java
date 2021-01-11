@@ -14,12 +14,12 @@ public class LottoTicketTest {
     @BeforeEach
     void init() {
         ticket = new LottoTicket(
-                Sets.newTreeSet(new Number(1),
-                        new Number(2),
-                        new Number(3),
-                        new Number(4),
-                        new Number(5),
-                        new Number(6))
+                Sets.newTreeSet(Number.of(1),
+                        Number.of(2),
+                        Number.of(3),
+                        Number.of(4),
+                        Number.of(5),
+                        Number.of(6))
         );
     }
 
@@ -27,21 +27,21 @@ public class LottoTicketTest {
     @DisplayName("로또번호 수 테스트")
     void numberCountTest() {
         assertThatThrownBy(() -> new LottoTicket(
-                Sets.newTreeSet(new Number(1),
-                        new Number(2),
-                        new Number(3),
-                        new Number(4),
-                        new Number(5))
+                Sets.newTreeSet(Number.of(1),
+                        Number.of(2),
+                        Number.of(3),
+                        Number.of(4),
+                        Number.of(5))
         )).isInstanceOf(IllegalArgumentException.class);
 
         assertThatThrownBy(() -> new LottoTicket(
-                Sets.newTreeSet(new Number(1),
-                        new Number(2),
-                        new Number(3),
-                        new Number(4),
-                        new Number(5),
-                        new Number(6),
-                        new Number(7))
+                Sets.newTreeSet(Number.of(1),
+                        Number.of(2),
+                        Number.of(3),
+                        Number.of(4),
+                        Number.of(5),
+                        Number.of(6),
+                        Number.of(7))
         )).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -49,12 +49,12 @@ public class LottoTicketTest {
     @DisplayName("중복 숫자 테스트")
     void duplicatedNumberTest() {
         assertThatThrownBy(() -> new LottoTicket(
-                Sets.newTreeSet(new Number(1),
-                        new Number(2),
-                        new Number(3),
-                        new Number(4),
-                        new Number(5),
-                        new Number(5))
+                Sets.newTreeSet(Number.of(1),
+                        Number.of(2),
+                        Number.of(3),
+                        Number.of(4),
+                        Number.of(5),
+                        Number.of(5))
         )).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -68,12 +68,12 @@ public class LottoTicketTest {
     @DisplayName("LottoTicket 출력 시 번호 정렬 테스트")
     void toStringOrderTest() {
         ticket = new LottoTicket(
-                Sets.newTreeSet(new Number(7),
-                        new Number(2),
-                        new Number(10),
-                        new Number(4),
-                        new Number(36),
-                        new Number(6))
+                Sets.newTreeSet(Number.of(7),
+                        Number.of(2),
+                        Number.of(10),
+                        Number.of(4),
+                        Number.of(36),
+                        Number.of(6))
         );
         assertThat(ticket.toString()).isEqualTo("[2, 4, 6, 7, 10, 36]");
     }
@@ -81,7 +81,7 @@ public class LottoTicketTest {
     @Test
     @DisplayName("LottoTicekt 숫자 포함 테스트")
     void containsTest() {
-        assertThat(ticket.contains(new Number(1))).isEqualTo(true);
+        assertThat(ticket.contains(Number.of(1))).isEqualTo(true);
     }
 
 }

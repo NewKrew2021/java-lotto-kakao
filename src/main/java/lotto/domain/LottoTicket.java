@@ -1,11 +1,10 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoTicket {
+    public static final int BALL_COUNT = 6;
     private final Set<Number> numbers;
 
     public LottoTicket(Set<Number> numbers) {

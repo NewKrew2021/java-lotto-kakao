@@ -15,7 +15,7 @@ public class WinnerNumber {
 
     public static WinnerNumber from(String input, int bonusNumber) {
         List<Integer> numbers = stringToIntegerList(input);
-        return new WinnerNumber(new TreeSet<Number>(numbers.stream().map(Number::new).collect(Collectors.toList())), new Number(bonusNumber));
+        return new WinnerNumber(new TreeSet<Number>(numbers.stream().map(Number::of).collect(Collectors.toList())), Number.of(bonusNumber));
     }
 
     public LottoRank getRank(LottoTicket lottoTicket) {
