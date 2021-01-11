@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.HashSet;
 import java.util.stream.Collectors;
 
-public class LottoNos {
+public class LottoNumbers {
 
-    List<LottoNo> numbers = new ArrayList<>();
+    List<LottoNumber> numbers = new ArrayList<>();
 
-    public LottoNos(List<Integer> numbers) {
+    public LottoNumbers(List<Integer> numbers) {
         if (numbers.size() != 6) {
             throw new IllegalArgumentException("갯수는 6개 이어야 합니다.");
         }
@@ -19,7 +19,7 @@ public class LottoNos {
         }
 
         for (int number : numbers) {
-            this.numbers.add(new LottoNo(number));
+            this.numbers.add(new LottoNumber(number));
         }
     }
 
@@ -33,13 +33,13 @@ public class LottoNos {
         return false;
     }
 
-    public boolean isContains(LottoNo lottoNo) {
-        return this.numbers.contains(lottoNo);
+    public boolean isContains(LottoNumber lottoNumber) {
+        return this.numbers.contains(lottoNumber);
     }
 
-    public int getMatchCount(LottoNos lottoNos) {
+    public int getMatchCount(LottoNumbers lottoNumbers) {
         return this.numbers.stream()
-                .filter((lottoNo) -> lottoNos.isContains(lottoNo))
+                .filter((lottoNo) -> lottoNumbers.isContains(lottoNo))
                 .collect(Collectors.toList())
                 .size();
     }

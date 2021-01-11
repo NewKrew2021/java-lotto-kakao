@@ -1,6 +1,6 @@
 package lotto.input;
 
-import lotto.domain.LottoNos;
+import lotto.domain.LottoNumbers;
 
 import java.util.Arrays;
 import java.util.List;
@@ -19,6 +19,6 @@ public class WinningLottoNumsValidInputGuaranteer extends ValidInputGuaranteer{
                 .map((String ballNumberInput) -> ballNumberInput.trim())
                 .map((String ballNumber) -> Integer.parseInt(ballNumber))
                 .collect(Collectors.toList());
-        new LottoNos(lottoNumbers);
+        new LottoNumbers(lottoNumbers);
     }
 }

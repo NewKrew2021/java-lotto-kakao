@@ -1,29 +1,28 @@
 package lotto.domain;
 
-import lotto.domain.LottoNos;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
-public class LottoNosTest {
+public class LottoNumbersTest {
 
     @Test
     void lottoNosLengthValidTest() {
         assertThatThrownBy(()->{
-            new LottoNos(Arrays.asList( 1,2,3,4,5,6,7 ));
+            new LottoNumbers(Arrays.asList( 1,2,3,4,5,6,7 ));
         }).isInstanceOf(IllegalArgumentException.class);
 
-        LottoNos lottoNos = new LottoNos(Arrays.asList( 1,2,3,4,5,6 ));
+        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList( 1,2,3,4,5,6 ));
     }
 
     @Test
     void duplicateValidTest(){
         assertThatThrownBy(()->{
-            new LottoNos(Arrays.asList( 1,2,3,3,5,5 ));
+            new LottoNumbers(Arrays.asList( 1,2,3,3,5,5 ));
         }).isInstanceOf(IllegalArgumentException.class);
 
-        LottoNos lottoNos = new LottoNos(Arrays.asList( 1,2,3,4,5,6 ));
+        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList( 1,2,3,4,5,6 ));
     }
 }

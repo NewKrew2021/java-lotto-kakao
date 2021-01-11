@@ -2,7 +2,6 @@ package lotto.domain;
 
 import java.util.*;
 
-import lotto.input.BuyingMoneyValidInputGuaranteer;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
 
@@ -15,7 +14,7 @@ public class LottoLogic {
 
     public void play() {
         int lottoCount = inputView.getLottoCountFromUser();
-        List<LottoNos> tickets = makeRandomLottos(lottoCount);
+        List<LottoNumbers> tickets = makeRandomLottos(lottoCount);
         LottoOutputView.printLottoCount(tickets);
 
         StatisticsResult result = LottoLogic.winningStatistics(tickets,
@@ -26,12 +25,12 @@ public class LottoLogic {
         System.out.println(result.benefit(tickets.size()));
     }
 
-    private static List<LottoNos> makeRandomLottos(int howmany) {
-        List<LottoNos> lottoTickets = new ArrayList<>();
+    private static List<LottoNumbers> makeRandomLottos(int howmany) {
+        List<LottoNumbers> lottoTickets = new ArrayList<>();
         List<Integer> nums = makeLottoNumber();
         for (int i = 0; i < howmany; i++) {
             Collections.shuffle(nums);
-            lottoTickets.add(new LottoNos(nums.subList(0, 6)));
+            lottoTickets.add(new LottoNumbers(nums.subList(0, 6)));
         }
         return lottoTickets;
     }
@@ -44,11 +43,11 @@ public class LottoLogic {
         return nums;
     }
 
-    public static StatisticsResult winningStatistics(List<LottoNos> lottoTickets, WinningLottoNos winningLottoNos) {
+    public static StatisticsResult winningStatistics(List<LottoNumbers> lottoTickets, WinningLottoNos winningLottoNos) {
         StatisticsResult statisticsResult = new StatisticsResult();
 
-        for (LottoNos lottoNos : lottoTickets) {
-            statisticsResult.increaseTypeCount(winningLottoNos.isWinning(lottoNos));
+        for (LottoNumbers lottoNumbers : lottoTickets) {
+            statisticsResult.increaseTypeCount(winningLottoNos.getMatchResult(lottoNumbers));
         }
         return statisticsResult;
     }

@@ -1,11 +1,6 @@
 package lotto.input;
 
-import lotto.domain.LottoNo;
-import lotto.domain.LottoNos;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
+import lotto.domain.LottoNumber;
 
 public class BonusNumberValidInputGuaranteer extends ValidInputGuaranteer{
     @Override
@@ -15,6 +10,6 @@ public class BonusNumberValidInputGuaranteer extends ValidInputGuaranteer{
 
     @Override
     protected void checkValid(String input){
-        new LottoNo(Integer.parseInt(input));
+        new LottoNumber(Integer.parseInt(input));
     }
 }

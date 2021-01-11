@@ -2,13 +2,13 @@ package lotto.domain;
 
 import java.util.Objects;
 
-public class LottoNo implements Comparable<LottoNo> {
+public class LottoNumber implements Comparable<LottoNumber> {
 
-    int number;
+    private int number;
     private static final int MIN_NUMBER = 1;
     private static final int MAX_NUMBER = 45;
 
-    public LottoNo(Integer number) {
+    public LottoNumber(Integer number) {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
             throw new IllegalArgumentException("1~45 사이어야 합니다");
         }
@@ -20,8 +20,8 @@ public class LottoNo implements Comparable<LottoNo> {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        LottoNo lottoNo = (LottoNo) o;
-        return number == lottoNo.number;
+        LottoNumber lottoNumber = (LottoNumber) o;
+        return number == lottoNumber.number;
     }
 
     @Override
@@ -30,7 +30,7 @@ public class LottoNo implements Comparable<LottoNo> {
     }
 
     @Override
-    public int compareTo(LottoNo o) {
+    public int compareTo(LottoNumber o) {
         if (this.number < o.number)
             return 1;
         if (this.number > o.number)

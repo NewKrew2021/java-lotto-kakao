@@ -1,10 +1,8 @@
 package lotto.domain;
 
 import lotto.StatisticsType;
-import lotto.domain.LottoLogic;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -15,25 +13,25 @@ public class LottoLogicTest {
     @Test
     void statisticTest() {
         WinningLottoNos winningLottoNos = new WinningLottoNos(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
-        LottoNos lottoNos2 = new LottoNos(Arrays.asList(1, 2, 9, 10, 11, 12)); // 2
-        LottoNos lottoNos3 = new LottoNos(Arrays.asList(1, 2, 3, 9, 10, 11)); // 3
-        LottoNos lottoNos4 = new LottoNos(Arrays.asList(1, 2, 3, 4, 10, 11)); // 4
-        LottoNos lottoNos5 = new LottoNos(Arrays.asList(1, 2, 3, 4, 5, 8)); // 5
-        LottoNos lottoNos5_1 = new LottoNos(Arrays.asList(1, 2, 3, 4, 5, 7)); // 5,1
-        LottoNos lottoNos6 = new LottoNos(Arrays.asList(1, 2, 3, 4, 5, 6)); // 6
+        LottoNumbers lottoNumbers2 = new LottoNumbers(Arrays.asList(1, 2, 9, 10, 11, 12)); // 2
+        LottoNumbers lottoNumbers3 = new LottoNumbers(Arrays.asList(1, 2, 3, 9, 10, 11)); // 3
+        LottoNumbers lottoNumbers4 = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 10, 11)); // 4
+        LottoNumbers lottoNumbers5 = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 8)); // 5
+        LottoNumbers lottoNumbers5_1 = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 7)); // 5,1
+        LottoNumbers lottoNumbers6 = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)); // 6
 
     }
 
     @Test
     void winningStatisticsTest() {
         WinningLottoNos winningLottoNos = new WinningLottoNos(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
-        List<LottoNos> lottoTickets = Arrays.asList(
-                new LottoNos(Arrays.asList(1, 2, 9, 10, 11, 12))
-                , new LottoNos(Arrays.asList(1, 2, 3, 9, 10, 11))
-                , new LottoNos(Arrays.asList(1, 2, 3, 4, 10, 11))
-                , new LottoNos(Arrays.asList(1, 2, 3, 4, 5, 8))
-                , new LottoNos(Arrays.asList(1, 2, 3, 4, 5, 7))
-                , new LottoNos(Arrays.asList(1, 2, 3, 4, 5, 6))
+        List<LottoNumbers> lottoTickets = Arrays.asList(
+                new LottoNumbers(Arrays.asList(1, 2, 9, 10, 11, 12))
+                , new LottoNumbers(Arrays.asList(1, 2, 3, 9, 10, 11))
+                , new LottoNumbers(Arrays.asList(1, 2, 3, 4, 10, 11))
+                , new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 8))
+                , new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 7))
+                , new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6))
         );
         StatisticsResult statisticsResult = new StatisticsResult();
         statisticsResult.increaseTypeCount(StatisticsType.NONE);
