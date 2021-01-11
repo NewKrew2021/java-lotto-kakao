@@ -2,10 +2,12 @@ package lotto.domain;
 
 import lotto.util.LottoNumberGenerator;
 
+import java.util.List;
 import java.util.Set;
 
 public class WinningLotto extends Lotto {
-    public WinningLotto(Set<LottoNumber> LottoNumbers) {
+
+    public WinningLotto(List<Integer> LottoNumbers) {
         super(LottoNumbers);
     }
 

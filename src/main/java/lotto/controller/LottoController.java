@@ -53,11 +53,11 @@ public class LottoController {
                 .collect(Collectors.toList());
     }
 
-    private Set<LottoNumber> makeUserLotto() {
+    private List<Integer> makeUserLotto() {
         return Arrays.stream(split(InputView.getSelfLottoNumberFromUser()))
-                .map(num -> LottoNumber.of(getParseInt(num)))
-                .sorted(Comparator.comparingInt(LottoNumber::getNumber))
-                .collect(Collectors.toCollection(LinkedHashSet::new));
+                .map(this::getParseInt)
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     private int getSelfLottoCount() {
@@ -85,9 +85,9 @@ public class LottoController {
 
     private WinningLotto getWinningLotto() {
         OutputView.printWinningNumberInputGuide();
-        return new WinningLotto(new LinkedHashSet<>(Arrays.stream(split(InputView.getWinningNumberFromUser()))
-                .map(num -> LottoNumber.of(getParseInt(num)))
-                .collect(Collectors.toList())));
+        return new WinningLotto(Arrays.stream(split(InputView.getWinningNumberFromUser()))
+                .map(num -> getParseInt(num))
+                .collect(Collectors.toList()));
     }
 
     private String[] split(String numbersText) {
