@@ -1,48 +1,51 @@
 package domain;
 
-import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.List;
 
 public enum LottoRank {
     // 선언 순서 중요
-    FIFTH(Arrays.asList(3), Arrays.asList(true, false), new BigDecimal("5000"), "3개 일치 (5000원)- "),
-    FOURTH(Arrays.asList(4), Arrays.asList(true, false), new BigDecimal("50000"), "4개 일치 (50000원)- "),
-    THIRD(Arrays.asList(5), Arrays.asList(false), new BigDecimal("1500000"), "5개 일치 (1500000원)- "),
-    SECOND(Arrays.asList(5), Arrays.asList(true), new BigDecimal("30000000"), "5개 일치, 보너스 볼 일치(30000000원) - "),
-    FIRST(Arrays.asList(6), Arrays.asList(true, false), new BigDecimal("2000000000"), "6개 일치 (2000000000원)- ");
+    NONE(2,  0, "3개 일치 (5000원)- "),
+    FIFTH(3,  5000, "3개 일치 (5000원)- "),
+    FOURTH(4, 50000, "4개 일치 (50000원)- "),
+    THIRD(5, 1500000, "5개 일치 (1500000원)- "),
+    SECOND(5,  30000000, "5개 일치, 보너스 볼 일치(30000000원) - "),
+    FIRST(6,  2000000000, "6개 일치 (2000000000원)- ");
 
-    private final List<Integer> rightCounts;
-    private final List<Boolean> rightBonusBalls;
-    private final BigDecimal reward;
+    private final int rightCounts;
+    private final int reward;
     private final String resultPrefix;
 
-    LottoRank(List<Integer> rightCounts, List<Boolean> rightBonusBalls, BigDecimal reward, String resultPrefix) {
+    LottoRank(int rightCounts, int reward, String resultPrefix) {
         this.rightCounts = rightCounts;
-        this.rightBonusBalls = rightBonusBalls;
         this.reward = reward;
         this.resultPrefix = resultPrefix;
     }
 
-    public boolean checkRank(int count, boolean rightBonusBall) {
-        return this.getRightCounts().contains(count) &&
-                this.getRightBonusBalls().contains(rightBonusBall);
+    public LottoRank getLottoRank(Lotto lotto, WinningLotto winningLotto) {
+        return getLottoRank(winningLotto.calculateSameBall(lotto),winningLotto.hasSameBonusBall(lotto));
     }
 
-    public boolean checkRank(Lotto lotto, Lotto winningLotto) {
-        return checkRank(lotto.calculateSameBall(winningLotto),
-                lotto.hasSameBonusBall(winningLotto));
+    public static LottoRank getLottoRank(int count, boolean matchBonusBall) {
+        if(sameCount(count,SECOND) && matchBonusBall){
+            return LottoRank.SECOND;
+        }
+
+        if(sameCount(count,FIRST)){
+            return LottoRank.FIRST;
+        }
+
+        return Arrays.stream(LottoRank.values())
+                .filter(lottoRank -> sameCount(count, lottoRank))
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
     }
 
-    private List<Integer> getRightCounts() {
-        return rightCounts;
+    private static boolean sameCount(int sameCount, LottoRank lottoRank) {
+        return lottoRank.rightCounts == sameCount;
     }
 
-    public List<Boolean> getRightBonusBalls() {
-        return rightBonusBalls;
-    }
 
-    public BigDecimal getReward() {
+    public int getReward() {
         return reward;
     }
 
