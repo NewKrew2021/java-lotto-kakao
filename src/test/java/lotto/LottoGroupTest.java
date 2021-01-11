@@ -39,8 +39,25 @@ public class LottoGroupTest {
     }
 
     @Test
-    @DisplayName("구입 개수만큼 Lotto를 생성하는지 테스트")
+    @DisplayName("구입 개수만큼 수동 Lotto를 생성하는지 테스트")
+    void createManualLottoGroupTest() {
+        List<String> lottoTexts = Arrays.asList("1,2,3,4,5,6", "11,12,13,14,15,16");
+        assertThat(LottoGroup.createManualLottoGroup(lottoTexts).getLottoCount()).isEqualTo(2);
+    }
+
+    @Test
+    @DisplayName("정해진 개수만큼 자동 Lotto를 생성하는지 테스트")
     void createRandomLottoGroupTest() {
-        assertThat(LottoGroup.createRandomLottoGroup(new PurchaseMoney("10000")).getLottoCount()).isEqualTo(10);
+        assertThat(LottoGroup.createRandomLottoGroup(10).getLottoCount()).isEqualTo(10);
+    }
+
+    @Test
+    @DisplayName("주어진 조건에 맞추어 Lotto를 생성하는지 테스트")
+    void createLottoGroupTest() {
+        PurchaseMoney purchaseMoney = new PurchaseMoney("4000");
+        List<String> lottoTexts = Arrays.asList("1,2,3,4,5,6", "11,12,13,14,15,16");
+        LottoGroup lottoGroup = LottoGroup.createLottoGroup(purchaseMoney, lottoTexts);
+
+        assertThat(lottoGroup.getLottoCount()).isEqualTo(4);
     }
 }

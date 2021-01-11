@@ -27,7 +27,7 @@ public class BallTest {
     @ParameterizedTest
     @CsvSource({"0", "46"})
     @DisplayName("Ball 번호가 범위를 벗어났을 경우 예외 발생")
-    void rangeTest(String ballString) {
-        assertThatThrownBy(() -> Ball.of(ballString)).isInstanceOf(IllegalArgumentException.class);
+    void rangeTest(String ballText) {
+        assertThatThrownBy(() -> Ball.of(ballText)).isInstanceOf(IllegalArgumentException.class);
     }
 }

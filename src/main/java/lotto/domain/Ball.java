@@ -20,11 +20,11 @@ public class Ball implements Comparable<Ball> {
         this.ballNumber = ballNumber;
     }
 
-    public static Ball of(String ballString) {
+    public static Ball of(String ballText) {
         int ballNumber;
 
         try {
-            ballNumber = Integer.parseInt(ballString);
+            ballNumber = Integer.parseInt(ballText);
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("볼은 정수여야 한다.");
         }

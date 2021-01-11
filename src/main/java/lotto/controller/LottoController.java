@@ -4,12 +4,15 @@ import lotto.domain.*;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
 
+import java.util.List;
+
 public class LottoController {
     public static void main(String[] args) {
         PurchaseMoney purchaseMoney = new PurchaseMoney(LottoInputView.inputPurchaseMoney());
-        LottoGroup lottoGroup = LottoGroup.createRandomLottoGroup(purchaseMoney);
+        List<String> lottoTexts = LottoInputView.inputLottoTexts(purchaseMoney);
+        LottoGroup lottoGroup = LottoGroup.createLottoGroup(purchaseMoney, lottoTexts);
 
-        LottoOutputView.outputPurchaseAmount(lottoGroup);
+        LottoOutputView.outputPurchaseQuantity(lottoTexts.size(), lottoGroup);
         LottoOutputView.outputLottoGroup(lottoGroup);
 
         Lotto winningLotto = new Lotto(LottoInputView.inputWinningLotto());

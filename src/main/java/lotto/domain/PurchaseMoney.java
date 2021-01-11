@@ -6,11 +6,11 @@ public class PurchaseMoney {
     public static final int LOTTO_PRICE = 1000;
     private final int money;
 
-    public PurchaseMoney(String moneyString) {
+    public PurchaseMoney(String moneyText) {
         int money;
 
         try {
-            money = Integer.parseInt(moneyString);
+            money = Integer.parseInt(moneyText);
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("구입금액은 정수를 입력해야 한다.");
         }
@@ -18,10 +18,6 @@ public class PurchaseMoney {
         checkRange(money);
         checkMultiple(money);
         this.money = money;
-    }
-
-    public int getLottoAmount() {
-        return money / LOTTO_PRICE;
     }
 
     private void checkRange(int money) {
@@ -34,6 +30,20 @@ public class PurchaseMoney {
         if (money % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException("구입 금액은 1000의 배수여야 한다.");
         }
+    }
+
+    public void checkManualQuantity(int manualQuantity) {
+        if (manualQuantity < 0) {
+            throw new IllegalArgumentException("수동 구매 수량은 음수이면 안된다.");
+        }
+
+        if (getLottoQuantity() < manualQuantity) {
+            throw new IllegalArgumentException("수동 구매 수량은 전체 구매 수량을 초과할 수 없다.");
+        }
+    }
+
+    public int getLottoQuantity() {
+        return money / LOTTO_PRICE;
     }
 
     public double getProfitRatio(long prize) {

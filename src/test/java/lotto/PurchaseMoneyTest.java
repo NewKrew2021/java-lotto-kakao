@@ -20,14 +20,22 @@ public class PurchaseMoneyTest {
     @ParameterizedTest
     @CsvSource({"1500", "-1000"})
     @DisplayName("PurchaseMoney에 유효한 값이 입력되지 않는 경우 예외 발생")
-    void inputTest(String moneyString) {
-        assertThatThrownBy(() -> new PurchaseMoney(moneyString)).isInstanceOf(IllegalArgumentException.class);
+    void inputTest(String moneyText) {
+        assertThatThrownBy(() -> new PurchaseMoney(moneyText)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     @DisplayName("구매 개수 테스트")
-    void amountTest() {
+    void quantityTest() {
         PurchaseMoney purchaseMoney = new PurchaseMoney("2000");
-        assertThat(purchaseMoney.getLottoAmount()).isEqualTo(2);
+        assertThat(purchaseMoney.getLottoQuantity()).isEqualTo(2);
+    }
+
+    @ParameterizedTest
+    @CsvSource({"1000,2", "1000,-1"})
+    @DisplayName("수동 구매 개수에 유효한 값이 입력되지 않는 경우 예외 발생")
+    void checkManualQuantityTest(String moneyText, int manualQuantity) {
+        assertThatThrownBy(() -> new PurchaseMoney(moneyText).checkManualQuantity(manualQuantity))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
