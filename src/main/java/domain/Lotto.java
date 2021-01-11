@@ -9,15 +9,15 @@ public class Lotto {
 
     public static final int LOTTO_NUMBERS_LENGTH = 6;
 
-    private final TreeSet<LottoNumber> numbers;
+    private final Set<LottoNumber> numbers;
 
-    private Lotto(TreeSet<LottoNumber> numbers) {
+    private Lotto(Set<LottoNumber> numbers) {
         validateLength(numbers);
 
         this.numbers = numbers;
     }
 
-    public static Lotto of(TreeSet<LottoNumber> numbers) {
+    public static Lotto of(Set<LottoNumber> numbers) {
         return new Lotto(numbers);
     }
 

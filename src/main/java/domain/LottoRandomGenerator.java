@@ -1,9 +1,6 @@
 package domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.TreeSet;
+import java.util.*;
 
 public class LottoRandomGenerator implements NumberGenerateStrategy {
 
@@ -19,7 +16,7 @@ public class LottoRandomGenerator implements NumberGenerateStrategy {
     @Override
     public Lotto generate() {
         Collections.shuffle(randomNumbers);
-        TreeSet<LottoNumber> numbers = new TreeSet<>();
+        Set<LottoNumber> numbers = new TreeSet<>();
         for (int i = 0; i < Lotto.LOTTO_NUMBERS_LENGTH; i++) {
             numbers.add(new LottoNumber(randomNumbers.get(i)));
         }
