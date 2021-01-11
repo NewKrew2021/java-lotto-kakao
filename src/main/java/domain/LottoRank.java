@@ -21,8 +21,8 @@ public enum LottoRank {
         this.resultPrefix = resultPrefix;
     }
 
-    public LottoRank getLottoRank(Lotto lotto, WinningLotto winningLotto) {
-        return getLottoRank(winningLotto.calculateSameBall(lotto),winningLotto.hasSameBonusBall(lotto));
+    public static LottoRank getLottoRank(Lotto lotto, WinningLotto winningLotto) {
+        return getLottoRank(winningLotto.calculateSameBall(lotto), winningLotto.hasSameBonusBall(lotto));
     }
 
     public static LottoRank getLottoRank(int count, boolean matchBonusBall) {
@@ -37,7 +37,7 @@ public enum LottoRank {
         return Arrays.stream(LottoRank.values())
                 .filter(lottoRank -> sameCount(count, lottoRank))
                 .findFirst()
-                .orElseThrow(IllegalArgumentException::new);
+                .orElse(LottoRank.NONE);
     }
 
     private static boolean sameCount(int sameCount, LottoRank lottoRank) {
