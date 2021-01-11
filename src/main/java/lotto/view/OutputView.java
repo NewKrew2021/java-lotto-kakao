@@ -16,8 +16,9 @@ public class OutputView {
 
     public static void printEarningRatio(float earningRatio) {
         System.out.print("총 수익률은 " + earningRatio + "입니다.");
-        if (earningRatio < 1)
+        if (earningRatio < 1) {
             System.out.println("(기준이 1이기 때문에 결과적으로 손해라는 의미임)");
+        }
     }
 
     public static void printLottoTickets(LottoTickets lottoTickets) {

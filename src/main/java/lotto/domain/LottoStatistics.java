@@ -35,16 +35,21 @@ public class LottoStatistics {
 
     private String makeString(Ranking ranking) {
         String result = ranking.getMatchCount() + "개 일치";
-        if(ranking.isMatchBonus())
+        if(ranking.isMatchBonus()) {
             result += ", 보너스 볼 일치";
+        }
         result += " (" + ranking.getPrize() + "원) - " + statistics.get(ranking) + "개";
         return result;
     }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         LottoStatistics lottoStatistics = (LottoStatistics) o;
         return Objects.equals(statistics, lottoStatistics.statistics);
     }

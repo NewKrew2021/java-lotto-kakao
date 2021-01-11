@@ -13,18 +13,19 @@ public class LottoNumbers {
     }
 
     private void isValid(Set<Integer> numbers) {
-        if(numbers.size() != NUMBER_COUNT)
+        if(numbers.size() != NUMBER_COUNT) {
             throw new IllegalArgumentException("로또 번호는 6개의 숫자여야 합니다.");
+        }
         for (Integer number : numbers) {
             validateNumberRange(number);
         }
     }
 
     private void validateNumberRange(Integer number) {
-        if(number < 1 || number > 45)
+        if (number < 1 || number > 45) {
             throw new IllegalArgumentException("로또 번호는 1부터 45까지의 숫자 중 하나여야 합니다.");
+        }
     }
-
     public Ranking calculateRanking(WinnerNumbers winner) {
         int count = countIntersection(winner.getWinnerNumber());
         boolean matchBonus = numbers.contains(winner.getBonusBall());
@@ -48,10 +49,14 @@ public class LottoNumbers {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof LottoNumbers)) return false;
-        LottoNumbers that = (LottoNumbers) o;
-        return Objects.equals(numbers, that.numbers);
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof LottoNumbers)) {
+            return false;
+        }
+        LottoNumbers lottoNumbers = (LottoNumbers) o;
+        return Objects.equals(numbers, lottoNumbers.numbers);
     }
 
     @Override
