@@ -48,6 +48,6 @@ public class LottoGameView {
     }
 
     public static void ticketCount(int manualTicketCount, int autoTicketCount) {
-        System.out.println("\n수동으로 " + manualTicketCount + "장, 자동으로 " + autoTicketCount + "개를 구매했습니다.");
+        System.out.println("\n" + MANUAL_STRING + " " + manualTicketCount + COUNT_UNIT + ", " + AUTO_STRING + " " + autoTicketCount + BUYING);
     }
 }
