@@ -10,8 +10,8 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 public class LotteryTest {
-    Lottery playerLottery;
-    final int[] playerNumbers = {1, 2, 3, 4, 5, 6};
+    private Lottery playerLottery;
+    private final int[] playerNumbers = {1, 2, 3, 4, 5, 6};
 
     @BeforeEach
     void setUp() {

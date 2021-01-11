@@ -12,7 +12,7 @@ public class InputView {
         try {
             printReadMoneyHelp();
             Money money = new Money(Integer.parseInt(sc.nextLine().trim()));
-            System.out.printf("%d개를 구매했습니다", LotteryUtil.calculateLotteryCount(money));
+            System.out.printf("%d개를 구매했습니다", Money.calculateLotteryCount(money));
             System.out.println();
             return money;
         } catch (RuntimeException e) {
@@ -45,7 +45,7 @@ public class InputView {
 
     private static Lottery getAnswerLotteryNumbers() {
         System.out.println("지난주 당첨번호를 입력해주세요.");
-        return LotteryUtil.convertStringsToLottery(sc.nextLine().split(","));
+        return Lottery.convertStringsToLottery(sc.nextLine().split(","));
     }
 
     private static LotteryNumber getAnswerBonusNumber() {

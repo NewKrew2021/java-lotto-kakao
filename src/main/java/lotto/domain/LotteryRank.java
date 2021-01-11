@@ -4,7 +4,8 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class LotteryRank {
-    HashMap<LotteryPrize, Integer> lotteryRank;
+
+    private final HashMap<LotteryPrize, Integer> lotteryRank;
 
     public LotteryRank(HashMap<LotteryPrize, Integer> ranks) {
         lotteryRank = ranks;
@@ -17,7 +18,7 @@ public class LotteryRank {
     public long getTotalIncome() {
         long total = 0;
         for (LotteryPrize prize : lotteryRank.keySet()) {
-            total += (long) prize.getRewardMoney() * getnthCount(prize);
+            total += prize.calculateRewardMoney(getnthCount(prize));
         }
         return total;
     }

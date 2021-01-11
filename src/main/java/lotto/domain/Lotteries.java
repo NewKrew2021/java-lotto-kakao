@@ -9,8 +9,8 @@ import java.util.stream.Collectors;
 public class Lotteries {
     private List<Lottery> lotteries;
 
-    public Lotteries(List<Lottery> lotteryList) {
-        lotteries = lotteryList;
+    public Lotteries(List<Lottery> lotteries) {
+        this.lotteries = lotteries;
     }
 
     public Lotteries() {
