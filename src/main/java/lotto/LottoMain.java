@@ -1,16 +1,16 @@
 package lotto;
 
+import lotto.domain.LottoGame;
 import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTickets;
 import lotto.domain.WinnerNumbers;
 import lotto.view.InputView;
 import lotto.view.OutputView;
-import lotto.domain.LottoGame;
 
 import java.util.Set;
 
 public class LottoMain {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         int money = InputView.getMoneyFromUser();
         LottoGame game = new LottoGame();
 

@@ -8,17 +8,17 @@ public class RandomNumberGenerator {
     private static final int SIZE = 6;
     private final List<Integer> availableNumbers;
 
-    public RandomNumberGenerator(){
+    public RandomNumberGenerator() {
         this.availableNumbers = new ArrayList<>();
-        for(int i = MINIMUM_LIMIT; i <= MAXIMUM_LIMIT; i++){
+        for (int i = MINIMUM_LIMIT; i <= MAXIMUM_LIMIT; i++) {
             availableNumbers.add(i);
         }
     }
 
-    public Set<Integer> generateNumbers(){
+    public Set<Integer> generateNumbers() {
         Collections.shuffle(availableNumbers);
         Set<Integer> numbers = new HashSet<>();
-        for(int i = 0; i < SIZE; i++){
+        for (int i = 0; i < SIZE; i++) {
             numbers.add(availableNumbers.get(i));
         }
 

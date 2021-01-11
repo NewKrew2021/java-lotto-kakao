@@ -13,7 +13,7 @@ public class LottoNumbers {
     }
 
     private void isValid(Set<Integer> numbers) {
-        if(numbers.size() != NUMBER_COUNT) {
+        if (numbers.size() != NUMBER_COUNT) {
             throw new IllegalArgumentException("로또 번호는 6개의 숫자여야 합니다.");
         }
         for (Integer number : numbers) {
@@ -26,6 +26,7 @@ public class LottoNumbers {
             throw new IllegalArgumentException("로또 번호는 1부터 45까지의 숫자 중 하나여야 합니다.");
         }
     }
+
     public Ranking calculateRanking(WinnerNumbers winner) {
         int count = countIntersection(winner.getWinnerNumber());
         boolean matchBonus = numbers.contains(winner.getBonusBall());
@@ -38,7 +39,7 @@ public class LottoNumbers {
                 .count();
     }
 
-    public boolean contains(int number){
+    public boolean contains(int number) {
         return this.numbers.contains(number);
     }
 

@@ -6,7 +6,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class LottoStatisticsTest {
     @Test
-    public void testGetReward(){
+    public void testGetReward() {
         LottoStatistics statistics = new LottoStatistics();
         for (Ranking rank : Ranking.values()) {
             statistics.addValue(rank, 1);

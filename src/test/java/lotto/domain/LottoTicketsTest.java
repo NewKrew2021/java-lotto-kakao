@@ -2,11 +2,12 @@ package lotto.domain;
 
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
 
-//import static org.assertj.core.api.Assertions.assertThat;
-
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoTicketsTest {
 
@@ -32,7 +33,7 @@ public class LottoTicketsTest {
     }
 
     @Test
-    public void testGetTicketsCount(){
+    public void testGetTicketsCount() {
         List<LottoNumbers> tickets = new ArrayList<>();
         tickets.add(new LottoNumbers(new HashSet<>(Arrays.asList(1, 2, 7, 8, 9, 11))));
         tickets.add(new LottoNumbers(new HashSet<>(Arrays.asList(1, 2, 3, 7, 8, 9))));

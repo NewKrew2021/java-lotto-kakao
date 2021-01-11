@@ -25,11 +25,11 @@ public class LottoTickets {
         }
     }
 
-    public int getTicketsCount(){
+    public int getTicketsCount() {
         return tickets.size();
     }
 
-    public String toString(){
+    public String toString() {
         String result = "";
         for (LottoNumbers numbers : tickets) {
             result += numbers.toString() + "\n";
