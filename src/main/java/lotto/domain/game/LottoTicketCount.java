@@ -2,7 +2,7 @@ package lotto.domain.game;
 
 public class LottoTicketCount {
 
-    private static final int MIN_TICKET_COUNT = 1;
+    private static final int MIN_TICKET_COUNT = 0;
     private static final int MONEY_PER_LOTTO = 1000;
 
     private final int ticketCount;
@@ -10,7 +10,7 @@ public class LottoTicketCount {
 
     public LottoTicketCount(int ticketCount) {
         if (ticketCount < MIN_TICKET_COUNT) {
-            throw new IllegalArgumentException("티켓의 갯수는 양의 정수여야 합니다.");
+            throw new IllegalArgumentException("티켓의 갯수는 음수일 수 없습니다.");
         }
 
         this.ticketCount = ticketCount;

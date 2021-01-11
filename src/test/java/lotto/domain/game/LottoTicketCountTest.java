@@ -24,13 +24,12 @@ public class LottoTicketCountTest {
         assertThat(count.getTicketCount()).isEqualTo(1);
     }
 
-    @DisplayName("티켓의 수가 음수 또는 0으로 주어지면, 예외가 발생한다.")
-    @ParameterizedTest
-    @ValueSource(ints = {0, -1})
-    void validateTicketCount(int given) {
+    @DisplayName("티켓의 수가 음수로 주어지면, 예외가 발생한다.")
+    @Test
+    void validateTicketCount() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> new LottoTicketCount(given))
-                .withMessage("티켓의 갯수는 양의 정수여야 합니다.");
+                .isThrownBy(() -> new LottoTicketCount(-1))
+                .withMessage("티켓의 갯수는 음수일 수 없습니다.");
     }
 
     @DisplayName("금액이 들어오면, 금액의 단위에 맞는 티켓의 갯수를 반환한다.")
