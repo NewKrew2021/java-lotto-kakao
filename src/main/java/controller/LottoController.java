@@ -25,7 +25,7 @@ public class LottoController {
         LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(lottoWinningTicket, bonusNumber);
         WinningInfo winningInfo = lottoTickets.getWinningInfo(lottoWinningNumber);
         LottoOutputView.printResult(winningInfo);
-        LottoOutputView.printYield(amount, winningInfo.getSumPrize());
+        LottoOutputView.printYield(winningInfo.getYield(amount));
     }
 
     private static LottoTickets createLottoTickets(int ticketCount) {

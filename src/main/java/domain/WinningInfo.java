@@ -18,13 +18,8 @@ public class WinningInfo {
         return info;
     }
 
-    public long getSumPrize() {
-        long sum = 0;
-        for (int i = 0; i < info.size(); i++) {
-            sum += info.get(i) * PRIZE.get(i);
-        }
-
-        return sum;
+    public double getYield(Amount amount) {
+        return (double) getSumPrize() / amount.getAmount();
     }
 
     @Override
