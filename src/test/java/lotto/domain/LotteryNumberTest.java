@@ -27,5 +27,4 @@ class LotteryNumberTest {
         assertThat(LotteryNumber.of(1) == LotteryNumber.of(1)).isTrue();
         assertThat(LotteryNumber.of(45) == LotteryNumber.of(45)).isTrue();
     }
-
 }
