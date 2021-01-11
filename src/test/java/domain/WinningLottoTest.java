@@ -1,11 +1,13 @@
 package domain;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.junit.jupiter.api.Assertions.*;
 
 class WinningLottoTest {
@@ -28,4 +30,13 @@ class WinningLottoTest {
     void hasSameBonusBall(){
         assertThat(winningLotto.hasSameBonusBall(lotto)).isTrue();
     }
+
+    @Test
+    @DisplayName("보너스볼과 로또 숫자가 겹칠때 예외 발생 케이스")
+    void constructor(){
+        assertThatThrownBy(() -> {
+            new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 6);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
 }
