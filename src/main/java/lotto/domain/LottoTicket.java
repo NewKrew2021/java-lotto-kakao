@@ -14,11 +14,8 @@ public class LottoTicket {
     List<LottoNo> numbers = new ArrayList<>();
 
     public LottoTicket(List<Integer> numbers) {
-        if( numbers.size() != LOTTO_NUMBER_COUNT_OF_TICKET ) {
-            throw new IllegalArgumentException();
-        }
 
-        if(checkDuplication(numbers)){
+        if( !checkValidationLottoTicket(numbers) ) {
             throw new IllegalArgumentException();
         }
 
@@ -28,7 +25,19 @@ public class LottoTicket {
         }
     }
 
-    private boolean checkDuplication(List<Integer> numbers){
+    public static boolean checkValidationLottoTicket(List<Integer> numbers) {
+        if( numbers.size() != LOTTO_NUMBER_COUNT_OF_TICKET ) {
+            return false;
+        }
+
+        if(checkDuplication(numbers)){
+            return false;
+        }
+
+        return true;
+    }
+
+    private static boolean checkDuplication(List<Integer> numbers){
         HashSet<Integer> set = new HashSet<>(numbers);
         return set.size() != numbers.size();
     }

@@ -26,9 +26,7 @@ public class LottoInputView {
     }
 
     private static boolean checkValidMoney(String money) {
-        try {
-            Money.checkValidationInputMoney(money);
-        } catch (Exception e) {
+        if( !Money.checkValidationInputMoney(money) ) {
             System.out.println("잘못된 금액을 입력하셨습니다.");
             return false;
         }
@@ -55,13 +53,12 @@ public class LottoInputView {
         return new ArrayList<>();
     }
 
-    private static boolean checkValidWinningNumber(List<Integer> nums){
-        try{
-            LottoTicket lottoTicket = new LottoTicket(nums);
-        } catch (Exception e){
+    private static boolean checkValidWinningNumber(List<Integer> numbers){
+        if( !LottoTicket.checkValidationLottoTicket(numbers) ) {
             System.out.println("당첨번호가 적절하지 않습니다.");
             return false;
         }
+
         return true;
     }
 
