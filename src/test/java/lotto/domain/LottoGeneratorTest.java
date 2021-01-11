@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 public class LottoGeneratorTest {
 
     private LottoGenerator lottoGenerator;
@@ -22,7 +24,7 @@ public class LottoGeneratorTest {
 
     @Test
     @DisplayName("서로다른 번호 6개로 로또번호가 생성된것인지 확인")
-    public void testLottoSize() {
+    public void lottoSizeTest() {
 
         Lotto lotto = lottoGenerator.generateLotto();
         Assertions.assertTrue(lotto.getLotto().size()==6);
@@ -30,5 +32,22 @@ public class LottoGeneratorTest {
         HashSet<Integer> set = new HashSet<>();
         set.addAll(lotto.getLotto());
         Assertions.assertTrue(set.size()==6);
+    }
+
+    @Test
+    @DisplayName("보너스 번호 유효성 검사")
+    public void bonusNumberTest() {
+        Lotto lotto = lottoGenerator.generateLotto();
+        HashSet<Integer> set = new HashSet<>();
+        set.addAll(lotto.getLotto());
+        set.add(lottoGenerator.generateBonus(lotto));
+        Assertions.assertTrue(set.size()==7);
+    }
+
+    @Test
+    @DisplayName("String을 이용한 Lotto 생성 검사")
+    public void textLottoGenerateTest() {
+        Lotto lotto = lottoGenerator.lottoStringParser("1,2,3,4,5,6");
+        assertThat(lotto.getLotto()).containsExactly(1,2,3,4,5,6);
     }
 }
