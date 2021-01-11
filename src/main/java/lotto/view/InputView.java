@@ -9,8 +9,7 @@ public class InputView {
 
     public static int getMoneyFromUser(){
         System.out.println("구입금액을 입력해 주세요.");
-        int money = Integer.parseInt(scan.nextLine());
-        return money;
+        return Integer.parseInt(scan.nextLine());
     }
 
     public static Set<Integer> getWinnerNumber(){
@@ -26,7 +25,6 @@ public class InputView {
 
     public static int getBonusBall() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        int bonus = scan.nextInt();
-        return bonus;
+        return scan.nextInt();
     }
 }
