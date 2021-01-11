@@ -1,10 +1,11 @@
 package lotto.domain;
 
-import lotto.dto.RankingsDto;
 import lotto.util.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -13,11 +14,8 @@ public class RankingsTest {
 
     @BeforeEach
     void setUp(){
-        RankingsDto rankingsDto = new RankingsDto();
-        rankingsDto.getRankings().put(Rank.SECOND,1);
-        rankingsDto.getRankings().put(Rank.FOURTH,1);
-        rankingsDto.getRankings().put(Rank.FIFTH,1);
-        rankings = new Rankings(rankingsDto.getRankings());
+        List<Rank> ranks = List.of(Rank.SECOND, Rank.FOURTH, Rank.FIFTH);
+        rankings = Rankings.fromRanks(ranks);
     }
 
     @Test

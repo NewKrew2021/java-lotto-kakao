@@ -4,10 +4,12 @@ import lotto.domain.Lottos;
 import lotto.domain.MatchNumber;
 import lotto.domain.Money;
 import lotto.domain.Rankings;
-import lotto.dto.RankingsDto;
 import lotto.util.LottoNumberGenerator;
 import lotto.util.RandomNumberGenerator;
+import lotto.util.Rank;
 import lotto.view.LottoUI;
+
+import java.util.List;
 
 public class LottoController {
     private final LottoUI lottoUI;
@@ -35,8 +37,8 @@ public class LottoController {
     }
 
     public void matchLotto() {
-        RankingsDto rankingsDto = lottos.match(matchNumber);
-        Rankings rankings = new Rankings(rankingsDto.getRankings());
+        List<Rank> ranks = lottos.match(matchNumber);
+        Rankings rankings = Rankings.fromRanks(ranks);
         lottoUI.printStatistics(rankings.toString(), rankings.getProfitRate(money));
     }
 }

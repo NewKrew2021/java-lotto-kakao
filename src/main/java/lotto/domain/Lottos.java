@@ -1,7 +1,7 @@
 package lotto.domain;
 
-import lotto.dto.RankingsDto;
 import lotto.util.LottoNumberGenerator;
+import lotto.util.Rank;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -27,12 +27,12 @@ public class Lottos {
         return lottos.size();
     }
 
-    public RankingsDto match(MatchNumber matchNumber) {
-        RankingsDto rankingsDto = new RankingsDto();
+    public List<Rank> match(MatchNumber matchNumber) {
+        List<Rank> ranks = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            rankingsDto.addRank(lotto.match(matchNumber));
+            ranks.add(lotto.match(matchNumber));
         }
-        return rankingsDto;
+        return ranks;
     }
 
     @Override
