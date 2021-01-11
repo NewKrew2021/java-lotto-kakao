@@ -12,7 +12,7 @@ import java.util.List;
 public class LottoMain {
 
     public static void main(String[] args) {
-        LottoGameController lottoGameController = new LottoGameController(RandomLottoNumberGenerator.initialize());
+        LottoGameController lottoGameController = new LottoGameController(new RandomLottoNumberGenerator());
         LottoStatisticsController lottoStatisticsController = new LottoStatisticsController();
 
         LottoTicketCount lottoTicketCount = lottoGameController.getLottoTicketCount();
