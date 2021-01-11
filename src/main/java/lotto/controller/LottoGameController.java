@@ -26,6 +26,7 @@ public class LottoGameController {
     public List<LottoNumbers> buyLottoTickets(LottoTicketCounts lottoTicketCounts) {
         List<LottoNumbers> lottoTickets = new ArrayList<>();
         buyManualLottoTickets(lottoTicketCounts, lottoTickets);
+        OutputView.printTicketCounts(lottoTicketCounts);
         buyAutoLottoTickets(lottoTicketCounts, lottoTickets);
         return lottoTickets;
     }
