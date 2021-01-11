@@ -1,7 +1,10 @@
 package lotto.domain;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public enum LottoRank {
     NOTHING(0, "2개 이하 일치"),
@@ -40,6 +43,10 @@ public enum LottoRank {
 
     public static LottoRank get(MatchResult result) {
         return RANK_TABLE.get(result);
+    }
+
+    public static List<LottoRank> valuesExceptNothing() {
+        return Arrays.stream(LottoRank.values()).filter(rank -> rank != LottoRank.NOTHING).collect(Collectors.toList());
     }
 
     public long getPrice() {

@@ -16,14 +16,19 @@ public class WinnerNumberTest {
 
     @BeforeEach
     void setUp() {
-        winnerNumber = new WinnerNumber(Sets.newHashSet(Arrays.asList(
-                new Number(1),
-                new Number(2),
-                new Number(3),
-                new Number(4),
-                new Number(5),
-                new Number(6)))
-                , new Number(7));
+        winnerNumber = WinnerNumber.from("1, 2, 3, 4, 5, 6", 7);
+    }
+
+    @Test
+    @DisplayName("팩토리 메소드 테스트")
+    void factoryMethodTest() {
+        assertThat(winnerNumber).isEqualTo(new WinnerNumber(
+                Sets.newTreeSet(new Number(1),
+                        new Number(2),
+                        new Number(3),
+                        new Number(4),
+                        new Number(5),
+                        new Number(6)), new Number(7)));
     }
 
     @Test

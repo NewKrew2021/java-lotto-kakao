@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -16,21 +19,15 @@ public class LottoResults {
     }
 
     public void upsert(LottoRank rank) {
-        if(isNothing(rank))
-            return;
         results.put(rank, results.get(rank) + 1);
-    }
-
-    private boolean isNothing(LottoRank rank) {
-        return rank == null;
     }
 
     public int getCount(LottoRank rank) {
         return results.get(rank);
     }
 
-    public double calculateRate(int price) {
-        return Math.floor((sumPrizeMoney() / price * 100)) / 100;
+    public BigDecimal calculateRate(int price) {
+        return new BigDecimal(sumPrizeMoney() / price).setScale(2, RoundingMode.FLOOR);
     }
 
     private double sumPrizeMoney() {
@@ -57,7 +54,7 @@ public class LottoResults {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (LottoRank rank : LottoRank.values()) {
+        for (LottoRank rank : LottoRank.valuesExceptNothing()) {
             stringBuilder.append(rank).append(" - ").append(results.get(rank)).append("개\n");
         }
         return stringBuilder.toString();

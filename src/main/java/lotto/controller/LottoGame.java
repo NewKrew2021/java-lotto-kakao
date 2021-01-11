@@ -3,12 +3,9 @@ package lotto.controller;
 import lotto.domain.LottoResults;
 import lotto.domain.LottoTickets;
 import lotto.domain.Price;
-import lotto.util.StringUtility;
 import lotto.domain.WinnerNumber;
 import lotto.view.LottoGameInputView;
 import lotto.view.LottoGameOutputView;
-
-import java.util.*;
 
 public class LottoGame {
     private Price price;
@@ -23,6 +20,7 @@ public class LottoGame {
     }
 
     private void requestPrice() {
+        LottoGameOutputView.askPrice();
         price = new Price(LottoGameInputView.inputPrice());
     }
 
@@ -32,9 +30,10 @@ public class LottoGame {
     }
 
     private void makeWinnerNumber() {
-        String input = LottoGameInputView.inputWinnerNumbers();
+        LottoGameOutputView.askWinnerNumber();
+        String inputNumbers = LottoGameInputView.inputWinnerNumbers();
+        LottoGameOutputView.askBonusNumber();
         int bonus = LottoGameInputView.inputBonusNumber();
-        List<Integer> inputNumbers = StringUtility.StringToIntegerList(input);
         winnerNumber = WinnerNumber.from(inputNumbers, bonus);
     }
 

@@ -5,6 +5,9 @@ import lotto.domain.LottoResults;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 import static org.assertj.core.api.Assertions.*;
 
 public class LottoResultsTest {
@@ -31,7 +34,7 @@ public class LottoResultsTest {
     void calculateRateTest() {
         LottoResults lottoResults = new LottoResults();
         lottoResults.upsert(LottoRank.FIFTH);
-        assertThat(lottoResults.calculateRate(14000)).isEqualTo(0.35);
+        assertThat(lottoResults.calculateRate(14000)).isEqualTo(new BigDecimal("0.35"));
     }
 
 }
