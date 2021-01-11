@@ -2,13 +2,14 @@ package lotto.domain.game;
 
 public class LottoTicketCount {
 
-    public static final int MONEY_PER_LOTTO = 1000;
+    private static final int MIN_TICKET_COUNT = 1;
+    private static final int MONEY_PER_LOTTO = 1000;
 
     private final int ticketCount;
     private int remainCount;
 
-    LottoTicketCount(int ticketCount) {
-        if (ticketCount <= 0) {
+    public LottoTicketCount(int ticketCount) {
+        if (ticketCount < MIN_TICKET_COUNT) {
             throw new IllegalArgumentException("티켓의 갯수는 양의 정수여야 합니다.");
         }
 
@@ -30,6 +31,10 @@ public class LottoTicketCount {
 
     public void useTicket() {
         remainCount--;
+    }
+
+    public int calculatePrice() {
+        return ticketCount * MONEY_PER_LOTTO;
     }
 
     public int getTicketCount() {

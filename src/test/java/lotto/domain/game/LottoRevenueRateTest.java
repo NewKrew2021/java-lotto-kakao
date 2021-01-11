@@ -12,8 +12,8 @@ public class LottoRevenueRateTest {
     @Test
     void create() {
         //given
-        long revenue = 5000;
-        long totalTicketMoney = 14000L;
+        long revenue = 5000L;
+        int totalTicketMoney = 14000;
 
         //when
         LottoRevenueRate lottoRevenueRate = LottoRevenueRate.of(revenue, totalTicketMoney);

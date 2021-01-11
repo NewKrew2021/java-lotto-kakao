@@ -8,7 +8,7 @@ public class LottoRevenueRate {
         this.rate = rate;
     }
 
-    public static LottoRevenueRate of(long revenue, long totalTicketMoney) {
+    public static LottoRevenueRate of(long revenue, int totalTicketMoney) {
         double revenueRate = (double) revenue / totalTicketMoney;
         return new LottoRevenueRate(revenueRate);
     }
