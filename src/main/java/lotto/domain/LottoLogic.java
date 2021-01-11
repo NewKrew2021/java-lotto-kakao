@@ -37,7 +37,7 @@ public class LottoLogic {
 
     private static List<Integer> makeLottoNumber() {
         List<Integer> nums = new ArrayList<>();
-        for (int i = 1; i <= 45; i++) {
+        for (int i = LottoNumber.MIN_NUMBER; i <= LottoNumber.MAX_NUMBER; i++) {
             nums.add(i);
         }
         return nums;
