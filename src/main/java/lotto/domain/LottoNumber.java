@@ -15,7 +15,7 @@ public class LottoNumber {
                 .forEach(i -> lottoNumberCache.put(i, new LottoNumber(i)));
     }
 
-    private int number;
+    private final int number;
 
     private LottoNumber(int number) {
         this.number = number;

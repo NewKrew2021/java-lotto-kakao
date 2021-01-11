@@ -31,6 +31,10 @@ public class Lotto {
         return Rank.of(winCount, bonusCount);
     }
 
+    public Set<LottoNumber> getLottoNumbers() {
+        return lottoNumbers;
+    }
+
     @Override
     public String toString() {
         return "[" + lottoNumbers.stream().map(LottoNumber::getNumber)
