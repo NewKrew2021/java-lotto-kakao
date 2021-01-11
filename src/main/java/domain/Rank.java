@@ -41,10 +41,6 @@ public enum Rank {
         return prize;
     }
 
-    public boolean getMatchBonus(){
-        return matchBonus;
-    }
-
     public String getResultMsg() {
         return resultMsg;
     }

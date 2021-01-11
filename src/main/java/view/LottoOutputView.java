@@ -2,21 +2,12 @@ package view;
 
 import domain.Rank;
 import dto.Amount;
-import domain.WinningInfo;
 
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LottoOutputView {
-
-    private static final String[] RESULT_FORMAT = {
-            "3개 일치 (5000원) - %d개",
-            "4개 일치 (50000원) - %d개",
-            "5개 일치 (150000) - %d개",
-            "5개 일치, 보너스 볼 일치(30000000원) - %d개",
-            "6개 일치 (200000000원) - %d개"};
-
 
     public static void printTicketsCount(Amount amount) {
         StringBuilder sb = new StringBuilder();
