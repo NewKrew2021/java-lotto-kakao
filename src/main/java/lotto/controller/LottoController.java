@@ -12,13 +12,19 @@ import java.util.Scanner;
 
 public class LottoController {
 
-    private final LottoView lottoView = new LottoView();
-    private final LottoGeneratorService lottoGeneratorService = new LottoGeneratorService();
-    private final Scanner scanner = new Scanner(System.in);
+    private final LottoView lottoView;
+    private final LottoGeneratorService lottoGeneratorService;
+    private final Scanner scanner;
     private final int LOTTO_PRICE = 1000;
 
+    public LottoController() {
 
-    public void lottoController() {
+        lottoGeneratorService = new LottoGeneratorService();
+        lottoView = new LottoView();
+        scanner = new Scanner(System.in);
+    }
+
+    public void startLottoGame() {
 
         Lottos lottos = buyLotto();
         lottoView.printLottos(lottos);

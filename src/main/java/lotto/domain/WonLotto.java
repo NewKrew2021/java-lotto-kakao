@@ -1,13 +1,9 @@
 package lotto.domain;
 
-import lotto.service.LottoGeneratorService;
-
 public class WonLotto {
 
     private final Lotto wonLotto;
     private final LottoNumber bonusNo;
-
-    private LottoGeneratorService lottoGeneratorService = new LottoGeneratorService();
 
     private final int NON_GRADE_NUMBER = 3;
     private final int BONUS_NUMBER_MATCHING_COUNT = 5;

@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 public class Lottos {
 
     private final int LOTTO_NUMBER_COUNT = 6;
+
     private List<Lotto> lottos;
 
 
@@ -25,6 +26,7 @@ public class Lottos {
         for (Lotto lotto : lottos) {
             results.add(wonLotto.checkRanking(lotto));
         }
+
         return results;
     }
 
