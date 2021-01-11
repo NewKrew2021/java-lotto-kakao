@@ -5,22 +5,19 @@ import lotto.domain.ranking.LottoRankingCount;
 public class LottoRevenue {
 
     private final long revenue;
+    private final int totalTicketMoney;
 
-    public LottoRevenue(long revenue) {
+    public LottoRevenue(long revenue, int totalTicketMoney) {
         this.revenue = revenue;
+        this.totalTicketMoney = totalTicketMoney;
+
     }
 
-    public static LottoRevenue from(LottoRankingCount lottoRankingCount) {
-        return new LottoRevenue(lottoRankingCount.calculateTotalPrice());
+    public static LottoRevenue of(LottoRankingCount lottoRankingCount, LottoGameCount lottoGameCount) {
+        return new LottoRevenue(lottoRankingCount.calculateTotalPrice(), lottoGameCount.calculateTotalTicketMoney());
     }
 
-    public double calculateRevenueRate(LottoGameCount lottoGameCount) {
-        int totalTicketMoney = lottoGameCount.calculateTotalTicketMoney();
-        return (double) revenue / totalTicketMoney;
+    public double calculateRevenueRate() {
+        return (double) revenue / (double) totalTicketMoney;
     }
-
-    public long getRevenue() {
-        return revenue;
-    }
-
 }

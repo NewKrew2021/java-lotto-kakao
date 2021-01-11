@@ -1,6 +1,5 @@
 package lotto.domain.game;
 
-import lotto.domain.game.LottoRevenue;
 import lotto.domain.ranking.LottoRanking;
 import lotto.domain.ranking.LottoRankingCount;
 import org.junit.jupiter.api.DisplayName;
@@ -13,19 +12,20 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 public class LottoRevenueTest {
-    @DisplayName("랭킹과 랭킹카운트가 주어지면 그에 따른 총 수익을 구한다.")
+    @DisplayName("랭킹과 랭킹카운트 주어지면 그에 따른 총 수익을 구한다.")
     @Test
     void create() {
         //given
         Map<LottoRanking, Integer> rankingCount = new HashMap<>();
         rankingCount.put(LottoRanking.RANK_4,1);
         rankingCount.put(LottoRanking.RANK_5,2);
+        int inputMoney = 10000;
 
         //when
-        LottoRevenue lottoRevenue = LottoRevenue.from(new LottoRankingCount(rankingCount));
+        LottoRevenue lottoRevenue = LottoRevenue.of(new LottoRankingCount(rankingCount),new LottoGameCount(inputMoney));
 
         //then
-        assertThat(lottoRevenue.getRevenue()).isEqualTo(60000);
+        assertThat(lottoRevenue.calculateRevenueRate()).isEqualTo(6.0);
     }
 
 
