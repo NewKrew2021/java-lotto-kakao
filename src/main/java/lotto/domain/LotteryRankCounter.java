@@ -4,7 +4,11 @@ import java.util.HashMap;
 import java.util.Objects;
 
 public class LotteryRankCounter {
-    private HashMap<LotteryRank, Integer> counter = new HashMap<>();
+    private final HashMap<LotteryRank, Long> counter;
+
+    LotteryRankCounter(HashMap<LotteryRank, Long> rankCounter) {
+        this.counter = rankCounter;
+    }
 
     public long getTotalIncome() {
         return counter.entrySet().stream()
@@ -12,16 +16,12 @@ public class LotteryRankCounter {
                 .sum();
     }
 
-    public void count(LotteryRank rank) {
-        counter.put(rank, getRankCount(rank) + 1);
+    public Long getRankCount(LotteryRank rank) {
+        return counter.getOrDefault(rank, 0L);
     }
 
-    public int getRankCount(LotteryRank rank) {
-        return counter.getOrDefault(rank, 0);
-    }
-
-    public int getRankCount(int rank) {
-        return counter.getOrDefault(LotteryRank.toLotteryRank(rank), 0);
+    public Long getRankCount(int rank) {
+        return counter.getOrDefault(LotteryRank.toLotteryRank(rank), 0L);
     }
 
     @Override

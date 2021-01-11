@@ -12,7 +12,7 @@ public class Main {
         Lotteries lotteries = new Lotteries(Lotteries.getRandomLotteryList(lotteryCount));
         OutputView.printLotteries(lotteries);
 
-        LotteryRankCounter lotteryRankCounter = lotteries.countLotteryResults(InputView.readLotteryAnswer());
+        LotteryRankCounter lotteryRankCounter = lotteries.getLotteryRankCounter(InputView.readLotteryAnswer());
         OutputView.printLotteryResult(lotteryRankCounter);
 
         int profit = LotteryUtil.calculateProfitRate(lotteryCount, lotteryRankCounter.getTotalIncome());
