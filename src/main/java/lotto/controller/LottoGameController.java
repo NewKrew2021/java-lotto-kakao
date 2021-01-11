@@ -4,11 +4,8 @@ import lotto.domain.game.LottoTicketCount;
 import lotto.domain.game.WinnerTicket;
 import lotto.domain.number.LottoNumbers;
 import lotto.domain.number.NumberGenerateStrategy;
-import lotto.domain.number.RandomLottoNumberGenerator;
-import lotto.domain.ranking.LottoStatistics;
 import lotto.view.InputView;
 import lotto.view.LottoNumbersDto;
-import lotto.view.LottoStatisticsDto;
 import lotto.view.OutputView;
 
 import java.util.ArrayList;
@@ -23,7 +20,7 @@ public class LottoGameController {
     }
 
     public LottoTicketCount getLottoTicketCount() {
-        LottoTicketCount lottoTicketCount = new LottoTicketCount(InputView.inputMoney());
+        LottoTicketCount lottoTicketCount = LottoTicketCount.fromMoney(InputView.inputMoney());
         OutputView.printTicketCount(lottoTicketCount);
         return lottoTicketCount;
     }
