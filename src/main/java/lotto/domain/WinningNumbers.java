@@ -18,14 +18,6 @@ public class WinningNumbers {
         this.bonusNumber = LottoNumber.of(bonusNumber);
     }
 
-    public LottoNumbers getWinNumbers() {
-        return this.winNumbers;
-    }
-
-    public LottoNumber getBonusNumber() {
-        return this.bonusNumber;
-    }
-
     private void validateWinAndBonusNumbers(List<Integer> winNumbers, int bonusNumber) {
         if (hasDuplicationBetween(winNumbers, bonusNumber)) {
             throw new BonusDuplicateException(DUPLICATE_BONUS_EXCEPTION_MESSAGE);
@@ -35,6 +27,15 @@ public class WinningNumbers {
     private boolean hasDuplicationBetween(List<Integer> winNumbers, int bonusNumber) {
         return winNumbers.contains(bonusNumber);
     }
+
+    public LottoNumbers getWinNumbers() {
+        return this.winNumbers;
+    }
+
+    public LottoNumber getBonusNumber() {
+        return this.bonusNumber;
+    }
+
 
     @Override
     public boolean equals(Object o) {

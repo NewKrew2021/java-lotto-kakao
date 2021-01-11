@@ -1,10 +1,11 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.Test;
 import lotto.exception.NumberRangeException;
+import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
 
 public class LottoNumberTest {
 
@@ -15,10 +16,11 @@ public class LottoNumberTest {
         assertThat(number1 == number2).isTrue();
     }
 
-    @Test
-    public void validateNumberRangeUpper() {
+    @ParameterizedTest
+    @ValueSource(ints = {46, 47})
+    public void validateNumberRangeUpper(int number) {
         assertThatThrownBy(() -> {
-            LottoNumber.of(46);
+            LottoNumber.of(number);
         }).isInstanceOf(NumberRangeException.class);
     }
 

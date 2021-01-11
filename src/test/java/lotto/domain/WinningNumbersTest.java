@@ -5,8 +5,8 @@ import lotto.exception.BonusDuplicateException;
 
 import java.util.Arrays;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
+import static org.assertj.core.api.Assertions.*;
+
 
 public class WinningNumbersTest {
 
