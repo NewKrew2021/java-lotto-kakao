@@ -32,7 +32,9 @@ public class LottoNumbers {
     }
 
     public int countIntersection(LottoNumbers winnerNumbers) {
-        return (int) numbers.stream().filter(number -> winnerNumbers.contains(number)).count();
+        return (int) numbers.stream()
+                .filter(winnerNumbers::contains)
+                .count();
     }
 
     public boolean contains(int number){

@@ -26,8 +26,8 @@ public enum Ranking {
         }
         return Arrays.stream(values())
                 .filter(ranking -> (ranking.matchCount == matchCountount))
-                        .findFirst()
-                        .orElse(null);
+                .findFirst()
+                .orElse(null);
     }
 
     private static Ranking getSecondOrThird(boolean matchBonus) {
