@@ -8,11 +8,29 @@ public class PurchaseInfos {
     private PurchaseInfo autoLottoPurchaseInfo;
 
     public PurchaseInfos(long initialMoney, long selfLottoCount) {
-        selfLottoPurchaseInfo = new PurchaseInfo(initialMoney, selfLottoCount);
-        long remainMoney = initialMoney - selfLottoCount * PurchaseInfo.LOTTE_PRICE;
-        autoLottoPurchaseInfo = new PurchaseInfo(remainMoney, remainMoney / LOTTO_PRICE);
+        long remainMoney = initialMoney - selfLottoCount * LOTTO_PRICE;
+        if (remainMoney < 0) {
+            throw new IllegalArgumentException("잔액이 부족합니다.");
+        }
+        selfLottoPurchaseInfo = new PurchaseInfo(selfLottoCount);
+        autoLottoPurchaseInfo = new PurchaseInfo(remainMoney / LOTTO_PRICE);
     }
 
+    public long getNeededSelfLottoCount() {
+        return selfLottoPurchaseInfo.getNeedLottoPurchaseCount();
+    }
+
+    public long getNeededAutoLottoCount() {
+        return autoLottoPurchaseInfo.getNeedLottoPurchaseCount();
+    }
+
+    public void buySelfLotto() {
+        selfLottoPurchaseInfo.buyLotto();
+    }
+
+    public void buyAutoLotto() {
+        autoLottoPurchaseInfo.buyLotto();
+    }
 
     public boolean canBuyAutoLotto() {
         return autoLottoPurchaseInfo.canBuyLotto();

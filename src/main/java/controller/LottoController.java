@@ -7,9 +7,7 @@ public class LottoController {
 
     private LottoSimulator lottoSimulator;
     private LottoSimulatorView lottoSimulatorView;
-
-    private PurchaseInfo selfLottoPurchaseInfo;
-    private PurchaseInfo autoLottoPurchaseInfo;
+    private PurchaseInfos purchaseInfos;
 
     private Lottos lottos;
     private Answer answer;
@@ -27,31 +25,26 @@ public class LottoController {
     }
 
     private void getLottoInformation() {
-        selfLottoPurchaseInfo = new PurchaseInfo(lottoSimulatorView.askMoneyForBuyLotto(), lottoSimulatorView.askCountForBuySelfLotto());
-
-        long remainMoney = selfLottoPurchaseInfo.getInitialPrice() - selfLottoPurchaseInfo.getNeedLottoPurchaseCount() * PurchaseInfo.LOTTE_PRICE;
-        autoLottoPurchaseInfo = new PurchaseInfo(remainMoney, remainMoney / PurchaseInfo.LOTTE_PRICE);
-
+        purchaseInfos = new PurchaseInfos(lottoSimulatorView.askMoneyForBuyLotto(), lottoSimulatorView.askCountForBuySelfLotto());
         lottos = new Lottos();
     }
 
     private void buyLotto() {
-        if(selfLottoPurchaseInfo.canBuyLotto()) {
+        if (purchaseInfos.canBuySelfLotto()) {
             lottoSimulatorView.printAskLottoNumberMakeSelfLotto();
         }
-        while(selfLottoPurchaseInfo.canBuyLotto()) {
+        while (purchaseInfos.canBuySelfLotto()) {
             lottos.buyLotto(new SelfLottoStrategy(lottoSimulatorView.askLottoNumberForMakeSelfLotto()));
-            selfLottoPurchaseInfo.buyLotto();
+            purchaseInfos.buySelfLotto();
         }
-        while(autoLottoPurchaseInfo.canBuyLotto()) {
+        while (purchaseInfos.canBuyAutoLotto()) {
             lottos.buyLotto(new RandomLottoStrategy());
-            autoLottoPurchaseInfo.buyLotto();
+            purchaseInfos.buyAutoLotto();
         }
     }
 
     private void printBuyLottoList() {
-        lottoSimulatorView.printBuyLottoCount(selfLottoPurchaseInfo.getNeedLottoPurchaseCount(),
-                lottos.getTotalPurchaseCount() - selfLottoPurchaseInfo.getNeedLottoPurchaseCount());
+        lottoSimulatorView.printBuyLottoCount(purchaseInfos.getNeededSelfLottoCount(), purchaseInfos.getNeededAutoLottoCount());
         lottoSimulatorView.printLottos(lottos);
     }
 

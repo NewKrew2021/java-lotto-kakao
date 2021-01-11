@@ -25,7 +25,7 @@ public class LottoSimulator {
     }
 
     public double getProfit() {
-        long purchaseMoney = lottos.getTotalPurchaseCount() * PurchaseInfo.LOTTE_PRICE;
+        long purchaseMoney = lottos.getTotalPurchaseCount() * PurchaseInfos.LOTTO_PRICE;
         return (double) (getWinningMoney() - purchaseMoney) / (double) purchaseMoney;
     }
 
