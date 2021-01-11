@@ -25,10 +25,10 @@ public class LottoSimulation {
     }
 
     private WinningLotto initWinningLotto(String[] digits, String bonusBall) {
-        List<Integer> lotto = new ArrayList<>();
+        List<LottoNumber> lotto = new ArrayList<>();
 
         for (String digit : digits) {
-            lotto.add(Integer.parseInt(digit.trim()));
+            lotto.add(new LottoNumber(Integer.parseInt(digit.trim())));
         }
 
         return new WinningLotto(new Lotto(lotto), new LottoNumber(Integer.parseInt(bonusBall)));

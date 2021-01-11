@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class Lotto {
     private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<Integer> digits) {
+    public Lotto(List<LottoNumber> digits) {
         if (isInvalidNumberOfDigits(digits)) {
             throw new IllegalArgumentException("숫자는 6개만 입력해주세요.");
         }
@@ -17,22 +17,16 @@ public class Lotto {
             throw new IllegalArgumentException("숫자는 중복되지 않게 입력해주세요.");
         }
         Collections.sort(digits);
-        this.lottoNumbers = mapDigit(digits);
+        this.lottoNumbers = digits;
     }
 
-    private boolean isDuplicate(List<Integer> digits) {
+    private boolean isDuplicate(List<LottoNumber> digits) {
         return digits.stream()
                 .distinct()
                 .count() != digits.size();
     }
 
-    private List<LottoNumber> mapDigit(List<Integer> digits) {
-        return digits.stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
-    }
-
-    private boolean isInvalidNumberOfDigits(List<Integer> digits) {
+    private boolean isInvalidNumberOfDigits(List<LottoNumber> digits) {
         return digits.size() != 6;
     }
 

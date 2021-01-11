@@ -4,16 +4,16 @@ import java.util.*;
 
 public class RandomNo {
     private static final int MAX_LENGTH = 45;
-    private static final List<Integer> numbers = new ArrayList<>();
+    private static final List<LottoNumber> numbers = new ArrayList<>();
 
     static {
         for (int i = 1; i <= MAX_LENGTH; ++i) {
-            numbers.add(i);
+            numbers.add(new LottoNumber(i));
         }
     }
 
-    public static List<Integer> generateRandomNos(int length) {
+    public static List<LottoNumber> generateRandomNos(int length) {
         Collections.shuffle(numbers);
-        return numbers.subList(0, length);
+        return new ArrayList<>(numbers.subList(0, length));
     }
 }
