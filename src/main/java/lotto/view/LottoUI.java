@@ -1,13 +1,10 @@
 package lotto.view;
 
-import lotto.dto.LottoDto;
-import lotto.dto.LottoNumberDto;
 import lotto.dto.LottosDto;
 import lotto.dto.RankingsDto;
 import lotto.util.Rank;
 
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class LottoUI {
     private final Scanner scanner;
@@ -23,17 +20,7 @@ public class LottoUI {
 
     public void printLottos(LottosDto lottosDto) {
         System.out.println(lottosDto.getLottoDtos().size() + "개를 구매했습니다.");
-        for (LottoDto lottoDto : lottosDto.getLottoDtos()) {
-            printLotto(lottoDto);
-        }
-    }
-
-    private void printLotto(LottoDto lottoDto) {
-        System.out.println("[" + lottoDto.getLottoNumbers()
-                .stream()
-                .map(LottoNumberDto::getNumber)
-                .map(LottoNumberDto -> Integer.toString(LottoNumberDto))
-                .collect(Collectors.joining(", ")) + "]");
+        System.out.println(lottosDto);
     }
 
     public String getWinningNumberFromUser() {
