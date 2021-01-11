@@ -12,9 +12,4 @@ public class LottoOutputView {
             System.out.println(lottoTicket.toString());
         }
     }
-
-    public static void printWinningStatistics(List<LottoNumbers> lottos) {
-
-    }
-
 }
