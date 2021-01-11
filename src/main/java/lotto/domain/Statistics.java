@@ -1,15 +1,13 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Statistics {
     public static final int ZERO = 0;
     public static final int HUNDRED = 100;
 
-    private final Rankings rankings;
+    private final Map<Rank, Integer> rankings;
+
     private static final List<Integer> prize = new ArrayList<>(Arrays.asList(ZERO, Rank.FIRST.getReward(),
             Rank.SECOND.getReward(),
             Rank.THIRD.getReward(),
@@ -18,11 +16,12 @@ public class Statistics {
 
 
     public Statistics(Map<Rank, Integer> rankingsMap) {
-        rankings = new Rankings(rankingsMap);
+        this.rankings = Collections.unmodifiableMap(rankingsMap);
+
     }
 
-    public int getRank(Rank rank) {
-        return rankings.getCountOfRank(rank);
+    public int getCountOfRank(Rank rank) {
+        return rankings.getOrDefault(rank, ZERO);
     }
 
     public int getProfitRate(Money money) {
@@ -36,10 +35,7 @@ public class Statistics {
     }
 
     private long getProfitPerRank(Rank rank) {
-        return (long) rankings.getCountOfRank(rank) * prize.get(rank.getRank());
+        return (long) getCountOfRank(rank) * prize.get(rank.getRank());
     }
 
-    public Rankings getRankings() {
-        return rankings;
-    }
 }

@@ -11,7 +11,7 @@ public class WinningLotto extends Lotto {
 
     public WinningLotto(List<Integer> lottoNumbers, int bonusNumber) {
         super(lottoNumbers);
-        if(lottoNumbers.contains(bonusNumber)){
+        if (lottoNumbers.contains(bonusNumber)) {
             throw new BonusNumberException();
         }
         this.bonusNumber = LottoNumber.of(bonusNumber);

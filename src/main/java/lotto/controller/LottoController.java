@@ -74,7 +74,7 @@ public class LottoController {
     private void matchLotto() {
         WinningLotto winningNumber = getWinningLotto();
         Statistics statistics = lottos.raffle(winningNumber);
-        OutputView.printStatistics(statistics.getRankings(), statistics.getProfitRate(money));
+        OutputView.printStatistics(statistics, statistics.getProfitRate(money));
     }
 
     private WinningLotto getWinningLotto() {

@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
@@ -15,7 +14,7 @@ public class StatisticsTest {
         Map m = new TreeMap<>();
         m.put(Rank.FIRST, 3);
         Statistics statistics = new Statistics(m);
-        assertThat(statistics.getRank(Rank.FIRST)).isEqualTo(3);
+        assertThat(statistics.getCountOfRank(Rank.FIRST)).isEqualTo(3);
     }
 
     @Test

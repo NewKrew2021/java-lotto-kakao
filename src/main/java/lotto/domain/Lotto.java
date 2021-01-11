@@ -20,7 +20,7 @@ public class Lotto {
         for (Integer number : numbers) {
             lottoNumbers.add(LottoNumber.of(number));
         }
-        if(isDuplicateNumber()){
+        if (isDuplicateNumber()) {
             throw new HasDuplicateNumberException();
         }
     }
