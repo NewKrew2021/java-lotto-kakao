@@ -44,13 +44,8 @@ public class LottoOutputView {
         System.out.println(WON_RESULT_PHRASE);
     }
 
-    public void printSameCountPhrase(List<Integer> rankInfo) {
-
-        for (int i = 4; i >= 0; i--) {
-            System.out.println(LottoRank.values()[i].getMatchedPhrase()
-                    + "(" + LottoRank.values()[i].getMoney() + "원)-"
-                    + rankInfo.get(i) + "개");
-        }
+    public void printSameCountPhrase(String rankStatistics) {
+        System.out.println(rankStatistics);
     }
 
     public void printProfitRatio(double ratio) {

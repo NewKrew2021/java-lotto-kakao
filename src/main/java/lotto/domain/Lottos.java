@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 
 public class Lottos {
 
-    private final int LOTTO_NUMBER_COUNT = 6;
 
     private List<Lotto> lottos;
 
@@ -28,17 +27,6 @@ public class Lottos {
         }
 
         return results;
-    }
-
-    public List<Integer> lottosRankingResult(List<LottoRank> lottoRank) {
-        int[] rankingResult = new int[LOTTO_NUMBER_COUNT];
-        Arrays.fill(rankingResult, 0);
-
-        for (LottoRank rank : lottoRank) {
-            rankingResult[rank.getIndex()]++;
-        }
-
-        return Arrays.stream(rankingResult).boxed().collect(Collectors.toList());
     }
 
     @Override

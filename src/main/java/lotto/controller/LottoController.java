@@ -2,7 +2,6 @@ package lotto.controller;
 
 import lotto.domain.*;
 import lotto.service.LottoGeneratorService;
-import lotto.service.LottoReviewService;
 import lotto.view.LottoOutputView;
 
 import java.util.Scanner;
@@ -26,9 +25,9 @@ public class LottoController {
         lottoOutputView.printLottos(lottos);
 
         WonLotto wonLotto = createWonLotto();
-
-        lottoOutputView.printSameCountPhrase(lottos.lottosRankingResult(lottos.lottosResult(wonLotto)));
-        lottoOutputView.printProfitRatio(new LottoReviewService().getProfitRatio(lottos.lottosResult(wonLotto)));
+        LottoRanks lottoRanks=new LottoRanks(lottos.lottosResult(wonLotto));
+        lottoOutputView.printSameCountPhrase(lottoRanks.toString());
+        lottoOutputView.printProfitRatio(lottoRanks.profitRatio());
 
     }
 
