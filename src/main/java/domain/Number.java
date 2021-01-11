@@ -22,7 +22,7 @@ public class Number implements Comparable<Number> {
         this.number = number;
     }
 
-    public static Number getNumber(int number) {
+    public static Number from(int number) {
         checkValidNumber(number);
         return numbers.get(number - 1);
     }

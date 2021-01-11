@@ -24,8 +24,8 @@ public class LottoResults {
 
     public String result(int price) {
         double sum = Arrays.stream(LottoRank.values())
-                .map(rank -> ((double) results.get(rank)) * rank.getPrice())
-                .reduce(0.0, Double::sum);
+                .map(rank -> ((long) results.get(rank)) * rank.getPrice())
+                .reduce(0L, Long::sum);
         return this + "총 수익률은 " + (long) ((sum - price) / price * 100) + "%입니다.";
     }
 
