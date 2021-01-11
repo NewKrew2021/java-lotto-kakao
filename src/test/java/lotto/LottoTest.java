@@ -4,6 +4,7 @@ import java.util.*;
 
 import lotto.domain.Ball;
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumberPool;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -54,14 +55,14 @@ public class LottoTest {
     @Test
     @DisplayName("Lotto 번호를 자동으로 생성했을 때 범위가 올바른지 테스트")
     void randomNumberRangeTest() {
-        List<String> lottoNumbers = Lotto.autoGenerate();
-        assertThat(lottoNumbers).allMatch((lottoNumber) -> (1 <= Integer.parseInt(lottoNumber) && Integer.parseInt(lottoNumber) <= 45));
+        List<Integer> lottoNumbers = LottoNumberPool.autoGenerate();
+        assertThat(lottoNumbers).allMatch((lottoNumber) -> (1 <= lottoNumber && lottoNumber <= 45));
     }
 
     @Test
     @DisplayName("Lotto 번호를 자동으로 생성했을 때 번호가 중복되지 않는지 테스트")
     void randomNumberDuplicateTest() {
-        List<String> lottoNumbers = Lotto.autoGenerate();
+        List<Integer> lottoNumbers = LottoNumberPool.autoGenerate();
         assertThat(lottoNumbers).doesNotHaveDuplicates();
     }
 

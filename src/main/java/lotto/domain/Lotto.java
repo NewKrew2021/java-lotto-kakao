@@ -9,7 +9,7 @@ public class Lotto {
     private final List<Ball> lottoBalls;
 
     public Lotto() {
-        this.lottoBalls = autoGenerate().stream()
+        this.lottoBalls = LottoNumberPool.autoGenerate().stream()
                 .map(Ball::of)
                 .collect(Collectors.toList());
     }
@@ -31,17 +31,6 @@ public class Lotto {
         if (lottoNumbers.size() != COUNT_OF_NUMBERS) {
             throw new IllegalArgumentException("로또번호는 6개여야 한다.");
         }
-    }
-
-    public static List<String> autoGenerate() {
-        Set<String> randomNumbers = new HashSet<>();
-
-        while (randomNumbers.size() < COUNT_OF_NUMBERS) {
-            int randomNumber = new Random().nextInt(Ball.UPPER_BOUND) + 1;
-            randomNumbers.add(String.valueOf(randomNumber));
-        }
-
-        return new ArrayList<>(randomNumbers);
     }
 
     private List<Ball> parseLottoText(String lottoText) {

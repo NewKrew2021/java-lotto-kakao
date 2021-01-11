@@ -29,6 +29,10 @@ public class Ball implements Comparable<Ball> {
             throw new IllegalArgumentException("볼은 정수여야 한다.");
         }
 
+        return of(ballNumber);
+    }
+
+    public static Ball of(int ballNumber) {
         checkRange(ballNumber);
         return balls.get(ballNumber);
     }
