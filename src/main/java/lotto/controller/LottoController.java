@@ -58,7 +58,6 @@ public class LottoController {
         while (lotto == null);
         lottoOutputView.printInputBonusBallPhrase();
         LottoNumber bonusBall = lottoInputView.getBonusBall();
-
         return new WonLotto(lotto, bonusBall);
     }
 

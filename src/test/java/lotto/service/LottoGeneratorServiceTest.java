@@ -1,12 +1,15 @@
 package lotto.service;
 
 import lotto.domain.Lotto;
+import lotto.domain.LottoNumber;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 
 public class LottoGeneratorServiceTest {
 
@@ -26,10 +29,18 @@ public class LottoGeneratorServiceTest {
         Lotto lotto = lottoGeneratorService.generateLotto();
         Assertions.assertTrue(lotto.getLottoNumbers().size() == 6);
 
-        HashSet<Integer> set = new HashSet<>();
-//        set.addAll(lotto.getLottoNumbers());
-//        Assertions.assertTrue(set.size() == 6);
+        HashSet<LottoNumber> set = new HashSet<>();
+        set.addAll(lotto.getLottoNumbers());
+        Assertions.assertTrue(set.size() == 6);
     }
 
+    @Test
+    @DisplayName("문자열 입력이 제대로 파싱되었는지 확인")
+    public void testLottoStringParser(){
+        Lotto lotto=lottoGeneratorService.lottoStringParser("1,2,3,4,5,6");
+        List<LottoNumber> userLottoNumber= Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5),new LottoNumber(6));
+        Lotto userLotto=new Lotto(userLottoNumber);
+        Assertions.assertTrue(lotto.checkSameCount(userLotto)==6);
+    }
 
 }
