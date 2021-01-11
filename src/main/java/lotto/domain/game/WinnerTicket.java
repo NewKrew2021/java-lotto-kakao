@@ -11,6 +11,10 @@ public class WinnerTicket {
     private final LottoNumber bonusNumber;
 
     private WinnerTicket(LottoNumbers winnerNumbers, LottoNumber bonusNumber) {
+        if (winnerNumbers.contains(bonusNumber)) {
+            throw new IllegalArgumentException("당첨 번호와 보너스 번호가 중복됩니다.");
+        }
+
         this.winnerNumbers = winnerNumbers;
         this.bonusNumber = bonusNumber;
     }
