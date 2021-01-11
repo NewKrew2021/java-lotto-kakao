@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.LottoTicket;
 import lotto.domain.Number;
 import lotto.domain.WinningNumber;
 import org.assertj.core.util.Sets;
@@ -25,13 +26,13 @@ public class WinningNumberTest {
 
     @Test
     void containBonusNumberTest(){
-        assertThat(winningNumber.bonusNumberContain(Sets.newHashSet(Arrays.asList(
+        assertThat(winningNumber.bonusNumberContain(new LottoTicket(Sets.newHashSet(Arrays.asList(
                 new Number(1),
                 new Number(2),
                 new Number(3),
                 new Number(4),
                 new Number(5),
-                new Number(7))))).isEqualTo(true);
+                new Number(7)))))).isEqualTo(true);
     }
 
 }

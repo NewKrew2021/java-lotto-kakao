@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 
@@ -37,7 +38,7 @@ public class LottoTicketTest {
     }
 
     @Test
-    void toStringOrderTest() {
+    void lottoTicketOrderTest() {
         ticket = new LottoTicket(
                 Sets.newHashSet(Arrays.asList(
                         new Number(7),
@@ -51,12 +52,12 @@ public class LottoTicketTest {
     }
 
     @Test
-    void matchOne() {
+    void matchOneTest() {
         assertThat(ticket.contains(new Number(1))).isEqualTo(true);
     }
 
     @Test
-    void matchThree() {
+    void matchThreeTest() {
         LottoTicket compTicket = new LottoTicket(
                 Sets.newHashSet(Arrays.asList(
                         new Number(1),
@@ -67,7 +68,6 @@ public class LottoTicketTest {
                         new Number(9)))
         );
         assertThat(ticket.matchCount(compTicket)).isEqualTo(3);
-        assertThat(ticket.matchCount(compTicket)).isNotEqualTo(4);
     }
-    
+
 }
