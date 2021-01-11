@@ -36,11 +36,11 @@ public class LottoController {
         while(!lottos.buyAllAutoLottos()) {
             lottos.buyLotto(new RandomLottoStrategy());
         }
-        lottoSimulatorView.printBuyLottoCount(purchaseInfo.getSelfLottoPurchaseCount(),
-                lottos.getTotalPurchaseCount() - purchaseInfo.getSelfLottoPurchaseCount());
     }
 
     private void printBuyLottoList() {
+        lottoSimulatorView.printBuyLottoCount(purchaseInfo.getSelfLottoPurchaseCount(),
+                lottos.getTotalPurchaseCount() - purchaseInfo.getSelfLottoPurchaseCount());
         lottoSimulatorView.printLottos(lottos);
     }
 
