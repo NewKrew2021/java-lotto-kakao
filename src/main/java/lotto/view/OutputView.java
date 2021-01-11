@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class OutputView {
-    public void printNumberOfLottoTickets(int ticketCount, int change) {
+    public void printNumberOfLottoTickets(long ticketCount, long change) {
         System.out.printf("%d개를 구매했습니다.\n", ticketCount);
 
         if (hasChange(change)) {
@@ -50,7 +50,7 @@ public class OutputView {
         System.out.println(message);
     }
 
-    private boolean hasChange(int change) {
+    private boolean hasChange(long change) {
         return change > 0;
     }
 }

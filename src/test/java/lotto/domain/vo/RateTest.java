@@ -1,21 +1,15 @@
-package lotto.domain.dto;
+package lotto.domain.vo;
 
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class RateTest {
     @Test
-    void correctRate() {
+    void testGetRate() {
         Rate rate = new Rate(100);
-
         assertThat(rate.getRate()).isEqualTo(100);
-    }
-
-    @Test
-    void negativeShouldThrowError() {
-        assertThatThrownBy(() -> new Rate(-10))
-                .isInstanceOf(IllegalArgumentException.class);
+        assertThat(rate.getRate()).isNotEqualTo(99);
     }
 
     @Test

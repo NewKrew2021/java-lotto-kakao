@@ -1,16 +1,16 @@
 package lotto.domain;
 
-import lotto.domain.dto.InsertPrice;
+import lotto.domain.vo.Price;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public final class LottoTicketIssuer {
     public static final int TICKET_PRICE = 1000;
-    private final InsertPrice insertPrice;
+    private final Price price;
 
-    public LottoTicketIssuer(InsertPrice insertPrice) {
-        this.insertPrice = insertPrice;
+    public LottoTicketIssuer(Price price) {
+        this.price = price;
     }
 
     public LottoTickets issue(NumberPickStrategy strategy) {
@@ -23,15 +23,15 @@ public final class LottoTicketIssuer {
         return new LottoTickets(numbers);
     }
 
-    public int getInvestedMoney() {
+    public long getInvestedMoney() {
         return getTicketCount() * TICKET_PRICE;
     }
 
-    public int getChange() {
-        return insertPrice.getPrice() % 1000;
+    public long getChange() {
+        return price.getPrice() % 1000;
     }
 
-    public int getTicketCount() {
-        return insertPrice.getPrice() / LottoTicketIssuer.TICKET_PRICE;
+    public long getTicketCount() {
+        return price.getPrice() / LottoTicketIssuer.TICKET_PRICE;
     }
 }

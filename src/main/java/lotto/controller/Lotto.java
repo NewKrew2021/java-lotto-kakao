@@ -1,7 +1,6 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.domain.RandomPickStrategy;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -11,7 +10,7 @@ public class Lotto {
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
 
-        issuer = new LottoTicketIssuer(inputView.scanInsertPrice());
+        issuer = new LottoTicketIssuer(inputView.scanPrice());
         LottoTickets tickets = issuer.issue(new RandomPickStrategy());
 
         outputView.printNumberOfLottoTickets(issuer.getTicketCount(), issuer.getChange());

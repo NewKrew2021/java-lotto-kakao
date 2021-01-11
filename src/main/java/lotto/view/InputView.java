@@ -2,8 +2,8 @@ package lotto.view;
 
 import lotto.domain.LottoNumbers;
 import lotto.domain.WinningNumbers;
-import lotto.domain.dto.InsertPrice;
-import lotto.domain.dto.LottoNumber;
+import lotto.domain.vo.LottoNumber;
+import lotto.domain.vo.Price;
 
 import java.util.List;
 import java.util.Scanner;
@@ -13,9 +13,9 @@ import java.util.stream.Stream;
 public final class InputView {
     private final static Scanner SC = new Scanner(System.in);
 
-    public InsertPrice scanInsertPrice() {
+    public Price scanPrice() {
         System.out.println("구입금액을 입력해 주세요.");
-        return new InsertPrice(Integer.parseInt(SC.nextLine().trim()));
+        return new Price(Integer.parseInt(SC.nextLine().trim()));
     }
 
     public WinningNumbers scanWinningNumbers() {

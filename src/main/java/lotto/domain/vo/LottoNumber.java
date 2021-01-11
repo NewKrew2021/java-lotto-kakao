@@ -1,4 +1,4 @@
-package lotto.domain.dto;
+package lotto.domain.vo;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     public static final int LOWER_BOUND = 1;

@@ -1,20 +1,20 @@
 package lotto.domain;
 
-import lotto.domain.dto.Rate;
-import lotto.domain.dto.TotalPrice;
+import lotto.domain.vo.Price;
+import lotto.domain.vo.Rate;
 
 import java.util.Map;
 
 public class LottoStatistics {
     private final MatchResults results;
-    private final TotalPrice totalPrice;
-    private final int investedMoney;
+    private final Price price;
+    private final long investedMoney;
     private final Rate rate;
 
-    public LottoStatistics(MatchResults results, int investedMoney) {
+    public LottoStatistics(MatchResults results, long investedMoney) {
         this.results = results;
         this.investedMoney = investedMoney;
-        this.totalPrice = calcTotalPrice();
+        this.price = calcTotalPrice();
         this.rate = calcRate();
     }
 
@@ -26,12 +26,12 @@ public class LottoStatistics {
         return rate;
     }
 
-    private TotalPrice calcTotalPrice() {
-        return new TotalPrice(results.getTotalEarnings());
+    private Price calcTotalPrice() {
+        return new Price(results.getTotalEarnings());
     }
 
     private Rate calcRate() {
-        double rateInRealNumber = (double) totalPrice.getTotalPrice() / investedMoney;
+        double rateInRealNumber = (double) price.getPrice() / investedMoney;
         return new Rate((int) Math.round(rateInRealNumber * 100));
     }
 }
