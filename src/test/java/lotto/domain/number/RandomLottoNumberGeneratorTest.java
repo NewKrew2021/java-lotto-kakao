@@ -13,7 +13,7 @@ class RandomLottoNumberGeneratorTest {
     @Test
     void create() {
         //given
-        NumberGenerateStrategy strategy = RandomLottoNumberGenerator.initialize();
+        NumberGenerateStrategy strategy = new RandomLottoNumberGenerator();
 
         //when
         List<Integer> randomNumbers = strategy.generate();
