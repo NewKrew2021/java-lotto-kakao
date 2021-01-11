@@ -5,9 +5,11 @@ import lotto.domain.*;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
-public class LottoUI {
+public class OutputView {
     public static final String PRICE_INPUT_TEXT = "구입금액을 입력해 주세요.";
-    public static final String BUY_SUCCESS_TEXT = "개를 구매했습니다.";
+    public static final String SELF_LOTTO_COUNT_TEXT= "수동으로 구매할 로또 수를 입력해 주세요.";
+    public static final String SELF_LOTTO_NUMBER_INPUT_TEXT = "수동으로 구매할 번호를 입력해 주세요.";
+    public static final String BUY_SUCCESS_TEXT = "수동으로 %d개, 자동으로 %d개를 구매했습니다.";
     public static final String NUMBER_INPUT_TEXT = "지난 주 당첨 번호를 입력해 주세요.";
     public static final String BONUS_INPUT_TEXT = "보너스 볼을 입력해 주세요.";
     public static final String STATISTICS_LINE_TEXT = "당첨 통계\n---------";
@@ -23,9 +25,16 @@ public class LottoUI {
 
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static int getMoneyFromUser() {
+    public static void printMoneyInputGuide() {
         System.out.println(PRICE_INPUT_TEXT);
-        return scanner.nextInt();
+    }
+
+    public static void printSelfLottoCountInputGuide() {
+        System.out.println(SELF_LOTTO_COUNT_TEXT);
+    }
+
+    public static void printSelfLottoNumberInputGuide() {
+        System.out.println(SELF_LOTTO_NUMBER_INPUT_TEXT);
     }
 
     public static void printLottos(Lottos lottos) {
@@ -42,15 +51,12 @@ public class LottoUI {
                 .collect(Collectors.joining(JOIN_DELIMITER)) + CLOSE_BRACKET;
     }
 
-    public static String getWinningNumberFromUser() {
+    public static void printWinningNumberInputGuide() {
         System.out.println(NUMBER_INPUT_TEXT);
-        scanner.nextLine();
-        return scanner.nextLine();
     }
 
-    public static int getBonusNumberFromUser() {
+    public static void printBonusNumberInputGuide() {
         System.out.println(BONUS_INPUT_TEXT);
-        return scanner.nextInt();
     }
 
     public static void printStatistics(Rankings rankings, int profitRate) {
