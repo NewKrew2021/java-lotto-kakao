@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.InsufficientMoneyException;
+
 import java.util.Objects;
 
 public class Money {
@@ -16,7 +18,7 @@ public class Money {
 
     private void validateMoney(int money) {
         if (!isSufficient(money)) {
-            throw new IllegalArgumentException(INSUFFICIENT_MONEY_EXCEPTION_MESSAGE);
+            throw new InsufficientMoneyException(INSUFFICIENT_MONEY_EXCEPTION_MESSAGE);
         }
     }
 

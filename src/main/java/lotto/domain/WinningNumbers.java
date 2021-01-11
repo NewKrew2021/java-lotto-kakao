@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.BonusDuplicateException;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -26,7 +28,7 @@ public class WinningNumbers {
 
     private void validateWinAndBonusNumbers(List<Integer> winNumbers, int bonusNumber) {
         if (hasDuplicationBetween(winNumbers, bonusNumber)) {
-            throw new IllegalArgumentException(DUPLICATE_BONUS_EXCEPTION_MESSAGE);
+            throw new BonusDuplicateException(DUPLICATE_BONUS_EXCEPTION_MESSAGE);
         }
     }
 

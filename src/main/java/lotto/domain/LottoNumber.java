@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.NumberRangeException;
+
 import java.util.Objects;
 
 public class LottoNumber {
@@ -17,7 +19,7 @@ public class LottoNumber {
 
     private void validateLottoNumber(int lottoNumber) {
         if (!isValidRange(lottoNumber)){
-            throw new IllegalArgumentException(RANGE_EXCEPTION_MESSAGE);
+            throw new NumberRangeException(RANGE_EXCEPTION_MESSAGE);
         }
     }
 

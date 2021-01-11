@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.exception.NumberDuplicateException;
+import lotto.exception.NumbersSizeException;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -22,10 +25,10 @@ public class LottoNumbers {
 
     private void validateLottoNumbers(List<Integer> numbers) {
         if (!isValidSize(numbers)) {
-            throw new IllegalArgumentException(SIZE_EXCEPTION_MESSAGE);
+            throw new NumbersSizeException(SIZE_EXCEPTION_MESSAGE);
         }
         if (!isUnique(numbers)) {
-            throw new IllegalArgumentException(DUPLICATE_EXCEPTION_MESSAGE);
+            throw new NumberDuplicateException(DUPLICATE_EXCEPTION_MESSAGE);
         }
     }
 
