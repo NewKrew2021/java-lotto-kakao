@@ -1,8 +1,13 @@
 package lotto.view;
 
-import lotto.domain.Lottos;
+import lotto.dto.LottoDto;
+import lotto.dto.LottoNumberDto;
+import lotto.dto.LottosDto;
+import lotto.dto.RankingsDto;
+import lotto.util.Rank;
 
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class LottoUI {
     private final Scanner scanner;
@@ -16,9 +21,19 @@ public class LottoUI {
         return scanner.nextInt();
     }
 
-    public void printLottos(Lottos lottos) {
-        System.out.println(lottos.getNumOfLotto() + "개를 구매했습니다.");
-        System.out.println(lottos);
+    public void printLottos(LottosDto lottosDto) {
+        System.out.println(lottosDto.getLottoDtos().size() + "개를 구매했습니다.");
+        for (LottoDto lottoDto : lottosDto.getLottoDtos()) {
+            printLotto(lottoDto);
+        }
+    }
+
+    private void printLotto(LottoDto lottoDto) {
+        System.out.println("[" + lottoDto.getLottoNumbers()
+                .stream()
+                .map(LottoNumberDto::getNumber)
+                .map(LottoNumberDto -> Integer.toString(LottoNumberDto))
+                .collect(Collectors.joining(", ")) + "]");
     }
 
     public String getWinningNumberFromUser() {
@@ -32,9 +47,16 @@ public class LottoUI {
         return scanner.nextInt();
     }
 
-    public void printStatistics(String statisticsText, int profitRate) {
+    public void printStatistics(RankingsDto rankingsDto) {
         System.out.println("당첨 통계\n---------");
-        System.out.println(statisticsText);
+        System.out.printf("3개 일치 (5000원)- %d개\n", rankingsDto.getRankings().get(Rank.FIFTH));
+        System.out.printf("4개 일치 (50000원)- %d개\n",  rankingsDto.getRankings().get(Rank.FOURTH));
+        System.out.printf("5개 일치 (1500000원)- %d개\n",  rankingsDto.getRankings().get(Rank.THIRD));
+        System.out.printf("5개 일치, 보너스 볼 일치(30000000원)- %d개\n",  rankingsDto.getRankings().get(Rank.SECOND));
+        System.out.printf("6개 일치 (2000000000원)- %d개\n",  rankingsDto.getRankings().get(Rank.FIRST));
+    }
+
+    public void printProfitRate(int profitRate) {
         System.out.printf("총 수익률은 %d%% 입니다.\n", profitRate);
     }
 }

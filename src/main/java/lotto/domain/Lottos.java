@@ -35,6 +35,10 @@ public class Lottos {
         return ranks;
     }
 
+    public List<Lotto> getLottos() {
+        return lottos;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
