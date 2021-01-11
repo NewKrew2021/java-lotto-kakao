@@ -1,10 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoDto;
-import lotto.domain.LottoNumber;
-
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class InputView {
     private static final Scanner scanner = new Scanner(System.in);
@@ -18,6 +14,7 @@ public class InputView {
     }
 
     public static String getSelfLottoNumberFromUser() {
+        scanner.nextLine();
         return scanner.nextLine();
     }
 

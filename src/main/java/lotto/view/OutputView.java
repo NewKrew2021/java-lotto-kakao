@@ -9,7 +9,7 @@ public class OutputView {
     public static final String PRICE_INPUT_TEXT = "구입금액을 입력해 주세요.";
     public static final String SELF_LOTTO_COUNT_TEXT= "수동으로 구매할 로또 수를 입력해 주세요.";
     public static final String SELF_LOTTO_NUMBER_INPUT_TEXT = "수동으로 구매할 번호를 입력해 주세요.";
-    public static final String BUY_SUCCESS_TEXT = "수동으로 %d개, 자동으로 %d개를 구매했습니다.";
+    public static final String BUY_SUCCESS_TEXT = "수동으로 %d개, 자동으로 %d개를 구매했습니다.\n";
     public static final String NUMBER_INPUT_TEXT = "지난 주 당첨 번호를 입력해 주세요.";
     public static final String BONUS_INPUT_TEXT = "보너스 볼을 입력해 주세요.";
     public static final String STATISTICS_LINE_TEXT = "당첨 통계\n---------";
@@ -37,8 +37,11 @@ public class OutputView {
         System.out.println(SELF_LOTTO_NUMBER_INPUT_TEXT);
     }
 
+    public static void printLottoCount(LottoKind lottoKind){
+        System.out.printf(BUY_SUCCESS_TEXT, lottoKind.getSelfLottoCount(), lottoKind.getRandomLottoCount());
+    }
+
     public static void printLottos(Lottos lottos) {
-        System.out.println(lottos.getSizeOfLotto() + BUY_SUCCESS_TEXT);
         LottosDto lottosDto = lottos.getLottosData();
         for (LottoDto lottoDto : lottosDto.getLottosDto()) {
             System.out.println(getLottoText(lottoDto));
