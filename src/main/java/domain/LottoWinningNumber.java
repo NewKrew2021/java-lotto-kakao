@@ -17,7 +17,7 @@ public class LottoWinningNumber {
     }
 
     public static LottoWinningNumber of(List<Integer> numbers, int bonusNumber){
-        return new LottoWinningNumber(Lotto.ofIntegerNumber(numbers), new LottoNumber(bonusNumber));
+        return new LottoWinningNumber(Lotto.from(new LottoManualGenerator(numbers)), new LottoNumber(bonusNumber));
     }
 
     private void validate(Lotto lottoWinningTicket, LottoNumber bonusNumber) {

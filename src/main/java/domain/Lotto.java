@@ -11,25 +11,18 @@ public class Lotto {
 
     private final TreeSet<LottoNumber> numbers;
 
-    private Lotto(List<LottoNumber> lottoNumbers) {
-        TreeSet<LottoNumber> numbers = new TreeSet<>(lottoNumbers);
+    private Lotto(TreeSet<LottoNumber> numbers) {
         validateLength(numbers);
 
         this.numbers = numbers;
     }
 
-    public static Lotto ofLottoNumber(List<LottoNumber> numbers) {
+    public static Lotto of(TreeSet<LottoNumber> numbers) {
         return new Lotto(numbers);
     }
 
-    public static Lotto ofIntegerNumber(List<Integer> integerNumbers) {
-        List<LottoNumber> numbers = Optional.ofNullable(integerNumbers)
-                .orElseThrow(() -> new InvalidLottoNumberException("null일 수 없습니다."))
-                .stream()
-                .map(LottoNumber::new)
-                .collect(Collectors.toList());
-
-        return new Lotto(numbers);
+    public static Lotto from(NumberGenerateStrategy strategy){
+        return strategy.generate();
     }
 
     private void validateLength(Collection<LottoNumber> numbers) {

@@ -19,7 +19,7 @@ public class LottoTickets {
         int count = amount.getCount();
         List<Lotto> tickets = new ArrayList<>();
         for (int i = 0; i < count; i++) {
-            tickets.add(strategy.generate());
+            tickets.add(Lotto.from(strategy));
         }
         return new LottoTickets(tickets);
     }
