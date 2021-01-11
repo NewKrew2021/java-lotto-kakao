@@ -13,12 +13,7 @@ public class Lotto {
     private Set<LottoNumber> lottoNumbers;
 
     public Lotto(LottoNumberGenerator lottoNumberGenerator) {
-        lottoNumbers = new TreeSet<>(new Comparator<LottoNumber>() {
-            @Override
-            public int compare(LottoNumber o1, LottoNumber o2) {
-                return o1.getNumber() - o2.getNumber();
-            }
-        });
+        lottoNumbers = new TreeSet<>(Comparator.comparingInt(LottoNumber::getNumber));
         for (int l : lottoNumberGenerator.getNumbers()) {
             lottoNumbers.add(LottoNumber.of(l));
         }
