@@ -1,7 +1,6 @@
 package lotto.domain;
 
 
-import lotto.dto.RankingsDto;
 import lotto.util.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -35,9 +34,6 @@ public class LottosTest {
     @DisplayName("로또 번호들과 당첨번호를 매칭하여 각 등수별 당첨 횟수를 구한다.")
     void match() {
         MatchNumber matchNumber = MatchNumber.of("1, 2, 3, 4, 5, 10", 6);
-        RankingsDto expected = new RankingsDto();
-        expected.addRank(Rank.SECOND);
-        expected.addRank(Rank.FOURTH);
-        assertThat(lottos.match(matchNumber).getRankings()).containsAllEntriesOf(expected.getRankings());
+        assertThat(lottos.match(matchNumber)).containsExactly(Rank.SECOND, Rank.FOURTH);
     }
 }

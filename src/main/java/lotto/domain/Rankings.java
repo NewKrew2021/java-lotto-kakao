@@ -4,13 +4,27 @@ import lotto.util.Prize;
 import lotto.util.Rank;
 
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Rankings {
     private Map<Rank, Integer> rankings;
 
-    public Rankings(Map<Rank, Integer> rankings) {
+    private Rankings(Map<Rank, Integer> rankings) {
         this.rankings = Collections.unmodifiableMap(rankings);
+    }
+
+    public static Rankings fromRanks(List<Rank> ranks) {
+        Map<Rank, Integer> rankMap = new HashMap<>();
+        for (Rank rank : Rank.values()) {
+            rankMap.put(rank, 0);
+        }
+
+        for (Rank rank : ranks) {
+            rankMap.computeIfPresent(rank, (k, v) -> v + 1);
+        }
+        return new Rankings(rankMap);
     }
 
     public int getProfitRate(Money money) {
