@@ -13,11 +13,22 @@ public class RandomGenerateStrategy implements GenerateStrategy {
     }
 
     private LottoNumbers generateRandomNumbers() {
+        return new LottoNumbers(sortNumbers(sliceNumbers(shuffleNumbers())));
+    }
+
+    private List<Integer> shuffleNumbers() {
         List<Integer> numbers = new ArrayList<>();
         IntStream.rangeClosed(1, 45).forEach(numbers::add);
         Collections.shuffle(numbers);
-        List<Integer> shuffledSubNumbers = numbers.subList(0, 6);
-        Collections.sort(shuffledSubNumbers);
-        return new LottoNumbers(shuffledSubNumbers);
+        return numbers;
+    }
+
+    private List<Integer> sliceNumbers(List<Integer> numbers) {
+        return numbers.subList(0, 6);
+    }
+
+    private List<Integer> sortNumbers(List<Integer> numbers) {
+        Collections.sort(numbers);
+        return numbers;
     }
 }

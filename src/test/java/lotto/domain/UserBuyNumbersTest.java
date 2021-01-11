@@ -32,7 +32,7 @@ public class UserBuyNumbersTest {
         totalUserBuyNums.addBuyNumbers(new LottoNumbers(Arrays.asList(20, 21, 22, 23, 24, 25)));
         List<List<String>> expectedMatrix = new ArrayList<>();
         expectedMatrix.add(Arrays.asList("30", "31", "32", "33", "34", "35"));
-        expectedMatrix.add(Arrays.asList("20","21","22","23","24","25"));
+        expectedMatrix.add(Arrays.asList("20", "21", "22", "23", "24", "25"));
         assertThat(totalUserBuyNums.convertToString()).isEqualTo(expectedMatrix);
     }
 }

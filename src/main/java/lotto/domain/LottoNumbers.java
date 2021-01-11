@@ -6,7 +6,9 @@ import java.util.Objects;
 
 public class LottoNumbers {
 
-    private static final int USER_BUY_NUMBERS_SIZE = 6;
+    private static final int POSSIBLE_NUMBERS_SIZE = 6;
+    private static final String SIZE_EXCEPTION_MESSAGE = "로또 번호는 6개입니다.";
+    private static final String DUPLICATE_EXCEPTION_MESSAGE = "로또 번호는 중복되면 안됩니다.";
 
     private final List<LottoNumber> lottoNumbers;
 
@@ -16,6 +18,23 @@ public class LottoNumbers {
         for (Integer num : numbers) {
             this.lottoNumbers.add(new LottoNumber(num));
         }
+    }
+
+    private void validateLottoNumbers(List<Integer> numbers) {
+        if (!isValidSize(numbers)) {
+            throw new IllegalArgumentException(SIZE_EXCEPTION_MESSAGE);
+        }
+        if (!isUnique(numbers)) {
+            throw new IllegalArgumentException(DUPLICATE_EXCEPTION_MESSAGE);
+        }
+    }
+
+    private boolean isValidSize(List<Integer> lottoNumbers) {
+        return lottoNumbers.size() == POSSIBLE_NUMBERS_SIZE;
+    }
+
+    private boolean isUnique(List<Integer> lottoNumbers) {
+        return lottoNumbers.stream().distinct().count() == lottoNumbers.size();
     }
 
     public int getMatchCountWith(LottoNumbers lottoNumbers) {
@@ -38,23 +57,6 @@ public class LottoNumbers {
             numbers.add(lottoNumber.getNumberToString());
         }
         return numbers;
-    }
-
-    private void validateLottoNumbers(List<Integer> numbers) {
-        if (!isValidSize(numbers)) {
-            throw new IllegalArgumentException("로또 번호는 6개입니다.");
-        }
-        if (!isUnique(numbers)) {
-            throw new IllegalArgumentException("로또 번호는 중복되면 안됩니다.");
-        }
-    }
-
-    private boolean isValidSize(List<Integer> lottoNumbers) {
-        return lottoNumbers.size() == USER_BUY_NUMBERS_SIZE;
-    }
-
-    private boolean isUnique(List<Integer> lottoNumbers) {
-        return lottoNumbers.stream().distinct().count() == lottoNumbers.size();
     }
 
     @Override

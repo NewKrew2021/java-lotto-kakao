@@ -3,7 +3,7 @@ package lotto;
 import lotto.domain.LottoGame;
 import lotto.domain.Money;
 import lotto.domain.RandomGenerateStrategy;
-import lotto.domain.WinAndBonusNumbers;
+import lotto.domain.WinningNumbers;
 import lotto.utils.Splitter;
 import lotto.view.InputView;
 import lotto.view.OutputView;
@@ -19,10 +19,10 @@ public class LottoMain {
 
         String winNumbers = InputView.enterWinNumbers();
         int bonusNumber = InputView.enterBonusNumber();
-        WinAndBonusNumbers winAndBonusNumbers = new WinAndBonusNumbers(
+        WinningNumbers winningNumbers = new WinningNumbers(
                 Splitter.splitToNumberBy(winNumbers, ","), bonusNumber
         );
 
-        OutputView.printResult(lotto.checkLotto(winAndBonusNumbers));
+        OutputView.printResult(lotto.checkLotto(winningNumbers));
     }
 }

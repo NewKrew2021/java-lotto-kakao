@@ -2,7 +2,7 @@ package lotto.domain;
 
 public class NumberGenerator {
 
-    public static LottoNumbers generateBuyNumbers(GenerateStrategy gs) {
-        return gs.generate();
+    public static LottoNumbers generateBuyNumbers(GenerateStrategy generateStrategy) {
+        return generateStrategy.generate();
     }
 }

@@ -4,6 +4,9 @@ import java.util.Objects;
 
 public class Money {
 
+    private static final int SINGLE_PRICE = 1000;
+    private static final String INSUFFICIENT_MONEY_EXCEPTION_MESSAGE = "1000원 이상의 금액이 필요합니다.";
+
     private final int money;
 
     public Money(int money) {
@@ -11,22 +14,22 @@ public class Money {
         this.money = money;
     }
 
+    private void validateMoney(int money) {
+        if (!isSufficient(money)) {
+            throw new IllegalArgumentException(INSUFFICIENT_MONEY_EXCEPTION_MESSAGE);
+        }
+    }
+
+    private boolean isSufficient(int money) {
+        return money >= SINGLE_PRICE;
+    }
+
     public int possibleNumberBuy() {
-        return this.money / 1000;
+        return this.money / SINGLE_PRICE;
     }
 
     public double getProfitRate(int earnedMoney) {
         return (double)earnedMoney / (double)money;
-    }
-
-    private void validateMoney(int money) {
-        if (!isOverThousand(money)) {
-            throw new IllegalArgumentException("1000원 이상의 금액이 필요합니다.");
-        }
-    }
-
-    private boolean isOverThousand(int money) {
-        return money >= 1000;
     }
 
     @Override
