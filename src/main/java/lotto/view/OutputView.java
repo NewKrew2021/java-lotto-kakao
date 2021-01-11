@@ -12,7 +12,7 @@ public class OutputView {
     }
 
     public static void printTicketNumbers(LottoNumbersDto lottoNumbers) {
-        System.out.println(lottoNumbers.getLottoNumbers());
+        System.out.println(lottoNumbers.getSortedLottoNumbers());
     }
 
     public static void printWinningStatistics(LottoRankingCountDto lottoRankingCount) {

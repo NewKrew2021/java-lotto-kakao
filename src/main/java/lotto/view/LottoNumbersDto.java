@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.domain.number.LottoNumber;
 import lotto.domain.number.LottoNumbers;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,7 +20,9 @@ public class LottoNumbersDto {
                 .collect(Collectors.collectingAndThen(Collectors.toList(), LottoNumbersDto::new));
     }
 
-    public List<Integer> getLottoNumbers() {
+
+    public List<Integer> getSortedLottoNumbers() {
+        Collections.sort(lottoNumbers);
         return lottoNumbers;
     }
 }
