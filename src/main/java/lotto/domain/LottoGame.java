@@ -9,10 +9,6 @@ public class LottoGame {
     private LottoTickets tickets;
     private LottoStatistics statistics;
 
-    public boolean isAssignedTickets() {
-        return this.tickets != null;
-    }
-
     public LottoTickets makeLottoTickets(int count) {
         List<LottoNumbers> tickets = new ArrayList<>();
         for (int i = 0; i < count; i++) {
@@ -44,9 +40,13 @@ public class LottoGame {
 
     public float getEarningRatio() {
         long reward = statistics.getReward();
-        int count = tickets.getTicketsCount();
+        int count = getTicketsCount();
 
         return (float) reward / (float) (TICKET_PRICE * count);
+    }
+
+    public int getTicketsCount(){
+        return tickets.getTicketsCount();
     }
 
     public void setTickets(LottoTickets tickets) {

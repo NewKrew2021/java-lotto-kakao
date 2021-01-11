@@ -39,7 +39,7 @@ public class LottoGameTest {
     @Test
     public void testMakeLottoTickets() {
         game.makeLottoTickets(5);
-        assertThat(game.isAssignedTickets()).isTrue();
+        assertThat(game.getTicketsCount()).isEqualTo(5);
     }
 
 
