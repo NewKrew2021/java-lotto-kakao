@@ -6,12 +6,12 @@ import java.util.HashSet;
 import java.util.stream.Collectors;
 
 public class LottoNumbers {
-
+    public static final int LOTTO_NUMBER_COUNT_IN_ONE_TICKET = 6;
     List<LottoNumber> numbers = new ArrayList<>();
 
     public LottoNumbers(List<Integer> numbers) {
         if (numbers.size() != 6) {
-            throw new IllegalArgumentException("갯수는 6개 이어야 합니다.");
+            throw new IllegalArgumentException("갯수는 "+LOTTO_NUMBER_COUNT_IN_ONE_TICKET+"개 이어야 합니다.");
         }
 
         if (checkDuplication(numbers)) {

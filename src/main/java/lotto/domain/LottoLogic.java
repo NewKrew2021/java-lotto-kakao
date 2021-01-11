@@ -30,7 +30,7 @@ public class LottoLogic {
         List<Integer> nums = makeLottoNumber();
         for (int i = 0; i < howmany; i++) {
             Collections.shuffle(nums);
-            lottoTickets.add(new LottoNumbers(nums.subList(0, 6)));
+            lottoTickets.add(new LottoNumbers(nums.subList(0, LottoNumbers.LOTTO_NUMBER_COUNT_IN_ONE_TICKET)));
         }
         return lottoTickets;
     }
