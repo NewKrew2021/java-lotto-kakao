@@ -1,9 +1,11 @@
 package view;
 
 import domain.Amount;
+import domain.LottoRank;
 import domain.WinningInfo;
 
 import java.util.List;
+import java.util.Map;
 
 public class LottoOutputView {
 
@@ -44,9 +46,9 @@ public class LottoOutputView {
     public static void printResult(WinningInfo winningInfo) {
         StringBuilder resultText = new StringBuilder();
         resultText.append("당첨 통계\n---------\n");
-        List<Integer> result = winningInfo.getInfo();
-        for (int i = 0; i < result.size(); i++) {
-            resultText.append(String.format(RESULT_FORMAT[i], result.get(i)));
+        Map<LottoRank, Integer> result = winningInfo.getInfo();
+        for (int i = 0; i < RESULT_FORMAT.length; i++) {
+            resultText.append(String.format(RESULT_FORMAT[i], result.getOrDefault(LottoRank.of(RESULT_FORMAT.length - i), 0)));
         }
         System.out.println(resultText);
     }

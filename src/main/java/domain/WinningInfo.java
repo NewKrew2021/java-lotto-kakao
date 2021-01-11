@@ -1,20 +1,29 @@
 package domain;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class WinningInfo {
 
-    private final List<Long> PRIZE = Arrays.asList(5000l, 50000l, 1500000l, 30000000l, 2000000000l);
+    private final Map<LottoRank, Integer> info;
 
-    private final List<Integer> info;
-
-    public WinningInfo(List<Integer> winningInfo) {
-        this.info = winningInfo;
+    public WinningInfo(Map<LottoRank, Integer> info) {
+        this.info = info;
     }
 
-    public List<Integer> getInfo() {
+    public long getSumPrize() {
+        long sum = 0;
+        for (LottoRank lottoRank : info.keySet()) {
+            sum += lottoRank.getPrize(info.get(lottoRank));
+        }
+
+        return sum;
+    }
+
+    public Map<LottoRank, Integer> getInfo() {
         return info;
     }
 
