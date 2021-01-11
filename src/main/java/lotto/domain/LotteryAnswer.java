@@ -15,7 +15,7 @@ public class LotteryAnswer {
     }
 
     public LotteryAnswer(int[] answerInts, int bonusNumber) {
-        this(new Lottery(answerInts), new LotteryNumber(bonusNumber));
+        this(new Lottery(answerInts), LotteryNumber.of(bonusNumber));
     }
 
     public Lottery getLottery() {

@@ -15,7 +15,7 @@ public class Lottery {
     public Lottery(int[] ints) {
         this(
                 Arrays.stream(ints)
-                        .mapToObj(LotteryNumber::new)
+                        .mapToObj(LotteryNumber::of)
                         .collect(Collectors.toList())
         );
     }
@@ -38,7 +38,7 @@ public class Lottery {
         return new Lottery(
                 range_1_45.subList(0, LOTTERY_NUMBER_SIZE)
                         .stream()
-                        .map(LotteryNumber::new)
+                        .map(LotteryNumber::of)
                         .collect(Collectors.toList())
         );
     }
