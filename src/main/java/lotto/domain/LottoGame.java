@@ -20,7 +20,7 @@ public class LottoGame {
             tickets.add(generateLottoTicket(numbers));
         }
 
-        this.tickets = new LottoTickets(count, tickets);
+        this.tickets = new LottoTickets(tickets);
         return this.tickets;
     }
 
