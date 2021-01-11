@@ -1,7 +1,7 @@
 package lotto.view;
 
 import lotto.domain.game.LottoRevenueRate;
-import lotto.domain.game.LottoTicketCount;
+import lotto.domain.game.LottoTicketCounts;
 import lotto.domain.ranking.LottoRanking;
 
 import java.util.Map;
@@ -10,8 +10,9 @@ public class OutputView {
 
     private static final String NEW_LINE = System.lineSeparator();
 
-    public static void printTicketCount(LottoTicketCount ticketCount) {
-        System.out.printf("%d개를 구매했습니다.%s", ticketCount.getTicketCount(), NEW_LINE);
+    public static void printTicketCounts(LottoTicketCounts ticketCounts) {
+        System.out.printf("수동으로 %d장, 자동으로 %d장 구매했습니다.%s",
+                ticketCounts.getAutoCount(), ticketCounts.getAutoCount(), NEW_LINE);
     }
 
     public static void printTicketNumbers(LottoNumbersDto lottoNumbers) {
