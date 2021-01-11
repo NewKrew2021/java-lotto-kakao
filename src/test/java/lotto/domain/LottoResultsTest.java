@@ -28,13 +28,13 @@ public class LottoResultsTest {
     }
 
     @Test
-    void getReward() {
+    void testGetReward() {
         assertThat(lottoResults.getReward()).isEqualTo(2001560000L);
     }
 
     @ParameterizedTest
     @MethodSource("resultCountProvider")
-    void getResultCount(Result result, int count) {
+    void testGetResultCount(Result result, int count) {
         assertThat(lottoResults.getResultCount(result)).isEqualTo(count);
     }
 
@@ -49,7 +49,7 @@ public class LottoResultsTest {
 
     @ParameterizedTest
     @MethodSource("resultProvider")
-    void result(int count, boolean bonus, Result result) {
+    void testResult(int count, boolean bonus, Result result) {
         assertThat(LottoResults.mapResult(count, bonus)).isEqualTo(result);
     }
 

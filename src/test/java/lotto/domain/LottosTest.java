@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottosTest {
 
     @Test
-    void getSize() {
+    void testGetSize() {
         Lottos lottos = Lottos.getInstance(3);
         assertThat(lottos.size()).isEqualTo(3);
     }

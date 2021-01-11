@@ -27,7 +27,7 @@ public class WinningLottoTest {
 
     @ParameterizedTest
     @MethodSource("lottoCompare")
-    void 로또번호일치(List<LottoNumber> lottoNumbers, Result result) {
+    void testLottoCompare(List<LottoNumber> lottoNumbers, Result result) {
         assertThat(winningLotto.compare(new Lotto(lottoNumbers))).isEqualTo(result);
     }
 
@@ -85,7 +85,7 @@ public class WinningLottoTest {
     }
 
     @Test
-    void create() {
+    void testCreate() {
         assertThat(winningLotto).isEqualTo(new WinningLotto(lotto, new LottoNumber(10)));
     }
 }

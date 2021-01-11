@@ -12,7 +12,7 @@ import static org.assertj.core.api.Assertions.offset;
 
 public class LottoSimulationTest {
     @Test
-    void getYield() {
+    void testGetYield() {
         LottoResults lottoResults = new LottoResults(Collections.singletonList(
                 Result.THREE
         ));

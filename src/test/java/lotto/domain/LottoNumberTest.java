@@ -18,7 +18,7 @@ public class LottoNumberTest {
 
     @ParameterizedTest
     @ValueSource(ints = {0, 46})
-    void invalid_범위(int value) {
+    void testInvalidRange(int value) {
         assertThatThrownBy(() -> new LottoNumber(value)).isInstanceOf(IllegalArgumentException.class);
     }
 

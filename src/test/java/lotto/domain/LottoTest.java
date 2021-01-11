@@ -16,7 +16,7 @@ import static org.junit.jupiter.params.provider.Arguments.arguments;
 
 public class LottoTest {
     @Test
-    void duplicate() {
+    void testDuplicate() {
         assertThatThrownBy(() -> new Lotto(Arrays.asList(
                 new LottoNumber(1),
                 new LottoNumber(1),
@@ -29,7 +29,7 @@ public class LottoTest {
 
     @ParameterizedTest
     @MethodSource("invalidArguments")
-    void invalid_번호개수(List<LottoNumber> lottoNumbers) {
+    void testInvalidArguments(List<LottoNumber> lottoNumbers) {
         assertThatThrownBy(() -> new Lotto(lottoNumbers)).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -53,7 +53,7 @@ public class LottoTest {
     }
 
     @Test
-    void sort() {
+    void testSort() {
         Lotto lotto = new Lotto(Arrays.asList(
                 new LottoNumber(1),
                 new LottoNumber(2),
