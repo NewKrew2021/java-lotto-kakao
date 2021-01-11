@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoTickets {
     private final List<LottoNumbers> tickets;
@@ -21,6 +22,12 @@ public class LottoTickets {
         return tickets.stream()
                 .map(LottoNumbers::getNumbersInTicket)
                 .collect(Collectors.toList());
+    }
+
+    public LottoTickets join(LottoTickets source) {
+        return new LottoTickets(Stream.of(tickets, source.tickets)
+                .flatMap(List::stream)
+                .collect(Collectors.toList()));
     }
 
     @Override

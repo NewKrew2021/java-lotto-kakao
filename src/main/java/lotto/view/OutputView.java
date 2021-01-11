@@ -10,19 +10,20 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class OutputView {
-    public void printNumberOfLottoTickets(long ticketCount, long change) {
-        System.out.printf("%d개를 구매했습니다.\n", ticketCount);
+    public void printNumberOfLottoTickets(long ticketCount, int change) {
+        System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.\n", ticketCount, change);
+    }
 
+    public void printChangeIfExists(int change) {
         if (hasChange(change)) {
             System.out.printf("잔돈 %d원은 반환되었습니다.\n", change);
         }
     }
 
-    public void printLottoTickets(LottoTickets lottoTickets) {
+    public void printLottoTickets(LottoTickets tickets) {
         StringBuilder message = new StringBuilder();
-        List<List<Integer>> tickets = lottoTickets.getAllTicketNumbers();
 
-        for (List<Integer> ticket : tickets) {
+        for (List<Integer> ticket : tickets.getAllTicketNumbers()) {
             String numbersFormatted = ticket.stream()
                     .map(num -> Integer.toString(num))
                     .collect(Collectors.joining(", "));
@@ -30,7 +31,7 @@ public class OutputView {
             message.append(String.format("[%s]\n", numbersFormatted));
         }
 
-        System.out.println(message);
+        System.out.println(message.toString());
     }
 
     public void printStatistics(LottoStatistics statistics) {
@@ -47,7 +48,7 @@ public class OutputView {
 
         message.append(String.format("총 수익률은 %d%%입니다.", statistics.getEarningRate().getRate()));
 
-        System.out.println(message);
+        System.out.println(message.toString());
     }
 
     private boolean hasChange(long change) {

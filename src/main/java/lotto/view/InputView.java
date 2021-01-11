@@ -1,7 +1,6 @@
 package lotto.view;
 
-import lotto.domain.LottoNumbers;
-import lotto.domain.WinningNumbers;
+import lotto.domain.*;
 import lotto.domain.vo.LottoNumber;
 import lotto.domain.vo.Price;
 
@@ -18,25 +17,38 @@ public final class InputView {
         return new Price(Integer.parseInt(SC.nextLine().trim()));
     }
 
+    public int scanManualChooseTicketCount() {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return Integer.parseInt(SC.nextLine().trim());
+    }
+
+    public LottoTickets scanManualChooseTickets(int count) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        return LottoTicketIssuer.issue(new ManualPickStrategy(), count);
+    }
+
     public WinningNumbers scanWinningNumbers() {
-        LottoNumbers luckyNumbers = scanLuckyNumbers();
-        LottoNumber bonusNumber = scanBonusNumber();
+        LottoNumbers luckyNumbers;
+        LottoNumber bonusNumber;
+
+        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        luckyNumbers = new LottoNumbers(scanTicket());
+
+        System.out.println("보너스 볼을 입력해 주세요.");
+        bonusNumber = LottoNumber.valueOf(scanNumber());
 
         return new WinningNumbers(luckyNumbers, bonusNumber);
     }
 
-    private LottoNumbers scanLuckyNumbers() {
-        System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-
-        return new LottoNumbers(parseToIntegers(SC.nextLine())
+    public List<LottoNumber> scanTicket() {
+        return parseToIntegers(SC.nextLine())
                 .stream()
                 .map(LottoNumber::valueOf)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
     }
 
-    private LottoNumber scanBonusNumber() {
-        System.out.println("보너스 볼을 입력해 주세요.");
-        return LottoNumber.valueOf(Integer.parseInt(SC.nextLine().trim()));
+    private int scanNumber() {
+        return Integer.parseInt(SC.nextLine().trim());
     }
 
     private List<Integer> parseToIntegers(String input) {
