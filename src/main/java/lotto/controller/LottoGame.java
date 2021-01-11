@@ -16,7 +16,7 @@ public class LottoGame {
         setLottoTickets(price);
         winningNumber = new WinningNumber(InputView.winningNumber(), InputView.bonusNumber());
 
-        ResultView.printResult(lottoTickets.getResults(winningNumber).result(price));
+        ResultView.printResult(lottoTickets.getResults(winningNumber), price);
 
     }
 
