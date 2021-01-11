@@ -1,41 +1,44 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.exception.FailBuyLottoException;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class LottoController {
     private static Lottos lottos;
     private static Money money;
+    private static LottoKind lottoKind;
 
     public static void main(String[] args) {
+        inputMoney();
         buyLotto();
+        printBuyResult();
         matchLotto();
     }
 
-    private static void buyLotto() {
+    private static void inputMoney() {
         money = new Money(InputView.getMoneyFromUser());
-        LottoKind lottoKind = getLottoKind(money);
-        List<Lotto> lottosList = new ArrayList<>();
-        lottosList.addAll(buySelfLottos(lottoKind.getSelfLottoCount()));
-        lottosList.addAll(buyRandomLottos(lottoKind.getRandomLottoCount()));
-        lottos = new Lottos(lottosList);
+        lottoKind = getLottoKind(money);
+    }
+
+    private static void buyLotto() {
+        lottos = new Lottos(Stream.concat(buySelfLottos(lottoKind.getSelfLottoCount()).stream(), buyRandomLottos(lottoKind.getRandomLottoCount()).stream())
+                .collect(Collectors.toList()));
+    }
+
+    private static void printBuyResult() {
         OutputView.printLottoCount(lottoKind);
         OutputView.printLottos(lottos);
     }
 
     private static LottoKind getLottoKind(Money money) {
         int selfLottoCount = InputView.getSelfLottoCountFromUser();
-        int randomLottoCount = money.howMany(Lotto.LOTTO_PRICE) - selfLottoCount;
-        if (randomLottoCount < 0) {
-            throw new FailBuyLottoException();
-        }
-        return new LottoKind(selfLottoCount, randomLottoCount);
+        return new LottoKind(selfLottoCount, money.howMany(Lotto.LOTTO_PRICE) - selfLottoCount);
     }
 
     private static List<Lotto> buySelfLottos(int selfLottoCount) {
