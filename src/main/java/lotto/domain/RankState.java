@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.exception.IllegalRankStateException;
-
 import java.util.Arrays;
 
 public enum RankState {
