@@ -11,7 +11,7 @@ public class LottoTicket {
     private final static int NUMBER_COUNT = 6;
     private final Set<Number> numbers;
 
-    private LottoTicket(Set<Number> numbers) {
+    protected LottoTicket(Set<Number> numbers) {
         this.numbers = numbers;
     }
 
