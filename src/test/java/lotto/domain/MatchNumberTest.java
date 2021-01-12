@@ -9,17 +9,16 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatNoException;
+import static org.assertj.core.api.Assertions.*;
 
 class MatchNumberTest {
 
     @Test
     @DisplayName("보너스 번호가 당첨번호와 동일하면 예외 발생.")
     void create_duplicate() {
-        assertThatNoException().isThrownBy(() -> {
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> {
             MatchNumber.of("1, 2, 3, 4, 5, 6", 6);
-        });
+        }).withMessageMatching(("보너스 번호는 당첨번호와 동일할 수 없습니다;"));
     }
 
     @ParameterizedTest
