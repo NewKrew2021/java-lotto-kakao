@@ -34,6 +34,6 @@ public class LottoNumberTest {
     @Test
     public void intToString() {
         LottoNumber lottoNumber = LottoNumber.of(7);
-        assertThat(lottoNumber.getNumberToString()).isEqualTo("7");
+        assertThat(lottoNumber.toString()).isEqualTo("7");
     }
 }

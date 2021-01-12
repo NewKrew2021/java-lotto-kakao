@@ -2,6 +2,7 @@ package lotto.view;
 
 import lotto.domain.Money;
 import lotto.domain.RankState;
+import lotto.domain.UserBuyNumbers;
 import lotto.dto.LottoStatisticDTO;
 
 import java.util.Arrays;
@@ -11,9 +12,6 @@ import java.util.List;
 public class OutputView {
 
     private static final String BUY_COUNT_OUTPUT_MESSAGE = "개를 구매했습니다.";
-    private static final String LOTTO_NUMBERS_LEFT_BRACKET = "[";
-    private static final String LOTTO_NUMBERS_RIGHT_BRACKET = "]";
-    private static final String LOTTO_NUMBERS_JOIN_DELIMITER = ", ";
 
     private static final String STATISTIC_TITLE = "당첨 통계";
     private static final String HORIZON_LINE_TYPE = "-";
@@ -26,12 +24,8 @@ public class OutputView {
         System.out.println(money.possibleNumberBuy()+BUY_COUNT_OUTPUT_MESSAGE);
     }
 
-    public static void printBuyLotto(List<List<String>> numbers) {
-        for (List<String> number : numbers) {
-            System.out.println(LOTTO_NUMBERS_LEFT_BRACKET
-                               +String.join(LOTTO_NUMBERS_JOIN_DELIMITER, number)
-                               +LOTTO_NUMBERS_RIGHT_BRACKET);
-        }
+    public static void printBuyLotto(UserBuyNumbers userBuyNumbers) {
+        System.out.println(userBuyNumbers.toString());
         System.out.println();
     }
 

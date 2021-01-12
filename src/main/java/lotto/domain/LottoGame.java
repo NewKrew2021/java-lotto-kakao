@@ -14,11 +14,11 @@ public class LottoGame {
         this.userBuyNumbers = new UserBuyNumbers();
     }
 
-    public List<List<String>> buyLotto(GenerateStrategy generateStrategy) {
+    public UserBuyNumbers buyLotto(GenerateStrategy generateStrategy) {
         for (int i = 0; i < money.possibleNumberBuy(); i++) {
             userBuyNumbers.addBuyNumbers(NumberGenerator.generateBuyNumbers(generateStrategy));
         }
-        return userBuyNumbers.convertToString();
+        return userBuyNumbers;
     }
 
     public LottoStatisticDTO checkLotto(WinningNumbers winningNumbers) {

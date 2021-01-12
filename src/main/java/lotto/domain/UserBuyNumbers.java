@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static java.util.stream.Collectors.joining;
+
 public class UserBuyNumbers {
 
     private final List<LottoNumbers> userBuyNumbers;
@@ -26,12 +28,11 @@ public class UserBuyNumbers {
         return rankStates;
     }
 
-    public List<List<String>> convertToString() {
-        List<List<String>> allNumbers = new ArrayList<>();
-        for (LottoNumbers lottoNumbers : userBuyNumbers) {
-            allNumbers.add(lottoNumbers.convertToString());
-        }
-        return allNumbers;
+    @Override
+    public String toString() {
+        return userBuyNumbers.stream()
+                .map(LottoNumbers::toString)
+                .collect(joining("\n"));
     }
 
     @Override

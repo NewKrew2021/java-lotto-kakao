@@ -34,8 +34,9 @@ public class LottoNumber {
         return lottoNumber;
     }
 
-    public String getNumberToString() {
-        return Integer.toString(this.lottoNumber);
+    @Override
+    public String toString() {
+        return Integer.toString(lottoNumber);
     }
 
     @Override

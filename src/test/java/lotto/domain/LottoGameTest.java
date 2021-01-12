@@ -19,8 +19,12 @@ public class LottoGameTest {
     @Test
     public void buyLottoOne() {
         LottoGame game = new LottoGame(new Money(1500));
-        List<List<String>> expected = game.buyLotto(()-> new LottoNumbers(Arrays.asList(1,2,3,4,5,6)));
-        assertThat(expected).containsOnly(Arrays.asList("1", "2", "3", "4", "5", "6"));
+        UserBuyNumbers expected = game.buyLotto(()-> new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
+
+        UserBuyNumbers userBuyNumbers = new UserBuyNumbers();
+        userBuyNumbers.addBuyNumbers(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
+
+        assertThat(userBuyNumbers).isEqualTo(expected);
     }
 
     @Test
