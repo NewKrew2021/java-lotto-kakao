@@ -23,21 +23,24 @@
   * method가 한 가지 일만 하도록 최대한 작게 만들어라.
   * 배열 대신 ArrayList를 사용한다.
   
+## 2단게 요구사항
+* 기능 요구사항
+  * 사용자가 수동으로 추첨 번호를 입력할 수 있도록 해야 한다.
+* 프로그래밍 요구사항
+  * 예외가 발생하는 부분에 대해 자바 Exception을 적용해 예외처리한다.
+  
 ## 구현 클래스
 * controller
   * LottoGame : 로또 게임의 동작을 관리하는 컨트롤러
     
 * domain
-  * BallCountChecker : 입력받는 로또 번호 갯수를 체크하는 클래스
   * LottoRank : 로또 등수에 대한 enum 클래스
   * LottoResults : 구입한 로또들에 대한 등수 결과 클래스
   * LottoTicket : 로또 한 장에 대한 클래스
   * LottoTickets : 구입한 로또 여러 장에 대한 클래스
-  * MatchResult : 로또 결과를 비교하기 위한 클래스
   * Number : 로또 번호 하나에 대한 클래스
-  * NumberPool : 로또 번호들을 캐싱해놓은 클래스
-  * Price : 유저로부터 입력받는 금액을 저장하는 클래스
-  * WinnerNumber : 정답 번호를 저장하는 클래스
+  * PurchaseInformation : 유저로부터 입력받는 금액 및 티켓 수를 저장하는 클래스
+  * WinnerNumber : 정답 번호와 보너스 번호를 저장하는 클래스
 
 * view
   * LottoGameInputView : 사용자로부터 입력을 담당하는 클래스
