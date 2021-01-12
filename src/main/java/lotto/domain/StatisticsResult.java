@@ -21,6 +21,15 @@ public class StatisticsResult {
         this.ticketCount++;
     }
 
+    public double benefit() {
+        double sumPrice = 0;
+        for( StatisticsType type : StatisticsType.values() ) {
+            sumPrice += type.getJackpot() * rankCount.get(type);
+        }
+        sumPrice = sumPrice / (this.ticketCount * LottoTicket.LOTTO_PRICE );
+        return sumPrice;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -42,14 +51,4 @@ public class StatisticsResult {
                 "5개 일치, 보너스 볼 일치("+ StatisticsType.FIVE_WITH_BONUS.getJackpot()  +"원)-" + rankCount.get(StatisticsType.FIVE_WITH_BONUS) + "\n" +
                 "6개 일치 (" + StatisticsType.SIX.getJackpot()  + "원)-" + rankCount.get(StatisticsType.SIX) + "\n";
     }
-
-    public double benefit() {
-        double sumPrice = 0;
-        for( StatisticsType type : StatisticsType.values() ) {
-            sumPrice += type.getJackpot() * rankCount.get(type);
-        }
-        sumPrice = sumPrice / (this.ticketCount * LottoTicket.LOTTO_PRICE );
-        return sumPrice;
-    }
-
 }
