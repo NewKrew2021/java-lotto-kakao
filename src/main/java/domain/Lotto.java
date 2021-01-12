@@ -17,7 +17,7 @@ public class Lotto {
         this.numbers = numbers;
     }
 
-    public static Lotto of(Set<LottoNumber> numbers) {
+    public static Lotto from(Set<LottoNumber> numbers) {
         return new Lotto(numbers);
     }
 

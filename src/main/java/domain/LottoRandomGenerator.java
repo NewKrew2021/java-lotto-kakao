@@ -21,7 +21,7 @@ public class LottoRandomGenerator implements NumberGenerateStrategy {
             numbers.add(new LottoNumber(randomNumbers.get(i)));
         }
 
-        return Lotto.of(numbers);
+        return Lotto.from(numbers);
     }
 
 }

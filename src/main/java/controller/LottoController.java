@@ -12,11 +12,10 @@ public class LottoController {
         LottoTicketCount manualCount = LottoInputView.inputManulCount(amount);
         LottoTicketCount autoCount = getAutoCount(manualCount, amount);
 
-        LottoTickets manualTickets = LottoTickets.of(LottoInputView.inputLottoNumbers(manualCount));
-
+        LottoTickets manualTickets = LottoTickets.from(LottoInputView.inputLottoNumbers(manualCount));
         LottoOutputView.printTicketsCount(manualCount, autoCount);
-        LottoTickets autoTickets = LottoTickets.of(new LottoRandomGenerator(), amount);
 
+        LottoTickets autoTickets = LottoTickets.of(new LottoRandomGenerator(), amount);
         LottoTickets lottoTickets = manualTickets.concat(autoTickets);
 
         LottoOutputView.printLottoTickets(lottoTickets.getLottoTickets());

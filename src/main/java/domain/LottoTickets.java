@@ -26,10 +26,10 @@ public class LottoTickets {
         return new LottoTickets(tickets);
     }
 
-    public static LottoTickets of(List<List<Integer>> lottoNumbers){
+    public static LottoTickets from(List<List<Integer>> lottoNumbers){
         List<Lotto> tickets = new ArrayList<>();
         for (List<Integer> lottoNumber : lottoNumbers) {
-            tickets.add(Lotto.of(lottoNumber
+            tickets.add(Lotto.from(lottoNumber
                     .stream()
                     .map(LottoNumber::new)
                     .collect(Collectors.toSet())));

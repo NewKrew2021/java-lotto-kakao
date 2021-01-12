@@ -19,6 +19,6 @@ public class LottoManualGenerator implements NumberGenerateStrategy {
                 .map(LottoNumber::new)
                 .collect(Collectors.toList()));
 
-        return Lotto.of(numberSet);
+        return Lotto.from(numberSet);
     }
 }
