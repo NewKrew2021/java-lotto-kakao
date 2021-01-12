@@ -16,15 +16,20 @@ public class Rankings {
     }
 
     public static Rankings fromRanks(List<Rank> ranks) {
+        Map<Rank, Integer> rankMap = getInitialMap();
+
+        for (Rank rank : ranks) {
+            rankMap.compute(rank, (k, v) -> v + 1);
+        }
+        return new Rankings(rankMap);
+    }
+
+    private static Map<Rank, Integer> getInitialMap() {
         Map<Rank, Integer> rankMap = new HashMap<>();
         for (Rank rank : Rank.values()) {
             rankMap.put(rank, 0);
         }
-
-        for (Rank rank : ranks) {
-            rankMap.computeIfPresent(rank, (k, v) -> v + 1);
-        }
-        return new Rankings(rankMap);
+        return rankMap;
     }
 
     public int getProfitRate(Money money) {
