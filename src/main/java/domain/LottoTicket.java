@@ -26,7 +26,8 @@ public class LottoTicket {
 
   public static LottoTicket of(List<Integer> integerNumbers) {
     List<LottoNumber> numbers = Optional.ofNullable(integerNumbers)
-        .orElseThrow(() -> new InvalidLottoNumberException("LottoTicket of List<Integer> null error"))
+        .orElseThrow(
+            () -> new InvalidLottoNumberException("LottoTicket of List<Integer> null error"))
         .stream()
         .map(LottoNumber::of)
         .collect(Collectors.toList());
@@ -47,7 +48,7 @@ public class LottoTicket {
   }
 
   private static void validateLength(Collection<LottoNumber> numbers) {
-    if(numbers.size() != LOTTO_NUMBERS_LENGTH) {
+    if (numbers.size() != LOTTO_NUMBERS_LENGTH) {
       throw new InvalidLottoNumberException("로또 티켓을 생성하기위해선 6개의 숫자만 입력해야합니다.");
     }
   }

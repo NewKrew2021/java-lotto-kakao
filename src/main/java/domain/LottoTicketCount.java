@@ -16,7 +16,9 @@ public class LottoTicketCount {
   }
 
   private void validate(int manualCount, int count) {
-    if (count < manualCount) throw new InvalidLottoCountException("수동 구매 개수는 총 구매 개수를 넘을 수 없습니다.");
+    if (count < manualCount) {
+      throw new InvalidLottoCountException("수동 구매 개수는 총 구매 개수를 넘을 수 없습니다.");
+    }
   }
 
   public int getManualCount() {

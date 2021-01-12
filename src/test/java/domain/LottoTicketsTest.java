@@ -31,7 +31,8 @@ public class LottoTicketsTest {
 
   @Test
   void rank() {
-    LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.of(7));
+    LottoWinningNumber lottoWinningNumber = new LottoWinningNumber(
+        LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6)), LottoNumber.of(7));
     WinningInfo winningInfo = lottoTickets.getWinningInfo(lottoWinningNumber);
 
     Map<LottoRank, Integer> testWinningInfo = new HashMap<>();

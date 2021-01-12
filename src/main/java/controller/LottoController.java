@@ -17,7 +17,8 @@ public class LottoController {
   public static void startLotto() {
     Amount amount = new Amount(LottoInputView.inputAmount());
 
-    LottoTicketCount lottoTicketCount = new LottoTicketCount(amount, LottoInputView.inputManualCount());
+    LottoTicketCount lottoTicketCount = new LottoTicketCount(amount,
+        LottoInputView.inputManualCount());
 
     LottoTickets lottoTickets = createLottoTickets(lottoTicketCount);
     LottoOutputView.printTicketsCount(lottoTicketCount);
@@ -32,8 +33,10 @@ public class LottoController {
   }
 
   private static LottoTickets createLottoTickets(LottoTicketCount lottoTicketCount) {
-    List<String> manualLottoNumbers = LottoInputView.inputManualLottoNumbers(lottoTicketCount.getManualCount());
-    LottoTickets lottoTickets = LottoService.generateLottoTickets(manualLottoNumbers, lottoTicketCount.getAutoCount());
+    List<String> manualLottoNumbers = LottoInputView
+        .inputManualLottoNumbers(lottoTicketCount.getManualCount());
+    LottoTickets lottoTickets = LottoService
+        .generateLottoTickets(manualLottoNumbers, lottoTicketCount.getAutoCount());
     LottoOutputView.printTickets(lottoTickets.getLottoTicketsInfo());
     return lottoTickets;
   }

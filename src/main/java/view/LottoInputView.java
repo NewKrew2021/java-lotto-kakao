@@ -9,7 +9,7 @@ public class LottoInputView {
   private LottoInputView() {
   }
 
-  private static Scanner sc = new Scanner(System.in);
+  private static final Scanner sc = new Scanner(System.in);
 
   public static int inputAmount() {
     System.out.println("구입금액을 입력해 주세요.");

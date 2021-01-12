@@ -30,12 +30,12 @@ public class WinningInfo {
 
   @Override
   public boolean equals(Object o) {
-      if (this == o) {
-          return true;
-      }
-      if (o == null || getClass() != o.getClass()) {
-          return false;
-      }
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     WinningInfo that = (WinningInfo) o;
     return Objects.equals(info, that.info);
   }

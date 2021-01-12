@@ -19,7 +19,9 @@ public class LottoOutputView {
 
 
   public static void printTicketsCount(LottoTicketCount lottoTicketCount) {
-    System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", lottoTicketCount.getManualCount(), lottoTicketCount.getAutoCount()));
+    System.out.println(String
+        .format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", lottoTicketCount.getManualCount(),
+            lottoTicketCount.getAutoCount()));
   }
 
   public static void printTickets(List<List<Integer>> lottoTicketsInfo) {
