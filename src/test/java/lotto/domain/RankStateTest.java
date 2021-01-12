@@ -18,12 +18,12 @@ public class RankStateTest {
 
     @ParameterizedTest
     @ValueSource(booleans = {true, false})
-    public void rankFirst(boolean bonus) {
+    public void rankFIRST(boolean bonus) {
         assertThat(RankState.rank(6, bonus)).isEqualTo(RankState.FIRST);
     }
 
     @Test
-    public void rankSecond() {
+    public void rankSECOND() {
         assertThat(RankState.rank(5, true)).isEqualTo(RankState.SECOND);
     }
 

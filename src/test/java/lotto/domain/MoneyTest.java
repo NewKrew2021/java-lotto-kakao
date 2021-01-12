@@ -2,28 +2,31 @@ package lotto.domain;
 
 import lotto.exception.InsufficientMoneyException;
 import org.junit.jupiter.api.Test;
-
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.*;
 
 public class MoneyTest {
 
     @Test
-    public void create() {
+    public void createEqualInstance() {
         Money money = new Money(1000);
         assertThat(money).isEqualTo(new Money(1000));
     }
 
-    @Test
-    public void validateNoBuyable() {
+    @ParameterizedTest
+    @ValueSource(ints = {0, 998, 999})
+    public void validateNoBuyable(int value) {
         assertThatThrownBy(() -> {
-            Money money = new Money(999);
+            new Money(value);
         }).isInstanceOf(InsufficientMoneyException.class);
     }
 
-    @Test
-    public void buyHowMany() {
-        Money money = new Money(1001);
+    @ParameterizedTest
+    @ValueSource(ints = {1000, 1001, 1999})
+    public void buyHowMany(int value) {
+        Money money = new Money(value);
         assertThat(money.possibleNumberBuy()).isEqualTo(1);
     }
 

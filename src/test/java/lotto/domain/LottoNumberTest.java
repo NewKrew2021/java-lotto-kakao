@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.*;
 public class LottoNumberTest {
 
     @Test
-    public void create() {
+    public void createEqualInstance() {
         LottoNumber number1 = LottoNumber.of(7);
         LottoNumber number2 = LottoNumber.of(7);
         assertThat(number1 == number2).isTrue();

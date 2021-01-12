@@ -11,7 +11,7 @@ import static org.assertj.core.api.Assertions.*;
 public class UserBuyNumbersTest {
 
     @Test
-    public void create() {
+    public void createEqualInstance() {
         UserBuyNumbers totalUserBuyNums = new UserBuyNumbers();
         assertThat(totalUserBuyNums).isEqualTo(new UserBuyNumbers());
     }
