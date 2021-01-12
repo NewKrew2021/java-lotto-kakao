@@ -30,6 +30,9 @@ public class OutputView {
     }
 
     public static void printResult(LottoSimulation lotto) {
+        System.out.println("\n당첨 통계");
+        System.out.println("---------");
+
         LottoResults results = lotto.getLottoResults();
         System.out.println("3개 일치 (" + Result.THREE.getReward() + "원) - " + results.getResultCount(Result.THREE) + "개");
         System.out.println("4개 일치 (" + Result.FOUR.getReward() + "원) - " + results.getResultCount(Result.FOUR) + "개");
