@@ -73,7 +73,7 @@ public class LottoTest {
     }
 
     @Test
-    void create() {
+    void testCreate() {
         Lotto lotto = new Lotto(Arrays.asList(
                 new LottoNumber(1),
                 new LottoNumber(2),
