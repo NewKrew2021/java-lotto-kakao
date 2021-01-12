@@ -30,7 +30,6 @@ public class LottoInputView {
     }
 
     public static String getNonAutoLotto(){
-        LottoOutputView.printInputNonAutoLottoPhrase();
         String lotto = scanner.nextLine();
         return lotto;
     }

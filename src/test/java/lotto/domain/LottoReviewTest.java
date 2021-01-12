@@ -45,7 +45,7 @@ public class LottoReviewTest {
     @Test
     void testLottoProfitRatio(){
         Lottos lottos = new Lottos();
-        assertThat(lottoReview.getProfitRatio()).isEqualTo(LottoRank.FIRST.getMoney()/10);
+        assertThat(lottoReview.getProfitRatio()).isEqualTo(LottoRank.FIRST.getMoney()/Money.LOTTO_PRICE);
     }
 
 }

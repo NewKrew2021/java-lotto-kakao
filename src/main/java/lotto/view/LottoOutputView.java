@@ -25,7 +25,7 @@ public class LottoOutputView {
     }
 
     public static void printInputQuantityPhrase(int nonAuto, int auto){
-        System.out.println("수동으로 " + nonAuto + "장, 자동으로" + auto + INPUT_QUANTITY_PHRASE);
+        System.out.println("수동으로 " + nonAuto + "장, 자동으로 " + auto + INPUT_QUANTITY_PHRASE);
     }
 
     public static void printLottos(Lottos lottos){
@@ -51,7 +51,7 @@ public class LottoOutputView {
     }
 
     public static void printProfitRatio(double ratio){
-        System.out.println(PROFIT_PHRASE + ratio + "입니다.");
+        System.out.println(PROFIT_PHRASE + (int)(ratio*100)/100.00 + "입니다.");
     }
 
     public static void printInputNonAutoLottoQuantityPhrase() {

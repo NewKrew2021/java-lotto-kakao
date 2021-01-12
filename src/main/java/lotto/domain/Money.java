@@ -5,7 +5,7 @@ import static lotto.util.StringUtils.*;
 public class Money {
     private int money;
 
-    private static final int LOTTO_PRICE = 1_000;
+    public static final int LOTTO_PRICE = 1_000;
 
     private Money(int money){
         this.money = money;
