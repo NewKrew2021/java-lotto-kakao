@@ -2,32 +2,38 @@ package mission.lotto.util;
 
 import mission.lotto.domain.*;
 
+import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 
 public class Statistics {
 
-    public static Map<Rank, Integer> getAllLottoRank(Lottos lottos, LottoAnswer lottoAnswer) {
-        Map<Rank, Integer> result = new TreeMap<>();
+    private final Map<Rank, Integer> lottoRanks;
+
+    public Statistics(Lottos lottos, LottoAnswer lottoAnswer) {
+        Map<Rank, Integer> lottoRanks = new TreeMap<>();
         for (Rank lotteryWinnings : Rank.values()) {
-            result.put(lotteryWinnings, 0);
+            lottoRanks.put(lotteryWinnings, 0);
         }
         for (Lotto lotto : lottos.getLottos()) {
             Rank rank = lotto.calculateRank(lottoAnswer);
-            result.put(rank, result.get(rank) + 1);
+            lottoRanks.put(rank, lottoRanks.get(rank) + 1);
         }
-        return result;
+        this.lottoRanks = lottoRanks;
     }
 
-    public static int getSumAllWinningMoney(Lottos lottos, LottoAnswer answer) {
-        return lottos.getLottos().stream()
-                .map(lotto -> lotto.calculateRank(answer))
-                .mapToInt(Rank::getMoney)
+    public float getRateOfProfit(UserMoney userMoney) {
+        return (float) getSumAllWinningMoney() / userMoney.getUserMoney();
+    }
+
+    public Map<Rank, Integer> getLottoRanks() {
+        return Collections.unmodifiableMap(this.lottoRanks);
+    }
+
+    public int getSumAllWinningMoney() {
+        return lottoRanks.keySet().stream()
+                .mapToInt(rank -> lottoRanks.get(rank) * rank.getMoney())
                 .sum();
-    }
-
-    public static float getRateOfProfit(Lottos lottos, LottoAnswer lottoAnswer, UserMoney userMoney) {
-        return (float) Statistics.getSumAllWinningMoney(lottos, lottoAnswer) / userMoney.getUserMoney();
     }
 
 }

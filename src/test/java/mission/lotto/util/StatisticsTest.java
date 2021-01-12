@@ -37,7 +37,8 @@ public class StatisticsTest {
         LottoAnswer answer = new LottoAnswer(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 
         // then
-        Map<Rank, Integer> allLottoRankCount = Statistics.getAllLottoRank(lottos, answer);
+        Statistics statistics = new Statistics(lottos, answer);
+        Map<Rank, Integer> allLottoRankCount = statistics.getLottoRanks();
         assertThat(allLottoRankCount)
                 .containsEntry(Rank.FIRST, 0)
                 .containsEntry(Rank.SECOND, 1)
@@ -46,7 +47,7 @@ public class StatisticsTest {
                 .containsEntry(Rank.FIFTH, 0)
                 .containsEntry(Rank.UNRANKED, 11);
 
-        assertThat(Statistics.getSumAllWinningMoney(lottos, answer)).isEqualTo(31550000);
+        assertThat(statistics.getSumAllWinningMoney()).isEqualTo(31550000);
     }
 
 }

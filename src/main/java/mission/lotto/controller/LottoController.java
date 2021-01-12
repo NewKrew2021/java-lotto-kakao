@@ -21,8 +21,9 @@ public class LottoController {
                 InputView.enterLastWeekWinningNumbers(),
                 InputView.enterLastWeekBonusNumber());
 
-        OutputView.resultView(Statistics.getAllLottoRank(lottos, lottoAnswer));
-        OutputView.totalEarningsView(Statistics.getRateOfProfit(lottos, lottoAnswer, userMoney));
+        Statistics statistics = new Statistics(lottos, lottoAnswer);
+        OutputView.resultView(statistics.getLottoRanks());
+        OutputView.totalEarningsView(statistics.getRateOfProfit(userMoney));
     }
 
 }
