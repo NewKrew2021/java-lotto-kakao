@@ -8,16 +8,16 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-public class AmountTest {
+class AmountTest {
 
   @Test
-  public void create() {
+  void create() {
     Amount amount = new Amount(1000);
     assertThat(amount).isEqualTo(new Amount(1000));
   }
 
   @Test
-  public void isInvalidAmount() {
+  void isInvalidAmount() {
     assertThatExceptionOfType(InvalidAmountException.class)
         .isThrownBy(() -> new Amount(999));
   }

@@ -10,6 +10,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
   static final int LOWER_BOUND = 1;
   static final int UPPER_BOUND = 45;
   static final List<LottoNumber> numbers;
+
   static {
     numbers = new ArrayList<>();
     for (int i = 0; i <= UPPER_BOUND; i++) {
