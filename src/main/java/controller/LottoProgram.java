@@ -23,7 +23,7 @@ public class LottoProgram {
         int buyManualCount = lottoProgramView.getBuyManualLottoCountForUser();
         int buyAutoLottoCount = calculateAutoBuyLottoCount(buyAmount,buyManualCount);
 
-        lottoProgramView.printBoughtLottosCount(buyAutoLottoCount);
+        lottoProgramView.printBoughtLottosCount(buyManualCount,buyAutoLottoCount);
         AutoLottos autoLottos = new AutoLottos(buyAutoLottoCount);
 
         lottoProgramView.printLottosNumber(autoLottos);
