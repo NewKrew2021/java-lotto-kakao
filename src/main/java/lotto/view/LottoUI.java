@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.domain.NumOfLotto;
 import lotto.dto.LottosDto;
 import lotto.dto.RankingsDto;
 import lotto.util.Rank;
@@ -31,8 +32,8 @@ public class LottoUI {
         return scanner.nextLine();
     }
 
-    public void printLottosMessage(int numOfManual, int numOfAuto) {
-        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", numOfManual, numOfAuto);
+    public void printLottosMessage(NumOfLotto numOfManual, NumOfLotto numOfAuto) {
+        System.out.printf("수동으로 %d장, 자동으로 %d개를 구매했습니다.\n", numOfManual.getNumOfLotto(), numOfAuto.getNumOfLotto());
     }
 
     public void printLottos(LottosDto lottosDto) {
