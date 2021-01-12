@@ -10,24 +10,26 @@ import java.util.stream.Collectors;
 public class Lotto {
 
     public static final int LOTTO_NUMBER_SIZE = 6;
-    private static final String LOTTO_SIZE_EXCEED_ERROR_MESSAGE = "%d개 이하의 숫자를 입력해주세요.";
+    private static final String LOTTO_SIZE_EXCEED_ERROR_MESSAGE = "%d개의 숫자를 입력해주세요.";
+    public static final String LOTTO_CONTAINS_DUPLICATE_NUMBER_ERROR_MESSAGE = "중복된 숫자가 포함되어 있습니다.";
 
     private List<LottoNumber> lottoNumbers;
 
+    public Lotto(LottoStrategy lottoStrategy) {
+        List<Integer> numbers = lottoStrategy.numberChooseStrategy();
 
-    public Lotto(String inputText) {
-        this(StringUtils.mapStringListToInteger(inputText));
-    }
-
-    public Lotto(List<Integer> numbers) {
-        if(numbers.size() > LOTTO_NUMBER_SIZE) {
+        if(numbers.size() != LOTTO_NUMBER_SIZE) {
             throw new IllegalArgumentException(String.format(LOTTO_SIZE_EXCEED_ERROR_MESSAGE, LOTTO_NUMBER_SIZE));
         }
 
         lottoNumbers = new ArrayList<>();
         for (Integer number : numbers) {
-            lottoNumbers.add(new LottoNumber(number));
+            addNumber(number);
         }
+    }
+
+    public boolean contains(int number) {
+        return lottoNumbers.contains(LottoNumber.of(number));
     }
 
     public List<LottoNumber> getLottoNumbers() {
@@ -39,20 +41,32 @@ public class Lotto {
                 findStatus(countMatchingNumber(answer.getAnswerLotto()), isBonusNumberMatching(answer.getBonusNumber()));
     }
 
+    private void addNumber(int number) {
+        if(lottoNumbers.contains(LottoNumber.of(number))) {
+            throw new IllegalArgumentException(LOTTO_CONTAINS_DUPLICATE_NUMBER_ERROR_MESSAGE);
+        }
+        lottoNumbers.add(LottoNumber.of(number));
+    }
+
     private boolean isBonusNumberMatching(LottoNumber bonusNumber) {
         return lottoNumbers.contains(bonusNumber);
     }
 
     private int countMatchingNumber(Lotto answerLotto) {
-        return lottoNumbers.stream().
-                filter(number -> answerLotto.getLottoNumbers().contains(number)).collect(Collectors.toList()).size();
+        return lottoNumbers.stream()
+                .filter(number -> answerLotto.getLottoNumbers().contains(number))
+                .collect(Collectors.toList()).size();
     }
 
     @Override
     public String toString() {
         StringBuffer stringBuffer = new StringBuffer();
         stringBuffer.append("[");
-        stringBuffer.append(lottoNumbers.stream().map(Object::toString).collect(Collectors.joining(",")));
+
+        stringBuffer.append(lottoNumbers.stream()
+                .map(Object::toString)
+                .collect(Collectors.joining(",")));
+
         stringBuffer.append("]");
         return stringBuffer.toString();
     }

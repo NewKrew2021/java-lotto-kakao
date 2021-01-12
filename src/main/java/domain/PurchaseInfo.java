@@ -1,20 +1,22 @@
 package domain;
 
 public class PurchaseInfo {
-    public static final long LOTTO_PRICE = 1000L;
-    private final long initialPrice;
-    private long purchaseCount;
 
-    public PurchaseInfo(long initialPrice) {
-        this.initialPrice = initialPrice;
-        this.purchaseCount = initialPrice / LOTTO_PRICE;
+    private final long needLottoPurchaseCount;
+    private long currentBuyLottoCount;
+
+    public PurchaseInfo(long needLottoPurchaseCount) {
+        this.needLottoPurchaseCount = needLottoPurchaseCount;
     }
 
-    public long getPurchaseCount() {
-        return purchaseCount;
+    public void buyLotto() {
+        currentBuyLottoCount++;
     }
 
-    public long getInitialPrice() {
-        return initialPrice;
+    public boolean canBuyLotto() { return currentBuyLottoCount < needLottoPurchaseCount; }
+
+    public long getNeedLottoPurchaseCount() {
+        return needLottoPurchaseCount;
     }
+
 }

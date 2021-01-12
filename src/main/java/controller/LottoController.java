@@ -7,7 +7,8 @@ public class LottoController {
 
     private LottoSimulator lottoSimulator;
     private LottoSimulatorView lottoSimulatorView;
-    private PurchaseInfo purchaseInfo;
+    private PurchaseInfos purchaseInfos;
+
     private Lottos lottos;
     private Answer answer;
 
@@ -16,30 +17,45 @@ public class LottoController {
     }
 
     public void startLottoSimulation() {
+        getLottoInformation();
         buyLotto();
-        printBuyLotto();
+        printBuyLottoList();
         getAnswerNumbers();
         printLottoResults();
     }
 
-    private void buyLotto() {
-        purchaseInfo = new PurchaseInfo(lottoSimulatorView.askMoneyForBuyLotto());
-        lottos = new Lottos(purchaseInfo);
-        lottoSimulatorView.printBuyLottoCount(purchaseInfo.getPurchaseCount());
+    private void getLottoInformation() {
+        purchaseInfos = new PurchaseInfos(lottoSimulatorView.askMoneyForBuyLotto(), lottoSimulatorView.askCountForBuySelfLotto());
+        lottos = new Lottos();
     }
 
-    private void printBuyLotto() {
+    private void buyLotto() {
+        if (purchaseInfos.canBuySelfLotto()) {
+            lottoSimulatorView.printAskLottoNumberMakeSelfLotto();
+        }
+        while (purchaseInfos.canBuySelfLotto()) {
+            lottos.buyLotto(new SelfLottoStrategy(lottoSimulatorView.askLottoNumberForMakeSelfLotto()));
+            purchaseInfos.buySelfLotto();
+        }
+        while (purchaseInfos.canBuyAutoLotto()) {
+            lottos.buyLotto(new RandomLottoStrategy());
+            purchaseInfos.buyAutoLotto();
+        }
+    }
+
+    private void printBuyLottoList() {
+        lottoSimulatorView.printBuyLottoCount(purchaseInfos.getNeededSelfLottoCount(), purchaseInfos.getNeededAutoLottoCount());
         lottoSimulatorView.printLottos(lottos);
     }
 
     private void getAnswerNumbers() {
-        Lotto answerLotto = new Lotto(lottoSimulatorView.askLottoNumberForAnswerLotto());
+        Lotto answerLotto = new Lotto(new SelfLottoStrategy(lottoSimulatorView.askLottoNumberForAnswerLotto()));
         int bonusNumber = lottoSimulatorView.askBonusNumberForAnswerLotto();
         answer = new Answer(answerLotto, bonusNumber);
     }
 
     private void printLottoResults() {
-        lottoSimulator = new LottoSimulator(purchaseInfo, lottos, answer);
-        lottoSimulatorView.printResult(lottoSimulator.getLottoResults(), lottoSimulator.profitPercentage());
+        lottoSimulator = new LottoSimulator(lottos, answer);
+        lottoSimulatorView.printResult(lottoSimulator.getLottoResults(), lottoSimulator.getProfit());
     }
 }

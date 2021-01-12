@@ -11,15 +11,15 @@ public class LottoNumberTest {
 
     @Test
     void createTest() {
-        LottoNumber lottoNumber = new LottoNumber(5);
-        assertThat(lottoNumber).isEqualTo(new LottoNumber(5));
+        LottoNumber lottoNumber = LottoNumber.of(5);
+        assertThat(lottoNumber == LottoNumber.of(5)).isTrue();
     }
 
     @ParameterizedTest
     @ValueSource(ints = {-1,0,46,47})
     void lottoNumberRangeTest(int number) {
         assertThatThrownBy(()->{
-            new LottoNumber(number);
+            LottoNumber.of(number);
         }).isInstanceOf(IllegalArgumentException.class).hasMessageMatching("[0-9]* ~ [0-9]* 사이의 숫자를 입력해주세요.");
     }
 }
