@@ -60,4 +60,5 @@ public class LottoRankingCountTest {
         long expected = 2_001_555_000L;
         assertThat(lottoRankingCount.calculateTotalPrice()).isEqualTo(expected);
     }
+
 }

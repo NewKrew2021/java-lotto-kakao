@@ -16,4 +16,5 @@ public enum LottoBonusMatcher {
     public boolean calculate(boolean bonus) {
         return matchBonusAndRank.apply(bonus);
     }
+
 }

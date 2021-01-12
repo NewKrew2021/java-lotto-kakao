@@ -28,9 +28,8 @@ public class WinnerTicketTest {
         WinnerTicket winnerTicket = new WinnerTicket(lottoNumbers, bonusNumber);
 
         //then
-        List<LottoNumber> expected = Arrays.asList(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
-                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6));
-        assertThat(winnerTicket.getWinnerNumbers().getLottoNumbers()).usingRecursiveComparison().
+        List<Integer> expected = Arrays.asList(1,2,3,4,5,6);
+        assertThat(winnerTicket.getWinnerNumbers().getSortedLottoNumbersAsInteger()).usingRecursiveComparison().
                 ignoringCollectionOrder().isEqualTo(expected);
         assertThat(winnerTicket.getBonusNumber()).isEqualTo(LottoNumber.valueOf(7));
     }

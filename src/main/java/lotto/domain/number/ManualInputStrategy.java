@@ -13,4 +13,5 @@ public class ManualInputStrategy implements NumberGenerateStrategy {
     public List<Integer> generate() {
         return manualInputNumbers;
     }
+
 }

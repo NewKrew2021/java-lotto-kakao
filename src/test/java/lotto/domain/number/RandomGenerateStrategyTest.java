@@ -20,4 +20,5 @@ class RandomGenerateStrategyTest {
         //then
         assertThat(randomNumbers.size()).isEqualTo(6);
     }
+
 }

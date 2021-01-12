@@ -24,9 +24,8 @@ public class LottoNumbersTest {
         LottoNumbers lottoNumbers = LottoNumbers.from(strategy);
 
         //then
-        List<LottoNumber> expected = Arrays.asList(LottoNumber.valueOf(1), LottoNumber.valueOf(2), LottoNumber.valueOf(3),
-                LottoNumber.valueOf(4), LottoNumber.valueOf(5), LottoNumber.valueOf(6));
-        assertThat(lottoNumbers.getLottoNumbers()).usingRecursiveComparison().
+        List<Integer> expected = Arrays.asList(1,2,3,4,5,6);
+        assertThat(lottoNumbers.getSortedLottoNumbersAsInteger()).usingRecursiveComparison().
                 ignoringCollectionOrder().isEqualTo(expected);
     }
 
@@ -68,4 +67,5 @@ public class LottoNumbersTest {
                 .isThrownBy(() -> LottoNumbers.from(overLengthStrategy))
                 .withMessage(LOTTO_TICKET_EXCEPTION_MESSAGE);
     }
+
 }

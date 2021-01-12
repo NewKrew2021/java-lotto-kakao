@@ -30,4 +30,5 @@ public class LottoNumberTest {
                 .isThrownBy(() -> LottoNumber.valueOf(number))
                 .withMessage(LOTTO_NUMBER_EXCEPTION_MESSAGE);
     }
+
 }

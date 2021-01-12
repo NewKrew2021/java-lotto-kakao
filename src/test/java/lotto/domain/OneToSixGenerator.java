@@ -10,4 +10,5 @@ public class OneToSixGenerator implements NumberGenerateStrategy {
     public List<Integer> generate() {
         return Arrays.asList(1, 2, 3, 4, 5, 6);
     }
+
 }

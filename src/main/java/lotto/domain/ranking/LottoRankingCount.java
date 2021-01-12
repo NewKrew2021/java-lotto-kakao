@@ -10,7 +10,7 @@ import java.util.Map;
 public class LottoRankingCount {
     private final Map<LottoRanking, Integer> rankingCount;
 
-    public LottoRankingCount(Map<LottoRanking, Integer> rankingCount) {
+    private LottoRankingCount(Map<LottoRanking, Integer> rankingCount) {
         this.rankingCount = rankingCount;
     }
 
@@ -39,4 +39,5 @@ public class LottoRankingCount {
     public Map<LottoRanking, Integer> getRankingCount() {
         return rankingCount;
     }
+
 }
