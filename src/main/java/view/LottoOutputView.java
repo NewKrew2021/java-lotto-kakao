@@ -1,6 +1,7 @@
 package view;
 
 import domain.LottoRank;
+import domain.LottoTicketCount;
 import domain.WinningInfo;
 import java.util.List;
 import java.util.Map;
@@ -17,10 +18,8 @@ public class LottoOutputView {
       "6개 일치 (200000000워원) - %d개\n"};
 
 
-  public static void printTicketsCount(int ticketsCount) {
-    StringBuilder sb = new StringBuilder();
-    sb.append(ticketsCount).append("개를 구매했습니다.");
-    System.out.println(sb.toString());
+  public static void printTicketsCount(LottoTicketCount lottoTicketCount) {
+    System.out.println(String.format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", lottoTicketCount.getManualCount(), lottoTicketCount.getAutoCount()));
   }
 
   public static void printTickets(List<List<Integer>> lottoTicketsInfo) {
