@@ -1,6 +1,6 @@
 package lotto.view;
 
-import lotto.domain.Money;
+import lotto.domain.LottoGame;
 import lotto.domain.RankState;
 import lotto.domain.UserBuyNumbers;
 import lotto.dto.LottoStatisticDTO;
@@ -20,8 +20,8 @@ public class OutputView {
     private static final String RANK_COUNT_OUTPUT_MESSAGE = "%d개 일치 (%d원)- %d개\n";
     private static final String PROFIT_RATE_OUTPUT_MESSAGE = "총 수익률은 %.2f 입니다.\n";
 
-    public static void printLottoCount(Money money) {
-        System.out.println(money.possibleNumberBuy()+BUY_COUNT_OUTPUT_MESSAGE);
+    public static void printLottoCount(LottoGame lottoGame) {
+        System.out.println(lottoGame.getLottoCount()+BUY_COUNT_OUTPUT_MESSAGE);
     }
 
     public static void printBuyLotto(UserBuyNumbers userBuyNumbers) {

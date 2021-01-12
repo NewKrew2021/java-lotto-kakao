@@ -14,6 +14,10 @@ public class LottoGame {
         this.userBuyNumbers = new UserBuyNumbers();
     }
 
+    public int getLottoCount() {
+        return money.possibleNumberBuy();
+    }
+
     public UserBuyNumbers buyLotto(GenerateStrategy generateStrategy) {
         for (int i = 0; i < money.possibleNumberBuy(); i++) {
             userBuyNumbers.addBuyNumbers(NumberGenerator.generateBuyNumbers(generateStrategy));
