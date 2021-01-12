@@ -25,6 +25,6 @@ public class MoneyTest {
     @DisplayName("구매가능한 로또 개수를 반환한다.")
     public void howManyTest() {
         Money money = new Money(14000);
-        assertThat(money.howMany()).isEqualTo(14);
+        assertThat(money.howMany().getNumOfLotto()).isEqualTo(14);
     }
 }
