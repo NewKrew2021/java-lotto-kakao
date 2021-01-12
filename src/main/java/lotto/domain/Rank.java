@@ -34,7 +34,7 @@ public enum Rank {
               .orElse(OUT);
    }
 
-   public int getMatchCount(){
+   private int getMatchCount(){
       return matchCount;
    }
 
