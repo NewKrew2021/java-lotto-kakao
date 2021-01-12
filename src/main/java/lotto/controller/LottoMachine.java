@@ -2,11 +2,14 @@ package lotto.controller;
 
 import lotto.domain.LottoPaper;
 import lotto.domain.LottoPaperGenerator;
+import lotto.domain.Ticket;
 import lotto.domain.WinnerBalls;
 import lotto.dto.LottoResult;
 import lotto.setting.Format;
 import lotto.view.Input;
 import lotto.view.Output;
+
+import java.util.HashSet;
 
 public class LottoMachine {
     private int userMoney;
@@ -27,7 +30,9 @@ public class LottoMachine {
     }
 
     public void inputWinnerInformation(){
-        winnerBalls = Input.getWinnerBallsFromUser();
+        Ticket winnerTicket = new Ticket(new HashSet<>(Input.getWinnerNumbersFromUser()));
+        int bonusBall = Input.getBonusBallFromUser();
+        winnerBalls = new WinnerBalls(winnerTicket, bonusBall);
     }
 
     public void outputStatisticsAboutPurchasedLotto() {

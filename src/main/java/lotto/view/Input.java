@@ -14,14 +14,15 @@ public class Input {
         return CustomTypeCasting.stringToInteger(scanner.nextLine());
     }
 
-    public static WinnerBalls getWinnerBallsFromUser() {
+    public static List<Integer> getWinnerNumbersFromUser() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        List<Integer> userInputNumbers = CustomTypeCasting.stringToIntegersUsingParsing(scanner.nextLine(), ",");
+        return CustomTypeCasting.stringToIntegersUsingParsing(scanner.nextLine(), ",");
+    }
 
+    public static int getBonusBallFromUser(){
         System.out.println("보너스 볼을 입력해주세요.");
         int ball = CustomTypeCasting.stringToInteger(scanner.nextLine());
-
-        return validationCheckAndWrap(userInputNumbers, ball); //TODO: 뭔가 이름을 바꾸면 좋겠다.
+        return ball;
     }
 
     /* 이 기능을 다른 클래스로 이동시킬지 고민했었는데, UI에 따라서 입력형식이 달라지므로, 이 클래스에 놓는게 좋다고 생각했습니다. */
