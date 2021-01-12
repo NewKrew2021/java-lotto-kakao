@@ -17,7 +17,7 @@ public class LottosTest {
 
     @BeforeEach
     void setUp(){
-        lottos.add(LottoGenerator.getInstance().generateLotto());
+        lottos.add(LottoGenerator.generateLotto());
     }
 
     @Test

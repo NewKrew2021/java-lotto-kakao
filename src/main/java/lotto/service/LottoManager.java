@@ -11,8 +11,6 @@ public class LottoManager {
     private WonLotto wonLotto;
     private LottoReview review;
 
-    private final LottoGenerator lottoGenerator=LottoGenerator.getInstance();
-
     public LottoManager(){
         lottos=new Lottos();
     }
@@ -44,7 +42,7 @@ public class LottoManager {
         LottoOutputView.printInputQuantityPhrase(nonAutoBuyCount, autoBuyCount);
 
         for(int i=0;i<autoBuyCount;i++){
-            lottos.add(lottoGenerator.generateLotto());
+            lottos.add(LottoGenerator.generateLotto());
         }
 
         LottoOutputView.printLottos(lottos);
@@ -58,13 +56,13 @@ public class LottoManager {
 
         LottoOutputView.printInputNonAutoLottoPhrase();
         for (int i = 0; i < amount; i++) {
-            lottos.add(lottoGenerator.lottoStringParser(LottoInputView.getNonAutoLotto()));
+            lottos.add(LottoGenerator.lottoStringParser(LottoInputView.getNonAutoLotto()));
         }
         money.buyLottos(amount);
     }
 
     private void makeWonLotto(){
-        Lotto lotto=lottoGenerator.lottoStringParser(LottoInputView.getWonLotto());
+        Lotto lotto=LottoGenerator.lottoStringParser(LottoInputView.getWonLotto());
         int bonusBall=LottoInputView.getBonusBall();
 
         wonLotto = new WonLotto(lotto,bonusBall);

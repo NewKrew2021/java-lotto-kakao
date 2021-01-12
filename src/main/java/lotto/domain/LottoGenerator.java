@@ -19,17 +19,7 @@ public class LottoGenerator {
 
     public static final int LOTTO_MAX_SIZE = 6;
 
-    private LottoGenerator(){
-    }
-
-    public static LottoGenerator getInstance(){
-        if(instance == null)
-            return new LottoGenerator();
-
-        return instance;
-    }
-
-    public Lotto generateLotto() {
+    public static Lotto generateLotto() {
 
         Collections.shuffle(allLottoNumbers);
 
@@ -39,7 +29,7 @@ public class LottoGenerator {
         return new Lotto(set);
     }
 
-    public WonLotto generateWonLotto(){
+    public static WonLotto generateWonLotto(){
         Collections.shuffle(allLottoNumbers);
 
         SortedSet<LottoNumber> set = new TreeSet<>();
@@ -48,7 +38,7 @@ public class LottoGenerator {
         return new WonLotto(new Lotto(set), allLottoNumbers.get(LOTTO_MAX_SIZE).getNumber());
     }
 
-    public Lotto lottoStringParser(String lotto){
+    public static Lotto lottoStringParser(String lotto){
 
         String[] lottoNumber=lotto.split(",");
         SortedSet<LottoNumber> parsedLotto=new TreeSet<>();

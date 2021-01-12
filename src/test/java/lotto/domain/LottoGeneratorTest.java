@@ -15,19 +15,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoGeneratorTest {
 
-    private LottoGenerator lottoGenerator;
-    Lotto lotto;
-    HashSet<Integer> set;
-
-    @BeforeEach
-    public void setUp() {
-        lottoGenerator = LottoGenerator.getInstance();
-    }
-
     @Test
     @DisplayName("서로다른 번호 6개로 로또번호가 생성된것인지 확인")
     public void lottoSizeTest() {
-        Lotto lotto = lottoGenerator.generateLotto();;
+        Lotto lotto = LottoGenerator.generateLotto();;
         HashSet<Integer> set = new HashSet<>();
         lotto.getLotto().stream().forEach(number -> set.add(number.getNumber()));
         Assertions.assertTrue(lotto.getLotto().size()==6);
@@ -37,7 +28,7 @@ public class LottoGeneratorTest {
     @Test
     @DisplayName("보너스 번호 유효성 검사")
     public void bonusNumberTest() {
-        WonLotto wonlotto = lottoGenerator.generateWonLotto();;
+        WonLotto wonlotto = LottoGenerator.generateWonLotto();;
         HashSet<Integer> set = new HashSet<>();
         wonlotto.getWonLotto().getLotto().stream().forEach(number -> set.add(number.getNumber()));
         set.add(wonlotto.getBonusNo());
@@ -47,7 +38,7 @@ public class LottoGeneratorTest {
     @Test
     @DisplayName("String을 이용한 Lotto 생성 검사")
     public void textLottoGenerateTest() {
-        Lotto lotto = lottoGenerator.lottoStringParser("1,2,3,4,5,6");
+        Lotto lotto = LottoGenerator.lottoStringParser("1,2,3,4,5,6");
         assertThat(lotto.getLotto().size()).isEqualTo(6);
     }
 }

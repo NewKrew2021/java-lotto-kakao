@@ -15,13 +15,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class WonLottoTest {
 
-    private LottoGenerator generator;
     private WonLotto wonLotto;
 
     @BeforeEach
     void setUp(){
-        generator = LottoGenerator.getInstance();
-        wonLotto = generator.generateWonLotto();
+        wonLotto = LottoGenerator.generateWonLotto();
     }
 
     @Test
