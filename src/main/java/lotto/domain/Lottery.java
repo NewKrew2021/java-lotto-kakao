@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class Lottery {
-    public static final int NONE = -1;
     public static final String MSG_DUPLICATED_LOTTERYNUMBER = "로또 숫자는 중복될 수 없습니다.";
     static final int LOTTERY_NUMBER_SIZE = 6;
     public static final String MSG_WRONG_LOTTERY_LENGTH = String.format(
@@ -16,7 +15,7 @@ public class Lottery {
     public Lottery(int[] ints) {
         this(
                 Arrays.stream(ints)
-                        .mapToObj(LotteryNumber::new)
+                        .mapToObj(LotteryNumber::of)
                         .collect(Collectors.toList())
         );
     }
@@ -39,7 +38,7 @@ public class Lottery {
         return new Lottery(
                 range_1_45.subList(0, LOTTERY_NUMBER_SIZE)
                         .stream()
-                        .map(LotteryNumber::new)
+                        .map(LotteryNumber::of)
                         .collect(Collectors.toList())
         );
     }

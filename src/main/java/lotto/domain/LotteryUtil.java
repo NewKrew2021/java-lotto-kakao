@@ -20,7 +20,7 @@ public class LotteryUtil {
 
     public static Lottery convertStringsToLottery(String[] strings) {
         return new Lottery(Arrays.stream(strings)
-                .map(string -> new LotteryNumber(Integer.parseInt(string.trim())))
+                .map(string -> LotteryNumber.of(Integer.parseInt(string.trim())))
                 .collect(Collectors.toList()));
     }
 }

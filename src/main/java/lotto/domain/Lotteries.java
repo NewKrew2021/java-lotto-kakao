@@ -4,9 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.HashMap;
 
 public class Lotteries {
-    private List<Lottery> lotteries;
+    private final List<Lottery> lotteries;
 
     public Lotteries(List<Lottery> lotteryList) {
         lotteries = lotteryList;
@@ -16,10 +17,14 @@ public class Lotteries {
         lotteries = new ArrayList<>();
     }
 
-    public LotteryRankCounter countLotteryResults(LotteryAnswer lotteryAnswer) {
-        LotteryRankCounter lotteryRanks = new LotteryRankCounter();
-        lotteries.forEach(lottery -> lotteryRanks.count(lottery.calculateRank(lotteryAnswer)));
-        return lotteryRanks;
+    public LotteryRankCounter getLotteryRankCounter(LotteryAnswer lotteryAnswer) {
+        return new LotteryRankCounter((HashMap<LotteryRank, Long>) lotteries.stream()
+                .collect(Collectors.groupingBy(
+                        lottery -> lottery.calculateRank(lotteryAnswer),
+                        Collectors.counting()
+                        )
+                )
+        );
     }
 
     public static List<Lottery> getRandomLotteryList(int count) {
@@ -28,10 +33,6 @@ public class Lotteries {
             lotteryList.add(Lottery.createRandomLottery());
         }
         return lotteryList;
-    }
-
-    public void push(Lottery lottery) {
-        lotteries.add(lottery);
     }
 
     @Override

@@ -9,13 +9,14 @@ public class Main {
         final int lotteryCount = LotteryUtil.calculateLotteryCount(InputView.readMoney());
         OutputView.printLotteryCount(lotteryCount);
 
-        Lotteries lotteries = new Lotteries(Lotteries.getRandomLotteryList(lotteryCount));
+        Lotteries lotteries = InputView.getLotteries(lotteryCount);;
         OutputView.printLotteries(lotteries);
 
-        LotteryRankCounter lotteryRankCounter = lotteries.countLotteryResults(InputView.readLotteryAnswer());
+        LotteryRankCounter lotteryRankCounter = lotteries.getLotteryRankCounter(InputView.readLotteryAnswer());
         OutputView.printLotteryResult(lotteryRankCounter);
 
         int profit = LotteryUtil.calculateProfitRate(lotteryCount, lotteryRankCounter.getTotalIncome());
         OutputView.printProfitRate(profit);
     }
+
 }

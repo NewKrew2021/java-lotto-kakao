@@ -3,8 +3,8 @@ package lotto.domain;
 import java.util.Objects;
 
 public class LotteryAnswer {
-    private Lottery lottery;
-    private LotteryNumber bonusNumber;
+    private final Lottery lottery;
+    private final LotteryNumber bonusNumber;
 
     public LotteryAnswer(Lottery answerLottery, LotteryNumber bonusNumber) {
         if (Lottery.isDuplicatedLotteryNumbers(answerLottery, bonusNumber)) {
@@ -15,7 +15,7 @@ public class LotteryAnswer {
     }
 
     public LotteryAnswer(int[] answerInts, int bonusNumber) {
-        this(new Lottery(answerInts), new LotteryNumber(bonusNumber));
+        this(new Lottery(answerInts), LotteryNumber.of(bonusNumber));
     }
 
     public Lottery getLottery() {

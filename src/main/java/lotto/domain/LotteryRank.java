@@ -4,20 +4,20 @@ import java.util.Arrays;
 import java.util.Comparator;
 
 public enum LotteryRank {
-    RANK1(2000000000, 6, false, 1),
-    RANK2(30000000, 5, true, 2),
-    RANK3(1500000, 5, false, 3),
-    RANK4(50000, 4, false, 4),
-    RANK5(5000, 3, false, 5),
+    RANK1(2_000_000_000, 6, false, 1),
+    RANK2(30_000_000, 5, true, 2),
+    RANK3(1_500_000, 5, false, 3),
+    RANK4(50_000, 4, false, 4),
+    RANK5(5_000, 3, false, 5),
     RANK_NONE(0, 0, false, LotteryRank.NONE);
 
-    public final static int NONE = -1;
-    public final static int MIN_RANK = 1;
-    public final static int MAX_RANK = 5;
+    private static final int NONE = -1;
+    public static final int MIN_RANK = 1;
+    public static final int MAX_RANK = 5;
 
     public final int rank;
-    public final int correctCount;
-    public final boolean bonusCheck;
+    private final int correctCount;
+    private final boolean bonusCheck;
     public final long winningPrice;
     public final String winningMsg;
 
