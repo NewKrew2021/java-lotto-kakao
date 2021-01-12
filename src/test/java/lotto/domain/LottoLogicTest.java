@@ -35,7 +35,7 @@ public class LottoLogicTest {
             "1,2,3,4,5,6'"      //SIX
     )
     void winningStatisticsTest(String winningLottoNumbers, int bonusNumber, String tickets) {
-        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(CsvParsing.convertStringToIntegerSet(winningLottoNumbers), bonusNumber);
+        WinningLottoNos winningLottoNos = new WinningLottoNos(CsvParsing.convertStringToIntegerSet(winningLottoNumbers), bonusNumber);
         List<LottoTicket> lottoTickets = new ArrayList<>();
         List<Set<Integer>> ticketsNumbers = CsvParsing.convertStringToTicketsNumber(tickets);
 
@@ -51,7 +51,7 @@ public class LottoLogicTest {
         statisticsResult.increaseTypeCount(StatisticsType.FIVE_WITH_BONUS);
         statisticsResult.increaseTypeCount(StatisticsType.SIX);
 
-        assertThat(LottoLogic.winningStatistics(lottoTickets, winningLottoTicket))
+        assertThat(LottoLogic.winningStatistics(lottoTickets, winningLottoNos))
                 .isEqualTo(statisticsResult);
     }
 

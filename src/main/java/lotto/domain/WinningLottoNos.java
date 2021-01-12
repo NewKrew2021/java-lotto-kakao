@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class WinningLottoTicket {
+public class WinningLottoNos {
 
     private List<LottoNo> winningNumbers;
     private final LottoNo bonusNo;
 
-    public WinningLottoTicket(Set<Integer> numbers, int bonusNo ) {
+    public WinningLottoNos(Set<Integer> numbers, int bonusNo ) {
         this.winningNumbers = new ArrayList<>();
         for( Integer number : numbers ) {
             this.winningNumbers.add(new LottoNo(number));

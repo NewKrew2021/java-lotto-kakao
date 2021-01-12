@@ -23,11 +23,11 @@ public class LottoLogic {
         return buyingStrategy.buyTicket();
     }
 
-    public static StatisticsResult winningStatistics(List<LottoTicket> lottoTickets, WinningLottoTicket winningLottoTicket) {
+    public static StatisticsResult winningStatistics(List<LottoTicket> lottoTickets, WinningLottoNos winningLottoNos) {
         StatisticsResult statisticsResult = new StatisticsResult();
 
         for (LottoTicket lottoTicket : lottoTickets) {
-            statisticsResult.increaseTypeCount(winningLottoTicket.isWinning(lottoTicket));
+            statisticsResult.increaseTypeCount(winningLottoNos.isWinning(lottoTicket));
         }
 
         return statisticsResult;
