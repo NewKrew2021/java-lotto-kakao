@@ -2,8 +2,10 @@ package lotto.domain;
 
 import lotto.StatisticsType;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class StatisticsResult {
 
@@ -34,11 +36,14 @@ public class StatisticsResult {
 
     @Override
     public String toString() {
-        return "3개 일치 (5,000원)-" + countOfType.get(StatisticsType.THREE) + "\n" +
-                "4개 일치 (50,000원)-" + countOfType.get(StatisticsType.FOUR) + "\n" +
-                "5개 일치 (1,500,000원)-" + countOfType.get(StatisticsType.FIVE) + "\n" +
-                "5개 일치, 보너스 볼 일치(30,000,000원)-" + countOfType.get(StatisticsType.FIVE_WITH_BONUS) + "\n" +
-                "6개 일치 (2,000,000,000원)-" + countOfType.get(StatisticsType.SIX) + "\n";
+        String result = "";
+        for (StatisticsType type: StatisticsType.valuesExceptNone()) {
+            result += (type.howmany + "개 일치"
+                    + (type.isBonus ? "보너스 볼 일치" : "")
+                    + "(" + type.price + "원)-"
+                    + countOfType.get(type) + "\n");
+        }
+        return result;
     }
 
     public String benefit(int ticketCount) {
