@@ -35,4 +35,5 @@ public class WinnerTicket {
     public boolean hasBonus(LottoNumbers lottoNumbers) {
         return lottoNumbers.contains(bonusNumber);
     }
+
 }

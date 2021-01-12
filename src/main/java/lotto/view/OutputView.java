@@ -15,6 +15,8 @@ public class OutputView {
         System.out.println(lottoNumbers.getSortedLottoNumbers());
     }
 
+
+
     public static void printWinningStatistics(LottoRankingCountDto lottoRankingCount) {
         System.out.println("당첨 통계");
         System.out.println("---------");
@@ -26,4 +28,5 @@ public class OutputView {
     public static void printRevenueRate(double revenueRate) {
         System.out.printf("총 수익률은 %.2f입니다.", revenueRate);
     }
+
 }

@@ -20,4 +20,5 @@ public class LottoRevenue {
     public double calculateRevenueRate() {
         return (double) revenue / (double) totalTicketMoney;
     }
+
 }

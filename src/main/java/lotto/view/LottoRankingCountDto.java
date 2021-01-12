@@ -22,4 +22,5 @@ public class LottoRankingCountDto {
     public Map<LottoRanking, Integer> getRankingCount() {
         return rankingCount;
     }
+
 }

@@ -40,4 +40,5 @@ public enum LottoRanking {
     public String getContext() {
         return context;
     }
+
 }

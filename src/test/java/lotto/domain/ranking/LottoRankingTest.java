@@ -25,4 +25,5 @@ public class LottoRankingTest {
         //then
         assertThat(ranking).isEqualTo(expected);
     }
+
 }

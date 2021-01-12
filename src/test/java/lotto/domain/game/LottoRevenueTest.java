@@ -28,5 +28,4 @@ public class LottoRevenueTest {
         assertThat(lottoRevenue.calculateRevenueRate()).isEqualTo(6.0);
     }
 
-
 }

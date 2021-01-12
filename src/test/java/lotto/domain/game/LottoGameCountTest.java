@@ -46,4 +46,5 @@ public class LottoGameCountTest {
                 .isThrownBy(() -> new LottoGameCount(money))
                 .withMessage(LOTTO_MONEY_EXCEPTION_MESSAGE);
     }
+
 }

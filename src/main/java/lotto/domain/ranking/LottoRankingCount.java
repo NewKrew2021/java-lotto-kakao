@@ -39,4 +39,5 @@ public class LottoRankingCount {
     public Map<LottoRanking, Integer> getRankingCount() {
         return rankingCount;
     }
+
 }

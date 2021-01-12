@@ -25,4 +25,5 @@ public class LottoNumbersDto {
         Collections.sort(lottoNumbers);
         return lottoNumbers;
     }
+
 }

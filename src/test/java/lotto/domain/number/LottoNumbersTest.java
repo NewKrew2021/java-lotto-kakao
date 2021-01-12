@@ -68,4 +68,5 @@ public class LottoNumbersTest {
                 .isThrownBy(() -> LottoNumbers.from(overLengthStrategy))
                 .withMessage(LOTTO_TICKET_EXCEPTION_MESSAGE);
     }
+
 }

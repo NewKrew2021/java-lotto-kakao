@@ -19,4 +19,5 @@ public class LottoBonusMatcherTest {
     void calculateBonusMatch(LottoBonusMatcher matchType, boolean bonus, boolean expected) {
         assertThat(matchType.calculate(bonus)).isEqualTo(expected);
     }
+
 }

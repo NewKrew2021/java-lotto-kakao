@@ -49,4 +49,5 @@ public class LottoNumbers {
     public Set<LottoNumber> getLottoNumbers() {
         return lottoNumbers;
     }
+
 }

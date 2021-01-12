@@ -21,4 +21,5 @@ public class LottoMain {
 
         OutputView.printRevenueRate(lottoController.getLottoRevenueRate());
     }
+
 }

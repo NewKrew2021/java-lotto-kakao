@@ -31,4 +31,5 @@ public class LottoGameCount {
     public int getTicketCount() {
         return ticketCount;
     }
+
 }

@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoNumber {
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final int MAX_LOTTO_NUMBER = 45;
+    protected static final int MIN_LOTTO_NUMBER = 1;
+    protected static final int MAX_LOTTO_NUMBER = 45;
     public static final String LOTTO_NUMBER_EXCEPTION_MESSAGE = "1~45 범위의 숫자만 허용됩니다";
 
     private final int number;
@@ -35,4 +35,5 @@ public class LottoNumber {
     public int getNumber() {
         return number;
     }
+
 }
