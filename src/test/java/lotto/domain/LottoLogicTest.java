@@ -2,7 +2,10 @@ package lotto.domain;
 
 import lotto.StatisticsType;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -11,45 +14,45 @@ import static org.assertj.core.api.AssertionsForClassTypes.*;
 public class LottoLogicTest {
 
     @Test
-    void lottoNosLengthValidTest() {
-        List<LottoTicket> lottoTickets = LottoLogic.buyLottoTicketsAuto(10);
-        assertThat(lottoTickets.size()).isEqualTo(10);
+    void buyingLottoNosCountTest() {
+        List<LottoTicket> lottoTickets1 = LottoLogic.buyLottoTicketsAuto(1000);
+        List<LottoTicket> lottoTickets10 = LottoLogic.buyLottoTicketsAuto(10000);
+        List<LottoTicket> lottoTickets100 = LottoLogic.buyLottoTicketsAuto(100000);
+
+        assertThat(lottoTickets1.size()).isEqualTo(1);
+        assertThat(lottoTickets10.size()).isEqualTo(10);
+        assertThat(lottoTickets100.size()).isEqualTo(100);
     }
 
-    @Test
-    void statisticTest() {
-        WinningLottoNos winningLottoNos = new WinningLottoNos(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
-        LottoTicket lottoTicket2 = new LottoTicket(Arrays.asList(1, 2, 9, 10, 11, 12)); // 2
-        LottoTicket lottoTicket3 = new LottoTicket(Arrays.asList(1, 2, 3, 9, 10, 11)); // 3
-        LottoTicket lottoTicket4 = new LottoTicket(Arrays.asList(1, 2, 3, 4, 10, 11)); // 4
-        LottoTicket lottoTicket5 = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 8)); // 5
-        LottoTicket lottoTicket5_1 = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 7)); // 5,1
-        LottoTicket lottoTicket6 = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6)); // 6
+    @ParameterizedTest
+    @CsvSource(
+            "'1,2,3,4,5,6'," + "'7'," +
+            "'2,3,4,9,10,11|" + //THREE
+            "1,2,3,9,10,11|" +  //THREE
+            "1,2,3,4,10,11|" +  //FOUR
+            "1,2,3,4,5,8|" +    //FIVE
+            "1,2,3,4,5,7|" +    //FIVE_WITH_BONUS
+            "1,2,3,4,5,6'"      //SIX
+    )
+    void winningStatisticsTest(String winningLottoNumbers, int bonusNumber, String tickets) {
+        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(CsvParsing.convertStringToIntegerList(winningLottoNumbers), bonusNumber);
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        List<List<Integer>> ticketsNumbers = CsvParsing.convertStringToTicketsNumber(tickets);
 
-    }
+        for( List<Integer> ticket : ticketsNumbers ) {
+            lottoTickets.add(new LottoTicket(ticket));
+        }
 
-    @Test
-    void winningStatisticsTest() {
-        WinningLottoNos winningLottoNos = new WinningLottoNos(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
-        List<LottoTicket> lottoTickets = Arrays.asList(
-                new LottoTicket(Arrays.asList(1, 2, 9, 10, 11, 12))
-                , new LottoTicket(Arrays.asList(1, 2, 3, 9, 10, 11))
-                , new LottoTicket(Arrays.asList(1, 2, 3, 4, 10, 11))
-                , new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 8))
-                , new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 7))
-                , new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6))
-        );
         StatisticsResult statisticsResult = new StatisticsResult();
-        statisticsResult.increaseTypeCount(StatisticsType.NONE);
+        statisticsResult.increaseTypeCount(StatisticsType.THREE);
         statisticsResult.increaseTypeCount(StatisticsType.THREE);
         statisticsResult.increaseTypeCount(StatisticsType.FOUR);
         statisticsResult.increaseTypeCount(StatisticsType.FIVE);
         statisticsResult.increaseTypeCount(StatisticsType.FIVE_WITH_BONUS);
         statisticsResult.increaseTypeCount(StatisticsType.SIX);
 
-        assertThat(LottoLogic.winningStatistics(lottoTickets, winningLottoNos))
+        assertThat(LottoLogic.winningStatistics(lottoTickets, winningLottoTicket))
                 .isEqualTo(statisticsResult);
-
     }
 
 }
