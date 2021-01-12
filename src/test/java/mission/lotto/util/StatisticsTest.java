@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class StatisticsTest {
     @Test
     @DisplayName("구입한 로또의 당첨 결과 및 당첨금 계산 테스트")
-    public void 당첨통계테스트() {
+    public void statTests() {
         Lottos lottos1 = new Lottos(Arrays.asList(
                 new Lotto(Arrays.asList(8, 21, 23, 41, 42, 43)),
                 new Lotto(Arrays.asList(3, 5, 11, 16, 32, 38)),
@@ -32,7 +32,7 @@ public class StatisticsTest {
         ));
 
         LottoAnswer answer = new LottoAnswer(
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), new Number(7));
+                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), Number.of(7));
 
         Map<Rank, Integer> allLottoRankCount = Statistics.getAllLottoRank(lottos1, answer);
         assertThat(allLottoRankCount)
