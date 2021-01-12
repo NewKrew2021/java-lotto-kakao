@@ -1,8 +1,7 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class RandomGenerateStrategy implements GenerateStrategy {
@@ -13,22 +12,25 @@ public class RandomGenerateStrategy implements GenerateStrategy {
     }
 
     private LottoNumbers generateRandomNumbers() {
-        return new LottoNumbers(sortNumbers(sliceNumbers(shuffleNumbers())));
+        return new LottoNumbers(toTreeSet(sliceNumbers(shuffleNumbers())));
     }
 
-    private List<Integer> shuffleNumbers() {
-        List<Integer> numbers = new ArrayList<>();
-        IntStream.rangeClosed(1, 45).forEach(numbers::add);
+    private List<LottoNumber> shuffleNumbers() {
+        List<LottoNumber> numbers = IntStream
+                .rangeClosed(LottoNumber.MIN_LOTTO_NUMBER,LottoNumber.MAX_LOTTO_NUMBER)
+                .boxed()
+                .map(LottoNumber::of)
+                .collect(Collectors.toList());
         Collections.shuffle(numbers);
         return numbers;
     }
 
-    private List<Integer> sliceNumbers(List<Integer> numbers) {
-        return numbers.subList(0, 6);
+    private List<LottoNumber> sliceNumbers(List<LottoNumber> numbers) {
+        return numbers.subList(0, LottoNumbers.POSSIBLE_NUMBERS_SIZE);
     }
 
-    private List<Integer> sortNumbers(List<Integer> numbers) {
-        Collections.sort(numbers);
-        return numbers;
+    private Set<LottoNumber> toTreeSet(List<LottoNumber> numbers) {
+        return new TreeSet(numbers);
     }
+
 }

@@ -3,24 +3,27 @@ package lotto.domain;
 import lotto.exception.NumberDuplicateException;
 import lotto.exception.NumbersSizeException;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class LottoNumbers {
 
-    private static final int POSSIBLE_NUMBERS_SIZE = 6;
+    public static final int POSSIBLE_NUMBERS_SIZE = 6;
     private static final String SIZE_EXCEPTION_MESSAGE = "로또 번호는 6개입니다.";
     private static final String DUPLICATE_EXCEPTION_MESSAGE = "로또 번호는 중복되면 안됩니다.";
 
-    private final List<LottoNumber> lottoNumbers;
+    private final Set<LottoNumber> lottoNumbers;
 
     public LottoNumbers(List<Integer> numbers) {
         validateLottoNumbers(numbers);
-        this.lottoNumbers = new ArrayList<>();
+        Set<LottoNumber> lottoNumbers = new TreeSet<>();
         for (Integer num : numbers) {
-            this.lottoNumbers.add(LottoNumber.of(num));
+            lottoNumbers.add(LottoNumber.of(num));
         }
+        this.lottoNumbers = lottoNumbers;
+    }
+
+    public LottoNumbers(Set<LottoNumber> numbers) {
+        this.lottoNumbers = numbers;
     }
 
     private void validateLottoNumbers(List<Integer> numbers) {
