@@ -1,20 +1,17 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Lotto {
 
-    private List<LottoNumber> lotto;
+    private SortedSet<LottoNumber> lotto;
 
-    public Lotto(List<LottoNumber> lotto) {
-        Collections.sort(lotto);
+    public Lotto(SortedSet<LottoNumber> lotto) {
         this.lotto = lotto;
     }
 
-    public final List<LottoNumber> getLotto(){
-        return new ArrayList<>(lotto);
+    public final SortedSet<LottoNumber> getLotto(){
+        return new TreeSet<>(lotto);
     }
 
     public int checkSameCount(Lotto userLotto){
@@ -30,10 +27,8 @@ public class Lotto {
     public String toString(){
         StringBuilder str=new StringBuilder();
         str.append('[');
-        for (int i=0;i<lotto.size()-1;i++) {
-            str.append(lotto.get(i)+", ");
-        }
-        str.append(lotto.get(lotto.size()-1));
+        lotto.stream().forEach(number -> str.append(number + ", "));
+        str.delete(str.length()-2, str.length());
         str.append("]\n");
         return str.toString();
     }

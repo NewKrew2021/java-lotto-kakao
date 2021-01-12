@@ -7,9 +7,7 @@ import lotto.domain.WonLotto;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -21,22 +19,14 @@ public class LottoReviewTest {
     @BeforeEach
     void setUp() {
         List<Lotto> lottoList = new ArrayList<>();
-        lottoList.add(new Lotto(Arrays.asList(
-                LottoNumber.makeNumber(1),
-                LottoNumber.makeNumber(2),
-                LottoNumber.makeNumber(3),
-                LottoNumber.makeNumber(4),
-                LottoNumber.makeNumber(5),
-                LottoNumber.makeNumber(6))));
+        SortedSet<LottoNumber> set = new TreeSet<>();
+        for (int i = 1; i <= 6; i++) {
+            set.add(LottoNumber.makeNumber(i));
+        }
+        lottoList.add(new Lotto(set));
 
         lottos = new Lottos(lottoList);
-        wonLotto = new WonLotto(new Lotto(Arrays.asList(
-                LottoNumber.makeNumber(1),
-                LottoNumber.makeNumber(2),
-                LottoNumber.makeNumber(3),
-                LottoNumber.makeNumber(4),
-                LottoNumber.makeNumber(5),
-                LottoNumber.makeNumber(6))), 7);
+        wonLotto = new WonLotto(new Lotto(set), 7);
         lottoReview = new LottoReview(lottos, wonLotto);
 
     }

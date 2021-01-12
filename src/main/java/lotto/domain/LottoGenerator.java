@@ -3,10 +3,7 @@ package lotto.domain;
 import lotto.domain.Lotto;
 import lotto.util.RandomUtil;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -36,10 +33,10 @@ public class LottoGenerator {
 
         Collections.shuffle(allLottoNumbers);
 
-        return new Lotto(
-                allLottoNumbers.stream()
-                .limit(LOTTO_MAX_SIZE)
-                .collect(Collectors.toList()));
+        SortedSet<LottoNumber> set = new TreeSet<>();
+        set.addAll(allLottoNumbers.subList(0, LOTTO_MAX_SIZE));
+
+        return new Lotto(set);
     }
 
     public int generateBonus(Lotto lotto){
@@ -57,7 +54,7 @@ public class LottoGenerator {
     public Lotto lottoStringParser(String lotto){
 
         String[] lottoNumber=lotto.split(",");
-        List<LottoNumber> parsedLotto=new ArrayList<>();
+        SortedSet<LottoNumber> parsedLotto=new TreeSet<>();
         for (String number : lottoNumber) {
             parsedLotto.add(LottoNumber.makeNumber(Integer.parseInt(number.trim())));
         }

@@ -16,14 +16,14 @@ public class LottoNumber implements Comparable<LottoNumber>{
 
     public static LottoNumber makeNumberFromText(String text){
         if(isBlank(text) || !isNumber(text))
-            throw new RuntimeException("숫자를 입력해주세요.");
+            throw new IllegalArgumentException("숫자를 입력해주세요.");
 
         return makeNumber(Integer.parseInt(text));
     }
 
     public static LottoNumber makeNumber(int number){
         if(number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER)
-            throw new RuntimeException("범위에 해당하지 않는 수입니다.");
+            throw new IllegalArgumentException("범위에 해당하지 않는 수입니다.");
 
         return new LottoNumber(number);
     }
