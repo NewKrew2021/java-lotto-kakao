@@ -10,13 +10,6 @@ public class WinningLottoTicket {
     private LottoNo bonusNo;
 
     public WinningLottoTicket(List<Integer> numbers, int bonusNo ) {
-
-        if ( !checkValidationWinningLottoNos(numbers, bonusNo) ) {
-            IllegalArgumentException error = new IllegalArgumentException();
-            error.printStackTrace();
-            throw error;
-        }
-
         this.lottoTicket = new LottoTicket(numbers);
         this.bonusNo = new LottoNo(bonusNo);
     }
