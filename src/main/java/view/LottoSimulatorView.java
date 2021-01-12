@@ -25,8 +25,21 @@ public class LottoSimulatorView {
         return Integer.parseInt(scanner.nextLine());
     }
 
-    public void printBuyLottoCount(long lottoCount) {
-        System.out.println(lottoCount + Message.LOTTO_COUNT_MESSAGE);
+    public int askLottoPurchaseCount() {
+        System.out.println(Message.ASK_LOTTO_PURCHASE_COUNT);
+        return Integer.parseInt(scanner.nextLine());
+    }
+
+    public void askManualLottoNumbers() {
+        System.out.println(Message.ASK_MANUAL_LOTTO_NUMBERS);
+    }
+
+    public String inputManualLotto() {
+        return scanner.nextLine();
+    }
+
+    public void printBuyLottoCount(int manualLottoCount, int autoLottoCount) {
+        System.out.printf(Message.LOTTO_COUNT_MESSAGE, manualLottoCount, autoLottoCount);
     }
 
     public void printLottos(Lottos lottos) {

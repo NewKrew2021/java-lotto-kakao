@@ -19,21 +19,56 @@ public class LottoController {
     }
 
     public void startLottoSimulator() {
-        Lottos lottos = buyAutoLotto();
-        printBuyLottos(lottos);
+        Lottos manualLottos = buyManualLotto();
+        Lottos autoLottos = buyAutoLotto(money.getLottoCount(manualLottos.size()), manualLottos.size());
+        Lottos totalLottos = getTotalLottos(manualLottos, autoLottos);
+        printBuyLottos(totalLottos);
         AnswerLotto answerLotto = getAnswerLottoNumbers();
-        printLottoResults(answerLotto, lottos);
+        printLottoResults(answerLotto, totalLottos);
     }
 
-    private Lottos buyAutoLotto() {
+    private Lottos getTotalLottos(Lottos manualLottos, Lottos autoLottos) {
+        List<Lotto> totalLottos = new ArrayList<>();
+        for (Lotto lotto : manualLottos.getLottos()) {
+            totalLottos.add(lotto);
+        }
+        for (Lotto lotto : autoLottos.getLottos()) {
+            totalLottos.add(lotto);
+        }
+        return new Lottos(totalLottos);
+    }
+
+    private Lottos buyManualLotto() {
         int lottoMoney = lottoSimulatorView.askMoneyToBuyLotto();
         this.money = new Money(lottoMoney);
 
+        int manualLottoCount = lottoSimulatorView.askLottoPurchaseCount();
+        money.checkCanBuy(manualLottoCount);
+
+        lottoSimulatorView.askManualLottoNumbers();
+        List<Lotto> lottos = getManualLottos(manualLottoCount);
+
+        return new Lottos(lottos);
+    }
+
+    private List<Lotto> getManualLottos(int manualLottoCount) {
         List<Lotto> lottos = new ArrayList<>();
-        for (int i = 0; i < money.getLottoCount(); i++) {
+        for (int i = 0; i < manualLottoCount; i++) {
+            List<String> lottoString = StringUtils.splitText(lottoSimulatorView.inputManualLotto());
+            lottos.add(new Lotto(lottoString.stream()
+                    .map(Integer::parseInt)
+                    .sorted()
+                    .collect(Collectors.toList())));
+        }
+        return lottos;
+    }
+
+    private Lottos buyAutoLotto(int autoLottoCount, int manualLottoCount) {
+        List<Lotto> lottos = new ArrayList<>();
+        for (int i = 0; i < autoLottoCount; i++) {
             lottos.add(new Lotto(new RandomLottoGenerateStrategy()));
         }
-        lottoSimulatorView.printBuyLottoCount(money.getLottoCount());
+        lottoSimulatorView.printBuyLottoCount(manualLottoCount, autoLottoCount);
         return new Lottos(lottos);
     }
 

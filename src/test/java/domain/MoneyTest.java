@@ -17,8 +17,17 @@ public class MoneyTest {
     void 로또_개수() {
         Money money = new Money(3000);
 
-        assertThat(money.getLottoCount())
+        assertThat(money.getLottoCount(0))
                 .isEqualTo(3);
+    }
+
+    @Test
+    void 수동_구매() {
+        Money money = new Money(3000);
+
+        assertThatExceptionOfType(LottoException.class)
+                .isThrownBy(() -> money.checkCanBuy(4))
+                .withMessageContaining("금액이 부족합니다.");
     }
 }
 

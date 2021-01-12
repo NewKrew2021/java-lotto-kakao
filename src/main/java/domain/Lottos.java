@@ -1,8 +1,10 @@
 package domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -14,6 +16,10 @@ public class Lottos {
 
     public List<Lotto> getLottos() {
         return lottos;
+    }
+
+    public int size() {
+        return lottos.size();
     }
 
     @Override
