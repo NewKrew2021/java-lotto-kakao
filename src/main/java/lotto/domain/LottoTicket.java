@@ -7,6 +7,9 @@ public class LottoTicket {
     private Set<Number> numbers;
 
     public LottoTicket(Set<Number> numbers) {
+        if (numbers.size() != 6){
+            throw new InvalidLottoTicketNumberException();
+        }
         this.numbers = numbers;
     }
 
