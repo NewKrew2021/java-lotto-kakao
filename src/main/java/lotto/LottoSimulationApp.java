@@ -1,8 +1,6 @@
 package lotto;
 
-import lotto.domain.LottoSimulation;
-import lotto.domain.Lottos;
-import lotto.domain.Price;
+import lotto.domain.*;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
@@ -17,7 +15,8 @@ public class LottoSimulationApp {
 
         String text = InputView.getText();
         String bonus = InputView.getBonus();
-        LottoSimulation lotto = new LottoSimulation(price, text, bonus, manualLottos.merge(autoLottos));
+        WinningLotto winningLotto = new WinningLotto(Lotto.of(text), new LottoNumber(Integer.parseInt(bonus)));
+        LottoSimulation lotto = new LottoSimulation(price, winningLotto, manualLottos.merge(autoLottos));
 
         lotto.confirm();
         OutputView.printResult(lotto);
