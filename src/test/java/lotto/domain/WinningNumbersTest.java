@@ -11,14 +11,14 @@ public class WinningNumbersTest {
 
     @Test
     public void create() {
-        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
-        assertThat(winningNumbers).isEqualTo(new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), 7));
+        WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 6", 7);
+        assertThat(winningNumbers).isEqualTo(new WinningNumbers("1, 2, 3, 4, 5, 6", 7));
     }
 
     @Test
     public void validateDuplicationBetweenWinNumbersAndBonusNumber() {
         assertThatThrownBy(() -> {
-            new WinningNumbers(Arrays.asList(1, 2, 3, 4, 5, 6), 6);
+            new WinningNumbers("1, 2, 3, 4, 5, 6", 6);
         }).isInstanceOf(BonusDuplicateException.class);
     }
 }

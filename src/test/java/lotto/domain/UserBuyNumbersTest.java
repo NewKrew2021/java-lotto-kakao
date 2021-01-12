@@ -29,7 +29,7 @@ public class UserBuyNumbersTest {
     public void rankResult() {
         UserBuyNumbers totalUserBuyNums = new UserBuyNumbers();
         totalUserBuyNums.addBuyNumbers(new LottoNumbers(Arrays.asList(30, 31, 32, 33, 34, 35)));
-        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(30, 31, 32, 33, 34, 40), 35);
+        WinningNumbers winningNumbers = new WinningNumbers("30, 31, 32, 33, 34, 40", 35);
         List<RankState> rankStates = new ArrayList<>(Arrays.asList(RankState.SECOND));
         assertThat(totalUserBuyNums.checkLottoResult(winningNumbers)).isEqualTo(rankStates);
     }

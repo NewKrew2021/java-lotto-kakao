@@ -27,7 +27,7 @@ public class LottoGameTest {
     public void checkLotto() {
         LottoGame game = new LottoGame(new Money(1500));
         game.buyLotto(()-> new LottoNumbers(Arrays.asList(1,2,3,4,5,6)));
-        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1,2,3,4,5,6),7);
+        WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 6",7);
         LottoStatisticDTO lottoDTO = new LottoStatisticDTO();
         lottoDTO.setRankCount(Arrays.asList(0, 0, 0, 0, 0, 1));
         lottoDTO.setProfitRate(2000000000.0 / 1500.0);

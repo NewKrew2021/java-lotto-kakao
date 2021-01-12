@@ -8,19 +8,19 @@ public class InputView {
     private static final String WIN_NUMBERS_INPUT_MESSAGE = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String BONUS_NUMBER_INPUT_MESSAGE = "보너스 볼을 입력해 주세요.";
 
-    public static int enterMoney() {
+    public static int scanMoney() {
         Scanner scanner = new Scanner(System.in);
         System.out.println(MONEY_INPUT_MESSAGE);
         return scanner.nextInt();
     }
 
-    public static String enterWinNumbers() {
+    public static String scanWinNumbers() {
         Scanner scanner = new Scanner(System.in);
         System.out.println(WIN_NUMBERS_INPUT_MESSAGE);
         return scanner.nextLine();
     }
 
-    public static int enterBonusNumber() {
+    public static int scanBonusNumber() {
         Scanner scanner = new Scanner(System.in);
         System.out.println(BONUS_NUMBER_INPUT_MESSAGE);
         return scanner.nextInt();
