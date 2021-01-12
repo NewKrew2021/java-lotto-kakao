@@ -47,10 +47,6 @@ public class LottoTickets {
         return Collections.unmodifiableList(lottos);
     }
 
-    public int size() {
-        return this.lottos.size();
-    }
-
     public LottoTickets concat(LottoTickets autoTickets) {
         return new LottoTickets(Stream
                 .concat(lottos.stream(), autoTickets.getLottos().stream())

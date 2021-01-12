@@ -1,7 +1,6 @@
 package domain;
 
 import domain.exceptions.InvalidLottoTicketCountException;
-import dto.Amount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;

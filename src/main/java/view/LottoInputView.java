@@ -1,7 +1,5 @@
 package view;
 
-import domain.Lotto;
-import domain.LottoNumber;
 import domain.LottoTicketCount;
 import dto.Amount;
 
