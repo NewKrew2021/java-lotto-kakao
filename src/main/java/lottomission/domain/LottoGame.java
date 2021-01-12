@@ -25,11 +25,6 @@ public class LottoGame {
         return selfLottos.combineLottos(autoLottos);
     }
 
-    public Lottos buyLottosSelf(List<Lotto> lottoList){
-        return new Lottos(lottoList);
-    }
-
-
     public LottoResult getLottoGameResult(Lottos lottos,LottoAnswer answer) {
         Map<LotteryWinnings, Integer> result = Arrays
                 .stream(LotteryWinnings.values())
@@ -42,9 +37,5 @@ public class LottoGame {
 
         result.remove(LotteryWinnings.UNRANKED);
         return new LottoResult(result);
-    }
-
-    public List<List<Integer>> getLottosList(Lottos lottos) {
-        return lottos.getLottosNumberList();
     }
 }
