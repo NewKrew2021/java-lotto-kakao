@@ -3,29 +3,25 @@ package lotto.view;
 import lotto.domain.Ticket;
 import lotto.domain.WinnerBalls;
 import lotto.setting.Format;
-import lotto.utils.Utils;
 
 import java.util.*;
 
 public class Input {
-    private static Scanner scanner = new Scanner(System.in);
+    private static final Scanner scanner = new Scanner(System.in);
 
     public static int getPriceFromUser() {
         System.out.println("구입금액을 입력해 주세요.");
-        int inputMoney = scanner.nextInt(); scanner.nextLine();
-        return inputMoney;
+        return CustomTypeCasting.stringToInteger(scanner.nextLine());
     }
 
     public static WinnerBalls getWinnerBallsFromUser() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        String userInput = scanner.nextLine();
-
-        List<Integer> userInputNumbers = Utils.extractIntFrom(userInput, ",");
+        List<Integer> userInputNumbers = CustomTypeCasting.stringToIntegersUsingParsing(scanner.nextLine(), ",");
 
         System.out.println("보너스 볼을 입력해주세요.");
-        int ball = scanner.nextInt();
+        int ball = CustomTypeCasting.stringToInteger(scanner.nextLine());
 
-        return validationCheckAndWrap(userInputNumbers, ball);
+        return validationCheckAndWrap(userInputNumbers, ball); //TODO: 뭔가 이름을 바꾸면 좋겠다.
     }
 
     /* 이 기능을 다른 클래스로 이동시킬지 고민했었는데, UI에 따라서 입력형식이 달라지므로, 이 클래스에 놓는게 좋다고 생각했습니다. */
