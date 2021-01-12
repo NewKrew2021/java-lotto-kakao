@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.exception.FailBuyLottoException;
-import lotto.view.InputView;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -12,7 +11,7 @@ public class Lottos {
     private List<Lotto> lottos;
 
     public Lottos(List<List<Integer>> lottos, int randomLottoCount) {
-        if(randomLottoCount < 0){
+        if (randomLottoCount < 0) {
             throw new FailBuyLottoException();
         }
         this.lottos = lottos.stream().map(Lotto::new).collect(Collectors.toList());

@@ -7,7 +7,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class RandomNumberGenerator{
+public class RandomNumberGenerator {
     public static final int ZERO = 0;
 
     private static final List<Integer> lottoNumbers = IntStream
@@ -17,9 +17,9 @@ public class RandomNumberGenerator{
 
     public static List<Integer> getNumbers() {
         Collections.shuffle(lottoNumbers);
-        return new ArrayList<>(lottoNumbers.subList(ZERO, Lotto.LOTTO_NUMBER_LENGTH)
+        return lottoNumbers.subList(ZERO, Lotto.LOTTO_NUMBER_LENGTH)
                 .stream()
                 .sorted()
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
     }
 }

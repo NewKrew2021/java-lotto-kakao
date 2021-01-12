@@ -2,6 +2,7 @@ package lotto.domain;
 
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.*;
@@ -18,15 +19,16 @@ public class LottosTest {
     }
 
     @Test
+    @DisplayName("추첨을 통한 정확도 테스트")
     public void raffleTest() {
         WinningLotto winningNumber = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 8);
         assertThat(lottos.raffle(winningNumber).getCountOfRank(Rank.FIRST)).isEqualTo(1);
     }
 
     @Test
+    @DisplayName("추첨을 통한 정확도 테스트")
     void bonusTest() {
         WinningLotto winningNumber = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 7), 6);
-
         assertThat(lottos.raffle(winningNumber).getCountOfRank(Rank.SECOND)).isEqualTo(1);
     }
 }

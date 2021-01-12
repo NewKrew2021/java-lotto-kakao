@@ -18,7 +18,7 @@ public class Rankings {
         Map<Rank, Integer> rankingsMap = new TreeMap<>();
         for (Lotto lotto : lottos) {
             Rank rank = winningNumber.getRankOfLotto(lotto);
-            rankingsMap.put(rank, rankingsMap.getOrDefault(rank, 0) + 1);
+            rankingsMap.put(rank, rankingsMap.getOrDefault(rank, ZERO) + 1);
         }
         rankings = rankingsMap;
     }

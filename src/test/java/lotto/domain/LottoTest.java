@@ -42,6 +42,7 @@ public class LottoTest {
     }
 
     @Test
+    @DisplayName("로또 번호 중복에 따른 예외 테스트")
     void lottoSizeExceptionTest() {
         assertThatExceptionOfType(HasDuplicateNumberException.class)
                 .isThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, 1)))
@@ -49,6 +50,7 @@ public class LottoTest {
     }
 
     @Test
+    @DisplayName("보너스 번호 중복에 따른 예외 테스트")
     void bonusNumberExceptionTest() {
         assertThatExceptionOfType(BonusNumberException.class)
                 .isThrownBy(() -> new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 6))

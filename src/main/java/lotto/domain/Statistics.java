@@ -3,7 +3,6 @@ package lotto.domain;
 import java.util.*;
 
 public class Statistics {
-    public static final int ZERO = 0;
     public static final int HUNDRED = 100;
 
     private final Rankings rankings;
