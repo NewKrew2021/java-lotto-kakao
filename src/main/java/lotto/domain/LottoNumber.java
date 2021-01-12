@@ -23,7 +23,7 @@ public class LottoNumber {
         this.number = number;
     }
 
-    public static LottoNumber of(int number) {  // LottoNumber를 반환하는 정적 팩토리 메서드
+    public static LottoNumber of(int number) {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
             throw new OutOfRangeException();
         }

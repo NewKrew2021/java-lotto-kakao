@@ -8,7 +8,7 @@ import java.util.TreeMap;
 public class Rankings {
     public static final int ZERO = 0;
 
-    private Map<Rank, Integer> rankings;
+    private final Map<Rank, Integer> rankings;
 
     public Rankings(Map<Rank, Integer> rankings) {
         this.rankings = Collections.unmodifiableMap(rankings);

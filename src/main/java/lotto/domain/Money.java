@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class Money {
     private static final int MIN_MONEY = 10;
-    private int money;
+    private final int money;
 
     public Money(int money) {
         if (money < MIN_MONEY) {
