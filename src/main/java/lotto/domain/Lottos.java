@@ -17,7 +17,7 @@ public class Lottos {
     public Lottos(String[] textLottos) {
         lottos = new ArrayList<>();
         for (String textLotto : textLottos) {
-            lottos.add(new Lotto(textLotto));
+            lottos.add(Lotto.of(textLotto));
         }
     }
 
@@ -25,7 +25,7 @@ public class Lottos {
         List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < number; ++i) {
-            lottos.add(new Lotto(RandomNo.generateRandomNos(NUMBER)));
+            lottos.add(Lotto.of(RandomNo.generateRandomNos(NUMBER)));
         }
 
         return new Lottos(lottos);

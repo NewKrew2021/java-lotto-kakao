@@ -11,7 +11,7 @@ public class LottoSimulation {
 
     public LottoSimulation(Price price, String text, String bonusBall, Lottos lottos) {
         this.price = price;
-        this.winningLotto = initWinningLotto(text.split(", "), bonusBall);
+        this.winningLotto = new WinningLotto(Lotto.of(text), new LottoNumber(Integer.parseInt(bonusBall)));
         this.lottos = lottos;
     }
 
@@ -20,16 +20,6 @@ public class LottoSimulation {
         this.lottoResults = lottoResults;
         this.lottos = null;
         this.winningLotto = null;
-    }
-
-    private WinningLotto initWinningLotto(String[] numbers, String bonusBall) {
-        List<LottoNumber> lotto = new ArrayList<>();
-
-        for (String number : numbers) {
-            lotto.add(new LottoNumber(Integer.parseInt(number)));
-        }
-
-        return new WinningLotto(new Lotto(lotto), new LottoNumber(Integer.parseInt(bonusBall)));
     }
 
     public void confirm() {
