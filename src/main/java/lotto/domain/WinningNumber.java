@@ -2,6 +2,7 @@ package lotto.domain;
 
 
 import java.util.Arrays;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WinningNumber extends LottoTicket {
@@ -15,7 +16,18 @@ public class WinningNumber extends LottoTicket {
                 .map(Number::new)
                 .collect(Collectors.toSet()));
         this.bonusNumber = new Number(bonusNumber);
+        invalidWinningNumberCheck(winningNumber);
+    }
 
+    private void invalidWinningNumberCheck(String winningNumber){
+        if (Arrays.stream(winningNumber
+                .replaceAll(" ", "")
+                .split(","))
+                .map(Integer::valueOf)
+                .map(Number::new)
+                .collect(Collectors.toList()).contains(bonusNumber)){
+            throw new InvalidBonusNumber();
+        }
     }
 
     public boolean bonusNumberContain(LottoTicket lottoTicket){

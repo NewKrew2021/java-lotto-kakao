@@ -23,7 +23,7 @@ public class CreateLottoResultsTest {
                     lottoResults.putIfAbsent(rank, 0);
                     lottoResults.put(rank, lottoResults.get(rank)+1);
                 });
-        
+
         assertThat(CreateLottoResults.createLottoResults(lottoTickets.getLottoTickets(), winningNumber)).
                 isEqualTo(new LottoResults(lottoResults));
     }

@@ -6,9 +6,6 @@ import java.util.stream.IntStream;
 
 public class CreateTicket {
     public static List<LottoTicket> createTotalTicket(int price, List<String> handTicket){
-        if(price/1000 < handTicket.size()){
-            throw new InvalidHandTicketSizeException();
-        }
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
         lottoTickets.addAll(createAutoTicket(price - handTicket.size()*1000));
