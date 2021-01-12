@@ -3,8 +3,6 @@ package lotto.domain;
 import lotto.setting.Prize;
 
 import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 public enum Rank {
    OUT(-1, Prize.MONEY_FOR_OUT),
@@ -14,9 +12,8 @@ public enum Rank {
    SECOND(5, Prize.MONEY_FOR_SECOND),
    FIRST(6, Prize.MONEY_FOR_FIRST);
 
-   private int matchCount;
-   private long prize;
-   Map<Integer, Rank> cache = new HashMap<>();
+   private final int matchCount;
+   private final long prize;
 
    Rank(int matchCount, long prize) {
       this.matchCount = matchCount;

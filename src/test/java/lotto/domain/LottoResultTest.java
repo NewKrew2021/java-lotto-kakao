@@ -13,9 +13,7 @@ public class LottoResultTest {
     @DisplayName("객체 생성 테스트")
     @Test
     public void createTest(){
-        Assertions.assertThatCode(() -> {
-            new LottoResult();
-        });
+        Assertions.assertThatCode(LottoResult::new).doesNotThrowAnyException();
     }
 
     @DisplayName("랭크를 하나 저장하고, 그 값이 반영되었는지 확인한다.")

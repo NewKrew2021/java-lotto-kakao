@@ -54,9 +54,7 @@ public class ManuallyGeneratingStrategyTest {
 
         assertThatExceptionOfType(ArrayIndexOutOfBoundsException.class)
                 .isThrownBy(
-                        () -> {
-                            strategy.generate();
-                        }
+                        strategy::generate
                 ).withMessageMatching("입력보다 더 많이 generate했습니다.");
     }
 
