@@ -2,15 +2,14 @@ package lotto.input;
 
 import java.util.Scanner;
 
-public abstract class ValidInputGuaranteer {
+public abstract class ValidInputGuaranteer <T>{
     protected Scanner scanner = new Scanner(System.in);
 
-    public String getFromUser(){
+    public T getFromUser(){
         System.out.println(getComment());
         try{
             String valueFromUser = scanner.nextLine();
-            checkValid(valueFromUser);
-            return valueFromUser;
+            return transformToObject(valueFromUser);
         } catch (Exception e){
             System.out.println(e.getMessage());
             return getFromUser();
@@ -19,5 +18,5 @@ public abstract class ValidInputGuaranteer {
 
     abstract String getComment();
 
-    abstract void checkValid(String input);
+    public abstract T transformToObject(String input);
 }

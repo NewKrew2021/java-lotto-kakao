@@ -2,7 +2,7 @@ package lotto.input;
 
 import lotto.domain.LottoMoney;
 
-public class BuyingMoneyValidInputGuaranteer extends ValidInputGuaranteer{
+public class BuyingMoneyValidInputGuaranteer extends ValidInputGuaranteer<LottoMoney>{
 
     @Override
     protected String getComment(){
@@ -10,7 +10,7 @@ public class BuyingMoneyValidInputGuaranteer extends ValidInputGuaranteer{
     }
 
     @Override
-    protected void checkValid(String input){
-        new LottoMoney(Integer.parseInt(input));
+    public LottoMoney transformToObject(String input){
+        return new LottoMoney(Integer.parseInt(input));
     }
 }
