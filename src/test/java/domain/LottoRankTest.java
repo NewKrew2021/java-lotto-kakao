@@ -1,6 +1,5 @@
 package domain;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -33,6 +32,7 @@ public class LottoRankTest {
     @DisplayName("로또의 등수가 꽝일 경우")
     public void getLottoRank4(){
         assertThat(LottoRank.NONE).isEqualTo(LottoRank.getLottoRank(2,false));
+        assertThat(LottoRank.NONE).isEqualTo(LottoRank.getLottoRank(1,false));
     }
 
 }
