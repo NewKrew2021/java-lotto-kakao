@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -9,9 +10,10 @@ public class LottoGame {
     private LottoTickets tickets;
     private LottoStatistics statistics;
 
-    public LottoTickets makeLottoTickets(int count) {
-        List<LottoNumbers> tickets = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
+    public LottoTickets makeLottoTickets(int totalCount, List<List<Integer>> manualLottoNumbers) {
+        List<LottoNumbers> tickets = makeManualLottoTickets(manualLottoNumbers);
+        
+        for (int i = 0; i < totalCount - manualLottoNumbers.size(); i++) {
             Set<Integer> numbers = getLottoNumber();
             tickets.add(generateLottoTicket(numbers));
         }
@@ -51,5 +53,15 @@ public class LottoGame {
 
     public void setTickets(LottoTickets tickets) {
         this.tickets = tickets;
+    }
+
+    public List<LottoNumbers> makeManualLottoTickets(List<List<Integer>> manualLottoNumbers) {
+        List<LottoNumbers> tickets = new ArrayList<>();
+        for (List<Integer> manualLottoNumber : manualLottoNumbers) {
+            Set<Integer> numbers = new HashSet<>(manualLottoNumber);
+            tickets.add(generateLottoTicket(numbers));
+        }
+
+        return tickets;
     }
 }
