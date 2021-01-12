@@ -30,8 +30,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
   }
 
   private static void validateRange(Integer number) {
-    if (number == null || number < LOWER_BOUND || number > UPPER_BOUND) {
-      throw new InvalidLottoNumberException();
+    if (number == null) {
+      throw new InvalidLottoNumberException("null 입력 에러");
+    }
+
+    if (number < LOWER_BOUND || number > UPPER_BOUND) {
+      throw new InvalidLottoNumberException("1~45 사이의 숫자만 입력해주세요.");
     }
   }
 
@@ -41,12 +45,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
   @Override
   public boolean equals(Object o) {
-      if (this == o) {
-          return true;
-      }
-      if (o == null || getClass() != o.getClass()) {
-          return false;
-      }
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     LottoNumber that = (LottoNumber) o;
     return number == that.number;
   }

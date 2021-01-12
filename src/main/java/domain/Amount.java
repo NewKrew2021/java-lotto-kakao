@@ -16,7 +16,7 @@ public class Amount {
 
   private void validate(int amount) {
     if (amount < LOTTO_PRICE) {
-      throw new InvalidAmountException();
+      throw new InvalidAmountException("구입금액이 부족합니다.");
     }
   }
 

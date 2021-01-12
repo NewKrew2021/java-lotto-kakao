@@ -16,7 +16,7 @@ public class LottoWinningNumber {
 
   private void validateInclude(LottoTicket lottoWinningTicket, LottoNumber bonusNumber) {
     if (lottoWinningTicket.isContains(bonusNumber)) {
-      throw new InvalidLottoNumberException();
+      throw new InvalidLottoNumberException("보너스 넘버는 당첨번호와 중복될 수 없습니다.");
     }
   }
 

@@ -2,7 +2,6 @@ package domain;
 
 import domain.exceptions.InvalidLottoRankException;
 import java.util.Arrays;
-import java.util.function.Function;
 import java.util.function.IntToLongFunction;
 
 public enum LottoRank {
