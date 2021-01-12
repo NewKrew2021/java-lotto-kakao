@@ -1,5 +1,6 @@
 package view;
 
+import domain.LottoTicketCount;
 import dto.Amount;
 
 import java.util.Arrays;
@@ -26,5 +27,10 @@ public class LottoInputView {
     public static int inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");
         return Integer.parseInt(sc.nextLine());
+    }
+
+    public static LottoTicketCount inputManulCount(Amount amount) {
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        return new LottoTicketCount(Integer.parseInt(sc.nextLine()), amount.getCount());
     }
 }

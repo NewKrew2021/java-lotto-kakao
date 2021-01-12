@@ -33,8 +33,6 @@ public class AmountTest {
     public void testInputIsNotNumber(String input){
         assertThatExceptionOfType(NumberFormatException.class)
                 .isThrownBy(()->new Amount(Integer.parseInt(input)));
-        assertThatExceptionOfType(NumberFormatException.class)
-                .isThrownBy(()->new Amount(Integer.parseInt(input)));
     }
 
     @ParameterizedTest

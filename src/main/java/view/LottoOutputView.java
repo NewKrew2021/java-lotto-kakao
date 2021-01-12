@@ -1,5 +1,6 @@
 package view;
 
+import domain.LottoTicketCount;
 import domain.Rank;
 import dto.Amount;
 
@@ -13,6 +14,11 @@ public class LottoOutputView {
         StringBuilder sb = new StringBuilder();
         sb.append(amount.getCount()).append("개를 구매했습니다.");
         System.out.println(sb.toString());
+    }
+
+    public static void printTicketsCount(LottoTicketCount manualCount, LottoTicketCount autoCount) {
+        System.out.println("수동으로 " + manualCount.getLottoTicketCount()
+                + "장, 자동으로 " + autoCount.getLottoTicketCount() + "장을 구매했습니다.");
     }
 
     public static void printResult(Map<Rank, Long> winningResult) {

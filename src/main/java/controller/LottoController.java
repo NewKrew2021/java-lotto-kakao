@@ -8,7 +8,12 @@ import view.LottoOutputView;
 public class LottoController {
     public static void startLotto() {
         Amount amount = LottoInputView.inputAmount();
-        LottoOutputView.printTicketsCount(amount);
+
+
+        LottoTicketCount manualCount = LottoInputView.inputManulCount(amount);
+        LottoTicketCount autoCount = getAutoCount(manualCount, amount);
+
+        LottoOutputView.printTicketsCount(manualCount, autoCount);
 
         NumberGenerateStrategy strategy = new LottoRandomGenerator();
         LottoTickets lottoTickets = LottoTickets.of(strategy, amount);
@@ -20,5 +25,9 @@ public class LottoController {
         WinningInfo winningInfo = new WinningInfo(lottoTickets, lottoWinningNumber);
         LottoOutputView.printResult(winningInfo.getWinningInfo());
         LottoOutputView.printYield(winningInfo.getYield(amount));
+    }
+
+    private static LottoTicketCount getAutoCount(LottoTicketCount manualCount, Amount amount) {
+        return new LottoTicketCount(amount.getCount() - manualCount.getLottoTicketCount(), amount.getCount());
     }
 }
