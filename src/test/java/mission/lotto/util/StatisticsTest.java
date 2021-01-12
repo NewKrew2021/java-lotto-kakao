@@ -1,6 +1,5 @@
 package mission.lotto.util;
 
-import mission.lotto.domain.Number;
 import mission.lotto.domain.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -35,8 +34,7 @@ public class StatisticsTest {
         Lottos lottos = Lottos.buyLottos(14, numberSamples, new UserMoney(14000));
 
         // when
-        LottoAnswer answer = new LottoAnswer(
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), Number.of(7));
+        LottoAnswer answer = new LottoAnswer(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
 
         // then
         Map<Rank, Integer> allLottoRankCount = Statistics.getAllLottoRank(lottos, answer);

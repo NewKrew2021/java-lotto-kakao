@@ -7,6 +7,7 @@ import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -17,12 +18,12 @@ public class LottoTest {
     @DisplayName("로또 정답 객체 생성기")
     static Stream<Arguments> answerGenerator() {
         return Stream.of(
-                Arguments.of(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)), Number.of(7), Rank.FIRST),
-                Arguments.of(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 11)), Number.of(6), Rank.SECOND),
-                Arguments.of(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 11)), Number.of(7), Rank.THIRD),
-                Arguments.of(new Lotto(Arrays.asList(1, 2, 3, 4, 12, 11)), Number.of(7), Rank.FOURTH),
-                Arguments.of(new Lotto(Arrays.asList(1, 2, 3, 13, 12, 11)), Number.of(7), Rank.FIFTH),
-                Arguments.of(new Lotto(Arrays.asList(1, 2, 11, 12, 13, 14)), Number.of(7), Rank.UNRANKED)
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 7, Rank.FIRST),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 11), 6, Rank.SECOND),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 11), 7, Rank.THIRD),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 12, 11), 7, Rank.FOURTH),
+                Arguments.of(Arrays.asList(1, 2, 3, 13, 12, 11), 7, Rank.FIFTH),
+                Arguments.of(Arrays.asList(1, 2, 11, 12, 13, 14), 7, Rank.UNRANKED)
         );
     }
 
@@ -50,7 +51,7 @@ public class LottoTest {
     @ParameterizedTest
     @DisplayName("당첨 등수 계산 테스트")
     @MethodSource("answerGenerator")
-    public void rankTest(Lotto numbers, Number bonusNumber, Rank rank) {
+    public void rankTest(List<Integer> numbers, int bonusNumber, Rank rank) {
         // given
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
 
