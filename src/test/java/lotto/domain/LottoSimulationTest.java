@@ -16,7 +16,7 @@ public class LottoSimulationTest {
         LottoResults lottoResults = new LottoResults(Collections.singletonList(
                 Result.THREE
         ));
-        LottoSimulation lottoSimulation = new LottoSimulation(14000,lottoResults);
+        LottoSimulation lottoSimulation = new LottoSimulation(14000, lottoResults);
 
         assertThat(lottoSimulation.getYield()).isCloseTo(0.35, offset(0.01));
     }
