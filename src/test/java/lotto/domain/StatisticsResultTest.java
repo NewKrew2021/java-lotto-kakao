@@ -16,7 +16,7 @@ public class StatisticsResultTest {
         statisticsResult.increaseTypeCount(StatisticsType.FIVE_WITH_BONUS);
         statisticsResult.increaseTypeCount(StatisticsType.SIX);
 
-        assertThat(statisticsResult.benefit())
+        assertThat(statisticsResult.getYield())
                 .isGreaterThan(338592)
                 .isLessThan(338593);
     }

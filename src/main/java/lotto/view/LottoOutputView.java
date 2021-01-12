@@ -19,7 +19,7 @@ public class LottoOutputView {
         System.out.println("당첨 통계");
         System.out.println("----------");
         System.out.println(statisticsResult.toString());
-        System.out.println("총 수익률은 " + statisticsResult.benefit() + "입니다.");
+        System.out.println("총 수익률은 " + statisticsResult.getYield() + "입니다.");
     }
 
 }

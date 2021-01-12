@@ -21,13 +21,16 @@ public class StatisticsResult {
         this.ticketCount++;
     }
 
-    public double benefit() {
-        double sumPrice = 0;
+    public double getYield() {
+        return this.calculateBenefit() / (this.ticketCount * LottoTicket.LOTTO_PRICE );
+    }
+
+    private double calculateBenefit() {
+        double benefit = 0;
         for( StatisticsType type : StatisticsType.values() ) {
-            sumPrice += type.getJackpot() * rankCount.get(type);
+            benefit += type.getJackpot() * rankCount.get(type);
         }
-        sumPrice = sumPrice / (this.ticketCount * LottoTicket.LOTTO_PRICE );
-        return sumPrice;
+        return benefit;
     }
 
     @Override
