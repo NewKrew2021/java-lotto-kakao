@@ -20,7 +20,7 @@ public class LottoMain {
         List<List<Integer>> manualLottoNumbers = InputView.getMaualLottoNumbers(manualCount);
 
         OutputView.printLottoTicketCount(totalCount);
-        LottoTickets lottoTickets = game.makeLottoTickets(totalCount);
+        LottoTickets lottoTickets = game.makeLottoTickets(totalCount, manualLottoNumbers);
         OutputView.printLottoTickets(lottoTickets);
 
         Set<Integer> numbers = InputView.getWinnerNumber();

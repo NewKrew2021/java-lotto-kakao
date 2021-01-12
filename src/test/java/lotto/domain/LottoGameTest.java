@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -17,7 +18,6 @@ public class LottoGameTest {
 
     @BeforeAll
     public static void setUp() {
-        game = new LottoGame();
         winner = new WinnerNumbers(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6)), 10);
 
         List<LottoNumbers> tickets = new ArrayList<>();
@@ -30,6 +30,11 @@ public class LottoGameTest {
         lottoTickets = new LottoTickets(tickets);
     }
 
+    @BeforeEach
+    public void initializer() {
+        game = new LottoGame();
+    }
+
     @Test
     public void testGetLottoTicketCount() {
         int count = game.getLottoTicketCount(14050);
@@ -38,7 +43,9 @@ public class LottoGameTest {
 
     @Test
     public void testMakeLottoTickets() {
-        game.makeLottoTickets(5);
+        List<List<Integer>> manualLottoNumbers = new ArrayList<>();
+        manualLottoNumbers.add(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        game.makeLottoTickets(5, manualLottoNumbers);
         assertThat(game.getTicketsCount()).isEqualTo(5);
     }
 
@@ -63,5 +70,20 @@ public class LottoGameTest {
         assertThat(game.getEarningRatio()).isEqualTo((float) 338592.5);
 
 
+    }
+
+    @Test
+    public void testMakeManualLottoTickets() {
+        List<List<Integer>> manualLottoNumbers = new ArrayList<>();
+        manualLottoNumbers.add(new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        manualLottoNumbers.add(new ArrayList<>(Arrays.asList(7, 8, 9, 10, 11, 12)));
+        manualLottoNumbers.add(new ArrayList<>(Arrays.asList(13, 14, 15, 16, 17, 18)));
+
+        List<LottoNumbers> tickets = new ArrayList<>();
+        tickets.add(new LottoNumbers(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6))));
+        tickets.add(new LottoNumbers(new HashSet<>(Arrays.asList(7, 8, 9, 10, 11, 12))));
+        tickets.add(new LottoNumbers(new HashSet<>(Arrays.asList(13, 14, 15, 16, 17, 18))));
+
+        assertThat(game.makeManualLottoTickets(manualLottoNumbers)).isEqualTo(tickets);
     }
 }
