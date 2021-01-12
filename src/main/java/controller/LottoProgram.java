@@ -1,12 +1,14 @@
 package controller;
 
-import domain.Lotto;
-import domain.LottoStatistics;
-import domain.AutoLottos;
-import domain.WinningLotto;
+import domain.*;
 import exception.ManualLottoCountExceededException;
 import exception.UnderLottoBuyAmountException;
 import view.LottoProgramView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoProgram {
 
@@ -23,15 +25,18 @@ public class LottoProgram {
         int buyManualCount = lottoProgramView.getBuyManualLottoCountForUser();
         int buyAutoLottoCount = calculateAutoBuyLottoCount(buyAmount,buyManualCount);
 
-        lottoProgramView.printBoughtLottosCount(buyManualCount,buyAutoLottoCount);
-        AutoLottos autoLottos = new AutoLottos(buyAutoLottoCount);
+        lottoProgramView.printGetManualBallPhrase();
+        List<Lotto> manualLotto = getManualLottos(buyManualCount);
 
-        lottoProgramView.printLottosNumber(autoLottos);
+        lottoProgramView.printBoughtLottosCount(buyManualCount,buyAutoLottoCount);
+        Lottos lottos = new Lottos(buyAutoLottoCount,manualLotto);
+
+        lottoProgramView.printLottosNumber(lottos);
 
         WinningLotto winningLotto = new WinningLotto(lottoProgramView.getWinningLottoForUser()
                 , lottoProgramView.getBonusBallForUser());
 
-        LottoStatistics lottoStatistics = new LottoStatistics(autoLottos.getRankCounts(winningLotto),buyAmount);
+        LottoStatistics lottoStatistics = new LottoStatistics(lottos.getRankCounts(winningLotto),buyAmount);
         lottoProgramView.printWinningStatistics(lottoStatistics);
     }
 
@@ -46,5 +51,19 @@ public class LottoProgram {
             throw new ManualLottoCountExceededException("수동 구입 갯수가 초과하였습니다.");
         }
         return (buyAmount / Lotto.LOTTO_PRICE) - buyManualCount;
+    }
+
+    private List<Lotto> getManualLottos(int buyManualCount){
+        List<Lotto> manualLottos = new ArrayList<>();
+        for (int i = 0; i < buyManualCount; i++) {
+            manualLottos.add(new Lotto(getBalls(lottoProgramView.getManualLottoForUser())));
+        }
+        return manualLottos;
+    }
+
+    private List<Ball> getBalls(String[] numbers){
+        return Arrays.stream(numbers)
+                .map(Ball::new)
+                .collect(Collectors.toList());
     }
 }

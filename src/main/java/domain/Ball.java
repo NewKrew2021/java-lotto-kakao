@@ -9,6 +9,10 @@ public class Ball {
         this.number = number;
     }
 
+    public Ball(String number) {
+        this.number = Integer.parseInt(number);
+    }
+
     public static Ball map(String number){
         return new Ball(Integer.parseInt(number));
     }
