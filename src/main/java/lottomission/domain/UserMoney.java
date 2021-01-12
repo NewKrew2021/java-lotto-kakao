@@ -1,7 +1,5 @@
 package lottomission.domain;
 
-import lottomission.controller.LottoController;
-
 public class UserMoney {
 
     private final int userMoney;
@@ -22,7 +20,6 @@ public class UserMoney {
     }
 
     public int getPossibleCount() {
-        return userMoney/ LottoController.LOTTO_PRICE;
+        return userMoney/ LottoGame.LOTTO_PRICE;
     }
-
 }

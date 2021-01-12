@@ -1,25 +1,26 @@
 package lottomission.domain;
 
+import lottomission.util.RandomForLotto;
+
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoGame {
 
-    private Lottos lottos;
-    private LottoAnswer answer;
+    public static int LOTTO_PRICE = 1000;
 
-
-    public void buyLottos(List<Lotto> lottoList){
-        this.lottos = new Lottos(lottoList);
+    public Lottos buyLottos(UserMoney userMoney){
+        return new Lottos(IntStream.range(0, userMoney.getPossibleCount())
+                .mapToObj(i -> new Lotto(RandomForLotto.getRandomSixIntegerList()))
+                .collect(Collectors.toList()));
+    }
+    public Lottos buyLottosSelf(List<Lotto> lottoList){
+        return new Lottos(lottoList);
     }
 
-    public void setLottoAnswer(List<Integer> sixNumberList, int bonusNumber){
-        this.answer = new LottoAnswer(
-                new LottoNumbers(sixNumberList),
-                new LottoNumber(bonusNumber));
-    }
 
-    public Map<LotteryWinnings, Integer> getAllLottoRankCount() {
+    public LottoResult getLottoGameResult(Lottos lottos,LottoAnswer answer) {
         Map<LotteryWinnings, Integer> result = Arrays
                 .stream(LotteryWinnings.values())
                 .collect(Collectors.toMap(lotteryWinnings -> lotteryWinnings, lotteryWinnings -> 0, (a, b) -> b, TreeMap::new));
@@ -30,10 +31,10 @@ public class LottoGame {
                 .forEach(winningsStat -> result.put(winningsStat, result.get(winningsStat) + 1));
 
         result.remove(LotteryWinnings.UNRANKED);
-        return result;
+        return new LottoResult(result);
     }
 
-    public List<List<Integer>> getLottosList() {
+    public List<List<Integer>> getLottosList(Lottos lottos) {
         return lottos.getLottosNumberList();
     }
 }

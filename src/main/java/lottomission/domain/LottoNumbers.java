@@ -32,9 +32,13 @@ public class LottoNumbers {
     }
 
     public int getCombineSetLength(LottoNumbers lottoNumbers) {
+        return lottoNumbers.combineTwoLottoNumberSet(this.numbers).size();
+    }
+
+    public Set<LottoNumber> combineTwoLottoNumberSet(Set<LottoNumber> lottoNumbers){
         Set<LottoNumber> combineSet = new HashSet<>(this.numbers);
-        combineSet.addAll(lottoNumbers.getNumbers());
-        return combineSet.size();
+        combineSet.addAll(lottoNumbers);
+        return combineSet;
     }
 
     public Set<LottoNumber> getNumbers() {

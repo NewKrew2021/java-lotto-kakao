@@ -1,22 +1,24 @@
 package lottomission.view;
 
-import lottomission.controller.LottoController;
 import lottomission.domain.LotteryWinnings;
+import lottomission.domain.LottoResult;
+import lottomission.domain.Lottos;
+import lottomission.domain.UserMoney;
 
 import java.util.List;
 import java.util.Map;
 
 public class OutputView {
 
-    public static void autoBoughtView(LottoController controller) {
-        List<List<Integer>> lottos = controller.getLottosList();
-        System.out.println(lottos.size() + "개를 구매했습니다.");
-        lottos.stream().forEach(i -> System.out.println(i));
+    public static void autoBoughtView(Lottos lottos) {
+        List<List<Integer>> lottosNumberList = lottos.getLottosNumberList();
+        System.out.println(lottosNumberList.size() + "개를 구매했습니다.");
+        lottosNumberList.stream().forEach(i -> System.out.println(i));
         System.out.println();
     }
 
-    public static void resultView(LottoController controller) {
-        Map<LotteryWinnings, Integer> allLottoRankCount = controller.getAllLottoCount();
+    public static void resultView(LottoResult lottoResult) {
+        Map<LotteryWinnings, Integer> allLottoRankCount = lottoResult.getRankCount();
         System.out.println("당첨 통계");
         StringBuilder sb = new StringBuilder();
         for (LotteryWinnings lotteryWinnings : allLottoRankCount.keySet()) {
@@ -29,9 +31,9 @@ public class OutputView {
         System.out.println(sb);
     }
 
-    public static void totalEarningsView(LottoController controller) {
+    public static void totalEarningsView(LottoResult lottoResult, UserMoney userMoney) {
         String result = "총 수익률은 ";
-        result += (int) Math.floor(controller.getRateOfProfit() * 100);
+        result += (int) Math.floor(lottoResult.getRateOfProfitResult(userMoney) * 100);
         System.out.println(result + "%입니다.");
     }
 }
