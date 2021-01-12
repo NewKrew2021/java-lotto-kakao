@@ -44,3 +44,20 @@
 
 ### View 구현
 1. Input Output
+
+## File 목록
+### domain
+- LottoNo : 로또 번호 객체
+- LottoTicket : 로또 티켓 객체
+- Money : Input 돈 객체
+- StatisticsResult : 매칭 결과 객체
+- WinningLottoTicket : 당첨 로또 티켓 객체
+- LottoLogic : 로또 구입, 당첨로또와 매칭
+
+### view
+- LottoInputView : Input UI view
+- LottoOutputView : Output UI view
+
+### 기타
+- StatisticsType : 로또 당첨 Ranking enum
+- LottoGameMain : main 함수
