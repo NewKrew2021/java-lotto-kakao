@@ -22,7 +22,7 @@ public class MatchNumber {
     }
 
     private boolean isValid() {
-        return winningNumber.isContain(bonusNumber);
+        return !winningNumber.isContain(bonusNumber);
     }
 
     public MatchResult getMatchResult(LottoNumber lottoNumber) {
