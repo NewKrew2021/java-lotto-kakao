@@ -1,15 +1,18 @@
 package lotto.view;
 
-import lotto.domain.Ticket;
-import lotto.domain.WinnerBalls;
-import lotto.setting.Format;
-
 import java.util.*;
 
+/*
+ * 입력 클래스에서는 입력과 관련된 validation만 체크해주도록 한다.
+ * 즉 숫자, 혹은 문자열이 잘 입력 받았는지 부분만 검증해주도록 한다.
+ * domain에서 처리할 validation까지 view에서 하지 않도록 한다.
+ * (domain에서 처리할 검사의 예: 입력받은 숫자가 특정 범위에 속해있어야 한다거나, 보너스볼은 당첨번호에 포함되어 있어야 한다거나 등의 검증까지는 하지 않는다.)
+ * 입력 클래스는 필요한 원시값을 잘 입력받아서 전달해주면 된다.
+ */
 public class Input {
     private static final Scanner scanner = new Scanner(System.in);
 
-    public static int getPriceFromUser() {
+    public static int getPriceFromUser() { //TODO: 사용자가 잘못된 값을 입력했을때 예외처리가 필요하다.
         System.out.println("구입금액을 입력해 주세요.");
         return CustomTypeCasting.stringToInteger(scanner.nextLine());
     }
@@ -21,20 +24,6 @@ public class Input {
 
     public static int getBonusBallFromUser(){
         System.out.println("보너스 볼을 입력해주세요.");
-        int ball = CustomTypeCasting.stringToInteger(scanner.nextLine());
-        return ball;
-    }
-
-    /* 이 기능을 다른 클래스로 이동시킬지 고민했었는데, UI에 따라서 입력형식이 달라지므로, 이 클래스에 놓는게 좋다고 생각했습니다. */
-    private static WinnerBalls validationCheckAndWrap(List<Integer> userInputNumbers, int bonusBall) {
-        Format.validateTicketSizeOf(userInputNumbers.size());
-
-        Set<Integer> extractedUserInputNumbers = new HashSet<>(userInputNumbers);
-        Format.validateTicketSizeOf(extractedUserInputNumbers.size());
-
-        Format.validateNumberRangeOf(extractedUserInputNumbers);
-        Format.validateBonusBall(extractedUserInputNumbers, bonusBall);
-
-        return new WinnerBalls(new Ticket(extractedUserInputNumbers), bonusBall);
+        return CustomTypeCasting.stringToInteger(scanner.nextLine());
     }
 }

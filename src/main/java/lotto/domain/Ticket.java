@@ -8,12 +8,33 @@ import java.util.Objects;
 import java.util.Set;
 
 public class Ticket {
+    public static final int LOWER_LIMIT_OF_NUMBER = 1;
+    public static final int UPPER_LIMIT_OF_NUMBER = 45;
+    private static final int TICKET_SIZE = 6;
+
     private final Set<Integer> numbers;
 
     public Ticket(Set<Integer> numbers) {
-        Format.validateTicketSizeOf(numbers.size());
-        Format.validateNumberRangeOf(numbers);
+        if(!isValid(numbers)){
+            throw new IllegalArgumentException("유효하지 않은 ticket 값입니다.");
+        }
         this.numbers = numbers;
+    }
+
+    public boolean isValid(Set<Integer> numbers){
+        return validateTicketSizeOf(numbers.size()) && validateAllValuesOfNumbers(numbers);
+    }
+
+    public boolean validateTicketSizeOf(int testTicketSize) {
+        return TICKET_SIZE != testTicketSize;
+    }
+
+    public static boolean validateAllValuesOfNumbers(Set<Integer> numbers) {
+        return numbers.stream().allMatch(Ticket::rangeCheckForOneNumber);
+    }
+
+    private static boolean rangeCheckForOneNumber(int number) {
+        return (LOWER_LIMIT_OF_NUMBER <= number) && (number <= UPPER_LIMIT_OF_NUMBER);
     }
 
     /* 숫자 정보가 변경되는 것을 막기 위해 복사하여 전달한다. */
