@@ -1,5 +1,6 @@
 package view;
 
+import domain.LottoResult;
 import domain.LottoStatus;
 import domain.Lottos;
 
@@ -7,9 +8,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class LottoSimulatorView {
-
     private static final Scanner scanner = new Scanner(System.in);
-
 
     public int askMoneyToBuyLotto() {
         System.out.println(Message.ASK_MONEY_MESSAGE);
@@ -34,10 +33,10 @@ public class LottoSimulatorView {
         System.out.println(lottos);
     }
 
-    public void printResult(Map<LottoStatus, Integer> lottoResult, long profit) {
+    public void printResult(LottoResult lottoResult, long profit) {
         System.out.println("당첨 통계\n-----------");
 
-        for (LottoStatus lottoStatus : LottoStatus.getLottoStatuses()) {
+        for (LottoStatus lottoStatus : LottoStatus.values()) {
             System.out.printf(Message.RESULT_MESSAGE, lottoStatus.getMatchedLottoNumberCount(),
                     printBonus(lottoStatus), lottoStatus.getWinngs(), lottoResult.get(lottoStatus));
         }
@@ -53,3 +52,4 @@ public class LottoSimulatorView {
     }
 
 }
+

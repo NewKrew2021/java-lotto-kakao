@@ -1,7 +1,6 @@
 package domain;
 
 import org.junit.jupiter.api.Test;
-import utils.LottoException;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -25,3 +24,4 @@ public class LottoNumberTest {
                 .isTrue();
     }
 }
+

@@ -6,12 +6,12 @@ import java.util.Comparator;
 import java.util.List;
 
 public enum LottoStatus {
-    FIRST(2000000000, 6),
-    SECOND( 30000000, 5),
-    THIRD( 1500000, 5),
-    FOURTH( 50000, 4),
-    FIFTH( 5000, 3),
-    NONE( 0, 0);
+    NONE(0, 0),
+    FIFTH(5000, 3),
+    FOURTH(50000, 4),
+    THIRD(1500000, 5),
+    SECOND(30000000, 5),
+    FIRST(2000000000, 6);
 
     private final int winngs;
     private final int matchedLottoNumberCount;
@@ -51,9 +51,4 @@ public enum LottoStatus {
         }
         return LottoStatus.THIRD;
     }
-
-    public static List<LottoStatus> getLottoStatuses() {
-        return lottoStatuses;
-    }
-
 }

@@ -1,7 +1,5 @@
 package domain;
 
-import utils.LottoException;
-
 import java.util.Objects;
 
 public class LottoNumber {
@@ -38,3 +36,4 @@ public class LottoNumber {
         return Objects.hash(number);
     }
 }
+

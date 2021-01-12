@@ -1,7 +1,6 @@
 package domain;
 
 import org.junit.jupiter.api.Test;
-import utils.LottoException;
 
 import java.util.Arrays;
 
@@ -60,3 +59,4 @@ public class LottoTest {
         assertThat(lotto.size()).isEqualTo(6);
     }
 }
+

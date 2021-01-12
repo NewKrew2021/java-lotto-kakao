@@ -1,10 +1,6 @@
 package domain;
 
-import utils.LottoException;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class AnswerLotto {
@@ -27,7 +23,7 @@ public class AnswerLotto {
 
     private int getMatchingNumber(List<LottoNumber> lotto) {
         return lotto.stream()
-                .filter(number -> answerLotto.contains(number))
+                .filter(answerLotto::contains)
                 .collect(Collectors.toList()).size();
     }
 
@@ -50,3 +46,4 @@ public class AnswerLotto {
         return Objects.hash(answerLotto, bonusNumber);
     }
 }
+
