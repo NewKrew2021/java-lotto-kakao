@@ -22,14 +22,14 @@ public class Ticket {
     }
 
     public boolean isValid(Set<Integer> numbers){
-        return validateTicketSizeOf(numbers.size()) && validateAllValuesOfNumbers(numbers);
+        return isValidSize(numbers.size()) && isValidValues(numbers);
     }
 
-    public boolean validateTicketSizeOf(int testTicketSize) {
-        return TICKET_SIZE != testTicketSize;
+    public boolean isValidSize(int testTicketSize) {
+        return TICKET_SIZE == testTicketSize;
     }
 
-    public static boolean validateAllValuesOfNumbers(Set<Integer> numbers) {
+    public static boolean isValidValues(Set<Integer> numbers) {
         return numbers.stream().allMatch(Ticket::rangeCheckForOneNumber);
     }
 
