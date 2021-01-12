@@ -5,18 +5,22 @@ import java.util.*;
 public class LottoLogic {
 
     private static Money money;
+    private static AutoBuyingStrategy autoBuyingStrategy = new AutoBuyingStrategy();
 
     public static List<LottoTicket> buyLottoTicketsAuto(int inputMoney) {
         money = new Money(inputMoney);
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        List<Integer> numberBasket = makeLottoNumberBasket();
+
 
         while(money.payForTicket()) {
-            Collections.shuffle(numberBasket);
-            lottoTickets.add(new LottoTicket(numberBasket.subList(0, LottoTicket.LOTTO_NUMBER_COUNT_OF_TICKET)));
+            lottoTickets.add(buyTicket(autoBuyingStrategy));
         }
 
         return lottoTickets;
+    }
+
+    private static LottoTicket buyTicket(BuyingStrategy buyingStrategy) {
+        return buyingStrategy.buyTicket();
     }
 
     private static List<Integer> makeLottoNumberBasket() {
