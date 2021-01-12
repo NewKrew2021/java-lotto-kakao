@@ -1,5 +1,7 @@
 package domain;
 
+import utils.RandomBallPool;
+
 import java.util.List;
 
 public class Lotto {

@@ -1,4 +1,6 @@
-package domain;
+package utils;
+
+import domain.Ball;
 
 import java.util.ArrayList;
 import java.util.Collections;
