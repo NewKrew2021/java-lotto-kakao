@@ -17,8 +17,8 @@ public class LottoTickets {
         this.lottos = lottos;
     }
 
-    public static LottoTickets of(NumberGenerateStrategy strategy, Amount amount) {
-        int count = amount.getCount();
+    public static LottoTickets of(NumberGenerateStrategy strategy, LottoTicketCount ticketCount) {
+        int count = ticketCount.getLottoTicketCount();
         List<Lotto> tickets = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             tickets.add(Lotto.from(strategy));
