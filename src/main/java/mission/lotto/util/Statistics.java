@@ -1,9 +1,6 @@
 package mission.lotto.util;
 
-import mission.lotto.domain.Lotto;
-import mission.lotto.domain.LottoAnswer;
-import mission.lotto.domain.Lottos;
-import mission.lotto.domain.Rank;
+import mission.lotto.domain.*;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -27,6 +24,10 @@ public class Statistics {
                 .map(lotto -> lotto.calculateRank(answer))
                 .mapToInt(Rank::getMoney)
                 .sum();
+    }
+
+    public static float getRateOfProfit(Lottos lottos, LottoAnswer lottoAnswer, UserMoney userMoney) {
+        return (float) Statistics.getSumAllWinningMoney(lottos, lottoAnswer) / userMoney.getUserMoney();
     }
 
 }
