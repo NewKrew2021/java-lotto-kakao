@@ -28,4 +28,12 @@ public class WinningInfoTest {
     WinningInfo winningInfo = new WinningInfo(rankCount);
     assertThat(winningInfo.getSumPrize()).isEqualTo(5000);
   }
+
+  @Test
+  void yield() {
+    WinningInfo winningInfo = new WinningInfo(rankCount);
+    Amount amount = new Amount(5000);
+
+    assertThat(winningInfo.getYield(amount)).isEqualTo(1.0);
+  }
 }

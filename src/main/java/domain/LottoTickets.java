@@ -3,11 +3,10 @@ package domain;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class LottoTickets {
-
-  public static final int MIN_MATCH_COUNT = 3;
 
   private List<LottoTicket> lottoTickets;
 
@@ -53,5 +52,22 @@ public class LottoTickets {
 
   public int size() {
     return this.lottoTickets.size();
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    LottoTickets that = (LottoTickets) o;
+    return Objects.equals(lottoTickets, that.lottoTickets);
+  }
+
+  @Override
+  public int hashCode() {
+    return Objects.hash(lottoTickets);
   }
 }
