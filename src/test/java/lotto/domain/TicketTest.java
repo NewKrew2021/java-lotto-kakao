@@ -1,99 +1,53 @@
 package lotto.domain;
 
-import lotto.setting.Rank;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.shadow.com.univocity.parsers.common.ArgumentUtils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@DisplayName("TicketTest class")
 public class TicketTest {
+    Ticket testTicket = new Ticket(
+            new ManuallyGeneratingStrategy(
+                    Arrays.asList(
+                            new HashSet<>(Arrays.asList(1, 2, 10, 30, 44, 45))
+                    )
+            )
+    );
 
-    @Test
-    public void isContains_test_true() {
-        Set<Integer> testNumbers = new HashSet<>(Arrays.asList(1, 2, 10, 30, 44, 45));
-        Ticket curTicket = new Ticket(testNumbers);
-        assertThat(curTicket.isContain(45)).isEqualTo(true);
+    @DisplayName("isConstains 메서드가 정상 작동하는 지 확인")
+    @ParameterizedTest
+    @MethodSource("provideInputBallAndResult")
+    public void isContainsTest(int testBall, boolean result) {
+        assertThat(testTicket.isContain(testBall)).isEqualTo(result);
     }
 
-    @Test
-    public void isContains_test_false() {
-        Set<Integer> testNumbers = new HashSet<>(Arrays.asList(1, 2, 10, 30, 44, 45));
-        Ticket curTicket = new Ticket(testNumbers);
-        assertThat(curTicket.isContain(3)).isEqualTo(false);
+    private static Stream<Arguments> provideInputBallAndResult(){
+        return Stream.of(
+                Arguments.of(1, true),
+                Arguments.of(2, true),
+                Arguments.of(45, true),
+                Arguments.of(3, false)
+        );
     }
 
+    @DisplayName("Ticket 객체의 값을 가져오는 것을 테스트")
     @Test
-    public void GetOrder_test_1() {
-        Set<Integer> numbersForUser = new HashSet<>(Arrays.asList(1, 2, 10, 30, 44, 45));
-        Set<Integer> numbersForWinner = new HashSet<>(Arrays.asList(1, 2, 10, 30, 44, 45));
-        int bonusBall = 7;
-
-        Ticket userTicket = new Ticket(numbersForUser);
-        WinnerBalls winnerBalls = new WinnerBalls(new Ticket(numbersForWinner), bonusBall);
-
-        assertThat(userTicket.getOrder(winnerBalls)).isEqualTo(Rank.FIRST);
-    }
-
-    @Test
-    public void GetOrder_test_2() {
-        Set<Integer> numbersForUser = new HashSet<>(Arrays.asList(7, 2, 10, 30, 44, 45));
-        Set<Integer> numbersForWinner = new HashSet<>(Arrays.asList(1, 2, 10, 30, 44, 45));
-        int bonusBall = 7;
-
-        Ticket userTicket = new Ticket(numbersForUser);
-        WinnerBalls winnerBalls = new WinnerBalls(new Ticket(numbersForWinner), bonusBall);
-
-        assertThat(userTicket.getOrder(winnerBalls)).isEqualTo(Rank.SECOND);
-    }
-
-    @Test
-    public void GetOrder_test_3() {
-        Set<Integer> numbersForUser = new HashSet<>(Arrays.asList(8, 2, 10, 30, 44, 45));
-        Set<Integer> numbersForWinner = new HashSet<>(Arrays.asList(1, 2, 10, 30, 44, 45));
-        int bonusBall = 7;
-
-        Ticket userTicket = new Ticket(numbersForUser);
-        WinnerBalls winnerBalls = new WinnerBalls(new Ticket(numbersForWinner), bonusBall);
-
-        assertThat(userTicket.getOrder(winnerBalls)).isEqualTo(Rank.THIRD);
-    }
-
-    @Test
-    public void GetOrder_test_4() {
-        Set<Integer> numbersForUser = new HashSet<>(Arrays.asList(11, 12, 30, 31, 32, 45));
-        Set<Integer> numbersForWinner = new HashSet<>(Arrays.asList(1, 2, 30, 31, 32, 45));
-        int bonusBall = 7;
-
-        Ticket userTicket = new Ticket(numbersForUser);
-        WinnerBalls winnerBalls = new WinnerBalls(new Ticket(numbersForWinner), bonusBall);
-
-        assertThat(userTicket.getOrder(winnerBalls)).isEqualTo(Rank.FOURTH);
-    }
-
-    @Test
-    public void GetOrder_test_5() {
-        Set<Integer> numbersForUser = new HashSet<>(Arrays.asList(11, 12, 13, 40, 41, 45));
-        Set<Integer> numbersForWinner = new HashSet<>(Arrays.asList(1, 2, 3, 40, 41, 45));
-        int bonusBall = 7;
-
-        Ticket userTicket = new Ticket(numbersForUser);
-        WinnerBalls winnerBalls = new WinnerBalls(new Ticket(numbersForWinner), bonusBall);
-
-        assertThat(userTicket.getOrder(winnerBalls)).isEqualTo(Rank.FIFTH);
-    }
-
-    @Test
-    public void GetOrder_test_6() {
-        Set<Integer> numbersForUser = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Set<Integer> numbersForWinner = new HashSet<>(Arrays.asList(7, 8, 9, 10, 11, 12));
-        int bonusBall = 13;
-
-        Ticket userTicket = new Ticket(numbersForUser);
-        WinnerBalls winnerBalls = new WinnerBalls(new Ticket(numbersForWinner), bonusBall);
-
-        assertThat(userTicket.getOrder(winnerBalls)).isEqualTo(Rank.OUT);
+    public void getNumberDataTest(){
+        assertThat(testTicket.getNumberData()).isEqualTo(
+                new HashSet<Integer>(
+                        Arrays.asList( 1, 2, 10, 30, 44, 45 )
+                )
+        );
     }
 }

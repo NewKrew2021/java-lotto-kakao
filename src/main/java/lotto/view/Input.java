@@ -17,7 +17,10 @@ public class Input {
         return CustomTypeCasting.stringToInteger(scanner.nextLine());
     }
 
-    public static List<Integer> getWinnerNumbersFromUser() {
+    public static List<Integer> getWinnerNumbersFromUser(boolean retry) {
+        if(retry){
+            System.out.println("잘못된 입력입니다. 재시도 합니다.......");
+        }
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
         return CustomTypeCasting.stringToIntegersUsingParsing(scanner.nextLine(), ",");
     }

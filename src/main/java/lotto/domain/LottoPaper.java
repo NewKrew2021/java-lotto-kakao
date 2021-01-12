@@ -1,8 +1,6 @@
 package lotto.domain;
 
 import lotto.dto.LottoNumberData;
-import lotto.dto.LottoResult;
-import lotto.setting.Rank;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -11,17 +9,10 @@ import java.util.stream.Stream;
 public class LottoPaper {
     private List<Ticket> tickets;
 
-    private LottoPaper(List<Ticket> generatedTickets) {
-        tickets = generatedTickets;
-    }
-
-    public static LottoPaper createBy(GeneratingStrategy strategy){
-        System.out.println("hello");
-        return new LottoPaper(
-                Stream.generate(() -> Ticket.createBy(strategy))
-                        .limit(strategy.getLimit())
-                        .collect(Collectors.toList())
-        );
+    public LottoPaper(GeneratingStrategy strategy){
+        tickets = Stream.generate(() -> new Ticket(strategy))
+                .limit(strategy.getLimit())
+                .collect(Collectors.toList());
     }
 
     /* 로또 숫자 정보가 수정되는 것을 막기 위해 정보를 복사하여 전달한다. */
@@ -35,31 +26,14 @@ public class LottoPaper {
         return new LottoNumberData(responseData);
     }
 
+    /* 당첨정보를 받아서 이 객체와 비교후, 결과정보를 반환한다. */
     public LottoResult getResultCompareWith(WinnerBalls winnerBalls) {
-        long score = getScoreCompareWith(winnerBalls);
-        List<Rank> countList = getOrdersCompareWith(winnerBalls);
-        return new LottoResult(score, countList);
-    }
-
-    public long getScoreCompareWith(WinnerBalls winnerBalls) {
-        List<Rank> orders = getOrdersCompareWith(winnerBalls);
-
-        long money = 0;
-        for (Rank order : orders) {
-            money += order.getPrize();
-        }
-
-        return money;
-    }
-
-    private List<Rank> getOrdersCompareWith(WinnerBalls winnerBalls) {
-        List<Rank> orders = new ArrayList<>();
-
+        LottoResult lottoResult = new LottoResult();
         for(Ticket curTicket : tickets){
-            Rank order = curTicket.getOrder(winnerBalls);
-            orders.add(order);
+            int matchCount = winnerBalls.getMatchCountComparedWith(curTicket);
+            boolean matchBonusBall = curTicket.isContain(winnerBalls.getBonusBall());
+            lottoResult.putRank(Rank.getRankAccordingTo(matchCount, matchBonusBall));
         }
-
-        return orders;
+        return lottoResult;
     }
 }

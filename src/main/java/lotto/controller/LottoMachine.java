@@ -4,12 +4,11 @@ import lotto.domain.LottoPaper;
 import lotto.domain.RandomlyGeneratingStrategy;
 import lotto.domain.Ticket;
 import lotto.domain.WinnerBalls;
-import lotto.dto.LottoResult;
-import lotto.setting.Format;
+import lotto.domain.LottoResult;
 import lotto.view.Input;
 import lotto.view.Output;
 
-import java.util.HashSet;
+import java.util.List;
 
 /*
  * 컨트롤러에서는 view로부터 받은 입력에 대해 유효성 검사를 하지 않는다.
@@ -42,7 +41,7 @@ public class LottoMachine {
     }
 
     public void generateAuto() {
-        userLottoPaper = LottoPaper.createBy(
+        userLottoPaper = new LottoPaper(
                 new RandomlyGeneratingStrategy(countOfPurchase)
         );
     }
@@ -52,13 +51,21 @@ public class LottoMachine {
     }
 
     public void inputWinnerInformation(){
-        Ticket winnerTicket = new Ticket(new HashSet<>(Input.getWinnerNumbersFromUser()));
-        int bonusBall = Input.getBonusBallFromUser();
-        winnerBalls = new WinnerBalls(winnerTicket, bonusBall);
+        List<Integer> winningNumbers;
+        int bonusBall;
+        boolean retry = false;
+
+        do {
+            winningNumbers = Input.getWinnerNumbersFromUser(retry);
+            bonusBall = Input.getBonusBallFromUser();
+            retry = true;
+        }while(!WinnerBalls.isValid(winningNumbers, bonusBall));
+
+        winnerBalls = new WinnerBalls(winningNumbers, bonusBall);
     }
 
     public void outputStatisticsAboutPurchasedLotto() {
         LottoResult result = userLottoPaper.getResultCompareWith(winnerBalls);
-        Output.printStatisticsToUser(userMoney, result);
+        Output.printStatisticsToUser(result);
     }
 }
