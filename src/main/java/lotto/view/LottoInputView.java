@@ -73,16 +73,17 @@ public class LottoInputView {
     }
 
     public static int inputBonusNumber() {
-        int bonusNum;
+        String bonusNum;
         do{
             System.out.println("보너스 볼을 입력해 주세요.");
-            bonusNum = sc.nextInt();
+            bonusNum = sc.nextLine();
         }while(!checkValidBonusNumber(bonusNum));
         System.out.println();
-        return bonusNum;
+        return Integer.parseInt(bonusNum);
     }
 
-    private static boolean checkValidBonusNumber(int bonusNum){
+    private static boolean checkValidBonusNumber(String inputBonus){
+        int bonusNum = convertStringToIntMoney(inputBonus);
         if( !LottoNo.checkValidationLottoNo(bonusNum) ) {
             System.out.println("보너스볼 번호가 적절하지 않습니다.");
             return false;
