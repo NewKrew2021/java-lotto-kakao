@@ -15,13 +15,6 @@ public class RandomNumberTest {
     }
 
     @Test
-    void rangeTest(){
-        for (int i = 0; i < NUM_OF_REPEAT; i++) {
-            randomNumberGenerator.getNumbers().forEach(num -> assertThat(num).isBetween(1, 45));
-        }
-    }
-
-    @Test
     void duplicationTest(){
         for (int i = 0; i < NUM_OF_REPEAT; i++) {
             assertThat(randomNumberGenerator.getNumbers()).doesNotHaveDuplicates();

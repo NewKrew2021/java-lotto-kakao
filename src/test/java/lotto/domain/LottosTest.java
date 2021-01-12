@@ -1,6 +1,7 @@
 package lotto.domain;
 
 
+import lotto.util.LottoNumberParser;
 import lotto.util.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -17,8 +18,8 @@ public class LottosTest {
     @BeforeEach
     void setUp() {
         lottos = new Lottos(Arrays.asList(
-                new Lotto(() -> Set.of(1, 2, 3, 4, 5, 6)),
-                new Lotto(() -> Set.of(1, 2, 3, 10, 11, 12))
+                new Lotto(() -> LottoNumberParser.toLottoNumbers("1, 2, 3, 4, 5, 6")),
+                new Lotto(() -> LottoNumberParser.toLottoNumbers("1, 2, 3, 10, 11, 12"))
         ));
     }
 
