@@ -10,12 +10,12 @@ public class Ball {
     private final int number;
 
     public Ball(String number) {
-        this(Integer.parseInt(number));
+        this(Integer.parseInt(number.trim()));
     }
 
     public Ball(int number) {
         if (!validator(number)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("입력한 로또번호는 1~45 사이로 입력해야 합니다.");
         }
         this.number = number;
     }
