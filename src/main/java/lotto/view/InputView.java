@@ -28,7 +28,7 @@ public class InputView {
     }
 
     public static int getMaualLottoCount(int totalCount) {
-        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+        System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요.");
         int count = Integer.parseInt(scan.nextLine());
         if (count > totalCount) {
             throw new IllegalArgumentException("로또 구매 수가 구입금액을 초과합니다.");
@@ -37,7 +37,7 @@ public class InputView {
     }
 
     public static List<List<Integer>> getMaualLottoNumbers(int manualCount) {
-        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
         List<List<Integer>> manualNumbers = new ArrayList<>();
         for (int i = 0; i < manualCount; i++) {
             List<Integer> numbers = Arrays.stream(scan.nextLine().split(","))
