@@ -1,7 +1,5 @@
 package domain;
 
-import dto.Amount;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -17,10 +15,9 @@ public class LottoTickets {
         this.lottos = lottos;
     }
 
-    public static LottoTickets of(NumberGenerateStrategy strategy, LottoTicketCount ticketCount) {
-        int count = ticketCount.getLottoTicketCount();
+    public static LottoTickets of(NumberGenerateStrategy strategy, int ticketCount) {
         List<Lotto> tickets = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
+        for (int i = 0; i < ticketCount; i++) {
             tickets.add(Lotto.from(strategy));
         }
         return new LottoTickets(tickets);

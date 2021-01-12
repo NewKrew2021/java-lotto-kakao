@@ -1,6 +1,6 @@
 package view;
 
-import domain.LottoTicketCount;
+import dto.LottoTicketCount;
 import domain.Rank;
 import dto.Amount;
 
@@ -16,8 +16,8 @@ public class LottoOutputView {
         System.out.println(sb.toString());
     }
 
-    public static void printTicketsCount(LottoTicketCount manualCount, LottoTicketCount autoCount) {
-        System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.\n", manualCount.getLottoTicketCount() , autoCount.getLottoTicketCount());
+    public static void printTicketsCount(LottoTicketCount ticketCount) {
+        System.out.printf("수동으로 %d장, 자동으로 %d장을 구매했습니다.\n", ticketCount.getLottoTicketCount() , ticketCount.getRemainTicketCount());
     }
 
     public static void printResult(Map<Rank, Long> winningResult) {
@@ -42,7 +42,8 @@ public class LottoOutputView {
         System.out.println(String.format("총 수익률은 %.2f입니다.", yield));
     }
 
-    public static void printLottoTickets(List<List<Integer>> lottoTickets) {
+    public static void printLottoTickets(LottoTicketCount ticketCount, List<List<Integer>> lottoTickets) {
+        printTicketsCount(ticketCount);
         for (List<Integer> lottoTicket : lottoTickets) {
             printLottoTicket(lottoTicket);
         }

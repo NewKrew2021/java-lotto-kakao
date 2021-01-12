@@ -1,6 +1,6 @@
 package view;
 
-import domain.LottoTicketCount;
+import dto.LottoTicketCount;
 import dto.Amount;
 
 import java.util.ArrayList;
@@ -23,10 +23,10 @@ public class LottoInputView {
         return getLottoNumbers();
     }
 
-    public static List<List<Integer>> inputLottoNumbers(LottoTicketCount manualCount){
+    public static List<List<Integer>> inputLottoNumbers(LottoTicketCount ticketCount){
         System.out.println("수동으로 구매할 번호를 입력해주세요.");
         List<List<Integer>> numbers = new ArrayList<>();
-        for (int i = 0; i < manualCount.getLottoTicketCount(); i++) {
+        for (int i = 0; i < ticketCount.getLottoTicketCount(); i++) {
             numbers.add(getLottoNumbers());
         }
         return numbers;
@@ -44,7 +44,7 @@ public class LottoInputView {
         return Integer.parseInt(sc.nextLine());
     }
 
-    public static LottoTicketCount inputManulCount(Amount amount) {
+    public static LottoTicketCount inputManualCount(Amount amount) {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         return new LottoTicketCount(Integer.parseInt(sc.nextLine()), amount.getCount());
     }

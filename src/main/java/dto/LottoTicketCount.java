@@ -1,4 +1,4 @@
-package domain;
+package dto;
 
 
 import domain.exceptions.InvalidLottoTicketCountException;
@@ -8,10 +8,12 @@ import java.util.Objects;
 public class LottoTicketCount {
 
     private final int lottoTicketCount;
+    private final int remainTicketCount;
 
     public LottoTicketCount(int lottoTicketCount, int totalTicketCount) {
         validate(lottoTicketCount, totalTicketCount);
         this.lottoTicketCount = lottoTicketCount;
+        this.remainTicketCount = totalTicketCount - lottoTicketCount;
     }
 
     private void validate(int lottoTicketCount, int totalTicketCount) {
@@ -25,6 +27,10 @@ public class LottoTicketCount {
 
     public int getLottoTicketCount() {
         return lottoTicketCount;
+    }
+
+    public int getRemainTicketCount() {
+        return remainTicketCount;
     }
 
     @Override

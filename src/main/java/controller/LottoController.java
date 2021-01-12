@@ -2,6 +2,7 @@ package controller;
 
 import domain.*;
 import dto.Amount;
+import dto.LottoTicketCount;
 import view.LottoInputView;
 import view.LottoOutputView;
 
@@ -9,16 +10,12 @@ public class LottoController {
     public static void startLotto() {
         Amount amount = LottoInputView.inputAmount();
 
-        LottoTicketCount manualCount = LottoInputView.inputManulCount(amount);
-        LottoTicketCount autoCount = getAutoCount(manualCount, amount);
+        LottoTicketCount ticketCount = LottoInputView.inputManualCount(amount);
 
-        LottoTickets manualTickets = LottoTickets.from(LottoInputView.inputLottoNumbers(manualCount));
-        LottoOutputView.printTicketsCount(manualCount, autoCount);
+        LottoTickets lottoTickets
+                = LottoTicketsFactory.newManualAndAuto(ticketCount, LottoInputView.inputLottoNumbers(ticketCount));
 
-        LottoTickets autoTickets = LottoTickets.of(new LottoRandomGenerator(), autoCount);
-        LottoTickets lottoTickets = manualTickets.concat(autoTickets);
-
-        LottoOutputView.printLottoTickets(lottoTickets.getLottoTickets());
+        LottoOutputView.printLottoTickets(ticketCount, lottoTickets.getLottoTickets());
 
         LottoWinningNumber lottoWinningNumber
                 = LottoWinningNumber.of(LottoInputView.inputWinningNumbers(), LottoInputView.inputBonusNumber());
@@ -26,9 +23,5 @@ public class LottoController {
         WinningInfo winningInfo = new WinningInfo(lottoTickets, lottoWinningNumber);
         LottoOutputView.printResult(winningInfo.getWinningInfo());
         LottoOutputView.printYield(winningInfo.getYield(amount));
-    }
-
-    private static LottoTicketCount getAutoCount(LottoTicketCount manualCount, Amount amount) {
-        return new LottoTicketCount(amount.getCount() - manualCount.getLottoTicketCount(), amount.getCount());
     }
 }

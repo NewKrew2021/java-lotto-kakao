@@ -1,6 +1,7 @@
-package domain;
+package dto;
 
 import domain.exceptions.InvalidLottoTicketCountException;
+import dto.LottoTicketCount;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -35,5 +36,13 @@ public class LottoTicketCountTest {
     public void testInvalidLottoTicketCount(int purchaseCount, int totalCount){
         assertThatExceptionOfType(InvalidLottoTicketCountException.class)
                 .isThrownBy(()->new LottoTicketCount(purchaseCount, totalCount));
+    }
+
+    @ParameterizedTest
+    @CsvSource({"1,2,1", "3,5,2"})
+    @DisplayName("남은 티켓 수는 총 구입 개수에서 구매한 티켓 수를 뺀 값이다.")
+    public void testRemain(int purchaseCount, int totalCount, int remainCount){
+        LottoTicketCount ticketCount = new LottoTicketCount(purchaseCount, totalCount);
+        assertThat(ticketCount.getRemainTicketCount()).isEqualTo(remainCount);
     }
 }
