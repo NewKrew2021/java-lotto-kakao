@@ -9,6 +9,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
+import java.util.List;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,7 +19,23 @@ public class LottoTest {
 
     @BeforeEach
     void setUp(){
-        lotto = new Lotto(() -> LottoNumberParser.toLottoNumbers("1, 2, 3, 4, 5, 6"));
+        lotto = Lotto.autoGenerate(() ->
+                LottoNumberParser.toLottoNumbers("1, 2, 3, 4, 5, 6"));
+    }
+
+    @Test
+    @DisplayName("로또 번호를 문자열로 받아 Lotto를 생성한다.")
+    void manualGenerate() {
+        Lotto manualLotto = Lotto.manualGenerate("1, 2, 3, 4, 5, 6");
+        List<LottoNumber> expected = List.of(
+                LottoNumber.of(1),
+                LottoNumber.of(2),
+                LottoNumber.of(3),
+                LottoNumber.of(4),
+                LottoNumber.of(5),
+                LottoNumber.of(6)
+        );
+        assertThat(manualLotto.getLottoNumbers()).containsExactlyElementsOf(expected);
     }
 
     @Test

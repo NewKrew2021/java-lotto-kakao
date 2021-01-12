@@ -1,9 +1,11 @@
 package lotto.domain;
 
 import lotto.util.LottoNumberGenerator;
+import lotto.util.LottoNumberParser;
 import lotto.util.MatchResult;
 import lotto.util.Rank;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Set;
 import java.util.TreeSet;
@@ -12,11 +14,24 @@ import java.util.stream.Collectors;
 public class Lotto {
     private Set<LottoNumber> lottoNumbers;
 
-    public Lotto(LottoNumberGenerator lottoNumberGenerator) {
-        lottoNumbers = new TreeSet<>(Comparator.comparingInt(LottoNumber::getNumber));
-        for (LottoNumber lottoNumber : lottoNumberGenerator.getNumbers()) {
-            lottoNumbers.add(lottoNumber);
-        }
+    private Lotto(Set<LottoNumber> lottoNumbers) {
+        this.lottoNumbers = Collections.unmodifiableSet(lottoNumbers);
+    }
+
+    public static Lotto autoGenerate(LottoNumberGenerator lottoNumberGenerator) {
+        Set<LottoNumber> newLottoNumbers = getEmptyLottoNumbers();
+        newLottoNumbers.addAll(lottoNumberGenerator.getNumbers());
+        return new Lotto(newLottoNumbers);
+    }
+
+    public static Lotto manualGenerate(String numbersText) {
+        Set<LottoNumber> newLottoNumbers = getEmptyLottoNumbers();
+        newLottoNumbers.addAll(LottoNumberParser.toLottoNumbers(numbersText));
+        return new Lotto(newLottoNumbers);
+    }
+
+    private static Set<LottoNumber> getEmptyLottoNumbers() {
+        return new TreeSet<>(Comparator.comparingInt(LottoNumber::getNumber));
     }
 
     public Rank match(MatchNumber matchNumber) {
