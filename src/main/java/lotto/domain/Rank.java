@@ -10,11 +10,11 @@ public enum Rank {
     SECOND(30_000_000L, 5, "5개 일치, 보너스 볼 일치"),
     FIRST(2_000_000_000L, 6, "6개 일치");
 
-    private final Long prize;
+    private final long prize;
     private final int matchedCount;
     private final String description;
 
-    Rank(Long prize, int matchedCount, String description) {
+    Rank(long prize, int matchedCount, String description) {
         this.prize = prize;
         this.matchedCount = matchedCount;
         this.description = description;
@@ -31,7 +31,7 @@ public enum Rank {
                 .orElse(NOTHING);
     }
 
-    public Long getPrize() {
+    public long getPrize() {
         return prize;
     }
 
