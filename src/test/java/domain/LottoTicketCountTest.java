@@ -30,11 +30,10 @@ public class LottoTicketCountTest {
 
 
     @ParameterizedTest
-    @CsvSource({"2,1", "5,3", "10,9"})
-    @DisplayName("구매개수가 총 구입 개수보다 크면 InvalidLottoTicketCountException을 던진다.")
+    @CsvSource({"2,1", "5,3", "10,9", "-1,1", "-5,10"})
+    @DisplayName("구매개수가 총 구입 개수보다 크거나 구매개수가 음수면 InvalidLottoTicketCountException을 던진다.")
     public void testInvalidLottoTicketCount(int purchaseCount, int totalCount){
         assertThatExceptionOfType(InvalidLottoTicketCountException.class)
                 .isThrownBy(()->new LottoTicketCount(purchaseCount, totalCount));
     }
-
 }
