@@ -35,6 +35,15 @@ public class LottoResultsTest {
     }
 
     @Test
+    @DisplayName("수익률 에러 테스트")
+    void calculateRateErrorTest() {
+        LottoResults lottoResults = new LottoResults();
+        lottoResults.upsert(LottoRank.FIFTH);
+        assertThatThrownBy(() -> lottoResults.calculateRate(14500))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
     @DisplayName("equals 테스트")
     void equalsTest() {
         LottoResults lottoResults = new LottoResults();

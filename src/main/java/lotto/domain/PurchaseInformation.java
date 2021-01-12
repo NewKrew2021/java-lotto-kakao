@@ -3,7 +3,8 @@ package lotto.domain;
 import java.math.BigDecimal;
 
 public class PurchaseInformation {
-    private static final int TICKET_PRICE = 1_000;
+    public static final int TICKET_PRICE = 1_000;
+
     private static final String TICKET_COUNT_ERROR = "구입 금액 또는 수동 로또 수를 잘못 입력했습니다.";
     private static final String TICKET_PRICE_ERROR = "구입 금액은 " + TICKET_PRICE + "원 이상 입력해주세요.";
 
