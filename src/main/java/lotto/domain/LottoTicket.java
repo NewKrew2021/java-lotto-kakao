@@ -21,10 +21,10 @@ public class LottoTicket {
     }
 
     public static LottoTicket from(String rawNumbers) {
-        List<Number> list = stringToIntegerList(preProcessing(rawNumbers)).stream()
+        return new LottoTicket(Arrays.stream(rawNumbers.split(DELIMITER))
+                .map(String::trim)
                 .map(Number::of)
-                .collect(Collectors.toList());
-        return new LottoTicket(new TreeSet<>(list));
+                .collect(Collectors.toCollection(TreeSet::new)));
     }
 
     public static LottoTicket from(TicketStrategy strategy) {
@@ -43,14 +43,6 @@ public class LottoTicket {
         if(numbers.size() != BALL_COUNT) {
             throw new IllegalArgumentException(NUMBER_COUNT_ERROR);
         }
-    }
-
-    private static List<Integer> stringToIntegerList(String input) {
-        return Arrays.stream(preProcessing(input).split(DELIMITER)).map(Integer::parseInt).collect(Collectors.toList());
-    }
-
-    private static String preProcessing(String input) {
-        return input.replaceAll(BLANK, "");
     }
 
     @Override

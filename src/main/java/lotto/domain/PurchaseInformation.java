@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import java.math.BigDecimal;
-
 public class PurchaseInformation {
     public static final int TICKET_PRICE = 1_000;
 

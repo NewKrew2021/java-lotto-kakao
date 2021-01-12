@@ -32,7 +32,7 @@ public class Number implements Comparable<Number> {
     }
 
     public static Number of(String number) {
-        Number returnNumber = null;
+        Number returnNumber;
         try {
             returnNumber = of(Integer.parseInt(number));
         } catch (NumberFormatException e) {

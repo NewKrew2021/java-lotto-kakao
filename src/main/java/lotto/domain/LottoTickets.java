@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.strategy.ManualTicketStrategy;
-import lotto.domain.strategy.RandomTicketStrategy;
 import lotto.domain.strategy.TicketStrategy;
 
 import java.util.*;

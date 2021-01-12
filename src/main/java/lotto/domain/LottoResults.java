@@ -8,8 +8,6 @@ import java.util.Map;
 import java.util.Objects;
 
 public class LottoResults {
-    private final String CALCULATE_RATE_ERROR = "수익률 계산에 실패했습니다.";
-
     private Map<LottoRank, Integer> results;
 
     public LottoResults() {
