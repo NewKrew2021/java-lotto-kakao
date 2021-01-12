@@ -16,7 +16,7 @@ public class LottoNumber implements Comparable<LottoNumber>{
         if(isBlank(text) || !isNumber(text))
             throw new RuntimeException("숫자를 입력해주세요.");
 
-        return new LottoNumber(Integer.parseInt(text));
+        return makeNumber(Integer.parseInt(text));
     }
 
     public static LottoNumber makeNumber(int number){
