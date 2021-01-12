@@ -11,10 +11,13 @@ public class Main {
     public static void main(String[] args) {
 
         UserMoney userMoney = new UserMoney(InputView.enterUerMoney());
+        List<List<Integer>> selfLottosNumberList = InputView.enterSelfLottoNumbers(
+                InputView.enterSelfLottoCount());
+
 
         LottoGame lottoGame = new LottoGame();
-        Lottos lottos = lottoGame.buyLottos(userMoney);
-        OutputView.autoBoughtView(lottos);
+        Lottos lottos = lottoGame.buyLottos(userMoney, selfLottosNumberList);
+        OutputView.lottoBoughtView(lottos);
 
         List<Integer> lottoAnswerNumberList = InputView.enterLastWeekWinningNumbers();
         int lottoAnswerBonusNumber = InputView.enterLastWeekBonusNumber();

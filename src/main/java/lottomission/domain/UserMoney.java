@@ -22,4 +22,8 @@ public class UserMoney {
     public int getPossibleCount() {
         return userMoney/ LottoGame.LOTTO_PRICE;
     }
+
+    public UserMoney getLeftUserMoney(int lottoCount){
+        return new UserMoney(userMoney - lottoCount * LottoGame.LOTTO_PRICE);
+    }
 }

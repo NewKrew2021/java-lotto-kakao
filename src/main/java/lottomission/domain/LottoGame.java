@@ -10,11 +10,21 @@ public class LottoGame {
 
     public static int LOTTO_PRICE = 1000;
 
-    public Lottos buyLottos(UserMoney userMoney){
-        return new Lottos(IntStream.range(0, userMoney.getPossibleCount())
+    public Lottos buyLottos(UserMoney totalUserMoney, List<List<Integer>> selfLottosNumberList){
+
+        Lottos selfLottos = new Lottos(selfLottosNumberList.stream()
+                .map(Lotto::new)
+                .collect(Collectors.toList()));
+
+        UserMoney userMoneyforAuto = totalUserMoney.getLeftUserMoney(selfLottos.getLottosSize());
+
+        Lottos autoLottos = new Lottos(IntStream.range(0, userMoneyforAuto.getPossibleCount())
                 .mapToObj(i -> new Lotto(RandomForLotto.getRandomSixIntegerList()))
                 .collect(Collectors.toList()));
+
+        return selfLottos.combineLottos(autoLottos);
     }
+
     public Lottos buyLottosSelf(List<Lotto> lottoList){
         return new Lottos(lottoList);
     }

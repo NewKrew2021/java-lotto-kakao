@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class OutputView {
 
-    public static void autoBoughtView(Lottos lottos) {
+    public static void lottoBoughtView(Lottos lottos) {
         List<List<Integer>> lottosNumberList = lottos.getLottosNumberList();
         System.out.println(lottosNumberList.size() + "개를 구매했습니다.");
         lottosNumberList.stream().forEach(i -> System.out.println(i));
