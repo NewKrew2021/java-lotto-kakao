@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class LottoSimulation {
     private final Price price;
     private final WinningLotto winningLotto;

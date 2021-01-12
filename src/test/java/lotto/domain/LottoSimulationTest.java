@@ -1,11 +1,6 @@
 package lotto.domain;
 
-import lotto.utils.Result;
-import org.assertj.core.data.Percentage;
 import org.junit.jupiter.api.Test;
-
-import java.util.Arrays;
-import java.util.Collections;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.offset;
