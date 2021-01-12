@@ -25,12 +25,22 @@ public class LottoInputView {
         return Integer.parseInt(money);
     }
 
-    private static boolean checkValidMoney(String money) {
+    private static boolean checkValidMoney(String inputMoney) {
+        int money = convertStringToIntMoney(inputMoney);
         if( !Money.checkValidationInputMoney(money) ) {
             System.out.println("잘못된 금액을 입력하셨습니다.");
             return false;
         }
         return true;
+    }
+
+    private static Integer convertStringToIntMoney(String inputMoney) {
+        try {
+            return Integer.parseInt(inputMoney);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 
     public static List<Integer> inputWinningNumbers() {
