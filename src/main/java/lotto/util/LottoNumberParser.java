@@ -3,15 +3,16 @@ package lotto.util;
 import lotto.domain.LottoNumber;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class LottoNumberParser {
-    public static final String SPLIT_DELIMITER = ", ";
+    public static final String SPLIT_DELIMITER = ",";
     public static final int NUM_OF_NUMBERS = 6;
 
     public static Set<LottoNumber> toLottoNumbers(String numbersText) {
-        Set<LottoNumber> lottoNumbers = Arrays.stream(split(numbersText))
+        Set<LottoNumber> lottoNumbers = trim(split(numbersText)).stream()
                 .map(number -> LottoNumber.of(getParseInt(number)))
                 .collect(Collectors.toSet());
         validate(lottoNumbers);
@@ -28,6 +29,12 @@ public class LottoNumberParser {
 
     private static String[] split(String numbersText) {
         return numbersText.split(SPLIT_DELIMITER);
+    }
+
+    private static List<String> trim(String[] splitTexts) {
+        return Arrays.stream(splitTexts)
+                .map(String::trim)
+                .collect(Collectors.toList());
     }
 
     private static void validate(Set<LottoNumber> lottoNumbers) {
