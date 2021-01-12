@@ -14,9 +14,11 @@ public class LottoMain {
         int money = InputView.getMoneyFromUser();
         LottoGame game = new LottoGame();
 
-        int count = game.getLottoTicketCount(money);
-        OutputView.printLottoTicketCount(count);
-        LottoTickets lottoTickets = game.makeLottoTickets(count);
+        int totalCount = game.getLottoTicketCount(money);
+        int manualCount = InputView.getMaualLottoCount(totalCount);
+
+        OutputView.printLottoTicketCount(totalCount);
+        LottoTickets lottoTickets = game.makeLottoTickets(totalCount);
         OutputView.printLottoTickets(lottoTickets);
 
         Set<Integer> numbers = InputView.getWinnerNumber();
