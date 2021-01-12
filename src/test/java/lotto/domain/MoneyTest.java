@@ -14,25 +14,20 @@ public class MoneyTest {
     @Test
     void moneyConstructorTest() {
         assertThatThrownBy(()->{
-            new Money("abcd101");
-        }).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(()->{
-            new Money("999");
+            new Money(999);
         }).isInstanceOf(IllegalArgumentException.class);
 
-        Money money1 = new Money("1000");
-        Money money2 = new Money("50000");
+        Money money1 = new Money(1000);
+        Money money2 = new Money(50000);
     }
 
     @ParameterizedTest
-    @CsvSource("abcd101,999,1000")
-    void checkValidationInputMoney(String includeChar, String underTicket, String upperTicket) {
-        boolean invalidIncludeChar = Money.checkValidationInputMoney(includeChar);
-        boolean invalidUnderTicket = Money.checkValidationInputMoney(underTicket);
+    @CsvSource("999,1000")
+    void checkValidationInputMoney(int underTicket, int upperTicket) {
+        boolean invalidTicket = Money.checkValidationInputMoney(underTicket);
         boolean validTicket = Money.checkValidationInputMoney(upperTicket);
 
-        assertThat(invalidIncludeChar).isFalse();
-        assertThat(invalidUnderTicket).isFalse();
+        assertThat(invalidTicket).isFalse();
         assertThat(validTicket).isTrue();
     }
 
