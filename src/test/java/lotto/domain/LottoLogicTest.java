@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.AssertionsForClassTypes.*;
 
@@ -35,11 +36,11 @@ public class LottoLogicTest {
             "1,2,3,4,5,6'"      //SIX
     )
     void winningStatisticsTest(String winningLottoNumbers, int bonusNumber, String tickets) {
-        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(CsvParsing.convertStringToIntegerList(winningLottoNumbers), bonusNumber);
+        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(CsvParsing.convertStringToIntegerSet(winningLottoNumbers), bonusNumber);
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        List<List<Integer>> ticketsNumbers = CsvParsing.convertStringToTicketsNumber(tickets);
+        List<Set<Integer>> ticketsNumbers = CsvParsing.convertStringToTicketsNumber(tickets);
 
-        for( List<Integer> ticket : ticketsNumbers ) {
+        for( Set<Integer> ticket : ticketsNumbers ) {
             lottoTickets.add(new LottoTicket(ticket));
         }
 

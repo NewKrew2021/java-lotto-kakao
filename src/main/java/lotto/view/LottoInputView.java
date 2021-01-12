@@ -4,10 +4,7 @@ import lotto.domain.LottoNo;
 import lotto.domain.LottoTicket;
 import lotto.domain.Money;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoInputView {
@@ -43,8 +40,8 @@ public class LottoInputView {
         return 0;
     }
 
-    public static List<Integer> inputWinningNumbers() {
-        List<Integer> nums;
+    public static Set<Integer> inputWinningNumbers() {
+        Set<Integer> nums;
         do{
             System.out.println("지난 주 당첨 번호를 입력해 주세요.");
             nums = convertInputToNumbers(sc.nextLine().split(", "));
@@ -52,18 +49,18 @@ public class LottoInputView {
         return nums;
     }
 
-    private static List<Integer> convertInputToNumbers(String[] inputString) {
+    private static Set<Integer> convertInputToNumbers(String[] inputString) {
         try {
             return Arrays.stream(inputString)
                     .map(Integer::parseInt)
-                    .collect(Collectors.toList());
+                    .collect(Collectors.toSet());
         } catch (Exception e) {
             System.out.println(e.toString());
         }
-        return new ArrayList<>();
+        return new HashSet<>();
     }
 
-    private static boolean checkValidWinningNumber(List<Integer> numbers){
+    private static boolean checkValidWinningNumber(Set<Integer> numbers){
         if( !LottoTicket.checkValidationLottoTicket(numbers) ) {
             System.out.println("당첨번호가 적절하지 않습니다.");
             return false;

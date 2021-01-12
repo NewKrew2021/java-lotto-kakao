@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.AssertionsForClassTypes.*;
 
@@ -19,7 +20,7 @@ public class WinningLottoTicketTest {
             "'3,0,46,0,7'"
     )
     void checkValidationTest(String ticketsNumbers, String bonusNumbers) {
-        List<List<Integer>> ticketsNumberListInt = CsvParsing.convertStringToTicketsNumber(ticketsNumbers);
+        List<Set<Integer>> ticketsNumberListInt = CsvParsing.convertStringToTicketsNumber(ticketsNumbers);
         List<Integer> bonusNumbersIntList = CsvParsing.convertStringToIntegerList(bonusNumbers);
 
         boolean invalid0 = WinningLottoTicket.checkValidationWinningLottoNos(ticketsNumberListInt.get(0), bonusNumbersIntList.get(0));
@@ -42,11 +43,11 @@ public class WinningLottoTicketTest {
             "'1,2,9,10,11,12|1,2,3,9,10,11|1,2,3,4,8,9|1,2,3,4,5,8|1,2,3,4,5,7|1,2,3,4,5,6'"
     )
     void isWinningTest(String winningLottoNumbers, int bonusNumber, String ticketsNumbers) {
-        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(CsvParsing.convertStringToIntegerList(winningLottoNumbers), bonusNumber);
+        WinningLottoTicket winningLottoTicket = new WinningLottoTicket(CsvParsing.convertStringToIntegerSet(winningLottoNumbers), bonusNumber);
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        List<List<Integer>> ticketsNumberListInt = CsvParsing.convertStringToTicketsNumber(ticketsNumbers);
+        List<Set<Integer>> ticketsNumberListInt = CsvParsing.convertStringToTicketsNumber(ticketsNumbers);
 
-        for( List<Integer> ticket : ticketsNumberListInt ) {
+        for( Set<Integer> ticket : ticketsNumberListInt ) {
             lottoTickets.add(new LottoTicket(ticket));
         }
 

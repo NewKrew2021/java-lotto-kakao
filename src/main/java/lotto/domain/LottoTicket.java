@@ -1,19 +1,15 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.HashSet;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class LottoTicket {
 
     public static final int LOTTO_NUMBER_COUNT_OF_TICKET = 6;
     public static final int LOTTO_PRICE = 1000;
 
-    private final List<LottoNo> numbers = new ArrayList<>();
+    private List<LottoNo> numbers = new ArrayList<>();
 
-    public LottoTicket(List<Integer> numbers) {
+    public LottoTicket(Set<Integer> numbers) {
 
         if( !checkValidationLottoTicket(numbers) ) {
             IllegalArgumentException error = new IllegalArgumentException();
@@ -21,23 +17,13 @@ public class LottoTicket {
             throw error;
         }
 
-        Collections.sort(numbers);
         for( int number : numbers ) {
             this.numbers.add(new LottoNo(number));
         }
     }
 
-    public static boolean checkValidationLottoTicket(final List<Integer> numbers) {
-        if( numbers.size() != LOTTO_NUMBER_COUNT_OF_TICKET ) {
-            return false;
-        }
-
-        return !checkDuplication(numbers);
-    }
-
-    private static boolean checkDuplication(final List<Integer> numbers){
-        HashSet<Integer> set = new HashSet<>(numbers);
-        return set.size() != numbers.size();
+    public static boolean checkValidationLottoTicket(final Set<Integer> numbers) {
+        return numbers.size() == LOTTO_NUMBER_COUNT_OF_TICKET;
     }
 
     public boolean isContains(LottoNo lottoNo) {
