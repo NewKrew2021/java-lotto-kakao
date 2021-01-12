@@ -13,7 +13,10 @@ public class LottoResultTest {
         lottoResult.addRank(Rank.FIRST);
         lottoResult.addRank(Rank.SECOND);
         lottoResult.addRank(Rank.THIRD);
-        assertThat(lottoResult.getPrize()).isEqualTo(2031500000);
+
+        long prize = lottoResult.getPrize();
+
+        assertThat(prize).isEqualTo(2031500000);
     }
 
     @Test
@@ -22,6 +25,9 @@ public class LottoResultTest {
         LottoResult lottoResult = new LottoResult();
         lottoResult.addRank(Rank.FIFTH);
         PurchaseMoney purchaseMoney = new PurchaseMoney("1000");
-        assertThat(lottoResult.getProfitRatio(purchaseMoney)).isEqualTo("400.00");
+
+        String profitRatio = lottoResult.getProfitRatio(purchaseMoney);
+
+        assertThat(profitRatio).isEqualTo("400.00");
     }
 }

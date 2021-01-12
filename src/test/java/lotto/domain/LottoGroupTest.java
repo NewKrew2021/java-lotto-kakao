@@ -17,6 +17,7 @@ public class LottoGroupTest {
                 new Lotto("1, 2, 3, 4, 5, 7"));
 
         LottoGroup lottoGroup = new LottoGroup(lottos);
+
         assertThat(lottoGroup).isEqualTo(new LottoGroup(lottos));
     }
 
@@ -27,27 +28,38 @@ public class LottoGroupTest {
                 new Lotto("1, 2, 3, 4, 5, 6"),
                 new Lotto("1, 2, 3, 4, 5, 7"));
         LottoGroup lottoGroup = new LottoGroup(lottos);
-
         Lotto winningLotto = new Lotto("1, 2, 3, 4, 5, 6");
         Ball bonusBall = Ball.of("7");
         WinningNumberSet winningNumberSet = new WinningNumberSet(winningLotto, bonusBall);
-
         LottoResult lottoResult = lottoGroup.getLottoResult(winningNumberSet);
-        assertThat(lottoResult.getRankCount(Rank.FIRST)).isEqualTo(1);
-        assertThat(lottoResult.getRankCount(Rank.SECOND)).isEqualTo(1);
+
+        int firstRankCount = lottoResult.getRankCount(Rank.FIRST);
+        int secondRankCount = lottoResult.getRankCount(Rank.SECOND);
+
+        assertThat(firstRankCount).isEqualTo(1);
+        assertThat(secondRankCount).isEqualTo(1);
     }
 
     @Test
     @DisplayName("구입 개수만큼 수동 Lotto를 생성하는지 테스트")
     void createManualLottoGroupTest() {
         List<String> lottoTexts = Arrays.asList("1,2,3,4,5,6", "11,12,13,14,15,16");
-        assertThat(LottoGroup.createManualLottoGroup(lottoTexts).getLottoCount()).isEqualTo(2);
+        LottoGroup lottoGroup = LottoGroup.createManualLottoGroup(lottoTexts);
+
+        int lottoCount = lottoGroup.getLottoCount();
+
+        assertThat(lottoCount).isEqualTo(2);
     }
 
     @Test
     @DisplayName("정해진 개수만큼 자동 Lotto를 생성하는지 테스트")
     void createRandomLottoGroupTest() {
-        assertThat(LottoGroup.createRandomLottoGroup(10).getLottoCount()).isEqualTo(10);
+        int quantity = 10;
+        LottoGroup lottoGroup = LottoGroup.createRandomLottoGroup(quantity);
+
+        int lottoCount = lottoGroup.getLottoCount();
+
+        assertThat(lottoCount).isEqualTo(quantity);
     }
 
     @Test
@@ -57,6 +69,8 @@ public class LottoGroupTest {
         List<String> lottoTexts = Arrays.asList("1,2,3,4,5,6", "11,12,13,14,15,16");
         LottoGroup lottoGroup = LottoGroup.createLottoGroup(purchaseMoney, lottoTexts);
 
-        assertThat(lottoGroup.getLottoCount()).isEqualTo(4);
+        int lottoCount = lottoGroup.getLottoCount();
+
+        assertThat(lottoCount).isEqualTo(4);
     }
 }
