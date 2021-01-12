@@ -21,44 +21,32 @@ public class LottoController {
     public void startLottoSimulator() {
         Lottos manualLottos = buyManualLotto();
         Lottos autoLottos = buyAutoLotto(money.getLottoCount(manualLottos.size()), manualLottos.size());
-        Lottos totalLottos = getTotalLottos(manualLottos, autoLottos);
+        Lottos totalLottos = manualLottos.combineLottos(autoLottos);
         printBuyLottos(totalLottos);
         AnswerLotto answerLotto = getAnswerLottoNumbers();
         printLottoResults(answerLotto, totalLottos);
     }
 
-    private Lottos getTotalLottos(Lottos manualLottos, Lottos autoLottos) {
-        List<Lotto> totalLottos = new ArrayList<>();
-        for (Lotto lotto : manualLottos.getLottos()) {
-            totalLottos.add(lotto);
-        }
-        for (Lotto lotto : autoLottos.getLottos()) {
-            totalLottos.add(lotto);
-        }
-        return new Lottos(totalLottos);
-    }
-
     private Lottos buyManualLotto() {
-        int lottoMoney = lottoSimulatorView.askMoneyToBuyLotto();
-        this.money = new Money(lottoMoney);
+        this.money = new Money(lottoSimulatorView.askMoneyToBuyLotto());
 
         int manualLottoCount = lottoSimulatorView.askLottoPurchaseCount();
         money.checkCanBuy(manualLottoCount);
 
+        if (manualLottoCount == 0) {
+            return new Lottos(new ArrayList<>());
+        }
         lottoSimulatorView.askManualLottoNumbers();
-        List<Lotto> lottos = getManualLottos(manualLottoCount);
+        List<Lotto> lottos = generateManualLottos(manualLottoCount);
 
         return new Lottos(lottos);
     }
 
-    private List<Lotto> getManualLottos(int manualLottoCount) {
+    private List<Lotto> generateManualLottos(int manualLottoCount) {
         List<Lotto> lottos = new ArrayList<>();
         for (int i = 0; i < manualLottoCount; i++) {
             List<String> lottoString = StringUtils.splitText(lottoSimulatorView.inputManualLotto());
-            lottos.add(new Lotto(lottoString.stream()
-                    .map(Integer::parseInt)
-                    .sorted()
-                    .collect(Collectors.toList())));
+            lottos.add(new Lotto(new ManualLottoGenerateStrategy(lottoString)));
         }
         return lottos;
     }
@@ -72,7 +60,7 @@ public class LottoController {
         return new Lottos(lottos);
     }
 
-    private AnswerLotto addAnswerLotto(String inputTexts, int bonus) {
+    private AnswerLotto getAnswerLotto(String inputTexts, int bonus) {
         List<Integer> lotto = StringUtils.splitText(inputTexts).stream()
                 .map(Integer::parseInt)
                 .collect(Collectors.toList());
@@ -102,7 +90,7 @@ public class LottoController {
     private AnswerLotto getAnswerLottoNumbers() {
         String answerLottoNumbers = lottoSimulatorView.askLottoNumberToAnswerLotto();
         int bonusNumber = lottoSimulatorView.askBonusNumberToAnswerLotto();
-        return addAnswerLotto(answerLottoNumbers, bonusNumber);
+        return getAnswerLotto(answerLottoNumbers, bonusNumber);
     }
 
     private void printLottoResults(AnswerLotto answerLotto, Lottos lottos) {

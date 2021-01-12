@@ -51,12 +51,5 @@ public class LottoTest {
 
         assertThat(lotto.size()).isEqualTo(6);
     }
-
-    @Test
-    void 로또_생성_문자열_리스트() {
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-
-        assertThat(lotto.size()).isEqualTo(6);
-    }
 }
 

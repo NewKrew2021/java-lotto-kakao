@@ -22,6 +22,13 @@ public class Lottos {
         return lottos.size();
     }
 
+    public Lottos combineLottos(Lottos autoLottos) {
+        for (Lotto lotto : autoLottos.getLottos()) {
+            lottos.add(lotto);
+        }
+        return new Lottos(lottos);
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();

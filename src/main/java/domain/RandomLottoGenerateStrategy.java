@@ -7,10 +7,6 @@ import java.util.stream.IntStream;
 
 public class RandomLottoGenerateStrategy implements LottoGenerateStrategy {
 
-    private static final int END_LOTTO_NUMBER = 45;
-    private static final int START_LOTTO_NUMBER = 1;
-    private static final int LOTTO_NUMBER_SIZE = 6;
-
     private final List<String> lotto;
 
     public RandomLottoGenerateStrategy() {
