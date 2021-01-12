@@ -38,8 +38,8 @@ public class LottoOutputView {
         System.out.println(INPUT_BONUS_BALL_PHRASE);
     }
 
-    public static void WonResultPhrase(){
-        System.out.println(WON_RESULT_PHRASE);
+    public static void printWonResultPhrase(){
+        System.out.println(WON_RESULT_PHRASE + "\n----------------");
     }
 
     public static void printSameCountPhrase(List<Integer> rankInfo){
@@ -48,8 +48,8 @@ public class LottoOutputView {
         }
     }
 
-    public static void printProfitRatio(int ratio){
-        System.out.println(PROFIT_PHRASE + ratio + "% 입니다.");
+    public static void printProfitRatio(double ratio){
+        System.out.println(PROFIT_PHRASE + ratio + "입니다.");
     }
 
 }

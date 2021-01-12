@@ -20,6 +20,7 @@ public class LottoManager {
 
         LottoReview review = new LottoReview(lottos, wonLotto);
 
+        LottoOutputView.printWonResultPhrase();
         LottoOutputView.printSameCountPhrase(review.getSameCountList());
         LottoOutputView.printProfitRatio(review.getProfitRatio());
     }

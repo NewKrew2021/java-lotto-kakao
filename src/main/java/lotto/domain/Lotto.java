@@ -27,7 +27,7 @@ public class Lotto {
     public String toString(){
         StringBuilder str=new StringBuilder();
         str.append('[');
-        lotto.stream().forEach(number -> str.append(number + ", "));
+        lotto.stream().forEach(number -> str.append(number.getNumber() + ", "));
         str.delete(str.length()-2, str.length());
         str.append("]\n");
         return str.toString();
