@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 public class WinningNumberSet {
+    private static final String BONUS_DUPLICATE_EXCEPTION_MESSAGE = "보너스볼에는 당첨 번호가 포함되어서는 안된다.";
     private final Lotto winningLotto;
     private final Ball bonusBall;
 
@@ -15,7 +16,7 @@ public class WinningNumberSet {
 
     private void checkDuplicate(Lotto winningLotto, Ball bonusBall) {
         if (winningLotto.contains(bonusBall)) {
-            throw new IllegalArgumentException("보너스볼에는 당첨 번호가 포함되어서는 안된다.");
+            throw new IllegalArgumentException(BONUS_DUPLICATE_EXCEPTION_MESSAGE);
         }
     }
 

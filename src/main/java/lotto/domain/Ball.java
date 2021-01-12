@@ -9,10 +9,12 @@ public class Ball implements Comparable<Ball> {
     public static final int LOWER_BOUND = 1;
     public static final int UPPER_BOUND = 45;
     private static final Map<Integer, Ball> balls = new HashMap<>();
+    private static final String BALL_TYPE_EXCEPTION_MESSAGE = "볼은 정수여야 한다.";
+    private static final String BALL_RANGE_EXCEPTION_MESSAGE = "볼은 %d 이상 %d 이하여야 한다.";
     private final int ballNumber;
 
     static {
-        IntStream.rangeClosed(Ball.LOWER_BOUND, Ball.UPPER_BOUND)
+        IntStream.rangeClosed(LOWER_BOUND, UPPER_BOUND)
                 .forEach(ballNumber -> balls.put(ballNumber, new Ball(ballNumber)));
     }
 
@@ -26,7 +28,7 @@ public class Ball implements Comparable<Ball> {
         try {
             ballNumber = Integer.parseInt(ballText);
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("볼은 정수여야 한다.");
+            throw new IllegalArgumentException(BALL_TYPE_EXCEPTION_MESSAGE);
         }
 
         return of(ballNumber);
@@ -38,8 +40,8 @@ public class Ball implements Comparable<Ball> {
     }
 
     private static void checkRange(int ballNumber) {
-        if (ballNumber < Ball.LOWER_BOUND || ballNumber > Ball.UPPER_BOUND) {
-            throw new IllegalArgumentException("볼은 1 이상 45 이하여야 한다.");
+        if (ballNumber < LOWER_BOUND || ballNumber > UPPER_BOUND) {
+            throw new IllegalArgumentException(String.format(BALL_RANGE_EXCEPTION_MESSAGE, LOWER_BOUND, UPPER_BOUND));
         }
     }
 

@@ -26,8 +26,12 @@ public class LottoTest {
     void checkDuplicateTest() {
         assertThatThrownBy(() -> {
             new Lotto().checkDuplicate(
-                    Arrays.asList(Ball.of("1"), Ball.of("2"), Ball.of("3"),
-                            Ball.of("4"), Ball.of("5"), Ball.of("5"))
+                    Arrays.asList(Ball.of("1"),
+                            Ball.of("2"),
+                            Ball.of("3"),
+                            Ball.of("4"),
+                            Ball.of("5"),
+                            Ball.of("5"))
             );
         }).isInstanceOf(IllegalArgumentException.class);
     }
@@ -37,8 +41,11 @@ public class LottoTest {
     void checkCountTest() {
         assertThatThrownBy(() -> {
             new Lotto().checkCount(
-                    Arrays.asList(Ball.of("1"), Ball.of("2"), Ball.of("3"),
-                            Ball.of("4"), Ball.of("5"))
+                    Arrays.asList(Ball.of("1"),
+                            Ball.of("2"),
+                            Ball.of("3"),
+                            Ball.of("4"),
+                            Ball.of("5"))
             );
         }).isInstanceOf(IllegalArgumentException.class);
     }
@@ -103,8 +110,12 @@ public class LottoTest {
     @Test
     @DisplayName("Lotto 번호와 여러 Ball 번호 사이의 일치개수 테스트")
     void compareWithBallsTest() {
-        List<Ball> balls = Arrays.asList(Ball.of("1"), Ball.of("2"), Ball.of("3"),
-                Ball.of("4"), Ball.of("5"), Ball.of("6"));
+        List<Ball> balls = Arrays.asList(Ball.of("1"),
+                Ball.of("2"),
+                Ball.of("3"),
+                Ball.of("4"),
+                Ball.of("5"),
+                Ball.of("6"));
         Lotto lotto = new Lotto("1, 2, 3, 4, 5, 6");
         assertThat(lotto.compareWithBalls(balls)).isEqualTo(6);
     }

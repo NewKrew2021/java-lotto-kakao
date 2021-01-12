@@ -6,6 +6,8 @@ import java.util.stream.Stream;
 
 public class Lotto {
     public static final int COUNT_OF_NUMBERS = 6;
+    private static final String LOTTO_DUPLICATE_EXCEPTION_MESSAGE = "로또번호 중복이 있어서는 안된다.";
+    private static final String LOTTO_COUNT_EXCEPTION_MESSAGE = "로또번호는 %d개여야 한다.";
     private final List<Ball> lottoBalls;
 
     public Lotto() {
@@ -23,13 +25,13 @@ public class Lotto {
 
     public void checkDuplicate(List<Ball> lottoNumbers) {
         if (lottoNumbers.stream().distinct().count() < lottoNumbers.size()) {
-            throw new IllegalArgumentException("로또번호 중복이 있어서는 안된다.");
+            throw new IllegalArgumentException(LOTTO_DUPLICATE_EXCEPTION_MESSAGE);
         }
     }
 
     public void checkCount(List<Ball> lottoNumbers) {
         if (lottoNumbers.size() != COUNT_OF_NUMBERS) {
-            throw new IllegalArgumentException("로또번호는 6개여야 한다.");
+            throw new IllegalArgumentException(String.format(LOTTO_COUNT_EXCEPTION_MESSAGE, COUNT_OF_NUMBERS));
         }
     }
 
