@@ -14,16 +14,12 @@ public class LottosTest {
 
     @BeforeEach
     public void setUp() {
-        lottos = new Lottos(Arrays.asList(
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                new Lotto(Arrays.asList(7, 8, 9, 10, 11, 12))
-        ));
+        lottos = new Lottos(Arrays.asList(Arrays.asList(1, 2, 3, 4, 5, 6), Arrays.asList(7, 8, 9, 10, 11, 12)), 3);
     }
 
     @Test
     public void raffleTest() {
         WinningLotto winningNumber = new WinningLotto(Arrays.asList(1, 2, 3, 4, 5, 6), 8);
-
         assertThat(lottos.raffle(winningNumber).getCountOfRank(Rank.FIRST)).isEqualTo(1);
     }
 

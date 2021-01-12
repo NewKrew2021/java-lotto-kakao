@@ -7,54 +7,37 @@ import lotto.view.OutputView;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class LottoController {
-    private static Lottos lottos;
-    private static Money money;
-    private static LottoKind lottoKind;
 
     public static void main(String[] args) {
-        inputMoney();
-        buyLotto();
-        printBuyResult();
-        matchLotto();
+        Money money = inputMoney();
+        Lottos lottos = buyLotto(money);
+        matchLotto(lottos, money);
     }
 
-    private static void inputMoney() {
-        money = new Money(InputView.getMoneyFromUser());
-        lottoKind = getLottoKind(money);
+    private static Money inputMoney() {
+        return new Money(InputView.getMoneyFromUser());
     }
 
-    private static void buyLotto() {
-        lottos = new Lottos(Stream.concat(buySelfLottos(lottoKind.getSelfLottoCount()).stream(), buyRandomLottos(lottoKind.getRandomLottoCount()).stream())
-                .collect(Collectors.toList()));
-    }
-
-    private static void printBuyResult() {
-        OutputView.printLottoCount(lottoKind);
-        OutputView.printLottos(lottos);
-    }
-
-    private static LottoKind getLottoKind(Money money) {
+    private static Lottos buyLotto(Money money) {
         int selfLottoCount = InputView.getSelfLottoCountFromUser();
-        return new LottoKind(selfLottoCount, money.howMany(Lotto.LOTTO_PRICE) - selfLottoCount);
+        int randomLottoCount = money.howMany(Lotto.LOTTO_PRICE) - selfLottoCount;
+
+        Lottos lottos = new Lottos(buySelfLottos(selfLottoCount), randomLottoCount);
+        OutputView.printLottoCount(selfLottoCount, randomLottoCount);
+        OutputView.printLottos(lottos);
+        return lottos;
     }
 
-    private static List<Lotto> buySelfLottos(int selfLottoCount) {
+    private static List<List<Integer>> buySelfLottos(int selfLottoCount) {
         OutputView.printSelfLottoNumberInputGuide();
         return IntStream.range(0, selfLottoCount)
-                .mapToObj(num -> new Lotto(InputView.getSelfLottoNumberFromUser()))
+                .mapToObj(num -> InputView.getSelfLottoNumberFromUser())
                 .collect(Collectors.toList());
     }
 
-    private static List<Lotto> buyRandomLottos(int randomLottoCount) {
-        return IntStream.range(0, randomLottoCount)
-                .mapToObj(num -> new Lotto())
-                .collect(Collectors.toList());
-    }
-
-    private static void matchLotto() {
+    private static void matchLotto(Lottos lottos, Money money) {
         WinningLotto winningNumber = new WinningLotto(InputView.getWinningNumberFromUser(), InputView.getBonusNumberFromUser());
         OutputView.printStatistics(new Statistics(lottos.raffle(winningNumber), money));
     }

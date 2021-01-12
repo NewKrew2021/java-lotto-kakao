@@ -23,8 +23,8 @@ public class OutputView {
         System.out.println(SELF_LOTTO_NUMBER_INPUT_TEXT);
     }
 
-    public static void printLottoCount(LottoKind lottoKind) {
-        System.out.printf(BUY_SUCCESS_TEXT, lottoKind.getSelfLottoCount(), lottoKind.getRandomLottoCount());
+    public static void printLottoCount(int selfLottoCount, int randomLottoCount) {
+        System.out.printf(BUY_SUCCESS_TEXT, selfLottoCount, randomLottoCount);
     }
 
     public static void printLottos(Lottos lottos) {
