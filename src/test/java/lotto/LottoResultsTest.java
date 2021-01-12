@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -20,22 +21,29 @@ public class LottoResultsTest {
     @BeforeEach
     void setInit(){
         results = new HashMap<LottoRank, Integer>();
+        results.put(LottoRank.FIRST, 1);
+        results.put(LottoRank.FIFTH, 10);
+        results.put(LottoRank.SECOND, 2);
     }
 
     @ParameterizedTest
-    @CsvSource(value = {"FIRST, 2", "FIFTH, 10", "SECOND, 3"})
+    @CsvSource(value = {"FIRST, 1", "FIFTH, 10", "SECOND, 2"})
     void getCountLottoRankTest(LottoRank rank, int matchNumber){
-        results.put(rank, matchNumber);
         LottoResults lottoResults = new LottoResults(results);
         assertThat(lottoResults.getCountLottoRank(rank)).isEqualTo(matchNumber);
     }
 
-    @ParameterizedTest
-    @CsvSource(value = {"FIRST, 1, 20000000", "FIFTH, 10, 500", "SECOND, 2, 60000000"})
-    void earningTest(LottoRank rank, int matchNumber, int rate){
-        results.put(rank, matchNumber);
+    @Test
+    void getCountNoRankTest(){
         LottoResults lottoResults = new LottoResults(results);
-        assertThat(lottoResults.earningRate(10000)).isEqualTo(rate);
+        assertThat(lottoResults.getCountLottoRank(LottoRank.FOURTH)).isEqualTo(0);
+    }
+
+    @ParameterizedTest
+    @CsvSource(value = {"10000, 20600500", "5000, 41201000", "1000, 206005000"})
+    void earningTest(int price, int rate){
+        LottoResults lottoResults = new LottoResults(results);
+        assertThat(lottoResults.earningRate(price)).isEqualTo(rate);
     }
 
 }
