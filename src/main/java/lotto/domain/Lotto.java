@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.StringJoiner;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
@@ -18,6 +15,13 @@ public class Lotto {
         }
         Collections.sort(digits);
         this.lottoNumbers = digits;
+    }
+
+    public Lotto(String text) {
+        lottoNumbers = new ArrayList<>();
+        for (String number : text.split(", ")) {
+            lottoNumbers.add(new LottoNumber(Integer.parseInt(number)));
+        }
     }
 
     public List<LottoNumber> getLottoNumbers() {

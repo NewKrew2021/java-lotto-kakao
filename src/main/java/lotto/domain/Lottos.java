@@ -14,6 +14,13 @@ public class Lottos {
         this.lottos = lottos;
     }
 
+    public Lottos(String[] textLottos) {
+        lottos = new ArrayList<>();
+        for (String textLotto : textLottos) {
+            lottos.add(new Lotto(textLotto));
+        }
+    }
+
     public static Lottos getInstance(int number) {
         List<Lotto> lottos = new ArrayList<>();
 
@@ -39,6 +46,12 @@ public class Lottos {
             results.add(winningLotto.compare(lotto));
         }
         return new LottoResults(results);
+    }
+
+    public Lottos merge(Lottos lottos) {
+        List<Lotto> newLottos = new ArrayList<>(this.lottos);
+        newLottos.addAll(lottos.getLottos());
+        return new Lottos(newLottos);
     }
 
     @Override
