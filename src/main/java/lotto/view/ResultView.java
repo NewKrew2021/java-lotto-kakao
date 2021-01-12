@@ -9,17 +9,12 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class ResultView {
-    private static final String PURCHASE_NUMBER = "개를 구매했습니다.";
     private static final String WINNING_RESULT = "\n당첨 통계\n----------------";
     private static final String EARNING_RATE = "총 수익률은 ";
     private static final String EARNING_RATE_SYMBOL = "%입니다.";
 
 
     private static Scanner sc = new Scanner(System.in);
-
-    public static void purchaseLottoNumber(int price){
-        System.out.println(price/1000 + PURCHASE_NUMBER);
-    }
 
     public static void printResult(LottoResults lottoResults, int price) {
         ResultView resultView = new ResultView();
