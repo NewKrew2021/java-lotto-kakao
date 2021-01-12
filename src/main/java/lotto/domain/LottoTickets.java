@@ -1,22 +1,29 @@
 package lotto.domain;
 
+import lotto.domain.strategy.TicketStrategy;
+
 import java.util.*;
 
 public class LottoTickets {
-    private static final int TICKET_PRICE = 1_000;
-
     private List<LottoTicket> lottoTickets;
 
     public LottoTickets(List<LottoTicket> lottoTickets) {
         this.lottoTickets = Collections.unmodifiableList(lottoTickets);
     }
 
-    public static LottoTickets fromPrice(int price) {
+    public static LottoTickets from(TicketStrategy strategy, int count) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < price / TICKET_PRICE; i++) {
-            lottoTickets.add(new LottoTicket(new TreeSet<>(Number.randomNumbers(LottoTicket.BALL_COUNT))));
+        for (int i = 0; i < count; i++) {
+            lottoTickets.add(LottoTicket.from(strategy));
         }
         return new LottoTickets(lottoTickets);
+    }
+
+    public static LottoTickets join(LottoTickets manualTickets, LottoTickets autoTickets) {
+        List<LottoTicket> joinedTickets = new ArrayList<>();
+        joinedTickets.addAll(manualTickets.lottoTickets);
+        joinedTickets.addAll(autoTickets.lottoTickets);
+        return new LottoTickets(joinedTickets);
     }
 
     public int getTicketCount() {
@@ -29,6 +36,19 @@ public class LottoTickets {
             lottoResults.upsert(winnerNumber.getRank(lottoTicket));
         }
         return lottoResults;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoTickets that = (LottoTickets) o;
+        return Objects.equals(lottoTickets, that.lottoTickets);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoTickets);
     }
 
     @Override

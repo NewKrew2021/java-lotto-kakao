@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
+import java.util.Arrays;
+import java.util.TreeSet;
+
 import static org.assertj.core.api.Assertions.*;
 
 public class LottoTicketTest {
@@ -25,6 +28,14 @@ public class LottoTicketTest {
 
         assertThatThrownBy(() -> LottoTicket.from("1, 2, 3, 4, 5, 6, 7"))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("LottoTicket 팩토리 메소드 테스트")
+    void fromTest() {
+        assertThat(LottoTicket.from(() -> {
+            return new TreeSet<>(Arrays.asList(Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(6)));
+        })).isEqualTo(LottoTicket.from("1, 2, 3, 4, 5, 6"));
     }
 
     @Test

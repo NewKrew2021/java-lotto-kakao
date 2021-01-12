@@ -2,29 +2,37 @@ package lotto.controller;
 
 import lotto.domain.LottoResults;
 import lotto.domain.LottoTickets;
-import lotto.domain.Price;
+import lotto.domain.PurchaseInformation;
 import lotto.domain.WinnerNumber;
+import lotto.domain.strategy.ManualTicketStrategy;
+import lotto.domain.strategy.RandomTicketStrategy;
 import lotto.view.LottoGameInputView;
 import lotto.view.LottoGameOutputView;
 
+import java.util.List;
+
 public class LottoGame {
-    private Price price;
+    private PurchaseInformation purchase;
     private LottoTickets lottoTickets;
     private WinnerNumber winnerNumber;
 
     public void run() {
-        requestPrice();
+        requestPurchaseInformation();
         makeAndPrintLottoTickets();
         makeWinnerNumber();
         makeAndPrintResult();
     }
 
-    private void requestPrice() {
-        price = new Price(LottoGameInputView.inputPrice());
+    private void requestPurchaseInformation() {
+        purchase = new PurchaseInformation(LottoGameInputView.inputPrice(), LottoGameInputView.inputManualTicketCount());
     }
 
     private void makeAndPrintLottoTickets() {
-        lottoTickets = LottoTickets.fromPrice(price.getPrice());
+        LottoGameOutputView.printManualSentence();
+        LottoTickets manualTickets = LottoTickets.from(new ManualTicketStrategy(), purchase.getManualCount());
+        LottoTickets autoTickets = LottoTickets.from(new RandomTicketStrategy(), purchase.getAutoCount());
+        lottoTickets = LottoTickets.join(manualTickets, autoTickets);
+        LottoGameOutputView.printTicketCount(purchase);
         LottoGameOutputView.printLottoTickets(lottoTickets);
     }
 
@@ -36,7 +44,7 @@ public class LottoGame {
 
     private void makeAndPrintResult() {
         LottoResults lottoResults = lottoTickets.getResults(winnerNumber);
-        LottoGameOutputView.printResult(lottoResults, price.getPrice());
+        LottoGameOutputView.printResult(lottoResults);
     }
 
 }

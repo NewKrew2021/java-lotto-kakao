@@ -31,7 +31,12 @@ public class LottoResultsTest {
     void calculateRateTest() {
         LottoResults lottoResults = new LottoResults();
         lottoResults.upsert(LottoRank.FIFTH);
-        assertThat(lottoResults.calculateRate(14000)).isEqualTo(new BigDecimal("0.35"));
+        assertThat(lottoResults.calculateRate()).isEqualTo(new BigDecimal("5.00"));
+
+        for (int i = 0; i < 13; i++) {
+            lottoResults.upsert(LottoRank.NOTHING);
+        }
+        assertThat(lottoResults.calculateRate()).isEqualTo(new BigDecimal("0.35"));
     }
 
     @Test
