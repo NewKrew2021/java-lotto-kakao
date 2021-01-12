@@ -7,26 +7,16 @@ import java.util.Objects;
 
 public class StatisticsResult {
 
-    HashMap<StatisticsType, Integer> hashMap = new HashMap<>();
-    static HashMap<StatisticsType, Integer> priceHash = new HashMap<>();
-    static {
-        priceHash.put(StatisticsType.NONE, 0);
-        priceHash.put(StatisticsType.THREE, 5000);
-        priceHash.put(StatisticsType.FOUR, 50000);
-        priceHash.put(StatisticsType.FIVE, 1500000);
-        priceHash.put(StatisticsType.FIVE_WITH_BONUS, 30000000);
-        priceHash.put(StatisticsType.SIX, 2000000000);
-    }
-
+    HashMap<StatisticsType, Integer> countOfType = new HashMap<>();
 
     public StatisticsResult() {
         for( StatisticsType type : StatisticsType.values() ) {
-            hashMap.put(type, 0);
+            countOfType.put(type, 0);
         }
     }
 
     public void increaseTypeCount(StatisticsType type) {
-        hashMap.put(type, hashMap.get(type) + 1);
+        countOfType.put(type, countOfType.get(type) + 1);
     }
 
     @Override
@@ -34,27 +24,27 @@ public class StatisticsResult {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         StatisticsResult that = (StatisticsResult) o;
-        return hashMap.equals(that.hashMap);
+        return countOfType.equals(that.countOfType);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(hashMap);
+        return Objects.hash(countOfType);
     }
 
     @Override
     public String toString() {
-        return "3개 일치 (5,000원)-" + hashMap.get(StatisticsType.THREE) + "\n" +
-                "4개 일치 (50,000원)-" + hashMap.get(StatisticsType.FOUR) + "\n" +
-                "5개 일치 (1,500,000원)-" + hashMap.get(StatisticsType.FIVE) + "\n" +
-                "5개 일치, 보너스 볼 일치(30,000,000원)-" + hashMap.get(StatisticsType.FIVE_WITH_BONUS) + "\n" +
-                "6개 일치 (2,000,000,000원)-" + hashMap.get(StatisticsType.SIX) + "\n";
+        return "3개 일치 (5,000원)-" + countOfType.get(StatisticsType.THREE) + "\n" +
+                "4개 일치 (50,000원)-" + countOfType.get(StatisticsType.FOUR) + "\n" +
+                "5개 일치 (1,500,000원)-" + countOfType.get(StatisticsType.FIVE) + "\n" +
+                "5개 일치, 보너스 볼 일치(30,000,000원)-" + countOfType.get(StatisticsType.FIVE_WITH_BONUS) + "\n" +
+                "6개 일치 (2,000,000,000원)-" + countOfType.get(StatisticsType.SIX) + "\n";
     }
 
     public String benefit(int ticketCount) {
         int sumPrice = 0;
         for( StatisticsType type : StatisticsType.values() ) {
-            sumPrice += priceHash.get(type) * hashMap.get(type);
+            sumPrice += type.price * countOfType.get(type);
         }
         sumPrice = sumPrice / (ticketCount * LottoMoney.LOTTO_PRICE);
         return "총 수익률은 " + sumPrice + "입니다";

@@ -1,13 +1,18 @@
 package lotto;
 
 public enum StatisticsType {
-    NONE,
-    THREE,
-    FOUR,
-    FIVE,
-    FIVE_WITH_BONUS,
-    SIX;
+    NONE(0),
+    THREE(5000),
+    FOUR(50000),
+    FIVE(1500000),
+    FIVE_WITH_BONUS(30000000),
+    SIX(2000000000);
 
+    public final int price;
+
+    StatisticsType(int price){
+        this.price = price;
+    }
     public static StatisticsType of( int matchCount, boolean isBonusMatch) {
         if( matchCount == 3 )
             return StatisticsType.THREE;
