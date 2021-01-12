@@ -8,15 +8,15 @@ import java.util.HashMap;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class LottosTest {
-    private Lottos lottos;
+public class AutoLottosTest {
+    private AutoLottos autoLottos;
     private WinningLotto winningLotto;
 
     @BeforeEach
     public void createLottos() {
         winningLotto = new WinningLotto(Arrays.asList(new Ball(1), new Ball(7), new Ball(8),
                 new Ball(9), new Ball(10), new Ball(11)),34);
-        lottos = new Lottos(
+        autoLottos = new AutoLottos(
                 Arrays.asList(
                         new Lotto(Arrays.asList(new Ball(1), new Ball(7), new Ball(8),
                                 new Ball(9), new Ball(10), new Ball(11))),
@@ -36,7 +36,7 @@ public class LottosTest {
 
     @Test
     void getRankCounts(){
-        HashMap<LottoRank, Integer> rankCounts = lottos.getRankCounts(winningLotto);
+        HashMap<LottoRank, Integer> rankCounts = autoLottos.getRankCounts(winningLotto);
         assertThat(rankCounts.get(LottoRank.FIRST)).isEqualTo(3);
         assertThat(rankCounts.get(LottoRank.THIRD)).isEqualTo(3);
     }

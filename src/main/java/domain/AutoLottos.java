@@ -4,18 +4,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Lottos {
+public class AutoLottos {
 
     private final List<Lotto> lottos;
 
-    public Lottos(int totalCount) {
+    public AutoLottos(int totalCount) {
         lottos = new ArrayList<>();
         for (int count = 0; count < totalCount; count++) {
             lottos.add(new Lotto());
         }
     }
 
-    public Lottos(List<Lotto> lottos) {
+    public AutoLottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }
 

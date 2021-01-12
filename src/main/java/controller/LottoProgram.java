@@ -2,7 +2,7 @@ package controller;
 
 import domain.Lotto;
 import domain.LottoStatistics;
-import domain.Lottos;
+import domain.AutoLottos;
 import domain.WinningLotto;
 import exception.ManualLottoCountExceededException;
 import exception.UnderLottoBuyAmountException;
@@ -24,14 +24,14 @@ public class LottoProgram {
         int buyAutoLottoCount = calculateAutoBuyLottoCount(buyAmount,buyManualCount);
 
         lottoProgramView.printBoughtLottosCount(buyAutoLottoCount);
-        Lottos lottos = new Lottos(buyAutoLottoCount);
+        AutoLottos autoLottos = new AutoLottos(buyAutoLottoCount);
 
-        lottoProgramView.printLottosNumber(lottos);
+        lottoProgramView.printLottosNumber(autoLottos);
 
         WinningLotto winningLotto = new WinningLotto(lottoProgramView.getWinningLottoForUser()
                 , lottoProgramView.getBonusBallForUser());
 
-        LottoStatistics lottoStatistics = new LottoStatistics(lottos.getRankCounts(winningLotto),buyAmount);
+        LottoStatistics lottoStatistics = new LottoStatistics(autoLottos.getRankCounts(winningLotto),buyAmount);
         lottoProgramView.printWinningStatistics(lottoStatistics);
     }
 

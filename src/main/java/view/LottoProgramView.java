@@ -54,8 +54,8 @@ public class LottoProgramView {
         System.out.println(printBuilder.toString());
     }
 
-    public void printLottosNumber(Lottos lottos) {
-        for (Lotto lotto : lottos.getLottos()) {
+    public void printLottosNumber(AutoLottos autoLottos) {
+        for (Lotto lotto : autoLottos.getLottos()) {
             System.out.println(lotto.toString());
         }
     }

@@ -15,7 +15,7 @@ public class LottoStatisticsTest {
     public void createLottos() {
         WinningLotto winningLotto = new WinningLotto(Arrays.asList(new Ball(1), new Ball(7), new Ball(8),
                 new Ball(9), new Ball(10), new Ball(11)),34);
-        Lottos lottos = new Lottos(
+        AutoLottos autoLottos = new AutoLottos(
                 Arrays.asList(
                         new Lotto(Arrays.asList(new Ball(1), new Ball(7), new Ball(8),
                                 new Ball(9), new Ball(10), new Ball(11))),
@@ -31,7 +31,7 @@ public class LottoStatisticsTest {
                                 new Ball(9), new Ball(10), new Ball(13)))
                 )
         );
-        lottoStatistics = new LottoStatistics(lottos.getRankCounts(winningLotto),lottos.getLottos().size());
+        lottoStatistics = new LottoStatistics(autoLottos.getRankCounts(winningLotto), autoLottos.getLottos().size());
     }
 
     @Test
