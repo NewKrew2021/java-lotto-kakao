@@ -19,8 +19,8 @@ public class LottoMain {
         int manualCount = InputView.getMaualLottoCount(totalCount);
         List<List<Integer>> manualLottoNumbers = InputView.getMaualLottoNumbers(manualCount);
 
-        OutputView.printLottoTicketCount(totalCount);
         LottoTickets lottoTickets = game.makeLottoTickets(totalCount, manualLottoNumbers);
+        OutputView.printLottoTicketCount(totalCount, manualCount);
         OutputView.printLottoTickets(lottoTickets);
 
         Set<Integer> numbers = InputView.getWinnerNumber();
