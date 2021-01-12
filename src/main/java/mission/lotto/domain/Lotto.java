@@ -1,9 +1,6 @@
 package mission.lotto.domain;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto implements Comparable<Lotto> {
@@ -50,7 +47,7 @@ public class Lotto implements Comparable<Lotto> {
     }
 
     public Set<Number> getNumbers() {
-        return numbers;
+        return Collections.unmodifiableSet(numbers);
     }
 
     @Override

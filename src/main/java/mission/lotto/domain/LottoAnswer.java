@@ -1,5 +1,6 @@
 package mission.lotto.domain;
 
+import java.util.Collections;
 import java.util.Set;
 
 public class LottoAnswer {
@@ -16,7 +17,7 @@ public class LottoAnswer {
     }
 
     public Set<Number> getAnswerNumbers() {
-        return answerNumbers.getNumbers();
+        return Collections.unmodifiableSet(answerNumbers.getNumbers());
     }
 
     public Number getBonusNumber() {
