@@ -1,8 +1,11 @@
 package view;
 
+import domain.Lotto;
+import domain.LottoNumber;
 import domain.LottoTicketCount;
 import dto.Amount;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
@@ -19,10 +22,24 @@ public class LottoInputView {
 
     public static List<Integer> inputWinningNumbers() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+        return getLottoNumbers();
+    }
+
+    public static List<List<Integer>> inputLottoNumbers(LottoTicketCount manualCount){
+        System.out.println("수동으로 구매할 번호를 입력해주세요.");
+        List<List<Integer>> numbers = new ArrayList<>();
+        for (int i = 0; i < manualCount.getLottoTicketCount(); i++) {
+            numbers.add(getLottoNumbers());
+        }
+        return numbers;
+    }
+
+    public static List<Integer> getLottoNumbers(){
         return Arrays.stream(sc.nextLine().split(","))
                 .map(i->Integer.parseInt(i))
                 .collect(Collectors.toList());
     }
+
 
     public static int inputBonusNumber() {
         System.out.println("보너스 볼을 입력해 주세요.");

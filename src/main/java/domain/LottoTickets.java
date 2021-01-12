@@ -5,7 +5,9 @@ import dto.Amount;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoTickets {
 
@@ -24,6 +26,17 @@ public class LottoTickets {
         return new LottoTickets(tickets);
     }
 
+    public static LottoTickets of(List<List<Integer>> lottoNumbers){
+        List<Lotto> tickets = new ArrayList<>();
+        for (List<Integer> lottoNumber : lottoNumbers) {
+            tickets.add(Lotto.of(lottoNumber
+                    .stream()
+                    .map(LottoNumber::new)
+                    .collect(Collectors.toSet())));
+        }
+        return new LottoTickets(tickets);
+    }
+
     public List<List<Integer>> getLottoTickets() {
         return lottos.stream()
                 .map(Lotto::getLottoTicketInfo)
@@ -36,5 +49,24 @@ public class LottoTickets {
 
     public int size() {
         return this.lottos.size();
+    }
+
+    public LottoTickets concat(LottoTickets autoTickets) {
+        return new LottoTickets(Stream
+                .concat(lottos.stream(), autoTickets.getLottos().stream())
+                .collect(Collectors.toList()));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoTickets tickets = (LottoTickets) o;
+        return Objects.equals(lottos, tickets.lottos);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottos);
     }
 }
