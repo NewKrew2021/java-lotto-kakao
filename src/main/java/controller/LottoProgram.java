@@ -4,6 +4,8 @@ import domain.Lotto;
 import domain.LottoStatistics;
 import domain.Lottos;
 import domain.WinningLotto;
+import exception.ManualLottoCountExceededException;
+import exception.UnderLottoBuyAmountException;
 import view.LottoProgramView;
 
 public class LottoProgram {
@@ -16,12 +18,13 @@ public class LottoProgram {
 
     public void start() {
         int buyAmount = lottoProgramView.getBuyAmountForUser();
+        checkBuyAmount(buyAmount);
+
         int buyManualCount = lottoProgramView.getBuyManualLottoCountForUser();
+        int buyAutoLottoCount = calculateAutoBuyLottoCount(buyAmount,buyManualCount);
 
-        int buyLottoCount = calculateBuyLottoCount(buyAmount);
-
-        lottoProgramView.printBoughtLottosCount(buyLottoCount);
-        Lottos lottos = new Lottos(buyLottoCount);
+        lottoProgramView.printBoughtLottosCount(buyAutoLottoCount);
+        Lottos lottos = new Lottos(buyAutoLottoCount);
 
         lottoProgramView.printLottosNumber(lottos);
 
@@ -32,10 +35,16 @@ public class LottoProgram {
         lottoProgramView.printWinningStatistics(lottoStatistics);
     }
 
-    public int calculateBuyLottoCount(int buyAmount) {
+    public void checkBuyAmount(int buyAmount) {
         if(buyAmount < Lotto.LOTTO_PRICE){
-            throw new IllegalArgumentException("구입 금액이 1000원 이상이어야 합니다.");
+            throw new UnderLottoBuyAmountException("구입 금액이 1000원 이상이어야 합니다.");
         }
-        return buyAmount / Lotto.LOTTO_PRICE;
+    }
+
+    public int calculateAutoBuyLottoCount(int buyAmount, int buyManualCount) {
+        if(buyAmount < buyManualCount * Lotto.LOTTO_PRICE){
+            throw new ManualLottoCountExceededException("수동 구입 갯수가 초과하였습니다.");
+        }
+        return (buyAmount / Lotto.LOTTO_PRICE) - buyManualCount;
     }
 }
