@@ -16,6 +16,8 @@ public class LottoProgram {
 
     public void start() {
         int buyAmount = lottoProgramView.getBuyAmountForUser();
+        int buyManualCount = lottoProgramView.getBuyManualLottoCountForUser();
+
         int buyLottoCount = calculateBuyLottoCount(buyAmount);
 
         lottoProgramView.printBoughtLottosCount(buyLottoCount);
