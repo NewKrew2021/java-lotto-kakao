@@ -17,7 +17,7 @@ public class RandomGenerateStrategy implements GenerateStrategy {
 
     private List<LottoNumber> shuffleNumbers() {
         List<LottoNumber> numbers = IntStream
-                .rangeClosed(LottoNumber.MIN_LOTTO_NUMBER,LottoNumber.MAX_LOTTO_NUMBER)
+                .rangeClosed(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER)
                 .boxed()
                 .map(LottoNumber::of)
                 .collect(Collectors.toList());

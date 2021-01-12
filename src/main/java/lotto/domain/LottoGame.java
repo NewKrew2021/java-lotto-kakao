@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import lotto.dto.LottoStatisticDTO;
+import lotto.view.OutputView;
+
 import java.util.List;
 import java.util.Objects;
 
@@ -14,11 +16,26 @@ public class LottoGame {
         this.userBuyNumbers = new UserBuyNumbers();
     }
 
-    public List<List<String>> buyLotto(GenerateStrategy generateStrategy) {
-        for (int i = 0; i < money.possibleNumberBuy(); i++) {
-            userBuyNumbers.addBuyNumbers(NumberGenerator.generateBuyNumbers(generateStrategy));
-        }
+    public List<List<String>> buyLotto(LottoTickets lottoTickets) {
+        buyLottoManually(lottoTickets);
+        buyLottoAuto(lottoTickets);
         return userBuyNumbers.convertToString();
+    }
+
+    private void buyLottoManually(LottoTickets lottoTickets) {
+        OutputView.printManualInput();
+        while (lottoTickets.isManualTicketRemain()) {
+            userBuyNumbers.addBuyNumbers(NumberGenerator.generateBuyNumbers(new ManualGenerateStrategy()));
+            lottoTickets.useManualTicket();
+        }
+    }
+
+    private void buyLottoAuto(LottoTickets lottoTickets) {
+        OutputView.printLottoCount(lottoTickets, money);
+        while (lottoTickets.isAutoTicketRemain()) {
+            userBuyNumbers.addBuyNumbers(NumberGenerator.generateBuyNumbers(new RandomGenerateStrategy()));
+            lottoTickets.useAutoTicket();
+        }
     }
 
     public LottoStatisticDTO checkLotto(WinningNumbers winningNumbers) {
