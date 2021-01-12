@@ -1,41 +1,37 @@
 package lotto.domain;
 
-public enum Rank {
-    NOTHING(0L, "꽝"),
-    FIFTH(5000L, "3개 일치"),
-    FOURTH(50000L, "4개 일치"),
-    THIRD(1500000L, "5개 일치"),
-    SECOND(30000000L, "5개 일치, 보너스 볼 일치"),
-    FIRST(2000000000L, "6개 일치");
+import java.util.Arrays;
 
-    private final Long prize;
+public enum Rank {
+    NOTHING(0L, 0, "꽝"),
+    FIFTH(5_000L, 3, "3개 일치"),
+    FOURTH(50_000L, 4, "4개 일치"),
+    THIRD(1_500_000L, 5, "5개 일치"),
+    SECOND(30_000_000L, 5, "5개 일치, 보너스 볼 일치"),
+    FIRST(2_000_000_000L, 6, "6개 일치");
+
+    private final long prize;
+    private final int matchedCount;
     private final String description;
 
-    Rank(Long prize, String description) {
+    Rank(long prize, int matchedCount, String description) {
         this.prize = prize;
+        this.matchedCount = matchedCount;
         this.description = description;
     }
 
     public static Rank createRank(int matchedCount, boolean hasBonus) {
-        if (matchedCount == Lotto.COUNT_OF_NUMBERS) {
-            return FIRST;
-        }
-        if (matchedCount == Lotto.COUNT_OF_NUMBERS - 1 && hasBonus) {
+        if (matchedCount == SECOND.matchedCount && hasBonus) {
             return SECOND;
         }
-        if (matchedCount == Lotto.COUNT_OF_NUMBERS - 1) {
-            return THIRD;
-        }
-        if (matchedCount == Lotto.COUNT_OF_NUMBERS - 2) {
-            return FOURTH;
-        }
-        if (matchedCount == Lotto.COUNT_OF_NUMBERS - 3) {
-            return FIFTH;
-        }
-        return NOTHING;
+
+        return Arrays.stream(Rank.values())
+                .filter(rank -> matchedCount == rank.matchedCount)
+                .findFirst()
+                .orElse(NOTHING);
     }
 
-    public Long getPrize() {
+    public long getPrize() {
         return prize;
     }
 

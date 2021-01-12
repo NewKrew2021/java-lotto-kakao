@@ -6,11 +6,13 @@ import java.util.stream.Stream;
 
 public class Lotto {
     public static final int COUNT_OF_NUMBERS = 6;
+    private static final String LOTTO_DUPLICATE_EXCEPTION_MESSAGE = "로또번호 중복이 있어서는 안된다.";
+    private static final String LOTTO_COUNT_EXCEPTION_MESSAGE = "로또번호는 %d개여야 한다.";
     private final List<Ball> lottoBalls;
 
     public Lotto() {
-        this.lottoBalls = autoGenerate().stream()
-                .map(Ball::new)
+        this.lottoBalls = LottoNumberPool.autoGenerate().stream()
+                .map(Ball::of)
                 .collect(Collectors.toList());
     }
 
@@ -21,33 +23,22 @@ public class Lotto {
         this.lottoBalls = lottoNumbers;
     }
 
-    private void checkDuplicate(List<Ball> lottoNumbers) {
+    void checkDuplicate(List<Ball> lottoNumbers) {
         if (lottoNumbers.stream().distinct().count() < lottoNumbers.size()) {
-            throw new IllegalArgumentException("로또번호 중복이 있어서는 안된다.");
+            throw new IllegalArgumentException(LOTTO_DUPLICATE_EXCEPTION_MESSAGE);
         }
     }
 
-    private void checkCount(List<Ball> lottoNumbers) {
+    void checkCount(List<Ball> lottoNumbers) {
         if (lottoNumbers.size() != COUNT_OF_NUMBERS) {
-            throw new IllegalArgumentException("로또번호는 6개여야 한다.");
+            throw new IllegalArgumentException(String.format(LOTTO_COUNT_EXCEPTION_MESSAGE, COUNT_OF_NUMBERS));
         }
     }
 
-    public static List<String> autoGenerate() {
-        Set<String> randomNumbers = new HashSet<>();
-
-        while (randomNumbers.size() < COUNT_OF_NUMBERS) {
-            int randomNumber = new Random().nextInt(Ball.UPPER_BOUND) + 1;
-            randomNumbers.add(String.valueOf(randomNumber));
-        }
-
-        return new ArrayList<>(randomNumbers);
-    }
-
-    private List<Ball> parseLottoText(String lottoText) {
+    public List<Ball> parseLottoText(String lottoText) {
         return Arrays.stream(lottoText.split(","))
                 .map(String::trim)
-                .map(Ball::new)
+                .map(Ball::of)
                 .collect(Collectors.toList());
     }
 
