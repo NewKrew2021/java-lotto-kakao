@@ -22,4 +22,16 @@ public class LottoInputView {
         int bonusBall = Integer.parseInt(scanner.nextLine());
         return bonusBall;
     }
+
+    public static int getNonAutoLottoBuyAmount(){
+        LottoOutputView.printInputNonAutoLottoQuantityPhrase();
+        int amount = Integer.parseInt(scanner.nextLine());
+        return amount;
+    }
+
+    public static String getNonAutoLotto(){
+        LottoOutputView.printInputNonAutoLottoPhrase();
+        String lotto = scanner.nextLine();
+        return lotto;
+    }
 }
