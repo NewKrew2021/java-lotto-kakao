@@ -39,16 +39,13 @@ public class LottoGenerator {
         return new Lotto(set);
     }
 
-    public int generateBonus(Lotto lotto){
-        HashSet<Integer> set = new HashSet<>();
-        lotto.getLotto().stream().forEach(number -> set.add(number.getNumber()));
+    public WonLotto generateWonLotto(){
+        Collections.shuffle(allLottoNumbers);
 
-        int bonusNo = RandomUtil.getRandomValue();
-        while(!set.add(bonusNo)){
-            bonusNo = RandomUtil.getRandomValue();
-        }
+        SortedSet<LottoNumber> set = new TreeSet<>();
+        set.addAll(allLottoNumbers.subList(0, LOTTO_MAX_SIZE));
 
-        return bonusNo;
+        return new WonLotto(new Lotto(set), allLottoNumbers.get(LOTTO_MAX_SIZE).getNumber());
     }
 
     public Lotto lottoStringParser(String lotto){

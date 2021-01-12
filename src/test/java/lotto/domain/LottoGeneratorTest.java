@@ -37,10 +37,10 @@ public class LottoGeneratorTest {
     @Test
     @DisplayName("보너스 번호 유효성 검사")
     public void bonusNumberTest() {
-        Lotto lotto = lottoGenerator.generateLotto();;
+        WonLotto wonlotto = lottoGenerator.generateWonLotto();;
         HashSet<Integer> set = new HashSet<>();
-        lotto.getLotto().stream().forEach(number -> set.add(number.getNumber()));
-        set.add(lottoGenerator.generateBonus(lotto));
+        wonlotto.getWonLotto().getLotto().stream().forEach(number -> set.add(number.getNumber()));
+        set.add(wonlotto.getBonusNo());
         Assertions.assertTrue(set.size()==7);
     }
 
