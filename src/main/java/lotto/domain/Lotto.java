@@ -15,12 +15,9 @@ public class Lotto {
     }
 
     public int checkSameCount(Lotto userLotto){
-        int count = 0;
-        for (LottoNumber number : userLotto.lotto) {
-            count += lotto.contains(number) ? 1 : 0;
-        }
-
-        return count;
+        return (int)userLotto.lotto.stream()
+                .filter(lotto::contains)
+                .count();
     }
 
     @Override
