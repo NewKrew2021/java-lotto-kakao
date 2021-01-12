@@ -23,13 +23,13 @@ public class Lotto {
         this.lottoBalls = lottoNumbers;
     }
 
-    public void checkDuplicate(List<Ball> lottoNumbers) {
+    void checkDuplicate(List<Ball> lottoNumbers) {
         if (lottoNumbers.stream().distinct().count() < lottoNumbers.size()) {
             throw new IllegalArgumentException(LOTTO_DUPLICATE_EXCEPTION_MESSAGE);
         }
     }
 
-    public void checkCount(List<Ball> lottoNumbers) {
+    void checkCount(List<Ball> lottoNumbers) {
         if (lottoNumbers.size() != COUNT_OF_NUMBERS) {
             throw new IllegalArgumentException(String.format(LOTTO_COUNT_EXCEPTION_MESSAGE, COUNT_OF_NUMBERS));
         }
