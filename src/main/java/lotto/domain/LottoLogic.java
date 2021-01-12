@@ -23,14 +23,6 @@ public class LottoLogic {
         return buyingStrategy.buyTicket();
     }
 
-    private static List<Integer> makeLottoNumberBasket() {
-        List<Integer> nums = new ArrayList<>();
-        for (int i = LottoNo.MIN_NUMBER; i <= LottoNo.MAX_NUMBER; i++) {
-            nums.add(i);
-        }
-        return nums;
-    }
-
     public static StatisticsResult winningStatistics(List<LottoTicket> lottoTickets, WinningLottoTicket winningLottoTicket) {
         StatisticsResult statisticsResult = new StatisticsResult();
 
