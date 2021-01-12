@@ -25,18 +25,18 @@ public class StatisticCalculatorTest {
     }
 
     @Test
-    public void create() {
+    public void When_TwoStatisticCalculatorInitializedWithSameResultAndMoney_Expected_isEqualToTrue() {
         assertThat(statCalculator).isEqualTo(new StatisticCalculator(eachLottoResult, money));
     }
 
     @Test
-    public void eachRankCount() {
+    public void testEachRankCount() {
         List<Integer> rankCount = new ArrayList<>(Arrays.asList(3, 0, 1, 1, 0, 1));
         assertThat(statCalculator.getRankCount()).isEqualTo(rankCount);
     }
 
     @Test
-    public void profitRate() {
+    public void testProfitRate() {
         double expectedProfitRate = 2001550000.0 / 14000.0;
         assertThat(statCalculator.getProfitRate()).isEqualTo(expectedProfitRate);
     }

@@ -22,6 +22,17 @@ public class LottoGame {
         return userBuyNumbers.convertToString();
     }
 
+    public LottoStatisticDTO checkLotto(WinningNumbers winningNumbers) {
+        LottoStatisticDTO responseLottoStatistic = new LottoStatisticDTO();
+
+        StatisticCalculator statCalculator = new StatisticCalculator(
+                userBuyNumbers.checkLottoResult(winningNumbers), money);
+        responseLottoStatistic.setRankCount(statCalculator.getRankCount());
+        responseLottoStatistic.setProfitRate(statCalculator.getProfitRate());
+
+        return responseLottoStatistic;
+    }
+
     private void buyLottoManually(LottoTickets lottoTickets) {
         OutputView.printManualInput();
         while (lottoTickets.isManualTicketRemain()) {
@@ -38,16 +49,6 @@ public class LottoGame {
         }
     }
 
-    public LottoStatisticDTO checkLotto(WinningNumbers winningNumbers) {
-        LottoStatisticDTO responseLottoStatistic = new LottoStatisticDTO();
-
-        StatisticCalculator statCalculator = new StatisticCalculator(
-                userBuyNumbers.checkLottoResult(winningNumbers), money);
-        responseLottoStatistic.setRankCount(statCalculator.getRankCount());
-        responseLottoStatistic.setProfitRate(statCalculator.getProfitRate());
-
-        return responseLottoStatistic;
-    }
 
     @Override
     public boolean equals(Object o) {

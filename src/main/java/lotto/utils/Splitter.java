@@ -25,7 +25,7 @@ public class Splitter {
         try {
             res = Integer.parseInt(number);
         } catch (NumberFormatException e) {
-            throw new IllegalStateException(ILLEGAL_LOTTO_INPUT_MESSAGE);
+            throw new IllegalArgumentException(ILLEGAL_LOTTO_INPUT_MESSAGE);
         }
         return res;
     }
