@@ -1,6 +1,8 @@
 package lotto.domain;
 
-import java.util.Objects;
+import lotto.util.StringUtils;
+
+import static lotto.util.StringUtils.*;
 
 public class LottoNumber implements Comparable<LottoNumber>{
     private int number;
@@ -40,19 +42,6 @@ public class LottoNumber implements Comparable<LottoNumber>{
 
     public boolean equals(int n){
         return number == n;
-    }
-
-    public static boolean isBlank(String text){
-        return text.isEmpty() || text == null;
-    }
-
-    public static boolean isNumber(String text){
-        try{
-           Integer.parseInt(text);
-           return true;
-        }catch (Exception e){
-            return false;
-        }
     }
 
     @Override
