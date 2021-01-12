@@ -14,8 +14,8 @@ public class WinningLottoNos {
         this(new LottoNumbers(numbers), new LottoNumber(bonusNumber));
     }
     public WinningLottoNos(LottoNumbers lottoNumbers, LottoNumber lottoNumber){
-        if ( this.lottoNumbers.isContains(lottoNumber) ) {
-            throw new IllegalArgumentException();
+        if ( lottoNumbers.isContains(lottoNumber) ) {
+            throw new IllegalArgumentException("잘못된 입력 입니다");
         }
         this.lottoNumbers = lottoNumbers;
         this.bonusNumber = lottoNumber;
