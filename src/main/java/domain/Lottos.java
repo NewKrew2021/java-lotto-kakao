@@ -8,14 +8,7 @@ public class Lottos {
 
     private final List<Lotto> autoLottos;
     private List<Lotto> manualLottos;
-
-    public Lottos(int totalCount) {
-        autoLottos = new ArrayList<>();
-        for (int count = 0; count < totalCount; count++) {
-            autoLottos.add(new Lotto());
-        }
-    }
-
+    
     public Lottos(int totalCount, List<Lotto> manualLottos) {
         autoLottos = new ArrayList<>();
         for (int count = 0; count < totalCount; count++) {
