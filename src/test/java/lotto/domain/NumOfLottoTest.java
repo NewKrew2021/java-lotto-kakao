@@ -27,6 +27,6 @@ public class NumOfLottoTest {
     void minus() {
         NumOfLotto minuend = new NumOfLotto(3);
         NumOfLotto subtrahend = new NumOfLotto(2);
-        assertThat(minuend.minus(subtrahend).getNumOfLotto()).isEqualTo(1);
+        assertThat(minuend.minus(subtrahend)).isEqualTo(new NumOfLotto(1));
     }
 }

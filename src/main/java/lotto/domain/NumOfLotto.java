@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Objects;
+
 public class NumOfLotto {
     private final int numOfLotto;
 
@@ -20,5 +22,18 @@ public class NumOfLotto {
 
     private boolean isValid() {
         return numOfLotto >= 0;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        NumOfLotto that = (NumOfLotto) o;
+        return numOfLotto == that.numOfLotto;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numOfLotto);
     }
 }
