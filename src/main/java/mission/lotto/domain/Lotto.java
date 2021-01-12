@@ -21,6 +21,10 @@ public class Lotto implements Comparable<Lotto> {
         this.numbers = lottoNums;
     }
 
+    private boolean checkNumbersLength(Set<Number> temp) {
+        return temp.size() != MAX_NUMBERS_LENGTH;
+    }
+
     public Rank calculateRank(LottoAnswer answer) {
         Set<Number> answerNumbers = answer.getAnswerNumbers();
         Set<Number> combine = new HashSet<>(answerNumbers);
@@ -33,21 +37,17 @@ public class Lotto implements Comparable<Lotto> {
         return Rank.getRank(correctNo, hasBonusNo);
     }
 
-    private boolean checkNumbersLength(Set<Number> temp) {
-        return temp.size() != MAX_NUMBERS_LENGTH;
-    }
-
     public boolean isContainLottoNumber(Number lottoNumber) {
         return numbers.contains(lottoNumber);
+    }
+
+    public Set<Number> getNumbers() {
+        return Collections.unmodifiableSet(numbers);
     }
 
     @Override
     public int compareTo(Lotto lotto) {
         return Integer.compare(Objects.hash(this), Objects.hash(lotto));
-    }
-
-    public Set<Number> getNumbers() {
-        return Collections.unmodifiableSet(numbers);
     }
 
     @Override
