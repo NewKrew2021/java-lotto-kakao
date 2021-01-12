@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.exception.LottoRaffleError;
+
 import java.util.stream.Stream;
 
 public enum Rank {
@@ -22,6 +24,10 @@ public enum Rank {
         this.bonusMatch = bonusMatch;
     }
 
+    public int getRank() {
+        return rank;
+    }
+
     public int getReward() {
         return reward;
     }
@@ -40,17 +46,19 @@ public enum Rank {
 
     public static Rank findRank(int matchCount, boolean bonusMatch) {
         return Rank.stream()
-                .filter(rank -> {
-                    if (matchCount == 5) {
-                        return rank.getMatchCount() == matchCount && rank.getBonusMatch() == bonusMatch;
-                    }
-                    if (matchCount < 3) {
-                        return rank.getMatchCount() < 3;
-                    }
-                    return rank.getMatchCount() == matchCount;
-                })
+                .filter(rank -> matchRank(matchCount, bonusMatch, rank))
                 .findFirst()
-                .get();
+                .orElseThrow(LottoRaffleError::new);
+    }
+
+    private static boolean matchRank(int matchCount, boolean bonusMatch, Rank rank) {
+        if (matchCount == 5) {
+            return rank.getMatchCount() == matchCount && rank.getBonusMatch() == bonusMatch;
+        }
+        if (matchCount < 3) {
+            return rank.getMatchCount() < 3;
+        }
+        return rank.getMatchCount() == matchCount;
     }
 
 }

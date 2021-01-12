@@ -14,7 +14,9 @@ public class Lottos {
         if (randomLottoCount < 0) {
             throw new FailBuyLottoException();
         }
-        this.lottos = lottos.stream().map(Lotto::new).collect(Collectors.toList());
+        this.lottos = lottos.stream()
+                .map(Lotto::new)
+                .collect(Collectors.toList());
         this.lottos.addAll(IntStream.range(0, randomLottoCount)
                 .mapToObj(num -> new Lotto())
                 .collect(Collectors.toList()));

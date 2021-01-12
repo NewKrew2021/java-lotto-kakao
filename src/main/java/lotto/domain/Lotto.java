@@ -1,7 +1,7 @@
 package lotto.domain;
 
 import lotto.exception.FailBuyLottoException;
-import lotto.exception.HasDuplicateNumberException;
+import lotto.exception.NumberErrorException;
 import lotto.util.RandomNumberGenerator;
 
 import java.util.*;
@@ -21,20 +21,14 @@ public class Lotto {
                 .map(LottoNumber::of)
                 .sorted(Comparator.comparingInt(LottoNumber::getNumber))
                 .collect(Collectors.toCollection(LinkedHashSet::new));
-        if (isDuplicateNumber()) {
-            throw new HasDuplicateNumberException();
-        }
-        if (isTooManyNumber()) {
-            throw new FailBuyLottoException();
+
+        if (!isNorMalNumber()) {
+            throw new NumberErrorException();
         }
     }
 
-    private boolean isDuplicateNumber() {
-        return lottoNumbers.size() < LOTTO_NUMBER_LENGTH;
-    }
-
-    private boolean isTooManyNumber() {
-        return lottoNumbers.size() > LOTTO_NUMBER_LENGTH;
+    private boolean isNorMalNumber() {
+        return lottoNumbers.size() == LOTTO_NUMBER_LENGTH;
     }
 
     public boolean contains(LottoNumber lottoNumber) {
