@@ -16,7 +16,9 @@ public class LottoTicket {
     public LottoTicket(List<Integer> numbers) {
 
         if( !checkValidationLottoTicket(numbers) ) {
-            throw new IllegalArgumentException();
+            IllegalArgumentException error = new IllegalArgumentException();
+            error.printStackTrace();
+            throw error;
         }
 
         Collections.sort(numbers);
@@ -30,11 +32,7 @@ public class LottoTicket {
             return false;
         }
 
-        if(checkDuplication(numbers)){
-            return false;
-        }
-
-        return true;
+        return !checkDuplication(numbers);
     }
 
     private static boolean checkDuplication(List<Integer> numbers){

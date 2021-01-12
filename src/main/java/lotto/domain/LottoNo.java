@@ -11,7 +11,9 @@ public class LottoNo implements Comparable<LottoNo>{
 
     public LottoNo(Integer number) {
         if( !checkValidationLottoNo(number) ) {
-            throw new IllegalArgumentException();
+            IllegalArgumentException error = new IllegalArgumentException();
+            error.printStackTrace();
+            throw error;
         }
 
         this.number = number;

@@ -2,22 +2,19 @@ package lotto.domain;
 
 public class Money {
 
-    private int money = 0;
+    private int money;
 
     public Money(int money) {
         if( !checkValidationInputMoney(money) ) {
-            throw new IllegalArgumentException();
+            IllegalArgumentException error = new IllegalArgumentException();
+            error.printStackTrace();
+            throw error;
         }
         this.money = money;
     }
 
     public static boolean checkValidationInputMoney(int money) {
-
-        if ( money < LottoTicket.LOTTO_PRICE ) {
-            return false;
-        }
-
-        return true;
+        return money >= LottoTicket.LOTTO_PRICE;
     }
 
     public boolean payForTicket() {
