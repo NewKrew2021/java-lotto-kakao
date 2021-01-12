@@ -11,8 +11,9 @@ import java.util.stream.Collectors;
 public class LottoProgramView {
 
     public static final String BUY_AMOUNT_PHRASE = "구입금액을 입력해 주세요.";
-    public static final String BUY_MANUAL_COUNT_PHRASE = "수동으로 구매할 로또 수를 입력해 주세요.";
-    public static final String LOTTOS_MANUAL_PHRASE = "수동으로 ";
+    public static final String BUY_MANUAL_COUNT_PHRASE = "\n수동으로 구매할 로또 수를 입력해 주세요.";
+    public static final String GET_MANUAL_BALL = "\n수동으로 구매할 번호를 입력해 주세요.";
+    public static final String LOTTOS_MANUAL_PHRASE = "\n수동으로 ";
     public static final String LOTTOS_AUTO_PHRASE = "장, 자동으로 ";
     public static final String LOTTOS_BOUGHT_PHRASE = "개를 구매했습니다.";
     public static final String LAST_WEEK_BALLS_PHRASE = "\n지난 주 당첨 번호를 입력해 주세요.";
@@ -43,6 +44,14 @@ public class LottoProgramView {
         return Integer.parseInt(buyManualAccount);
     }
 
+    public void printGetManualBallPhrase(){
+        System.out.println(GET_MANUAL_BALL);
+    }
+
+    public String[] getManualLottoForUser(){
+        return scanner.nextLine().split(",");
+    }
+
     public boolean checkNumberFormat(String buyAmount) {
         return buyAmount.chars().allMatch(Character::isDigit);
     }
@@ -60,8 +69,11 @@ public class LottoProgramView {
         System.out.println(printBuilder.toString());
     }
 
-    public void printLottosNumber(AutoLottos autoLottos) {
-        for (Lotto lotto : autoLottos.getLottos()) {
+    public void printLottosNumber(Lottos lottos) {
+        for (Lotto lotto : lottos.getManualLottos()) {
+            System.out.println(lotto.toString());
+        }
+        for (Lotto lotto : lottos.getAutoLottos()) {
             System.out.println(lotto.toString());
         }
     }
