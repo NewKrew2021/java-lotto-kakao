@@ -10,10 +10,11 @@ import java.util.Map;
 
 public class OutputView {
 
-    public static void lottoBoughtView(Lottos lottos) {
+    public static void lottoBoughtView(Lottos lottos, int selfLottoCount) {
         List<List<Integer>> lottosNumberList = lottos.getLottosNumberList();
-        System.out.println(lottosNumberList.size() + "개를 구매했습니다.");
-        lottosNumberList.stream().forEach(i -> System.out.println(i));
+        System.out.print("수동으로 " + selfLottoCount + "장, ");
+        System.out.println("자동으로 " + (lottosNumberList.size() - selfLottoCount) + "개를 구매했습니다.");
+        lottosNumberList.stream().forEach(System.out::println);
         System.out.println();
     }
 
