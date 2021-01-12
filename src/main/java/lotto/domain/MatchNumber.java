@@ -12,10 +12,17 @@ public class MatchNumber {
     private MatchNumber(WinningNumber winningNumber, int bonusNumber) {
         this.winningNumber = winningNumber;
         this.bonusNumber = LottoNumber.of(bonusNumber);
+        if (!isValid()) {
+            throw new IllegalArgumentException("보너스 번호는 당첨번호와 동일할 수 없습니다;");
+        }
     }
 
     public static MatchNumber of(String numbersText, int bonusNumber) {
         return new MatchNumber(WinningNumber.fromNumbersText(numbersText), bonusNumber);
+    }
+
+    private boolean isValid() {
+        return winningNumber.isContain(bonusNumber);
     }
 
     public MatchResult getMatchResult(LottoNumber lottoNumber) {
