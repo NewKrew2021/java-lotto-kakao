@@ -1,56 +1,44 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.util.LottoNumberGenerator;
-import lotto.util.RandomNumberGenerator;
-import lotto.view.LottoUI;
+import lotto.view.InputView;
+import lotto.view.OutputView;
 
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class LottoController {
-    private static final String SPLIT_DELIMITER = ",";
-
-    private Lottos lottos;
-    private Money money;
-
-    private LottoNumberGenerator randomNumberGenerator = new RandomNumberGenerator();
 
     public static void main(String[] args) {
-        LottoController lottoController = new LottoController();
-        lottoController.buyLotto();
-        lottoController.matchLotto();
+        Money money = inputMoney();
+        Lottos lottos = buyLotto(money);
+        matchLotto(lottos, money);
     }
 
-    public void buyLotto() {
-        money = new Money(LottoUI.getMoneyFromUser());
-        lottos = new Lottos(IntStream
-                .range(0, (money.howMany(Lotto.getLottoPrice())))
-                .mapToObj(num -> new Lotto(new LinkedHashSet<>(randomNumberGenerator
-                        .getNumbers()
-                        .stream()
-                        .map(LottoNumber::of)
-                        .collect(Collectors.toList()))))
-                .collect(Collectors.toList()));
-        LottoUI.printLottos(lottos);
+    private static Money inputMoney() {
+        return new Money(InputView.getMoneyFromUser());
     }
 
-    public void matchLotto() {
-        WinningLotto winningNumber = new WinningLotto(new LinkedHashSet<>(Arrays.stream(split(LottoUI.getWinningNumberFromUser()))
-                .map(num -> LottoNumber.of(getParseInt(num)))
-                .collect(Collectors.toList())));
-        LottoNumber bonusNumber = LottoNumber.of(LottoUI.getBonusNumberFromUser());
+    private static Lottos buyLotto(Money money) {
+        int selfLottoCount = InputView.getSelfLottoCountFromUser();
+        int randomLottoCount = money.howMany(Lotto.LOTTO_PRICE) - selfLottoCount;
 
-        Statistics statistics = lottos.raffle(winningNumber, bonusNumber);
-        LottoUI.printStatistics(statistics.getRankings(), statistics.getProfitRate(money));
+        Lottos lottos = new Lottos(buySelfLottos(selfLottoCount), randomLottoCount);
+        OutputView.printLottoCount(selfLottoCount, randomLottoCount);
+        OutputView.printLottos(lottos);
+        return lottos;
     }
 
-    private String[] split(String numbersText) {
-        return numbersText.split(SPLIT_DELIMITER);
+    private static List<List<Integer>> buySelfLottos(int selfLottoCount) {
+        OutputView.printSelfLottoNumberInputGuide();
+        return IntStream.range(0, selfLottoCount)
+                .mapToObj(num -> InputView.getSelfLottoNumberFromUser())
+                .collect(Collectors.toList());
     }
 
-    private int getParseInt(String number) {
-        return Integer.parseInt(number);
+    private static void matchLotto(Lottos lottos, Money money) {
+        WinningLotto winningNumber = new WinningLotto(InputView.getWinningNumberFromUser(), InputView.getBonusNumberFromUser());
+        OutputView.printStatistics(new Statistics(lottos.raffle(winningNumber), money));
     }
 }

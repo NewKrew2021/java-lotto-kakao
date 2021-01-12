@@ -1,46 +1,48 @@
 package lotto.domain;
 
-import lotto.util.LottoNumberGenerator;
+import lotto.exception.FailBuyLottoException;
+import lotto.exception.NumberErrorException;
 import lotto.util.RandomNumberGenerator;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotto {
+    public static final int LOTTO_PRICE = 1000;
+    public static final int LOTTO_NUMBER_LENGTH = 6;
     private Set<LottoNumber> lottoNumbers;
-    private static final int LOTTO_PRICE = 1000;
 
-    public Lotto(LottoNumberGenerator lottoNumberGenerator) {
-        lottoNumbers = new LinkedHashSet<>();
-        for (int l : lottoNumberGenerator.getNumbers()) {
-            lottoNumbers.add(LottoNumber.of(l));
+    public Lotto() {
+        this(RandomNumberGenerator.getNumbers());
+    }
+
+    public Lotto(List<Integer> numbers) {
+        lottoNumbers = numbers.stream()
+                .map(LottoNumber::of)
+                .sorted(Comparator.comparingInt(LottoNumber::getNumber))
+                .collect(Collectors.toCollection(LinkedHashSet::new));
+
+        if (!isNorMalNumber()) {
+            throw new NumberErrorException();
         }
     }
 
-    public Lotto() {
-        this(new RandomNumberGenerator());
+    private boolean isNorMalNumber() {
+        return lottoNumbers.size() == LOTTO_NUMBER_LENGTH;
     }
 
-    public Lotto(Set<LottoNumber> lottoNumbers) {
-        this.lottoNumbers = lottoNumbers;
-    }
-
-    public boolean isContain(LottoNumber lottoNumber) {
+    public boolean contains(LottoNumber lottoNumber) {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    public LottoDto getLottoData() {
-        return new LottoDto(Collections.unmodifiableSet(lottoNumbers));
+    public Set<LottoNumber> getLottoData() {
+        return Collections.unmodifiableSet(lottoNumbers);
     }
 
     public int matchCount(Lotto lotto) {
         return (int) lottoNumbers
                 .stream()
-                .filter(lotto::isContain)
+                .filter(lotto::contains)
                 .count();
-    }
-
-    public static int getLottoPrice() {
-        return LOTTO_PRICE;
     }
 }

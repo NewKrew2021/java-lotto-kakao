@@ -1,35 +1,36 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import lotto.exception.FailBuyLottoException;
+
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Lottos {
 
     private List<Lotto> lottos;
 
-    public Lottos(List<Lotto> lottos) {
-        this.lottos = Collections.unmodifiableList(lottos);
-    }
-
-    public int getSizeOfLotto() {
-        return lottos.size();
-    }
-
-    public Statistics raffle(WinningLotto winningNumber, LottoNumber bonusNumber) {
-        Map<Rank, Integer> rankingsMap = new TreeMap<>();
-        for (Lotto lotto : lottos) {
-            Rank rank = winningNumber.getRankOfLotto(lotto, bonusNumber);
-            rankingsMap.put(rank, rankingsMap.getOrDefault(rank, 0) + 1);
+    public Lottos(List<List<Integer>> lottos, int randomLottoCount) {
+        if (randomLottoCount < 0) {
+            throw new FailBuyLottoException();
         }
-        return new Statistics(rankingsMap);
-    }
-
-    public LottosDto getLottosData() {
-        return new LottosDto(lottos.stream()
-                .map(Lotto::getLottoData)
+        this.lottos = lottos.stream()
+                .map(Lotto::new)
+                .collect(Collectors.toList());
+        this.lottos.addAll(IntStream.range(0, randomLottoCount)
+                .mapToObj(num -> new Lotto())
                 .collect(Collectors.toList()));
     }
+
+    public Rankings raffle(WinningLotto winningNumber) {
+        return new Rankings(lottos, winningNumber);
+    }
+
+    public List<Set<LottoNumber>> getLottosData() {
+        return lottos.stream()
+                .map(Lotto::getLottoData)
+                .collect(Collectors.toList());
+    }
+
+
 }

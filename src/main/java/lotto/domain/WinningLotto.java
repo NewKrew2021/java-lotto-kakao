@@ -1,24 +1,22 @@
 package lotto.domain;
 
-import lotto.util.LottoNumberGenerator;
-import lotto.util.RandomNumberGenerator;
+import lotto.exception.BonusNumberException;
 
-import java.util.Set;
+import java.util.List;
 
 public class WinningLotto extends Lotto {
-    public WinningLotto(Set<LottoNumber> LottoNumbers) {
-        super(LottoNumbers);
+
+    private final LottoNumber bonusNumber;
+
+    public WinningLotto(List<Integer> lottoNumbers, int bonusNumber) {
+        super(lottoNumbers);
+        if (lottoNumbers.contains(bonusNumber)) {
+            throw new BonusNumberException();
+        }
+        this.bonusNumber = LottoNumber.of(bonusNumber);
     }
 
-    public WinningLotto(LottoNumberGenerator lottoNumberGenerator) {
-        super(lottoNumberGenerator);
-    }
-
-    public WinningLotto() {
-        super(new RandomNumberGenerator());
-    }
-
-    public Rank getRankOfLotto(Lotto lotto, LottoNumber bonusNumber) {
-        return Rank.checkRank(this.matchCount(lotto), lotto.isContain(bonusNumber));
+    public Rank getRankOfLotto(Lotto lotto) {
+        return Rank.findRank(this.matchCount(lotto), lotto.contains(bonusNumber));
     }
 }
