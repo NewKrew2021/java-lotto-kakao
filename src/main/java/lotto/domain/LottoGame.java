@@ -23,12 +23,9 @@ public class LottoGame {
 
     public LottoStatisticDTO checkLotto(WinningNumbers winningNumbers) {
         LottoStatisticDTO responseLottoStatistic = new LottoStatisticDTO();
-
-        StatisticCalculator statCalculator = new StatisticCalculator(
-                userBuyNumbers.checkLottoResult(winningNumbers), money);
-        responseLottoStatistic.setRankCount(statCalculator.getRankCount());
-        responseLottoStatistic.setProfitRate(statCalculator.getProfitRate());
-
+        List<RankState> eachLottoResult = userBuyNumbers.checkLottoResult(winningNumbers);
+        responseLottoStatistic.setRankCount(StatisticCalculator.getRankCount(eachLottoResult));
+        responseLottoStatistic.setProfitRate(StatisticCalculator.getProfitRate(eachLottoResult, money));
         return responseLottoStatistic;
     }
 
