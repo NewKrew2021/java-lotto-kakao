@@ -33,8 +33,7 @@ public class LottoOutputView {
                 .append("개\n");
     }
 
-    public static void printYield(Amount amount, Long sum) {
-        double yield = (double) sum / amount.getAmount();
+    public static void printYield(double yield) {
         System.out.println(String.format("총 수익률은 %.2f입니다.", yield));
     }
 
