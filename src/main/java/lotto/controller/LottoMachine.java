@@ -1,7 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.LottoPaper;
-import lotto.domain.LottoPaperGenerator;
+import lotto.domain.RandomlyGeneratingStrategy;
 import lotto.domain.Ticket;
 import lotto.domain.WinnerBalls;
 import lotto.dto.LottoResult;
@@ -31,17 +31,20 @@ import java.util.HashSet;
  * 그러니 프로그램을 종료시키도록 한다.
  */
 public class LottoMachine {
-    private int userMoney;
+    private int userMoney, countOfPurchase;
     private LottoPaper userLottoPaper;
     private WinnerBalls winnerBalls;
 
     public void inputPrice() {
         userMoney = Input.getPriceFromUser();
-        Output.printCountOfPurchase(userMoney / Format.TICKET_PRICE);
+        countOfPurchase = userMoney / Ticket.TICKET_PRICE; //TODO: 나중에 따로 빼면 좋을듯
+        Output.printCountOfPurchase(countOfPurchase);
     }
 
     public void generateAuto() {
-        userLottoPaper = new LottoPaperGenerator(userMoney).generateAuto();
+        userLottoPaper = LottoPaper.createBy(
+                new RandomlyGeneratingStrategy(countOfPurchase)
+        );
     }
 
     public void outputAboutPurchasedLotto(){
@@ -57,14 +60,5 @@ public class LottoMachine {
     public void outputStatisticsAboutPurchasedLotto() {
         LottoResult result = userLottoPaper.getResultCompareWith(winnerBalls);
         Output.printStatisticsToUser(userMoney, result);
-    }
-
-    public static void main(String[] args) {
-        LottoMachine machine = new LottoMachine();
-        machine.inputPrice();
-        machine.generateAuto();
-        machine.outputAboutPurchasedLotto();
-        machine.inputWinnerInformation();
-        machine.outputStatisticsAboutPurchasedLotto();
     }
 }

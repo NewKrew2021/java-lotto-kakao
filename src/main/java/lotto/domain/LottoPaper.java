@@ -5,16 +5,23 @@ import lotto.dto.LottoResult;
 import lotto.setting.Rank;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoPaper {
     private List<Ticket> tickets;
 
-    public LottoPaper(LottoNumberData request) {
-        tickets = new ArrayList<>();
+    private LottoPaper(List<Ticket> generatedTickets) {
+        tickets = generatedTickets;
+    }
 
-        for (Set<Integer> currentTicketData : request.getNumberData()) {
-            tickets.add(new Ticket(currentTicketData));
-        }
+    public static LottoPaper createBy(GeneratingStrategy strategy){
+        System.out.println("hello");
+        return new LottoPaper(
+                Stream.generate(() -> Ticket.createBy(strategy))
+                        .limit(strategy.getLimit())
+                        .collect(Collectors.toList())
+        );
     }
 
     /* 로또 숫자 정보가 수정되는 것을 막기 위해 정보를 복사하여 전달한다. */

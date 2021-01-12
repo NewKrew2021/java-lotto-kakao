@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.setting.Format;
 import lotto.setting.Rank;
 
 import java.util.HashSet;
@@ -8,17 +7,22 @@ import java.util.Objects;
 import java.util.Set;
 
 public class Ticket {
-    public static final int LOWER_LIMIT_OF_NUMBER = 1;
+    public static final int LOWER_LIMIT_OF_NUMBER = 1; //TODO : Number 객체를 만든후, 이것을 분할해서 소유해줄 수 있도록 하자.
     public static final int UPPER_LIMIT_OF_NUMBER = 45;
-    private static final int TICKET_SIZE = 6;
+    public static final int TICKET_SIZE = 6;
+    public static final int TICKET_PRICE = 1000;
 
     private final Set<Integer> numbers;
 
-    public Ticket(Set<Integer> numbers) {
+    public Ticket(Set<Integer> numbers) { //TODO: 반드시 private으로 바뀌어야 한다.
         if(!isValid(numbers)){
             throw new IllegalArgumentException("유효하지 않은 ticket 값입니다.");
         }
         this.numbers = numbers;
+    }
+
+    public static Ticket createBy(GeneratingStrategy strategy){
+        return new Ticket(strategy.generate());
     }
 
     public boolean isValid(Set<Integer> numbers){
