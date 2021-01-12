@@ -18,10 +18,6 @@ public class WinningNumber {
                 LottoNumberParser.toLottoNumbers(numbersText));
     }
 
-    public Set<LottoNumber> getWinningNumber(){
-        return getWinningNumber();
-    }
-
     public boolean isContain(LottoNumber lottoNumber) {
         return winningNumber.contains(lottoNumber);
     }
