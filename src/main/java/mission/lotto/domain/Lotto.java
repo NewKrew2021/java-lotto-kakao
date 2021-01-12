@@ -14,7 +14,7 @@ public class Lotto implements Comparable<Lotto> {
 
     public Lotto(List<Integer> numbers) {
         Set<Number> lottoNums = numbers.stream()
-                .map(Number::new)
+                .map(Number::of)
                 .collect(Collectors.toSet());
 
         if (checkNumbersLength(lottoNums)) {

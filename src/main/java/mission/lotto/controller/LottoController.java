@@ -2,7 +2,6 @@ package mission.lotto.controller;
 
 import mission.lotto.domain.Number;
 import mission.lotto.domain.*;
-import mission.lotto.util.RandomUtil;
 import mission.lotto.util.Statistics;
 import mission.lotto.view.InputView;
 import mission.lotto.view.OutputView;
@@ -12,41 +11,40 @@ import java.util.Map;
 
 public class LottoController {
 
-    private UserMoney userMoney;
-    private Lottos lottos;
+    public static void main(String[] args) {
+        LottoController lc = new LottoController();
+        UserMoney userMoney;
+        int manualCount;
+        Lottos lottos;
 
-    public void start() {
-        registerUserMoney(InputView.enterUerMoney());
-        buyLottos(new RandomUtil(), userMoney);
-        OutputView.autoBoughtView(lottos);
+        userMoney = lc.registerUserMoney(InputView.enterUerMoney());
+        manualCount = InputView.enterManualCount();
+        lottos = Lottos.buyLottos(manualCount, InputView.enterManualList(manualCount), userMoney);
+        OutputView.boughtLottosView(manualCount, lottos);
 
-        LottoAnswer lottoAnswer = makeLottoAnswer(
+        LottoAnswer lottoAnswer = lc.makeLottoAnswer(
                 InputView.enterLastWeekWinningNumbers(),
                 InputView.enterLastWeekBonusNumber());
 
-        OutputView.resultView(getAllLottoRank(lottoAnswer));
-        OutputView.totalEarningsView(getRateOfProfit(lottoAnswer));
+        OutputView.resultView(lc.getAllLottoRank(lottos, lottoAnswer));
+        OutputView.totalEarningsView(lc.getRateOfProfit(lottos, lottoAnswer, userMoney));
     }
 
-    private void registerUserMoney(int userMoney) {
-        this.userMoney = new UserMoney(userMoney);
-    }
-
-    private void buyLottos(NumGenerator numGenerator, UserMoney userMoney) {
-        this.lottos = Lottos.buyLottos(numGenerator, userMoney);
+    private UserMoney registerUserMoney(int userMoney) {
+        return new UserMoney(userMoney);
     }
 
     private LottoAnswer makeLottoAnswer(List<Integer> sixNumberList, int bonusNumber) {
         return new LottoAnswer(
                 new Lotto(sixNumberList),
-                new Number(bonusNumber));
+                Number.of(bonusNumber));
     }
 
-    private Map<Rank, Integer> getAllLottoRank(LottoAnswer lottoAnswer) {
+    private Map<Rank, Integer> getAllLottoRank(Lottos lottos, LottoAnswer lottoAnswer) {
         return Statistics.getAllLottoRank(lottos, lottoAnswer);
     }
 
-    private float getRateOfProfit(LottoAnswer lottoAnswer) {
+    private float getRateOfProfit(Lottos lottos, LottoAnswer lottoAnswer, UserMoney userMoney) {
         return (float) Statistics.getSumAllWinningMoney(lottos, lottoAnswer) / userMoney.getUserMoney();
     }
 

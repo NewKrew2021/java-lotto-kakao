@@ -1,10 +1,13 @@
 package mission.lotto.domain;
 
+import mission.lotto.util.Random;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class Lottos {
 
@@ -15,9 +18,13 @@ public class Lottos {
         Collections.sort(this.lottos);
     }
 
-    public static Lottos buyLottos(NumGenerator numGenerator, UserMoney userMoney) {
-        return new Lottos(IntStream.range(0, lottoAmount(userMoney))
-                .mapToObj(value -> new Lotto(numGenerator.getSixNumbers()))
+    public static Lottos buyLottos(int manualCount, List<List<Integer>> manualInput, UserMoney userMoney) {
+        int totalQuantity = lottoAmount(userMoney);
+        Stream<Lotto> manualLottos = IntStream.range(0, manualCount)
+                .mapToObj(value -> new Lotto(manualInput.get(value)));
+        Stream<Lotto> autoLottos = IntStream.range(0, totalQuantity - manualCount)
+                .mapToObj(value -> new Lotto(Random.getSixNumbers()));
+        return new Lottos(Stream.concat(manualLottos, autoLottos)
                 .collect(Collectors.toList()));
     }
 
