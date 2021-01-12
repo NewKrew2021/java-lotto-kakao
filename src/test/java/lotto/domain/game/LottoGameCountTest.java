@@ -3,6 +3,7 @@ package lotto.domain.game;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static lotto.domain.game.LottoGameCount.LOTTO_MANUAL_EXCEPTION_MESSAGE;
 import static lotto.domain.game.LottoGameCount.LOTTO_MONEY_EXCEPTION_MESSAGE;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -45,6 +46,61 @@ public class LottoGameCountTest {
                 // when
                 .isThrownBy(() -> new LottoGameCount(money))
                 .withMessage(LOTTO_MONEY_EXCEPTION_MESSAGE);
+    }
+
+    @DisplayName("게임 금액이 투입된 상태로 수동 티켓 개수가 들어오면, 수동 티켓을 입력된 숫자만큼 생성한다.")
+    @Test
+    void createManualTickets() {
+        //given
+        int money = 14000;
+        int numOfManualTickets = 5;
+        //when
+        LottoGameCount lottoGameCount = new LottoGameCount(money, numOfManualTickets);
+
+        //then
+        assertThat(lottoGameCount.getManualTicketCount()).isEqualTo(numOfManualTickets);
+    }
+
+    @DisplayName("게임 금액이 투입된 상태로 수동 티켓 개수가 게임 횟수보다 많이 들어오면, 에러를 출력한다.")
+    @Test
+    void validManualTickets1() {
+        //given
+        int money = 14000;
+        int numOfManualTickets = 15;
+        //then
+        assertThatIllegalArgumentException()
+                // when
+                .isThrownBy(() -> new LottoGameCount(money, numOfManualTickets))
+                .withMessage(LOTTO_MANUAL_EXCEPTION_MESSAGE);
+    }
+
+    @DisplayName("게임 금액이 투입된 상태로 수동 티켓 개수가 음수가 들어오면, 에러를 출력한다.")
+    @Test
+    void validManualTickets2() {
+        //given
+        int money = 14000;
+        int numOfManualTickets = -1;
+        //then
+        assertThatIllegalArgumentException()
+                // when
+                .isThrownBy(() -> new LottoGameCount(money, numOfManualTickets))
+                .withMessage(LOTTO_MANUAL_EXCEPTION_MESSAGE);
+    }
+
+    @DisplayName("게임 금액이 투입된 상태로 수동 티켓 개수가 들어온 상태에서, 게임이 수동 티켓만큼 진행되었을 경우 수동 티켓 횟수를 끝낸다.")
+    @Test
+    void useManualTickets() {
+        //given
+        int money = 14000;
+        int numOfManualTickets = 5;
+        LottoGameCount lottoGameCount = new LottoGameCount(money, numOfManualTickets);
+
+        //when
+        for (int i = 0; i < 5; i++) {
+            lottoGameCount.useTicket();
+        }
+        //then
+        assertThat(lottoGameCount.isManualTicketRemain()).isEqualTo(false);
     }
 
 }

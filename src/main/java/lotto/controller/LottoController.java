@@ -13,26 +13,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
-    private NumberGenerateStrategy numberGenerateStrategy;
     private List<LottoNumbers> lottoTickets = new ArrayList<>();
     private LottoGameCount lottoGameCount;
     private WinnerTicket winnerTicket;
     private LottoRankingCount lottoRankingCount;
 
-    private LottoController(NumberGenerateStrategy numberGenerateStrategy, int inputMoney) {
-        this.numberGenerateStrategy = numberGenerateStrategy;
-        this.lottoGameCount = new LottoGameCount(inputMoney);
+    public LottoController(int inputMoney, int numOfManualNumbers) {
+        this.lottoGameCount = new LottoGameCount(inputMoney, numOfManualNumbers);
     }
 
-    public static LottoController of(NumberGenerateStrategy numberGenerateStrategy, int lottoGameCount) {
-        return new LottoController(numberGenerateStrategy, lottoGameCount);
-    }
-
-    public LottoNumbersDto gamePlay() {
+    public void makeTicketByStrategy(NumberGenerateStrategy numberGenerateStrategy) {
         LottoNumbers lottoTicket = LottoNumbers.from(numberGenerateStrategy);
         lottoTickets.add(lottoTicket);
         lottoGameCount.useTicket();
-        return LottoNumbersDto.from(lottoTicket);
     }
 
     public void setWinnerTicket(List<Integer> winnerNumbers, int bonusNumber) {
@@ -41,6 +34,10 @@ public class LottoController {
 
     public boolean isTicketRemain() {
         return lottoGameCount.isTicketRemain();
+    }
+
+    public boolean isManualTicketRemain() {
+        return lottoGameCount.isManualTicketRemain();
     }
 
     public LottoRankingCountDto getRankingCountDto() {
@@ -52,4 +49,19 @@ public class LottoController {
         return LottoRevenue.of(lottoRankingCount, lottoGameCount).calculateRevenueRate();
     }
 
+    public int getNumOfAutoTickets() {
+        return lottoGameCount.getAutoTicketCount();
+    }
+
+    public int getNumOfAllTickets() {
+        return lottoGameCount.getTicketCount();
+    }
+
+    public int getNumOfManualTickets() {
+        return lottoGameCount.getManualTicketCount();
+    }
+
+    public List<Integer> getSortedLottoNumbers(int i) {
+        return LottoNumbersDto.from(lottoTickets.get(i)).getSortedLottoNumbers();
+    }
 }
