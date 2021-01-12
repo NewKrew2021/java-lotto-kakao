@@ -7,28 +7,33 @@ import java.util.stream.IntStream;
 
 public class RandomGenerateStrategy implements GenerateStrategy {
 
+    private static final List<Integer> numbers = new ArrayList<>();
+
+    static {
+        IntStream.rangeClosed(LottoNumber.MIN_LOTTO_NUMBER, LottoNumber.MAX_LOTTO_NUMBER).forEach(numbers::add);
+    }
+
     @Override
     public LottoNumbers generate() {
         return generateRandomNumbers();
     }
 
     private LottoNumbers generateRandomNumbers() {
-        return new LottoNumbers(sortNumbers(sliceNumbers(shuffleNumbers())));
+        shuffleNumbers();
+        return new LottoNumbers(sortNumbers());
     }
 
-    private List<Integer> shuffleNumbers() {
-        List<Integer> numbers = new ArrayList<>();
-        IntStream.rangeClosed(1, 45).forEach(numbers::add);
+    private void shuffleNumbers() {
         Collections.shuffle(numbers);
-        return numbers;
     }
 
-    private List<Integer> sliceNumbers(List<Integer> numbers) {
-        return numbers.subList(0, 6);
+    private List<Integer> sortNumbers() {
+        List<Integer> subNumbers = sliceNumbers();
+        Collections.sort(subNumbers);
+        return subNumbers;
     }
 
-    private List<Integer> sortNumbers(List<Integer> numbers) {
-        Collections.sort(numbers);
-        return numbers;
+    private List<Integer> sliceNumbers() {
+        return numbers.subList(0, LottoNumbers.POSSIBLE_NUMBERS_SIZE);
     }
 }

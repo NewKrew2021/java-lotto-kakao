@@ -8,8 +8,8 @@ import java.util.Objects;
 
 public class LottoNumber {
 
-    private static final int MAX_LOTTO_NUMBER = 45;
-    private static final int MIN_LOTTO_NUMBER = 1;
+    static final int MAX_LOTTO_NUMBER = 45;
+    static final int MIN_LOTTO_NUMBER = 1;
     private static final String RANGE_EXCEPTION_MESSAGE = "로또 번호는 "+MIN_LOTTO_NUMBER+"부터 "
                                                           +MAX_LOTTO_NUMBER+"까지의 숫자입니다.";
     private static final Map<Integer, LottoNumber> lottoNumberCACHE = new HashMap<>();
