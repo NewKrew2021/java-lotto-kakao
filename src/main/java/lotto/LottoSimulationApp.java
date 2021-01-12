@@ -9,15 +9,15 @@ import lotto.view.OutputView;
 public class LottoSimulationApp {
     public static void main(String[] args) {
         Price price = new Price(InputView.getPrice());
-        OutputView.printLottoCount(price);
+        int manual = InputView.getManual(price.count());
 
-        Lottos lottos = Lottos.getInstance(price.count());
-        OutputView.printLottos(lottos);
+        Lottos manualLottos = new Lottos(InputView.getManualLottos(manual));
+        Lottos autoLottos = Lottos.getInstance(price.count() - manual);
+        OutputView.printLottos(manualLottos, autoLottos);
 
         String text = InputView.getText();
         String bonus = InputView.getBonus();
-
-        LottoSimulation lotto = new LottoSimulation(price, text, bonus, lottos);
+        LottoSimulation lotto = new LottoSimulation(price, text, bonus, manualLottos.merge(autoLottos));
 
         lotto.confirm();
         OutputView.printResult(lotto);
