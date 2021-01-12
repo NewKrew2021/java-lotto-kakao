@@ -39,26 +39,26 @@ public class LottoNumbersTest {
 
     @Test
     public void containTrue() {
-        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1,2,3,4,5,6));
+        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertThat(lottoNumbers.isContains(LottoNumber.of(3))).isTrue();
     }
 
     @Test
     public void containFalse() {
-        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1,2,3,4,5,6));
+        LottoNumbers lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
         assertThat(lottoNumbers.isContains(LottoNumber.of(7))).isFalse();
     }
 
     @Test
     public void matchCount() {
-        LottoNumbers lottoNumbers1 = new LottoNumbers(Arrays.asList(1,2,3,4,5,6));
-        LottoNumbers lottoNumbers2 = new LottoNumbers(Arrays.asList(3,4,5,6,7,8));
+        LottoNumbers lottoNumbers1 = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumbers lottoNumbers2 = new LottoNumbers(Arrays.asList(3, 4, 5, 6, 7, 8));
         assertThat(lottoNumbers1.getMatchCountWith(lottoNumbers2)).isEqualTo(4);
     }
 
     @Test
     public void convertToString() {
-        LottoNumbers lottoNumbers1 = new LottoNumbers(Arrays.asList(1,2,3,4,5,6));
-        assertThat(lottoNumbers1.convertToString()).isEqualTo(Arrays.asList("1","2","3","4","5","6"));
+        LottoNumbers lottoNumbers1 = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThat(lottoNumbers1.convertToString()).isEqualTo(Arrays.asList("1", "2", "3", "4", "5", "6"));
     }
 }
