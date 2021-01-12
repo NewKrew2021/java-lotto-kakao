@@ -1,19 +1,21 @@
 package mission.lotto.domain;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Number {
 
     public static final int MIN_NUMBER_VALUE = 1;
     public static final int MAX_NUMBER_VALUE = 45;
-    private static final Map<Integer, Number> numberPool = new HashMap<>();
+    private static final Map<Integer, Number> numberPool;
 
     static {
-        for (int i = MIN_NUMBER_VALUE; i <= MAX_NUMBER_VALUE; i++) {
-            numberPool.put(i, new Number(i));
-        }
+        numberPool = IntStream.range(MIN_NUMBER_VALUE, MAX_NUMBER_VALUE + 1)
+                .mapToObj(Number::new)
+                .collect(Collectors.toMap(Number::getNumber, Function.identity()));
     }
 
     private final int number;
@@ -31,6 +33,10 @@ public class Number {
 
     private static boolean isInvalidNumber(int number) {
         return number > MAX_NUMBER_VALUE || number < MIN_NUMBER_VALUE;
+    }
+
+    private int getNumber() {
+        return number;
     }
 
     @Override
