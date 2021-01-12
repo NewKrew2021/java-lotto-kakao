@@ -18,6 +18,10 @@ public class LottoUI {
         return scanner.nextInt();
     }
 
+    public String getLottoFromUser() {
+        return scanner.nextLine();
+    }
+
     public void printLottos(LottosDto lottosDto) {
         System.out.println(lottosDto.getLottoDtos().size() + "개를 구매했습니다.");
         System.out.println(lottosDto);

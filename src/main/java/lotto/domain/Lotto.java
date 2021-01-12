@@ -14,8 +14,8 @@ public class Lotto {
 
     public Lotto(LottoNumberGenerator lottoNumberGenerator) {
         lottoNumbers = new TreeSet<>(Comparator.comparingInt(LottoNumber::getNumber));
-        for (int l : lottoNumberGenerator.getNumbers()) {
-            lottoNumbers.add(LottoNumber.of(l));
+        for (LottoNumber lottoNumber : lottoNumberGenerator.getNumbers()) {
+            lottoNumbers.add(lottoNumber);
         }
     }
 

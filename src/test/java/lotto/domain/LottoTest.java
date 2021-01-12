@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.util.LottoNumberParser;
 import lotto.util.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -8,7 +9,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 
-import java.util.Set;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -18,7 +18,7 @@ public class LottoTest {
 
     @BeforeEach
     void setUp(){
-        lotto = new Lotto(() -> Set.of(1, 2, 3, 4, 5, 6));
+        lotto = new Lotto(() -> LottoNumberParser.toLottoNumbers("1, 2, 3, 4, 5, 6"));
     }
 
     @Test

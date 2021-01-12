@@ -27,7 +27,7 @@ public class LottoController {
 
     public void buyLotto() {
         money = new Money(lottoUI.getMoneyFromUser());
-        lottos = Lottos.fromMoney(money, lottoNumberGenerator);
+//        lottos = Lottos.fromMoney(money, lottoNumberGenerator);
         lottoUI.printLottos(LottosDto.from(lottos));
     }
 
