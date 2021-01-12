@@ -1,13 +1,14 @@
 package lotto.domain;
 
 
-import lotto.util.LottoNumberParser;
 import lotto.util.Rank;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,8 +19,12 @@ public class LottosTest {
     @BeforeEach
     void setUp() {
         lottos = new Lottos(Arrays.asList(
-                new Lotto(() -> LottoNumberParser.toLottoNumbers("1, 2, 3, 4, 5, 6")),
-                new Lotto(() -> LottoNumberParser.toLottoNumbers("1, 2, 3, 10, 11, 12"))
+                Lotto.autoGenerate(() -> Set.of(1, 2, 3, 4, 5, 6).stream()
+                        .map(LottoNumber::of)
+                        .collect(Collectors.toSet())),
+                Lotto.autoGenerate(() -> Set.of(1, 2, 3, 10, 11, 12).stream()
+                        .map(LottoNumber::of)
+                        .collect(Collectors.toSet()))
         ));
     }
 
