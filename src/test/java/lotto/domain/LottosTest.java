@@ -19,10 +19,10 @@ public class LottosTest {
     @BeforeEach
     void setUp() {
         lottos = new Lottos(Arrays.asList(
-                Lotto.autoGenerate(() -> Set.of(1, 2, 3, 4, 5, 6).stream()
+                Lotto.of(Set.of(1, 2, 3, 4, 5, 6).stream()
                         .map(LottoNumber::of)
                         .collect(Collectors.toSet())),
-                Lotto.autoGenerate(() -> Set.of(1, 2, 3, 10, 11, 12).stream()
+                Lotto.of(Set.of(1, 2, 3, 10, 11, 12).stream()
                         .map(LottoNumber::of)
                         .collect(Collectors.toSet()))
         ));

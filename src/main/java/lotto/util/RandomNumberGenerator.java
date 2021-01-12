@@ -4,7 +4,7 @@ import lotto.domain.LottoNumber;
 
 import java.util.*;
 
-public class RandomNumberGenerator implements LottoNumberGenerator {
+public class RandomNumberGenerator {
 
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final int MAX_LOTTO_NUMBER = 45;
@@ -18,7 +18,7 @@ public class RandomNumberGenerator implements LottoNumberGenerator {
         }
     }
 
-    public Set<LottoNumber> getNumbers() {
+    public static Set<LottoNumber> generate() {
         Collections.shuffle(allNumbers);
         return new HashSet<>(allNumbers.subList(0, NUM_OF_NUMBERS));
     }
