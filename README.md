@@ -51,8 +51,10 @@
 - LottoTicket : 로또 티켓 객체
 - Money : Input 돈 객체
 - StatisticsResult : 매칭 결과 객체
-- WinningLottoTicket : 당첨 로또 티켓 객체
+- WinningLottoNos : 당첨 로또 티켓 객체
 - LottoLogic : 로또 구입, 당첨로또와 매칭
+- AutoBuyingStrategy : 로또 자동 구입 객체
+- BuyingStrategy : 로또 구입 전략패턴 인터페이스
 
 ### view
 - LottoInputView : Input UI view
