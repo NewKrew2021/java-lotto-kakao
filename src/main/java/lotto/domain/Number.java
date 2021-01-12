@@ -31,6 +31,16 @@ public class Number implements Comparable<Number> {
                 .orElseThrow(() -> new IllegalArgumentException(WRONG_NUMBER_ERROR + number));
     }
 
+    public static Number of(String number) {
+        Number returnNumber = null;
+        try {
+            returnNumber = of(Integer.parseInt(number));
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(WRONG_NUMBER_ERROR + number);
+        }
+        return returnNumber;
+    }
+
     public static List<Number> randomNumbers(int count) {
         Collections.shuffle(numberPool);
         return numberPool.subList(0, count);

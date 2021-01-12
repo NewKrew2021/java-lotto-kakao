@@ -34,6 +34,10 @@ public class LottoGameInputView {
         return rawNumbers;
     }
 
+    public static String inputManualTicket() {
+        return scan.nextLine();
+    }
+
     public static String inputWinnerNumbers() {
         System.out.println(ASK_WINNER_NUMBER_SENTENCE);
         String numbers = scan.nextLine();
