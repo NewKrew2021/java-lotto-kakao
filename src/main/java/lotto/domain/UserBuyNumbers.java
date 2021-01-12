@@ -19,7 +19,7 @@ public class UserBuyNumbers {
     public List<RankState> checkLottoResult(WinningNumbers winningNumbers) {
         List<RankState> rankStates = new ArrayList<>();
         for (LottoNumbers lottoNumbers : this.userBuyNumbers) {
-            int matchCount = lottoNumbers.getMatchCountWith(winningNumbers.getWinNumbers());
+            int matchCount = lottoNumbers.getMatchCount(winningNumbers.getWinNumbers());
             boolean bonusMatched = lottoNumbers.isContains(winningNumbers.getBonusNumber());
             rankStates.add(RankState.rank(matchCount, bonusMatched));
         }

@@ -40,7 +40,7 @@ public class LottoNumbers {
         return lottoNumbers.stream().distinct().count() == lottoNumbers.size();
     }
 
-    public int getMatchCountWith(LottoNumbers lottoNumbers) {
+    public int getMatchCount(LottoNumbers lottoNumbers) {
         int count = 0;
         for (LottoNumber lottoNumber : this.lottoNumbers) {
             if (lottoNumbers.isContains(lottoNumber)) {

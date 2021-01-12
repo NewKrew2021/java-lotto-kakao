@@ -17,12 +17,12 @@ public class Money {
     }
 
     private void validateMoney(int money) {
-        if (!isSufficient(money)) {
+        if (!haveSufficientMoney(money)) {
             throw new InsufficientMoneyException(INSUFFICIENT_MONEY_EXCEPTION_MESSAGE);
         }
     }
 
-    private boolean isSufficient(int money) {
+    private boolean haveSufficientMoney(int money) {
         return money >= SINGLE_PRICE;
     }
 

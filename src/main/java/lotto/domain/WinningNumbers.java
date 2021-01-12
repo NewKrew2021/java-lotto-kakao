@@ -19,12 +19,12 @@ public class WinningNumbers {
     }
 
     private void validateWinAndBonusNumbers(List<Integer> winNumbers, int bonusNumber) {
-        if (hasDuplicationBetween(winNumbers, bonusNumber)) {
+        if (haveDuplicationBetween(winNumbers, bonusNumber)) {
             throw new BonusDuplicateException(DUPLICATE_BONUS_EXCEPTION_MESSAGE);
         }
     }
 
-    private boolean hasDuplicationBetween(List<Integer> winNumbers, int bonusNumber) {
+    private boolean haveDuplicationBetween(List<Integer> winNumbers, int bonusNumber) {
         return winNumbers.contains(bonusNumber);
     }
 

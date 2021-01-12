@@ -12,13 +12,13 @@ public class LottoNumber {
     private static final int MIN_LOTTO_NUMBER = 1;
     private static final String RANGE_EXCEPTION_MESSAGE = "로또 번호는 "+MIN_LOTTO_NUMBER+"부터 "
                                                           +MAX_LOTTO_NUMBER+"까지의 숫자입니다.";
-    private static Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
+    private static final Map<Integer, LottoNumber> lottoNumberCACHE = new HashMap<>();
 
     private final int lottoNumber;
 
     static {
         for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
-            lottoNumbers.put(i, new LottoNumber(i));
+            lottoNumberCACHE.put(i, new LottoNumber(i));
         }
     }
 
@@ -27,8 +27,8 @@ public class LottoNumber {
     }
 
     public static LottoNumber of(int number) {
-        LottoNumber lottoNumber = lottoNumbers.get(number);
-        if (lottoNumber == null) {
+        LottoNumber lottoNumber = lottoNumberCACHE.get(number);
+        if (Objects.isNull(lottoNumber)) {
             throw new NumberRangeException(RANGE_EXCEPTION_MESSAGE);
         }
         return lottoNumber;
