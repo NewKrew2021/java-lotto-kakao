@@ -1,8 +1,5 @@
 package lotto.domain;
 
-import lotto.utils.Result;
-import lotto.utils.StringUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +11,7 @@ public class LottoSimulation {
 
     public LottoSimulation(Price price, String text, String bonusBall, Lottos lottos) {
         this.price = price;
-        this.winningLotto = initWinningLotto(StringUtils.splitDigit(text), bonusBall);
+        this.winningLotto = initWinningLotto(text.split(", "), bonusBall);
         this.lottos = lottos;
     }
 
@@ -25,11 +22,11 @@ public class LottoSimulation {
         this.winningLotto = null;
     }
 
-    private WinningLotto initWinningLotto(String[] digits, String bonusBall) {
+    private WinningLotto initWinningLotto(String[] numbers, String bonusBall) {
         List<LottoNumber> lotto = new ArrayList<>();
 
-        for (String digit : digits) {
-            lotto.add(new LottoNumber(Integer.parseInt(digit.trim())));
+        for (String number : numbers) {
+            lotto.add(new LottoNumber(Integer.parseInt(number)));
         }
 
         return new WinningLotto(new Lotto(lotto), new LottoNumber(Integer.parseInt(bonusBall)));
