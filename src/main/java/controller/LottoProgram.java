@@ -31,7 +31,7 @@ public class LottoProgram {
     }
 
     public int calculateBuyLottoCount(int buyAmount) {
-        if(buyAmount < 1000){
+        if(buyAmount < Lotto.LOTTO_PRICE){
             throw new IllegalArgumentException("구입 금액이 1000원 이상이어야 합니다.");
         }
         return buyAmount / Lotto.LOTTO_PRICE;
