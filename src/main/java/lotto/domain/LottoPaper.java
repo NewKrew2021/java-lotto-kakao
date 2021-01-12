@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 public class LottoPaper {
     private List<Ticket> tickets;
 
-    public LottoPaper(GeneratingStrategy strategy){
+    public LottoPaper(GeneratingStrategy strategy) {
         tickets = Stream.generate(() -> new Ticket(strategy))
                 .limit(strategy.getLimit())
                 .collect(Collectors.toList());

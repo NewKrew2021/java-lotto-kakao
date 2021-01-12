@@ -17,7 +17,7 @@ public class WinnerBalls {
         this.bonusBall = bonusBall;
     }
 
-    public static boolean isValid(List<Integer> initialWinningNumbers, int bonusBall){
+    public static boolean isValid(List<Integer> initialWinningNumbers, int bonusBall) {
         if(WINNING_NUMBER_SIZE != initialWinningNumbers.size()){
             return false;
         }
@@ -35,7 +35,7 @@ public class WinnerBalls {
         return true;
     }
 
-    private static boolean existInvalidNumberIn(Set<Integer> numbers){
+    private static boolean existInvalidNumberIn(Set<Integer> numbers) {
         boolean result = false;
         for (int number : numbers) {
             //한번이라도 invalid number가 발생하면, true를 or한다. 따라서 result는 true가 된다.
@@ -52,7 +52,7 @@ public class WinnerBalls {
                 .count();
     }
 
-    public int getBonusBall(){
+    public int getBonusBall() {
         return bonusBall;
     }
 }

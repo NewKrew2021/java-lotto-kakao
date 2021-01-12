@@ -29,7 +29,7 @@ public class LottoPaperTest {
     LottoPaper testPaper;
 
     @BeforeEach
-    public void testPaperCreate(){
+    public void testPaperCreate() {
         testPaper = new LottoPaper (
                 new ManuallyGeneratingStrategy(
                         testInputNumberSets
@@ -39,7 +39,7 @@ public class LottoPaperTest {
 
     @DisplayName("객체 생성 테스트")
     @Test
-    public void createTest(){
+    public void createTest() {
         Assertions.assertThatCode(
                 () -> {
                     new LottoPaper(
@@ -53,7 +53,7 @@ public class LottoPaperTest {
 
     @DisplayName("객체가 자신이 가지고 있는 정보를 바탕으로 적절한 LottoNumberData를 반환하는지 검사")
     @Test
-    public void getLottoNumberDataTest(){
+    public void getLottoNumberDataTest() {
         LottoNumberData lottoNumberData = testPaper.getLottoNumberData();
         assertThat(lottoNumberData).isEqualTo(
                 new LottoNumberData(testInputNumberSets)
@@ -63,7 +63,7 @@ public class LottoPaperTest {
     @DisplayName("미리 준비해둔 Paper와 당첨정보 test case를 바탕으로 일치하는 결과가 나오는지 테스트")
     @ParameterizedTest
     @MethodSource("providePaperAndResult")
-    public void getResultCompareWithTest(List<Set<Integer>> dataForPaper, WinnerBalls winnerBalls, List<Rank> lottoResult){
+    public void getResultCompareWithTest(List<Set<Integer>> dataForPaper, WinnerBalls winnerBalls, List<Rank> lottoResult) {
         LottoPaper testPaper = new LottoPaper(
                 new ManuallyGeneratingStrategy(dataForPaper)
         );
@@ -78,7 +78,7 @@ public class LottoPaperTest {
 
     // 너무 코드가 길어져서 당황스럽지만,,, 그래도 이 부분을 테스트 하지 않고 넘어가면,
     // 나중에 에러가 발생했을때, 더 시간을 많이 쓸것 같아서 넣었습니다.
-    private static Stream<Arguments> providePaperAndResult(){
+    private static Stream<Arguments> providePaperAndResult() {
         return Stream.of(
 
                 /* test case #1 */

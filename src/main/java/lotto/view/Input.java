@@ -25,7 +25,7 @@ public class Input {
         return CustomTypeCasting.stringToIntegersUsingParsing(scanner.nextLine(), ",");
     }
 
-    public static int getBonusBallFromUser(){
+    public static int getBonusBallFromUser() {
         System.out.println("보너스 볼을 입력해주세요.");
         return CustomTypeCasting.stringToInteger(scanner.nextLine());
     }

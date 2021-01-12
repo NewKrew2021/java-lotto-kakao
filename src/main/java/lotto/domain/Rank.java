@@ -34,11 +34,11 @@ public enum Rank {
               .orElse(OUT);
    }
 
-   private int getMatchCount(){
+   private int getMatchCount() {
       return matchCount;
    }
 
-   public long getPrize(){
+   public long getPrize() {
       return prize;
    }
 }

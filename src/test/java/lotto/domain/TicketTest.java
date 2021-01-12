@@ -32,7 +32,7 @@ public class TicketTest {
         assertThat(testTicket.isContain(testBall)).isEqualTo(result);
     }
 
-    private static Stream<Arguments> provideInputBallAndResult(){
+    private static Stream<Arguments> provideInputBallAndResult() {
         return Stream.of(
                 Arguments.of(1, true),
                 Arguments.of(2, true),
@@ -43,7 +43,7 @@ public class TicketTest {
 
     @DisplayName("Ticket 객체의 값을 가져오는 것을 테스트")
     @Test
-    public void getNumberDataTest(){
+    public void getNumberDataTest() {
         assertThat(testTicket.getNumberData()).isEqualTo(
                 new HashSet<Integer>(
                         Arrays.asList( 1, 2, 10, 30, 44, 45 )

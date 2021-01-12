@@ -18,12 +18,12 @@ public class CustomTypeCastingTest {
     @DisplayName("전달받은 string을 split한후, 숫자리스트로 반환받는 기능을 테스트")
     @ParameterizedTest()
     @MethodSource("provideStringAndInteger")
-    public void stringToIntegersUsingParsing(String testString, List<Integer> integers){
+    public void stringToIntegersUsingParsing(String testString, List<Integer> integers) {
         assertThat(CustomTypeCasting.stringToIntegersUsingParsing(testString, ","))
                 .isEqualTo(integers);
     }
 
-    private static Stream<Arguments> provideStringAndInteger(){
+    private static Stream<Arguments> provideStringAndInteger() {
         return Stream.of(
                 Arguments.of("1, 2, 3, 4, 5, 6", new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))),
                 Arguments.of("1, 2 , 3, 4, 5, 6", new ArrayList<>(Arrays.asList(1, 2, 3, 4, 5, 6))),

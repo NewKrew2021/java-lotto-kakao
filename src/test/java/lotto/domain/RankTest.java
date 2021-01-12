@@ -17,7 +17,7 @@ public class RankTest {
     @DisplayName("matchCount와 보너스볼 일치여부를 받아 랭크를 반환하는 기능 테스트")
     @ParameterizedTest
     @MethodSource("provideMatchCountAndMatchBonusBallAndRank")
-    public void getRankArccordingToTest(int matchCount, boolean matchBonusBall, Rank rank){
+    public void getRankArccordingToTest(int matchCount, boolean matchBonusBall, Rank rank) {
         assertThat(
                 Rank.getRankAccordingTo(
                         matchCount, matchBonusBall
@@ -25,7 +25,7 @@ public class RankTest {
         ).isEqualTo(rank);
     }
 
-    private static Stream<Arguments> provideMatchCountAndMatchBonusBallAndRank(){
+    private static Stream<Arguments> provideMatchCountAndMatchBonusBallAndRank() {
         return Stream.of(
                 Arguments.of(6, false, Rank.FIRST),
                 Arguments.of(5, true, Rank.SECOND),

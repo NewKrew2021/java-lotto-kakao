@@ -3,26 +3,26 @@ package lotto.domain;
 import java.util.*;
 
 public class LottoResult {
-    private Map<Rank, Integer> ranks = new HashMap<Rank, Integer>();
+    private final Map<Rank, Integer> ranks = new HashMap<>();
 
-    public LottoResult(){
+    public LottoResult() {
         Arrays.stream(Rank.values()).forEach(rank -> ranks.put(rank, 0));
     }
 
-    public void putRank(Rank rank){
+    public void putRank(Rank rank) {
         ranks.put(rank, ranks.get(rank) + 1);
     }
 
-    public int getCountOf(Rank rank){
+    public int getCountOf(Rank rank) {
         return ranks.get(rank);
     }
 
-    public double getRate(){
+    public double getRate() {
         long userMoney = Ticket.TICKET_PRICE * getCountOfAllRecoredRank();
         return (double)getSumOfPrizes() / userMoney;
     }
 
-    private long getCountOfAllRecoredRank(){
+    private long getCountOfAllRecoredRank() {
         int countSum = 0;
         for(Rank rank : Rank.values()){
             countSum += getCountOf(rank);

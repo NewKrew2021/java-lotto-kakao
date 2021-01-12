@@ -12,7 +12,7 @@ import java.util.Set;
 
 public class Output {
 
-    public static void printCountOfPurchase(long count){
+    public static void printCountOfPurchase(long count) {
         System.out.println(count + "개를 구매했습니다.");
     }
 

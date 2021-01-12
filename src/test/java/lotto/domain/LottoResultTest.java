@@ -20,7 +20,7 @@ public class LottoResultTest {
 
     @DisplayName("랭크를 하나 저장하고, 그 값이 반영되었는지 확인한다.")
     @Test
-    public void putRankAndGetCountOfTest(){
+    public void putRankAndGetCountOfTest() {
         LottoResult testResult = new LottoResult();
         testResult.putRank(Rank.FIRST);
         assertThat(testResult.getCountOf(Rank.FIRST)).isEqualTo(1);

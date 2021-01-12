@@ -24,7 +24,7 @@ public class ManuallyGeneratingStrategyTest {
 
     @DisplayName("객체 생성 테스트")
     @Test
-    public void create(){
+    public void create() {
         Assertions.assertThatCode(
                 () -> new ManuallyGeneratingStrategy(testInputNumberSets)
         ).doesNotThrowAnyException();
@@ -32,7 +32,7 @@ public class ManuallyGeneratingStrategyTest {
 
     @DisplayName("generate를 정상횟수만큼 실행하였을때, original과 같은지 테스트한다.")
     @Test
-    public void generateTest(){
+    public void generateTest() {
         ManuallyGeneratingStrategy strategy = new ManuallyGeneratingStrategy(testInputNumberSets);
         List<Set<Integer>> outputNumberSets = new ArrayList<>();
 
@@ -45,7 +45,7 @@ public class ManuallyGeneratingStrategyTest {
 
     @DisplayName("generate를 주어진 입력보다 많이 실행하였을때 예외가 발생하는지 테스트한다.")
     @Test
-    public void IllegalGenerateTest(){
+    public void IllegalGenerateTest() {
         ManuallyGeneratingStrategy strategy = new ManuallyGeneratingStrategy(testInputNumberSets);
 
         for(int i = 0; i < testInputNumberSets.size(); i++){
@@ -62,7 +62,7 @@ public class ManuallyGeneratingStrategyTest {
 
     @DisplayName("generate를 할 수 있는 limit count를 확인한다.")
     @Test
-    public void getLimitTest(){
+    public void getLimitTest() {
         ManuallyGeneratingStrategy strategy = new ManuallyGeneratingStrategy(testInputNumberSets);
         assertThat(strategy.getLimit()).isEqualTo(testInputNumberSets.size());
     }

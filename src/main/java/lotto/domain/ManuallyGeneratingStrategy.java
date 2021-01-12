@@ -10,20 +10,20 @@ public class ManuallyGeneratingStrategy implements GeneratingStrategy {
     private int currentGenerationPosition = 0;
 
     /* 값 복사 */
-    public ManuallyGeneratingStrategy(List<Set<Integer>> inputNumberSets){
+    public ManuallyGeneratingStrategy(List<Set<Integer>> inputNumberSets) {
         for (Set<Integer> inputNumberSet : inputNumberSets) {
             numberSets.add(new HashSet<>(inputNumberSet));
         }
     }
 
-    public Set<Integer> generate(){
-        if(numberSets.size() <= currentGenerationPosition){
+    public Set<Integer> generate() {
+        if(numberSets.size() <= currentGenerationPosition) {
             throw new ArrayIndexOutOfBoundsException("입력보다 더 많이 generate했습니다.");
         }
         return numberSets.get(currentGenerationPosition++);
     }
 
-    public int getLimit(){
+    public int getLimit() {
         return numberSets.size();
     }
 }

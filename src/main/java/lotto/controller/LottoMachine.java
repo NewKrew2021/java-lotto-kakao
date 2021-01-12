@@ -36,7 +36,7 @@ public class LottoMachine {
 
     public void inputPrice() {
         userMoney = Input.getPriceFromUser();
-        countOfPurchase = userMoney / Ticket.TICKET_PRICE; //TODO: 나중에 따로 빼면 좋을듯
+        countOfPurchase = userMoney / Ticket.TICKET_PRICE;
         Output.printCountOfPurchase(countOfPurchase);
     }
 
@@ -46,11 +46,11 @@ public class LottoMachine {
         );
     }
 
-    public void outputAboutPurchasedLotto(){
+    public void outputAboutPurchasedLotto() {
         Output.printPurchasedLottoToUser(userLottoPaper);
     }
 
-    public void inputWinnerInformation(){
+    public void inputWinnerInformation() {
         List<Integer> winningNumbers;
         int bonusBall;
         boolean retry = false;

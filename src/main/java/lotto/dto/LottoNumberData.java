@@ -20,7 +20,7 @@ public class LottoNumberData {
         return copiedNumbers;
     }
 
-    private Set<Integer> copyingLine(Set<Integer> currentLine){
+    private Set<Integer> copyingLine(Set<Integer> currentLine) {
         return new HashSet<>(currentLine);
     }
 
