@@ -39,12 +39,4 @@ public class PurchaseInformationTest {
         assertThatThrownBy(() -> new PurchaseInformation(3000, 4))
                 .isInstanceOf(IllegalArgumentException.class);
     }
-
-    @ParameterizedTest
-    @CsvSource({"1500,1000", "11500,11000", "51300,51000"})
-    @DisplayName("실 구매 금액 테스트")
-    void purchasedMoneyTest(int pay, int realPay) {
-        assertThat(new PurchaseInformation(pay, 0).getPurchasedPrice())
-                .isEqualTo(realPay);
-    }
 }

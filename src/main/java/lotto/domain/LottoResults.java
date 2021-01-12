@@ -28,11 +28,17 @@ public class LottoResults {
         return results.get(rank);
     }
 
-    public BigDecimal calculateRate(int price) {
-        if(price % PurchaseInformation.TICKET_PRICE != 0) {
-            throw new IllegalArgumentException(CALCULATE_RATE_ERROR);
-        }
+    public BigDecimal calculateRate() {
+        int price = getResultTicketCount() * PurchaseInformation.TICKET_PRICE;
         return new BigDecimal(sumPrizeMoney() / price).setScale(2, RoundingMode.FLOOR);
+    }
+
+    private int getResultTicketCount() {
+        int count = 0;
+        for (LottoRank rank : LottoRank.values()) {
+            count += results.get(rank);
+        }
+        return count;
     }
 
     private double sumPrizeMoney() {

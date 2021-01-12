@@ -32,10 +32,6 @@ public class PurchaseInformation {
         }
     }
 
-    public int getPurchasedPrice() {
-        return (manualCount + autoCount) * TICKET_PRICE;
-    }
-
     public int getPrice() {
         return this.price;
     }

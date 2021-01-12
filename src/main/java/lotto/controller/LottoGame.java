@@ -40,7 +40,7 @@ public class LottoGame {
 
     private void makeAndPrintResult() {
         LottoResults lottoResults = lottoTickets.getResults(winnerNumber);
-        LottoGameOutputView.printResult(lottoResults, purchase.getPurchasedPrice());
+        LottoGameOutputView.printResult(lottoResults);
     }
 
 }

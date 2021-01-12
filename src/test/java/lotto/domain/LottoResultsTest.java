@@ -31,16 +31,12 @@ public class LottoResultsTest {
     void calculateRateTest() {
         LottoResults lottoResults = new LottoResults();
         lottoResults.upsert(LottoRank.FIFTH);
-        assertThat(lottoResults.calculateRate(14000)).isEqualTo(new BigDecimal("0.35"));
-    }
+        assertThat(lottoResults.calculateRate()).isEqualTo(new BigDecimal("5.00"));
 
-    @Test
-    @DisplayName("수익률 에러 테스트")
-    void calculateRateErrorTest() {
-        LottoResults lottoResults = new LottoResults();
-        lottoResults.upsert(LottoRank.FIFTH);
-        assertThatThrownBy(() -> lottoResults.calculateRate(14500))
-                .isInstanceOf(IllegalArgumentException.class);
+        for (int i = 0; i < 13; i++) {
+            lottoResults.upsert(LottoRank.NOTHING);
+        }
+        assertThat(lottoResults.calculateRate()).isEqualTo(new BigDecimal("0.35"));
     }
 
     @Test

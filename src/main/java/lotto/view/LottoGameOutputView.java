@@ -18,11 +18,11 @@ public class LottoGameOutputView {
         System.out.printf(TICKET_COUNT_SENTENCE, purchaseInformation.getManualCount(), purchaseInformation.getAutoCount());
     }
 
-    public static void printResult(LottoResults lottoResults, int price) {
+    public static void printResult(LottoResults lottoResults) {
         System.out.println(RESULT_SENTENCE);
         System.out.println(HORIZON_SEPARATOR);
         System.out.println(lottoResults);
-        System.out.printf(RATE_SENTENCE, lottoResults.calculateRate(price));
+        System.out.printf(RATE_SENTENCE, lottoResults.calculateRate());
     }
 
 }
