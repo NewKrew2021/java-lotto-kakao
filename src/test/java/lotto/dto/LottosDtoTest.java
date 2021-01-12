@@ -17,10 +17,10 @@ public class LottosDtoTest {
     @Test
     @DisplayName("Lottos와 동일한 값을 가지는 LottosDto를 생성한다.")
     void create() {
-        Lotto lotto1 = Lotto.autoGenerate(() -> Set.of(1, 2, 3, 4, 5, 6).stream()
+        Lotto lotto1 = Lotto.of(Set.of(1, 2, 3, 4, 5, 6).stream()
                 .map(LottoNumber::of)
                 .collect(Collectors.toSet()));
-        Lotto lotto2 = Lotto.autoGenerate(() -> Set.of(1, 2, 3, 10, 11, 12).stream()
+        Lotto lotto2 = Lotto.of(Set.of(1, 2, 3, 10, 11, 12).stream()
                 .map(LottoNumber::of)
                 .collect(Collectors.toSet()));
 

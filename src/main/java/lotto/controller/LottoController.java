@@ -3,7 +3,7 @@ package lotto.controller;
 import lotto.domain.*;
 import lotto.dto.LottosDto;
 import lotto.dto.RankingsDto;
-import lotto.util.LottoNumberGenerator;
+import lotto.util.ManualNumberGenerator;
 import lotto.util.RandomNumberGenerator;
 import lotto.util.Rank;
 import lotto.view.LottoUI;
@@ -13,14 +13,12 @@ import java.util.List;
 
 public class LottoController {
     private final LottoUI lottoUI;
-    private final LottoNumberGenerator lottoNumberGenerator;
     private MatchNumber matchNumber;
     private Lottos lottos;
     private Money money;
 
     public LottoController() {
         lottoUI = new LottoUI();
-        lottoNumberGenerator = new RandomNumberGenerator();
     }
 
     public void buyLotto() {
@@ -29,7 +27,7 @@ public class LottoController {
         NumOfLotto numOfAuto = money.howMany().minus(numOfManual);
 
         List<Lotto> manualLottoList = buyManualLotto(numOfManual);
-        List<Lotto> autoLottoList = buyAutoLotto(numOfAuto, lottoNumberGenerator);
+        List<Lotto> autoLottoList = buyAutoLotto(numOfAuto);
 
         lottoUI.printLottosMessage(numOfManual, numOfAuto);
         lottos = Lottos.of(manualLottoList, autoLottoList);
@@ -38,18 +36,20 @@ public class LottoController {
 
     private List<Lotto> buyManualLotto(NumOfLotto numOfManual) {
         lottoUI.printManualLottoMessage();
+
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < numOfManual.getNumOfLotto(); i++) {
-            lottoList.add(Lotto.manualGenerate(
-                    lottoUI.getManualLottoFromUser()));
+            lottoList.add(Lotto.of(
+                    ManualNumberGenerator.generate(
+                            lottoUI.getManualLottoFromUser())));
         }
         return lottoList;
     }
 
-    private List<Lotto> buyAutoLotto(NumOfLotto numOfAuto, LottoNumberGenerator lottoNumberGenerator) {
+    private List<Lotto> buyAutoLotto(NumOfLotto numOfAuto) {
         List<Lotto> lottoList = new ArrayList<>();
         for (int i = 0; i < numOfAuto.getNumOfLotto(); i++) {
-            lottoList.add(Lotto.autoGenerate(lottoNumberGenerator));
+            lottoList.add(Lotto.of(RandomNumberGenerator.generate()));
         }
         return lottoList;
     }

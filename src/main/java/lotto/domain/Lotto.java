@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.util.LottoNumberGenerator;
-import lotto.util.LottoNumberParser;
 import lotto.util.MatchResult;
 import lotto.util.Rank;
 
@@ -18,20 +16,11 @@ public class Lotto {
         this.lottoNumbers = Collections.unmodifiableSet(lottoNumbers);
     }
 
-    public static Lotto autoGenerate(LottoNumberGenerator lottoNumberGenerator) {
-        Set<LottoNumber> newLottoNumbers = getEmptyLottoNumbers();
-        newLottoNumbers.addAll(lottoNumberGenerator.getNumbers());
+    public static Lotto of(Set<LottoNumber> lottoNumbers) {
+        Set<LottoNumber> newLottoNumbers = new TreeSet<>(
+                Comparator.comparingInt(LottoNumber::getNumber));
+        newLottoNumbers.addAll(lottoNumbers);
         return new Lotto(newLottoNumbers);
-    }
-
-    public static Lotto manualGenerate(String numbersText) {
-        Set<LottoNumber> newLottoNumbers = getEmptyLottoNumbers();
-        newLottoNumbers.addAll(LottoNumberParser.toLottoNumbers(numbersText));
-        return new Lotto(newLottoNumbers);
-    }
-
-    private static Set<LottoNumber> getEmptyLottoNumbers() {
-        return new TreeSet<>(Comparator.comparingInt(LottoNumber::getNumber));
     }
 
     public Rank match(MatchNumber matchNumber) {
