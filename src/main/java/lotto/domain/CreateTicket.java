@@ -11,7 +11,7 @@ public class CreateTicket {
         }
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
-        lottoTickets.addAll(createAutoTicket(price));
+        lottoTickets.addAll(createAutoTicket(price - handTicket.size()*1000));
         lottoTickets.addAll(createHandTicket(handTicket));
 
         return lottoTickets;
