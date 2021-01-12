@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.strategy.RandomTicketStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -9,14 +10,27 @@ import static org.assertj.core.api.Assertions.*;
 
 public class LottoTicketsTest {
     @Test
-    @DisplayName("가격에 따른 티켓 갯수 테스트")
+    @DisplayName("팩토리 메소드 테스트")
     void lottoTicketCountTest(){
-        LottoTickets lottoTickets = LottoTickets.from(new PurchaseInformation(14000, 0), new ArrayList<String>());
+        LottoTickets lottoTickets = LottoTickets.from(new RandomTicketStrategy(), 14);
         assertThat(lottoTickets.getTicketCount()).isEqualTo(14);
+    }
 
-        List<String> manualNumbers = Arrays.asList("1,2,3,4,5,6", "2,3,4,5,6,7");
-        lottoTickets = LottoTickets.from(new PurchaseInformation(5500, 2), manualNumbers);
-        assertThat(lottoTickets.getTicketCount()).isEqualTo(5);
+    @Test
+    @DisplayName("Ticket 병합 테스트")
+    void joinTicketTest() {
+        List<LottoTicket> firstTicketsList = new ArrayList<>();
+        firstTicketsList.add(LottoTicket.from("1, 2, 3, 4, 5, 6"));
+        LottoTickets lottoTickets = new LottoTickets(firstTicketsList);
+
+        List<LottoTicket> secondTicketList = new ArrayList<>();
+        secondTicketList.add(LottoTicket.from("1, 2, 3, 4, 5, 6"));
+        LottoTickets joinedLottoTickets = new LottoTickets(secondTicketList);
+
+        List<LottoTicket> joinedList = new ArrayList<>();
+        joinedList.addAll(firstTicketsList);
+        joinedList.addAll(secondTicketList);
+        assertThat(LottoTickets.join(lottoTickets, joinedLottoTickets)).isEqualTo(new LottoTickets(joinedList));
     }
 
     @Test
@@ -39,23 +53,11 @@ public class LottoTicketsTest {
     }
 
     @Test
-    @DisplayName("수동 티켓 생성 테스트")
-    void makeManualTicketTest() {
-        PurchaseInformation purchase = new PurchaseInformation(2000, 2);
-        List<String> manualNumbers = Arrays.asList("1,2,3,4,5,6", "11, 12, 13, 14, 15, 16");
-        LottoTickets lottoTickets = LottoTickets.from(purchase, manualNumbers);
-
-        List<LottoTicket> lottoTicketList = new ArrayList<>();
-        manualNumbers.forEach(numbers -> lottoTicketList.add(LottoTicket.from(numbers)));
-        assertThat(lottoTickets).isEqualTo(new LottoTickets(lottoTicketList));
-    }
-
-    @Test
     @DisplayName("toString 테스트")
     void toStringTest() {
-        PurchaseInformation purchase = new PurchaseInformation(1000, 1);
-        List<String> manualNumbers = Arrays.asList("1,2,3,4,5,6");
-        LottoTickets lottoTickets = LottoTickets.from(purchase, manualNumbers);
+        LottoTickets lottoTickets = LottoTickets.from(() -> {
+            return new TreeSet<>(Arrays.asList(Number.of(1), Number.of(2), Number.of(3), Number.of(4), Number.of(5), Number.of(6)));
+        }, 1);
         assertThat(lottoTickets.toString()).isEqualTo("[1, 2, 3, 4, 5, 6]\n");
     }
 }

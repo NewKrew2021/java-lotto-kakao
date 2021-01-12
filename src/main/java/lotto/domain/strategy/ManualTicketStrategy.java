@@ -5,6 +5,7 @@ import lotto.view.LottoGameInputView;
 
 import java.util.Arrays;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 public class ManualTicketStrategy implements TicketStrategy {
@@ -15,6 +16,6 @@ public class ManualTicketStrategy implements TicketStrategy {
         return Arrays.stream(LottoGameInputView.inputManualTicket().split(DELIMITER))
                 .map(String::trim)
                 .map(Number::of)
-                .collect(Collectors.toSet());
+                .collect(Collectors.toCollection(TreeSet::new));
     }
 }

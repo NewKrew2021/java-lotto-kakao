@@ -4,6 +4,8 @@ import lotto.domain.LottoResults;
 import lotto.domain.LottoTickets;
 import lotto.domain.PurchaseInformation;
 import lotto.domain.WinnerNumber;
+import lotto.domain.strategy.ManualTicketStrategy;
+import lotto.domain.strategy.RandomTicketStrategy;
 import lotto.view.LottoGameInputView;
 import lotto.view.LottoGameOutputView;
 
@@ -26,8 +28,10 @@ public class LottoGame {
     }
 
     private void makeAndPrintLottoTickets() {
-        List<String> rawManualNumbers = LottoGameInputView.inputManualTickets(purchase.getManualCount());
-        lottoTickets = LottoTickets.from(purchase, rawManualNumbers);
+        LottoGameOutputView.printManualSentence();
+        LottoTickets manualTickets = LottoTickets.from(new ManualTicketStrategy(), purchase.getManualCount());
+        LottoTickets autoTickets = LottoTickets.from(new RandomTicketStrategy(), purchase.getAutoCount());
+        lottoTickets = LottoTickets.join(manualTickets, autoTickets);
         LottoGameOutputView.printTicketCount(purchase);
         LottoGameOutputView.printLottoTickets(lottoTickets);
     }

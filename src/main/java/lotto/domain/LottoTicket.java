@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.strategy.TicketStrategy;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -23,6 +25,10 @@ public class LottoTicket {
                 .map(Number::of)
                 .collect(Collectors.toList());
         return new LottoTicket(new TreeSet<>(list));
+    }
+
+    public static LottoTicket from(TicketStrategy strategy) {
+        return new LottoTicket(strategy.makeNumbers());
     }
 
     public int matchCount(LottoTicket comparedTicket) {

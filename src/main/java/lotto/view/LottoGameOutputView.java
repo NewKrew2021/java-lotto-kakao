@@ -9,6 +9,7 @@ public class LottoGameOutputView {
     private static final String RESULT_SENTENCE = "당첨 통계";
     private static final String HORIZON_SEPARATOR = "--------------";
     private static final String RATE_SENTENCE = "총 수익률은 %s 입니다.\n";
+    private static final String MANUAL_SENTENCE = "\n수동으로 구매할 번호를 입력해주세요.";
 
     public static void printLottoTickets(LottoTickets lottoTickets) {
         System.out.println(lottoTickets);
@@ -25,4 +26,7 @@ public class LottoGameOutputView {
         System.out.printf(RATE_SENTENCE, lottoResults.calculateRate());
     }
 
+    public static void printManualSentence() {
+        System.out.println(MANUAL_SENTENCE);
+    }
 }

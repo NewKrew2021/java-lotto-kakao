@@ -1,5 +1,9 @@
 package lotto.domain;
 
+import lotto.domain.strategy.ManualTicketStrategy;
+import lotto.domain.strategy.RandomTicketStrategy;
+import lotto.domain.strategy.TicketStrategy;
+
 import java.util.*;
 
 public class LottoTickets {
@@ -9,15 +13,19 @@ public class LottoTickets {
         this.lottoTickets = Collections.unmodifiableList(lottoTickets);
     }
 
-    public static LottoTickets from(PurchaseInformation purchase, List<String> manualTicket) {
+    public static LottoTickets from(TicketStrategy strategy, int count) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < purchase.getManualCount(); i++) {
-            lottoTickets.add(LottoTicket.from(manualTicket.get(i)));
-        }
-        for (int i = 0; i < purchase.getAutoCount(); i++) {
-            lottoTickets.add(new LottoTicket(new TreeSet<>(Number.randomNumbers(LottoTicket.BALL_COUNT))));
+        for (int i = 0; i < count; i++) {
+            lottoTickets.add(LottoTicket.from(strategy));
         }
         return new LottoTickets(lottoTickets);
+    }
+
+    public static LottoTickets join(LottoTickets manualTickets, LottoTickets autoTickets) {
+        List<LottoTicket> joinedTickets = new ArrayList<>();
+        joinedTickets.addAll(manualTickets.lottoTickets);
+        joinedTickets.addAll(autoTickets.lottoTickets);
+        return new LottoTickets(joinedTickets);
     }
 
     public int getTicketCount() {
