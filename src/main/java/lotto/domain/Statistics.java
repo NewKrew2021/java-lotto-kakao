@@ -9,12 +9,6 @@ public class Statistics {
     private final Rankings rankings;
     private final Money money;
 
-    private static final List<Integer> prize = new ArrayList<>(Arrays.asList(ZERO, Rank.FIRST.getReward(),
-            Rank.SECOND.getReward(),
-            Rank.THIRD.getReward(),
-            Rank.FOURTH.getReward(),
-            Rank.FIFTH.getReward()));
-
     public Statistics(Rankings rankings, Money money) {
         this.rankings = rankings;
         this.money = money;
@@ -35,7 +29,7 @@ public class Statistics {
     }
 
     private long getProfitPerRank(Rank rank) {
-        return (long) getCountOfRank(rank) * prize.get(rank.getRank());
+        return (long) getCountOfRank(rank) * rank.getReward();
     }
 
 }

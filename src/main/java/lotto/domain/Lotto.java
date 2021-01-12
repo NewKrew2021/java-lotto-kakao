@@ -41,8 +41,8 @@ public class Lotto {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    public LottoDto getLottoData() {
-        return new LottoDto(Collections.unmodifiableSet(lottoNumbers));
+    public Set<LottoNumber> getLottoData() {
+        return Collections.unmodifiableSet(lottoNumbers);
     }
 
     public int matchCount(Lotto lotto) {

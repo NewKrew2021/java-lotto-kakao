@@ -1,9 +1,6 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lottos {
@@ -14,18 +11,22 @@ public class Lottos {
         this.lottos = Collections.unmodifiableList(lottos);
     }
 
+//    public Rankings raffle(WinningLotto winningNumber) {
+//        Map<Rank, Integer> rankingsMap = new TreeMap<>();
+//        for (Lotto lotto : lottos) {
+//            Rank rank = winningNumber.getRankOfLotto(lotto);
+//            rankingsMap.put(rank, rankingsMap.getOrDefault(rank, 0) + 1);
+//        }
+//        return new Rankings(rankingsMap);
+//    }
+
     public Rankings raffle(WinningLotto winningNumber) {
-        Map<Rank, Integer> rankingsMap = new TreeMap<>();
-        for (Lotto lotto : lottos) {
-            Rank rank = winningNumber.getRankOfLotto(lotto);
-            rankingsMap.put(rank, rankingsMap.getOrDefault(rank, 0) + 1);
-        }
-        return new Rankings(rankingsMap);
+        return new Rankings(lottos, winningNumber);
     }
 
-    public LottosDto getLottosData() {
-        return new LottosDto(lottos.stream()
+    public List<Set<LottoNumber>> getLottosData() {
+        return lottos.stream()
                 .map(Lotto::getLottoData)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
     }
 }

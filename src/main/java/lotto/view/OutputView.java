@@ -2,7 +2,9 @@ package lotto.view;
 
 import lotto.domain.*;
 
+import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class OutputView {
@@ -26,14 +28,14 @@ public class OutputView {
     }
 
     public static void printLottos(Lottos lottos) {
-        LottosDto lottosDto = lottos.getLottosData();
-        for (LottoDto lottoDto : lottosDto.getLottosDto()) {
-            System.out.println(getLottoText(lottoDto));
+        List<Set<LottoNumber>> lottosDto = lottos.getLottosData();
+        for (Set<LottoNumber> lotto : lottosDto) {
+            System.out.println(getLottoText(lotto));
         }
     }
 
-    private static String getLottoText(LottoDto lottoDto) {
-        return OPEN_BRACKET + lottoDto.getLottoDto().stream().map(LottoNumber::getNumber)
+    private static String getLottoText(Set<LottoNumber> lotto) {
+        return OPEN_BRACKET + lotto.stream().map(LottoNumber::getNumber)
                 .map(lottoNumber -> Integer.toString(lottoNumber))
                 .collect(Collectors.joining(JOIN_DELIMITER)) + CLOSE_BRACKET;
     }
