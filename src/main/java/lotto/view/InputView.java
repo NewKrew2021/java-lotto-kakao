@@ -1,8 +1,7 @@
 package lotto.view;
 
-import java.util.HashSet;
-import java.util.Scanner;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class InputView {
     public static Scanner scan = new Scanner(System.in);
@@ -31,9 +30,22 @@ public class InputView {
     public static int getMaualLottoCount(int totalCount) {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         int count = Integer.parseInt(scan.nextLine());
-        if(count > totalCount){
+        if (count > totalCount) {
             throw new IllegalArgumentException("로또 구매 수가 구입금액을 초과합니다.");
         }
         return count;
+    }
+
+    public static List<List<Integer>> getMaualLottoNumbers(int manualCount) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        List<List<Integer>> manualNumbers = new ArrayList<>();
+        for (int i = 0; i < manualCount; i++) {
+            List<Integer> numbers = Arrays.stream(scan.nextLine().split(","))
+                    .map(String::trim)
+                    .map(Integer::parseInt)
+                    .collect(Collectors.toList());
+            manualNumbers.add(numbers);
+        }
+        return manualNumbers;
     }
 }
