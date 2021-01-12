@@ -20,7 +20,7 @@ public enum StatisticsType {
         return this.jackpot;
     }
 
-    public static StatisticsType matchTicktes(int matchCount, boolean isBonusMatch) {
+    public static StatisticsType matchTickts(int matchCount, boolean isBonusMatch) {
         if( matchCount > FOUR.matchCount ) {
             return matchNumbersUpper4(matchCount, isBonusMatch);
         }
