@@ -1,5 +1,6 @@
 package lotto.domain.number;
 
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -31,7 +32,7 @@ public class LottoNumbers {
     }
 
     public int countMatchingNumber(LottoNumbers lottoNumbers) {
-        Set<LottoNumber> lottoNumbersIntersection = lottoNumbers.getLottoNumbers();
+        Set<LottoNumber> lottoNumbersIntersection = lottoNumbers.lottoNumbers;
         lottoNumbersIntersection.retainAll(this.lottoNumbers);
         return lottoNumbersIntersection.size();
 
@@ -41,8 +42,10 @@ public class LottoNumbers {
         return lottoNumbers.contains(number);
     }
 
-    public Set<LottoNumber> getLottoNumbers() {
-        return lottoNumbers;
+    public List<Integer> getSortedLottoNumbersAsInteger() {
+        return lottoNumbers.stream().map(LottoNumber::getNumber)
+                .sorted()
+                .collect(Collectors.toList());
     }
 
 }

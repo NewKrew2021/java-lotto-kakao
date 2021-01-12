@@ -32,7 +32,7 @@ public class LottoNumber {
         }
     }
 
-    public int getNumber() {
+    protected int getNumber() {
         return number;
     }
 

@@ -36,6 +36,10 @@ public class LottoGameCount {
         }
     }
 
+    protected int calculateTotalTicketMoney() {
+        return ticketCount * UNIT_OF_MONEY;
+    }
+
     public boolean isTicketRemain() {
         return !(remainCount == 0);
     }
@@ -46,10 +50,6 @@ public class LottoGameCount {
 
     public void useTicket() {
         remainCount--;
-    }
-
-    public int calculateTotalTicketMoney() {
-        return ticketCount * UNIT_OF_MONEY;
     }
 
     public int getTicketCount() {

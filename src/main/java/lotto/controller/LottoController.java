@@ -6,7 +6,6 @@ import lotto.domain.game.WinnerTicket;
 import lotto.domain.number.LottoNumbers;
 import lotto.domain.number.NumberGenerateStrategy;
 import lotto.domain.ranking.LottoRankingCount;
-import lotto.view.LottoNumbersDto;
 import lotto.view.LottoRankingCountDto;
 
 import java.util.ArrayList;
@@ -62,6 +61,7 @@ public class LottoController {
     }
 
     public List<Integer> getSortedLottoNumbers(int i) {
-        return LottoNumbersDto.from(lottoTickets.get(i)).getSortedLottoNumbers();
+        return lottoTickets.get(i).getSortedLottoNumbersAsInteger();
     }
+
 }
