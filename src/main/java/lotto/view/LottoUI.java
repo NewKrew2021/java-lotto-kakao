@@ -15,12 +15,12 @@ public class LottoUI {
 
     public int getMoneyFromUser() {
         System.out.println("구입금액을 입력해 주세요.");
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 
     public int getNumOfManualFromUser() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 
     public void printManualLottoMessage() {
@@ -36,19 +36,17 @@ public class LottoUI {
     }
 
     public void printLottos(LottosDto lottosDto) {
-        System.out.println(lottosDto.getLottoDtos().size() + "개를 구매했습니다.");
         System.out.println(lottosDto);
     }
 
     public String getWinningNumberFromUser() {
         System.out.println("지난 주 당첨 번호를 입력해 주세요.");
-        scanner.nextLine();
         return scanner.nextLine();
     }
 
     public int getBonusNumberFromUser() {
         System.out.println("보너스 볼을 입력해 주세요.");
-        return scanner.nextInt();
+        return Integer.parseInt(scanner.nextLine());
     }
 
     public void printStatistics(RankingsDto rankingsDto) {
