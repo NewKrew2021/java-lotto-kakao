@@ -3,17 +3,18 @@ package lotto.domain;
 import java.util.*;
 
 public class LottoTickets {
-    private static final int TICKET_PRICE = 1_000;
-
     private List<LottoTicket> lottoTickets;
 
     public LottoTickets(List<LottoTicket> lottoTickets) {
         this.lottoTickets = Collections.unmodifiableList(lottoTickets);
     }
 
-    public static LottoTickets fromPrice(int price) {
+    public static LottoTickets from(PurchaseInformation purchase, List<String> manualTicket) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
-        for (int i = 0; i < price / TICKET_PRICE; i++) {
+        for (int i = 0; i < purchase.getManualCount(); i++) {
+            lottoTickets.add(LottoTicket.from(manualTicket.get(i)));
+        }
+        for (int i = 0; i < purchase.getAutoCount(); i++) {
             lottoTickets.add(new LottoTicket(new TreeSet<>(Number.randomNumbers(LottoTicket.BALL_COUNT))));
         }
         return new LottoTickets(lottoTickets);
@@ -29,6 +30,19 @@ public class LottoTickets {
             lottoResults.upsert(winnerNumber.getRank(lottoTicket));
         }
         return lottoResults;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        LottoTickets that = (LottoTickets) o;
+        return Objects.equals(lottoTickets, that.lottoTickets);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lottoTickets);
     }
 
     @Override
