@@ -3,9 +3,7 @@ package lotto.view;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoResults;
 import lotto.domain.LottoTickets;
-import lotto.domain.WinningNumber;
 
-import java.util.Map;
 import java.util.Scanner;
 
 public class ResultView {

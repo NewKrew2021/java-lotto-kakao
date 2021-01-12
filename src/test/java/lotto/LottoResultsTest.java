@@ -38,7 +38,5 @@ public class LottoResultsTest {
         assertThat(lottoResults.earningRate(10000)).isEqualTo(rate);
     }
 
-//    @ParameterizedTest
-
 }
 
