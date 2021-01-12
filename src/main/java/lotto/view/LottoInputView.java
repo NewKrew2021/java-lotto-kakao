@@ -24,7 +24,11 @@ public class LottoInputView {
         System.out.println(ASK_MANUAL_QUANTITY_MESSAGE);
         int manualQuantity = scanner.nextInt();
         purchaseMoney.checkManualQuantity(manualQuantity);
-        System.out.print(manualQuantity > 0 ? ASK_MANUAL_NUMBER_MESSAGE : "");
+
+        if (manualQuantity > 0) {
+            System.out.println(ASK_MANUAL_NUMBER_MESSAGE);
+        }
+
         scanner.nextLine();
 
         return IntStream.range(0, manualQuantity)
