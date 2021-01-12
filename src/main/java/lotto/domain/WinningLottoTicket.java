@@ -1,7 +1,6 @@
 package lotto.domain;
 
 import lotto.StatisticsType;
-
 import java.util.Set;
 
 public class WinningLottoTicket {

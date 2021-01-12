@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.domain.LottoNo;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.*;
 
@@ -13,12 +12,8 @@ public class LottoNoTest {
         LottoNo lottoNo2 = new LottoNo(LottoNo.MAX_NUMBER);
 
         //error
-        assertThatThrownBy(()->{
-            new LottoNo(LottoNo.MIN_NUMBER-1);
-        }).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(()->{
-            new LottoNo(LottoNo.MAX_NUMBER+1);
-        }).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(()-> new LottoNo(LottoNo.MIN_NUMBER-1)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(()-> new LottoNo(LottoNo.MAX_NUMBER+1)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

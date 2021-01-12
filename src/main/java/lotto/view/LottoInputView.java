@@ -3,7 +3,6 @@ package lotto.view;
 import lotto.domain.LottoNo;
 import lotto.domain.LottoTicket;
 import lotto.domain.Money;
-
 import java.util.*;
 import java.util.stream.Collectors;
 
