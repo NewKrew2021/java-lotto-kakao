@@ -1,9 +1,6 @@
 package lotto.controller;
 
-import lotto.domain.Lottos;
-import lotto.domain.MatchNumber;
-import lotto.domain.Money;
-import lotto.domain.Rankings;
+import lotto.domain.*;
 import lotto.dto.LottosDto;
 import lotto.dto.RankingsDto;
 import lotto.util.LottoNumberGenerator;
@@ -11,6 +8,7 @@ import lotto.util.RandomNumberGenerator;
 import lotto.util.Rank;
 import lotto.view.LottoUI;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class LottoController {
@@ -27,8 +25,34 @@ public class LottoController {
 
     public void buyLotto() {
         money = new Money(lottoUI.getMoneyFromUser());
-//        lottos = Lottos.fromMoney(money, lottoNumberGenerator);
+
+        int numOfManual = lottoUI.getNumOfManualFromUser();
+        int numOfAuto = money.howMany() - numOfManual;
+
+        List<Lotto> manualLottoList = buyManualLotto(numOfManual);
+        List<Lotto> autoLottoList = buyAutoLotto(numOfAuto, lottoNumberGenerator);
+
+        lottoUI.printLottosMessage(numOfManual, numOfAuto);
+        lottos = Lottos.of(manualLottoList, autoLottoList);
         lottoUI.printLottos(LottosDto.from(lottos));
+    }
+
+    private List<Lotto> buyManualLotto(int numOfManual) {
+        lottoUI.printManualLottoMessage();
+        List<Lotto> lottoList = new ArrayList<>();
+        for (int i = 0; i < numOfManual; i++) {
+            lottoList.add(Lotto.manualGenerate(
+                    lottoUI.getManualLottoFromUser()));
+        }
+        return lottoList;
+    }
+
+    private List<Lotto> buyAutoLotto(int numOfAuto, LottoNumberGenerator lottoNumberGenerator) {
+        List<Lotto> lottoList = new ArrayList<>();
+        for (int i = 0; i < numOfAuto; i++) {
+            lottoList.add(Lotto.autoGenerate(lottoNumberGenerator));
+        }
+        return lottoList;
     }
 
     public void getWinningNumber() {
