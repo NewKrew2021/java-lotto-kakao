@@ -30,12 +30,6 @@ public class LottoTicket {
         return this.numbers.contains(lottoNo);
     }
 
-    public int matchTickets(LottoTicket lottoTicket) {
-        return (int) this.numbers.stream()
-                .filter(lottoTicket::isContains)
-                .count();
-    }
-
     @Override
     public String toString() {
         return this.numbers.toString();

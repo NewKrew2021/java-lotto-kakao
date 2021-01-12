@@ -63,4 +63,24 @@ public class WinningLottoTicketTest {
         assertThat(six).isEqualTo(StatisticsType.SIX);
     }
 
+    @ParameterizedTest
+    @CsvSource(
+            "'1,2,3,4,5,6'," + "'7'," +
+            "'7,8,9,10,11,12|6,7,8,9,10,11|5,6,7,8,9,10|4,5,6,7,8,9|3,4,5,6,7,8|2,3,4,5,6,7|1,2,3,4,5,6'"
+    )
+    void matchTicketTest(String ticketNumbers, int bonusNumber, String ticketsNumbers){
+        WinningLottoTicket winningTicket = new WinningLottoTicket(CsvParsing.convertStringToIntegerSet(ticketNumbers) , bonusNumber);
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        List<Set<Integer>> ticketsNumberListInt = CsvParsing.convertStringToTicketsNumber(ticketsNumbers);
+
+        for( Set<Integer> ticket : ticketsNumberListInt ) {
+            lottoTickets.add(new LottoTicket(ticket));
+        }
+
+        for (int i = 0; i < 7; i++) {
+            int matchCount = winningTicket.matchTickets(lottoTickets.get(i));
+            assertThat(matchCount).isEqualTo(i);
+        }
+    }
+
 }

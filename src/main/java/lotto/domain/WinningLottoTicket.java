@@ -1,15 +1,21 @@
 package lotto.domain;
 
 import lotto.StatisticsType;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 public class WinningLottoTicket {
 
-    private final LottoTicket lottoTicket;
+    private List<LottoNo> winningNumbers;
     private final LottoNo bonusNo;
 
     public WinningLottoTicket(Set<Integer> numbers, int bonusNo ) {
-        this.lottoTicket = new LottoTicket(numbers);
+        this.winningNumbers = new ArrayList<>();
+        for( Integer number : numbers ) {
+            this.winningNumbers.add(new LottoNo(number));
+        }
         this.bonusNo = new LottoNo(bonusNo);
     }
 
@@ -21,9 +27,16 @@ public class WinningLottoTicket {
     }
 
     public StatisticsType isWinning(LottoTicket lottoTicket) {
-        int matchCount = this.lottoTicket.matchTickets(lottoTicket);
+        int matchCount = this.matchTickets(lottoTicket);
         boolean isBonusMatch = lottoTicket.isContains(bonusNo);
         return StatisticsType.matchTickets(matchCount, isBonusMatch);
     }
+
+    public int matchTickets(LottoTicket lottoTicket) {
+        return (int) this.winningNumbers.stream()
+                .filter(lottoTicket::isContains)
+                .count();
+    }
+
 
 }
