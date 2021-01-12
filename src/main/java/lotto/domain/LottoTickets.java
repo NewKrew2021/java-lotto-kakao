@@ -14,7 +14,7 @@ public class LottoTickets {
     }
 
     public LottoResults getResults(WinningNumber winningNumber) {
-        LottoResults lottoResults = new LottoResults(CreateLottoResults.createLottoResults(lottoTickets, winningNumber));
+        LottoResults lottoResults = CreateLottoResults.createLottoResults(lottoTickets, winningNumber);
         return lottoResults;
     }
 }

@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CreateLottoResults {
-    public static Map<LottoRank, Integer> createLottoResults(List<LottoTicket> lottoTickets, WinningNumber winningNumber){
+    public static LottoResults createLottoResults(List<LottoTicket> lottoTickets, WinningNumber winningNumber){
         Map<LottoRank, Integer> results = new HashMap<LottoRank, Integer>();
         lottoTickets.stream()
                 .forEach(lottoTicket -> {
@@ -14,6 +14,6 @@ public class CreateLottoResults {
                     results.putIfAbsent(rank, 0);
                     results.put(rank, results.get(rank)+1);
                 });
-        return results;
+        return new LottoResults(results);
     }
 }
