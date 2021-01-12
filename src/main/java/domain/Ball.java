@@ -3,18 +3,25 @@ package domain;
 import java.util.Objects;
 
 public class Ball {
+
+    public static final int LOTTO_MIN = 1;
+    public static final int LOTTO_MAX = 45;
+
     private final int number;
 
+    public Ball(String number) {
+        this(Integer.parseInt(number));
+    }
+
     public Ball(int number) {
+        if (!validator(number)) {
+            throw new IllegalArgumentException();
+        }
         this.number = number;
     }
 
-    public Ball(String number) {
-        this.number = Integer.parseInt(number);
-    }
-
-    public static Ball map(String number){
-        return new Ball(Integer.parseInt(number));
+    public static Ball map(String number) {
+        return new Ball(number);
     }
 
     @Override
@@ -33,5 +40,13 @@ public class Ball {
     @Override
     public String toString() {
         return String.valueOf(number);
+    }
+
+    private boolean validator(int number) {
+        if (number < LOTTO_MIN || LOTTO_MAX < number) {
+            return false;
+        }
+
+        return true;
     }
 }
