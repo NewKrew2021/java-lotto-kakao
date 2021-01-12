@@ -17,8 +17,8 @@ public class Money {
         return money;
     }
 
-    public int howMany() {
-        return money / LOTTO_PRICE;
+    public NumOfLotto howMany() {
+        return new NumOfLotto(money / LOTTO_PRICE);
     }
 
     @Override

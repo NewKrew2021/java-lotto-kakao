@@ -25,9 +25,8 @@ public class LottoController {
 
     public void buyLotto() {
         money = new Money(lottoUI.getMoneyFromUser());
-
-        int numOfManual = lottoUI.getNumOfManualFromUser();
-        int numOfAuto = money.howMany() - numOfManual;
+        NumOfLotto numOfManual = new NumOfLotto(lottoUI.getNumOfManualFromUser());
+        NumOfLotto numOfAuto = money.howMany().minus(numOfManual);
 
         List<Lotto> manualLottoList = buyManualLotto(numOfManual);
         List<Lotto> autoLottoList = buyAutoLotto(numOfAuto, lottoNumberGenerator);
@@ -37,19 +36,19 @@ public class LottoController {
         lottoUI.printLottos(LottosDto.from(lottos));
     }
 
-    private List<Lotto> buyManualLotto(int numOfManual) {
+    private List<Lotto> buyManualLotto(NumOfLotto numOfManual) {
         lottoUI.printManualLottoMessage();
         List<Lotto> lottoList = new ArrayList<>();
-        for (int i = 0; i < numOfManual; i++) {
+        for (int i = 0; i < numOfManual.getNumOfLotto(); i++) {
             lottoList.add(Lotto.manualGenerate(
                     lottoUI.getManualLottoFromUser()));
         }
         return lottoList;
     }
 
-    private List<Lotto> buyAutoLotto(int numOfAuto, LottoNumberGenerator lottoNumberGenerator) {
+    private List<Lotto> buyAutoLotto(NumOfLotto numOfAuto, LottoNumberGenerator lottoNumberGenerator) {
         List<Lotto> lottoList = new ArrayList<>();
-        for (int i = 0; i < numOfAuto; i++) {
+        for (int i = 0; i < numOfAuto.getNumOfLotto(); i++) {
             lottoList.add(Lotto.autoGenerate(lottoNumberGenerator));
         }
         return lottoList;
