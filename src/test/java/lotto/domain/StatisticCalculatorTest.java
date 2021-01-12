@@ -37,7 +37,7 @@ public class StatisticCalculatorTest {
 
     @Test
     public void profitRate() {
-        double expectedProfitRate = 2001550000.0 / 14000.0;
+        double expectedProfitRate = (2001550000.0 - 14000.0) / 14000.0;
         assertThat(statCalculator.getProfitRate()).isEqualTo(expectedProfitRate);
     }
 }

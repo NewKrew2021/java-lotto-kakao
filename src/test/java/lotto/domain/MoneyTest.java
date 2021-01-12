@@ -30,6 +30,6 @@ public class MoneyTest {
     @Test
     public void profitRate() {
         Money money = new Money(10000);
-        assertThat(money.getProfitRate(5000)).isEqualTo(0.5);
+        assertThat(money.getProfitRate(5000)).isEqualTo(-0.5);
     }
 }

@@ -30,7 +30,7 @@ public class LottoGameTest {
         WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 6",7);
         LottoStatisticDTO lottoDTO = new LottoStatisticDTO();
         lottoDTO.setRankCount(Arrays.asList(0, 0, 0, 0, 0, 1));
-        lottoDTO.setProfitRate(2000000000.0 / 1500.0);
+        lottoDTO.setProfitRate((2000000000.0 - 1500.0)/ 1500.0);
         assertThat(game.checkLotto(winningNumbers).getRankCount()).isEqualTo(lottoDTO.getRankCount());
         assertThat(game.checkLotto(winningNumbers).getProfitRate()).isEqualTo(lottoDTO.getProfitRate());
     }
