@@ -19,7 +19,7 @@ public class LottoTicketCount {
             throw new InvalidLottoTicketCountException("구입 개수가 총 구입 개수보다 클 수 없습니다.");
         }
         if (lottoTicketCount < 0){
-            throw new InvalidLottoTicketCountException("구앱 개수가 음수일 수 없습니다.");
+            throw new InvalidLottoTicketCountException("구입 개수는 음수일 수 없습니다.");
         }
     }
 
