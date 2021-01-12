@@ -6,6 +6,7 @@ import lotto.util.Rank;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Lottos {
 
@@ -28,11 +29,9 @@ public class Lottos {
     }
 
     public List<Rank> match(MatchNumber matchNumber) {
-        List<Rank> ranks = new ArrayList<>();
-        for (Lotto lotto : lottos) {
-            ranks.add(lotto.match(matchNumber));
-        }
-        return ranks;
+        return lottos.stream()
+                .map(lotto -> lotto.match(matchNumber))
+                .collect(Collectors.toList());
     }
 
     public List<Lotto> getLottos() {
