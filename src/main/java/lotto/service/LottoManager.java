@@ -31,21 +31,21 @@ public class LottoManager {
 
     public void buyLotto(){
 
-        int money = LottoInputView.getLottoBuyAmount();
+        Money money = Money.makeMoney(LottoInputView.getLottoBuyAmount());
 
-        int nonAutoMoney = buyNonAutoLotto(money);
+        buyNonAutoLotto(money);
 
-        int buyCount=amount/LOTTO_PRICE;
-        LottoOutputView.printInputQuantityPhrase(buyCount);
+        int buyCount=money.getPossibleLottoCount();
+        LottoOutputView.printInputQuantityPhrase(buyCount, buyCount);
         Lottos lottos=new Lottos();
-        for(int i=0;i<amount/1000;i++){
+        for(int i=0;i<money.getPossibleLottoCount();i++){
             lottos.add(lottoGenerator.generateLotto());
         }
 
         LottoOutputView.printLottos(lottos);
     }
 
-    public int buyNonAutoLotto(){
-
+    public Money buyNonAutoLotto(Money money){
+        return null;
     }
 }
