@@ -23,33 +23,33 @@ public class LottoTest {
         Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
         LottoAnswer lottoAnswer = new LottoAnswer(
                 new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                new Number(7));
+                Number.of(7));
 
         assertThat(lotto.calculateRank(lottoAnswer)).isEqualTo(Rank.FIRST);
 
         lottoAnswer = new LottoAnswer(
                 new Lotto(Arrays.asList(1, 2, 3, 4, 5, 41)),
-                new Number(6));
+                Number.of(6));
         assertThat(lotto.calculateRank(lottoAnswer)).isEqualTo(Rank.SECOND);
 
         lottoAnswer = new LottoAnswer(
                 new Lotto(Arrays.asList(1, 2, 3, 4, 5, 41)),
-                new Number(9));
+                Number.of(9));
         assertThat(lotto.calculateRank(lottoAnswer)).isEqualTo(Rank.THIRD);
 
         lottoAnswer = new LottoAnswer(
                 new Lotto(Arrays.asList(1, 2, 3, 4, 11, 13)),
-                new Number(5));
+                Number.of(5));
         assertThat(lotto.calculateRank(lottoAnswer)).isEqualTo(Rank.FOURTH);
 
         lottoAnswer = new LottoAnswer(
                 new Lotto(Arrays.asList(1, 2, 3, 15, 16, 17)),
-                new Number(5));
+                Number.of(5));
         assertThat(lotto.calculateRank(lottoAnswer)).isEqualTo(Rank.FIFTH);
 
         lottoAnswer = new LottoAnswer(
                 new Lotto(Arrays.asList(1, 2, 11, 22, 33, 44)),
-                new Number(4));
+                Number.of(4));
         assertThat(lotto.calculateRank(lottoAnswer)).isEqualTo(Rank.UNRANKED);
     }
 
@@ -78,8 +78,8 @@ public class LottoTest {
     public void containNumberTest() {
         Lotto Lotto1 = new Lotto(Arrays.asList(3, 2, 1, 4, 5, 6));
 
-        assertThat(Lotto1.isContainLottoNumber(new Number(1))).isEqualTo(true);
-        assertThat(Lotto1.isContainLottoNumber(new Number(7))).isEqualTo(false);
+        assertThat(Lotto1.isContainLottoNumber(Number.of(1))).isEqualTo(true);
+        assertThat(Lotto1.isContainLottoNumber(Number.of(7))).isEqualTo(false);
     }
 
 }
