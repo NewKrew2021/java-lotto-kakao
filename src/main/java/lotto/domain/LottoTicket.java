@@ -11,7 +11,7 @@ public class LottoTicket {
     public static final int LOTTO_NUMBER_COUNT_OF_TICKET = 6;
     public static final int LOTTO_PRICE = 1000;
 
-    List<LottoNo> numbers = new ArrayList<>();
+    private final List<LottoNo> numbers = new ArrayList<>();
 
     public LottoTicket(List<Integer> numbers) {
 
@@ -27,7 +27,7 @@ public class LottoTicket {
         }
     }
 
-    public static boolean checkValidationLottoTicket(List<Integer> numbers) {
+    public static boolean checkValidationLottoTicket(final List<Integer> numbers) {
         if( numbers.size() != LOTTO_NUMBER_COUNT_OF_TICKET ) {
             return false;
         }
@@ -35,7 +35,7 @@ public class LottoTicket {
         return !checkDuplication(numbers);
     }
 
-    private static boolean checkDuplication(List<Integer> numbers){
+    private static boolean checkDuplication(final List<Integer> numbers){
         HashSet<Integer> set = new HashSet<>(numbers);
         return set.size() != numbers.size();
     }

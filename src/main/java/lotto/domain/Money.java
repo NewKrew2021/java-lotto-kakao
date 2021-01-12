@@ -13,7 +13,7 @@ public class Money {
         this.money = money;
     }
 
-    public static boolean checkValidationInputMoney(int money) {
+    public static boolean checkValidationInputMoney(final int money) {
         return money >= LottoTicket.LOTTO_PRICE;
     }
 

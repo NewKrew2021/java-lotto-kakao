@@ -7,9 +7,9 @@ public class LottoNo implements Comparable<LottoNo>{
     public static final int MIN_NUMBER = 1;
     public static final int MAX_NUMBER = 45;
 
-    int number;
+    private final int number;
 
-    public LottoNo(Integer number) {
+    public LottoNo(final Integer number) {
         if( !checkValidationLottoNo(number) ) {
             IllegalArgumentException error = new IllegalArgumentException();
             error.printStackTrace();
@@ -19,7 +19,7 @@ public class LottoNo implements Comparable<LottoNo>{
         this.number = number;
     }
 
-    public static boolean checkValidationLottoNo(Integer number) {
+    public static boolean checkValidationLottoNo(final Integer number) {
         return number >= MIN_NUMBER && number <= MAX_NUMBER;
     }
 

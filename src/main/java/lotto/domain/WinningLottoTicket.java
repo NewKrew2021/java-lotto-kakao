@@ -6,8 +6,8 @@ import java.util.List;
 
 public class WinningLottoTicket {
 
-    private LottoTicket lottoTicket;
-    private LottoNo bonusNo;
+    private final LottoTicket lottoTicket;
+    private final LottoNo bonusNo;
 
     public WinningLottoTicket(List<Integer> numbers, int bonusNo ) {
         this.lottoTicket = new LottoTicket(numbers);
