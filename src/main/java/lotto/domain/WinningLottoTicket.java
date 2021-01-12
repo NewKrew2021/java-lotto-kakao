@@ -4,14 +4,14 @@ import lotto.StatisticsType;
 
 import java.util.List;
 
-public class WinningLottoNos {
+public class WinningLottoTicket {
 
     private LottoTicket lottoTicket;
     private LottoNo bonusNo;
 
-    public WinningLottoNos( List<Integer> numbers, int bonusNo ) {
+    public WinningLottoTicket(List<Integer> numbers, int bonusNo ) {
 
-        if ( checkValidationWinningLottoNos(numbers, bonusNo) ) {
+        if ( !checkValidationWinningLottoNos(numbers, bonusNo) ) {
             throw new IllegalArgumentException();
         }
 
@@ -29,7 +29,7 @@ public class WinningLottoNos {
     public StatisticsType isWinning(LottoTicket lottoTicket) {
         int matchCount = this.lottoTicket.matchTickets(lottoTicket);
         boolean isBonusMatch = lottoTicket.isContains(bonusNo);
-        return StatisticsType.matchTicktes(matchCount, isBonusMatch);
+        return StatisticsType.matchTickets(matchCount, isBonusMatch);
     }
 
 }
