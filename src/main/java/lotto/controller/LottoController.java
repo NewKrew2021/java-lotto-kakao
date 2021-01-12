@@ -68,4 +68,11 @@ public class LottoController {
         lottoUI.printStatistics(RankingsDto.from(rankings));
         lottoUI.printProfitRate(rankings.getProfitRate(money));
     }
+
+    public static void main(String[] args) {
+        LottoController lottoController = new LottoController();
+        lottoController.buyLotto();
+        lottoController.getWinningNumber();
+        lottoController.matchLotto();
+    }
 }
