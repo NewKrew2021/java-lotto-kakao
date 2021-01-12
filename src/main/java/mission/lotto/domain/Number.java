@@ -6,7 +6,6 @@ import java.util.Objects;
 
 public class Number {
 
-    private final int number;
     public static final int MIN_NUMBER_VALUE = 1;
     public static final int MAX_NUMBER_VALUE = 45;
     private static final Map<Integer, Number> numberPool = new HashMap<>();
@@ -16,6 +15,8 @@ public class Number {
             numberPool.put(i, new Number(i));
         }
     }
+
+    private final int number;
 
     private Number(int number) {
         this.number = number;
@@ -33,6 +34,11 @@ public class Number {
     }
 
     @Override
+    public String toString() {
+        return String.valueOf(number);
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -43,10 +49,5 @@ public class Number {
     @Override
     public int hashCode() {
         return Objects.hash(number);
-    }
-
-    @Override
-    public String toString() {
-        return String.valueOf(number);
     }
 }
