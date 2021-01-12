@@ -7,13 +7,14 @@ import lotto.domain.Rank;
 
 public class LottoOutputView {
 
-    public static void outputPurchaseAmount(int amount) {
-        System.out.println(String.format("%d개를 구매했습니다.", amount));
+    public static void outputPurchaseAmount(int manualAmount, int autoAmount) {
+        System.out.println(String.format("\n수동으로 %d개, 자동으로 %d개를 구매했습니다.", manualAmount, autoAmount));
     }
 
     public static void outputLottoGroup(LottoGroup lottoGroup) {
-        System.out.println("[" + lottoGroup.toString().replace("\n", "]\n[") + "]");
-        System.out.println();
+        if (lottoGroup.getLottoCount() > 0) {
+            System.out.println("[" + lottoGroup.toString().replace("\n", "]\n[") + "]");
+        }
     }
 
     public static void outputLottoResult(LottoResult lottoResult, PurchaseMoney purchaseMoney) {

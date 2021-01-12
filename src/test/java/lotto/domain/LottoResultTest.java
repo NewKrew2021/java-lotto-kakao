@@ -39,4 +39,19 @@ public class LottoResultTest {
         PurchaseMoney purchaseMoney = new PurchaseMoney(9000);
         assertThat(lottoResult.getProfitRatio(purchaseMoney)).isEqualTo("55.56");
     }
+
+    @Test
+    @DisplayName("combine 메서드를 통해 합쳐진 로또 결과가 제대로 구해졌는지 확인한다.")
+    void combineLottoResultTest() {
+        LottoResult lottoResult1 = new LottoResult();
+        lottoResult1.addRank(Rank.FIRST);
+        lottoResult1.addRank(Rank.SECOND);
+        LottoResult lottoResult2 = new LottoResult();
+        lottoResult2.addRank(Rank.SECOND);
+        lottoResult2.addRank(Rank.THIRD);
+        LottoResult combinedLottoResult = LottoResult.combine(lottoResult1, lottoResult2);
+        assertThat(combinedLottoResult.getRankCount(Rank.FIRST)).isEqualTo(1);
+        assertThat(combinedLottoResult.getRankCount(Rank.SECOND)).isEqualTo(2);
+        assertThat(combinedLottoResult.getRankCount(Rank.THIRD)).isEqualTo(1);
+    }
 }
