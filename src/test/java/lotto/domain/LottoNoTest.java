@@ -6,17 +6,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.*;
 public class LottoNoTest {
 
     @Test
-    void lottoNoConstructorTest() {
-        //pass
-        LottoNo lottoNo1 = new LottoNo(LottoNo.MIN_NUMBER);
-        LottoNo lottoNo2 = new LottoNo(LottoNo.MAX_NUMBER);
-
-        //error
-        assertThatThrownBy(()-> new LottoNo(LottoNo.MIN_NUMBER-1)).isInstanceOf(IllegalArgumentException.class);
-        assertThatThrownBy(()-> new LottoNo(LottoNo.MAX_NUMBER+1)).isInstanceOf(IllegalArgumentException.class);
-    }
-
-    @Test
     void validLottoNoTest() {
         int underMin = LottoNo.MIN_NUMBER - 1;
         int min = LottoNo.MIN_NUMBER;
