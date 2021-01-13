@@ -10,8 +10,23 @@ import static org.assertj.core.api.Assertions.*;
 public class SplitterTest {
 
     @Test
-    public void splitStringToIntegerList() {
+    public void testSplitToNumberBy() {
         List<Integer> numbers = Splitter.splitToNumberBy("4, 13, 17, 20, 25, 40", ",");
         assertThat(numbers).isEqualTo(Arrays.asList(4,13,17,20,25,40));
     }
+
+    @Test
+    public void When_SplitToNumberByWithNotNumber_Expected_ThrowException() {
+        assertThatThrownBy(()->{
+            Splitter.splitToNumberBy("4,z,1,2,3,4", ",");
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    public void When_SplitToNumberByWithConsecutiveComma_Expected_ThrowException() {
+        assertThatThrownBy(()->{
+            Splitter.splitToNumberBy("4,,1,1,2,3,4", ",");
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
 }

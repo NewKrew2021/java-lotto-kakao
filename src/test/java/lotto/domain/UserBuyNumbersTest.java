@@ -11,13 +11,13 @@ import static org.assertj.core.api.Assertions.*;
 public class UserBuyNumbersTest {
 
     @Test
-    public void create() {
+    public void testConstructor() {
         UserBuyNumbers totalUserBuyNums = new UserBuyNumbers();
         assertThat(totalUserBuyNums).isEqualTo(new UserBuyNumbers());
     }
 
     @Test
-    public void addNewNumbers() {
+    public void When_TwoUserBuyNumbersAddedSameLottoNumbers_Expected_isEqualToTrue() {
         UserBuyNumbers totalUserBuyNums1 = new UserBuyNumbers();
         totalUserBuyNums1.addBuyNumbers(new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)));
         UserBuyNumbers totalUserBuyNums2 = new UserBuyNumbers();
@@ -26,7 +26,7 @@ public class UserBuyNumbersTest {
     }
 
     @Test
-    public void rankResult() {
+    public void testRankResult() {
         UserBuyNumbers totalUserBuyNums = new UserBuyNumbers();
         totalUserBuyNums.addBuyNumbers(new LottoNumbers(Arrays.asList(30, 31, 32, 33, 34, 35)));
         WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(30, 31, 32, 33, 34, 40), 35);
@@ -35,7 +35,7 @@ public class UserBuyNumbersTest {
     }
 
     @Test
-    public void intToStringMatrix() {
+    public void testIntToStringMatrix() {
         UserBuyNumbers totalUserBuyNums = new UserBuyNumbers();
         totalUserBuyNums.addBuyNumbers(new LottoNumbers(Arrays.asList(30, 31, 32, 33, 34, 35)));
         totalUserBuyNums.addBuyNumbers(new LottoNumbers(Arrays.asList(20, 21, 22, 23, 24, 25)));

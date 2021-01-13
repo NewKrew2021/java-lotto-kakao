@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.*;
 public class LottoNumberTest {
 
     @Test
-    public void create() {
+    public void When_TwoLottoNumberInitializedWithSameNumber_Expected_TwoInstanceIsEqual() {
         LottoNumber number1 = LottoNumber.of(7);
         LottoNumber number2 = LottoNumber.of(7);
         assertThat(number1 == number2).isTrue();
@@ -18,21 +18,21 @@ public class LottoNumberTest {
 
     @ParameterizedTest
     @ValueSource(ints = {46, 47})
-    public void validateNumberRangeUpper(int number) {
+    public void When_LottoNumberInitializedWithNumberOver45_Expected_ThrowException(int number) {
         assertThatThrownBy(() -> {
             LottoNumber.of(number);
         }).isInstanceOf(NumberRangeException.class);
     }
 
     @Test
-    public void validateNumberRangeLower() {
+    public void When_LottoNumberInitializedWithNumberUnder1_Expected_ThrowException() {
         assertThatThrownBy(() -> {
             LottoNumber.of(0);
         }).isInstanceOf(NumberRangeException.class);
     }
 
     @Test
-    public void intToString() {
+    public void testIntToString() {
         LottoNumber lottoNumber = LottoNumber.of(7);
         assertThat(lottoNumber.getNumberToString()).isEqualTo("7");
     }

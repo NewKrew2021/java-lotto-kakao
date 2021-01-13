@@ -31,7 +31,7 @@ public class Money {
     }
 
     public double getProfitRate(int earnedMoney) {
-        return (double)earnedMoney / (double)money;
+        return (double) earnedMoney / (double) (possibleNumberBuy() * SINGLE_PRICE);
     }
 
     @Override
