@@ -63,7 +63,7 @@ public class LottoApplication {
     }
 
     private static void validateMoney(int money) {
-        if (money % LOTTO_PRICE != 0 || money == 0) {
+        if (money <= 0 || money % LOTTO_PRICE != 0) {
             throw new IllegalArgumentException();
         }
     }
