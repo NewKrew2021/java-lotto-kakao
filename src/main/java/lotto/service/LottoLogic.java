@@ -3,27 +3,24 @@ package lotto.service;
 import lotto.domain.*;
 import lotto.domain.strategy.AutoBuyingStrategy;
 import lotto.domain.strategy.BuyingStrategy;
+import lotto.domain.strategy.ManualBuyingStrategy;
 
 import java.util.*;
 
 public class LottoLogic {
 
-    private Money money;
-    private static AutoBuyingStrategy autoBuyingStrategy = new AutoBuyingStrategy();
-
-    public static List<LottoTicket> buyLottoTicketsAuto(int inputMoney) {
-        Money money = new Money(inputMoney);
+    public static List<LottoTicket> buyLottoTickets(PurchaseList purchaseList) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
+        AutoBuyingStrategy autoBuyingStrategy = new AutoBuyingStrategy(purchaseList);
+        ManualBuyingStrategy manualBuyingStrategy = new ManualBuyingStrategy(purchaseList);
 
-
-        while(money.payForAutoTicketing()) {
-            lottoTickets.add(buyTicket(autoBuyingStrategy));
-        }
+        lottoTickets.addAll(buyTicket(manualBuyingStrategy));
+        lottoTickets.addAll(buyTicket(autoBuyingStrategy));
 
         return lottoTickets;
     }
 
-    private static LottoTicket buyTicket(BuyingStrategy buyingStrategy) {
+    private static List<LottoTicket> buyTicket(BuyingStrategy buyingStrategy) {
         return buyingStrategy.buyTicket();
     }
 

@@ -1,7 +1,6 @@
 package lotto.service;
 
 import lotto.domain.*;
-import lotto.service.LottoLogic;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -16,9 +15,9 @@ public class LottoLogicTest {
 
     @Test
     void buyingLottoNosCountTest() {
-        List<LottoTicket> lottoTickets1 = LottoLogic.buyLottoTicketsAuto(1000);
-        List<LottoTicket> lottoTickets10 = LottoLogic.buyLottoTicketsAuto(10000);
-        List<LottoTicket> lottoTickets100 = LottoLogic.buyLottoTicketsAuto(100000);
+        List<LottoTicket> lottoTickets1 = LottoLogic.buyLottoTickets(new PurchaseList(1000));
+        List<LottoTicket> lottoTickets10 = LottoLogic.buyLottoTickets(new PurchaseList(10000));
+        List<LottoTicket> lottoTickets100 = LottoLogic.buyLottoTickets(new PurchaseList(100000));
 
         assertThat(lottoTickets1.size()).isEqualTo(1);
         assertThat(lottoTickets10.size()).isEqualTo(10);
