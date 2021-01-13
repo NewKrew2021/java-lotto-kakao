@@ -1,6 +1,7 @@
 package lotto.controller;
 
 import lotto.domain.LottoTicket;
+import lotto.domain.Money;
 import lotto.domain.StatisticsResult;
 import lotto.domain.WinningLottoNos;
 import lotto.service.LottoLogic;

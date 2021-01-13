@@ -22,7 +22,7 @@ public class LottoInputView {
     }
 
     private static boolean validateMoney(String inputMoney) {
-        int money = convertStringToIntMoney(inputMoney);
+        int money = convertStringToInt(inputMoney);
         if( !Money.validateInputMoney(money) ) {
             System.out.println("잘못된 금액을 입력하셨습니다.");
             return false;
@@ -30,13 +30,13 @@ public class LottoInputView {
         return true;
     }
 
-    private static Integer convertStringToIntMoney(String inputMoney) {
+    private static Integer convertStringToInt(String inputMoney) {
         try {
             return Integer.parseInt(inputMoney);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return 0;
+        return -1;
     }
 
     public static Set<Integer> inputWinningNumbers() {
@@ -79,7 +79,7 @@ public class LottoInputView {
     }
 
     private static boolean validateBonusNumber(String inputBonus){
-        int bonusNum = convertStringToIntMoney(inputBonus);
+        int bonusNum = convertStringToInt(inputBonus);
         if( !LottoNo.validateLottoNo(bonusNum) ) {
             System.out.println("보너스볼 번호가 적절하지 않습니다.");
             return false;
@@ -87,4 +87,22 @@ public class LottoInputView {
 
         return true;
     }
+
+    public static int inputManualLottoBuying() {
+        String count;
+        do {
+            System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
+            count = sc.nextLine();
+        }while(validateManualCount(count));
+        return Integer.parseInt(count);
+    }
+
+    private static boolean validateManualCount(String inputCount) {
+        int count = convertStringToInt(inputCount);
+        if( count < 0 ) {
+            return false;
+        }
+        return true;
+    }
+
 }

@@ -15,7 +15,7 @@ public class Money {
         return money >= LottoTicket.LOTTO_PRICE;
     }
 
-    public boolean payForTicket() {
+    public boolean payForAutoTicketing() {
         if( this.money < LottoTicket.LOTTO_PRICE) {
             return false;
         }

@@ -1,20 +1,22 @@
 package lotto.service;
 
 import lotto.domain.*;
+import lotto.domain.strategy.AutoBuyingStrategy;
+import lotto.domain.strategy.BuyingStrategy;
 
 import java.util.*;
 
 public class LottoLogic {
 
-    private static Money money;
+    private Money money;
     private static AutoBuyingStrategy autoBuyingStrategy = new AutoBuyingStrategy();
 
     public static List<LottoTicket> buyLottoTicketsAuto(int inputMoney) {
-        money = new Money(inputMoney);
+        Money money = new Money(inputMoney);
         List<LottoTicket> lottoTickets = new ArrayList<>();
 
 
-        while(money.payForTicket()) {
+        while(money.payForAutoTicketing()) {
             lottoTickets.add(buyTicket(autoBuyingStrategy));
         }
 

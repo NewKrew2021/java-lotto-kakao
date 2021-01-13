@@ -28,7 +28,7 @@ public class LottoTicketTest {
 
     @ParameterizedTest
     @CsvSource(
-            "'1,2,3,4,5,6','5'"
+            value = "1,2,3,4,5,6 | 5", delimiter = '|'
     )
     void isContainsTrueTest(String ticketNumbers, Integer lottoNumber){
         LottoTicket lottoTicket = new LottoTicket(CsvParsing.convertStringToIntegerSet(ticketNumbers));
