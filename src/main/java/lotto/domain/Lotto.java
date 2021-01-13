@@ -10,7 +10,6 @@ public class Lotto {
     private final List<LottoNumber> lottoNumbers;
 
     public Lotto(List<LottoNumber> lottoNumbers) {
-
         if (lottoNumbers.size() != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("6자리 숫자가 아닙니다.");
         }
@@ -18,32 +17,30 @@ public class Lotto {
     }
 
     public List<LottoNumber> getLottoNumbers() {
-
         return Collections.unmodifiableList(lottoNumbers);
     }
 
     public int checkSameCount(Lotto userLotto) {
-
         int count = 0;
+
         for (LottoNumber number : userLotto.getLottoNumbers()) {
             count += contain(number);
         }
-
         return count;
     }
 
     public int contain(LottoNumber number) {
-
         if (lottoNumbers.contains(number)) {
             return 1;
         }
         return 0;
     }
 
+
     @Override
     public String toString() {
-
         StringBuilder str = new StringBuilder();
+
         str.append('[');
         str.append(lottoNumbers.stream().map(Object::toString).collect(Collectors.joining(", ")));
         str.append("]\n");

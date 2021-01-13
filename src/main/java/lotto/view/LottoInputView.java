@@ -18,13 +18,11 @@ public class LottoInputView {
     }
 
     public String getWonLotto() {
-
         System.out.println(INPUT_WONLOTTO_PHRASE);
         return scanner.nextLine();
     }
 
     public LottoNumber getBonusBall() {
-
         System.out.println(INPUT_BONUS_BALL_PHRASE);
         int bonusBall = scanner.nextInt();
         scanner.nextLine();
@@ -33,7 +31,6 @@ public class LottoInputView {
 
 
     public Amount getLottoBuyAmount() {
-
         System.out.println(INPUT_MONEY_PHRASE);
         try {
             int money = scanner.nextInt();

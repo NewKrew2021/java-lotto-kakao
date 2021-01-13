@@ -19,7 +19,6 @@ public class LottoController {
     public void startLottoGame() {
         Lottos lottos = buyLotto();
         lottoOutputView.printLottos(lottos);
-
         WonLotto wonLotto = createWonLotto();
         LottoResult lottoResult = new LottoResult(lottos.lottosResult(wonLotto));
         lottoOutputView.WonResultPhrase();
@@ -31,7 +30,6 @@ public class LottoController {
 
     public Lottos buyLotto() {
         Amount amount = lottoInputView.getLottoBuyAmount();
-
         lottoOutputView.printInputQuantityPhrase(amount.BuyCount());
         Lottos lottos = new Lottos();
         for (int i = 0; i < amount.BuyCount(); i++) {

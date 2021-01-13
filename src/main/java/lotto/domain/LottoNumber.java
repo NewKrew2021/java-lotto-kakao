@@ -18,7 +18,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static LottoNumber of(int number){
-
         if (number > LOTTO_MAX_INT || number < LOTTO_MIN_INT) {
             throw new IllegalArgumentException("1~45범위를 벗어난 숫자입니다.");
         }
@@ -26,7 +25,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public LottoNumber(int number) {
-
         this.number = number;
     }
 

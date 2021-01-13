@@ -21,17 +21,14 @@ public class LottoTest {
 
     @Test
     public void testLottoSizeException() {
-
         List<LottoNumber> smallLotto = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5));
         List<LottoNumber> bigLotto = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6), new LottoNumber(7));
-
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> new Lotto(smallLotto));
         assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> new Lotto(bigLotto));
     }
 
     @Test
     public void testSameCountZero() {
-
         List<LottoNumber> userLottoNumber = Arrays.asList(new LottoNumber(12), new LottoNumber(7), new LottoNumber(8), new LottoNumber(9), new LottoNumber(10), new LottoNumber(11));
         Lotto userLotto = new Lotto(userLottoNumber);
         Assertions.assertTrue(lotto.checkSameCount(userLotto) == 0);
@@ -39,7 +36,6 @@ public class LottoTest {
 
     @Test
     public void testSameCountOne() {
-
         List<LottoNumber> userLottoNumber = Arrays.asList(new LottoNumber(1), new LottoNumber(7), new LottoNumber(8), new LottoNumber(9), new LottoNumber(10), new LottoNumber(11));
         Lotto userLotto = new Lotto(userLottoNumber);
         Assertions.assertTrue(lotto.checkSameCount(userLotto) == 1);
@@ -47,7 +43,6 @@ public class LottoTest {
 
     @Test
     public void testSameCountTwo() {
-
         List<LottoNumber> userLottoNumber = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(8), new LottoNumber(9), new LottoNumber(10), new LottoNumber(11));
         Lotto userLotto = new Lotto(userLottoNumber);
         Assertions.assertTrue(lotto.checkSameCount(userLotto) == 2);
@@ -55,7 +50,6 @@ public class LottoTest {
 
     @Test
     public void testSameCountThree() {
-
         List<LottoNumber> userLottoNumber = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(9), new LottoNumber(10), new LottoNumber(11));
         Lotto userLotto = new Lotto(userLottoNumber);
         Assertions.assertTrue(lotto.checkSameCount(userLotto) == 3);
@@ -64,7 +58,6 @@ public class LottoTest {
 
     @Test
     public void testSameCountFour() {
-
         List<LottoNumber> userLottoNumber = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(10), new LottoNumber(11));
         Lotto userLotto = new Lotto(userLottoNumber);
         Assertions.assertTrue(lotto.checkSameCount(userLotto) == 4);
@@ -72,7 +65,6 @@ public class LottoTest {
 
     @Test
     public void testSameCountFive() {
-
         List<LottoNumber> userLottoNumber = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(11));
         Lotto userLotto = new Lotto(userLottoNumber);
         Assertions.assertTrue(lotto.checkSameCount(userLotto) == 5);
@@ -80,7 +72,6 @@ public class LottoTest {
 
     @Test
     public void testSameCountSix() {
-
         List<LottoNumber> userLottoNumber = Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6));
         Lotto userLotto = new Lotto(userLottoNumber);
         Assertions.assertTrue(lotto.checkSameCount(userLotto) == 6);
@@ -88,7 +79,6 @@ public class LottoTest {
 
     @Test
     public void testContain() {
-
         Assertions.assertTrue(lotto.contain(new LottoNumber(1)) == 1);
         Assertions.assertTrue(lotto.contain(new LottoNumber(13)) == 0);
     }
