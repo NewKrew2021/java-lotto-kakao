@@ -16,10 +16,8 @@ class WinningLottoTest {
 
     @BeforeEach
     public void setUpLotto() {
-        lotto = new Lotto(Arrays.asList(new Ball(1), new Ball(7), new Ball(8),
-                new Ball(9), new Ball(10), new Ball(11)));
-        winningLotto = new WinningLotto(Arrays.asList(new Ball(1), new Ball(2), new Ball(3),
-                new Ball(4), new Ball(5), new Ball(6)), 11);
+        lotto = new Lotto(LottoTest.getLottoBalls(1,7,8,9,10,11));
+        winningLotto = new WinningLotto(LottoTest.getLottoBalls(1,2,3,4,5,6), 11);
     }
 
     @Test
@@ -36,8 +34,7 @@ class WinningLottoTest {
     @DisplayName("보너스볼과 로또 숫자가 겹칠때 예외 발생 케이스")
     void constructor(){
         assertThatThrownBy(() -> {
-            new WinningLotto(Arrays.asList(new Ball(1), new Ball(2), new Ball(3),
-                    new Ball(4), new Ball(5), new Ball(6)), 6);
+            new WinningLotto(LottoTest.getLottoBalls(1,2,3,4,5,6), 6);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 

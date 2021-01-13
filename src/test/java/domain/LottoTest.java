@@ -5,7 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -18,10 +18,8 @@ public class LottoTest {
 
     @BeforeEach
     public void setUpLotto() {
-        lotto = new Lotto(Arrays.asList(new Ball(1), new Ball(7), new Ball(8),
-                new Ball(9), new Ball(10), new Ball(11)));
-        winningLotto = new WinningLotto(Arrays.asList(new Ball(1), new Ball(2), new Ball(3),
-                new Ball(4), new Ball(5), new Ball(6)), 12);
+        lotto = new Lotto(getLottoBalls(1,7,8,9,10,11));
+        winningLotto = new WinningLotto(getLottoBalls(1,2,3,4,5,6), 12);
     }
 
     @RepeatedTest(100)
@@ -38,19 +36,25 @@ public class LottoTest {
     @DisplayName("생성자 파라미터에 볼의 갯수가 6개가 아닐 때, 중복되는 숫자가 있을 때 테스트")
     void validator(){
         assertThatThrownBy(() -> {
-            new Lotto(Arrays.asList(new Ball(1), new Ball(7), new Ball(8),
-                    new Ball(9), new Ball(10)));
+            new Lotto(getLottoBalls(1,7,8,9,10));
         }).isInstanceOf(IllegalArgumentException.class);
 
         assertThatThrownBy(() -> {
-            new Lotto(Arrays.asList(new Ball(1), new Ball(7), new Ball(8),
-                    new Ball(9), new Ball(10), new Ball(14), new Ball(15)));
+            new Lotto(getLottoBalls(1,7,8,9,10,14,15));
         }).isInstanceOf(IllegalArgumentException.class);
 
         assertThatThrownBy(() -> {
-            new Lotto(Arrays.asList(new Ball(1), new Ball(7), new Ball(8),
-                    new Ball(9), new Ball(10), new Ball(10)));
+            new Lotto(getLottoBalls(1,7,8,9,10,10));
         }).isInstanceOf(IllegalArgumentException.class);
     }
+
+    public static List<Ball> getLottoBalls(int... numbers){
+        List<Ball> balls = new ArrayList<>();
+        for(int number : numbers){
+            balls.add(new Ball(number));
+        }
+        return balls;
+    }
+
 
 }
