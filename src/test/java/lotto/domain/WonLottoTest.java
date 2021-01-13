@@ -6,10 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
 import java.util.HashSet;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class WonLottoTest {
     private WonLotto wonLotto;
@@ -17,7 +14,7 @@ public class WonLottoTest {
 
     @BeforeEach
     void setUp() {
-        lottoGeneratorService=new LottoGeneratorService();
+        lottoGeneratorService = new LottoGeneratorService();
         wonLotto = new WonLotto(lottoGeneratorService.lottoStringParser("1,2,3,4,5,6"), LottoNumber.of(7));
     }
 

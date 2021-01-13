@@ -26,7 +26,7 @@ public class LottoOutputView {
     }
 
     public void printProfitRatio(BigDecimal ratio) {
-        System.out.println(PROFIT_PHRASE + ratio+ "입니다.");
+        System.out.println(PROFIT_PHRASE + ratio + "입니다.");
     }
 
 }

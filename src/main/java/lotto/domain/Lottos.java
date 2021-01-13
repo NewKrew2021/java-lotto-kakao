@@ -19,7 +19,7 @@ public class Lottos {
         for (Lotto lotto : lottos) {
             int matchNo = wonLotto.getWonLotto().checkSameCount(lotto);
             int isBonus = lotto.contain(wonLotto.getBonusNo());
-            results.add(LottoRank.checkRanking(matchNo,isBonus));
+            results.add(LottoRank.checkRanking(matchNo, isBonus));
         }
         return results;
     }

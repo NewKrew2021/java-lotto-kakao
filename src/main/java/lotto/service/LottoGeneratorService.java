@@ -2,7 +2,6 @@ package lotto.service;
 
 import lotto.domain.Lotto;
 import lotto.domain.LottoNumber;
-import lotto.view.LottoOutputView;
 
 import java.util.ArrayList;
 import java.util.Collections;
