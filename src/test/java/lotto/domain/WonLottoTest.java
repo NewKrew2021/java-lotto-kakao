@@ -37,10 +37,10 @@ public class WonLottoTest {
     @DisplayName("일치하는 번호에 따른 등수 확인")
     void testCheckRanking() {
 
-        LottoRank rank = wonLotto.checkRanking(new Lotto(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))));
+        LottoRank rank = LottoRank.checkRanking(new Lotto(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))),wonLotto);
         assertThat(rank).isEqualTo(LottoRank.FIRST);
 
-        rank = wonLotto.checkRanking(new Lotto(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(7))));
+        rank = LottoRank.checkRanking(new Lotto(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(7))),wonLotto);
         assertThat(rank).isEqualTo(LottoRank.SECOND);
     }
 }

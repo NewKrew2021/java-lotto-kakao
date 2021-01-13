@@ -12,6 +12,9 @@ public enum LottoRank {
     private final int index;
     private final String matchedPhrase;
 
+    private final static int NON_GRADE_NUMBER = 3;
+    private final static int BONUS_NUMBER_MATCHING_COUNT = 5;
+
     LottoRank(int money, int index, String matchedPhrase) {
         this.money = money;
         this.index = index;
@@ -29,5 +32,25 @@ public enum LottoRank {
     public String getMatchedPhrase() {
         return matchedPhrase;
     }
+
+    public static LottoRank checkRanking(Lotto lotto, WonLotto wonLotto) {
+        int matchNo = wonLotto.getWonLotto().checkSameCount(lotto);
+
+        if (matchNo < NON_GRADE_NUMBER)
+            return LottoRank.NONE;
+
+        if (matchNo == BONUS_NUMBER_MATCHING_COUNT)
+            return lotto.getLottoNumbers().contains(wonLotto.getBonusNo()) ? LottoRank.SECOND : LottoRank.THIRD;
+
+        if (matchNo < BONUS_NUMBER_MATCHING_COUNT)
+            return LottoRank.values()[convertRank(matchNo)];
+
+        return LottoRank.FIRST;
+    }
+
+    private static int convertRank(int matchNo) {
+        return 7 - matchNo;
+    }
+
 
 }

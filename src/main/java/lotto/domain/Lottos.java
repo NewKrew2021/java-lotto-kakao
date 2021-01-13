@@ -19,7 +19,7 @@ public class Lottos {
 
         List<LottoRank> results = new ArrayList<>();
         for (Lotto lotto : lottos) {
-            results.add(wonLotto.checkRanking(lotto));
+            results.add(LottoRank.checkRanking(lotto,wonLotto));
         }
 
         return results;
