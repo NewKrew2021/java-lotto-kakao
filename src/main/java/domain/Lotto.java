@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int BASE_LOTTO_LENGTH = 6;
-    private final List<LottoNumber> lotto = new ArrayList<>();
     public static final int LOTTO_PRICE = 1000;
+    private final List<LottoNumber> lotto = new ArrayList<>();
 
     public Lotto(LottoGenerateStrategy lottoGenerateStrategy) {
         this(lottoGenerateStrategy.numberChooseStrategy());
@@ -31,7 +31,7 @@ public class Lotto {
 
     private void checkLottoLength(List<Integer> lotto) {
         if (lotto.size() != BASE_LOTTO_LENGTH) {
-            throw new LottoException("로또의 길이가 6이 아닙니다.");
+            throw new InvalidLottoException("로또의 길이가 6이 아닙니다.");
         }
     }
 

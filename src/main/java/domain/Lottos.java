@@ -1,14 +1,19 @@
 package domain;
 
+import utils.StringUtils;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class Lottos {
 
     private final List<Lotto> lottos;
+
+    public Lottos() {
+        this(new ArrayList<>());
+    }
 
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
@@ -22,11 +27,15 @@ public class Lottos {
         return lottos.size();
     }
 
-    public Lottos combineLottos(Lottos autoLottos) {
-        for (Lotto lotto : autoLottos.getLottos()) {
-            lottos.add(lotto);
-        }
-        return new Lottos(lottos);
+    public void generateManualLottos(List<String> inputs) {
+        inputs.stream()
+                .map(StringUtils::splitText)
+                .forEach(lotto -> lottos.add(new Lotto(new ManualLottoGenerateStrategy(lotto))));
+    }
+
+    public void generateAutoLottos(int autoLottoCount) {
+        IntStream.range(0, autoLottoCount)
+                .forEach(i -> lottos.add(new Lotto(new RandomLottoGenerateStrategy())));
     }
 
     @Override

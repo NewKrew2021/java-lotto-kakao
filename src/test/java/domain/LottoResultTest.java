@@ -14,12 +14,7 @@ public class LottoResultTest {
         LottoResult lottoResult = new LottoResult(new AnswerLotto(new Lotto(Arrays.asList(1,2,3,4,5,6)),
                 new LottoNumber(7)), new Lottos(new ArrayList<>(Arrays.asList(new Lotto(Arrays.asList(1,2,3,4,5,8))))));
 
-        assertThat(lottoResult.getLottoResult().get(LottoStatus.FIRST)).isEqualTo(0);
-        assertThat(lottoResult.getLottoResult().get(LottoStatus.SECOND)).isEqualTo(0);
-        assertThat(lottoResult.getLottoResult().get(LottoStatus.THIRD)).isEqualTo(1);
-        assertThat(lottoResult.getLottoResult().get(LottoStatus.FOURTH)).isEqualTo(0);
-        assertThat(lottoResult.getLottoResult().get(LottoStatus.FIFTH)).isEqualTo(0);
-        assertThat(lottoResult.getLottoResult().get(LottoStatus.NONE)).isEqualTo(0);
+        assertThat(lottoResult.getWinningMoney()).isEqualTo(LottoStatus.THIRD.getWinnings());
     }
 
     @Test
@@ -27,12 +22,7 @@ public class LottoResultTest {
         LottoResult lottoResult = new LottoResult(new AnswerLotto(new Lotto(Arrays.asList(1,2,3,4,5,6)),
                 new LottoNumber(7)), new Lottos(new ArrayList<>(Arrays.asList(new Lotto(Arrays.asList(1,2,3,4,5,7))))));
 
-        assertThat(lottoResult.getLottoResult().get(LottoStatus.FIRST)).isEqualTo(0);
-        assertThat(lottoResult.getLottoResult().get(LottoStatus.SECOND)).isEqualTo(1);
-        assertThat(lottoResult.getLottoResult().get(LottoStatus.THIRD)).isEqualTo(0);
-        assertThat(lottoResult.getLottoResult().get(LottoStatus.FOURTH)).isEqualTo(0);
-        assertThat(lottoResult.getLottoResult().get(LottoStatus.FIFTH)).isEqualTo(0);
-        assertThat(lottoResult.getLottoResult().get(LottoStatus.NONE)).isEqualTo(0);
+        assertThat(lottoResult.getWinningMoney()).isEqualTo(LottoStatus.SECOND.getWinnings());
     }
 
     @Test
@@ -40,12 +30,7 @@ public class LottoResultTest {
         LottoResult lottoResult = new LottoResult(new AnswerLotto(new Lotto(Arrays.asList(1,2,3,4,5,6)),
                 new LottoNumber(7)), new Lottos(new ArrayList<>(Arrays.asList(new Lotto(Arrays.asList(1,2,3,4,5,6))))));
 
-        assertThat(lottoResult.getLottoResult().get(LottoStatus.FIRST)).isEqualTo(1);
-        assertThat(lottoResult.getLottoResult().get(LottoStatus.SECOND)).isEqualTo(0);
-        assertThat(lottoResult.getLottoResult().get(LottoStatus.THIRD)).isEqualTo(0);
-        assertThat(lottoResult.getLottoResult().get(LottoStatus.FOURTH)).isEqualTo(0);
-        assertThat(lottoResult.getLottoResult().get(LottoStatus.FIFTH)).isEqualTo(0);
-        assertThat(lottoResult.getLottoResult().get(LottoStatus.NONE)).isEqualTo(0);
+        assertThat(lottoResult.getWinningMoney()).isEqualTo(LottoStatus.FIRST.getWinnings());
     }
 
     @Test
@@ -54,7 +39,7 @@ public class LottoResultTest {
         LottoResult lottoResult = new LottoResult(new AnswerLotto(new Lotto(Arrays.asList(1,2,3,4,5,6)),
                 new LottoNumber(7)), new Lottos(new ArrayList<>(Arrays.asList(new Lotto(Arrays.asList(1,2,3,4,5,6))))));
 
-        assertThat(lottoResult.getWinningMoney()).isEqualTo(LottoStatus.FIRST.getWinngs());
+        assertThat(lottoResult.getWinningMoney()).isEqualTo(LottoStatus.FIRST.getWinnings());
     }
 }
 

@@ -6,6 +6,7 @@ import java.util.Objects;
 
 public class LottoResult {
 
+    private static final long PERCENTAGE = 100;
     private final Map<LottoStatus, Integer> lottoResult;
 
     public LottoResult(AnswerLotto answerLotto, Lottos lottos) {
@@ -30,15 +31,15 @@ public class LottoResult {
         return lottoResult.get(lottoStatus);
     }
 
-    public int getWinningMoney() {
+    public long getWinningMoney() {
         return lottoResult.entrySet().stream()
-                .map(e -> e.getValue() * e.getKey().getWinngs())
-                .reduce(Integer::sum)
-                .orElse(0);
+                .map(e -> e.getValue() * e.getKey().getWinnings())
+                .reduce(Long::sum)
+                .orElse(0L);
     }
 
-    public Map<LottoStatus, Integer> getLottoResult() {
-        return lottoResult;
+    public long profitPercentage(Money money) {
+        return getWinningMoney() * PERCENTAGE / money.getMoney();
     }
 
     @Override

@@ -25,14 +25,14 @@ public class LottoTest {
 
     @Test
     void 로또_길이_6_미만() {
-        assertThatExceptionOfType(LottoException.class)
+        assertThatExceptionOfType(InvalidLottoException.class)
                 .isThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5)))
                 .withMessageContaining("로또의 길이가 6이 아닙니다.");
     }
 
     @Test
     void 로또_길이_6_이상() {
-        assertThatExceptionOfType(LottoException.class)
+        assertThatExceptionOfType(InvalidLottoException.class)
                 .isThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6, 7)))
                 .withMessageContaining("로또의 길이가 6이 아닙니다.");
     }

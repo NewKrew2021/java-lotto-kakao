@@ -6,15 +6,16 @@ import java.util.Comparator;
 import java.util.List;
 
 public enum LottoStatus {
-    NONE(0, 0),
-    FIFTH(5000, 3),
-    FOURTH(50000, 4),
-    THIRD(1500000, 5),
-    SECOND(30000000, 5),
-    FIRST(2000000000, 6);
+    NONE(0L, 0, false),
+    FIFTH(5000L, 3, false),
+    FOURTH(50000L, 4, false),
+    THIRD(1500000L, 5, false),
+    SECOND(30000000L, 5, true),
+    FIRST(2000000000L, 6, false);
 
-    private final int winngs;
-    private final int matchedLottoNumberCount;
+    private final long winnings;
+    private final int matchingCount;
+    private final boolean isBonusNumberMatched;
 
     private static final List<LottoStatus> lottoStatuses = new ArrayList<>();
 
@@ -23,25 +24,27 @@ public enum LottoStatus {
         lottoStatuses.sort(Comparator.reverseOrder());
     }
 
-    LottoStatus(int winngs, int matchedLottoNumberCount) {
-        this.winngs = winngs;
-        this.matchedLottoNumberCount = matchedLottoNumberCount;
+    LottoStatus(long winnings, int matchingCount, boolean isBonusNumberMatched) {
+        this.winnings = winnings;
+        this.matchingCount = matchingCount;
+        this.isBonusNumberMatched = isBonusNumberMatched;
     }
 
-    public int getWinngs() {
-        return winngs;
+    public long getWinnings() {
+        return winnings;
     }
 
-    public int getMatchedLottoNumberCount() {
-        return matchedLottoNumberCount;
+    public int getMatchingCount() {
+        return matchingCount;
     }
 
-    public static LottoStatus findStatus(int matchedLottoNumberCount, boolean isBonusNumberMatched) {
-        if (matchedLottoNumberCount == LottoStatus.SECOND.matchedLottoNumberCount) {
+    public static LottoStatus findStatus(int matchingCount, boolean isBonusNumberMatched) {
+        if (matchingCount == LottoStatus.SECOND.matchingCount) {
             return secondOrThird(isBonusNumberMatched);
         }
-        return lottoStatuses.stream().filter(lotto ->
-                lotto.getMatchedLottoNumberCount() == matchedLottoNumberCount).findFirst()
+        return lottoStatuses.stream()
+                .filter(lotto -> lotto.getMatchingCount() == matchingCount)
+                .findFirst()
                 .orElse(NONE);
     }
 

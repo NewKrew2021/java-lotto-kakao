@@ -14,7 +14,7 @@ public class LottoNumber {
 
     private void checkNumber(int number) {
         if (number < MIN_NUMBER || number > MAX_NUMBER) {
-            throw new LottoException("로또 범위 밖입니다.");
+            throw new InvalidLottoException("로또 범위 밖입니다.");
         }
     }
 
