@@ -1,14 +1,20 @@
 package lotto.domain;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static java.util.stream.Collectors.toMap;
 
 public class LottoNumber implements Comparable<LottoNumber> {
     private static final int LOTTO_MIN_INT = 1;
     private static final int LOTTO_MAX_INT = 45;
+    private static final int LOTTO_NUMBER_COUNT = 6;
     private final int number;
-    private static final Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
+    private static final Map<Integer, LottoNumber> lottoNumbers = IntStream.rangeClosed(LOTTO_MIN_INT, LOTTO_MAX_INT)
+            .boxed()
+            .collect(toMap(Function.identity(),LottoNumber::new));
 
     static {
         for (int i = LOTTO_MIN_INT; i <= LOTTO_MAX_INT; i++) {
@@ -25,6 +31,12 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public LottoNumber(int number) {
         this.number = number;
+    }
+
+    public static Lotto generateAutoLotto() {
+        List<LottoNumber> numbers= lottoNumbers.values().stream().collect(Collectors.toList());
+        Collections.shuffle(numbers);
+        return new Lotto(numbers.subList(LOTTO_MIN_INT-1,LOTTO_MAX_INT));
     }
 
     @Override

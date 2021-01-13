@@ -24,7 +24,7 @@ public class WonLottoTest {
         HashSet<LottoNumber> set = new HashSet<>();
         set.addAll(wonLotto.getWonLotto().getLottoNumbers());
         Assertions.assertTrue(set.size() == 6);
-        set.add(wonLotto.getBonusNo());
+        set.add(wonLotto.getBonusNumber());
         Assertions.assertTrue(set.size() == 7);
     }
 

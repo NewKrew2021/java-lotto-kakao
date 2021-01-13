@@ -24,18 +24,18 @@ public enum LottoRank {
         return money;
     }
 
-    public static LottoRank checkRanking(int matchNo, int isBonus) {
-        if (matchNo < NON_GRADE_NUMBER)
+    public static LottoRank checkRanking(int matchCount, int isBonus) {
+        if (matchCount < NON_GRADE_NUMBER)
             return LottoRank.NONE;
-        if (matchNo == BONUS_NUMBER_MATCHING_COUNT)
+        if (matchCount == BONUS_NUMBER_MATCHING_COUNT)
             return isBonus == 1 ? SECOND : THIRD;
-        if (matchNo < BONUS_NUMBER_MATCHING_COUNT)
-            return LottoRank.values()[convertRank(matchNo)];
+        if (matchCount < BONUS_NUMBER_MATCHING_COUNT)
+            return LottoRank.values()[convertRank(matchCount)];
         return LottoRank.FIRST;
     }
 
-    private static int convertRank(int matchNo) {
-        return 7 - matchNo;
+    private static int convertRank(int matchCount) {
+        return 7 - matchCount;
     }
 
     @Override

@@ -2,19 +2,19 @@ package lotto.domain;
 
 public class WonLotto {
     private final Lotto wonLotto;
-    private final LottoNumber bonusNo;
+    private final LottoNumber bonusNumber;
 
-    public WonLotto(Lotto lotto, LottoNumber bonusNo) {
+    public WonLotto(Lotto lotto, LottoNumber bonusNumber) {
         this.wonLotto = lotto;
-        this.bonusNo = bonusNo;
+        this.bonusNumber = bonusNumber;
     }
 
     public Lotto getWonLotto() {
         return wonLotto;
     }
 
-    public LottoNumber getBonusNo() {
-        return bonusNo;
+    public LottoNumber getBonusNumber() {
+        return bonusNumber;
     }
 
 }

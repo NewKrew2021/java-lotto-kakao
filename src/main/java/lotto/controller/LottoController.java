@@ -32,7 +32,7 @@ public class LottoController {
         lottoOutputView.printInputQuantityPhrase(amount.BuyCount());
         Lottos lottos = new Lottos();
         for (int i = 0; i < amount.BuyCount(); i++) {
-            lottos.add(lottoGeneratorService.generateAutoLotto());
+            lottos.add(LottoNumber.generateAutoLotto());
         }
         return lottos;
     }
