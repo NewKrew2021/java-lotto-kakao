@@ -6,15 +6,12 @@ import java.util.List;
 
 public class LottoResult {
     private HashMap<LottoRank, Integer> result = new HashMap<>();
-    private int totalPrice;
-    private final int LOTTO_PRICE = 1000;
 
     public LottoResult(List<LottoRank> lottoRanks) {
         initializationMap();
         for (LottoRank lottoRank : lottoRanks) {
             result.put(lottoRank, result.get(lottoRank) + 1);
         }
-        this.totalPrice = lottoRanks.size() * LOTTO_PRICE;
     }
 
     public void initializationMap() {
@@ -23,11 +20,7 @@ public class LottoResult {
         }
     }
 
-    public BigDecimal profitRatio() {
-        return new BigDecimal(totalPrize() / totalPrice).setScale(2, BigDecimal.ROUND_HALF_UP);
-    }
-
-    private int totalPrize() {
+    public int totalPrize() {
         int sum = 0;
         for (LottoRank lottoRank : result.keySet()) {
             sum += result.get(lottoRank) * lottoRank.getMoney();

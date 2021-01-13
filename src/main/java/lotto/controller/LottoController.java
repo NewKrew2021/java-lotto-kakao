@@ -17,19 +17,19 @@ public class LottoController {
     }
 
     public void startLottoGame() {
-        Lottos lottos = buyLotto();
+        Amount amount = lottoInputView.getLottoBuyAmount();
+        lottoOutputView.printInputQuantityPhrase(amount.BuyCount());
+        Lottos lottos = buyLotto(amount);
         lottoOutputView.printLottos(lottos);
         WonLotto wonLotto = createWonLotto();
         LottoResult lottoResult = new LottoResult(lottos.lottosResult(wonLotto));
         lottoOutputView.WonResultPhrase();
         lottoOutputView.printSameCountPhrase(lottoResult.toString());
-        lottoOutputView.printProfitRatio(lottoResult.profitRatio());
+        lottoOutputView.printProfitRatio(amount.profitRatio(lottoResult.totalPrize()));
 
     }
 
-    public Lottos buyLotto() {
-        Amount amount = lottoInputView.getLottoBuyAmount();
-        lottoOutputView.printInputQuantityPhrase(amount.BuyCount());
+    public Lottos buyLotto(Amount amount) {
         Lottos lottos = new Lottos();
         for (int i = 0; i < amount.BuyCount(); i++) {
             lottos.add(LottoNumber.generateAutoLotto());

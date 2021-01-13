@@ -14,8 +14,6 @@ public enum LottoRank {
     private final int matchedCount;
     private final String matchedPhrase = "개 일치";
     private final String matchedBonusPhrase = "보너스 볼 일치";
-    private final static int NON_GRADE_NUMBER = 3;
-    private final static int BONUS_NUMBER_MATCHING_COUNT = 5;
 
     LottoRank(int money, int matchedCount) {
         this.money = money;
@@ -31,7 +29,7 @@ public enum LottoRank {
             return SECOND;
         }
         return Arrays.stream(values())
-                .filter(r -> r.matchedCount == matchCount)
+                .filter(r -> r.matchedCount == matchCount&&r!=SECOND)
                 .findFirst()
                 .orElse(LottoRank.NONE);
     }

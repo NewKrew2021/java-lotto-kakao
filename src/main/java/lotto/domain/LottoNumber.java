@@ -36,7 +36,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public static Lotto generateAutoLotto() {
         List<LottoNumber> numbers= lottoNumbers.values().stream().collect(Collectors.toList());
         Collections.shuffle(numbers);
-        return new Lotto(numbers.subList(LOTTO_MIN_INT-1,LOTTO_MAX_INT));
+        numbers=numbers.subList(0,Lotto.LOTTO_NUMBER_COUNT);
+        Collections.sort(numbers);
+        return new Lotto(new ArrayList<>(numbers));
     }
 
     @Override

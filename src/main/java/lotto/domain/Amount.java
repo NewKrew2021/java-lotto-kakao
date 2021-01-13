@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
+
 public class Amount {
     private final int LOTTO_PRICE = 1000;
     private final int money;
@@ -9,6 +11,9 @@ public class Amount {
             throw new IllegalArgumentException("로또를 구매할 수 없는 금액입니다.");
         }
         this.money = money;
+    }
+    public BigDecimal profitRatio(int totalPrize) {
+        return new BigDecimal(totalPrize/ (double)money).setScale(2, BigDecimal.ROUND_HALF_UP);
     }
 
     public int BuyCount() {
