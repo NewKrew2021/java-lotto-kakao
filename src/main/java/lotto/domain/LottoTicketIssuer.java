@@ -8,7 +8,7 @@ public final class LottoTicketIssuer {
         throw new IllegalStateException("Issuer cannot be instantiated");
     }
 
-    public static LottoTickets issue(NumberPickStrategy strategy, int count) {
+    public static LottoTickets issuing(NumberPickStrategy strategy, int count) {
         List<LottoNumbers> numbers = new ArrayList<>();
 
         for (int ignored = 0; ignored < count; ignored++) {

@@ -32,15 +32,10 @@ public class LottoNumbers {
     }
 
     public int getMatchCount(LottoNumbers luckyNumbers) {
-        int count = 0;
-
-        for (LottoNumber lottoNumber : lottoNumbers) {
-            if (luckyNumbers.contains(lottoNumber)) {
-                count++;
-            }
-        }
-
-        return count;
+        return (int) lottoNumbers.stream()
+                .map(luckyNumbers::contains)
+                .filter(isContained -> isContained)
+                .count();
     }
 
     public boolean isMatchBonus(LottoNumber bonusNumber) {

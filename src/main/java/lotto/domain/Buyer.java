@@ -4,33 +4,33 @@ import lotto.domain.vo.Price;
 
 public class Buyer {
     private final int TICKET_PRICE = 1000;
-    private final int manualChoose;
-    private final Price insertPrice;
-    private LottoTickets allTickets;
+    private final int manualCount;
+    private final Price price;
+    private LottoTickets tickets;
 
-    public Buyer(Price insertPrice, int manualChooseTicketAmount) {
-        if (isNegative(manualChooseTicketAmount)) {
+    public Buyer(Price price, int manualCount) {
+        if (isNegative(manualCount)) {
             throw new IllegalArgumentException("Cannot choose negative amount of manual tickets");
         }
-        if (hasNotEnoughBudget(getTotalTicketAmount((int) insertPrice.getPrice()), manualChooseTicketAmount)) {
+        if (hasNotEnoughBudget(getTotalTicketAmount((int) price.getPrice()), manualCount)) {
             throw new IllegalArgumentException(
-                    String.format("Not enough budget to buy %d tickets", manualChooseTicketAmount));
+                    String.format("Not enough budget to buy %d tickets", manualCount));
         }
 
-        this.insertPrice = insertPrice;
-        this.manualChoose = manualChooseTicketAmount;
+        this.price = price;
+        this.manualCount = manualCount;
     }
 
-    public void setLottoTickets(LottoTickets tickets) {
-        allTickets = tickets;
+    public void issueTickets(LottoTickets tickets) {
+        this.tickets = tickets;
     }
 
-    public Price getInsertPrice() {
-        return insertPrice;
+    public Price getPrice() {
+        return price;
     }
 
     public int getChange() {
-        return (int) insertPrice.getPrice() % 1000;
+        return (int) price.getPrice() % 1000;
     }
 
     public long getInvestedMoney() {
@@ -38,19 +38,19 @@ public class Buyer {
     }
 
     public int getTotalTicketAmount() {
-        return (int) insertPrice.getPrice() / TICKET_PRICE;
+        return (int) price.getPrice() / TICKET_PRICE;
     }
 
-    public int getManualChooseTicketAmount() {
-        return manualChoose;
+    public int getManualCount() {
+        return manualCount;
     }
 
-    public int getRandomChooseTicketAmount() {
-        return getTotalTicketAmount() - getManualChooseTicketAmount();
+    public int getRandomCount() {
+        return getTotalTicketAmount() - getManualCount();
     }
 
     public LottoTickets getLottoTickets() {
-        return allTickets;
+        return tickets;
     }
 
     private boolean isNegative(int value) {

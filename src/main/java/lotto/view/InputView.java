@@ -24,7 +24,7 @@ public final class InputView {
 
     public LottoTickets scanManualChooseTickets(int count) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        return LottoTicketIssuer.issue(new ManualPickStrategy(), count);
+        return LottoTicketIssuer.issuing(new ManualPickStrategy(), count);
     }
 
     public WinningNumbers scanWinningNumbers() {

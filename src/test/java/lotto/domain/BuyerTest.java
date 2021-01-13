@@ -16,7 +16,7 @@ public class BuyerTest {
     @Test
     void testGetInsertPrice() {
         Buyer buyer = new Buyer(new Price(123), 0);
-        assertThat(buyer.getInsertPrice().getPrice()).isEqualTo(123L);
+        assertThat(buyer.getPrice().getPrice()).isEqualTo(123L);
     }
 
     @Test
@@ -47,8 +47,8 @@ public class BuyerTest {
     void testGetTicketAmount() {
         Buyer buyer = new Buyer(new Price(8234), 5);
         assertThat(buyer.getTotalTicketAmount()).isEqualTo(8);
-        assertThat(buyer.getManualChooseTicketAmount()).isEqualTo(5);
-        assertThat(buyer.getRandomChooseTicketAmount()).isEqualTo(3);
+        assertThat(buyer.getManualCount()).isEqualTo(5);
+        assertThat(buyer.getRandomCount()).isEqualTo(3);
     }
 
     @Test
@@ -59,7 +59,7 @@ public class BuyerTest {
                 new LottoNumbers(LottoNumberArray.asList(1, 2, 3, 4, 5, 6)));
 
         Buyer buyer = new Buyer(new Price(0), 0);
-        buyer.setLottoTickets(new LottoTickets(numbers));
+        buyer.issueTickets(new LottoTickets(numbers));
 
         assertThat(buyer.getLottoTickets()).isEqualTo(new LottoTickets(numbers));
     }

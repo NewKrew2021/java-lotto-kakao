@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class LottoTicketIssuerTest {
     @Test
     void testIssue() {
-        LottoTickets tickets = LottoTicketIssuer.issue(() -> LottoNumberArray.asList(1, 2, 3, 4, 5, 6), 2);
+        LottoTickets tickets = LottoTicketIssuer.issuing(() -> LottoNumberArray.asList(1, 2, 3, 4, 5, 6), 2);
 
         assertThat(tickets).isEqualTo(new LottoTickets(Arrays.asList(
                 new LottoNumbers(LottoNumberArray.asList(1, 2, 3, 4, 5, 6)),
