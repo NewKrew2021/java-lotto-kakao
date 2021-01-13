@@ -1,6 +1,6 @@
-package lotto.domain.dto;
+package lotto.domain;
 
-import lotto.domain.LottoNumbers;
+import lotto.domain.vo.LottoNumber;
 
 public class WinningNumbers {
     private final LottoNumbers luckyNumbers;
@@ -15,12 +15,8 @@ public class WinningNumbers {
         this.bonusNumber = bonusNumber;
     }
 
-    public LottoNumbers getLuckyNumbers() {
-        return luckyNumbers;
-    }
-
-    public LottoNumber getBonusNumber() {
-        return bonusNumber;
+    public MatchResult getMatchResult(LottoNumbers lottoTicket) {
+        return MatchResult.valueOf(lottoTicket.getMatchCount(luckyNumbers), lottoTicket.isMatchBonus(bonusNumber));
     }
 
     @Override

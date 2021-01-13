@@ -1,9 +1,13 @@
-package lotto.domain.dto;
+package lotto.domain.vo;
 
-public class TotalPrice {
+public class Price {
     private final long price;
 
-    public TotalPrice(long price) {
+    public Price(int price) {
+        this((long) price);
+    }
+
+    public Price(long price) {
         if (isNegative(price)) {
             throw new IllegalArgumentException("Total price cannot be negative");
         }
@@ -11,7 +15,7 @@ public class TotalPrice {
         this.price = price;
     }
 
-    public long getTotalPrice() {
+    public long getPrice() {
         return price;
     }
 

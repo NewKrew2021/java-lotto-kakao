@@ -1,21 +1,14 @@
-package lotto.domain.dto;
+package lotto.domain.vo;
 
 public class Rate {
     private final int rate;
 
     public Rate(int rate) {
-        if (isNegative(rate)) {
-            throw new IllegalArgumentException("rate cannot be negative");
-        }
         this.rate = rate;
     }
 
     public int getRate() {
         return rate;
-    }
-
-    private boolean isNegative(int rate) {
-        return rate < 0;
     }
 
     @Override

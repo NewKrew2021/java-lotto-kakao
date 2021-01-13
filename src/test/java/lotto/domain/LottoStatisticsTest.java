@@ -1,16 +1,13 @@
 package lotto.domain;
 
-import lotto.domain.dto.LottoNumber;
-import lotto.domain.dto.Rate;
-import lotto.domain.dto.WinningNumbers;
+import lotto.domain.vo.LottoNumber;
+import lotto.domain.vo.Rate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottoStatisticsTest {
     private LottoNumbers luckyNumbers;
@@ -21,9 +18,7 @@ public class LottoStatisticsTest {
 
     @BeforeEach
     void setUp() {
-        luckyNumbers = new LottoNumbers(Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::valueOf)
-                .collect(Collectors.toList()));
+        luckyNumbers = new LottoNumbers(LottoNumberArray.asList(1, 2, 3, 4, 5, 6));
         bonusNumber = LottoNumber.valueOf(7);
         winningNumbers = new WinningNumbers(luckyNumbers, bonusNumber);
         matcher = new LottoMatcher(winningNumbers);
@@ -43,17 +38,16 @@ public class LottoStatisticsTest {
                 ));
 
         LottoStatistics statistics = new LottoStatistics(matcher.match(tickets), investedMoney);
-        StatisticsResult statisticsResult = statistics.getStatisticsResult();
-        double expectedRateInRealNumber = (double) ((long) MatchResult.FIRST.getReward()
-                + MatchResult.SECOND.getReward() + MatchResult.FIFTH.getReward()) / investedMoney;
         MatchResults expectedMatches = new MatchResults(Arrays.asList(
                 MatchResult.FIRST,
                 MatchResult.SECOND,
                 MatchResult.FIFTH
         ));
+        double expectedRateInRealNumber = (double) ((long) MatchResult.FIRST.getReward()
+                + MatchResult.SECOND.getReward() + MatchResult.FIFTH.getReward()) / investedMoney;
         Rate expectedRate = new Rate((int) (Math.round(expectedRateInRealNumber * 100)));
 
-        assertThat(statisticsResult)
-                .isEqualTo(new StatisticsResult(expectedMatches, expectedRate));
+        assertThat(statistics.getResults()).isEqualTo(expectedMatches.getResult());
+        assertThat(statistics.getEarningRate()).isEqualTo(expectedRate);
     }
 }

@@ -1,37 +1,36 @@
 package lotto.domain;
 
-import lotto.domain.dto.InsertPrice;
-import lotto.domain.dto.Rate;
-import lotto.domain.dto.TotalPrice;
-
-import java.util.NoSuchElementException;
+import lotto.domain.dto.MatchResultsDto;
+import lotto.domain.vo.Price;
+import lotto.domain.vo.Rate;
 
 public class LottoStatistics {
     private final MatchResults results;
-    private final TotalPrice totalPrice;
-    private final int investedMoney;
+    private final Price price;
+    private final long investedMoney;
+    private final Rate rate;
 
-    public LottoStatistics(MatchResults results, int investedMoney) {
+    public LottoStatistics(MatchResults results, long investedMoney) {
         this.results = results;
         this.investedMoney = investedMoney;
-        this.totalPrice = getTotalPrice(results);
+        this.price = calcTotalPrice();
+        this.rate = calcRate();
     }
 
-    public StatisticsResult getStatisticsResult() {
-        double rateInRealNumber = (double) totalPrice.getTotalPrice() / investedMoney;
-        Rate rate = new Rate((int) Math.round(rateInRealNumber * 100));
-        return new StatisticsResult(results, rate);
+    public MatchResultsDto getResults() {
+        return results.getResult();
     }
 
-    private TotalPrice getTotalPrice(MatchResults results) {
-        long[] total = new long[1];
+    public Rate getEarningRate() {
+        return rate;
+    }
 
-        results.delegate(resultCounter ->
-                total[0] = resultCounter.entrySet()
-                        .stream()
-                        .mapToLong(entry -> (long) entry.getKey().getReward() * entry.getValue())
-                        .sum());
+    private Price calcTotalPrice() {
+        return new Price(results.getTotalEarnings());
+    }
 
-        return new TotalPrice(total[0]);
+    private Rate calcRate() {
+        double rateInRealNumber = (double) price.getPrice() / investedMoney;
+        return new Rate((int) Math.round(rateInRealNumber * 100));
     }
 }

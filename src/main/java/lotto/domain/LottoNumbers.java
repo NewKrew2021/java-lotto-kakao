@@ -1,10 +1,11 @@
 package lotto.domain;
 
-import lotto.domain.dto.LottoNumber;
+import lotto.domain.dto.LottoNumbersDto;
+import lotto.domain.vo.LottoNumber;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.function.Consumer;
 
 public class LottoNumbers {
     public static final int ALLOWED_NUMBER_COUNT = 6;
@@ -21,8 +22,23 @@ public class LottoNumbers {
         this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
     }
 
-    public void delegate(Consumer<List<LottoNumber>> consumer) {
-        consumer.accept(lottoNumbers);
+    public LottoNumbersDto getNumbersInTicket() {
+        return new LottoNumbersDto(new ArrayList<>(lottoNumbers));
+    }
+
+    public MatchResult matchWinning(WinningNumbers winningNumbers) {
+        return winningNumbers.getMatchResult(this);
+    }
+
+    public int getMatchCount(LottoNumbers luckyNumbers) {
+        return (int) lottoNumbers.stream()
+                .map(luckyNumbers::contains)
+                .filter(isContained -> isContained)
+                .count();
+    }
+
+    public boolean isMatchBonus(LottoNumber bonusNumber) {
+        return contains(bonusNumber);
     }
 
     public boolean contains(LottoNumber lottonumber) {

@@ -1,22 +1,17 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import lotto.domain.dto.LottoNumber;
-import lotto.domain.dto.WinningNumbers;
+import lotto.domain.vo.LottoNumber;
 import org.junit.jupiter.api.Test;
 
-import static org.assertj.core.api.Assertions.*;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class MatchResultsTest {
     @Test
     void matchesAreCorrect() {
-        LottoNumbers luckyNumbers = new LottoNumbers(Stream.of(1, 2, 3, 4, 5, 6)
-                .map(LottoNumber::valueOf)
-                .collect(Collectors.toList()));
+        LottoNumbers luckyNumbers = new LottoNumbers(LottoNumberArray.asList(1, 2, 3, 4, 5, 6));
         LottoNumber bonusNumber = LottoNumber.valueOf(7);
         WinningNumbers winningNumbers = new WinningNumbers(luckyNumbers, bonusNumber);
         LottoMatcher lottoMatcher = new LottoMatcher(winningNumbers);
@@ -45,6 +40,17 @@ public class MatchResultsTest {
     }
 
     @Test
+    void testGetTotalEarnings() {
+        MatchResults matchResults = new MatchResults(Arrays.asList(
+                MatchResult.FIRST,
+                MatchResult.THIRD
+        ));
+
+        assertThat(matchResults.getTotalEarnings())
+                .isEqualTo(MatchResult.FIRST.getReward() + MatchResult.THIRD.getReward());
+    }
+
+    @Test
     void testHashCode() {
         List<MatchResult> results = Arrays.asList(
                 MatchResult.FIRST,
@@ -58,16 +64,5 @@ public class MatchResultsTest {
 
         assertThat(matchResults.hashCode()).isEqualTo(new MatchResults(results).hashCode());
         assertThat(matchResults.hashCode()).isNotEqualTo(new MatchResults(differentResult).hashCode());
-    }
-
-    @Test
-    void testDelegate() {
-        MatchResults matchResults = new MatchResults(Arrays.asList(
-                MatchResult.FIRST,
-                MatchResult.THIRD
-        ));
-
-        matchResults.delegate(consumer -> assertThat(consumer.containsKey(MatchResult.FIRST)).isTrue());
-        matchResults.delegate(consumer -> assertThat(consumer.containsKey(MatchResult.SECOND)).isFalse());
     }
 }

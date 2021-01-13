@@ -1,10 +1,14 @@
 package lotto.domain;
 
-import java.util.*;
-import java.util.function.Consumer;
+import lotto.domain.dto.MatchResultsDto;
+
+import java.util.EnumMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 public class MatchResults {
-    private Map<MatchResult, Integer> resultCounter;
+    private final Map<MatchResult, Integer> resultCounter;
 
     public MatchResults(List<MatchResult> results) {
         resultCounter = new EnumMap<>(MatchResult.class);
@@ -13,8 +17,15 @@ public class MatchResults {
         }
     }
 
-    public void delegate(Consumer<Map<MatchResult, Integer>> consumer) {
-        consumer.accept(resultCounter);
+    public MatchResultsDto getResult() {
+        return new MatchResultsDto(resultCounter);
+    }
+
+    public long getTotalEarnings() {
+        return resultCounter.keySet()
+                .stream()
+                .map(result -> result.calculateTotalReward(resultCounter.get(result)))
+                .reduce(0L, Long::sum);
     }
 
     private void insertResult(MatchResult result) {

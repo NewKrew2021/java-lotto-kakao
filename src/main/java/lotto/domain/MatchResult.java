@@ -38,6 +38,10 @@ public enum MatchResult implements EnumMatcher {
         return MatchResult.LOSE;
     }
 
+    public long calculateTotalReward(int rankCount) {
+        return (long) this.reward * rankCount;
+    }
+
     public int getMatchCount() {
         return this.matchCount;
     }

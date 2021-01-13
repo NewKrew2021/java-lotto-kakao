@@ -1,10 +1,11 @@
-package lotto.domain.dto;
+package lotto.domain.vo;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottoNumberTest {
     @ParameterizedTest
@@ -34,12 +35,7 @@ public class LottoNumberTest {
 
     @ParameterizedTest
     @ValueSource(ints = {1, 45})
-    void isEqualAndValid(int value) {
+    void testValueOf(int value) {
         assertThat(LottoNumber.valueOf(value)).isEqualTo(LottoNumber.valueOf(value));
-    }
-
-    @Test
-    void isNotEqualTest(){
-        assertThat(LottoNumber.valueOf(1)).isNotEqualTo(LottoNumber.valueOf(10));
     }
 }
