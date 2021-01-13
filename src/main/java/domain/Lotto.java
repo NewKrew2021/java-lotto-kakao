@@ -34,6 +34,10 @@ public class Lotto {
         return lottoBalls.contains(ball);
     }
 
+    public static Lotto makeLotto(List<Ball> balls){
+        return new Lotto(balls);
+    }
+
     @Override
     public String toString() {
         StringBuilder lottoBuilder = new StringBuilder();

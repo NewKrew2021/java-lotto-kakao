@@ -24,12 +24,12 @@ public class LottoProgram {
 
         int buyManualCount = lottoProgramView.getBuyManualLottoCountForUser();
         int buyAutoLottoCount = calculateAutoBuyLottoCount(buyAmount,buyManualCount);
+        Lottos lottos = new Lottos(buyAutoLottoCount);
 
         lottoProgramView.printGetManualBallPhrase();
-        List<Lotto> manualLotto = getManualLottos(buyManualCount);
+        addManualLottoToLottos(lottos,buyManualCount);
 
         lottoProgramView.printBoughtLottosCount(buyManualCount,buyAutoLottoCount);
-        Lottos lottos = new Lottos(buyAutoLottoCount,manualLotto);
 
         lottoProgramView.printLottosNumber(lottos);
 
@@ -53,17 +53,9 @@ public class LottoProgram {
         return (buyAmount / Lotto.LOTTO_PRICE) - buyManualCount;
     }
 
-    private List<Lotto> getManualLottos(int buyManualCount){
-        List<Lotto> manualLottos = new ArrayList<>();
+    private void addManualLottoToLottos(Lottos lottos, int buyManualCount){
         for (int i = 0; i < buyManualCount; i++) {
-            manualLottos.add(new Lotto(getBalls(lottoProgramView.getManualLottoForUser())));
+            lottos.addLotto(Lotto.makeLotto(Ball.getBalls(lottoProgramView.getManualLottoForUser())));
         }
-        return manualLottos;
-    }
-
-    private List<Ball> getBalls(String[] numbers){
-        return Arrays.stream(numbers)
-                .map(Ball::new)
-                .collect(Collectors.toList());
     }
 }

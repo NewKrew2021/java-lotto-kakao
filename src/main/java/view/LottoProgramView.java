@@ -70,10 +70,7 @@ public class LottoProgramView {
     }
 
     public void printLottosNumber(Lottos lottos) {
-        for (Lotto lotto : lottos.getManualLottos()) {
-            System.out.println(lotto.toString());
-        }
-        for (Lotto lotto : lottos.getAutoLottos()) {
+        for (Lotto lotto : lottos.getLottos()) {
             System.out.println(lotto.toString());
         }
     }

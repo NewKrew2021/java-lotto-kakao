@@ -31,7 +31,7 @@ public class LottoStatisticsTest {
                                 new Ball(9), new Ball(10), new Ball(13)))
                 )
         );
-        lottoStatistics = new LottoStatistics(lottos.getRankCounts(winningLotto), lottos.getAutoLottos().size());
+        lottoStatistics = new LottoStatistics(lottos.getRankCounts(winningLotto), lottos.getLottos().size());
     }
 
     @Test
