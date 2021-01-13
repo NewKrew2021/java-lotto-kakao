@@ -13,17 +13,18 @@ public class LottoGeneratorService {
     private static final int LOTTO_NUMBER_COUNT = 6;
     private static final int LOTTO_MAX_INT = 45;
     private static final int LOTTO_SMALL_INT = 1;
-    private static final ArrayList<LottoNumber> lottoSelectors;
+    private final List<LottoNumber> lottoSelectors;
 
-    static {
+
+    public LottoGeneratorService() {
+
         lottoSelectors = new ArrayList<>();
         for (int i = LOTTO_SMALL_INT; i <= LOTTO_MAX_INT; i++) {
             lottoSelectors.add(new LottoNumber(i));
         }
     }
 
-
-    public Lotto generateLotto() {
+    public Lotto generateAutoLotto() {
 
         Collections.shuffle(lottoSelectors);
         List<LottoNumber> lottoNumbers = new ArrayList<>();

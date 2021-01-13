@@ -15,13 +15,12 @@ public class LottoInputView {
 
     public String getWonLotto() {
 
-        String wonLotto = scanner.nextLine();
-        return wonLotto;
+        return scanner.nextLine();
     }
 
     public LottoNumber getBonusBall() {
 
-        int bonusBall = Integer.parseInt(scanner.nextLine());
+        int bonusBall = scanner.nextInt();
         return new LottoNumber(bonusBall);
     }
 
@@ -29,7 +28,7 @@ public class LottoInputView {
     public Amount getLottoBuyAmount() {
 
         try {
-            int money = Integer.parseInt(scanner.nextLine());
+            int money = scanner.nextInt();
             return new Amount(money);
         } catch (Exception e) {
             System.out.println("잘못된 입력입니다.");

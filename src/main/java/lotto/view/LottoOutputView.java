@@ -51,8 +51,4 @@ public class LottoOutputView {
         System.out.println(INPUT_ERROR_PHRASE);
     }
 
-    public void printInputDuplicatePhrase() {
-        System.out.println(INPUT_DUPLICATE_PHRASE);
-    }
-
 }
