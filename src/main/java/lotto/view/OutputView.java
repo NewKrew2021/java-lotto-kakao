@@ -28,7 +28,7 @@ public class OutputView {
         for (LottoNumbersDto ticket : tickets.getTickets()) {
             String numbersFormatted = ticket.getNumbers()
                     .stream()
-                    .map(num -> Integer.toString(num))
+                    .map(lottoNumber -> Integer.toString(lottoNumber.getNumber()))
                     .collect(Collectors.joining(", "));
 
             message.append(String.format("[%s]\n", numbersFormatted));

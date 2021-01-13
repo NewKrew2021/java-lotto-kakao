@@ -3,9 +3,9 @@ package lotto.domain;
 import lotto.domain.dto.LottoNumbersDto;
 import lotto.domain.vo.LottoNumber;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class LottoNumbers {
     public static final int ALLOWED_NUMBER_COUNT = 6;
@@ -23,9 +23,7 @@ public class LottoNumbers {
     }
 
     public LottoNumbersDto getNumbersInTicket() {
-        return new LottoNumbersDto(lottoNumbers.stream()
-                .map(LottoNumber::getNumber)
-                .collect(Collectors.toList()));
+        return new LottoNumbersDto(new ArrayList<>(lottoNumbers));
     }
 
     public MatchResult matchWinning(WinningNumbers winningNumbers) {
