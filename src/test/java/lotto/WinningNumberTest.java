@@ -1,5 +1,6 @@
 package lotto;
 
+import lotto.domain.InvalidBonusNumberException;
 import lotto.domain.LottoTicket;
 import lotto.domain.Number;
 import lotto.domain.WinningNumber;
@@ -33,6 +34,13 @@ public class WinningNumberTest {
                 new Number(4),
                 new Number(5),
                 new Number(7)))))).isEqualTo(true);
+    }
+
+    @Test
+    void invalidBonusNumberTest(){
+        assertThatThrownBy(() ->{
+            new WinningNumber("1, 2, 3, 4, 5, 6", 6);
+        }).isInstanceOf(InvalidBonusNumberException.class);
     }
 
 }
