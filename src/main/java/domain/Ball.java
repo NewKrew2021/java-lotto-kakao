@@ -1,6 +1,9 @@
 package domain;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class Ball {
 
@@ -22,6 +25,12 @@ public class Ball {
 
     public static Ball map(String number) {
         return new Ball(number);
+    }
+
+    public static List<Ball> getBalls(String[] numbers){
+        return Arrays.stream(numbers)
+                .map(Ball::new)
+                .collect(Collectors.toList());
     }
 
     @Override
