@@ -28,7 +28,7 @@ public class LottoInputView {
         System.out.println(INPUT_BONUS_BALL_PHRASE);
         int bonusBall = scanner.nextInt();
         scanner.nextLine();
-        return new LottoNumber(bonusBall);
+        return LottoNumber.of(bonusBall);
     }
 
 

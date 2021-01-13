@@ -2,6 +2,8 @@ package lotto.view;
 
 import lotto.domain.Lottos;
 
+import java.math.BigDecimal;
+
 public class LottoOutputView {
 
     private final String INPUT_QUANTITY_PHRASE = "개를 구매했습니다.";
@@ -29,8 +31,8 @@ public class LottoOutputView {
         System.out.println(rankStatistics);
     }
 
-    public void printProfitRatio(double ratio) {
-        System.out.println(PROFIT_PHRASE + String.format("%.2f", ratio) + "입니다.");
+    public void printProfitRatio(BigDecimal ratio) {
+        System.out.println(PROFIT_PHRASE + ratio+ "입니다.");
     }
 
 

@@ -20,7 +20,7 @@ public class LottoGeneratorService {
 
         lottoSelectors = new ArrayList<>();
         for (int i = LOTTO_SMALL_INT; i <= LOTTO_MAX_INT; i++) {
-            lottoSelectors.add(new LottoNumber(i));
+            lottoSelectors.add(LottoNumber.of(i));
         }
     }
 

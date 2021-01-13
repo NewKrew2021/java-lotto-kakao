@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,10 +25,11 @@ public class LottoRanks {
         return sum;
     }
 
-    public double profitRatio() {
+    public BigDecimal profitRatio() {
+        BigDecimal totalPrize=new BigDecimal(String.valueOf(totalPrize()));
+        BigDecimal lottoTotalPrice=new BigDecimal(String.valueOf(lottoRanks.size()*LOTTO_PRICE));
 
-        double ratio = (double) totalPrize() / (double) (lottoRanks.size() * LOTTO_PRICE);
-        return ratio;
+        return totalPrize.divide(lottoTotalPrice,2,BigDecimal.ROUND_HALF_UP);
     }
 
     private List<Integer> rankStatistics() {
