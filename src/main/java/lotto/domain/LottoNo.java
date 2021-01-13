@@ -12,7 +12,7 @@ public class LottoNo implements Comparable<LottoNo>{
     private final int number;
 
     private LottoNo(final Integer number) {
-        if( !checkValidationLottoNo(number) ) {
+        if( !validateLottoNo(number) ) {
             throw new IllegalArgumentException("잘못된 로또 번호 입니다.");
         }
 
@@ -26,7 +26,7 @@ public class LottoNo implements Comparable<LottoNo>{
         }
     }
 
-    public static boolean checkValidationLottoNo(final Integer number) {
+    public static boolean validateLottoNo(final Integer number) {
         return number >= MIN_NUMBER && number <= MAX_NUMBER;
     }
 

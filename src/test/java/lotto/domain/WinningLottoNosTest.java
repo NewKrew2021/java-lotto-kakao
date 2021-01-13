@@ -19,11 +19,11 @@ public class WinningLottoNosTest {
         List<Set<Integer>> ticketsNumberListInt = CsvParsing.convertStringToTicketsNumber(ticketsNumbers);
         List<Integer> bonusNumbersIntList = CsvParsing.convertStringToIntegerList(bonusNumbers);
 
-        boolean invalid0 = WinningLottoNos.checkValidationWinningLottoNos(ticketsNumberListInt.get(0), bonusNumbersIntList.get(0));
-        boolean invalid1 = WinningLottoNos.checkValidationWinningLottoNos(ticketsNumberListInt.get(1), bonusNumbersIntList.get(1));
-        boolean invalid2 = WinningLottoNos.checkValidationWinningLottoNos(ticketsNumberListInt.get(2), bonusNumbersIntList.get(2));
-        boolean invalid3 = WinningLottoNos.checkValidationWinningLottoNos(ticketsNumberListInt.get(3), bonusNumbersIntList.get(3));
-        boolean valid = WinningLottoNos.checkValidationWinningLottoNos(ticketsNumberListInt.get(4), bonusNumbersIntList.get(4));
+        boolean invalid0 = WinningLottoNos.validateWinningLottoNos(ticketsNumberListInt.get(0), bonusNumbersIntList.get(0));
+        boolean invalid1 = WinningLottoNos.validateWinningLottoNos(ticketsNumberListInt.get(1), bonusNumbersIntList.get(1));
+        boolean invalid2 = WinningLottoNos.validateWinningLottoNos(ticketsNumberListInt.get(2), bonusNumbersIntList.get(2));
+        boolean invalid3 = WinningLottoNos.validateWinningLottoNos(ticketsNumberListInt.get(3), bonusNumbersIntList.get(3));
+        boolean valid = WinningLottoNos.validateWinningLottoNos(ticketsNumberListInt.get(4), bonusNumbersIntList.get(4));
 
         assertThat(invalid0).isFalse();
         assertThat(invalid1).isFalse();

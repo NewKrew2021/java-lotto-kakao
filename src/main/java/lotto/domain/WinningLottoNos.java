@@ -17,8 +17,8 @@ public class WinningLottoNos {
         this.bonusNo = LottoNo.of(bonusNo);
     }
 
-    public static boolean checkValidationWinningLottoNos(Set<Integer> numbers, Integer bonusNo ) {
-        if( !LottoTicket.checkValidationLottoTicket(numbers) || !LottoNo.checkValidationLottoNo(bonusNo) ) {
+    public static boolean validateWinningLottoNos(Set<Integer> numbers, Integer bonusNo ) {
+        if( !LottoTicket.validateLottoTicket(numbers) || !LottoNo.validateLottoNo(bonusNo) ) {
             return false;
         }
         return !numbers.contains(bonusNo);

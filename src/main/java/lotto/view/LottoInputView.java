@@ -23,7 +23,7 @@ public class LottoInputView {
 
     private static boolean checkValidMoney(String inputMoney) {
         int money = convertStringToIntMoney(inputMoney);
-        if( !Money.checkValidationInputMoney(money) ) {
+        if( !Money.validateInputMoney(money) ) {
             System.out.println("잘못된 금액을 입력하셨습니다.");
             return false;
         }
@@ -60,7 +60,7 @@ public class LottoInputView {
     }
 
     private static boolean checkValidWinningNumber(Set<Integer> numbers){
-        if( !LottoTicket.checkValidationLottoTicket(numbers) ) {
+        if( !LottoTicket.validateLottoTicket(numbers) ) {
             System.out.println("당첨번호가 적절하지 않습니다.");
             return false;
         }
@@ -80,7 +80,7 @@ public class LottoInputView {
 
     private static boolean checkValidBonusNumber(String inputBonus){
         int bonusNum = convertStringToIntMoney(inputBonus);
-        if( !LottoNo.checkValidationLottoNo(bonusNum) ) {
+        if( !LottoNo.validateLottoNo(bonusNum) ) {
             System.out.println("보너스볼 번호가 적절하지 않습니다.");
             return false;
         }

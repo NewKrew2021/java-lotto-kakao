@@ -5,13 +5,13 @@ public class Money {
     private int money;
 
     public Money(int money) {
-        if( !checkValidationInputMoney(money) ) {
+        if( !validateInputMoney(money) ) {
             throw new IllegalArgumentException("잘못된 금액을 입력하셨습니다.");
         }
         this.money = money;
     }
 
-    public static boolean checkValidationInputMoney(final int money) {
+    public static boolean validateInputMoney(final int money) {
         return money >= LottoTicket.LOTTO_PRICE;
     }
 

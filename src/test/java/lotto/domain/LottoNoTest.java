@@ -12,10 +12,10 @@ public class LottoNoTest {
         int upperMax = LottoNo.MAX_NUMBER + 1;
         int max = LottoNo.MAX_NUMBER;
 
-        boolean underMinValidation = LottoNo.checkValidationLottoNo(underMin);
-        boolean minValidation = LottoNo.checkValidationLottoNo(min);
-        boolean upperMaxValidation = LottoNo.checkValidationLottoNo(upperMax);
-        boolean maxValidation = LottoNo.checkValidationLottoNo(max);
+        boolean underMinValidation = LottoNo.validateLottoNo(underMin);
+        boolean minValidation = LottoNo.validateLottoNo(min);
+        boolean upperMaxValidation = LottoNo.validateLottoNo(upperMax);
+        boolean maxValidation = LottoNo.validateLottoNo(max);
 
         assertThat(underMinValidation).isFalse();
         assertThat(minValidation).isTrue();

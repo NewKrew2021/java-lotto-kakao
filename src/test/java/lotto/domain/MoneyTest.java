@@ -19,8 +19,8 @@ public class MoneyTest {
     @ParameterizedTest
     @CsvSource("999,1000")
     void checkValidationInputMoney(int underTicket, int upperTicket) {
-        boolean invalidTicket = Money.checkValidationInputMoney(underTicket);
-        boolean validTicket = Money.checkValidationInputMoney(upperTicket);
+        boolean invalidTicket = Money.validateInputMoney(underTicket);
+        boolean validTicket = Money.validateInputMoney(upperTicket);
 
         assertThat(invalidTicket).isFalse();
         assertThat(validTicket).isTrue();

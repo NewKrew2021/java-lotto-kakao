@@ -2,7 +2,7 @@ package lotto.domain;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Set;
 
@@ -17,9 +17,9 @@ public class LottoTicketTest {
     void checkValidationLottoTicketTest(String input){
         List<Set<Integer>> ticketsNumber = CsvParsing.convertStringToTicketsNumber(input);
 
-        boolean invalidNumberSize = LottoTicket.checkValidationLottoTicket(ticketsNumber.get(0));
-        boolean invalidDuplication = LottoTicket.checkValidationLottoTicket(ticketsNumber.get(1));
-        boolean validNumber = LottoTicket.checkValidationLottoTicket(ticketsNumber.get(2));
+        boolean invalidNumberSize = LottoTicket.validateLottoTicket(ticketsNumber.get(0));
+        boolean invalidDuplication = LottoTicket.validateLottoTicket(ticketsNumber.get(1));
+        boolean validNumber = LottoTicket.validateLottoTicket(ticketsNumber.get(2));
 
         assertThat(invalidNumberSize).isFalse();
         assertThat(invalidDuplication).isFalse();
