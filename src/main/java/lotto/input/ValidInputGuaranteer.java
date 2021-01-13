@@ -6,12 +6,13 @@ public abstract class ValidInputGuaranteer <T>{
     protected Scanner scanner = new Scanner(System.in);
 
     public T getFromUser(){
-        System.out.println(getComment());
+        if(!getComment().equals(""))
+            System.out.println(getComment());
         try{
             String valueFromUser = scanner.nextLine();
             return transformToObject(valueFromUser);
         } catch (Exception e){
-            System.out.println(e.getMessage());
+            System.out.println("적절하지 않은 입력 입니다.");
             return getFromUser();
         }
     }

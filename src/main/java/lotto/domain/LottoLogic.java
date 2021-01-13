@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
@@ -13,19 +15,27 @@ public class LottoLogic {
     }
 
     public void play() {
-        int lottoCount = inputView.getLottoCountFromUser();
-        List<LottoNumbers> tickets = makeRandomLottos(lottoCount);
-        LottoOutputView.printLottoCount(tickets);
+        List<LottoNumbers> totalTickets = getTotalTickets();
+        LottoOutputView.printLottoCount(totalTickets);
 
-        StatisticsResult result = LottoLogic.winningStatistics(tickets,
+        StatisticsResult result = LottoLogic.winningStatistics(totalTickets,
                 new WinningLottoNos(
                         inputView.inputWinningNumbers(),
                         inputView.inputBonusNumber()));
         System.out.println(result.toString());
-        System.out.println(result.benefit(tickets.size()));
+        System.out.println(result.benefit(totalTickets.size()));
     }
 
-    private static List<LottoNumbers> makeRandomLottos(int howmany) {
+    private List<LottoNumbers> getTotalTickets(){
+        int totalLottoCount = inputView.getLottoCountFromUser();
+        List<LottoNumbers> selfTickets = inputView.getSelfTickets(inputView.inputSelfLottoCount());
+        List<LottoNumbers> exceptSelfTickets = makeRandomTickets(totalLottoCount - selfTickets.size());
+        List<LottoNumbers> totalTickets = Stream.concat(selfTickets.stream(), exceptSelfTickets.stream())
+                .collect(Collectors.toList());
+        return totalTickets;
+    }
+
+    private static List<LottoNumbers> makeRandomTickets(int howmany) {
         List<LottoNumbers> lottoTickets = new ArrayList<>();
         List<Integer> nums = makeLottoNumber();
         for (int i = 0; i < howmany; i++) {
