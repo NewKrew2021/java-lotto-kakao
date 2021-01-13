@@ -44,9 +44,9 @@ public class Lottos {
         return new LottoResults(results);
     }
 
-    public Lottos merge(Lottos lottos) {
-        List<Lotto> newLottos = new ArrayList<>(this.lottos);
-        newLottos.addAll(lottos.getLottos());
+    public static Lottos merge(Lottos lottos1, Lottos lottos2) {
+        List<Lotto> newLottos = new ArrayList<>(lottos1.getLottos());
+        newLottos.addAll(lottos2.getLottos());
         return new Lottos(newLottos);
     }
 

@@ -16,7 +16,7 @@ public class LottoSimulationApp {
         String text = InputView.getText();
         String bonus = InputView.getBonus();
         WinningLotto winningLotto = new WinningLotto(Lotto.of(text), new LottoNumber(Integer.parseInt(bonus)));
-        LottoSimulation lotto = new LottoSimulation(price, winningLotto, manualLottos.merge(autoLottos));
+        LottoSimulation lotto = new LottoSimulation(price, winningLotto, Lottos.merge(manualLottos, autoLottos));
 
         lotto.confirm();
         OutputView.printResult(lotto);
