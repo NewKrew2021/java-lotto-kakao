@@ -1,6 +1,8 @@
 package lotto.domain;
 
-import java.util.Objects;
+import lotto.util.StringUtils;
+
+import static lotto.util.StringUtils.*;
 
 public class LottoNumber implements Comparable<LottoNumber>{
     private int number;
@@ -14,14 +16,14 @@ public class LottoNumber implements Comparable<LottoNumber>{
 
     public static LottoNumber makeNumberFromText(String text){
         if(isBlank(text) || !isNumber(text))
-            throw new RuntimeException("숫자를 입력해주세요.");
+            throw new IllegalArgumentException("숫자를 입력해주세요.");
 
-        return new LottoNumber(Integer.parseInt(text));
+        return makeNumber(Integer.parseInt(text));
     }
 
     public static LottoNumber makeNumber(int number){
         if(number < LOTTO_MIN_NUMBER || number > LOTTO_MAX_NUMBER)
-            throw new RuntimeException("범위에 해당하지 않는 수입니다.");
+            throw new IllegalArgumentException("범위에 해당하지 않는 수입니다.");
 
         return new LottoNumber(number);
     }
@@ -40,19 +42,6 @@ public class LottoNumber implements Comparable<LottoNumber>{
 
     public boolean equals(int n){
         return number == n;
-    }
-
-    public static boolean isBlank(String text){
-        return text.isEmpty() || text == null;
-    }
-
-    public static boolean isNumber(String text){
-        try{
-           Integer.parseInt(text);
-           return true;
-        }catch (Exception e){
-            return false;
-        }
     }
 
     @Override

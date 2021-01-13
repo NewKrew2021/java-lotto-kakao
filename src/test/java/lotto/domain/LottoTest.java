@@ -13,7 +13,7 @@ public class LottoTest {
 
     @BeforeEach
     void setUp(){
-        lotto = LottoGenerator.getInstance().generateLotto();
+        lotto = LottoGenerator.generateLotto();
     }
 
     @Test

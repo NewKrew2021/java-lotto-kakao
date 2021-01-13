@@ -3,10 +3,7 @@ package lotto.domain;
 import lotto.domain.Lotto;
 import lotto.util.RandomUtil;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -22,42 +19,29 @@ public class LottoGenerator {
 
     public static final int LOTTO_MAX_SIZE = 6;
 
-    private LottoGenerator(){
-    }
-
-    public static LottoGenerator getInstance(){
-        if(instance == null)
-            return new LottoGenerator();
-
-        return instance;
-    }
-
-    public Lotto generateLotto() {
+    public static Lotto generateLotto() {
 
         Collections.shuffle(allLottoNumbers);
 
-        return new Lotto(
-                allLottoNumbers.stream()
-                .limit(LOTTO_MAX_SIZE)
-                .collect(Collectors.toList()));
+        SortedSet<LottoNumber> set = new TreeSet<>();
+        set.addAll(allLottoNumbers.subList(0, LOTTO_MAX_SIZE));
+
+        return new Lotto(set);
     }
 
-    public int generateBonus(Lotto lotto){
-        HashSet<Integer> set = new HashSet<>();
-        lotto.getLotto().stream().forEach(number -> set.add(number.getNumber()));
+    public static WonLotto generateWonLotto(){
+        Collections.shuffle(allLottoNumbers);
 
-        int bonusNo = RandomUtil.getRandomValue();
-        while(!set.add(bonusNo)){
-            bonusNo = RandomUtil.getRandomValue();
-        }
+        SortedSet<LottoNumber> set = new TreeSet<>();
+        set.addAll(allLottoNumbers.subList(0, LOTTO_MAX_SIZE));
 
-        return bonusNo;
+        return new WonLotto(new Lotto(set), allLottoNumbers.get(LOTTO_MAX_SIZE).getNumber());
     }
 
-    public Lotto lottoStringParser(String lotto){
+    public static Lotto lottoStringParser(String lotto){
 
         String[] lottoNumber=lotto.split(",");
-        List<LottoNumber> parsedLotto=new ArrayList<>();
+        SortedSet<LottoNumber> parsedLotto=new TreeSet<>();
         for (String number : lottoNumber) {
             parsedLotto.add(LottoNumber.makeNumber(Integer.parseInt(number.trim())));
         }

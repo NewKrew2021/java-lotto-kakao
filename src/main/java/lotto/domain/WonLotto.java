@@ -5,13 +5,6 @@ public class WonLotto {
     private Lotto wonLotto;
     private int bonusNo;
 
-    private LottoGenerator lottoGenerator = LottoGenerator.getInstance();
-
-    public WonLotto(){
-        this.wonLotto = lottoGenerator.generateLotto();
-        this.bonusNo = lottoGenerator.generateBonus(wonLotto);
-    }
-
     public WonLotto(Lotto lotto, int bonusNo){
         this.wonLotto = lotto;
         this.bonusNo = bonusNo;
@@ -28,7 +21,7 @@ public class WonLotto {
     public LottoRank checkRanking(Lotto lotto){
         int matchNo=wonLotto.checkSameCount(lotto);
 
-        boolean isBonusMatched=lotto.getLotto().contains(bonusNo);
+        boolean isBonusMatched=lotto.getLotto().add(LottoNumber.makeNumber(bonusNo));
 
         return LottoRank.rankForMatched(matchNo, isBonusMatched);
     }

@@ -32,18 +32,4 @@ public class LottoNumberTest {
             LottoNumber.makeNumber(LottoNumber.LOTTO_MAX_NUMBER+1);
         }).isInstanceOf(RuntimeException.class);
     }
-
-    @Test
-    void blankNumberTest(){
-        assertThatThrownBy(() -> {
-            LottoNumber.makeNumberFromText("");
-        }).isInstanceOf(RuntimeException.class);
-    }
-
-    @Test
-    void notNumberTest(){
-        assertThatThrownBy(() -> {
-            LottoNumber.makeNumberFromText("ab");
-        }).isInstanceOf(RuntimeException.class);
-    }
 }

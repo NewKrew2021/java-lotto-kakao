@@ -27,13 +27,13 @@ public class LottoReview {
         return totalPrize;
     }
 
-    public int getProfitRatio() {
+    public double getProfitRatio() {
 
         return calculateRatio(getProfit(),rankResult.size()*1000);
     }
 
-    private int calculateRatio(long totalPrize, long totalCost){
-        return (int)Math.round((double)(totalPrize)/(double)(totalCost)*100);
+    private double calculateRatio(long totalPrize, long totalCost){
+        return (double)(totalPrize)/(double)(totalCost);
     }
 
     public List<Integer> getSameCountList() {
