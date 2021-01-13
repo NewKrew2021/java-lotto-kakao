@@ -31,10 +31,6 @@ public class Lottos {
         return new Lottos(lottos);
     }
 
-    public int size() {
-        return lottos.size();
-    }
-
     public List<Lotto> getLottos() {
         return lottos;
     }

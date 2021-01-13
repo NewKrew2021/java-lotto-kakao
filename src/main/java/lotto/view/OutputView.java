@@ -7,7 +7,7 @@ import java.util.StringJoiner;
 
 public class OutputView {
     public static void printLottos(Lottos manualLottos, Lottos autoLottos) {
-        System.out.println("수동으로 " + manualLottos.size() + "장, 자동으로 " + autoLottos.size() + "개를 구매했습니다.");
+        System.out.println("수동으로 " + manualLottos.getLottos().size() + "장, 자동으로 " + autoLottos.getLottos().size() + "개를 구매했습니다.");
         for (Lotto lotto : manualLottos.getLottos()) {
             printLotto(lotto);
         }
