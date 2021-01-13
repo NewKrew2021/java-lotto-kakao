@@ -26,7 +26,7 @@ public class LottoTest {
 
     @RepeatedTest(100)
     public void generateLottoTest() {
-        Lotto randomLotto = new Lotto();
+        Lotto randomLotto = Lotto.makeAutoLotto();
         List<Ball> lottoNumbers = randomLotto.getLottoBalls();
         assertThat(lottoNumbers.size()).isEqualTo(Lotto.LOTTO_COUNT);
         for (Object lottoNumber : lottoNumbers) {

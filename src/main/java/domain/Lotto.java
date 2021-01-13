@@ -2,7 +2,11 @@ package domain;
 
 import utils.RandomBallPool;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -10,10 +14,6 @@ public class Lotto {
     public static final int LOTTO_PRICE = 1000;
 
     private List<Ball> lottoBalls;
-
-    public Lotto(){
-        this(RandomBallPool.getLottoBallList(LOTTO_COUNT));
-    }
 
     public Lotto(List<Ball> balls) {
         if(!validator(balls)){
@@ -32,6 +32,18 @@ public class Lotto {
 
     public boolean contains(Ball ball){
         return lottoBalls.contains(ball);
+    }
+
+    public static Lotto makeAutoLotto(){
+        Set<Ball> balls = new HashSet<>();
+
+        while(balls.size() != LOTTO_COUNT){
+            balls.add(RandomBallPool.getRandomNumber());
+        }
+
+        return Lotto.makeLotto(balls
+                .stream()
+                .collect(Collectors.toList()));
     }
 
     public static Lotto makeLotto(List<Ball> balls){

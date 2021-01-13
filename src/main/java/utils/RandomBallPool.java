@@ -5,7 +5,6 @@ import domain.Ball;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class RandomBallPool {
 
@@ -18,10 +17,8 @@ public class RandomBallPool {
         }
     }
 
-    public static List<Ball> getLottoBallList(int count){
+    public static Ball getRandomNumber(){
         Collections.shuffle(randomPool);
-        return randomPool.stream()
-                .limit(count)
-                .collect(Collectors.toList());
+        return randomPool.get(0);
     }
 }

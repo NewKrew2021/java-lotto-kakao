@@ -11,7 +11,7 @@ public class Lottos {
     public Lottos(int autoCount) {
         lottos = new ArrayList<>();
         for (int count = 0; count < autoCount; count++) {
-            lottos.add(new Lotto());
+            lottos.add(Lotto.makeAutoLotto());
         }
     }
 
