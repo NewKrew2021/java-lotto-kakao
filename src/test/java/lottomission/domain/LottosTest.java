@@ -2,8 +2,10 @@ package lottomission.domain;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Map;
+import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class LottosTest {
@@ -38,8 +40,21 @@ public class LottosTest {
                 new Lotto(Arrays.asList(1,2,3,4,5,8)),
                 new Lotto(Arrays.asList(9,10,11,12,13,14))
         ));
-
-
         assertThat(lottos1).isNotEqualTo(lottos2);
+    }
+
+    @Test
+    public void 로또_숫자_리스트_반환_테스트(){
+        Lottos lottos = new Lottos(Arrays.asList(
+                new Lotto(Arrays.asList(1,2,3,4,5,6)),
+                new Lotto(Arrays.asList(1,2,3,4,5,7)),
+                new Lotto(Arrays.asList(1,2,3,4,5,8))
+        ));
+        List<List<Integer>> lottosNumberList = new ArrayList<>();
+        lottosNumberList.add(Arrays.asList(1,2,3,4,5,6));
+        lottosNumberList.add(Arrays.asList(1,2,3,4,5,7));
+        lottosNumberList.add(Arrays.asList(1,2,3,4,5,8));
+
+        assertThat(lottos.getLottosNumberList()).isEqualTo(lottosNumberList);
     }
 }

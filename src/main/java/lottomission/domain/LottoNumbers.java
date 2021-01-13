@@ -1,5 +1,7 @@
 package lottomission.domain;
 
+import lottomission.domain.exception.InvalidLottoLengthException;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -18,7 +20,7 @@ public class LottoNumbers {
         }
 
         if (checkNumbersLength(temp)) {
-            throw new IllegalArgumentException("로또는 중복 없는 6자리만 가능합니다.");
+            throw new InvalidLottoLengthException();
         }
         this.numbers = temp;
     }
@@ -32,9 +34,13 @@ public class LottoNumbers {
     }
 
     public int getCombineSetLength(LottoNumbers lottoNumbers) {
+        return lottoNumbers.combineTwoLottoNumberSet(this.numbers).size();
+    }
+
+    public Set<LottoNumber> combineTwoLottoNumberSet(Set<LottoNumber> lottoNumbers){
         Set<LottoNumber> combineSet = new HashSet<>(this.numbers);
-        combineSet.addAll(lottoNumbers.getNumbers());
-        return combineSet.size();
+        combineSet.addAll(lottoNumbers);
+        return combineSet;
     }
 
     public Set<LottoNumber> getNumbers() {

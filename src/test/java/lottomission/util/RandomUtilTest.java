@@ -10,5 +10,4 @@ public class RandomUtilTest {
         RandomForLotto randomUtil = new RandomForLotto();
         assertThat(randomUtil.getRandomInt()).isBetween(1, 45);
     }
-
 }

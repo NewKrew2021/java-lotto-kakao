@@ -1,14 +1,14 @@
 package lottomission.domain;
 
-import lottomission.controller.LottoController;
+import lottomission.domain.exception.InvalidMoneyException;
 
 public class UserMoney {
 
     private final int userMoney;
 
     public UserMoney(int userMoney) {
-        if (isNotPositive(userMoney)) {
-            throw new IllegalArgumentException("구입금액은 양수가 되어야 합니다.");
+        if (isNotPositiveValue(userMoney)) {
+            throw new InvalidMoneyException();
         }
         this.userMoney = userMoney;
     }
@@ -17,12 +17,11 @@ public class UserMoney {
         return this.userMoney;
     }
 
-    private boolean isNotPositive(int userMoney) {
+    private boolean isNotPositiveValue(int userMoney) {
         return userMoney <= 0;
     }
 
     public int getPossibleCount() {
-        return userMoney/ LottoController.LOTTO_PRICE;
+        return userMoney/ LottoGame.LOTTO_PRICE;
     }
-
 }

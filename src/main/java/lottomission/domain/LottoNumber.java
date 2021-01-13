@@ -1,5 +1,7 @@
 package lottomission.domain;
 
+import lottomission.domain.exception.InvalidLottoNumberException;
+
 import java.util.Objects;
 
 public class LottoNumber {
@@ -10,7 +12,7 @@ public class LottoNumber {
 
     public LottoNumber(int number) {
         if (isInvalidNumber(number)) {
-            throw new IllegalArgumentException("숫자는 1~45 에 포함 되어야 합니다");
+            throw new InvalidLottoNumberException();
         }
         this.number = number;
     }

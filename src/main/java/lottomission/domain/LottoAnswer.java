@@ -1,5 +1,7 @@
 package lottomission.domain;
 
+import lottomission.domain.exception.InvalidBonusNumberException;
+
 public class LottoAnswer {
 
     private final LottoNumbers answerNumbers;
@@ -7,7 +9,7 @@ public class LottoAnswer {
 
     public LottoAnswer(LottoNumbers answerNumbers, LottoNumber bonusNumber) {
         if (answerNumbers.isContainLottoNumber(bonusNumber)) {
-            throw new IllegalArgumentException("당첨 번호와 보너스 번호가 같을 수 없습니다.");
+            throw new InvalidBonusNumberException();
         }
         this.answerNumbers = answerNumbers;
         this.bonusNumber = bonusNumber;

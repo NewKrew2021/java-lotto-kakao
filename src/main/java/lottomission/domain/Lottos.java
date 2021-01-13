@@ -17,7 +17,7 @@ public class Lottos {
     }
 
     public List<List<Integer>> getLottosNumberList() {
-        return lottos
+        return this.lottos
                 .stream()
                 .map(Lotto::getLottoNumberList)
                 .collect(Collectors.toList());

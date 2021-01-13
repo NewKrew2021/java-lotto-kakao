@@ -15,11 +15,7 @@ public class LottoResult {
         return this.rankCount;
     }
 
-    public float getRateOfProfitResult(UserMoney userMoney) {
-        return (float) getSumAllWinningMoney()/ userMoney.getUserMoney();
-    }
-
-    private int getSumAllWinningMoney() {
+    public int getSumAllWinningMoney() {
         return rankCount
                 .keySet()
                 .stream()
