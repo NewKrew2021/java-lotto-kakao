@@ -24,7 +24,7 @@ public class WinningLottoNos {
         return !numbers.contains(bonusNo);
     }
 
-    public StatisticsType isWinning(LottoTicket lottoTicket) {
+    public StatisticsType rankWinning(LottoTicket lottoTicket) {
         int matchCount = this.matchTickets(lottoTicket);
         boolean isBonusMatch = lottoTicket.isContains(bonusNo);
         return StatisticsType.matchTickets(matchCount, isBonusMatch);

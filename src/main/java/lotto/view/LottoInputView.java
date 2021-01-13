@@ -16,12 +16,12 @@ public class LottoInputView {
         do {
             System.out.println("구입금액을 입력해 주세요.");
             money = sc.nextLine();
-        } while(!checkValidMoney(money));
+        } while(!validateMoney(money));
 
         return Integer.parseInt(money);
     }
 
-    private static boolean checkValidMoney(String inputMoney) {
+    private static boolean validateMoney(String inputMoney) {
         int money = convertStringToIntMoney(inputMoney);
         if( !Money.validateInputMoney(money) ) {
             System.out.println("잘못된 금액을 입력하셨습니다.");
@@ -44,7 +44,7 @@ public class LottoInputView {
         do{
             System.out.println("지난 주 당첨 번호를 입력해 주세요.");
             nums = convertInputToNumbers(sc.nextLine().split(", "));
-        }while(!checkValidWinningNumber(nums));
+        }while(!validateWinningNumber(nums));
         return nums;
     }
 
@@ -59,7 +59,7 @@ public class LottoInputView {
         return new HashSet<>();
     }
 
-    private static boolean checkValidWinningNumber(Set<Integer> numbers){
+    private static boolean validateWinningNumber(Set<Integer> numbers){
         if( !LottoTicket.validateLottoTicket(numbers) ) {
             System.out.println("당첨번호가 적절하지 않습니다.");
             return false;
@@ -73,12 +73,12 @@ public class LottoInputView {
         do{
             System.out.println("보너스 볼을 입력해 주세요.");
             bonusNum = sc.nextLine();
-        }while(!checkValidBonusNumber(bonusNum));
+        }while(!validateBonusNumber(bonusNum));
         System.out.println();
         return Integer.parseInt(bonusNum);
     }
 
-    private static boolean checkValidBonusNumber(String inputBonus){
+    private static boolean validateBonusNumber(String inputBonus){
         int bonusNum = convertStringToIntMoney(inputBonus);
         if( !LottoNo.validateLottoNo(bonusNum) ) {
             System.out.println("보너스볼 번호가 적절하지 않습니다.");

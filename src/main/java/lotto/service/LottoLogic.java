@@ -29,7 +29,7 @@ public class LottoLogic {
         StatisticsResult statisticsResult = new StatisticsResult();
 
         for (LottoTicket lottoTicket : lottoTickets) {
-            statisticsResult.increaseTypeCount(winningLottoNos.isWinning(lottoTicket));
+            statisticsResult.increaseTypeCount(winningLottoNos.rankWinning(lottoTicket));
         }
 
         return statisticsResult;

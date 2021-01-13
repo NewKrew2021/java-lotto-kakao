@@ -47,12 +47,12 @@ public class WinningLottoNosTest {
             lottoTickets.add(new LottoTicket(ticket));
         }
 
-        StatisticsType none = winningLottoNos.isWinning(lottoTickets.get(0));
-        StatisticsType three = winningLottoNos.isWinning(lottoTickets.get(1));
-        StatisticsType four = winningLottoNos.isWinning(lottoTickets.get(2));
-        StatisticsType five = winningLottoNos.isWinning(lottoTickets.get(3));
-        StatisticsType fiveWithBonus = winningLottoNos.isWinning(lottoTickets.get(4));
-        StatisticsType six = winningLottoNos.isWinning(lottoTickets.get(5));
+        StatisticsType none = winningLottoNos.rankWinning(lottoTickets.get(0));
+        StatisticsType three = winningLottoNos.rankWinning(lottoTickets.get(1));
+        StatisticsType four = winningLottoNos.rankWinning(lottoTickets.get(2));
+        StatisticsType five = winningLottoNos.rankWinning(lottoTickets.get(3));
+        StatisticsType fiveWithBonus = winningLottoNos.rankWinning(lottoTickets.get(4));
+        StatisticsType six = winningLottoNos.rankWinning(lottoTickets.get(5));
 
         assertThat(none).isEqualTo(StatisticsType.NONE);
         assertThat(three).isEqualTo(StatisticsType.THREE);

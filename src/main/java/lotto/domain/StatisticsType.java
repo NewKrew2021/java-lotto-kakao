@@ -1,8 +1,6 @@
 package lotto.domain;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 public enum StatisticsType {
@@ -30,12 +28,12 @@ public enum StatisticsType {
 
     public static StatisticsType matchTickets(int matchCount, boolean isBonusMatch) {
         return StatisticsType.typeCache.stream()
-                .filter(match -> match.checkMatch(matchCount, isBonusMatch))
+                .filter(match -> match.isMatch(matchCount, isBonusMatch))
                 .findAny()
                 .orElse(NONE);
     }
 
-    private boolean checkMatch(int matchCount, boolean isBonusMatch) {
+    private boolean isMatch(int matchCount, boolean isBonusMatch) {
         if( matchCount == FIVE.matchCount ) {
             return this.matchCount == matchCount && this.bonusBallMatch == isBonusMatch;
         }
