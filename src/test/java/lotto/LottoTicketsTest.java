@@ -31,6 +31,6 @@ public class LottoTicketsTest {
     void lottoResultsTest(){
         WinningNumber winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6", 7);
         assertThat(lottoTickets.getResults(winningNumber))
-                .isEqualTo(LottoResults.createLottoResults(lottoTickets.getLottoTickets(), winningNumber));
+                .isEqualTo(CreateLottoResults.createLottoResults(lottoTickets.getLottoTickets(), winningNumber));
     }
 }

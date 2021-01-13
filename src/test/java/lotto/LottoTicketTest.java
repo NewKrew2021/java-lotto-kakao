@@ -1,15 +1,11 @@
 package lotto;
 
-import lotto.domain.LottoRank;
+import lotto.domain.InvalidLottoTicketNumberException;
 import lotto.domain.LottoTicket;
 import lotto.domain.Number;
-import lotto.domain.WinningNumber;
 import org.assertj.core.util.Sets;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 
 import java.util.Arrays;
 
@@ -70,4 +66,32 @@ public class LottoTicketTest {
         assertThat(ticket.matchCount(compTicket)).isEqualTo(3);
     }
 
+    @Test
+    void invalidLottoTicketNumberCountTest(){
+        assertThatThrownBy(() -> {
+            new LottoTicket(
+                    Sets.newHashSet(Arrays.asList(
+                            new Number(1),
+                            new Number(2),
+                            new Number(3),
+                            new Number(4),
+                            new Number(5)))
+            );
+        }).isInstanceOf(InvalidLottoTicketNumberException.class);
+    }
+
+    @Test
+    void invalidLottoTicketNumberDuplicateTest(){
+        assertThatThrownBy(() -> {
+            new LottoTicket(
+                    Sets.newHashSet(Arrays.asList(
+                            new Number(1),
+                            new Number(2),
+                            new Number(3),
+                            new Number(4),
+                            new Number(5),
+                            new Number(5)))
+            );
+        }).isInstanceOf(InvalidLottoTicketNumberException.class);
+    }
 }

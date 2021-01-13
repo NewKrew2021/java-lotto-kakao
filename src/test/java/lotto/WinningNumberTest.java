@@ -1,38 +1,32 @@
-package lotto;
+package lotto.domain;
 
-import lotto.domain.LottoTicket;
-import lotto.domain.Number;
-import lotto.domain.WinningNumber;
-import org.assertj.core.util.Sets;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
-import static org.assertj.core.api.Assertions.*;
+public class WinningNumber extends LottoTicket {
+    private Number bonusNumber;
 
-public class WinningNumberTest {
-    private WinningNumber winningNumber;
-
-    @BeforeEach
-    void setInit(){
-        winningNumber = new WinningNumber("1, 2, 3, 4, 5, 6", 7);
+    public WinningNumber(String winningNumber, int bonusNumber){
+        super(Arrays.stream(winningNumber
+                .replaceAll(" ", "")
+                .split(","))
+                .map(Integer::valueOf)
+                .map(Number::new)
+                .collect(Collectors.toSet()));
+        this.bonusNumber = new Number(bonusNumber);
+        if (super.contains(this.bonusNumber)){
+            throw new InvalidBonusNumberException();
+        }
     }
 
-    @Test
-    void createWinningNumberTest() {
-        assertThat(winningNumber.toString()).isEqualTo("[1, 2, 3, 4, 5, 6] bonusNumber : 7");
+    public boolean bonusNumberContain(LottoTicket lottoTicket){
+        return lottoTicket.contains(bonusNumber);
     }
 
-    @Test
-    void containBonusNumberTest(){
-        assertThat(winningNumber.bonusNumberContain(new LottoTicket(Sets.newHashSet(Arrays.asList(
-                new Number(1),
-                new Number(2),
-                new Number(3),
-                new Number(4),
-                new Number(5),
-                new Number(7)))))).isEqualTo(true);
-    }
 
+    @Override
+    public String toString() {
+        return super.toString() + " bonusNumber : " + bonusNumber;
+    }
 }

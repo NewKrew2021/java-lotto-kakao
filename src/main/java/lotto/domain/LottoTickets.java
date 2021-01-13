@@ -5,8 +5,8 @@ import java.util.*;
 public class LottoTickets {
     private List<LottoTicket> lottoTickets;
 
-    public LottoTickets(List<LottoTicket> makeLottoTickets){
-        lottoTickets = makeLottoTickets;
+    public LottoTickets(List<LottoTicket> lottoTickets){
+        this.lottoTickets = lottoTickets;
     }
 
     public List<LottoTicket> getLottoTickets() {
@@ -14,7 +14,7 @@ public class LottoTickets {
     }
 
     public LottoResults getResults(WinningNumber winningNumber) {
-        LottoResults lottoResults = LottoResults.createLottoResults(lottoTickets, winningNumber);
+        LottoResults lottoResults = CreateLottoResults.createLottoResults(lottoTickets, winningNumber);
         return lottoResults;
     }
 }

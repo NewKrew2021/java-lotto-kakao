@@ -1,29 +1,45 @@
 package lotto.domain;
 
-        import java.util.ArrayList;
-        import java.util.HashSet;
-        import java.util.List;
-        import java.util.stream.Collectors;
-        import java.util.stream.IntStream;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class CreateTicket {
-    private List<LottoTicket> lottoTickets;
-    private LottoNumber lottoNumber;
+    public static List<LottoTicket> createTotalTicket(int price, List<String> handTicket){
+        if (price < 1000){
+            throw new InvalidPriceException();
+        }
+        if (price/1000 < handTicket.size()){
+            throw new InvalidHandTicketSizeException();
+        }
+        List<LottoTicket> lottoTickets = new ArrayList<>();
 
-    private CreateTicket(int price){
-        lottoNumber = new LottoNumber();
-        lottoTickets = new ArrayList<>();
-        lottoTickets = IntStream.range(1, price / 1000 + 1)
-                .mapToObj(val -> new LottoTicket(new HashSet<>(lottoNumber.getRandomNumbers())))
+        lottoTickets.addAll(createAutoTicket(price - handTicket.size()*1000));
+        lottoTickets.addAll(createHandTicket(handTicket));
+
+        return lottoTickets;
+    }
+
+    private static List<LottoTicket> createAutoTicket(int price){
+        return IntStream.range(1, price / 1000 + 1)
+                .mapToObj(val -> new LottoTicket(new HashSet<>(new LottoNumber().getRandomNumbers())))
                 .collect(Collectors.toList());
     }
 
-    public static LottoTickets createAutoTicket(int price){
-        CreateTicket createTicket = new CreateTicket(price);
-        return new LottoTickets(createTicket.getTickets());
+    private static List<LottoTicket> createHandTicket(List<String> handTicket) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        for (String ticket : handTicket) {
+            lottoTickets.add(new LottoTicket(changeValidNumber(ticket)));
+        }
+        return lottoTickets;
     }
 
-    public List<LottoTicket> getTickets(){
-        return lottoTickets;
+    private static Set<Number> changeValidNumber(String ticket){
+        return Arrays.stream(ticket
+                .replaceAll(" ", "")
+                .split(","))
+                .map(Integer::valueOf)
+                .map(Number::new)
+                .collect(Collectors.toSet());
     }
 }

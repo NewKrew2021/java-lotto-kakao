@@ -1,9 +1,7 @@
 package lotto.domain;
 
-import lotto.view.InputView;
 
 import java.util.Arrays;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 public class WinningNumber extends LottoTicket {
@@ -17,7 +15,9 @@ public class WinningNumber extends LottoTicket {
                 .map(Number::new)
                 .collect(Collectors.toSet()));
         this.bonusNumber = new Number(bonusNumber);
-
+        if (super.contains(this.bonusNumber)){
+            throw new InvalidBonusNumberException();
+        }
     }
 
     public boolean bonusNumberContain(LottoTicket lottoTicket){

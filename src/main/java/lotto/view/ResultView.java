@@ -3,23 +3,18 @@ package lotto.view;
 import lotto.domain.LottoRank;
 import lotto.domain.LottoResults;
 import lotto.domain.LottoTickets;
-import lotto.domain.WinningNumber;
 
-import java.util.Map;
+import java.util.List;
 import java.util.Scanner;
 
 public class ResultView {
-    private static final String PURCHASE_NUMBER = "개를 구매했습니다.";
     private static final String WINNING_RESULT = "\n당첨 통계\n----------------";
     private static final String EARNING_RATE = "총 수익률은 ";
     private static final String EARNING_RATE_SYMBOL = "%입니다.";
+    private static final String TOTAL_LOTTO_TICKET = "수동으로 %d장, 자동으로 %d개를 구매했습니다.";
 
 
     private static Scanner sc = new Scanner(System.in);
-
-    public static void purchaseLottoNumber(int price){
-        System.out.println(price/1000 + PURCHASE_NUMBER);
-    }
 
     public static void printResult(LottoResults lottoResults, int price) {
         ResultView resultView = new ResultView();
@@ -37,7 +32,8 @@ public class ResultView {
         return s;
     }
 
-    public static void purchaseLottoTicket(LottoTickets lottoTickets) {
+    public static void purchaseLottoTicket(LottoTickets lottoTickets, List<String> handLotto) {
+        System.out.printf(TOTAL_LOTTO_TICKET, handLotto.size(), lottoTickets.getLottoTickets().size()-handLotto.size());
         lottoTickets.getLottoTickets().forEach(val -> System.out.println(val.toString()));
         System.out.println();
     }
