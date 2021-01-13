@@ -8,7 +8,7 @@ public class LottosTest {
 
     @Test
     void testGetSize() {
-        Lottos lottos = Lottos.getInstance(3);
+        Lottos lottos = Lottos.getAutoLottos(3);
         assertThat(lottos.size()).isEqualTo(3);
     }
 

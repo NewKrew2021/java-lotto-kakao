@@ -21,7 +21,7 @@ public class Lottos {
         }
     }
 
-    public static Lottos getInstance(int number) {
+    public static Lottos getAutoLottos(int number) {
         List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < number; ++i) {

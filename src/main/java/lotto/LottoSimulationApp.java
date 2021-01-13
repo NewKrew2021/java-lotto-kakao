@@ -10,7 +10,7 @@ public class LottoSimulationApp {
         int manual = InputView.getManual(price.count());
 
         Lottos manualLottos = new Lottos(InputView.getManualLottos(manual));
-        Lottos autoLottos = Lottos.getInstance(price.count() - manual);
+        Lottos autoLottos = Lottos.getAutoLottos(price.count() - manual);
         OutputView.printLottos(manualLottos, autoLottos);
 
         String text = InputView.getText();
