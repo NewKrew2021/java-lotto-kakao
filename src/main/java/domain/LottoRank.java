@@ -2,35 +2,47 @@ package domain;
 
 import domain.exceptions.InvalidLottoRankException;
 import java.util.Arrays;
-import java.util.function.Function;
+import java.util.function.IntToLongFunction;
 
 public enum LottoRank {
-  FIFTH(5, count -> count * 5000L),
+  LOSE(0, count -> 0),
+  FIFTH(3, count -> count * 5000L),
   FOURTH(4, count -> count * 50000L),
-  THIRD(3, count -> count * 1500000L),
-  SECOND(2, count -> count * 30000000L),
-  FIRST(1, count -> count * 2000000000L);
+  THIRD(5, count -> count * 1500000L),
+  SECOND(5, count -> count * 30000000L),
+  FIRST(6, count -> count * 2000000000L);
 
-  private final int rank;
-  private final Function<Long, Long> expression;
+  private final int matchCount;
+  private final IntToLongFunction expression;
 
-  LottoRank(int rank, Function<Long, Long> expression) {
-    this.rank = rank;
+  LottoRank(int matchCount, IntToLongFunction expression) {
+    this.matchCount = matchCount;
     this.expression = expression;
   }
 
-  public static LottoRank of(int lottoRank) {
+  public static LottoRank of(int matchCount, boolean matchBonus) {
+    if (matchCount < FIFTH.matchCount) {
+      return LOSE;
+    }
+
+    if (matchCount == SECOND.matchCount) {
+      return secondOrThird(matchBonus);
+    }
+
     return Arrays.stream(LottoRank.values())
-        .filter(rank -> lottoRank == rank.getRank())
+        .filter(rank -> rank.matchCount == matchCount)
         .findAny()
         .orElseThrow(InvalidLottoRankException::new);
   }
 
-  public int getRank() {
-    return rank;
+  private static LottoRank secondOrThird(boolean matchBonus) {
+    if (matchBonus) {
+      return SECOND;
+    }
+    return THIRD;
   }
 
-  public Long getPrize(int count) {
-    return expression.apply((long) count);
+  public Long sumPrize(int count) {
+    return expression.applyAsLong(count);
   }
 }

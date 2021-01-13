@@ -11,40 +11,43 @@ public class LottoTicketTest {
 
   @Test
   public void create() {
-    LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 45));
-    assertThat(lottoTicket).isEqualTo(new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 45)));
+    LottoTicket lottoTicket = LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 45));
+    assertThat(lottoTicket).isEqualTo(LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 45)));
+
+    LottoTicket lottoTicketByString = LottoTicket.of("1,2,3,4,5,6");
+    assertThat(lottoTicketByString).isEqualTo(LottoTicket.of("1,2,3,4,5,6"));
   }
 
   @Test
   public void isInValidLength() {
     assertThatExceptionOfType(InvalidLottoNumberException.class)
-        .isThrownBy(() -> new LottoTicket(Arrays.asList(1, 2, 3, 4, 5)));
+        .isThrownBy(() -> LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5)));
     assertThatExceptionOfType(InvalidLottoNumberException.class)
-        .isThrownBy(() -> new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 6, 7)));
+        .isThrownBy(() -> LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 6, 7)));
     assertThatExceptionOfType(InvalidLottoNumberException.class)
-        .isThrownBy(() -> new LottoTicket(Arrays.asList()));
+        .isThrownBy(() -> LottoTicket.of(Arrays.asList()));
     assertThatExceptionOfType(InvalidLottoNumberException.class)
-        .isThrownBy(() -> new LottoTicket(null));
+        .isThrownBy(() -> LottoTicket.of((String) null));
   }
 
   @Test
   void isDuplicateNumber() {
     assertThatExceptionOfType(InvalidLottoNumberException.class)
-        .isThrownBy(() -> new LottoTicket(Arrays.asList(1, 1, 2, 3, 4, 5)));
+        .isThrownBy(() -> LottoTicket.of(Arrays.asList(1, 1, 2, 3, 4, 5)));
   }
 
   @Test
   void isInvalidNumber() {
     assertThatExceptionOfType(InvalidLottoNumberException.class)
-        .isThrownBy(() -> new LottoTicket(Arrays.asList(0, 2, 3, 4, 5, 6)));
+        .isThrownBy(() -> LottoTicket.of(Arrays.asList(0, 2, 3, 4, 5, 6)));
     assertThatExceptionOfType(InvalidLottoNumberException.class)
-        .isThrownBy(() -> new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 46)));
+        .isThrownBy(() -> LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 46)));
   }
 
   @Test
   void matchedCount() {
-    LottoTicket lottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 45));
-    LottoTicket winningLottoTicket = new LottoTicket(Arrays.asList(1, 2, 3, 4, 5, 45));
+    LottoTicket lottoTicket = LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 45));
+    LottoTicket winningLottoTicket = LottoTicket.of(Arrays.asList(1, 2, 3, 4, 5, 45));
     assertThat(lottoTicket.getMatchedCount(winningLottoTicket)).isEqualTo(6);
   }
 }

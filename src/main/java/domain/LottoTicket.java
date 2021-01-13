@@ -1,6 +1,7 @@
 package domain;
 
 import domain.exceptions.InvalidLottoNumberException;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
@@ -15,27 +16,40 @@ public class LottoTicket {
 
   private final List<LottoNumber> numbers;
 
-  public LottoTicket(List<Integer> integerNumbers) {
+  public static LottoTicket of(String lottoNumber) {
+    return of(Arrays.stream(Optional.ofNullable(lottoNumber)
+        .orElseThrow(() -> new InvalidLottoNumberException("LottoTicket of String null error"))
+        .split(","))
+        .map(number -> Integer.parseInt(number.trim()))
+        .collect(Collectors.toList()));
+  }
+
+  public static LottoTicket of(List<Integer> integerNumbers) {
     List<LottoNumber> numbers = Optional.ofNullable(integerNumbers)
-        .orElseThrow(InvalidLottoNumberException::new)
+        .orElseThrow(
+            () -> new InvalidLottoNumberException("LottoTicket of List<Integer> null error"))
         .stream()
-        .map(LottoNumber::new)
+        .map(LottoNumber::of)
         .collect(Collectors.toList());
 
     validateLength(numbers);
     validateDuplicate(numbers);
 
+    return new LottoTicket(numbers);
+  }
+
+  private LottoTicket(List<LottoNumber> numbers) {
     this.numbers = numbers;
   }
 
-  private void validateDuplicate(List<LottoNumber> numbers) {
+  private static void validateDuplicate(List<LottoNumber> numbers) {
     Set<LottoNumber> numbersSet = new HashSet<>(numbers);
     validateLength(numbersSet);
   }
 
-  private void validateLength(Collection<LottoNumber> numbers) {
-    if (numbers == null || numbers.size() != LOTTO_NUMBERS_LENGTH) {
-      throw new InvalidLottoNumberException();
+  private static void validateLength(Collection<LottoNumber> numbers) {
+    if (numbers.size() != LOTTO_NUMBERS_LENGTH) {
+      throw new InvalidLottoNumberException("로또 티켓을 생성하기위해선 6개의 숫자만 입력해야합니다.");
     }
   }
 

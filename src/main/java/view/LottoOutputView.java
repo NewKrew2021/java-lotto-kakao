@@ -1,7 +1,9 @@
 package view;
 
 import domain.LottoRank;
+import domain.LottoTicketCount;
 import domain.WinningInfo;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -17,10 +19,10 @@ public class LottoOutputView {
       "6개 일치 (200000000워원) - %d개\n"};
 
 
-  public static void printTicketsCount(int ticketsCount) {
-    StringBuilder sb = new StringBuilder();
-    sb.append(ticketsCount).append("개를 구매했습니다.");
-    System.out.println(sb.toString());
+  public static void printTicketsCount(LottoTicketCount lottoTicketCount) {
+    System.out.println(String
+        .format("수동으로 %d장, 자동으로 %d개를 구매했습니다.", lottoTicketCount.getManualCount(),
+            lottoTicketCount.getAutoCount()));
   }
 
   public static void printTickets(List<List<Integer>> lottoTicketsInfo) {
@@ -46,9 +48,10 @@ public class LottoOutputView {
     StringBuilder resultText = new StringBuilder();
     resultText.append("당첨 통계\n---------\n");
     Map<LottoRank, Integer> result = winningInfo.getInfo();
+    List<LottoRank> lottoRanks = Arrays.asList(LottoRank.values());
     for (int i = 0; i < RESULT_FORMAT.length; i++) {
       resultText.append(String.format(RESULT_FORMAT[i],
-          result.getOrDefault(LottoRank.of(RESULT_FORMAT.length - i), 0)));
+          result.getOrDefault(lottoRanks.get(i + 1), 0)));
     }
     System.out.println(resultText);
   }

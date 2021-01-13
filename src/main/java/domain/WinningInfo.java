@@ -14,7 +14,7 @@ public class WinningInfo {
   public long getSumPrize() {
     long sum = 0;
     for (LottoRank lottoRank : info.keySet()) {
-      sum += lottoRank.getPrize(info.get(lottoRank));
+      sum += lottoRank.sumPrize(info.get(lottoRank));
     }
 
     return sum;
@@ -30,12 +30,12 @@ public class WinningInfo {
 
   @Override
   public boolean equals(Object o) {
-      if (this == o) {
-          return true;
-      }
-      if (o == null || getClass() != o.getClass()) {
-          return false;
-      }
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     WinningInfo that = (WinningInfo) o;
     return Objects.equals(info, that.info);
   }
