@@ -1,16 +1,19 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotteries {
-    private List<Lottery> lotteries;
+    private final List<Lottery> lotteries;
 
-    public Lotteries(List<Lottery> lotteryList) {
-        lotteries = lotteryList;
+    public Lotteries(String[][] lotteries){
+        this(Arrays.stream(lotteries)
+                .map(Lottery::new)
+                .collect(Collectors.toList()));
+    }
+
+    public Lotteries(List<Lottery> lotteries) {
+        this.lotteries = lotteries;
     }
 
     public Lotteries() {
@@ -19,22 +22,17 @@ public class Lotteries {
 
     public LotteryRank calculateRank(LotteryAnswer lotteryAnswer) {
         HashMap<LotteryPrize, Integer> ranks = new HashMap<>();
-        for (LotteryPrize value : LotteryPrize.values()) {
-            ranks.put(value,0);
-        }
         for (Lottery lottery : lotteries) {
             LotteryPrize rank = lottery.checkRank(lotteryAnswer);
-            ranks.put(rank, ranks.get(rank) + 1);
+            ranks.put(rank, ranks.getOrDefault(rank,0) + 1);
         }
         return new LotteryRank(ranks);
     }
 
-    public static List<Lottery> getRandomLotteries(int count) {
-        List<Lottery> lotteryList = new ArrayList<>();
+    public void addRandomLotteries(int count) {
         for (int i = 0; i < count; i++) {
-            lotteryList.add(Lottery.createRandomLottery());
+            lotteries.add(Lottery.createRandomLottery());
         }
-        return lotteryList;
     }
 
     public void push(Lottery lottery) {

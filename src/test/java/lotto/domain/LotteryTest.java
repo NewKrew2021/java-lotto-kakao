@@ -10,8 +10,8 @@ import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 @DisplayNameGeneration(DisplayNameGenerator.ReplaceUnderscores.class)
 public class LotteryTest {
-    Lottery playerLottery;
-    final int[] playerNumbers = {1, 2, 3, 4, 5, 6};
+    private Lottery playerLottery;
+    private final int[] playerNumbers = {1, 2, 3, 4, 5, 6};
 
     @BeforeEach
     void setUp() {
@@ -22,6 +22,12 @@ public class LotteryTest {
     void Lottery_자동_생성() {
         Lottery randomLottery = Lottery.createRandomLottery();
         assertThat(randomLottery).isEqualTo(randomLottery);
+    }
+
+    @Test
+    void Lottery_문자열_생성() {
+        Lottery lottery = new Lottery(new String[]{"1", "2", "3", "4", "5", "6"});
+        assertThat(lottery).isEqualTo(playerLottery);
     }
 
     @Test

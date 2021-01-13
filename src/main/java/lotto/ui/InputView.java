@@ -10,9 +10,8 @@ public class InputView {
 
     public static Money readMoney() {
         try {
-            printReadMoneyHelp();
             Money money = new Money(Integer.parseInt(sc.nextLine().trim()));
-            System.out.printf("%d개를 구매했습니다", LotteryUtil.calculateLotteryCount(money));
+            System.out.printf("%d개를 구매했습니다", Money.calculateLotteryCount(money));
             System.out.println();
             return money;
         } catch (RuntimeException e) {
@@ -22,6 +21,25 @@ public class InputView {
             handleUnknownError(e);
             return null;
         }
+    }
+
+    public static int readManualLotteryCount() {
+        try {
+            System.out.println("수동으로 구매할 로또 갯수를 입력해 주세요.");
+            return Integer.parseInt(sc.nextLine().trim());
+        } catch (IllegalArgumentException e) {
+            System.out.println("숫자로 입력해주세요.");
+            return readManualLotteryCount();
+        }
+    }
+
+    public static String[][] readManualLotteries(int count) {
+        System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        String[][] lotteries = new String[count][];
+        for (int i = 0; i < count; i++) {
+            lotteries[i] = sc.nextLine().split(",");
+        }
+        return lotteries;
     }
 
     public static LotteryAnswer readLotteryAnswer() {
@@ -38,26 +56,19 @@ public class InputView {
         }
     }
 
-    private static void printReadMoneyHelp() {
-        System.out.println("로또 1장의 가격은 1000원이다.");
-        System.out.println("구입금액을 입력해 주세요.");
-    }
-
     private static Lottery getAnswerLotteryNumbers() {
         System.out.println("지난주 당첨번호를 입력해주세요.");
-        return LotteryUtil.convertStringsToLottery(sc.nextLine().split(","));
+        return new Lottery(sc.nextLine().split(","));
     }
 
     private static LotteryNumber getAnswerBonusNumber() {
         System.out.println("보너스 볼 번호를 입력해주세요.");
-        int lotteryNumber;
         try {
-            lotteryNumber = Integer.parseInt(sc.nextLine().trim());
+            int lotteryNumber = Integer.parseInt(sc.nextLine().trim());
+            return new LotteryNumber(lotteryNumber);
         } catch (NumberFormatException e) {
             throw new InvalidLotteryNumberException();
         }
-        return new LotteryNumber(lotteryNumber);
-
     }
 
     private static void handleUnknownError(Exception e) {

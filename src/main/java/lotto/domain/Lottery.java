@@ -1,11 +1,6 @@
 package lotto.domain;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -17,10 +12,16 @@ public class Lottery {
     private final List<LotteryNumber> numbers;
 
     public Lottery(int[] ints) {
-        this(
-                Arrays.stream(ints)
+        this(Arrays.stream(ints)
                         .mapToObj(LotteryNumber::new)
                         .collect(Collectors.toList())
+        );
+    }
+
+    public Lottery(String[] strings) {
+        this(Arrays.stream(strings)
+                .map(string -> new LotteryNumber(Integer.parseInt(string.trim())))
+                .collect(Collectors.toList())
         );
     }
 
@@ -28,7 +29,7 @@ public class Lottery {
         if (isInvalidSizeLotteryNumbers(numbers)) {
             throw new IllegalArgumentException(MSG_WRONG_LOTTERY_LENGTH);
         }
-        if (isDuplicatedLotteryNumbers(numbers)) {
+        if (hasDuplicatedLotteryNumbers(numbers)) {
             throw new IllegalArgumentException(MSG_DUPLICATED_LOTTERYNUMBER);
         }
         this.numbers = numbers;
@@ -47,27 +48,23 @@ public class Lottery {
         );
     }
 
-    public static boolean isDuplicatedLotteryNumbers(Lottery lottery, LotteryNumber bonusNumber) {
-        if (lottery.numbers.contains(bonusNumber)) {
+    public boolean hasDuplicatedLotteryNumbers(LotteryNumber bonusNumber) {
+        if (numbers.contains(bonusNumber)) {
             return true;
         }
-        return isDuplicatedLotteryNumbers(lottery.numbers);
+        return hasDuplicatedLotteryNumbers(numbers);
     }
 
-    private static boolean isDuplicatedLotteryNumbers(List<LotteryNumber> numbers) {
+    private static boolean hasDuplicatedLotteryNumbers(List<LotteryNumber> numbers) {
         Set<LotteryNumber> set = new HashSet<>(numbers);
-        if (set.size() != numbers.size()) {
-            return true;
-        }
-        return false;
+        return set.size() != numbers.size();
     }
 
     private static boolean isInvalidSizeLotteryNumbers(List<LotteryNumber> numbers) {
-        if (numbers.size() != LOTTERY_NUMBER_SIZE) {
-            return true;
-        }
-        return false;
+        return numbers.size() != LOTTERY_NUMBER_SIZE;
     }
+
+
 
     public LotteryPrize checkRank(LotteryAnswer lotteryAnswer) {
         boolean bonus = numbers.contains(lotteryAnswer.getBonusNumber());
@@ -76,7 +73,7 @@ public class Lottery {
                 .stream()
                 .filter(numbers::contains)
                 .count();
-        return LotteryUtil.convertCountToRank(count, bonus);
+        return LotteryPrize.findRank(count, bonus);
     }
 
     @Override
