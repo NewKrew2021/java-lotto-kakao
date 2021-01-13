@@ -2,23 +2,26 @@ package controller;
 
 import domain.*;
 import dto.Amount;
+import dto.LottoTicketCount;
 import view.LottoInputView;
 import view.LottoOutputView;
 
 public class LottoController {
     public static void startLotto() {
-        Amount amount = new Amount(LottoInputView.inputAmount());
-        LottoOutputView.printTicketsCount(amount);
+        Amount amount = LottoInputView.inputAmount();
 
-        NumberGenerateStrategy strategy = new LottoRandomGenerator();
-        LottoTickets lottoTickets = LottoTickets.of(strategy, amount);
-        LottoOutputView.printLottoTickets(lottoTickets.getLottoTickets());
+        LottoTicketCount ticketCount = LottoInputView.inputManualCount(amount);
+
+        LottoTickets lottoTickets
+                = LottoTicketsFactory.newManualAndAuto(ticketCount, LottoInputView.inputLottoNumbers(ticketCount));
+
+        LottoOutputView.printLottoTickets(ticketCount, lottoTickets.getLottoTickets());
 
         LottoWinningNumber lottoWinningNumber
                 = LottoWinningNumber.of(LottoInputView.inputWinningNumbers(), LottoInputView.inputBonusNumber());
 
         WinningInfo winningInfo = new WinningInfo(lottoTickets, lottoWinningNumber);
         LottoOutputView.printResult(winningInfo.getWinningInfo());
-        LottoOutputView.printYield(amount, winningInfo.getTotalPrize());
+        LottoOutputView.printYield(winningInfo.getYield(amount));
     }
 }

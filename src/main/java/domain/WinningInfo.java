@@ -1,5 +1,7 @@
 package domain;
 
+import dto.Amount;
+
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -45,8 +47,8 @@ public class WinningInfo {
         return winningInfo;
     }
 
-    public long getTotalPrize() {
-        return totalPrize;
+    public double getYield(Amount amount) {
+        return (double) totalPrize / amount.getAmount();
     }
 
     @Override

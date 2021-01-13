@@ -1,6 +1,7 @@
 package domain;
 
 import java.util.List;
+import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
@@ -14,10 +15,10 @@ public class LottoManualGenerator implements NumberGenerateStrategy {
 
     @Override
     public Lotto generate() {
-        TreeSet<LottoNumber> numberSet = new TreeSet<>(numbers.stream()
+        Set<LottoNumber> numberSet = new TreeSet<>(numbers.stream()
                 .map(LottoNumber::new)
                 .collect(Collectors.toList()));
 
-        return Lotto.of(numberSet);
+        return Lotto.from(numberSet);
     }
 }

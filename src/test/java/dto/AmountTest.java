@@ -8,7 +8,6 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.in;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatExceptionOfType;
 
 public class AmountTest {
@@ -31,8 +30,6 @@ public class AmountTest {
     @ValueSource(strings = {"", "a"})
     @DisplayName("input이 숫자가 아니면 NumberFormatException을 던진다.")
     public void testInputIsNotNumber(String input){
-        assertThatExceptionOfType(NumberFormatException.class)
-                .isThrownBy(()->new Amount(Integer.parseInt(input)));
         assertThatExceptionOfType(NumberFormatException.class)
                 .isThrownBy(()->new Amount(Integer.parseInt(input)));
     }
