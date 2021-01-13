@@ -23,7 +23,7 @@ public class LottoStatistics {
         long totalReward = 0;
 
         for (LottoRank lottoRank : rankCounts.keySet()) {
-           totalReward += rankCounts.get(lottoRank) * lottoRank.getReward();
+            totalReward += rankCounts.get(lottoRank) * lottoRank.getReward();
         }
 
         return totalReward;
@@ -33,7 +33,7 @@ public class LottoStatistics {
         return calculateTotalReward() / buyAmount;
     }
 
-    private void appendStatisticsResult(StringBuilder statisticsResult, LottoRank lottoRank){
+    private void appendStatisticsResult(StringBuilder statisticsResult, LottoRank lottoRank) {
         statisticsResult.append(lottoRank.getResultPrefix());
         statisticsResult.append(rankCounts.containsKey(lottoRank) ? rankCounts.get(lottoRank) : 0);
         statisticsResult.append(RESULT_UNIT);
@@ -47,8 +47,8 @@ public class LottoStatistics {
                 .filter(lottoRank -> !lottoRank.equals(LottoRank.NONE))
                 .collect(Collectors.toList());
 
-        for(LottoRank lottoRank : printRanks){
-            appendStatisticsResult(statisticsResult,lottoRank);
+        for (LottoRank lottoRank : printRanks) {
+            appendStatisticsResult(statisticsResult, lottoRank);
         }
 
         statisticsResult.append(EARNING_RATE_PREFIX);

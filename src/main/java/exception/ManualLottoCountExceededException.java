@@ -1,8 +1,8 @@
 package exception;
 
-public class ManualLottoCountExceededException extends RuntimeException{
+public class ManualLottoCountExceededException extends RuntimeException {
 
-    public ManualLottoCountExceededException(String msg){
+    public ManualLottoCountExceededException(String msg) {
         super(msg);
     }
 }

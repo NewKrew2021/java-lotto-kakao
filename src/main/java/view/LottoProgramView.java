@@ -1,6 +1,9 @@
 package view;
 
-import domain.*;
+import domain.Ball;
+import domain.Lotto;
+import domain.LottoStatistics;
+import domain.Lottos;
 
 import java.util.Arrays;
 import java.util.InputMismatchException;
@@ -35,7 +38,7 @@ public class LottoProgramView {
         return Integer.parseInt(buyAmount);
     }
 
-    public int getBuyManualLottoCountForUser(){
+    public int getBuyManualLottoCountForUser() {
         System.out.println(BUY_MANUAL_COUNT_PHRASE);
         String buyManualAccount = scanner.nextLine();
         if (!checkNumberFormat(buyManualAccount)) {
@@ -44,11 +47,11 @@ public class LottoProgramView {
         return Integer.parseInt(buyManualAccount);
     }
 
-    public void printGetManualBallPhrase(){
+    public void printGetManualBallPhrase() {
         System.out.println(GET_MANUAL_BALL);
     }
 
-    public String[] getManualLottoForUser(){
+    public String[] getManualLottoForUser() {
         return scanner.nextLine().split(",");
     }
 
@@ -75,7 +78,7 @@ public class LottoProgramView {
         }
     }
 
-    public int getBonusBallForUser(){
+    public int getBonusBallForUser() {
         System.out.println(BONUS_BALL_INPUT_PHRASE);
         return scanner.nextInt();
     }

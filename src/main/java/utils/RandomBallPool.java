@@ -17,7 +17,7 @@ public class RandomBallPool {
         }
     }
 
-    public static Ball getRandomNumber(){
+    public static Ball getRandomNumber() {
         Collections.shuffle(randomPool);
         return randomPool.get(0);
     }

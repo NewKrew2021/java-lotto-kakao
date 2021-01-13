@@ -27,7 +27,7 @@ class LottoProgramTest {
 
     @Test
     @DisplayName("수동 구입 갯수에 대한 예외 상황 테스트")
-    void calculateAutoBuyLottoCount(){
+    void calculateAutoBuyLottoCount() {
         assertThatThrownBy(() -> {
             lottoProgram.calculateAutoBuyLottoCount(10000, 12);
         }).isInstanceOf(ManualLottoCountExceededException.class);

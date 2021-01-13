@@ -27,7 +27,7 @@ public class Ball {
         return new Ball(number);
     }
 
-    public static List<Ball> getBalls(String[] numbers){
+    public static List<Ball> getBalls(String[] numbers) {
         return Arrays.stream(numbers)
                 .map(Ball::new)
                 .collect(Collectors.toList());

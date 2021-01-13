@@ -7,7 +7,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 class BallTest {
 
     @Test
-    void validator(){
+    void validator() {
         assertThatThrownBy(() -> {
             new Ball(46);
         }).isInstanceOf(IllegalArgumentException.class);

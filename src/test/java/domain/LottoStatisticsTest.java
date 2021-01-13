@@ -13,15 +13,15 @@ public class LottoStatisticsTest {
 
     @BeforeEach
     public void createLottos() {
-        WinningLotto winningLotto = new WinningLotto(LottoTest.getLottoBalls(1,7,8,9,10,11),34);
+        WinningLotto winningLotto = new WinningLotto(LottoTest.getLottoBalls(1, 7, 8, 9, 10, 11), 34);
         Lottos lottos = new Lottos(
                 Arrays.asList(
-                        new Lotto(LottoTest.getLottoBalls(1,7,8,9,10,11)),
-                        new Lotto(LottoTest.getLottoBalls(1,7,8,9,10,11)),
-                        new Lotto(LottoTest.getLottoBalls(1,7,8,9,10,11)),
-                        new Lotto(LottoTest.getLottoBalls(1,7,8,9,10,13)),
-                        new Lotto(LottoTest.getLottoBalls(1,7,8,9,10,13)),
-                        new Lotto(LottoTest.getLottoBalls(1,7,8,9,10,13))
+                        new Lotto(LottoTest.getLottoBalls(1, 7, 8, 9, 10, 11)),
+                        new Lotto(LottoTest.getLottoBalls(1, 7, 8, 9, 10, 11)),
+                        new Lotto(LottoTest.getLottoBalls(1, 7, 8, 9, 10, 11)),
+                        new Lotto(LottoTest.getLottoBalls(1, 7, 8, 9, 10, 13)),
+                        new Lotto(LottoTest.getLottoBalls(1, 7, 8, 9, 10, 13)),
+                        new Lotto(LottoTest.getLottoBalls(1, 7, 8, 9, 10, 13))
                 )
         );
         lottoStatistics = new LottoStatistics(lottos.getRankCounts(winningLotto), lottos.getLottos().size());

@@ -18,8 +18,8 @@ public class LottoTest {
 
     @BeforeEach
     public void setUpLotto() {
-        lotto = new Lotto(getLottoBalls(1,7,8,9,10,11));
-        winningLotto = new WinningLotto(getLottoBalls(1,2,3,4,5,6), 12);
+        lotto = new Lotto(getLottoBalls(1, 7, 8, 9, 10, 11));
+        winningLotto = new WinningLotto(getLottoBalls(1, 2, 3, 4, 5, 6), 12);
     }
 
     @RepeatedTest(100)
@@ -34,23 +34,23 @@ public class LottoTest {
 
     @Test
     @DisplayName("생성자 파라미터에 볼의 갯수가 6개가 아닐 때, 중복되는 숫자가 있을 때 테스트")
-    void validator(){
+    void validator() {
         assertThatThrownBy(() -> {
-            new Lotto(getLottoBalls(1,7,8,9,10));
+            new Lotto(getLottoBalls(1, 7, 8, 9, 10));
         }).isInstanceOf(IllegalArgumentException.class);
 
         assertThatThrownBy(() -> {
-            new Lotto(getLottoBalls(1,7,8,9,10,14,15));
+            new Lotto(getLottoBalls(1, 7, 8, 9, 10, 14, 15));
         }).isInstanceOf(IllegalArgumentException.class);
 
         assertThatThrownBy(() -> {
-            new Lotto(getLottoBalls(1,7,8,9,10,10));
+            new Lotto(getLottoBalls(1, 7, 8, 9, 10, 10));
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
-    public static List<Ball> getLottoBalls(int... numbers){
+    public static List<Ball> getLottoBalls(int... numbers) {
         List<Ball> balls = new ArrayList<>();
-        for(int number : numbers){
+        for (int number : numbers) {
             balls.add(new Ball(number));
         }
         return balls;

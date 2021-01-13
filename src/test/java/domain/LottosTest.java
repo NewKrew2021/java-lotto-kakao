@@ -14,21 +14,21 @@ public class LottosTest {
 
     @BeforeEach
     public void createLottos() {
-        winningLotto = new WinningLotto(LottoTest.getLottoBalls(1,7,8,9,10,11),34);
+        winningLotto = new WinningLotto(LottoTest.getLottoBalls(1, 7, 8, 9, 10, 11), 34);
         lottos = new Lottos(
                 Arrays.asList(
-                        new Lotto(LottoTest.getLottoBalls(1,7,8,9,10,11)),
-                        new Lotto(LottoTest.getLottoBalls(1,7,8,9,10,11)),
-                        new Lotto(LottoTest.getLottoBalls(1,7,8,9,10,11)),
-                        new Lotto(LottoTest.getLottoBalls(1,7,8,9,10,13)),
-                        new Lotto(LottoTest.getLottoBalls(1,7,8,9,10,13)),
-                        new Lotto(LottoTest.getLottoBalls(1,7,8,9,10,13))
+                        new Lotto(LottoTest.getLottoBalls(1, 7, 8, 9, 10, 11)),
+                        new Lotto(LottoTest.getLottoBalls(1, 7, 8, 9, 10, 11)),
+                        new Lotto(LottoTest.getLottoBalls(1, 7, 8, 9, 10, 11)),
+                        new Lotto(LottoTest.getLottoBalls(1, 7, 8, 9, 10, 13)),
+                        new Lotto(LottoTest.getLottoBalls(1, 7, 8, 9, 10, 13)),
+                        new Lotto(LottoTest.getLottoBalls(1, 7, 8, 9, 10, 13))
                 )
         );
     }
 
     @Test
-    void getRankCounts(){
+    void getRankCounts() {
         HashMap<LottoRank, Integer> rankCounts = lottos.getRankCounts(winningLotto);
         assertThat(rankCounts.get(LottoRank.FIRST)).isEqualTo(3);
         assertThat(rankCounts.get(LottoRank.THIRD)).isEqualTo(3);
