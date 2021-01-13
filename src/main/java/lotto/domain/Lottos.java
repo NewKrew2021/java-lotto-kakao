@@ -14,18 +14,21 @@ public class Lottos {
         this.lottos = lottos;
     }
 
-    public static Lottos getInstance(int number) {
+    public Lottos(String[] textLottos) {
+        lottos = new ArrayList<>();
+        for (String textLotto : textLottos) {
+            lottos.add(Lotto.of(textLotto));
+        }
+    }
+
+    public static Lottos getAutoLottos(int number) {
         List<Lotto> lottos = new ArrayList<>();
 
         for (int i = 0; i < number; ++i) {
-            lottos.add(new Lotto(RandomNo.generateRandomNos(NUMBER)));
+            lottos.add(Lotto.of(RandomNo.generateRandomNos(NUMBER)));
         }
 
         return new Lottos(lottos);
-    }
-
-    public int size() {
-        return lottos.size();
     }
 
     public List<Lotto> getLottos() {
@@ -39,6 +42,12 @@ public class Lottos {
             results.add(winningLotto.compare(lotto));
         }
         return new LottoResults(results);
+    }
+
+    public static Lottos merge(Lottos lottos1, Lottos lottos2) {
+        List<Lotto> newLottos = new ArrayList<>(lottos1.getLottos());
+        newLottos.addAll(lottos2.getLottos());
+        return new Lottos(newLottos);
     }
 
     @Override

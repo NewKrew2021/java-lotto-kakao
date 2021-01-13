@@ -1,23 +1,31 @@
 package lotto.domain;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
-import java.util.StringJoiner;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public class Lotto {
     private final List<LottoNumber> lottoNumbers;
 
-    public Lotto(List<LottoNumber> digits) {
-        if (isInvalidNumberOfDigits(digits)) {
+    private Lotto(List<LottoNumber> lottoNumbers) {
+        if (isInvalidNumberOfDigits(lottoNumbers)) {
             throw new IllegalArgumentException("숫자는 6개만 입력해주세요.");
         }
-        if (isDuplicate(digits)) {
+        if (isDuplicate(lottoNumbers)) {
             throw new IllegalArgumentException("숫자는 중복되지 않게 입력해주세요.");
         }
-        Collections.sort(digits);
-        this.lottoNumbers = digits;
+        Collections.sort(lottoNumbers);
+        this.lottoNumbers = lottoNumbers;
+    }
+
+    public static Lotto of(List<LottoNumber> lottoNumbers) {
+        return new Lotto(lottoNumbers);
+    }
+
+    public static Lotto of(String text) {
+        List<LottoNumber> lottoNumbers = new ArrayList<>();
+        for (String number : text.split(",")) {
+            lottoNumbers.add(new LottoNumber(Integer.parseInt(number.trim())));
+        }
+        return new Lotto(lottoNumbers);
     }
 
     public List<LottoNumber> getLottoNumbers() {

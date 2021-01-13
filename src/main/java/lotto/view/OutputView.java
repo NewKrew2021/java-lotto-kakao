@@ -6,8 +6,12 @@ import lotto.utils.Result;
 import java.util.StringJoiner;
 
 public class OutputView {
-    public static void printLottos(Lottos lottos) {
-        for (Lotto lotto : lottos.getLottos()) {
+    public static void printLottos(Lottos manualLottos, Lottos autoLottos) {
+        System.out.println("수동으로 " + manualLottos.getLottos().size() + "장, 자동으로 " + autoLottos.getLottos().size() + "개를 구매했습니다.");
+        for (Lotto lotto : manualLottos.getLottos()) {
+            printLotto(lotto);
+        }
+        for (Lotto lotto : autoLottos.getLottos()) {
             printLotto(lotto);
         }
         System.out.println();
@@ -26,6 +30,9 @@ public class OutputView {
     }
 
     public static void printResult(LottoSimulation lotto) {
+        System.out.println("\n당첨 통계");
+        System.out.println("---------");
+
         LottoResults results = lotto.getLottoResults();
         System.out.println("3개 일치 (" + Result.THREE.getReward() + "원) - " + results.getResultCount(Result.THREE) + "개");
         System.out.println("4개 일치 (" + Result.FOUR.getReward() + "원) - " + results.getResultCount(Result.FOUR) + "개");
