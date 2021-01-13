@@ -15,7 +15,7 @@ public class LottoGame {
         
         for (int i = 0; i < totalCount - manualLottoNumbers.size(); i++) {
             Set<Integer> numbers = getLottoNumber();
-            tickets.add(generateLottoTicket(numbers));
+            tickets.add(toLottoNumbers(numbers));
         }
 
         this.tickets = new LottoTickets(tickets);
@@ -27,7 +27,7 @@ public class LottoGame {
         return generator.generateNumbers();
     }
 
-    private LottoNumbers generateLottoTicket(Set<Integer> numbers) {
+    private LottoNumbers toLottoNumbers(Set<Integer> numbers) {
         return new LottoNumbers(numbers);
     }
 
@@ -59,7 +59,7 @@ public class LottoGame {
         List<LottoNumbers> tickets = new ArrayList<>();
         for (List<Integer> manualLottoNumber : manualLottoNumbers) {
             Set<Integer> numbers = new HashSet<>(manualLottoNumber);
-            tickets.add(generateLottoTicket(numbers));
+            tickets.add(toLottoNumbers(numbers));
         }
 
         return tickets;
