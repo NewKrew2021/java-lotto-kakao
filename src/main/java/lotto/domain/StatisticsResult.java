@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.StatisticsType;
 import java.util.HashMap;
 import java.util.Objects;
 

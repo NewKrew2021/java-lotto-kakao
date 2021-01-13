@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.StatisticsType;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.*;
 
