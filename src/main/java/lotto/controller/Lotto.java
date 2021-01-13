@@ -7,24 +7,27 @@ import lotto.view.OutputView;
 
 public class Lotto {
     public void play() {
-        Buyer buyer;
+        TicketBuyer ticketBuyer;
         InputView inputView = new InputView();
         OutputView outputView = new OutputView();
 
         Price insertPrice = inputView.scanPrice();
-        int manualChoose = inputView.scanManualChooseTicketCount();
-        buyer = new Buyer(insertPrice, manualChoose);
+        int manualChoose = inputView.scanManualCount();
+        ticketBuyer = new TicketBuyer(insertPrice, manualChoose);
 
-        LottoTickets manualTickets = inputView.scanManualChooseTickets(buyer.getManualCount());
-        LottoTickets randomTickets = LottoTicketIssuer.issuing(
-                new RandomPickStrategy(), buyer.getRandomCount());
-        buyer.issueTickets(manualTickets.join(randomTickets));
+        LottoTickets manualTickets = TicketSeller.issuing(
+                new ManualPickStrategy(inputView.scanManualTickets(ticketBuyer.getManualCount())),
+                ticketBuyer.getManualCount());
+        LottoTickets randomTickets = TicketSeller.issuing(
+                new RandomPickStrategy(),
+                ticketBuyer.getRandomCount());
+        ticketBuyer.issueTickets(manualTickets.join(randomTickets));
 
-        outputView.printChangeIfExists(buyer.getChange());
-        outputView.printNumberOfLottoTickets(buyer.getManualCount(), buyer.getRandomCount());
-        outputView.printLottoTickets(buyer.getLottoTickets());
+        outputView.printChangeIfExists(ticketBuyer.getChange());
+        outputView.printNumberOfLottoTickets(ticketBuyer.getManualCount(), ticketBuyer.getRandomCount());
+        outputView.printLottoTickets(ticketBuyer.getLottoTickets());
 
-        MatchResults matchResults = new LottoMatcher(inputView.scanWinningNumbers()).match(buyer.getLottoTickets());
-        outputView.printStatistics(new LottoStatistics(matchResults, buyer.getInvestedMoney()));
+        MatchResults matchResults = new LottoMatcher(inputView.scanWinningNumbers()).match(ticketBuyer.getLottoTickets());
+        outputView.printStatistics(new LottoStatistics(matchResults, ticketBuyer.getInvestedMoney()));
     }
 }

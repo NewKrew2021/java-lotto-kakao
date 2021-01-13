@@ -3,9 +3,9 @@ package lotto.domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public final class LottoTicketIssuer {
-    private LottoTicketIssuer() {
-        throw new IllegalStateException("Issuer cannot be instantiated");
+public final class TicketSeller {
+    private TicketSeller() {
+        throw new IllegalStateException("Seller cannot be instantiated");
     }
 
     public static LottoTickets issuing(NumberPickStrategy strategy, int count) {

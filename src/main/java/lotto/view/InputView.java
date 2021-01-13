@@ -1,13 +1,15 @@
 package lotto.view;
 
-import lotto.domain.*;
+import lotto.domain.LottoNumbers;
+import lotto.domain.WinningNumbers;
 import lotto.domain.vo.LottoNumber;
 import lotto.domain.vo.Price;
+import lotto.utils.NumbersSplitAndParser;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public final class InputView {
     private final static Scanner SC = new Scanner(System.in);
@@ -17,14 +19,20 @@ public final class InputView {
         return new Price(Integer.parseInt(SC.nextLine().trim()));
     }
 
-    public int scanManualChooseTicketCount() {
+    public int scanManualCount() {
         System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         return Integer.parseInt(SC.nextLine().trim());
     }
 
-    public LottoTickets scanManualChooseTickets(int count) {
+    public List<String> scanManualTickets(int count) {
+        List<String> tickets = new ArrayList<>();
+
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
-        return LottoTicketIssuer.issuing(new ManualPickStrategy(), count);
+        for (int i = 0; i < count; i++) {
+            tickets.add(SC.nextLine());
+        }
+
+        return tickets;
     }
 
     public WinningNumbers scanWinningNumbers() {
@@ -41,7 +49,7 @@ public final class InputView {
     }
 
     public List<LottoNumber> scanTicket() {
-        return parseToIntegers(SC.nextLine())
+        return NumbersSplitAndParser.parseToIntegers(SC.nextLine())
                 .stream()
                 .map(LottoNumber::valueOf)
                 .collect(Collectors.toList());
@@ -49,11 +57,5 @@ public final class InputView {
 
     private int scanNumber() {
         return Integer.parseInt(SC.nextLine().trim());
-    }
-
-    private List<Integer> parseToIntegers(String input) {
-        return Stream.of(input.split(","))
-                .map(value -> Integer.parseInt(value.trim()))
-                .collect(Collectors.toList());
     }
 }

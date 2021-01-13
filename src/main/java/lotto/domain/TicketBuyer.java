@@ -2,13 +2,13 @@ package lotto.domain;
 
 import lotto.domain.vo.Price;
 
-public class Buyer {
+public class TicketBuyer {
     private final int TICKET_PRICE = 1000;
     private final int manualCount;
     private final Price price;
     private LottoTickets tickets;
 
-    public Buyer(Price price, int manualCount) {
+    public TicketBuyer(Price price, int manualCount) {
         if (isNegative(manualCount)) {
             throw new IllegalArgumentException("Cannot choose negative amount of manual tickets");
         }

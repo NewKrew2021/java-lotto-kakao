@@ -12,19 +12,19 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class BuyerTest {
+public class TicketBuyerTest {
     @Test
     void testGetInsertPrice() {
-        Buyer buyer = new Buyer(new Price(123), 0);
-        assertThat(buyer.getPrice().getPrice()).isEqualTo(123L);
+        TicketBuyer ticketBuyer = new TicketBuyer(new Price(123), 0);
+        assertThat(ticketBuyer.getPrice().getPrice()).isEqualTo(123L);
     }
 
     @Test
     void invalidInputsShouldThrowError() {
-        assertThatThrownBy(() -> new Buyer(new Price(1000), -1))
+        assertThatThrownBy(() -> new TicketBuyer(new Price(1000), -1))
                 .isInstanceOf(IllegalArgumentException.class);
 
-        assertThatThrownBy(() -> new Buyer(new Price(1999), 2))
+        assertThatThrownBy(() -> new TicketBuyer(new Price(1999), 2))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -32,23 +32,23 @@ public class BuyerTest {
     @ParameterizedTest
     @CsvSource({"0,0", "999,999", "1000,0", "1001,1"})
     void testGetChange(int price, int expected) {
-        Buyer buyer = new Buyer(new Price(price), 0);
-        assertThat(buyer.getChange()).isEqualTo(expected);
+        TicketBuyer ticketBuyer = new TicketBuyer(new Price(price), 0);
+        assertThat(ticketBuyer.getChange()).isEqualTo(expected);
     }
 
     @ParameterizedTest
     @CsvSource({"0,0", "999,0", "1000,1000", "1001,1000"})
     void testGetInvestedMoney(int price, long expected) {
-        Buyer buyer = new Buyer(new Price(price), 0);
-        assertThat(buyer.getInvestedMoney()).isEqualTo(expected);
+        TicketBuyer ticketBuyer = new TicketBuyer(new Price(price), 0);
+        assertThat(ticketBuyer.getInvestedMoney()).isEqualTo(expected);
     }
 
     @Test
     void testGetTicketAmount() {
-        Buyer buyer = new Buyer(new Price(8234), 5);
-        assertThat(buyer.getTotalTicketAmount()).isEqualTo(8);
-        assertThat(buyer.getManualCount()).isEqualTo(5);
-        assertThat(buyer.getRandomCount()).isEqualTo(3);
+        TicketBuyer ticketBuyer = new TicketBuyer(new Price(8234), 5);
+        assertThat(ticketBuyer.getTotalTicketAmount()).isEqualTo(8);
+        assertThat(ticketBuyer.getManualCount()).isEqualTo(5);
+        assertThat(ticketBuyer.getRandomCount()).isEqualTo(3);
     }
 
     @Test
@@ -58,9 +58,9 @@ public class BuyerTest {
                 new LottoNumbers(LottoNumberArray.asList(1, 2, 3, 4, 5, 6)),
                 new LottoNumbers(LottoNumberArray.asList(1, 2, 3, 4, 5, 6)));
 
-        Buyer buyer = new Buyer(new Price(0), 0);
-        buyer.issueTickets(new LottoTickets(numbers));
+        TicketBuyer ticketBuyer = new TicketBuyer(new Price(0), 0);
+        ticketBuyer.issueTickets(new LottoTickets(numbers));
 
-        assertThat(buyer.getLottoTickets()).isEqualTo(new LottoTickets(numbers));
+        assertThat(ticketBuyer.getLottoTickets()).isEqualTo(new LottoTickets(numbers));
     }
 }
