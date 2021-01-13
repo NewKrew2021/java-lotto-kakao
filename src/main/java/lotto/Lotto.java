@@ -7,15 +7,15 @@ import static lotto.LottoNumber.MAX_LOTTO_NUMBER;
 import static lotto.LottoNumber.MIN_LOTTO_NUMBER;
 
 public class Lotto {
-    private static final int LOTTO_NUMBER_COUNT = 6;
-    static final int LOTTO_PRICE = 1000;
+    private static final int LOTTO_NUMBERS_COUNT = 6;
+    public static final int LOTTO_PRICE = 1000;
 
     private final List<LottoNumber> lottoNumbers = new ArrayList<>();
 
     private Lotto(List<Integer> numbers) {
         validate(numbers);
         numbers.forEach(num ->
-                lottoNumbers.add(LottoNumber.getInstance(num))
+                lottoNumbers.add(LottoNumber.of(num))
         );
     }
 
@@ -23,13 +23,30 @@ public class Lotto {
         return new Lotto(generateLottoNumbers());
     }
 
-    public static Lotto generateLotto(List<Integer> numbers) {
+    public static Lotto generateManualLotto(List<Integer> numbers) {
         return new Lotto(numbers);
     }
 
     private void validate(List<Integer> numbers) {
-        if (numbers.size() != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException();
+        validateCount(numbers);
+        validateDuplicate(numbers);
+    }
+
+    private void validateCount(List<Integer> numbers) {
+        if (numbers.size() != LOTTO_NUMBERS_COUNT) {
+            throw new IllegalArgumentException("Input numbers exceed " + LOTTO_NUMBERS_COUNT + ".");
+        }
+    }
+
+    private void validateDuplicate(List<Integer> numbers) {
+        Set<Integer> numberSet = new HashSet<Integer>();
+
+        for (Integer number : numbers) {
+            numberSet.add(number);
+        }
+
+        if (numberSet.size() != LOTTO_NUMBERS_COUNT) {
+            throw new IllegalArgumentException("Input numbers contains duplicate numbers.");
         }
     }
 
@@ -41,14 +58,16 @@ public class Lotto {
     }
 
     private int countSameLottoNumber(Lotto lotto) {
-        Set<LottoNumber> set = new HashSet<>();
+        Set<LottoNumber> set1 = new HashSet<>();
+        Set<LottoNumber> set2 = new HashSet<>();
 
-        for (int i = 0; i < LOTTO_NUMBER_COUNT; i++) {
-            set.add(this.lottoNumbers.get(i));
-            set.add(lotto.lottoNumbers.get(i));
+        for (int i = 0; i < LOTTO_NUMBERS_COUNT; i++) {
+            set1.add(this.lottoNumbers.get(i));
+            set2.add(lotto.lottoNumbers.get(i));
         }
+        set1.retainAll(set2);
 
-        return LOTTO_NUMBER_COUNT * 2 - set.size();
+        return set1.size();
     }
 
     private boolean contains(LottoNumber lottoNumber) {
@@ -69,7 +88,7 @@ public class Lotto {
         }
 
         Collections.shuffle(lottoNumbers);
-        List<Integer> sixLottoNumbers = lottoNumbers.subList(0, LOTTO_NUMBER_COUNT);
+        List<Integer> sixLottoNumbers = lottoNumbers.subList(0, LOTTO_NUMBERS_COUNT);
         Collections.sort(sixLottoNumbers);
 
         return sixLottoNumbers;

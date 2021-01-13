@@ -10,20 +10,24 @@ class LottoTest {
     @Test
     void validate() {
         assertThatThrownBy(() -> {
-            Lotto wrongLottoNumbers = Lotto.generateLotto(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
+            Lotto wrongLottoNumbers = Lotto.generateManualLotto(Arrays.asList(1, 2, 3, 4, 5, 6, 7));
         });
 
-        Lotto correctLottoNumbers = Lotto.generateLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        assertThatThrownBy(() -> {
+            Lotto wrongLottoNumbers = Lotto.generateManualLotto(Arrays.asList(1, 2, 3, 4, 5, 5));
+        });
+
+        Lotto correctLottoNumbers = Lotto.generateManualLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
     }
 
     @Test
     void checkLotto() {
-        Lotto winningNumbers = Lotto.generateLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        LottoNumber bonusNumber = LottoNumber.getInstance(7);
+        Lotto winningNumbers = Lotto.generateManualLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        LottoNumber bonusNumber = LottoNumber.of(7);
 
-        Lotto lotto1 = Lotto.generateLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-        Lotto lotto2 = Lotto.generateLotto(Arrays.asList(7, 8, 9, 10, 11, 12));
-        Lotto lotto3 = Lotto.generateLotto(Arrays.asList(3, 6, 7, 20, 45, 36));
+        Lotto lotto1 = Lotto.generateManualLotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+        Lotto lotto2 = Lotto.generateManualLotto(Arrays.asList(7, 8, 9, 10, 11, 12));
+        Lotto lotto3 = Lotto.generateManualLotto(Arrays.asList(3, 6, 7, 20, 45, 36));
 
         assertEquals(LottoResult.FIRST, lotto1.checkLotto(winningNumbers, bonusNumber));
         assertEquals(LottoResult.NOTHING, lotto2.checkLotto(winningNumbers, bonusNumber));

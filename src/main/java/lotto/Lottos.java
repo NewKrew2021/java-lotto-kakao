@@ -8,14 +8,8 @@ public class Lottos {
 
     private final List<Lotto> lottos = new ArrayList<>();
 
-    public void addLotto(Lotto lotto){
+    public void addLotto(Lotto lotto) {
         lottos.add(lotto);
-    }
-
-    public void addRandomLottos(int numberOfLottos){
-        for (int i = 0; i < numberOfLottos; i++) {
-            addLotto(Lotto.generateRandomLotto());
-        }
     }
 
     public List<Lotto> getLottos() {

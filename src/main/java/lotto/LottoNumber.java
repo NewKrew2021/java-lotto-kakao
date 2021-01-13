@@ -12,17 +12,20 @@ public class LottoNumber {
         }
     }
 
-    public static LottoNumber getInstance(int number) {
+    public static LottoNumber of(int number) {
+        validation(number);
         return LIST[number];
     }
 
     private LottoNumber(int number) {
-        if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException();
-        }
         this.number = number;
     }
 
+    private static void validation(int number) {
+        if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
+            throw new IllegalArgumentException();
+        }
+    }
 
     public int getNumber() {
         return number;
