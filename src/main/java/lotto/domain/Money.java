@@ -11,18 +11,11 @@ public class Money {
         this.money = money;
     }
 
-    public static Money makeMoney(int money){
+    public static Money of(int money){
         if(money < LOTTO_PRICE)
             throw new IllegalArgumentException("가격이 부족합니다.");
 
         return new Money(money);
-    }
-
-    public static Money makeMoneyFromText(String money){
-        if(isBlank(money) || !isNumber(money))
-            throw new IllegalArgumentException("숫자를 입력하세요.");
-
-        return makeMoney(Integer.parseInt(money));
     }
 
     public int getPossibleLottoCount(){
