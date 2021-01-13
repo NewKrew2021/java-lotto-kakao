@@ -10,30 +10,26 @@ public enum Rank {
     FIFTH(3, false, 5000),
     UNRANKED(0, false, 0);
 
-    private final int correctNo;
+    private final int matchedNumberCount;
     private final boolean hasBonus;
     private final int money;
 
     Rank(int correctNo, boolean hasBonus, int money) {
-        this.correctNo = correctNo;
+        this.matchedNumberCount = correctNo;
         this.hasBonus = hasBonus;
         this.money = money;
     }
 
-    public static Rank getRank(int correctNo, boolean hasBonus) {
+    public static Rank getRank(int matchedNumberCount, boolean hasBonus) {
         return Arrays.stream(Rank.values())
-                .filter(rank -> rank.isSameCorrectNo(correctNo))
+                .filter(rank -> rank.isSameMatchedCount(matchedNumberCount))
                 .filter(rank -> !rank.equals(SECOND) || hasBonus)
                 .findFirst()
                 .orElse(UNRANKED);
     }
 
-    private boolean isSameCorrectNo(int correctNo) {
-        return correctNo == this.correctNo;
-    }
-
-    public int getCorrectNo() {
-        return correctNo;
+    private boolean isSameMatchedCount(int matchedNumberCount) {
+        return matchedNumberCount == this.matchedNumberCount;
     }
 
     public boolean getHasBonus() {
