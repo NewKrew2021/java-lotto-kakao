@@ -1,63 +1,29 @@
 package mission.lotto.controller;
 
-import mission.lotto.domain.Number;
-import mission.lotto.domain.*;
-import mission.lotto.util.RandomUtil;
+import mission.lotto.domain.LottoAnswer;
+import mission.lotto.domain.LottoException;
+import mission.lotto.domain.Lottos;
+import mission.lotto.domain.UserMoney;
+import mission.lotto.util.Statistics;
 import mission.lotto.view.InputView;
 import mission.lotto.view.OutputView;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
 public class LottoController {
 
-    private UserMoney userMoney;
-    private TryNumber tryNumber;
-    private Lottos lottos;
+    public static void main(String[] args) throws LottoException {
+        UserMoney userMoney = new UserMoney(InputView.enterUerMoney());
+        int manualCount = InputView.enterManualCount();
+        Lottos lottos = Lottos.buyLottos(manualCount, InputView.enterManualList(manualCount), userMoney);
 
-    public void start() {
-        registerUserMoney(InputView.enterUerMoney());
+        OutputView.boughtLottosView(manualCount, lottos);
 
-        buyLottos(RandomUtil::getRandomSixIntegerList);
-
-        OutputView.autoBoughtView(lottos);
-
-        LottoAnswer lottoAnswer = makeLottoAnswer(
+        LottoAnswer lottoAnswer = new LottoAnswer(
                 InputView.enterLastWeekWinningNumbers(),
                 InputView.enterLastWeekBonusNumber());
 
-        OutputView.resultView(getAllLottoRank(lottoAnswer));
-        OutputView.totalEarningsView(getRateOfProfit(lottoAnswer));
-    }
-
-    private void registerUserMoney(int userMoney) {
-        this.userMoney = new UserMoney(userMoney);
-        int LOTTO_PRICE = 1000;
-        this.tryNumber = new TryNumber(userMoney / LOTTO_PRICE);
-    }
-
-    private void buyLottos(NumGenerator numberGenerator) {
-        List<Lotto> lottoList = new ArrayList<>();
-        while (this.tryNumber.hasNext()) {
-            lottoList.add(new Lotto(numberGenerator.getSixNumbers()));
-            this.tryNumber.useTryNumberCount();
-        }
-        this.lottos = new Lottos(lottoList);
-    }
-
-    private LottoAnswer makeLottoAnswer(List<Integer> sixNumberList, int bonusNumber) {
-        return new LottoAnswer(
-                new LottoNumbers(sixNumberList),
-                new Number(bonusNumber));
-    }
-
-    private Map<Rank, Integer> getAllLottoRank(LottoAnswer lottoAnswer) {
-        return lottos.getAllLottoRank(lottoAnswer);
-    }
-
-    private float getRateOfProfit(LottoAnswer lottoAnswer) {
-        return (float) lottos.getSumAllWinningMoney(lottoAnswer) / userMoney.getUserMoney();
+        Statistics statistics = new Statistics(lottos, lottoAnswer);
+        OutputView.resultView(statistics);
+        OutputView.totalEarningsView(statistics.getRateOfProfit(userMoney));
     }
 
 }

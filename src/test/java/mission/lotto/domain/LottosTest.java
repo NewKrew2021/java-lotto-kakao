@@ -1,84 +1,55 @@
 package mission.lotto.domain;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
-import java.util.Map;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class LottosTest {
 
-    @Test
-    @DisplayName("Lottos 는 각각의 Lotto 순서가 다르더라도, 담긴 숫자가 일치하면 동일한 객체로 본다")
-    public void LottosEqualTest() {
-        Lottos lottos1 = new Lottos(Arrays.asList(
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)),
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 8))
-        ));
+    static Stream<Arguments> numberGenerator() {
+        List<List<Integer>> numList = Arrays.asList(
+                Arrays.asList(1, 2, 3, 4, 5, 6),
+                Arrays.asList(1, 2, 3, 4, 5, 7),
+                Arrays.asList(1, 2, 3, 4, 5, 8)
+        );
 
-        Lottos lottos2 = new Lottos(Arrays.asList(
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 8)),
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7))
-        ));
+        return Stream.of(
+                Arguments.of(3, numList, new UserMoney(3000))
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("numberGenerator")
+    @DisplayName("Lottos 객체의 equals 테스트 - 숫자의 순서는 상관이 없다")
+    public void LottosEqualTest(int manualCount, List<List<Integer>> numbers, UserMoney userMoney) throws LottoException {
+        // when
+        Lottos lottos1 = Lottos.buyLottos(manualCount, numbers, userMoney);
+        Collections.shuffle(numbers);
+        Lottos lottos2 = Lottos.buyLottos(manualCount, numbers, userMoney);
+
+        // then
         assertThat(lottos1).isEqualTo(lottos2);
+        assertThat(lottos1 == lottos2).isFalse();
     }
 
-    @Test
-    @DisplayName("숫자 조합이 다르면 서로 다른 로또임을 테스트")
-    public void LottoNotEqualTest() {
-        Lottos lottos1 = new Lottos(Arrays.asList(
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)),
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 8))
-        ));
-
-        Lottos lottos2 = new Lottos(Arrays.asList(
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)),
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 8)),
-                new Lotto(Arrays.asList(9, 10, 11, 12, 13, 14))
-        ));
-
-        assertThat(lottos1).isNotEqualTo(lottos2);
-    }
-
-    @Test
-    @DisplayName("구입한 로또의 당첨 결과 및 당첨금 계산 테스트")
-    public void 당첨통계테스트() {
-        Lottos lottos1 = new Lottos(Arrays.asList(
-                new Lotto(Arrays.asList(8, 21, 23, 41, 42, 43)),
-                new Lotto(Arrays.asList(3, 5, 11, 16, 32, 38)),
-                new Lotto(Arrays.asList(7, 11, 16, 35, 36, 44)),
-                new Lotto(Arrays.asList(1, 8, 3, 2, 4, 5)),
-                new Lotto(Arrays.asList(1, 2, 3, 4, 5, 7)),
-                new Lotto(Arrays.asList(7, 11, 30, 40, 42, 43)),
-                new Lotto(Arrays.asList(2, 13, 22, 32, 38, 45)),
-                new Lotto(Arrays.asList(23, 25, 33, 36, 39, 41)),
-                new Lotto(Arrays.asList(1, 3, 4, 6, 22, 45)),
-                new Lotto(Arrays.asList(5, 9, 38, 41, 43, 44)),
-                new Lotto(Arrays.asList(2, 8, 9, 18, 19, 21)),
-                new Lotto(Arrays.asList(13, 14, 18, 21, 23, 35)),
-                new Lotto(Arrays.asList(17, 21, 29, 37, 42, 45)),
-                new Lotto(Arrays.asList(3, 8, 27, 30, 35, 44))
-        ));
-
-        LottoAnswer answer = new LottoAnswer(
-                new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6)), new Number(7));
-
-        Map<Rank, Integer> allLottoRankCount = lottos1.getAllLottoRank(answer);
-        assertThat(allLottoRankCount)
-                .containsEntry(Rank.FIRST, 0)
-                .containsEntry(Rank.SECOND, 1)
-                .containsEntry(Rank.THIRD, 1)
-                .containsEntry(Rank.FOURTH, 1)
-                .containsEntry(Rank.FIFTH, 0)
-                .containsEntry(Rank.UNRANKED, 11);
-
-        assertThat(lottos1.getSumAllWinningMoney(answer)).isEqualTo(31550000);
-
+    @ParameterizedTest
+    @MethodSource("numberGenerator")
+    @DisplayName("Getter로 받아온 Set이 불변객체인지 확인하는 테스트")
+    public void immutableTest(int manualCount, List<List<Integer>> numbers, UserMoney userMoney) {
+        assertThatThrownBy(() -> {
+            Lottos lottos = Lottos.buyLottos(manualCount, numbers, userMoney);
+            List<Lotto> lottoList = lottos.getLottos();
+            lottoList.add(new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6)));
+        }).isInstanceOf(UnsupportedOperationException.class);
     }
 
 }
