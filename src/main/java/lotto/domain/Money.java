@@ -6,9 +6,7 @@ public class Money {
 
     public Money(int money) {
         if( !checkValidationInputMoney(money) ) {
-            IllegalArgumentException error = new IllegalArgumentException();
-            error.printStackTrace();
-            throw error;
+            throw new IllegalArgumentException("잘못된 금액을 입력하셨습니다.");
         }
         this.money = money;
     }

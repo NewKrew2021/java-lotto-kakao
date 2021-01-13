@@ -12,9 +12,7 @@ public class LottoTicket {
     public LottoTicket(Set<Integer> numbers) {
 
         if( !checkValidationLottoTicket(numbers) ) {
-            IllegalArgumentException error = new IllegalArgumentException();
-            error.printStackTrace();
-            throw error;
+            throw new IllegalArgumentException("잘못된 로또 티켓 번호입니다.");
         }
 
         for( int number : numbers ) {
