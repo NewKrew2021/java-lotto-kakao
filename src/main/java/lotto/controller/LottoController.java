@@ -27,7 +27,6 @@ public class LottoController {
 
     }
 
-
     public Lottos buyLotto() {
         Amount amount = lottoInputView.getLottoBuyAmount();
         lottoOutputView.printInputQuantityPhrase(amount.BuyCount());
@@ -43,6 +42,5 @@ public class LottoController {
         LottoNumber bonusBall = lottoInputView.getBonusBall();
         return new WonLotto(lotto, bonusBall);
     }
-
 
 }

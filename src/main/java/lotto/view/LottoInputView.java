@@ -6,9 +6,7 @@ import lotto.domain.LottoNumber;
 import java.util.Scanner;
 
 public class LottoInputView {
-
     private final Scanner scanner;
-
     private final String INPUT_MONEY_PHRASE = "구입금액을 입력해주세요.";
     private final String INPUT_WONLOTTO_PHRASE = "지난 주 당첨 번호를 입력해주세요.";
     private final String INPUT_BONUS_BALL_PHRASE = "보너스 볼을 입력해주세요.";
@@ -28,7 +26,6 @@ public class LottoInputView {
         scanner.nextLine();
         return LottoNumber.of(bonusBall);
     }
-
 
     public Amount getLottoBuyAmount() {
         System.out.println(INPUT_MONEY_PHRASE);

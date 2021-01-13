@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lottos {
-
     private final List<Lotto> lottos;
 
     public Lottos() {
@@ -16,14 +15,12 @@ public class Lottos {
     }
 
     public List<LottoRank> lottosResult(WonLotto wonLotto) {
-
         List<LottoRank> results = new ArrayList<>();
         for (Lotto lotto : lottos) {
             int matchNo = wonLotto.getWonLotto().checkSameCount(lotto);
             int isBonus = lotto.contain(wonLotto.getBonusNo());
             results.add(LottoRank.checkRanking(matchNo,isBonus));
         }
-
         return results;
     }
 

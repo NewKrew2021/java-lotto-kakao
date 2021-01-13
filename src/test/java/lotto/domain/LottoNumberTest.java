@@ -10,8 +10,8 @@ public class LottoNumberTest {
     @Test
     @DisplayName("1~45범위 밖에서 에러 발생하는지 확인")
     public void testAmountRange() {
-        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> new LottoNumber(0));
-        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> new LottoNumber(46));
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> LottoNumber.of(0));
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> LottoNumber.of(46));
     }
 
 }

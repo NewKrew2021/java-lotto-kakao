@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public class LottoResult {
-
     private HashMap<LottoRank, Integer> result = new HashMap<>();
     private int totalPrice;
     private final int LOTTO_PRICE = 1000;
@@ -15,7 +14,7 @@ public class LottoResult {
         for (LottoRank lottoRank : lottoRanks) {
             result.put(lottoRank, result.get(lottoRank) + 1);
         }
-        this.totalPrice=lottoRanks.size()*LOTTO_PRICE;
+        this.totalPrice = lottoRanks.size() * LOTTO_PRICE;
     }
 
     public void initializationMap() {
@@ -24,18 +23,12 @@ public class LottoResult {
         }
     }
 
-
     public BigDecimal profitRatio() {
-
-        BigDecimal totalPrize = new BigDecimal(String.valueOf(totalPrize()));
-        BigDecimal lottoTotalPrice = new BigDecimal(String.valueOf(totalPrice));
-
-        return totalPrize.divide(lottoTotalPrice, 2, BigDecimal.ROUND_HALF_UP);
+        return new BigDecimal(totalPrize() / totalPrice).setScale(2, BigDecimal.ROUND_HALF_UP);
     }
 
     private int totalPrize() {
-        int sum=0;
-
+        int sum = 0;
         for (LottoRank lottoRank : result.keySet()) {
             sum += result.get(lottoRank) * lottoRank.getMoney();
         }
@@ -44,9 +37,8 @@ public class LottoResult {
 
     @Override
     public String toString() {
-        StringBuilder sb=new StringBuilder();
-
-        for(int i=LottoRank.values().length-2;i>=0;i--){
+        StringBuilder sb = new StringBuilder();
+        for (int i = LottoRank.values().length - 2; i >= 0; i--) {
             sb.append(LottoRank.values()[i].toString());
             sb.append("- ");
             sb.append(result.get(LottoRank.values()[i]));
@@ -54,6 +46,5 @@ public class LottoResult {
         }
         return sb.toString();
     }
-
 
 }

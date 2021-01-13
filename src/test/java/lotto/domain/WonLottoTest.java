@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.service.LottoGeneratorService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -12,10 +13,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class WonLottoTest {
     private WonLotto wonLotto;
+    private LottoGeneratorService lottoGeneratorService;
 
     @BeforeEach
     void setUp() {
-        wonLotto = new WonLotto(new Lotto(Arrays.asList(new LottoNumber(1), new LottoNumber(2), new LottoNumber(3), new LottoNumber(4), new LottoNumber(5), new LottoNumber(6))), new LottoNumber(7));
+        lottoGeneratorService=new LottoGeneratorService();
+        wonLotto = new WonLotto(lottoGeneratorService.lottoStringParser("1,2,3,4,5,6"), LottoNumber.of(7));
     }
 
     @Test
@@ -28,12 +31,4 @@ public class WonLottoTest {
         Assertions.assertTrue(set.size() == 7);
     }
 
-    @Test
-    @DisplayName("일치하는 번호에 따른 등수 확인")
-    void testCheckRanking() {
-        LottoRank rank = LottoRank.checkRanking(6,0);
-        assertThat(rank).isEqualTo(LottoRank.FIRST);
-        rank = LottoRank.checkRanking(5,1);
-        assertThat(rank).isEqualTo(LottoRank.SECOND);
-    }
 }

@@ -1,7 +1,6 @@
 package lotto.domain;
 
 public class Amount {
-
     private final int LOTTO_PRICE = 1000;
     private final int money;
 

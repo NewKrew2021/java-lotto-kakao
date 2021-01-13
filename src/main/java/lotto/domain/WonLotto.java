@@ -1,11 +1,8 @@
 package lotto.domain;
 
 public class WonLotto {
-
     private final Lotto wonLotto;
     private final LottoNumber bonusNo;
-
-
 
     public WonLotto(Lotto lotto, LottoNumber bonusNo) {
         this.wonLotto = lotto;
@@ -19,8 +16,5 @@ public class WonLotto {
     public LottoNumber getBonusNo() {
         return bonusNo;
     }
-
-
-
 
 }

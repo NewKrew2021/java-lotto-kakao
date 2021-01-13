@@ -11,7 +11,6 @@ public enum LottoRank {
     private final int money;
     private final int matchedCount;
     private final String matchedPhrase;
-
     private final static int NON_GRADE_NUMBER = 3;
     private final static int BONUS_NUMBER_MATCHING_COUNT = 5;
 
@@ -29,12 +28,11 @@ public enum LottoRank {
         if (matchNo < NON_GRADE_NUMBER)
             return LottoRank.NONE;
         if (matchNo == BONUS_NUMBER_MATCHING_COUNT)
-            return isBonus==1?SECOND:THIRD;
+            return isBonus == 1 ? SECOND : THIRD;
         if (matchNo < BONUS_NUMBER_MATCHING_COUNT)
             return LottoRank.values()[convertRank(matchNo)];
         return LottoRank.FIRST;
     }
-
 
     private static int convertRank(int matchNo) {
         return 7 - matchNo;
@@ -42,6 +40,6 @@ public enum LottoRank {
 
     @Override
     public String toString() {
-        return matchedPhrase+" ("+money+"원)";
+        return matchedPhrase + " (" + money + "원)";
     }
 }

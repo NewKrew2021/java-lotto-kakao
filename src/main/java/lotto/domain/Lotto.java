@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class Lotto {
-
     public final int LOTTO_NUMBER_COUNT = 6;
     private final List<LottoNumber> lottoNumbers;
 
@@ -22,7 +21,6 @@ public class Lotto {
 
     public int checkSameCount(Lotto userLotto) {
         int count = 0;
-
         for (LottoNumber number : userLotto.getLottoNumbers()) {
             count += contain(number);
         }
@@ -36,11 +34,9 @@ public class Lotto {
         return 0;
     }
 
-
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
-
         str.append('[');
         str.append(lottoNumbers.stream().map(Object::toString).collect(Collectors.joining(", ")));
         str.append("]\n");
