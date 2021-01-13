@@ -23,7 +23,7 @@ public class LottoNumber {
 
     private static void validation(int number) {
         if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("Lotto number should be between 1 to 45.");
         }
     }
 
