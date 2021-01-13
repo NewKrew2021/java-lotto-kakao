@@ -51,4 +51,12 @@ public class PurchaseList {
         return this.manualLottoTicketNumbers.get(this.manualTicketCount);
     }
 
+    public int getAutoTicketCount() {
+        return autoTicketCount;
+    }
+
+    public int getManualTicketCount() {
+        return manualTicketCount;
+    }
+
 }

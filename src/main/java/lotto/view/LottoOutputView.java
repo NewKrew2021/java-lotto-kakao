@@ -7,8 +7,11 @@ import java.util.List;
 
 public class LottoOutputView {
 
+    public static void printLottoTicketCount(int manualLottoCount, int autoLottoCount) {
+        System.out.println("수동으로 " + manualLottoCount + "장, 자동으로 " + autoLottoCount + "를 구매했습니다.");
+    }
+
     public static void printLottoTickets(List<LottoTicket> lottoTickets) {
-        System.out.println(lottoTickets.size() + "개를 구매했습니다.");
         for( LottoTicket lottoTicket : lottoTickets ) {
             System.out.println(lottoTicket.toString());
         }

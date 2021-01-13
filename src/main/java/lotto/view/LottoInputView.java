@@ -92,8 +92,8 @@ public class LottoInputView {
 
     public static int inputManualLottoBuying() {
         String count;
+        System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
         do {
-            System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
             count = sc.nextLine();
         }while(!validateManualCount(count));
         return Integer.parseInt(count);
