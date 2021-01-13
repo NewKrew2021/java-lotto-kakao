@@ -1,9 +1,8 @@
 package lotto.domain;
 
+import lotto.domain.dto.MatchResultsDto;
 import lotto.domain.vo.Price;
 import lotto.domain.vo.Rate;
-
-import java.util.Map;
 
 public class LottoStatistics {
     private final MatchResults results;
@@ -18,7 +17,7 @@ public class LottoStatistics {
         this.rate = calcRate();
     }
 
-    public Map<MatchResult, Integer> getResults() {
+    public MatchResultsDto getResults() {
         return results.getResult();
     }
 

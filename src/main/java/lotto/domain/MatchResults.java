@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.dto.MatchResultsDto;
+
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -15,8 +17,8 @@ public class MatchResults {
         }
     }
 
-    public Map<MatchResult, Integer> getResult() {
-        return resultCounter;
+    public MatchResultsDto getResult() {
+        return new MatchResultsDto(resultCounter);
     }
 
     public long getTotalEarnings() {

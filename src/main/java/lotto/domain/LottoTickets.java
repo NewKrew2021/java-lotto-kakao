@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.dto.LottoTicketsDto;
+
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,10 +20,10 @@ public class LottoTickets {
                 .collect(Collectors.toList()));
     }
 
-    public List<List<Integer>> getAllTicketNumbers() {
-        return tickets.stream()
+    public LottoTicketsDto getAllTicketNumbers() {
+        return new LottoTicketsDto(tickets.stream()
                 .map(LottoNumbers::getNumbersInTicket)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
     public LottoTickets join(LottoTickets source) {

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.dto.LottoNumbersDto;
 import lotto.domain.vo.LottoNumber;
 
 import java.util.Collections;
@@ -21,10 +22,10 @@ public class LottoNumbers {
         this.lottoNumbers = Collections.unmodifiableList(lottoNumbers);
     }
 
-    public List<Integer> getNumbersInTicket() {
-        return lottoNumbers.stream()
+    public LottoNumbersDto getNumbersInTicket() {
+        return new LottoNumbersDto(lottoNumbers.stream()
                 .map(LottoNumber::getNumber)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()));
     }
 
     public MatchResult matchWinning(WinningNumbers winningNumbers) {

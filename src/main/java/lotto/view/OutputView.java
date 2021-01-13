@@ -3,9 +3,10 @@ package lotto.view;
 import lotto.domain.LottoStatistics;
 import lotto.domain.LottoTickets;
 import lotto.domain.MatchResult;
+import lotto.domain.dto.LottoNumbersDto;
+import lotto.domain.dto.LottoTicketsDto;
+import lotto.domain.dto.MatchResultsDto;
 
-import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -20,11 +21,13 @@ public class OutputView {
         }
     }
 
-    public void printLottoTickets(LottoTickets tickets) {
+    public void printLottoTickets(LottoTickets lottoTickets) {
         StringBuilder message = new StringBuilder();
+        LottoTicketsDto tickets = lottoTickets.getAllTicketNumbers();
 
-        for (List<Integer> ticket : tickets.getAllTicketNumbers()) {
-            String numbersFormatted = ticket.stream()
+        for (LottoNumbersDto ticket : tickets.getTickets()) {
+            String numbersFormatted = ticket.getNumbers()
+                    .stream()
                     .map(num -> Integer.toString(num))
                     .collect(Collectors.joining(", "));
 
@@ -36,14 +39,16 @@ public class OutputView {
 
     public void printStatistics(LottoStatistics statistics) {
         StringBuilder message = new StringBuilder();
-        Map<MatchResult, Integer> matchResults = statistics.getResults();
+        MatchResultsDto matchResults = statistics.getResults();
 
         message.append("당첨 통계\n")
                 .append("---------\n");
 
         Stream.of(MatchResult.values())
                 .map(result -> String.format("%s (%d원) - %d개%n",
-                        result.getInfo(), result.getReward(), matchResults.getOrDefault(result, 0)))
+                        result.getInfo(),
+                        result.getReward(),
+                        matchResults.getMatchResults().getOrDefault(result, 0)))
                 .forEach(message::append);
 
         message.append(String.format("총 수익률은 %d%%입니다.", statistics.getEarningRate().getRate()));
