@@ -1,6 +1,6 @@
 package mission.lotto.view;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
@@ -49,13 +49,12 @@ public class InputView {
     private static List<Integer> getIntegerList() {
         scanner = new Scanner(System.in);
         String str = scanner.nextLine();
-        String[] strArr = str.split(",");
-        List<Integer> winningNumbers = new ArrayList<>();
-        for (String s : strArr) {
-            s = s.trim();
-            Integer parseInt = Integer.parseInt(s);
-            winningNumbers.add(parseInt);
-        }
-        return winningNumbers;
+        String[] inputString = str.split(",");
+
+        return Arrays.stream(inputString)
+                .map(String::trim)
+                .mapToInt(Integer::parseInt)
+                .boxed()
+                .collect(Collectors.toList());
     }
 }
