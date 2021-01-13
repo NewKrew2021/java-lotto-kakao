@@ -3,6 +3,7 @@ package view;
 import domain.LottoRank;
 import domain.LottoTicketCount;
 import domain.WinningInfo;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -47,9 +48,10 @@ public class LottoOutputView {
     StringBuilder resultText = new StringBuilder();
     resultText.append("당첨 통계\n---------\n");
     Map<LottoRank, Integer> result = winningInfo.getInfo();
+    List<LottoRank> lottoRanks = Arrays.asList(LottoRank.values());
     for (int i = 0; i < RESULT_FORMAT.length; i++) {
       resultText.append(String.format(RESULT_FORMAT[i],
-          result.getOrDefault(LottoRank.of(RESULT_FORMAT.length - i), 0)));
+          result.getOrDefault(lottoRanks.get(i + 1), 0)));
     }
     System.out.println(resultText);
   }

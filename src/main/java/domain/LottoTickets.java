@@ -27,27 +27,11 @@ public class LottoTickets {
       int matchedCount = lottoWinningNumber.getMatchedCount(lottoTicket);
       boolean matchedBounus = lottoWinningNumber.isContainsBounusNumber(lottoTicket);
 
-      LottoRank rank = LottoRank.of(getRank(matchedCount, matchedBounus));
+      LottoRank rank = LottoRank.of(matchedCount, matchedBounus);
       winningInfo.put(rank, winningInfo.getOrDefault(rank, 0) + 1);
     }
 
     return new WinningInfo(winningInfo);
-  }
-
-  private int getRank(int matchedCount, boolean matchedBounus) {
-    if (matchedCount == LottoTicket.LOTTO_NUMBERS_LENGTH) {
-      return 1;
-    }
-
-    if (matchedCount == LottoTicket.LOTTO_NUMBERS_LENGTH - 1 && matchedBounus) {
-      return 2;
-    }
-
-    if (matchedCount > 2) {
-      return LottoTicket.LOTTO_NUMBERS_LENGTH - matchedCount + 2;
-    }
-
-    return 0;
   }
 
   public int size() {
