@@ -22,8 +22,8 @@ public class Lotto {
 
     public static Lotto of(String text) {
         List<LottoNumber> lottoNumbers = new ArrayList<>();
-        for (String number : text.split(", ")) {
-            lottoNumbers.add(new LottoNumber(Integer.parseInt(number)));
+        for (String number : text.split(",")) {
+            lottoNumbers.add(new LottoNumber(Integer.parseInt(number.trim())));
         }
         return new Lotto(lottoNumbers);
     }
