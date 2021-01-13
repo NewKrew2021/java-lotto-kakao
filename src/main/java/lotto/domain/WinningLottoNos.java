@@ -10,18 +10,15 @@ public class WinningLottoNos {
     private final LottoNo bonusNo;
 
     public WinningLottoNos(Set<Integer> numbers, int bonusNo ) {
+        if(!Validation.validateWinningLottoNos(numbers, bonusNo)) {
+            throw new IllegalArgumentException("잘못된 로또 당첨 번호입니다.");
+        }
+
         this.winningNumbers = new ArrayList<>();
         for( Integer number : numbers ) {
             this.winningNumbers.add(LottoNo.of(number));
         }
         this.bonusNo = LottoNo.of(bonusNo);
-    }
-
-    public static boolean validateWinningLottoNos(Set<Integer> numbers, Integer bonusNo ) {
-        if( !LottoTicket.validateLottoTicket(numbers) || !LottoNo.validateLottoNo(bonusNo) ) {
-            return false;
-        }
-        return !numbers.contains(bonusNo);
     }
 
     public StatisticsType rankWinning(LottoTicket lottoTicket) {

@@ -12,22 +12,6 @@ public class LottoTicketTest {
 
     @ParameterizedTest
     @CsvSource(
-            "'1,2,3,3,5|1,2,3,4,5,5|1,2,3,4,5,6'"
-    )
-    void checkValidationLottoTicketTest(String input){
-        List<Set<Integer>> ticketsNumber = CsvParsing.convertStringToTicketsNumber(input);
-
-        boolean invalidNumberSize = LottoTicket.validateLottoTicket(ticketsNumber.get(0));
-        boolean invalidDuplication = LottoTicket.validateLottoTicket(ticketsNumber.get(1));
-        boolean validNumber = LottoTicket.validateLottoTicket(ticketsNumber.get(2));
-
-        assertThat(invalidNumberSize).isFalse();
-        assertThat(invalidDuplication).isFalse();
-        assertThat(validNumber).isTrue();
-    }
-
-    @ParameterizedTest
-    @CsvSource(
             value = "1,2,3,4,5,6 | 5", delimiter = '|'
     )
     void isContainsTrueTest(String ticketNumbers, Integer lottoNumber){

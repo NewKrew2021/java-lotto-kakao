@@ -11,7 +11,7 @@ public class LottoTicket {
 
     public LottoTicket(Set<Integer> numbers) {
 
-        if( !validateLottoTicket(numbers) ) {
+        if( !Validation.validateLottoTicket(numbers) ) {
             throw new IllegalArgumentException("잘못된 로또 티켓 번호입니다.");
         }
 
@@ -19,10 +19,6 @@ public class LottoTicket {
             this.numbers.add(LottoNo.of(number));
         }
         Collections.sort(this.numbers);
-    }
-
-    public static boolean validateLottoTicket(final Set<Integer> numbers) {
-        return numbers.size() == LOTTO_NUMBER_COUNT_OF_TICKET;
     }
 
     public boolean isContains(LottoNo lottoNo) {

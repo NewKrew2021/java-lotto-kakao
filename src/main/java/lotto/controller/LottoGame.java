@@ -18,7 +18,7 @@ public class LottoGame {
     private static final String MANUAL_LOTTO_INPUT_TEXT = "수동으로 구매할 번호를 입력해 주세요.";
 
     public void run() {
-        List<LottoTicket> lottoTickets = LottoLogic.buyLottoTickets(this.inputTicketCount());           // 로또 티켓 구입
+        List<LottoTicket> lottoTickets = LottoLogic.buyLottoTickets(this.createPurchaseList());           // 로또 티켓 구입
         LottoOutputView.printLottoTickets(lottoTickets);                                                        // 구입한 티켓 출력
 
         WinningLottoNos winningLottoNos =
@@ -28,7 +28,8 @@ public class LottoGame {
 
         LottoOutputView.printWinningStatistics(statisticsResult);                                               // 결과 출력
     }
-    private PurchaseList inputTicketCount() {
+
+    private PurchaseList createPurchaseList() {
         int money = LottoInputView.inputMoney();
         int manualTicketCount = LottoInputView.inputManualLottoBuying();
         List<Set<Integer>> manualLottoNumbers = new ArrayList<>();

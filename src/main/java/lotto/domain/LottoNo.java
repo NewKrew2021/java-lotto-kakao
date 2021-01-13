@@ -12,7 +12,7 @@ public class LottoNo implements Comparable<LottoNo>{
     private final int number;
 
     private LottoNo(final Integer number) {
-        if( !validateLottoNo(number) ) {
+        if( !Validation.validateLottoNo(number) ) {
             throw new IllegalArgumentException("잘못된 로또 번호 입니다.");
         }
 
@@ -24,10 +24,6 @@ public class LottoNo implements Comparable<LottoNo>{
             lottoNumberBasket.add(i);
             lottoNoCache.put(i, new LottoNo(i));
         }
-    }
-
-    public static boolean validateLottoNo(final Integer number) {
-        return number >= MIN_NUMBER && number <= MAX_NUMBER;
     }
 
     public static LottoNo of(int number) {

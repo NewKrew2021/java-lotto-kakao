@@ -3,6 +3,8 @@ package lotto.view;
 import lotto.domain.LottoNo;
 import lotto.domain.LottoTicket;
 import lotto.domain.PurchaseList;
+import lotto.domain.Validation;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -60,7 +62,7 @@ public class LottoInputView {
     }
 
     private static boolean validateWinningNumber(Set<Integer> numbers){
-        if( !LottoTicket.validateLottoTicket(numbers) ) {
+        if( !Validation.validateLottoTicket(numbers) ) {
             System.out.println("로또 번호가 적절하지 않습니다.");
             return false;
         }
@@ -80,7 +82,7 @@ public class LottoInputView {
 
     private static boolean validateBonusNumber(String inputBonus){
         int bonusNum = convertStringToInt(inputBonus);
-        if( !LottoNo.validateLottoNo(bonusNum) ) {
+        if( !Validation.validateLottoNo(bonusNum) ) {
             System.out.println("보너스볼 번호가 적절하지 않습니다.");
             return false;
         }
@@ -93,13 +95,14 @@ public class LottoInputView {
         do {
             System.out.println("수동으로 구매할 로또 수를 입력해 주세요.");
             count = sc.nextLine();
-        }while(validateManualCount(count));
+        }while(!validateManualCount(count));
         return Integer.parseInt(count);
     }
 
     private static boolean validateManualCount(String inputCount) {
         int count = convertStringToInt(inputCount);
         if( count < 0 ) {
+            System.out.println("잘못된 수를 입력하셨습니다.");
             return false;
         }
         return true;

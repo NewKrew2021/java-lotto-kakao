@@ -12,28 +12,6 @@ public class WinningLottoNosTest {
 
     @ParameterizedTest
     @CsvSource(
-            "'1,2,3,4,5,6|1,2,3,4,5,6|1,2,3,4,5,6|1,2,3,4,5,5|1,2,3,4,5,6'," +
-            "'3,0,46,0,7'"
-    )
-    void checkValidationTest(String ticketsNumbers, String bonusNumbers) {
-        List<Set<Integer>> ticketsNumberListInt = CsvParsing.convertStringToTicketsNumber(ticketsNumbers);
-        List<Integer> bonusNumbersIntList = CsvParsing.convertStringToIntegerList(bonusNumbers);
-
-        boolean invalid0 = WinningLottoNos.validateWinningLottoNos(ticketsNumberListInt.get(0), bonusNumbersIntList.get(0));
-        boolean invalid1 = WinningLottoNos.validateWinningLottoNos(ticketsNumberListInt.get(1), bonusNumbersIntList.get(1));
-        boolean invalid2 = WinningLottoNos.validateWinningLottoNos(ticketsNumberListInt.get(2), bonusNumbersIntList.get(2));
-        boolean invalid3 = WinningLottoNos.validateWinningLottoNos(ticketsNumberListInt.get(3), bonusNumbersIntList.get(3));
-        boolean valid = WinningLottoNos.validateWinningLottoNos(ticketsNumberListInt.get(4), bonusNumbersIntList.get(4));
-
-        assertThat(invalid0).isFalse();
-        assertThat(invalid1).isFalse();
-        assertThat(invalid2).isFalse();
-        assertThat(invalid3).isFalse();
-        assertThat(valid).isTrue();
-    }
-
-    @ParameterizedTest
-    @CsvSource(
             "'1,2,3,4,5,6'," +
             "'7'," +
             "'1,2,9,10,11,12|1,2,3,9,10,11|1,2,3,4,8,9|1,2,3,4,5,8|1,2,3,4,5,7|1,2,3,4,5,6'"

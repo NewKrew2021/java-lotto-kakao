@@ -17,9 +17,9 @@ public class AutoBuyingStrategy implements BuyingStrategy{
     @Override
     public List<LottoTicket> buyTicket() {
         List<LottoTicket> autoLottoTickets = new ArrayList<>();
-        Collections.shuffle(LottoNo.lottoNumberBasket);
 
         while(this.purchaseList.payForAutoTicketing()) {
+            Collections.shuffle(LottoNo.lottoNumberBasket);
             autoLottoTickets.add(new LottoTicket(new HashSet<>(LottoNo.lottoNumberBasket.subList(0, LottoTicket.LOTTO_NUMBER_COUNT_OF_TICKET))));
         }
 
