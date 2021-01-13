@@ -10,19 +10,11 @@ public class Lotto {
     public static final int LOTTO_PRICE = 1000;
     private final List<LottoNumber> lotto = new ArrayList<>();
 
-    public Lotto(LottoGenerateStrategy lottoGenerateStrategy) {
-        this(lottoGenerateStrategy.numberChooseStrategy());
-    }
-
     public Lotto(List<Integer> lotto) {
         checkLottoLength(lotto);
         for (int number : lotto) {
             this.lotto.add(new LottoNumber(number));
         }
-    }
-
-    int size() {
-        return lotto.size();
     }
 
     public List<LottoNumber> getLotto() {

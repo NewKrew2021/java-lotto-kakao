@@ -45,11 +45,5 @@ public class LottoTest {
                 .isTrue();
     }
 
-    @Test
-    void 로또_생성_전략_테스트() {
-        Lotto lotto = new Lotto(new RandomLottoGenerateStrategy());
-
-        assertThat(lotto.size()).isEqualTo(6);
-    }
 }
 
