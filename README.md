@@ -46,20 +46,29 @@
 1. Input Output
 
 ## File 목록
+### controller
+- LottoGame : 로또 게임 flow 제어
+
 ### domain
 - LottoNo : 로또 번호 객체
 - LottoTicket : 로또 티켓 객체
-- Money : Input 돈 객체
+- PurchaseList : 구입목록 객체
 - StatisticsResult : 매칭 결과 객체
 - WinningLottoNos : 당첨 로또 티켓 객체
-- LottoLogic : 로또 구입, 당첨로또와 매칭
+- StatisticsType : 로또 당첨 Ranking enum
+- Validation : 예외 처리 class 
+
+#### strategy
 - AutoBuyingStrategy : 로또 자동 구입 객체
+- ManualBuyingStrategy : 로또 수동 구입 객체
 - BuyingStrategy : 로또 구입 전략패턴 인터페이스
+
+### Service
+- LottoLogic : 로또 구입, 당첨로또와 매칭
 
 ### view
 - LottoInputView : Input UI view
 - LottoOutputView : Output UI view
 
 ### 기타
-- StatisticsType : 로또 당첨 Ranking enum
 - LottoGameMain : main 함수
