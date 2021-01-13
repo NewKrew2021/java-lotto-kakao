@@ -10,8 +10,8 @@ import static java.util.stream.Collectors.toMap;
 public class LottoNumber implements Comparable<LottoNumber> {
     private static final int LOTTO_MIN_INT = 1;
     private static final int LOTTO_MAX_INT = 45;
-    private static final int LOTTO_NUMBER_COUNT = 6;
     private final int number;
+
     private static final Map<Integer, LottoNumber> lottoNumbers = IntStream.rangeClosed(LOTTO_MIN_INT, LOTTO_MAX_INT)
             .boxed()
             .collect(toMap(Function.identity(),LottoNumber::new));

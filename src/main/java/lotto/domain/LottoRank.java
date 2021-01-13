@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import java.util.Arrays;
+
 public enum LottoRank {
     FIRST(2_000_000_000, 6),
     SECOND(30_000_000, 5),
@@ -24,14 +26,14 @@ public enum LottoRank {
         return money;
     }
 
-    public static LottoRank checkRanking(int matchCount, int isBonus) {
-        if (matchCount < NON_GRADE_NUMBER)
-            return LottoRank.NONE;
-        if (matchCount == BONUS_NUMBER_MATCHING_COUNT)
-            return isBonus == 1 ? SECOND : THIRD;
-        if (matchCount < BONUS_NUMBER_MATCHING_COUNT)
-            return LottoRank.values()[convertRank(matchCount)];
-        return LottoRank.FIRST;
+    public static LottoRank checkRanking(int matchCount, boolean isBonus) {
+        if(matchCount == SECOND.matchedCount && isBonus) {
+            return SECOND;
+        }
+        return Arrays.stream(values())
+                .filter(r -> r.matchedCount == matchCount)
+                .findFirst()
+                .orElse(LottoRank.NONE);
     }
 
     private static int convertRank(int matchCount) {

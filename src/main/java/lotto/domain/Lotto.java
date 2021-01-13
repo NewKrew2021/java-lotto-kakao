@@ -22,16 +22,16 @@ public class Lotto {
     public int checkSameCount(Lotto userLotto) {
         int count = 0;
         for (LottoNumber number : userLotto.getLottoNumbers()) {
-            count += contain(number);
+            count += contain(number)?1:0;
         }
         return count;
     }
 
-    public int contain(LottoNumber number) {
+    public boolean contain(LottoNumber number) {
         if (lottoNumbers.contains(number)) {
-            return 1;
+            return true;
         }
-        return 0;
+        return false;
     }
 
     @Override

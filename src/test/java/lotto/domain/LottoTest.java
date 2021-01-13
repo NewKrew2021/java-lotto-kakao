@@ -72,7 +72,7 @@ public class LottoTest {
 
     @Test
     public void testContain() {
-        Assertions.assertTrue(lotto.contain(LottoNumber.of(1)) == 1);
-        Assertions.assertTrue(lotto.contain(LottoNumber.of(13)) == 0);
+        Assertions.assertTrue(lotto.contain(LottoNumber.of(1)));
+        Assertions.assertTrue(lotto.contain(LottoNumber.of(13)));
     }
 }

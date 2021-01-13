@@ -18,7 +18,7 @@ public class Lottos {
         List<LottoRank> results = new ArrayList<>();
         for (Lotto lotto : lottos) {
             int matchCount = wonLotto.getWonLotto().checkSameCount(lotto);
-            int isBonus = lotto.contain(wonLotto.getBonusNumber());
+            boolean isBonus = lotto.contain(wonLotto.getBonusNumber());
             results.add(LottoRank.checkRanking(matchCount, isBonus));
         }
         return results;
