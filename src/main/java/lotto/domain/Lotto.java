@@ -22,7 +22,7 @@ public class Lotto {
     public int checkSameCount(Lotto userLotto) {
         int count = 0;
         for (LottoNumber number : userLotto.getLottoNumbers()) {
-            count += contain(number)?1:0;
+            count += contain(number) ? 1 : 0;
         }
         return count;
     }

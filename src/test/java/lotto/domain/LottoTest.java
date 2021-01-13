@@ -16,7 +16,7 @@ public class LottoTest {
 
     @BeforeEach
     void setUp() {
-        lottoGeneratorService=new LottoGeneratorService();
+        lottoGeneratorService = new LottoGeneratorService();
         lotto = lottoGeneratorService.lottoStringParser("1,2,3,4,5,6");
     }
 

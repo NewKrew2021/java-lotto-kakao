@@ -28,5 +28,4 @@ public class LottosTest {
         assertThat(Arrays.asList(LottoRank.FIRST, LottoRank.SECOND, LottoRank.THIRD, LottoRank.NONE)).isEqualTo(lottos.lottosResult(wonLotto));
     }
 
-
 }

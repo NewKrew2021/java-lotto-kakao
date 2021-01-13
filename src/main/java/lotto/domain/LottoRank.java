@@ -25,17 +25,13 @@ public enum LottoRank {
     }
 
     public static LottoRank checkRanking(int matchCount, boolean isBonus) {
-        if(matchCount == SECOND.matchedCount && isBonus) {
+        if (matchCount == SECOND.matchedCount && isBonus) {
             return SECOND;
         }
         return Arrays.stream(values())
-                .filter(r -> r.matchedCount == matchCount&&r!=SECOND)
+                .filter(r -> r.matchedCount == matchCount && r != SECOND)
                 .findFirst()
                 .orElse(LottoRank.NONE);
-    }
-
-    private static int convertRank(int matchCount) {
-        return 7 - matchCount;
     }
 
     @Override

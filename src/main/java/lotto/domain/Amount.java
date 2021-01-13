@@ -12,8 +12,9 @@ public class Amount {
         }
         this.money = money;
     }
+
     public BigDecimal profitRatio(int totalPrize) {
-        return new BigDecimal(totalPrize/ (double)money).setScale(2, BigDecimal.ROUND_HALF_UP);
+        return new BigDecimal(totalPrize / (double) money).setScale(2, BigDecimal.ROUND_HALF_UP);
     }
 
     public int BuyCount() {

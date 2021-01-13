@@ -14,7 +14,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     private static final Map<Integer, LottoNumber> lottoNumbers = IntStream.rangeClosed(LOTTO_MIN_INT, LOTTO_MAX_INT)
             .boxed()
-            .collect(toMap(Function.identity(),LottoNumber::new));
+            .collect(toMap(Function.identity(), LottoNumber::new));
 
     static {
         for (int i = LOTTO_MIN_INT; i <= LOTTO_MAX_INT; i++) {
@@ -34,9 +34,9 @@ public class LottoNumber implements Comparable<LottoNumber> {
     }
 
     public static Lotto generateAutoLotto() {
-        List<LottoNumber> numbers= lottoNumbers.values().stream().collect(Collectors.toList());
+        List<LottoNumber> numbers = lottoNumbers.values().stream().collect(Collectors.toList());
         Collections.shuffle(numbers);
-        numbers=numbers.subList(0,Lotto.LOTTO_NUMBER_COUNT);
+        numbers = numbers.subList(0, Lotto.LOTTO_NUMBER_COUNT);
         Collections.sort(numbers);
         return new Lotto(new ArrayList<>(numbers));
     }

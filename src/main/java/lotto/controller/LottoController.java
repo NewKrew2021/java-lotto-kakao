@@ -26,7 +26,6 @@ public class LottoController {
         lottoOutputView.WonResultPhrase();
         lottoOutputView.printSameCountPhrase(lottoResult.toString());
         lottoOutputView.printProfitRatio(amount.profitRatio(lottoResult.totalPrize()));
-
     }
 
     public Lottos buyLotto(Amount amount) {
