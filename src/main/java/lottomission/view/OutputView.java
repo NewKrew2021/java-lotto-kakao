@@ -32,9 +32,9 @@ public class OutputView {
         System.out.println(sb);
     }
 
-    public static void totalEarningsView(LottoResult lottoResult, UserMoney userMoney) {
+    public static void totalEarningsView(float value) {
         String result = "총 수익률은 ";
-        result += (int) Math.floor(lottoResult.getRateOfProfitResult(userMoney) * 100);
+        result += (int) value;
         System.out.println(result + "%입니다.");
     }
 }

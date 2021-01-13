@@ -1,5 +1,7 @@
 package lottomission.domain;
 
+import lottomission.domain.exception.InvalidLottoLengthException;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -18,7 +20,7 @@ public class LottoNumbers {
         }
 
         if (checkNumbersLength(temp)) {
-            throw new IllegalArgumentException("로또는 중복 없는 6자리만 가능합니다.");
+            throw new InvalidLottoLengthException();
         }
         this.numbers = temp;
     }

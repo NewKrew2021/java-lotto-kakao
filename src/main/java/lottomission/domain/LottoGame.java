@@ -1,5 +1,6 @@
 package lottomission.domain;
 
+import lottomission.domain.exception.InvalidLottoLengthException;
 import lottomission.util.RandomForLotto;
 
 import java.util.*;
@@ -11,18 +12,25 @@ public class LottoGame {
     public static int LOTTO_PRICE = 1000;
 
     public Lottos buyLottos(UserMoney totalUserMoney, List<List<Integer>> selfLottosNumberList){
+        if(!checkLottosNumberList(selfLottosNumberList)){
+            throw new InvalidLottoLengthException();
+        }
 
-        Lottos selfLottos = new Lottos(selfLottosNumberList.stream()
+        List<Lotto> combineLottoList = selfLottosNumberList.stream()
                 .map(Lotto::new)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
 
-        UserMoney userMoneyforAuto = totalUserMoney.getLeftUserMoney(selfLottos.getLottosSize());
-
-        Lottos autoLottos = new Lottos(IntStream.range(0, userMoneyforAuto.getPossibleCount())
+        combineLottoList.addAll(IntStream.range(0, totalUserMoney.getPossibleCount() - selfLottosNumberList.size())
                 .mapToObj(i -> new Lotto(RandomForLotto.getRandomSixIntegerList()))
                 .collect(Collectors.toList()));
 
-        return selfLottos.combineLottos(autoLottos);
+        return new Lottos(combineLottoList);
+    }
+
+    private boolean checkLottosNumberList(List<List<Integer>> lottosNumberList){
+        return lottosNumberList
+                .stream()
+                .allMatch(lottoNumberList -> new HashSet<>(lottoNumberList).size() == LottoNumbers.MAX_NUMBERS_LENGTH);
     }
 
     public LottoResult getLottoGameResult(Lottos lottos,LottoAnswer answer) {

@@ -1,6 +1,8 @@
 package lottomission;
 
 import lottomission.domain.*;
+import lottomission.domain.exception.InvalidSelfLottoCountException;
+import lottomission.util.CalculatorForLotto;
 import lottomission.view.InputView;
 import lottomission.view.OutputView;
 
@@ -12,9 +14,11 @@ public class Main {
 
         UserMoney userMoney = new UserMoney(InputView.enterUerMoney());
         int selfLottoCount = InputView.enterSelfLottoCount();
+        if(userMoney.getPossibleCount() < selfLottoCount){
+            throw new InvalidSelfLottoCountException();
+        }
         List<List<Integer>> selfLottosNumberList = InputView.enterSelfLottoNumbers(
                 selfLottoCount);
-
 
         LottoGame lottoGame = new LottoGame();
         Lottos lottos = lottoGame.buyLottos(userMoney, selfLottosNumberList);
@@ -27,8 +31,9 @@ public class Main {
                 new LottoNumber(lottoAnswerBonusNumber)
         );
 
+        CalculatorForLotto cal = new CalculatorForLotto();
         LottoResult lottoResult = lottoGame.getLottoGameResult(lottos, lottoAnswer);
         OutputView.resultView(lottoResult);
-        OutputView.totalEarningsView(lottoResult, userMoney);
+        OutputView.totalEarningsView(cal.rateOfProfit(userMoney.getUserMoney(),lottoResult.getSumAllWinningMoney()));
     }
 }

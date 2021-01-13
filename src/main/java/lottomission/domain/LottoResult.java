@@ -15,14 +15,7 @@ public class LottoResult {
         return this.rankCount;
     }
 
-    public float getRateOfProfitResult(UserMoney userMoney) {
-        if(userMoney.isUserMoneyZero()){
-            throw new IllegalArgumentException("초기 입력 금액이 0원 이기에 수익률을 계산 할 수 없습니다");
-        }
-        return (float) getSumAllWinningMoney()/ userMoney.getUserMoney();
-    }
-
-    private int getSumAllWinningMoney() {
+    public int getSumAllWinningMoney() {
         return rankCount
                 .keySet()
                 .stream()

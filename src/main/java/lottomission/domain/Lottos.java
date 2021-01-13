@@ -22,20 +22,6 @@ public class Lottos {
                 .map(Lotto::getLottoNumberList)
                 .collect(Collectors.toList());
     }
-    public int getLottosSize(){
-        return this.lottos.size();
-    }
-
-    public Lottos combineLottos(Lottos lottos){
-        return new Lottos(lottos.combineLottoList(this.lottos));
-    }
-
-    public List<Lotto> combineLottoList(List<Lotto> lottoList){
-        List<Lotto> combineLottoListResult = new ArrayList<>(lottoList);
-        combineLottoListResult.addAll(this.lottos);
-        return combineLottoListResult;
-    }
-
 
     @Override
     public boolean equals(Object o) {
