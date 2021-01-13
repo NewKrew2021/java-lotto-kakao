@@ -32,7 +32,7 @@ public class LottoTicketTest {
     )
     void isContainsTrueTest(String ticketNumbers, Integer lottoNumber){
         LottoTicket lottoTicket = new LottoTicket(CsvParsing.convertStringToIntegerSet(ticketNumbers));
-        LottoNo lottoNo = new LottoNo(lottoNumber);
+        LottoNo lottoNo = LottoNo.of(lottoNumber);
 
         boolean isContain = lottoTicket.isContains(lottoNo);
 
@@ -45,7 +45,7 @@ public class LottoTicketTest {
     )
     void isContainsFalseTest(String ticketNumbers, Integer lottoNumber){
         LottoTicket lottoTicket = new LottoTicket(CsvParsing.convertStringToIntegerSet(ticketNumbers));
-        LottoNo lottoNo = new LottoNo(lottoNumber);
+        LottoNo lottoNo = LottoNo.of(lottoNumber);
 
         boolean isContain = lottoTicket.isContains(lottoNo);
 

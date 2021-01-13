@@ -1,7 +1,5 @@
 package lotto.domain;
 
-import lotto.StatisticsType;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -14,9 +12,9 @@ public class WinningLottoNos {
     public WinningLottoNos(Set<Integer> numbers, int bonusNo ) {
         this.winningNumbers = new ArrayList<>();
         for( Integer number : numbers ) {
-            this.winningNumbers.add(new LottoNo(number));
+            this.winningNumbers.add(LottoNo.of(number));
         }
-        this.bonusNo = new LottoNo(bonusNo);
+        this.bonusNo = LottoNo.of(bonusNo);
     }
 
     public static boolean checkValidationWinningLottoNos(Set<Integer> numbers, Integer bonusNo ) {

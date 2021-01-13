@@ -1,26 +1,37 @@
 package lotto.domain;
 
-import java.util.Objects;
+import java.util.*;
 
 public class LottoNo implements Comparable<LottoNo>{
 
     public static final int MIN_NUMBER = 1;
     public static final int MAX_NUMBER = 45;
 
+    public static List<Integer> lottoNumberBasket = new ArrayList<>();
+    private static Map<Integer, LottoNo> lottoNoCache = new HashMap<>();
     private final int number;
 
-    public LottoNo(final Integer number) {
+    private LottoNo(final Integer number) {
         if( !checkValidationLottoNo(number) ) {
-            IllegalArgumentException error = new IllegalArgumentException();
-            error.printStackTrace();
-            throw error;
+            throw new IllegalArgumentException("잘못된 로또 번호 입니다.");
         }
 
         this.number = number;
     }
 
+    static {
+        for (int i = LottoNo.MIN_NUMBER; i <= LottoNo.MAX_NUMBER; i++) {
+            lottoNumberBasket.add(i);
+            lottoNoCache.put(i, new LottoNo(i));
+        }
+    }
+
     public static boolean checkValidationLottoNo(final Integer number) {
         return number >= MIN_NUMBER && number <= MAX_NUMBER;
+    }
+
+    public static LottoNo of(int number) {
+        return lottoNoCache.get(number);
     }
 
     @Override
