@@ -8,6 +8,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -90,5 +91,16 @@ public class LottoTest {
 
         // then
         assertThat(Lotto1.isContainLottoNumber(choice)).isEqualTo(result);
+    }
+
+    @Test
+    @DisplayName("Getter로 받아온 Set이 불변객체인지 확인하는 테스트")
+    public void immutableTest() {
+        assertThatThrownBy(() -> {
+                    Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
+                    Set<Number> numbers = lotto.getNumbers();
+                    numbers.add(Number.of(3));
+                }
+        ).isInstanceOf(UnsupportedOperationException.class);
     }
 }

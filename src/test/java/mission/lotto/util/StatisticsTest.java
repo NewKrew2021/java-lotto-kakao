@@ -2,19 +2,21 @@ package mission.lotto.util;
 
 import mission.lotto.domain.*;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class StatisticsTest {
-    @Test
-    @DisplayName("구입한 로또의 당첨 결과 및 당첨금 계산 테스트")
-    public void statTests() throws LottoException {
-        // given
+
+    static Stream<Arguments> numberGenerator() {
         List<List<Integer>> numberSamples = Arrays.asList(
                 Arrays.asList(8, 21, 23, 41, 42, 43),
                 Arrays.asList(3, 5, 11, 16, 32, 38),
@@ -31,7 +33,17 @@ public class StatisticsTest {
                 Arrays.asList(17, 21, 29, 37, 42, 45),
                 Arrays.asList(3, 8, 27, 30, 35, 44)
         );
-        Lottos lottos = Lottos.buyLottos(14, numberSamples, new UserMoney(14000));
+        return Stream.of(
+                Arguments.of(14, numberSamples, new UserMoney(14000))
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("numberGenerator")
+    @DisplayName("구입한 로또의 당첨 결과 및 당첨금 계산 테스트")
+    public void statTests(int count, List<List<Integer>> numberSamples, UserMoney userMoney) throws LottoException {
+        // given
+        Lottos lottos = Lottos.buyLottos(count, numberSamples, userMoney);
 
         // when
         LottoAnswer answer = new LottoAnswer(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
@@ -48,6 +60,23 @@ public class StatisticsTest {
                 .containsEntry(Rank.UNRANKED, 11);
 
         assertThat(statistics.getSumAllWinningMoney()).isEqualTo(31550000);
+    }
+
+    @ParameterizedTest
+    @MethodSource("numberGenerator")
+    @DisplayName("Getter로 받아온 Set이 불변객체인지 확인하는 테스트")
+    public void immutableTest(int count, List<List<Integer>> numberSamples, UserMoney userMoney) throws LottoException {
+        // given
+        Lottos lottos = Lottos.buyLottos(count, numberSamples, userMoney);
+
+        // when
+        LottoAnswer answer = new LottoAnswer(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+
+        // then
+        Statistics statistics = new Statistics(lottos, answer);
+        Map<Rank, Integer> allLottoRankCount = statistics.getLottoRanks();
+        assertThatThrownBy(() -> allLottoRankCount.put(Rank.FIRST, 2))
+                .isInstanceOf(UnsupportedOperationException.class);
     }
 
 }

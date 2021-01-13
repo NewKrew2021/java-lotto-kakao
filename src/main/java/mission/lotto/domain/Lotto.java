@@ -30,11 +30,11 @@ public class Lotto implements Comparable<Lotto> {
         Set<Number> combine = new HashSet<>(answerNumbers);
         combine.addAll(numbers);
 
-        int matchedNumberCount = 12 - combine.size();
+        int correctNo = 12 - combine.size();
         Number bonus = answer.getBonusNumber();
 
         boolean hasBonusNo = isContainLottoNumber(bonus);
-        return Rank.getRank(matchedNumberCount, hasBonusNo);
+        return Rank.getRank(correctNo, hasBonusNo);
     }
 
     public boolean isContainLottoNumber(Number lottoNumber) {

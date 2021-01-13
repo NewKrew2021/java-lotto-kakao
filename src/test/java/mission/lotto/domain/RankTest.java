@@ -21,7 +21,11 @@ public class RankTest {
                 Arguments.of(3, true, Rank.FIFTH),
                 Arguments.of(3, false, Rank.FIFTH),
                 Arguments.of(2, true, Rank.UNRANKED),
-                Arguments.of(2, false, Rank.UNRANKED)
+                Arguments.of(2, false, Rank.UNRANKED),
+                Arguments.of(7, false, Rank.UNRANKED),
+                Arguments.of(0, false, Rank.UNRANKED),
+                Arguments.of(-1, false, Rank.UNRANKED),
+                Arguments.of(1, false, Rank.UNRANKED)
         );
     }
 
