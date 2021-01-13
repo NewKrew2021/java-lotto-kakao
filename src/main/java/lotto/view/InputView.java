@@ -12,7 +12,7 @@ public class InputView {
         try {
             price = Integer.parseInt(input.nextLine());
             System.out.println();
-        } catch (IllegalArgumentException e) {
+        } catch (NumberFormatException e) {
             throw new IllegalArgumentException("금액 정보가 올바르지 않습니다.");
         }
 
