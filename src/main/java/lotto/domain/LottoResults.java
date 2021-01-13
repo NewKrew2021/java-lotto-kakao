@@ -1,6 +1,8 @@
 package lotto.domain;
 
 import lotto.utils.Result;
+
+import java.util.Arrays;
 import java.util.List;
 
 public class LottoResults {
@@ -10,10 +12,13 @@ public class LottoResults {
         lottoResults = results;
     }
 
-    public static Result mapResult(int count, boolean bonus) {
-        if (count < 3) return Result.UNDERTHREE;
-        if (count == 5 && bonus) return Result.BONUSFIVE;
-        return Result.values()[count - 2];
+    public static Result mapResult(int match, boolean bonus) {
+        if (match <= Result.UNDERTHREE.getMatch()) return Result.UNDERTHREE;
+        if (match == Result.BONUSFIVE.getMatch() && bonus) return Result.BONUSFIVE;
+        return Arrays.stream(Result.values())
+                .filter(result -> result.getMatch() == match)
+                .findFirst()
+                .orElse(null);
     }
 
     public int getResultCount(Result result) {
