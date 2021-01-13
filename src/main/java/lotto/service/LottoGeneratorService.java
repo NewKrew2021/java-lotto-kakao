@@ -46,8 +46,7 @@ public class LottoGeneratorService {
             convertList(lottoNumber, parsedLotto);
             return new Lotto(parsedLotto);
         } catch (Exception e) {
-            new LottoOutputView().printInputErrorPhrase();
-            return null;
+            throw new IllegalArgumentException("잘못된 입력형식입니다");
         }
 
     }

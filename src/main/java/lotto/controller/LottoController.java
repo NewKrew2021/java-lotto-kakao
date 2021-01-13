@@ -34,12 +34,8 @@ public class LottoController {
 
     public Lottos buyLotto() {
 
-        lottoOutputView.printInputMoneyPhrase();
-        Amount amount;
-        do {
-            amount = lottoInputView.getLottoBuyAmount();
-        }
-        while (amount == null);
+        Amount amount = lottoInputView.getLottoBuyAmount();
+
         lottoOutputView.printInputQuantityPhrase(amount.BuyCount());
         Lottos lottos = new Lottos();
         for (int i = 0; i < amount.BuyCount(); i++) {
@@ -50,13 +46,8 @@ public class LottoController {
 
     public WonLotto createWonLotto() {
 
-        Lotto lotto;
-        lottoOutputView.printInputWonlottoPhrase();
-        do {
-            lotto = lottoGeneratorService.lottoStringParser(lottoInputView.getWonLotto());
-        }
-        while (lotto == null);
-        lottoOutputView.printInputBonusBallPhrase();
+        Lotto lotto = lottoGeneratorService.lottoStringParser(lottoInputView.getWonLotto());
+
         LottoNumber bonusBall = lottoInputView.getBonusBall();
         return new WonLotto(lotto, bonusBall);
     }

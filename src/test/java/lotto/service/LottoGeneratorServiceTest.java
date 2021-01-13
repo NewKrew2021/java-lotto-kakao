@@ -25,7 +25,7 @@ public class LottoGeneratorServiceTest {
     @DisplayName("서로다른 번호 6개로 로또번호가 생성된것인지 확인")
     public void testLottoSize() {
 
-        Lotto lotto = lottoGeneratorService.generateLotto();
+        Lotto lotto = lottoGeneratorService.generateAutoLotto();
         Assertions.assertTrue(lotto.getLottoNumbers().size() == 6);
 
         HashSet<LottoNumber> set = new HashSet<>();
