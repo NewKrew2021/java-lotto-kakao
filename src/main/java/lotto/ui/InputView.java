@@ -33,12 +33,11 @@ public class InputView {
         }
     }
 
-    public static Lotteries readManualLotteries(int count) {
-        Lotteries lotteries = new Lotteries();
+    public static String[][] readManualLotteries(int count) {
         System.out.println("수동으로 구매할 번호를 입력해 주세요.");
+        String[][] lotteries = new String[count][];
         for (int i = 0; i < count; i++) {
-            String[] lotteryNumbers = sc.nextLine().split(",");
-            lotteries.push(new Lottery(lotteryNumbers));
+            lotteries[i] = sc.nextLine().split(",");
         }
         return lotteries;
     }

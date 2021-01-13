@@ -29,7 +29,7 @@ public class Lottery {
         if (isInvalidSizeLotteryNumbers(numbers)) {
             throw new IllegalArgumentException(MSG_WRONG_LOTTERY_LENGTH);
         }
-        if (isDuplicatedLotteryNumbers(numbers)) {
+        if (hasDuplicatedLotteryNumbers(numbers)) {
             throw new IllegalArgumentException(MSG_DUPLICATED_LOTTERYNUMBER);
         }
         this.numbers = numbers;
@@ -48,14 +48,14 @@ public class Lottery {
         );
     }
 
-    public static boolean isDuplicatedLotteryNumbers(Lottery lottery, LotteryNumber bonusNumber) {
-        if (lottery.numbers.contains(bonusNumber)) {
+    public boolean hasDuplicatedLotteryNumbers(LotteryNumber bonusNumber) {
+        if (numbers.contains(bonusNumber)) {
             return true;
         }
-        return isDuplicatedLotteryNumbers(lottery.numbers);
+        return hasDuplicatedLotteryNumbers(numbers);
     }
 
-    private static boolean isDuplicatedLotteryNumbers(List<LotteryNumber> numbers) {
+    private static boolean hasDuplicatedLotteryNumbers(List<LotteryNumber> numbers) {
         Set<LotteryNumber> set = new HashSet<>(numbers);
         return set.size() != numbers.size();
     }

@@ -7,7 +7,7 @@ public class LotteryAnswer {
     private final LotteryNumber bonusNumber;
 
     public LotteryAnswer(Lottery answerLottery, LotteryNumber bonusNumber) {
-        if (Lottery.isDuplicatedLotteryNumbers(answerLottery, bonusNumber)) {
+        if (answerLottery.hasDuplicatedLotteryNumbers(bonusNumber)) {
             throw new IllegalArgumentException(Lottery.MSG_DUPLICATED_LOTTERYNUMBER);
         }
         this.lottery = answerLottery;

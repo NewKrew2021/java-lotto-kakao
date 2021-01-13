@@ -1,13 +1,13 @@
 package lotto.domain;
 
-import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public class LotteryRank {
 
-    private final HashMap<LotteryPrize, Integer> lotteryRank;
+    private final Map<LotteryPrize, Integer> lotteryRank;
 
-    public LotteryRank(HashMap<LotteryPrize, Integer> ranks) {
+    public LotteryRank(Map<LotteryPrize, Integer> ranks) {
         lotteryRank = ranks;
     }
 

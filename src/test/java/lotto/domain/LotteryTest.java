@@ -25,6 +25,12 @@ public class LotteryTest {
     }
 
     @Test
+    void Lottery_문자열_생성() {
+        Lottery lottery = new Lottery(new String[]{"1", "2", "3", "4", "5", "6"});
+        assertThat(lottery).isEqualTo(playerLottery);
+    }
+
+    @Test
     void Lottery_수동_정상생성() {
         assertThat(new Lottery(playerNumbers)).isEqualTo(new Lottery(playerNumbers));
     }

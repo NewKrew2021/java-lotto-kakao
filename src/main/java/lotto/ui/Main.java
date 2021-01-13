@@ -11,7 +11,7 @@ public class Main {
         final int manualLotteriesCount = InputView.readManualLotteryCount();
         final int autoLotteriesCount = lotteryCount - manualLotteriesCount;
 
-        Lotteries lotteries = InputView.readManualLotteries(manualLotteriesCount);
+        Lotteries lotteries = new Lotteries(InputView.readManualLotteries(manualLotteriesCount));
         lotteries.addRandomLotteries(autoLotteriesCount);
         OutputView.printLotteries(lotteries, manualLotteriesCount, autoLotteriesCount);
 

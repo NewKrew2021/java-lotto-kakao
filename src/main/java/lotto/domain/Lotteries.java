@@ -1,13 +1,16 @@
 package lotto.domain;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Lotteries {
     private final List<Lottery> lotteries;
+
+    public Lotteries(String[][] lotteries){
+        this(Arrays.stream(lotteries)
+                .map(Lottery::new)
+                .collect(Collectors.toList()));
+    }
 
     public Lotteries(List<Lottery> lotteries) {
         this.lotteries = lotteries;
@@ -34,10 +37,6 @@ public class Lotteries {
 
     public void push(Lottery lottery) {
         lotteries.add(lottery);
-    }
-
-    public void pushAll(List<Lottery> lotteries){
-        this.lotteries.addAll(lotteries);
     }
 
     @Override
