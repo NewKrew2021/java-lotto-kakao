@@ -1,23 +1,23 @@
 package lotto.domain;
 
 public enum LottoRank {
-    FIRST(2_000_000_000, 6, "6개 일치 "),
-    SECOND(30_000_000, 5, "5개 일치, 보너스 볼 일치"),
-    THIRD(1_500_000, 5, "5개 일치 "),
-    FOURTH(50_000, 4, "4개 일치 "),
-    FIFTH(5_000, 3, "3개 일치 "),
-    NONE(0, 0, "");
+    FIRST(2_000_000_000, 6),
+    SECOND(30_000_000, 5),
+    THIRD(1_500_000, 5),
+    FOURTH(50_000, 4),
+    FIFTH(5_000, 3),
+    NONE(0, 0);
 
     private final int money;
     private final int matchedCount;
-    private final String matchedPhrase;
+    private final String matchedPhrase = "개 일치";
+    private final String matchedBonusPhrase = "보너스 볼 일치";
     private final static int NON_GRADE_NUMBER = 3;
     private final static int BONUS_NUMBER_MATCHING_COUNT = 5;
 
-    LottoRank(int money, int matchedCount, String matchedPhrase) {
+    LottoRank(int money, int matchedCount) {
         this.money = money;
         this.matchedCount = matchedCount;
-        this.matchedPhrase = matchedPhrase;
     }
 
     public int getMoney() {
@@ -40,6 +40,9 @@ public enum LottoRank {
 
     @Override
     public String toString() {
-        return matchedPhrase + " (" + money + "원)";
+        if (this == SECOND) {
+            return matchedCount + matchedPhrase + "," + matchedBonusPhrase + " (" + money + "원)";
+        }
+        return matchedCount + matchedPhrase + " (" + money + "원)";
     }
 }
