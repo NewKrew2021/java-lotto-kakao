@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class MatchResults {
-    private Map<MatchResult, Integer> resultCounter;
+    private final Map<MatchResult, Integer> resultCounter;
 
     public MatchResults(List<MatchResult> results) {
         resultCounter = new EnumMap<>(MatchResult.class);
@@ -20,13 +20,10 @@ public class MatchResults {
     }
 
     public long getTotalEarnings() {
-        long total = 0;
-
-        for (Map.Entry<MatchResult, Integer> entry : resultCounter.entrySet()) {
-            total += (long) entry.getKey().getReward() * entry.getValue();
-        }
-
-        return total;
+        return resultCounter.keySet()
+                .stream()
+                .map(result -> result.calculateTotalReward(resultCounter.get(result)))
+                .reduce(0L, Long::sum);
     }
 
     private void insertResult(MatchResult result) {
