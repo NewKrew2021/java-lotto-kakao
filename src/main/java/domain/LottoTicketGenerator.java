@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LottoService {
+public class LottoTicketGenerator {
 
   private static final List<Integer> randomNumbers;
 

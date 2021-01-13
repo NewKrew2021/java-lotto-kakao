@@ -2,9 +2,9 @@ package controller;
 
 import domain.Amount;
 import domain.LottoNumber;
-import domain.LottoService;
 import domain.LottoTicket;
 import domain.LottoTicketCount;
+import domain.LottoTicketGenerator;
 import domain.LottoTickets;
 import domain.LottoWinningNumber;
 import domain.WinningInfo;
@@ -35,7 +35,7 @@ public class LottoController {
   private static LottoTickets createLottoTickets(LottoTicketCount lottoTicketCount) {
     List<String> manualLottoNumbers = LottoInputView
         .inputManualLottoNumbers(lottoTicketCount.getManualCount());
-    LottoTickets lottoTickets = LottoService
+    LottoTickets lottoTickets = LottoTicketGenerator
         .generateLottoTickets(manualLottoNumbers, lottoTicketCount.getAutoCount());
     LottoOutputView.printTickets(lottoTickets.getLottoTicketsInfo());
     return lottoTickets;
