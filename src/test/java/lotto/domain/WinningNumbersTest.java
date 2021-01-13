@@ -14,7 +14,7 @@ public class WinningNumbersTest {
         assertThat(winningNumbers).isEqualTo(new WinningNumbers("1, 2, 3, 4, 5, 6", 7));
     }
 
-    @DisplayName("Validate duplicate between winNumbers and bonusNumber")
+    @DisplayName("당첨 번호와 보너스 번호 사이 중복 발생")
     @Test
     public void validateDuplication() {
         assertThatThrownBy(() -> {

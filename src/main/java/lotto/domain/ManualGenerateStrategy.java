@@ -1,14 +1,22 @@
 package lotto.domain;
 
 import lotto.utils.Splitter;
-import lotto.view.InputView;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class ManualGenerateStrategy implements GenerateStrategy {
 
     private static final String SPLIT_DELIMITER = ",";
+
+    private final List<String> manualLottos;
+    private int lottoIndex;
+
+    public ManualGenerateStrategy(List<String> manualLottos) {
+        this.manualLottos = manualLottos;
+        this.lottoIndex = 0;
+    }
 
     @Override
     public LottoNumbers generate() {
@@ -16,8 +24,9 @@ public class ManualGenerateStrategy implements GenerateStrategy {
     }
 
     private LottoNumbers generateManualNumber() {
-        String manualLotto = InputView.scanManualLotto();
-        List<Integer> sortedNumbers = sortNumbers(Splitter.splitToNumberBy(manualLotto, SPLIT_DELIMITER));
+        List<Integer> sortedNumbers = sortNumbers(
+                Splitter.splitToNumberBy(manualLottos.get(lottoIndex++), SPLIT_DELIMITER)
+        );
         return new LottoNumbers(sortedNumbers);
     }
 

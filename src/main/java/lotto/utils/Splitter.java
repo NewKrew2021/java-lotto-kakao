@@ -11,8 +11,7 @@ public class Splitter {
     }
 
     public static List<Integer> splitToNumberBy(String string, String delimiter) {
-        string = string.replace(" ", "");
-        return Stream.of(string.split(delimiter))
+        return Stream.of(string.replace(" ", "").split(delimiter))
                 .mapToInt(Integer::parseInt)
                 .boxed()
                 .collect(Collectors.toList());

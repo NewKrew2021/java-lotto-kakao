@@ -5,6 +5,8 @@ import lotto.dto.LottoStatisticDTO;
 import lotto.view.InputView;
 import lotto.view.OutputView;
 
+import java.util.List;
+
 public class LottoMain {
 
     public static void main(String[] args) {
@@ -13,8 +15,8 @@ public class LottoMain {
 
         int manualCount = InputView.scanManualCount();
         if (manualCount > 0) {
-            InputView.printManualLottoMessage();
-            lotto.buyLotto(new ManualGenerateStrategy(), manualCount);
+            List<String> manualLottos = InputView.scanManualLotto(manualCount);
+            lotto.buyLotto(new ManualGenerateStrategy(manualLottos), manualCount);
         }
         UserBuyNumbers userBuyNumbers = lotto.buyLotto(
                 new RandomGenerateStrategy(), money.possibleNumberBuy() - manualCount

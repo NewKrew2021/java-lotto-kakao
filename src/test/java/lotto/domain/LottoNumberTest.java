@@ -24,10 +24,11 @@ public class LottoNumberTest {
         }).isInstanceOf(NumberRangeException.class);
     }
 
-    @Test
-    public void validateNumberRangeLower() {
+    @ParameterizedTest
+    @ValueSource(ints = {-1, 0})
+    public void validateNumberRangeLower(int number) {
         assertThatThrownBy(() -> {
-            LottoNumber.of(0);
+            LottoNumber.of(number);
         }).isInstanceOf(NumberRangeException.class);
     }
 
