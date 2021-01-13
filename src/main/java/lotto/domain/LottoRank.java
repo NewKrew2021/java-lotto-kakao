@@ -25,14 +25,6 @@ public enum LottoRank {
         return money;
     }
 
-    public int getIndex() {
-        return index;
-    }
-
-    public String getMatchedPhrase() {
-        return matchedPhrase;
-    }
-
     public static LottoRank checkRanking(Lotto lotto, WonLotto wonLotto) {
         int matchNo = wonLotto.getWonLotto().checkSameCount(lotto);
 
@@ -52,5 +44,8 @@ public enum LottoRank {
         return 7 - matchNo;
     }
 
-
+    @Override
+    public String toString() {
+        return matchedPhrase+" ("+money+"원)";
+    }
 }

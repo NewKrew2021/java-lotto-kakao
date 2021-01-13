@@ -13,8 +13,8 @@ public class LottoRanksTest {
     void testProfitRatio() {
 
         List<LottoRank> lottoRanksList = Arrays.asList(LottoRank.FIRST, LottoRank.SECOND, LottoRank.THIRD, LottoRank.NONE);
-        LottoRanks lottoRanks = new LottoRanks(lottoRanksList);
-        assertThat(lottoRanks.profitRatio()).isEqualTo(2031500000 / 4000);
+        LottoResult lottoResult = new LottoResult(lottoRanksList);
+        assertThat(lottoResult.profitRatio()).isEqualTo(2031500000 / 4000);
     }
 
 }

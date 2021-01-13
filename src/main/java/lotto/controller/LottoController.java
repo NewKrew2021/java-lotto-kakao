@@ -6,34 +6,30 @@ import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
 
 public class LottoController {
-
     private final LottoOutputView lottoOutputView;
     private final LottoInputView lottoInputView;
     private final LottoGeneratorService lottoGeneratorService;
 
     public LottoController() {
-
         lottoGeneratorService = new LottoGeneratorService();
         lottoOutputView = new LottoOutputView();
         lottoInputView = new LottoInputView();
     }
 
     public void startLottoGame() {
-
         Lottos lottos = buyLotto();
         lottoOutputView.printLottos(lottos);
 
         WonLotto wonLotto = createWonLotto();
-        LottoRanks lottoRanks = new LottoRanks(lottos.lottosResult(wonLotto));
+        LottoResult lottoResult = new LottoResult(lottos.lottosResult(wonLotto));
         lottoOutputView.WonResultPhrase();
-        lottoOutputView.printSameCountPhrase(lottoRanks.toString());
-        lottoOutputView.printProfitRatio(lottoRanks.profitRatio());
+        lottoOutputView.printSameCountPhrase(lottoResult.toString());
+        lottoOutputView.printProfitRatio(lottoResult.profitRatio());
 
     }
 
 
     public Lottos buyLotto() {
-
         Amount amount = lottoInputView.getLottoBuyAmount();
 
         lottoOutputView.printInputQuantityPhrase(amount.BuyCount());
@@ -45,9 +41,7 @@ public class LottoController {
     }
 
     public WonLotto createWonLotto() {
-
         Lotto lotto = lottoGeneratorService.lottoStringParser(lottoInputView.getWonLotto());
-
         LottoNumber bonusBall = lottoInputView.getBonusBall();
         return new WonLotto(lotto, bonusBall);
     }
