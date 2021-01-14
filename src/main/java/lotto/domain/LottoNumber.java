@@ -2,39 +2,38 @@ package lotto.domain;
 
 import lotto.exception.NumberRangeException;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class LottoNumber {
 
-    private static final int MAX_LOTTO_NUMBER = 45;
-    private static final int MIN_LOTTO_NUMBER = 1;
-    private static final String RANGE_EXCEPTION_MESSAGE = "로또 번호는 1부터 45까지의 숫자입니다.";
-    private static Map<Integer, LottoNumber> lottoNumbers = new HashMap<>();
+    static final int MAX_LOTTO_NUMBER = 45;
+    static final int MIN_LOTTO_NUMBER = 1;
+    private static final String RANGE_EXCEPTION_MESSAGE = "로또 번호는 "+MIN_LOTTO_NUMBER+"부터 "
+                                                          +MAX_LOTTO_NUMBER+"까지의 숫자입니다.";
+    private static final List<LottoNumber> lottoNumberCache = IntStream
+        .rangeClosed(MIN_LOTTO_NUMBER, MAX_LOTTO_NUMBER)
+        .mapToObj(LottoNumber::new)
+        .collect(Collectors.toList());
 
     private final int lottoNumber;
-
-    static {
-        for (int i = MIN_LOTTO_NUMBER; i <= MAX_LOTTO_NUMBER; i++) {
-            lottoNumbers.put(i, new LottoNumber(i));
-        }
-    }
 
     private LottoNumber(int lottoNumber) {
         this.lottoNumber = lottoNumber;
     }
 
     public static LottoNumber of(int number) {
-        LottoNumber lottoNumber = lottoNumbers.get(number);
-        if (lottoNumber == null) {
+        if (number < MIN_LOTTO_NUMBER || number > MAX_LOTTO_NUMBER) {
             throw new NumberRangeException(RANGE_EXCEPTION_MESSAGE);
         }
-        return lottoNumber;
+        return lottoNumberCache.get(number - 1);
     }
 
-    public String getNumberToString() {
-        return Integer.toString(this.lottoNumber);
+    @Override
+    public String toString() {
+        return Integer.toString(lottoNumber);
     }
 
     @Override

@@ -7,7 +7,7 @@ import java.util.Objects;
 public class Money {
 
     private static final int SINGLE_PRICE = 1000;
-    private static final String INSUFFICIENT_MONEY_EXCEPTION_MESSAGE = "1000원 이상의 금액이 필요합니다.";
+    private static final String INSUFFICIENT_MONEY_EXCEPTION_MESSAGE = SINGLE_PRICE+"원 이상의 금액이 필요합니다.";
 
     private final int money;
 
@@ -17,12 +17,12 @@ public class Money {
     }
 
     private void validateMoney(int money) {
-        if (!isSufficient(money)) {
+        if (!haveSufficientMoney(money)) {
             throw new InsufficientMoneyException(INSUFFICIENT_MONEY_EXCEPTION_MESSAGE);
         }
     }
 
-    private boolean isSufficient(int money) {
+    private boolean haveSufficientMoney(int money) {
         return money >= SINGLE_PRICE;
     }
 
@@ -31,7 +31,7 @@ public class Money {
     }
 
     public double getProfitRate(int earnedMoney) {
-        return (double)earnedMoney / (double)money;
+        return (double)(earnedMoney - money) / (double)money;
     }
 
     @Override

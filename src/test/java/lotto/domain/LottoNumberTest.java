@@ -10,7 +10,7 @@ import static org.assertj.core.api.Assertions.*;
 public class LottoNumberTest {
 
     @Test
-    public void create() {
+    public void createEqualInstance() {
         LottoNumber number1 = LottoNumber.of(7);
         LottoNumber number2 = LottoNumber.of(7);
         assertThat(number1 == number2).isTrue();
@@ -24,16 +24,17 @@ public class LottoNumberTest {
         }).isInstanceOf(NumberRangeException.class);
     }
 
-    @Test
-    public void validateNumberRangeLower() {
+    @ParameterizedTest
+    @ValueSource(ints = {-1, 0})
+    public void validateNumberRangeLower(int number) {
         assertThatThrownBy(() -> {
-            LottoNumber.of(0);
+            LottoNumber.of(number);
         }).isInstanceOf(NumberRangeException.class);
     }
 
     @Test
     public void intToString() {
         LottoNumber lottoNumber = LottoNumber.of(7);
-        assertThat(lottoNumber.getNumberToString()).isEqualTo("7");
+        assertThat(lottoNumber.toString()).isEqualTo("7");
     }
 }

@@ -13,7 +13,6 @@ public class StatisticCalculatorTest {
 
     List<RankState> eachLottoResult;
     Money money;
-    StatisticCalculator statCalculator;
 
     @BeforeEach
     void setUp() {
@@ -21,23 +20,17 @@ public class StatisticCalculatorTest {
                 RankState.FAIL, RankState.THIRD, RankState.FAIL, RankState.FAIL, RankState.FOURTH, RankState.FIRST
         ));
         money = new Money(14000);
-        statCalculator = new StatisticCalculator(eachLottoResult, money);
-    }
-
-    @Test
-    public void create() {
-        assertThat(statCalculator).isEqualTo(new StatisticCalculator(eachLottoResult, money));
     }
 
     @Test
     public void eachRankCount() {
         List<Integer> rankCount = new ArrayList<>(Arrays.asList(3, 0, 1, 1, 0, 1));
-        assertThat(statCalculator.getRankCount()).isEqualTo(rankCount);
+        assertThat(StatisticCalculator.getRankCount(eachLottoResult)).isEqualTo(rankCount);
     }
 
     @Test
     public void profitRate() {
-        double expectedProfitRate = 2001550000.0 / 14000.0;
-        assertThat(statCalculator.getProfitRate()).isEqualTo(expectedProfitRate);
+        double expectedProfitRate = (2001550000.0 - 14000.0) / 14000.0;
+        assertThat(StatisticCalculator.getProfitRate(eachLottoResult, money)).isEqualTo(expectedProfitRate);
     }
 }

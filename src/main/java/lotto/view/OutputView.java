@@ -1,39 +1,59 @@
 package lotto.view;
 
-import lotto.domain.Money;
+import lotto.domain.LottoGame;
+import lotto.domain.RankState;
+import lotto.domain.UserBuyNumbers;
 import lotto.dto.LottoStatisticDTO;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class OutputView {
 
-    public static void printLottoCount(Money money) {
-        System.out.printf("%d개를 구매했습니다.\n", money.possibleNumberBuy());
+    private static final String BUY_COUNT_OUTPUT_MESSAGE = "수동으로 %d장, 자동으로 %d장을 구매했습니다.\n";
+
+    private static final String STATISTIC_TITLE = "당첨 통계";
+    private static final String HORIZON_LINE_TYPE = "-";
+    private static final int HORIZON_LINE_LENGTH = 10;
+
+    private static final String RANK_COUNT_OUTPUT_MESSAGE = "%d개 일치 (%d원)- %d개\n";
+    private static final String SECOND_RANK_COUNT_OUTPUT_MESSAGE = "%d개 일치, 보너스 볼 일치 (%d원)- %d개\n";
+    private static final String PROFIT_RATE_OUTPUT_MESSAGE = "총 수익률은 %.2f 입니다.\n";
+
+    public static void printLottoCount(int manualCount, LottoGame lottoGame) {
+        System.out.printf(BUY_COUNT_OUTPUT_MESSAGE, manualCount, lottoGame.getLottoCount() - manualCount);
     }
 
-    public static void printBuyLotto(List<List<String>> numbers) {
-        for (List<String> number : numbers) {
-            System.out.println("["+String.join(", ", number)+"]");
-        }
+    public static void printBuyLotto(UserBuyNumbers userBuyNumbers) {
+        System.out.println(userBuyNumbers.toString());
         System.out.println();
     }
 
     public static void printResult(LottoStatisticDTO lottoStatisticDTO) {
-        System.out.println("\n당첨 통계");
-        System.out.println("---------");
+        System.out.println(STATISTIC_TITLE);
+        System.out.println(String.join("", Collections.nCopies(HORIZON_LINE_LENGTH, HORIZON_LINE_TYPE)));
         printRankCount(lottoStatisticDTO.getRankCount());
         printProfitRate(lottoStatisticDTO.getProfitRate());
     }
 
-    private static void printRankCount(List<Integer> rankCount) {
-        System.out.println("3개 일치 (5000원)- "+rankCount.get(1)+"개");
-        System.out.println("4개 일치 (50000원)- "+rankCount.get(2)+"개");
-        System.out.println("5개 일치 (1500000원)- "+rankCount.get(3)+"개");
-        System.out.println("5개 일치, 보너스 볼 일치 (30000000원)- "+rankCount.get(4)+"개");
-        System.out.println("6개 일치 (2000000000원)- "+rankCount.get(5)+"개");
+    private static void printRankCount(List<Integer> rankCounts) {
+        Arrays.stream(RankState.values())
+                .filter(rank -> rank != RankState.FAIL)
+                .forEach(rank -> printEachRankCount(rank, rankCounts.get(rank.getRankIndex())));
+    }
+
+    private static void printEachRankCount(RankState rankState, int rankCount) {
+        if (rankState == RankState.SECOND) {
+            System.out.printf(SECOND_RANK_COUNT_OUTPUT_MESSAGE,
+                    rankState.getMatchCount(), rankState.getWinMoney(), rankCount);
+            return;
+        }
+        System.out.printf(RANK_COUNT_OUTPUT_MESSAGE,
+                rankState.getMatchCount(), rankState.getWinMoney(), rankCount);
     }
 
     private static void printProfitRate(double profitRate) {
-        System.out.printf("총 수익률은 %.2f 입니다.\n", profitRate);
+        System.out.printf(PROFIT_RATE_OUTPUT_MESSAGE, profitRate);
     }
 }

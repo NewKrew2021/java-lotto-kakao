@@ -18,29 +18,29 @@ public class RankStateTest {
 
     @ParameterizedTest
     @ValueSource(booleans = {true, false})
-    public void rankFirst(boolean bonus) {
+    public void rank_FIRST(boolean bonus) {
         assertThat(RankState.rank(6, bonus)).isEqualTo(RankState.FIRST);
     }
 
     @Test
-    public void rankSecond() {
+    public void rank_SECOND() {
         assertThat(RankState.rank(5, true)).isEqualTo(RankState.SECOND);
     }
 
     @Test
-    public void rankTHIRD() {
+    public void rank_THIRD() {
         assertThat(RankState.rank(5, false)).isEqualTo(RankState.THIRD);
     }
 
     @ParameterizedTest
     @ValueSource(booleans = {true, false})
-    public void rankFOURTH(boolean bonus) {
+    public void rank_FOURTH(boolean bonus) {
         assertThat(RankState.rank(4, bonus)).isEqualTo(RankState.FOURTH);
     }
 
     @ParameterizedTest
     @ValueSource(booleans = {true, false})
-    public void rankFIFTH(boolean bonus) {
+    public void rank_FIFTH(boolean bonus) {
         assertThat(RankState.rank(3, bonus)).isEqualTo(RankState.FIFTH);
     }
 }

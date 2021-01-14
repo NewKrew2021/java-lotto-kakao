@@ -6,12 +6,12 @@ import java.util.Arrays;
 
 public enum RankState {
 
-    FIRST(2000000000, 5,6),
-    SECOND(30000000, 4,5),
-    THIRD(1500000, 3,5),
-    FOURTH(50000, 2,4),
-    FIFTH(5000, 1,3),
-    FAIL(0, 0,2);
+    FAIL(0, 0, 2),
+    FIFTH(5000, 1, 3),
+    FOURTH(50000, 2, 4),
+    THIRD(1_500_000, 3, 5),
+    SECOND(30_000_000, 4, 5),
+    FIRST(2_000_000_000, 5, 6);
 
     private final int winMoney;
     private final int rankIndex;
@@ -55,5 +55,9 @@ public enum RankState {
 
     public int getRankIndex() {
         return rankIndex;
+    }
+
+    public int getMatchCount() {
+        return matchCount;
     }
 }

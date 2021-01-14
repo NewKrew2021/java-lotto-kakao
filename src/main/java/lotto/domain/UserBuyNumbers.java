@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static java.util.stream.Collectors.joining;
+
 public class UserBuyNumbers {
 
     private final List<LottoNumbers> userBuyNumbers;
@@ -19,19 +21,18 @@ public class UserBuyNumbers {
     public List<RankState> checkLottoResult(WinningNumbers winningNumbers) {
         List<RankState> rankStates = new ArrayList<>();
         for (LottoNumbers lottoNumbers : this.userBuyNumbers) {
-            int matchCount = lottoNumbers.getMatchCountWith(winningNumbers.getWinNumbers());
+            int matchCount = lottoNumbers.getMatchCount(winningNumbers.getWinNumbers());
             boolean bonusMatched = lottoNumbers.isContains(winningNumbers.getBonusNumber());
             rankStates.add(RankState.rank(matchCount, bonusMatched));
         }
         return rankStates;
     }
 
-    public List<List<String>> convertToString() {
-        List<List<String>> allNumbers = new ArrayList<>();
-        for (LottoNumbers lottoNumbers : userBuyNumbers) {
-            allNumbers.add(lottoNumbers.convertToString());
-        }
-        return allNumbers;
+    @Override
+    public String toString() {
+        return userBuyNumbers.stream()
+                .map(LottoNumbers::toString)
+                .collect(joining("\n"));
     }
 
     @Override

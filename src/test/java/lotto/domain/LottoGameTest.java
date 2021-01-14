@@ -1,36 +1,82 @@
 package lotto.domain;
 
 import lotto.dto.LottoStatisticDTO;
-import org.junit.jupiter.api.Test;
+import lotto.exception.IllegalManualCountException;
 
-import java.util.List;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
 
 public class LottoGameTest {
 
+    LottoGame game;
+    LottoNumbers lottoNumbers;
+
+    @BeforeEach
+    void setUp() {
+        game = new LottoGame(new Money(1500));
+        lottoNumbers = new LottoNumbers(Arrays.asList(1, 2, 3, 4, 5, 6));
+    }
+
     @Test
-    public void create() {
-        LottoGame game = new LottoGame(new Money(14000));
-        assertThat(game).isEqualTo(new LottoGame(new Money(14000)));
+    public void createEqualInstance() {
+        assertThat(game).isEqualTo(new LottoGame(new Money(1500)));
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {-1, -2})
+    public void validatePositiveCount(int count) {
+        assertThatThrownBy(() -> {
+            game.buyLotto(() -> lottoNumbers, count);
+        }).isInstanceOf(IllegalManualCountException.class);
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {2, 3})
+    public void validateExcessCount(int count) {
+        assertThatThrownBy(() -> {
+            game.buyLotto(() -> lottoNumbers, count);
+        }).isInstanceOf(IllegalManualCountException.class);
     }
 
     @Test
     public void buyLottoOne() {
-        LottoGame game = new LottoGame(new Money(1500));
-        List<List<String>> expected = game.buyLotto(()-> new LottoNumbers(Arrays.asList(1,2,3,4,5,6)));
-        assertThat(expected).containsOnly(Arrays.asList("1", "2", "3", "4", "5", "6"));
+        UserBuyNumbers userBuyNumbers = new UserBuyNumbers();
+        userBuyNumbers.addBuyNumbers(lottoNumbers);
+
+        UserBuyNumbers expected = game.buyLotto(() -> lottoNumbers, 1);
+
+        assertThat(userBuyNumbers).isEqualTo(expected);
     }
 
     @Test
+    public void buyLottoManually() {
+        List<String> numbers = new ArrayList<>(Arrays.asList("1,2,3,4,5,6"));
+        UserBuyNumbers userBuyNumbers = new UserBuyNumbers();
+        userBuyNumbers.addBuyNumbers(lottoNumbers);
+
+        UserBuyNumbers expected = game.buyLotto(new ManualGenerateStrategy(numbers), 1);
+
+        assertThat(userBuyNumbers).isEqualTo(expected);
+    }
+
+
+    @Test
     public void checkLotto() {
-        LottoGame game = new LottoGame(new Money(1500));
-        game.buyLotto(()-> new LottoNumbers(Arrays.asList(1,2,3,4,5,6)));
-        WinningNumbers winningNumbers = new WinningNumbers(Arrays.asList(1,2,3,4,5,6),7);
+        game.buyLotto(() -> lottoNumbers, 1);
+        WinningNumbers winningNumbers = new WinningNumbers("1, 2, 3, 4, 5, 6",7);
+
         LottoStatisticDTO lottoDTO = new LottoStatisticDTO();
         lottoDTO.setRankCount(Arrays.asList(0, 0, 0, 0, 0, 1));
-        lottoDTO.setProfitRate(2000000000.0 / 1500.0);
+        lottoDTO.setProfitRate((2000000000.0 - 1500.0)/ 1500.0);
+
         assertThat(game.checkLotto(winningNumbers).getRankCount()).isEqualTo(lottoDTO.getRankCount());
         assertThat(game.checkLotto(winningNumbers).getProfitRate()).isEqualTo(lottoDTO.getProfitRate());
     }

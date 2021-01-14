@@ -7,11 +7,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static java.util.stream.Collectors.joining;
+
 public class LottoNumbers {
 
-    private static final int POSSIBLE_NUMBERS_SIZE = 6;
-    private static final String SIZE_EXCEPTION_MESSAGE = "로또 번호는 6개입니다.";
+    static final int POSSIBLE_NUMBERS_SIZE = 6;
+    private static final String SIZE_EXCEPTION_MESSAGE = "로또 번호는 "+POSSIBLE_NUMBERS_SIZE+"개입니다.";
     private static final String DUPLICATE_EXCEPTION_MESSAGE = "로또 번호는 중복되면 안됩니다.";
+
+    private static final String NUMBERS_LEFT_BRACKET = "[";
+    private static final String NUMBERS_RIGHT_BRACKET = "]";
+    private static final String NUMBERS_JOIN_DELIMITER = ", ";
 
     private final List<LottoNumber> lottoNumbers;
 
@@ -40,7 +46,7 @@ public class LottoNumbers {
         return lottoNumbers.stream().distinct().count() == lottoNumbers.size();
     }
 
-    public int getMatchCountWith(LottoNumbers lottoNumbers) {
+    public int getMatchCount(LottoNumbers lottoNumbers) {
         int count = 0;
         for (LottoNumber lottoNumber : this.lottoNumbers) {
             if (lottoNumbers.isContains(lottoNumber)) {
@@ -54,12 +60,11 @@ public class LottoNumbers {
         return lottoNumbers.contains(lottoNumber);
     }
 
-    public List<String> convertToString() {
-        List<String> numbers = new ArrayList<>();
-        for (LottoNumber lottoNumber : this.lottoNumbers) {
-            numbers.add(lottoNumber.getNumberToString());
-        }
-        return numbers;
+    @Override
+    public String toString() {
+        return lottoNumbers.stream()
+                .map(LottoNumber::toString)
+                .collect(joining(NUMBERS_JOIN_DELIMITER, NUMBERS_LEFT_BRACKET, NUMBERS_RIGHT_BRACKET));
     }
 
     @Override
