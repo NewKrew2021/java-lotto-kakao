@@ -1,6 +1,5 @@
 package domain;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -12,10 +11,6 @@ public class Ball {
 
     private final int number;
 
-    public Ball(String number) {
-        this(Integer.parseInt(number.trim()));
-    }
-
     public Ball(int number) {
         if (!validator(number)) {
             throw new IllegalArgumentException("입력한 로또번호는 1~45 사이로 입력해야 합니다.");
@@ -23,12 +18,8 @@ public class Ball {
         this.number = number;
     }
 
-    public static Ball map(String number) {
-        return new Ball(number);
-    }
-
-    public static List<Ball> getBalls(String[] numbers) {
-        return Arrays.stream(numbers)
+    public static List<Ball> getBalls(List<Integer> numbers) {
+        return numbers.stream()
                 .map(Ball::new)
                 .collect(Collectors.toList());
     }

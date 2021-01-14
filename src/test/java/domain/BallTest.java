@@ -14,9 +14,5 @@ class BallTest {
         assertThatThrownBy(() -> {
             new Ball(0);
         }).isInstanceOf(IllegalArgumentException.class);
-
-        assertThatThrownBy(() -> {
-            new Ball("x");
-        }).isInstanceOf(NumberFormatException.class);
     }
 }

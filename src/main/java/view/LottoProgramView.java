@@ -10,6 +10,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class LottoProgramView {
 
@@ -51,8 +52,10 @@ public class LottoProgramView {
         System.out.println(GET_MANUAL_BALL);
     }
 
-    public String[] getManualLottoForUser() {
-        return scanner.nextLine().split(",");
+    public List<Integer> getManualLottoForUser() {
+        return Arrays.stream(scanner.nextLine().split(","))
+                .map(Integer::parseInt)
+                .collect(Collectors.toList());
     }
 
     public boolean checkNumberFormat(String buyAmount) {
@@ -83,10 +86,10 @@ public class LottoProgramView {
         return scanner.nextInt();
     }
 
-    public List<Ball> getWinningLottoForUser() {
+    public List<Integer> getWinningLottoForUser() {
         System.out.println(LAST_WEEK_BALLS_PHRASE);
         return Arrays.stream(scanner.nextLine().split(","))
-                .map(Ball::map)
+                .map(Integer::parseInt)
                 .collect(Collectors.toList());
     }
 
