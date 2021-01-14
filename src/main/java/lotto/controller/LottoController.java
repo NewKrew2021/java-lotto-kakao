@@ -37,7 +37,7 @@ public class LottoController {
     }
 
     public WonLotto createWonLotto() {
-        Lotto lotto = lottoGeneratorService.lottoStringParser(lottoInputView.getWonLotto());
+        Lotto lotto = new Lotto(lottoInputView.getWonLotto());
         LottoNumber bonusBall = lottoInputView.getBonusBall();
         return new WonLotto(lotto, bonusBall);
     }

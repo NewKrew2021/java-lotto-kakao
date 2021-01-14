@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -17,6 +18,23 @@ public class Lotto {
 
     public Lotto(){
         this.lottoNumbers=LottoNumber.generateLottoNumbers(LOTTO_NUMBER_COUNT);
+    }
+
+    public Lotto(String lotto) {
+        String[] lottoNumber = lotto.split(",");
+        List<LottoNumber> parsedLotto = new ArrayList<>();
+        try {
+            convertList(lottoNumber, parsedLotto);
+            this.lottoNumbers=parsedLotto;
+        } catch (Exception e) {
+            throw new IllegalArgumentException("잘못된 입력형식입니다");
+        }
+    }
+
+    private void convertList(String[] lottoNumber, List<LottoNumber> parsedLotto) {
+        for (String number : lottoNumber) {
+            parsedLotto.add(new LottoNumber(Integer.parseInt(number.trim())));
+        }
     }
 
     public List<LottoNumber> getLottoNumbers() {
