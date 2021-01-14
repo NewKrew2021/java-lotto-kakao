@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 public class Amount {
     private final int LOTTO_PRICE = 1000;
     private final int amont;
-    private final int chageMoney;
+    private final int changes;
     private final int money;
 
     public Amount(int money) {
@@ -14,7 +14,7 @@ public class Amount {
         }
         this.money = money;
         this.amont=money/LOTTO_PRICE;
-        this.chageMoney=money-amont*LOTTO_PRICE;
+        this.changes=money-amont*LOTTO_PRICE;
     }
 
     public BigDecimal profitRatio(int totalPrize) {

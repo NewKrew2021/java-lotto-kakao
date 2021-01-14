@@ -16,12 +16,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
             .boxed()
             .collect(toMap(Function.identity(), LottoNumber::new));
 
-    static {
-        for (int i = LOTTO_MIN_INT; i <= LOTTO_MAX_INT; i++) {
-            lottoNumbers.put(i, new LottoNumber(i));
-        }
-    }
-
     public static LottoNumber of(int number) {
         if (number > LOTTO_MAX_INT || number < LOTTO_MIN_INT) {
             throw new IllegalArgumentException("1~45범위를 벗어난 숫자입니다.");

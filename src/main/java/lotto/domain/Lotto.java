@@ -32,6 +32,9 @@ public class Lotto {
     }
 
     private void convertList(String[] lottoNumber, List<LottoNumber> parsedLotto) {
+        if(lottoNumber.length>LOTTO_NUMBER_COUNT){
+            throw new IllegalArgumentException("잘못된 입력형식입니다");
+        }
         for (String number : lottoNumber) {
             parsedLotto.add(new LottoNumber(Integer.parseInt(number.trim())));
         }

@@ -1,17 +1,14 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.service.LottoGeneratorService;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
 
 public class LottoController {
     private final LottoOutputView lottoOutputView;
     private final LottoInputView lottoInputView;
-    private final LottoGeneratorService lottoGeneratorService;
 
     public LottoController() {
-        lottoGeneratorService = new LottoGeneratorService();
         lottoOutputView = new LottoOutputView();
         lottoInputView = new LottoInputView();
     }
