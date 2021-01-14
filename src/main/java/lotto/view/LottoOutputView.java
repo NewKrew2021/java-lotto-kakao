@@ -8,7 +8,6 @@ public class LottoOutputView {
     private final String WON_RESULT_PHRASE = "당첨 통계";
     private final String PROFIT_PHRASE = "총 수익률은 ";
 
-
     public void printLottos(Lottos lottos) {
         System.out.println(lottos.toString());
     }

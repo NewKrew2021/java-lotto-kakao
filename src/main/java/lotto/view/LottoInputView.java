@@ -14,7 +14,6 @@ public class LottoInputView {
     private final String INPUT_MANUAL_LOTTO_NUMBER_PHRASE = "수동으로 구매할 번호를 입력해 주세요.";
     private final String INPUT_MANUAL_LOTTO_COUNT_PHRASE = "수동으로 구매할 로또 수를 입력해 주세요.";
 
-
     public LottoInputView() {
         scanner = new Scanner(System.in);
     }
@@ -52,6 +51,7 @@ public class LottoInputView {
             throw new IllegalArgumentException("잘못된 입력입니다.");
         }
     }
+
     public String getManualLottoNumber(){
         return scanner.nextLine();
     }
@@ -59,6 +59,7 @@ public class LottoInputView {
     public void printInputQuantityPhrase(Amount amount) {
         System.out.println(String.format(INPUT_QUANTITY_PHRASE,amount.manualCount(),amount.autoCount()));
     }
+
     public void printInputManualLottoNumberPhrase() {
         System.out.println(INPUT_MANUAL_LOTTO_NUMBER_PHRASE);
     }
