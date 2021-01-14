@@ -29,7 +29,6 @@ public class LottoResultTest {
                 Arguments.of(new LottoResult(new AnswerLotto(new Lotto(Arrays.asList(1,2,3,4,5,6)),
                         new LottoNumber(7)), new Lottos(new ArrayList<>(Arrays.asList(new Lotto(Arrays.asList(1,2,3,4,5,6)))))), LottoStatus.FIRST)
         );
-
     }
 
     @Test
