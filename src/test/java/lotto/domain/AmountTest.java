@@ -20,10 +20,10 @@ public class AmountTest {
 
     @Test
     public void testBuyCount() {
-        Assertions.assertTrue(new Amount(1999).BuyCount() == 1);
-        Assertions.assertTrue(new Amount(2000).BuyCount() == 2);
-        Assertions.assertTrue(new Amount(2999).BuyCount() == 2);
-        Assertions.assertTrue(new Amount(3000).BuyCount() == 3);
+        Assertions.assertTrue(new Amount(1999).autoCount() == 1);
+        Assertions.assertTrue(new Amount(2000).autoCount() == 2);
+        Assertions.assertTrue(new Amount(2999).autoCount() == 2);
+        Assertions.assertTrue(new Amount(3000).autoCount() == 3);
     }
 
     @Test

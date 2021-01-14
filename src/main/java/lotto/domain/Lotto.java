@@ -27,7 +27,7 @@ public class Lotto {
         }
         List<LottoNumber> parsedLotto = new ArrayList<>();
         for (String number : lottoNumber) {
-            parsedLotto.add(LottoNumber.of(number));
+            parsedLotto.add(LottoNumber.of(number.trim()));
         }
         this.lottoNumbers=parsedLotto;
     }
