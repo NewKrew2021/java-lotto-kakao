@@ -17,7 +17,7 @@ public class LottoController {
 
     public void startLottoGame() {
         Amount amount = lottoInputView.getLottoBuyAmount();
-        lottoOutputView.printInputQuantityPhrase(amount.BuyCount());
+        lottoInputView.printInputQuantityPhrase(amount.BuyCount());
         Lottos lottos = buyLotto(amount);
         lottoOutputView.printLottos(lottos);
         WonLotto wonLotto = createWonLotto();

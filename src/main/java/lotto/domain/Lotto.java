@@ -22,15 +22,14 @@ public class Lotto {
 
     public Lotto(String lotto) {
         String[] lottoNumber = lotto.split(",");
+        if(lottoNumber.length>LOTTO_NUMBER_COUNT){
+            throw new IllegalArgumentException("6자리 숫자가 아닙니다");
+        }
         List<LottoNumber> parsedLotto = new ArrayList<>();
         for (String number : lottoNumber) {
             parsedLotto.add(LottoNumber.of(number));
         }
-        try {
-            this.lottoNumbers=parsedLotto;
-        } catch (Exception e) {
-            throw new IllegalArgumentException("잘못된 입력형식입니다");
-        }
+        this.lottoNumbers=parsedLotto;
     }
 
     public List<LottoNumber> getLottoNumbers() {
