@@ -12,6 +12,10 @@ import java.util.*;
 public class Input {
     private static final Scanner scanner = new Scanner(System.in);
 
+    private Input(){
+        throw new IllegalStateException("Input class is not allowed to construct.");
+    }
+
     public static int getPriceFromUser() { //TODO: 사용자가 잘못된 값을 입력했을때 예외처리가 필요하다.
         System.out.println("구입금액을 입력해 주세요.");
         return CustomTypeCasting.stringToInteger(scanner.nextLine());

@@ -5,6 +5,10 @@ import java.util.List;
 
 public class CustomTypeCasting {
 
+    private CustomTypeCasting() {
+        throw new IllegalStateException("CustomTypeCasting class is not allowed to construct");
+    }
+
     public static int stringToInteger(String string){
         return Integer.parseInt(string);
     }

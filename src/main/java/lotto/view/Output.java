@@ -12,6 +12,10 @@ import java.util.Set;
 
 public class Output {
 
+    private Output(){
+        throw new IllegalStateException("Output class is not allowed to construct.");
+    }
+
     public static void printCountOfPurchase(long count) {
         System.out.println(count + "개를 구매했습니다.");
     }
