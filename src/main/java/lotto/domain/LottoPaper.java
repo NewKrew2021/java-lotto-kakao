@@ -30,9 +30,8 @@ public class LottoPaper {
     public LottoResult getResultCompareWith(WinnerBalls winnerBalls) {
         LottoResult lottoResult = new LottoResult();
         for(Ticket curTicket : tickets){
-            int matchCount = winnerBalls.getMatchCountComparedWith(curTicket);
-            boolean matchBonusBall = curTicket.isContain(winnerBalls.getBonusBall());
-            lottoResult.putRank(Rank.getRankAccordingTo(matchCount, matchBonusBall));
+            Rank rankOfCurTicket = winnerBalls.getRankOf(curTicket);
+            lottoResult.putRank(rankOfCurTicket);
         }
         return lottoResult;
     }

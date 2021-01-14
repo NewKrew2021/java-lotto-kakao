@@ -47,4 +47,31 @@ public class WinnerBallsTest {
                 Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), 46)
         );
     }
+
+    @DisplayName("구입한 티켓과 비교하여 Rank를 반환하는 기능 테스트")
+    @ParameterizedTest
+    @MethodSource("provideTicketInformationAndRanks")
+    public void 주어진_티켓의_rank를_계산해주는_기능_테스트(List<Integer> ticketInfo, Rank expectedRank) {
+        //given
+        WinnerBalls testWinnerBalls = new WinnerBalls(Arrays.asList(1, 2, 3, 4, 5, 6), 7);
+        Ticket testTicket = new Ticket(new ManuallyGeneratingStrategy(Arrays.asList(new HashSet<>(ticketInfo))));
+
+        //when
+        Rank testRank = testWinnerBalls.getRankOf(testTicket);
+
+        //then
+        assertThat(testRank).isEqualTo(expectedRank);
+    }
+
+    private static Stream<Arguments> provideTicketInformationAndRanks() {
+        return Stream.of(
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 6), Rank.FIRST),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 7), Rank.SECOND),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 5, 11), Rank.THIRD),
+                Arguments.of(Arrays.asList(1, 2, 3, 4, 11, 12), Rank.FOURTH),
+                Arguments.of(Arrays.asList(1, 2, 3, 11, 12, 13), Rank.FIFTH),
+                Arguments.of(Arrays.asList(1, 2, 11, 12, 13, 14), Rank.OUT)
+        );
+    }
+
 }

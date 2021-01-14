@@ -17,41 +17,38 @@ public class WinnerBalls {
         this.bonusBall = bonusBall;
     }
 
+    /* 생성자로 값을 생성하기 전에 이 함수를 사용하여 전달될 값이 유효한지 미리 검사해볼 수 있다. */
     public static boolean isValid(List<Integer> initialWinningNumbers, int bonusBall) {
         Set<Integer> compressedNumbers = new HashSet<>(initialWinningNumbers);
 
         if(중복이_존재하는_당첨번호(initialWinningNumbers.size(), compressedNumbers.size())){
             return false;
         }
-
         if(유효하지않은_당첨번호의_개수(compressedNumbers.size())){
             return false;
         }
-
         if(당첨번호에_보너스볼이_포함(compressedNumbers, bonusBall)){
             return false;
         }
-
         if(범위를_벗어나는_로또번호가_존재(compressedNumbers, bonusBall)){
             return false;
         }
-
         return true;
     }
 
-    private static boolean 중복이_존재하는_당첨번호(int givenSize, int compressedSize){
+    private static boolean 중복이_존재하는_당첨번호(int givenSize, int compressedSize) {
         return compressedSize < givenSize;
     }
 
-    private static boolean 유효하지않은_당첨번호의_개수(int size){
+    private static boolean 유효하지않은_당첨번호의_개수(int size) {
         return size != WINNING_NUMBER_SIZE;
     }
 
-    private static boolean 당첨번호에_보너스볼이_포함(Set<Integer> givenWinningNumbers, int bonusBall){
+    private static boolean 당첨번호에_보너스볼이_포함(Set<Integer> givenWinningNumbers, int bonusBall) {
         return givenWinningNumbers.contains(bonusBall);
     }
 
-    private static boolean 범위를_벗어나는_로또번호가_존재(Set<Integer> givenWinningNumbers, int bonusBall){
+    private static boolean 범위를_벗어나는_로또번호가_존재(Set<Integer> givenWinningNumbers, int bonusBall) {
         boolean result = 로또번호가_정의된_범위를_벗어남(bonusBall);
 
         for (int number : givenWinningNumbers) {
@@ -65,12 +62,18 @@ public class WinnerBalls {
         return result;
     }
 
-    private static boolean 로또번호가_정의된_범위를_벗어남(int number){
+    private static boolean 로또번호가_정의된_범위를_벗어남(int number) {
         return number < Ticket.LOWER_LIMIT_OF_NUMBER || Ticket.UPPER_LIMIT_OF_NUMBER < number;
     }
 
-    /* 당첨번호와 구입한 티켓의 번호를 비교하여 일치하는 것의 개수를 반환한다. */
-    public int getMatchCountComparedWith(Ticket buyingTicket) {
+    /* 당첨번호와 구입한 티켓의 번호를 비교하여 Rank를 반환한다. */
+    public Rank getRankOf(Ticket buyingTicket) {
+        int matchCount = getMatchCountComparedWith(buyingTicket);
+        boolean matchBonusBall = buyingTicket.isContain(bonusBall);
+        return Rank.getRankAccordingTo(matchCount, matchBonusBall);
+    }
+
+    private int getMatchCountComparedWith(Ticket buyingTicket) {
         return (int) winningNumbers.stream()
                 .filter(buyingTicket::isContain)
                 .count();
