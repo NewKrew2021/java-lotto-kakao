@@ -8,13 +8,6 @@ public class Lottos {
 
     private List<Lotto> lottos;
 
-    public Lottos(int autoCount) {
-        lottos = new ArrayList<>();
-        for (int count = 0; count < autoCount; count++) {
-            lottos.add(Lotto.makeAutoLotto());
-        }
-    }
-
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
     }

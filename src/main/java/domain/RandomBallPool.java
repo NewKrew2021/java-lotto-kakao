@@ -1,7 +1,5 @@
 package domain;
 
-import domain.Ball;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -17,8 +15,16 @@ public class RandomBallPool {
         }
     }
 
-    public static Ball getRandomNumber() {
+    public static List<Ball> getRandomBalls(int ballCount) {
+        List<Ball> randomBalls = new ArrayList<Ball>();
         Collections.shuffle(randomPool);
-        return randomPool.get(0);
+
+        for (int i = 0; i < ballCount; i++) {
+            randomBalls.add(randomPool.get(i));
+        }
+
+        return randomBalls;
     }
+
+
 }

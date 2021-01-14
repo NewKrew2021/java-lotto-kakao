@@ -5,6 +5,12 @@ import exception.ManualLottoCountExceededException;
 import exception.UnderLottoBuyAmountException;
 import view.LottoProgramView;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 public class LottoProgram {
 
     private LottoProgramView lottoProgramView;
@@ -19,7 +25,7 @@ public class LottoProgram {
 
         int buyManualCount = lottoProgramView.getBuyManualLottoCountForUser();
         int buyAutoLottoCount = calculateAutoBuyLottoCount(buyAmount, buyManualCount);
-        Lottos lottos = new Lottos(buyAutoLottoCount);
+        Lottos lottos = new Lottos(makeAutoLottos(buyAutoLottoCount));
 
         lottoProgramView.printGetManualBallPhrase();
         addManualLottoToLottos(lottos, buyManualCount);
@@ -50,7 +56,16 @@ public class LottoProgram {
 
     private void addManualLottoToLottos(Lottos lottos, int buyManualCount) {
         for (int i = 0; i < buyManualCount; i++) {
-            lottos.addLotto(Lotto.makeLotto(Ball.getBalls(lottoProgramView.getManualLottoForUser())));
+            lottos.addLotto(new Lotto(Ball.getBalls(lottoProgramView.getManualLottoForUser())));
         }
+    }
+
+    private List<Lotto> makeAutoLottos(int buyAutoLottoCount) {
+        List<Lotto> autoLottos = new ArrayList<>();
+
+        for (int i = 0; i < buyAutoLottoCount; i++) {
+            autoLottos.add(new Lotto(RandomBallPool.getRandomBalls(Lotto.LOTTO_COUNT)));
+        }
+        return autoLottos;
     }
 }
