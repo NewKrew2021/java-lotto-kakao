@@ -1,5 +1,6 @@
 package domain;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -16,14 +17,12 @@ public class LottoResult {
     private Map<LottoStatus, Integer> makeLottoResult(AnswerLotto answerLotto, Lottos lottos) {
         Map<LottoStatus, Integer> result = new HashMap<>();
 
-        for (LottoStatus lottoStatus : LottoStatus.values()) {
-            result.put(lottoStatus, 0);
-        }
+        Arrays.stream(LottoStatus.values())
+                .forEach(lottoStatus -> result.put(lottoStatus, 0));
 
-        for (Lotto lotto : lottos.getLottos()) {
-            LottoStatus lottoStatus = answerLotto.getResult(lotto);
-            result.put(lottoStatus, result.get(lottoStatus) + 1);
-        }
+        lottos.getLottos().stream()
+                .forEach(lotto -> result.put(answerLotto.getResult(lotto), result.get(answerLotto.getResult(lotto)) + 1));
+
         return result;
     }
 

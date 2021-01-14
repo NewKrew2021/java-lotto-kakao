@@ -15,23 +15,21 @@ public class Lottos {
     private static final int LOTTO_NUMBER_SIZE = 6;
     private final List<Lotto> lottos;
 
-    public Lottos() {
-        this(new ArrayList<>());
-    }
-
     public Lottos(List<Lotto> lottos) {
         this.lottos = lottos;
+    }
+
+    public Lottos(List<String> manualLottos, int autoLottoCount) {
+        this.lottos = new ArrayList<>();
+        generateManualLottos(manualLottos);
+        generateAutoLottos(autoLottoCount);
     }
 
     public List<Lotto> getLottos() {
         return lottos;
     }
 
-    public int size() {
-        return lottos.size();
-    }
-
-    public void generateManualLottos(List<String> inputs) {
+    private void generateManualLottos(List<String> inputs) {
         inputs.stream()
                 .map(StringUtils::splitText)
                 .forEach(lotto -> lottos.add(new Lotto(generateManualLotto(lotto))));
@@ -43,7 +41,7 @@ public class Lottos {
                 .collect(Collectors.toList());
     }
 
-    public void generateAutoLottos(int autoLottoCount) {
+    private void generateAutoLottos(int autoLottoCount) {
         IntStream.range(0, autoLottoCount)
                 .forEach(i -> lottos.add(new Lotto(generateAutoLotto())));
     }

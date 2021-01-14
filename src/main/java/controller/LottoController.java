@@ -11,12 +11,12 @@ public class LottoController {
     private static Money money;
 
     public static void main(String[] args) {
-        Lottos lottos = new Lottos();
-        lottos.generateManualLottos(buyManualLotto());
+        List<String> manualLottos = buyManualLotto();
 
-        int manualLottoCount = lottos.size();
+        int manualLottoCount = manualLottos.size();
         int autoLottoCount = money.getAutoLottoCount(manualLottoCount);
-        lottos.generateAutoLottos(autoLottoCount);
+
+        Lottos lottos = new Lottos(manualLottos, autoLottoCount);
         LottoOutputView.printBuyLottoCount(manualLottoCount, autoLottoCount);
 
         printBuyLottos(lottos);
@@ -49,6 +49,5 @@ public class LottoController {
         int bonusNumber = LottoInputView.askBonusNumberToAnswerLotto();
         return new AnswerLotto(answerLottoNumbers, bonusNumber);
     }
-
 }
 

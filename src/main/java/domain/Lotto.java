@@ -12,9 +12,8 @@ public class Lotto {
 
     public Lotto(List<Integer> lotto) {
         checkLottoLength(lotto);
-        for (int number : lotto) {
-            this.lotto.add(new LottoNumber(number));
-        }
+        lotto.stream()
+                .forEach(number -> this.lotto.add(new LottoNumber(number)));
     }
 
     public List<LottoNumber> getLotto() {
