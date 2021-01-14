@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.service.LottoGeneratorService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -10,11 +9,9 @@ import java.util.HashSet;
 
 public class WonLottoTest {
     private WonLotto wonLotto;
-    private LottoGeneratorService lottoGeneratorService;
 
     @BeforeEach
     void setUp() {
-        lottoGeneratorService = new LottoGeneratorService();
         wonLotto = new WonLotto(new Lotto("1,2,3,4,5,6"), LottoNumber.of(7));
     }
 

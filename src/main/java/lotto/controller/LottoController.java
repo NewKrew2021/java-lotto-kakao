@@ -4,6 +4,8 @@ import lotto.domain.*;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
 
+import java.util.stream.IntStream;
+
 public class LottoController {
     private final LottoOutputView lottoOutputView;
     private final LottoInputView lottoInputView;
@@ -27,9 +29,7 @@ public class LottoController {
 
     public Lottos buyLotto(Amount amount) {
         Lottos lottos = new Lottos();
-        for (int i = 0; i < amount.BuyCount(); i++) {
-            lottos.add(new Lotto());
-        }
+        IntStream.range(0, amount.BuyCount()).mapToObj(i -> new Lotto()).forEach(lottos::add);
         return lottos;
     }
 

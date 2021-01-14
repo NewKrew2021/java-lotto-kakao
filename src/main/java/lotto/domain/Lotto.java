@@ -23,20 +23,13 @@ public class Lotto {
     public Lotto(String lotto) {
         String[] lottoNumber = lotto.split(",");
         List<LottoNumber> parsedLotto = new ArrayList<>();
+        for (String number : lottoNumber) {
+            parsedLotto.add(LottoNumber.of(number));
+        }
         try {
-            convertList(lottoNumber, parsedLotto);
             this.lottoNumbers=parsedLotto;
         } catch (Exception e) {
             throw new IllegalArgumentException("잘못된 입력형식입니다");
-        }
-    }
-
-    private void convertList(String[] lottoNumber, List<LottoNumber> parsedLotto) {
-        if(lottoNumber.length>LOTTO_NUMBER_COUNT){
-            throw new IllegalArgumentException("잘못된 입력형식입니다");
-        }
-        for (String number : lottoNumber) {
-            parsedLotto.add(new LottoNumber(Integer.parseInt(number.trim())));
         }
     }
 

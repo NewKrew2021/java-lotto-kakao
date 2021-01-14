@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public class Amount {
     private final int LOTTO_PRICE = 1000;
-    private final int amont;
+    private final int amount;
     private final int changes;
     private final int money;
 
@@ -13,8 +13,8 @@ public class Amount {
             throw new IllegalArgumentException("로또를 구매할 수 없는 금액입니다.");
         }
         this.money = money;
-        this.amont=money/LOTTO_PRICE;
-        this.changes=money-amont*LOTTO_PRICE;
+        this.amount=money/LOTTO_PRICE;
+        this.changes=money-amount*LOTTO_PRICE;
     }
 
     public BigDecimal profitRatio(int totalPrize) {
@@ -22,6 +22,6 @@ public class Amount {
     }
 
     public int BuyCount() {
-        return amont;
+        return amount;
     }
 }

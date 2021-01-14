@@ -23,6 +23,14 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return lottoNumbers.get(number);
     }
 
+    public static LottoNumber of(String number) {
+        try {
+            return of(Integer.parseInt(number));
+        }catch (Exception e){
+            throw new IllegalArgumentException("숫자가 아닌 입력입니다");
+        }
+    }
+
     public LottoNumber(int number) {
         this.number = number;
     }
