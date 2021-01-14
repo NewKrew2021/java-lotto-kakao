@@ -31,7 +31,7 @@ public class LottoController {
     public Lottos buyLotto(Amount amount) {
         Lottos lottos = new Lottos();
         for (int i = 0; i < amount.BuyCount(); i++) {
-            lottos.add(LottoNumber.generateAutoLotto());
+            lottos.add(new Lotto());
         }
         return lottos;
     }

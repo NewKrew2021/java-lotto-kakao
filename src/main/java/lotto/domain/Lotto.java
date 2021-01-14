@@ -15,6 +15,10 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
+    public Lotto(){
+        this.lottoNumbers=LottoNumber.generateLottoNumbers(LOTTO_NUMBER_COUNT);
+    }
+
     public List<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }

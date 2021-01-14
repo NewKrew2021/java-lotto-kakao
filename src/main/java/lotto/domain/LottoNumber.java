@@ -33,12 +33,14 @@ public class LottoNumber implements Comparable<LottoNumber> {
         this.number = number;
     }
 
-    public static Lotto generateAutoLotto() {
-        List<LottoNumber> numbers = lottoNumbers.values().stream().collect(Collectors.toList());
+    public static List<LottoNumber> generateLottoNumbers(int amount) {
+        List<LottoNumber> numbers = lottoNumbers.values()
+                                                .stream()
+                                                .collect(Collectors.toList());
         Collections.shuffle(numbers);
-        numbers = numbers.subList(0, Lotto.LOTTO_NUMBER_COUNT);
+        numbers = numbers.subList(0, amount);
         Collections.sort(numbers);
-        return new Lotto(new ArrayList<>(numbers));
+        return numbers;
     }
 
     @Override

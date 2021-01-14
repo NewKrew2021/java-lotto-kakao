@@ -20,7 +20,7 @@ public class LottoNumberTest {
     @Test
     @DisplayName("서로다른 번호 6개로 로또번호가 생성된것인지 확인")
     public void testLottoSize() {
-        Lotto lotto = LottoNumber.generateAutoLotto();
+        Lotto lotto = new Lotto();
         Assertions.assertTrue(lotto.getLottoNumbers().size() == 6);
         HashSet<LottoNumber> set = new HashSet<>();
         set.addAll(lotto.getLottoNumbers());
