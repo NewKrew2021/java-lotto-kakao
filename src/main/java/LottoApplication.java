@@ -63,8 +63,8 @@ public class LottoApplication {
     }
 
     private static void validateMoney(int money) {
-        if (money % LOTTO_PRICE != 0 || money == 0) {
-            throw new IllegalArgumentException();
+        if (money <= 0 || money % LOTTO_PRICE != 0) {
+            throw new IllegalArgumentException("Input number should be multiples of 1000");
         }
     }
 }
