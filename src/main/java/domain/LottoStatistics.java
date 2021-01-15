@@ -2,6 +2,8 @@ package domain;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class LottoStatistics {
 
@@ -21,7 +23,7 @@ public class LottoStatistics {
         long totalReward = 0;
 
         for (LottoRank lottoRank : rankCounts.keySet()) {
-           totalReward += rankCounts.get(lottoRank) * lottoRank.getReward();
+            totalReward += rankCounts.get(lottoRank) * lottoRank.getReward();
         }
 
         return totalReward;
@@ -31,17 +33,23 @@ public class LottoStatistics {
         return calculateTotalReward() / buyAmount;
     }
 
+    private void appendStatisticsResult(StringBuilder statisticsResult, LottoRank lottoRank) {
+        statisticsResult.append(lottoRank.getResultPrefix());
+        statisticsResult.append(rankCounts.containsKey(lottoRank) ? rankCounts.get(lottoRank) : 0);
+        statisticsResult.append(RESULT_UNIT);
+    }
+
     @Override
     public String toString() {
         StringBuilder statisticsResult = new StringBuilder();
 
-        Arrays.stream(LottoRank.values())
+        List<LottoRank> printRanks = Arrays.stream(LottoRank.values())
                 .filter(lottoRank -> !lottoRank.equals(LottoRank.NONE))
-                .forEach(lottoRank -> {
-                    statisticsResult.append(lottoRank.getResultPrefix());
-                    statisticsResult.append(rankCounts.containsKey(lottoRank) ? rankCounts.get(lottoRank) : 0);
-                    statisticsResult.append(RESULT_UNIT);
-                });
+                .collect(Collectors.toList());
+
+        for (LottoRank lottoRank : printRanks) {
+            appendStatisticsResult(statisticsResult, lottoRank);
+        }
 
         statisticsResult.append(EARNING_RATE_PREFIX);
         statisticsResult.append(calculateEarningsRate(buyAmount));

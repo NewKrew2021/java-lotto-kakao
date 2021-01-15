@@ -14,28 +14,21 @@ public class LottosTest {
 
     @BeforeEach
     public void createLottos() {
-        winningLotto = new WinningLotto(Arrays.asList(new Ball(1), new Ball(7), new Ball(8),
-                new Ball(9), new Ball(10), new Ball(11)),34);
+        winningLotto = new WinningLotto(LottoTest.getLottoBalls(1, 7, 8, 9, 10, 11), 34);
         lottos = new Lottos(
                 Arrays.asList(
-                        new Lotto(Arrays.asList(new Ball(1), new Ball(7), new Ball(8),
-                                new Ball(9), new Ball(10), new Ball(11))),
-                        new Lotto(Arrays.asList(new Ball(1), new Ball(7), new Ball(8),
-                                new Ball(9), new Ball(10), new Ball(11))),
-                        new Lotto(Arrays.asList(new Ball(1), new Ball(7), new Ball(8),
-                                new Ball(9), new Ball(10), new Ball(11))),
-                        new Lotto(Arrays.asList(new Ball(1), new Ball(7), new Ball(8),
-                                new Ball(9), new Ball(10), new Ball(13))),
-                        new Lotto(Arrays.asList(new Ball(1), new Ball(7), new Ball(8),
-                                new Ball(9), new Ball(10), new Ball(13))),
-                        new Lotto(Arrays.asList(new Ball(1), new Ball(7), new Ball(8),
-                                new Ball(9), new Ball(10), new Ball(13)))
+                        new Lotto(LottoTest.getLottoBalls(1, 7, 8, 9, 10, 11)),
+                        new Lotto(LottoTest.getLottoBalls(1, 7, 8, 9, 10, 11)),
+                        new Lotto(LottoTest.getLottoBalls(1, 7, 8, 9, 10, 11)),
+                        new Lotto(LottoTest.getLottoBalls(1, 7, 8, 9, 10, 13)),
+                        new Lotto(LottoTest.getLottoBalls(1, 7, 8, 9, 10, 13)),
+                        new Lotto(LottoTest.getLottoBalls(1, 7, 8, 9, 10, 13))
                 )
         );
     }
 
     @Test
-    void getRankCounts(){
+    void getRankCounts() {
         HashMap<LottoRank, Integer> rankCounts = lottos.getRankCounts(winningLotto);
         assertThat(rankCounts.get(LottoRank.FIRST)).isEqualTo(3);
         assertThat(rankCounts.get(LottoRank.THIRD)).isEqualTo(3);

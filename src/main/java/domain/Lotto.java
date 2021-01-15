@@ -1,6 +1,9 @@
 package domain;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Lotto {
 
@@ -9,11 +12,10 @@ public class Lotto {
 
     private List<Ball> lottoBalls;
 
-    public Lotto(){
-        lottoBalls = RandomBallPool.getLottoBallList(LOTTO_COUNT);
-    }
-
     public Lotto(List<Ball> balls) {
+        if (!validator(balls)) {
+            throw new IllegalArgumentException("로또 번호의 갯수가 6개가 아닙니다.");
+        }
         lottoBalls = balls;
     }
 
@@ -25,7 +27,7 @@ public class Lotto {
         return lottoBalls.contains(ball);
     }
 
-    public boolean contains(Ball ball){
+    public boolean contains(Ball ball) {
         return lottoBalls.contains(ball);
     }
 
@@ -42,5 +44,13 @@ public class Lotto {
         lottoBuilder.delete(lottoBuilder.length() - 2, lottoBuilder.length() - 1);
         lottoBuilder.append("]");
         return lottoBuilder.toString();
+    }
+
+    private boolean validator(List<Ball> balls) {
+        if (balls.stream().distinct().count() != LOTTO_COUNT) {
+            return false;
+        }
+
+        return true;
     }
 }

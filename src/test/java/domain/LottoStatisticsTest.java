@@ -13,25 +13,18 @@ public class LottoStatisticsTest {
 
     @BeforeEach
     public void createLottos() {
-        WinningLotto winningLotto = new WinningLotto(Arrays.asList(new Ball(1), new Ball(7), new Ball(8),
-                new Ball(9), new Ball(10), new Ball(11)),34);
+        WinningLotto winningLotto = new WinningLotto(LottoTest.getLottoBalls(1, 7, 8, 9, 10, 11), 34);
         Lottos lottos = new Lottos(
                 Arrays.asList(
-                        new Lotto(Arrays.asList(new Ball(1), new Ball(7), new Ball(8),
-                                new Ball(9), new Ball(10), new Ball(11))),
-                        new Lotto(Arrays.asList(new Ball(1), new Ball(7), new Ball(8),
-                                new Ball(9), new Ball(10), new Ball(11))),
-                        new Lotto(Arrays.asList(new Ball(1), new Ball(7), new Ball(8),
-                                new Ball(9), new Ball(10), new Ball(11))),
-                        new Lotto(Arrays.asList(new Ball(1), new Ball(7), new Ball(8),
-                                new Ball(9), new Ball(10), new Ball(13))),
-                        new Lotto(Arrays.asList(new Ball(1), new Ball(7), new Ball(8),
-                                new Ball(9), new Ball(10), new Ball(13))),
-                        new Lotto(Arrays.asList(new Ball(1), new Ball(7), new Ball(8),
-                                new Ball(9), new Ball(10), new Ball(13)))
+                        new Lotto(LottoTest.getLottoBalls(1, 7, 8, 9, 10, 11)),
+                        new Lotto(LottoTest.getLottoBalls(1, 7, 8, 9, 10, 11)),
+                        new Lotto(LottoTest.getLottoBalls(1, 7, 8, 9, 10, 11)),
+                        new Lotto(LottoTest.getLottoBalls(1, 7, 8, 9, 10, 13)),
+                        new Lotto(LottoTest.getLottoBalls(1, 7, 8, 9, 10, 13)),
+                        new Lotto(LottoTest.getLottoBalls(1, 7, 8, 9, 10, 13))
                 )
         );
-        lottoStatistics = new LottoStatistics(lottos.getRankCounts(winningLotto),lottos.getLottos().size());
+        lottoStatistics = new LottoStatistics(lottos.getRankCounts(winningLotto), lottos.getLottos().size());
     }
 
     @Test
