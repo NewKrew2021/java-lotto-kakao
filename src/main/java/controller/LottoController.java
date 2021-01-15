@@ -1,49 +1,53 @@
 package controller;
 
-import domain.LottoGame;
-import view.LottoSimulatorView;
+import domain.*;
+import view.LottoInputView;
+import view.LottoOutputView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class LottoController {
-
-    private LottoGame lottoGame;
-    private LottoSimulatorView lottoSimulatorView;
-
-    public LottoController() {
-        lottoSimulatorView = new LottoSimulatorView();
-    }
-
-    public void startLottoSimulator() {
-        buyAutoLotto();
-        printBuyLottos();
-        getAnswerLottoNumbers();
-        printLottoResults();
-    }
-
-    private void buyAutoLotto() {
-        int lottoMoney = lottoSimulatorView.askMoneyToBuyLotto();
-        lottoGame = new LottoGame(lottoMoney);
-        while (lottoGame.hasMoney()) {
-            lottoGame.buyAutoLotto();
-        }
-        lottoSimulatorView.printBuyLottoCount(lottoGame.getBuyLottoCount());
-    }
-
-    private void printBuyLottos() {
-        lottoSimulatorView.printLottos(lottoGame.getLottos());
-    }
-
-    private void getAnswerLottoNumbers() {
-        String answerLottoNumbers = lottoSimulatorView.askLottoNumberToAnswerLotto();
-        int bonusNumber = lottoSimulatorView.askBonusNumberToAnswerLotto();
-        lottoGame.addAnswerLotto(answerLottoNumbers, bonusNumber);
-    }
-
-    private void printLottoResults() {
-        lottoSimulatorView.printResult(lottoGame.getLottoResults(), lottoGame.profitPercentage());
-    }
+    private static Money money;
 
     public static void main(String[] args) {
-        LottoController lottoController = new LottoController();
-        lottoController.startLottoSimulator();
+        List<String> manualLottos = buyManualLotto();
+
+        int manualLottoCount = manualLottos.size();
+        int autoLottoCount = money.getAutoLottoCount(manualLottoCount);
+
+        Lottos lottos = new Lottos(manualLottos, autoLottoCount);
+        LottoOutputView.printBuyLottoCount(manualLottoCount, autoLottoCount);
+
+        printBuyLottos(lottos);
+        AnswerLotto answerLotto = getAnswerLottoNumbers();
+
+        LottoResult lottoResult = new LottoResult(answerLotto, lottos);
+        LottoOutputView.printResult(lottoResult, lottoResult.profitPercentage(money));
+    }
+
+    private static List<String> buyManualLotto() {
+        money = new Money(LottoInputView.askMoneyToBuyLotto());
+
+        int manualLottoCount = LottoInputView.askLottoPurchaseCount();
+        money.checkCanBuy(manualLottoCount);
+
+        LottoOutputView.askManualLottoNumbers();
+        List<String> inputs = new ArrayList<>();
+        for (int i = 0; i < manualLottoCount; i++) {
+            inputs.add(LottoInputView.inputManualLotto());
+        }
+        return inputs;
+    }
+
+    private static void printBuyLottos(Lottos lottos) {
+        LottoOutputView.printLottos(lottos);
+    }
+
+    private static AnswerLotto getAnswerLottoNumbers() {
+        String answerLottoNumbers = LottoInputView.askLottoNumberToAnswerLotto();
+        int bonusNumber = LottoInputView.askBonusNumberToAnswerLotto();
+        return new AnswerLotto(answerLottoNumbers, bonusNumber);
     }
 }
+

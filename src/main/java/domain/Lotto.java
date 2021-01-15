@@ -1,30 +1,21 @@
 package domain;
 
-import utils.LottoException;
-
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Lotto {
     private static final int BASE_LOTTO_LENGTH = 6;
-    private final List<LottoNumber> lotto = new ArrayList<>();
     public static final int LOTTO_PRICE = 1000;
-
-    public Lotto(LottoGenerateStrategy lottoGenerateStrategy) {
-        this(lottoGenerateStrategy.numberChooseStrategy());
-    }
+    private final List<LottoNumber> lotto = new ArrayList<>();
 
     public Lotto(List<Integer> lotto) {
         checkLottoLength(lotto);
-        for (int number : lotto) {
-            this.lotto.add(new LottoNumber(number));
-        }
-    }
-
-    int size() {
-        return lotto.size();
+        Collections.sort(lotto);
+        lotto.stream()
+                .forEach(number -> this.lotto.add(new LottoNumber(number)));
     }
 
     public List<LottoNumber> getLotto() {
@@ -33,7 +24,7 @@ public class Lotto {
 
     private void checkLottoLength(List<Integer> lotto) {
         if (lotto.size() != BASE_LOTTO_LENGTH) {
-            throw new LottoException("로또의 길이가 6이 아닙니다.");
+            throw new InvalidLottoException("로또의 길이가 6이 아닙니다.");
         }
     }
 
@@ -65,3 +56,4 @@ public class Lotto {
         return Objects.hash(lotto);
     }
 }
+

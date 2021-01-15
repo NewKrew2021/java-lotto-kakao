@@ -1,20 +1,29 @@
 package domain;
 
-import utils.LottoException;
+import utils.StringUtils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class AnswerLotto {
     private final Lotto answerLotto;
     private final LottoNumber bonusNumber;
 
+    public AnswerLotto(String input, int bonusNumber) {
+        this.answerLotto = makeAnswerLotto(input);
+        this.bonusNumber = new LottoNumber(bonusNumber);
+    }
+
     public AnswerLotto(Lotto answerLotto, LottoNumber bonusNumber) {
         checkLottoHasBonus(answerLotto, bonusNumber);
         this.answerLotto = answerLotto;
         this.bonusNumber = bonusNumber;
+    }
+
+    private Lotto makeAnswerLotto(String input) {
+        return new Lotto(StringUtils.splitText(input).stream()
+                .map(Integer::parseInt)
+                .collect(Collectors.toList()));
     }
 
     public LottoStatus getResult(Lotto lotto) {
@@ -27,13 +36,13 @@ public class AnswerLotto {
 
     private int getMatchingNumber(List<LottoNumber> lotto) {
         return lotto.stream()
-                .filter(number -> answerLotto.contains(number))
+                .filter(answerLotto::contains)
                 .collect(Collectors.toList()).size();
     }
 
     private void checkLottoHasBonus(Lotto answerLotto, LottoNumber bonus) {
         if (answerLotto.contains(bonus)) {
-            throw new LottoException("로또번호에 보너스가 포함되어있습니다.");
+            throw new InvalidLottoException("로또번호에 보너스가 포함되어있습니다.");
         }
     }
 
@@ -50,3 +59,4 @@ public class AnswerLotto {
         return Objects.hash(answerLotto, bonusNumber);
     }
 }
+

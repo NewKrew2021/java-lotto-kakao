@@ -1,7 +1,6 @@
 package domain;
 
 import org.junit.jupiter.api.Test;
-import utils.LottoException;
 
 import java.util.Arrays;
 
@@ -26,14 +25,14 @@ public class LottoTest {
 
     @Test
     void 로또_길이_6_미만() {
-        assertThatExceptionOfType(LottoException.class)
+        assertThatExceptionOfType(InvalidLottoException.class)
                 .isThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5)))
                 .withMessageContaining("로또의 길이가 6이 아닙니다.");
     }
 
     @Test
     void 로또_길이_6_이상() {
-        assertThatExceptionOfType(LottoException.class)
+        assertThatExceptionOfType(InvalidLottoException.class)
                 .isThrownBy(() -> new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6, 7)))
                 .withMessageContaining("로또의 길이가 6이 아닙니다.");
     }
@@ -46,17 +45,5 @@ public class LottoTest {
                 .isTrue();
     }
 
-    @Test
-    void 로또_생성_전략_테스트() {
-        Lotto lotto = new Lotto(new RandomLottoGenerateStrategy());
-
-        assertThat(lotto.size()).isEqualTo(6);
-    }
-
-    @Test
-    void 로또_생성_문자열_리스트() {
-        Lotto lotto = new Lotto(Arrays.asList(1, 2, 3, 4, 5, 6));
-
-        assertThat(lotto.size()).isEqualTo(6);
-    }
 }
+
