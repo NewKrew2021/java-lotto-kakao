@@ -22,14 +22,21 @@ public class Lotto {
 
     public Lotto(String lotto) {
         String[] lottoNumber = lotto.split(",");
-        if (lottoNumber.length > LOTTO_NUMBER_COUNT) {
+        if (lottoNumber.length != LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("6자리 숫자가 아닙니다");
         }
-        List<LottoNumber> parsedLotto = new ArrayList<>();
+        this.lottoNumbers = new ArrayList<>();
         for (String number : lottoNumber) {
-            parsedLotto.add(LottoNumber.of(number.trim()));
+            validateDuplicate(LottoNumber.of(number.trim()));
+            lottoNumbers.add(LottoNumber.of(number.trim()));
         }
-        this.lottoNumbers = parsedLotto;
+    }
+
+    public void validateDuplicate(LottoNumber lottoNumber) {
+        if (contain(lottoNumber)) {
+            System.out.println("중복");
+            throw new IllegalArgumentException("중복된 숫자가 입력되었습니다");
+        }
     }
 
     public List<LottoNumber> getLottoNumbers() {

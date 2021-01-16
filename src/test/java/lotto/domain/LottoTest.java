@@ -27,6 +27,22 @@ public class LottoTest {
     }
 
     @Test
+    @DisplayName("문자열로 로또 생성시 validation")
+    public void testLottoMadeByStringSizeException() {
+        String smallLotto = "1,2,3,4,5";
+        String bigLotto = "1,2,3,4,5,6,7";
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> new Lotto(smallLotto));
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> new Lotto(bigLotto));
+    }
+
+    @Test
+    @DisplayName("동일 번호입력시 에러 발생")
+    public void testDuplicateLottoNumberException() {
+        String duplicateLotto = "1,2,3,4,5,5";
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> new Lotto(duplicateLotto));
+    }
+
+    @Test
     @DisplayName("문자열 입력이 제대로 파싱되었는지 확인")
     public void testLottoStringParser() {
         Lotto lotto = new Lotto("1,2,3,4,5,6");
@@ -34,6 +50,7 @@ public class LottoTest {
         Lotto userLotto = new Lotto(userLottoNumber);
         Assertions.assertTrue(lotto.checkSameCount(userLotto) == 6);
     }
+
 
     @Test
     public void testSameCountZero() {

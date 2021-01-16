@@ -6,6 +6,9 @@ public class WonLotto {
 
     public WonLotto(Lotto lotto, LottoNumber bonusNumber) {
         this.wonLotto = lotto;
+        if (wonLotto.contain(bonusNumber)) {
+            throw new IllegalArgumentException("중복된 숫자가 입력되었습니다");
+        }
         this.bonusNumber = bonusNumber;
     }
 

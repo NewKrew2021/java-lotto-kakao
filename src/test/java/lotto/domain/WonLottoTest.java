@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
 
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 public class WonLottoTest {
     private WonLotto wonLotto;
 
@@ -23,6 +25,13 @@ public class WonLottoTest {
         Assertions.assertTrue(set.size() == 6);
         set.add(wonLotto.getBonusNumber());
         Assertions.assertTrue(set.size() == 7);
+    }
+
+
+    @Test
+    @DisplayName("보너스 넘버가 같을경우 exception발생")
+    void testDuplicateNumber() {
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> new WonLotto(new Lotto("1,2,3,4,5,6"), LottoNumber.of(1)));
     }
 
 }
