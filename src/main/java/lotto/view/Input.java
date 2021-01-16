@@ -33,4 +33,24 @@ public class Input {
         System.out.println("보너스 볼을 입력해주세요.");
         return CustomTypeCasting.stringToInteger(scanner.nextLine());
     }
+
+    public static int getNumberOfManualTicket() {
+        System.out.println("\n수동으로 구매할 로또 수를 입력해 주세요");
+        return CustomTypeCasting.stringToInteger(scanner.nextLine());
+    }
+
+    public static List<Set<Integer>> getListOfTicketNumbersFromUser(int numberOfTicket) {
+        System.out.println("\n수동으로 구매할 번호를 입력해 주세요.");
+        List<Set<Integer>> userInputData = new ArrayList<>();
+        for(int i = 0; i < numberOfTicket; i++){
+            userInputData.add(getTicketNumbersFromUser());
+        }
+        return userInputData;
+    }
+
+    private static Set<Integer> getTicketNumbersFromUser(){
+        String userInputTicketNumbers = scanner.nextLine();
+        List<Integer> convertedNumbers = CustomTypeCasting.stringToIntegersUsingParsing(userInputTicketNumbers, ",");
+        return new HashSet<>(convertedNumbers);
+    }
 }

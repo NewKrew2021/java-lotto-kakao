@@ -26,7 +26,6 @@ import java.util.Set;
  * 객체를 생성하기 전에, 유효한지 체크한 후, 생성하기 때문이다.
  * 그러니 프로그램을 종료시키도록 한다.
  */
-/*
 public class LottoMachine {
     private int userMoney;
     private int countOfAllTicket, countOfManualTicket, countOfAutoTicket;
@@ -39,16 +38,20 @@ public class LottoMachine {
     }
 
     public void processForPurchasingManually(){
-        int numberOfTicket = Input.getNumberOfManualTicket();
-        List<Set<Integer>> manuallyEnteredNumbers = Input.getListOfTicketNumbersFromUser(numberOfTicket);
+        countOfManualTicket = Input.getNumberOfManualTicket();
+        if(countOfAllTicket < countOfManualTicket){
+            throw new IllegalArgumentException("입력된 티켓의 수가 구입가능한 티켓의 수보다 많습니다.");
+        }
+        List<Set<Integer>> manuallyEnteredNumbers = Input.getListOfTicketNumbersFromUser(countOfManualTicket);
         manualLottoPaper = new LottoPaper(new ManuallyGeneratingStrategy(manuallyEnteredNumbers));
     }
 
     public void processForPurchasingRemains() {
+        countOfAutoTicket = countOfAllTicket - countOfManualTicket;
         autoLottoPaper = new LottoPaper(new RandomlyGeneratingStrategy(countOfAutoTicket));
     }
 
-    public void outputAboutPurchasedLotto() {
+    public void processForPrintingAllPurchasedLotto() {
         Output.printCountOfPurchase(countOfManualTicket, countOfAutoTicket);
         Output.printPurchasedLottoToUser(manualLottoPaper);
         Output.printPurchasedLottoToUser(autoLottoPaper);
@@ -69,8 +72,8 @@ public class LottoMachine {
     }
 
     public void outputStatisticsAboutPurchasedLotto() {
-        LottoResult result = userLottoPaper.getResultCompareWith(winnerBalls);
+        LottoPaper joinedPaper = LottoPaper.join(manualLottoPaper, autoLottoPaper);
+        LottoResult result = joinedPaper.getResultCompareWith(winnerBalls);
         Output.printStatisticsToUser(result);
     }
 }
- */

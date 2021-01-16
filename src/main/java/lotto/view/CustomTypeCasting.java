@@ -3,7 +3,7 @@ package lotto.view;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomTypeCasting {
+public class CustomTypeCasting { //TODO 이곳에서 예외처리
 
     private CustomTypeCasting() {
         throw new IllegalStateException("CustomTypeCasting class is not allowed to construct");
