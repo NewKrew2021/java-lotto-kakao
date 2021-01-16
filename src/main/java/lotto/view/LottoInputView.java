@@ -41,7 +41,7 @@ public class LottoInputView {
         }
     }
 
-    public int getManualLottoAmount(){
+    public int getManualLottoAmount() {
         System.out.println(INPUT_MANUAL_LOTTO_COUNT_PHRASE);
         try {
             int amount = scanner.nextInt();
@@ -52,12 +52,12 @@ public class LottoInputView {
         }
     }
 
-    public String getManualLottoNumber(){
+    public String getManualLottoNumber() {
         return scanner.nextLine();
     }
 
     public void printInputQuantityPhrase(Amount amount) {
-        System.out.println(String.format(INPUT_QUANTITY_PHRASE,amount.manualCount(),amount.autoCount()));
+        System.out.println(String.format(INPUT_QUANTITY_PHRASE, amount.manualCount(), amount.autoCount()));
     }
 
     public void printInputManualLottoNumberPhrase() {

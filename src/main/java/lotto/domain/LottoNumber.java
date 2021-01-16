@@ -26,7 +26,7 @@ public class LottoNumber implements Comparable<LottoNumber> {
     public static LottoNumber of(String number) {
         try {
             return of(Integer.parseInt(number));
-        }catch (Exception e){
+        } catch (Exception e) {
             throw new IllegalArgumentException("숫자가 아닌 입력입니다");
         }
     }
@@ -37,8 +37,8 @@ public class LottoNumber implements Comparable<LottoNumber> {
 
     public static List<LottoNumber> generateLottoNumbers(int amount) {
         List<LottoNumber> numbers = lottoNumbers.values()
-                                                .stream()
-                                                .collect(Collectors.toList());
+                .stream()
+                .collect(Collectors.toList());
         Collections.shuffle(numbers);
         numbers = numbers.subList(0, amount);
         Collections.sort(numbers);

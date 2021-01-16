@@ -13,18 +13,18 @@ public class Amount {
         if (money < 1000) {
             throw new IllegalArgumentException("로또를 구매할 수 없는 금액입니다.");
         }
-        this.autoAmount=money/LOTTO_PRICE;
-        this.totalPrice=autoAmount*LOTTO_PRICE;
-        this.changes=money-totalPrice;
-        this.manualAmount=0;
+        this.autoAmount = money / LOTTO_PRICE;
+        this.totalPrice = autoAmount * LOTTO_PRICE;
+        this.changes = money - totalPrice;
+        this.manualAmount = 0;
     }
 
-    public void buyManualLotto(int manualAmount){
-        if(manualAmount>autoAmount){
+    public void buyManualLotto(int manualAmount) {
+        if (manualAmount > autoAmount) {
             throw new IllegalArgumentException("구매 가능한 수량을 초과했습니다");
         }
-        this.manualAmount=manualAmount;
-        this.autoAmount=this.autoAmount-manualAmount;
+        this.manualAmount = manualAmount;
+        this.autoAmount = this.autoAmount - manualAmount;
     }
 
     public BigDecimal profitRatio(int totalPrize) {
@@ -35,5 +35,7 @@ public class Amount {
         return autoAmount;
     }
 
-    public int manualCount(){return manualAmount;}
+    public int manualCount() {
+        return manualAmount;
+    }
 }

@@ -21,7 +21,7 @@ public class LottoController {
         amount.buyManualLotto(lottoInputView.getManualLottoAmount());
         Lottos lottos = buyManualLotto(amount);
         lottoInputView.printInputQuantityPhrase(amount);
-        buyAutoLotto(amount,lottos);
+        buyAutoLotto(amount, lottos);
         lottoOutputView.printLottos(lottos);
         WonLotto wonLotto = createWonLotto();
         LottoResult lottoResult = new LottoResult(lottos.lottosResult(wonLotto));
@@ -30,7 +30,7 @@ public class LottoController {
         lottoOutputView.printProfitRatio(amount.profitRatio(lottoResult.totalPrize()));
     }
 
-    public Lottos buyAutoLotto(Amount amount,Lottos lottos) {
+    public Lottos buyAutoLotto(Amount amount, Lottos lottos) {
         IntStream.range(0, amount.autoCount()).mapToObj(i -> new Lotto()).forEach(lottos::add);
         return lottos;
     }
@@ -38,7 +38,7 @@ public class LottoController {
     public Lottos buyManualLotto(Amount amount) {
         Lottos lottos = new Lottos();
         lottoInputView.printInputManualLottoNumberPhrase();
-        for(int i=0;i<amount.manualCount();i++){
+        for (int i = 0; i < amount.manualCount(); i++) {
             lottos.add(new Lotto(lottoInputView.getManualLottoNumber()));
         }
         return lottos;

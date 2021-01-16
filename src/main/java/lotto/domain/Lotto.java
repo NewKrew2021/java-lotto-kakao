@@ -16,20 +16,20 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
-    public Lotto(){
-        this.lottoNumbers=LottoNumber.generateLottoNumbers(LOTTO_NUMBER_COUNT);
+    public Lotto() {
+        this.lottoNumbers = LottoNumber.generateLottoNumbers(LOTTO_NUMBER_COUNT);
     }
 
     public Lotto(String lotto) {
         String[] lottoNumber = lotto.split(",");
-        if(lottoNumber.length>LOTTO_NUMBER_COUNT){
+        if (lottoNumber.length > LOTTO_NUMBER_COUNT) {
             throw new IllegalArgumentException("6자리 숫자가 아닙니다");
         }
         List<LottoNumber> parsedLotto = new ArrayList<>();
         for (String number : lottoNumber) {
             parsedLotto.add(LottoNumber.of(number.trim()));
         }
-        this.lottoNumbers=parsedLotto;
+        this.lottoNumbers = parsedLotto;
     }
 
     public List<LottoNumber> getLottoNumbers() {
