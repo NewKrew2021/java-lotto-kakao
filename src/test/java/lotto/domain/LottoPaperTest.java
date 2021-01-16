@@ -47,6 +47,28 @@ public class LottoPaperTest {
         ).doesNotThrowAnyException();
     }
 
+    @DisplayName("두개의 LottoPaper 객체를 하나로 합치는 기능 테스트")
+    @Test
+    public void joinTest(){
+        //given
+        LottoPaper paper1 = new LottoPaper(new ManuallyGeneratingStrategy(testInputNumberSets));
+        LottoPaper paper2 = new LottoPaper(new ManuallyGeneratingStrategy(testInputNumberSets));
+
+        List<Set<Integer>> dataOfExpectedResult = new ArrayList<>();
+        for(int i = 0; i < testInputNumberSets.size() * 2; i++){
+            Set<Integer> copiedTicketInfo = testInputNumberSets.get(i % testInputNumberSets.size());
+            dataOfExpectedResult.add(copiedTicketInfo);
+        }
+        LottoNumberData expectedResult = new LottoNumberData(dataOfExpectedResult);
+
+        //when
+        LottoPaper joinedPaper = LottoPaper.join(paper1, paper2);
+        LottoNumberData testResult = joinedPaper.getLottoNumberData();
+
+        //then
+        assertThat(testResult).isEqualTo(expectedResult);
+    }
+
     @DisplayName("객체가 자신이 가지고 있는 정보를 바탕으로 적절한 LottoNumberData를 반환하는지 검사")
     @Test
     public void getLottoNumberDataTest() {

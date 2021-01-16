@@ -9,6 +9,14 @@ import java.util.stream.Stream;
 public class LottoPaper {
     private List<Ticket> tickets;
 
+    public static LottoPaper join(LottoPaper paper1, LottoPaper paper2){
+        List<Set<Integer>> data = paper1.getLottoNumberData().getNumberData();
+        for(Set<Integer> oneLine : paper2.getLottoNumberData().getNumberData()){
+            data.add(new HashSet<>(oneLine));
+        }
+        return new LottoPaper(new ManuallyGeneratingStrategy(data));
+    }
+
     public LottoPaper(GeneratingStrategy strategy) {
         tickets = Stream.generate(() -> new Ticket(strategy))
                 .limit(strategy.getLimit())

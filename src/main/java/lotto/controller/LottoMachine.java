@@ -45,14 +45,13 @@ public class LottoMachine {
     }
 
     public void processForPurchasingRemains() {
-        userLottoPaper = new LottoPaper(
-                new RandomlyGeneratingStrategy(countOfPurchase)
-        );
+        autoLottoPaper = new LottoPaper(new RandomlyGeneratingStrategy(countOfAutoTicket));
     }
 
     public void outputAboutPurchasedLotto() {
         Output.printCountOfPurchase(countOfManualTicket, countOfAutoTicket);
-        Output.printPurchasedLottoToUser(userLottoPaper);
+        Output.printPurchasedLottoToUser(manualLottoPaper);
+        Output.printPurchasedLottoToUser(autoLottoPaper);
     }
 
     public void inputWinnerInformation() {
@@ -74,4 +73,4 @@ public class LottoMachine {
         Output.printStatisticsToUser(result);
     }
 }
-*/
+ */
