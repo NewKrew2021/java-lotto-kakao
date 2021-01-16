@@ -9,14 +9,14 @@ public class Amount {
     private final double changes;
     private final double totalPrice;
 
-    public Amount(int money) {
+    public Amount(int money, int manualAmount) {
         if (money < 1000) {
             throw new IllegalArgumentException("로또를 구매할 수 없는 금액입니다.");
         }
         this.autoAmount = money / LOTTO_PRICE;
         this.totalPrice = autoAmount * LOTTO_PRICE;
         this.changes = money - totalPrice;
-        this.manualAmount = 0;
+        buyManualLotto(manualAmount);
     }
 
     public void buyManualLotto(int manualAmount) {

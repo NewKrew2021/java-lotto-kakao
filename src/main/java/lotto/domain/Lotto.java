@@ -45,10 +45,7 @@ public class Lotto {
     }
 
     public boolean contain(LottoNumber number) {
-        if (lottoNumbers.contains(number)) {
-            return true;
-        }
-        return false;
+        return lottoNumbers.contains(number);
     }
 
     @Override
