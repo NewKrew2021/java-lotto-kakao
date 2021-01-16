@@ -1,14 +1,11 @@
 package lotto.controller;
 
-import lotto.domain.LottoPaper;
-import lotto.domain.RandomlyGeneratingStrategy;
-import lotto.domain.Ticket;
-import lotto.domain.WinnerBalls;
-import lotto.domain.LottoResult;
+import lotto.domain.*;
 import lotto.view.Input;
 import lotto.view.Output;
 
 import java.util.List;
+import java.util.Set;
 
 /*
  * 컨트롤러에서는 view로부터 받은 입력에 대해 유효성 검사를 하지 않는다.
@@ -29,24 +26,32 @@ import java.util.List;
  * 객체를 생성하기 전에, 유효한지 체크한 후, 생성하기 때문이다.
  * 그러니 프로그램을 종료시키도록 한다.
  */
+/*
 public class LottoMachine {
-    private int userMoney, countOfPurchase;
-    private LottoPaper userLottoPaper;
+    private int userMoney;
+    private int countOfAllTicket, countOfManualTicket, countOfAutoTicket;
+    private LottoPaper manualLottoPaper, autoLottoPaper;
     private WinnerBalls winnerBalls;
 
-    public void inputPrice() {
+    public void processForInputPrice() {
         userMoney = Input.getPriceFromUser();
-        countOfPurchase = userMoney / Ticket.TICKET_PRICE;
-        Output.printCountOfPurchase(countOfPurchase);
+        countOfAllTicket = userMoney / Ticket.TICKET_PRICE;
     }
 
-    public void generateAuto() {
+    public void processForPurchasingManually(){
+        int numberOfTicket = Input.getNumberOfManualTicket();
+        List<Set<Integer>> manuallyEnteredNumbers = Input.getListOfTicketNumbersFromUser(numberOfTicket);
+        manualLottoPaper = new LottoPaper(new ManuallyGeneratingStrategy(manuallyEnteredNumbers));
+    }
+
+    public void processForPurchasingRemains() {
         userLottoPaper = new LottoPaper(
                 new RandomlyGeneratingStrategy(countOfPurchase)
         );
     }
 
     public void outputAboutPurchasedLotto() {
+        Output.printCountOfPurchase(countOfManualTicket, countOfAutoTicket);
         Output.printPurchasedLottoToUser(userLottoPaper);
     }
 
@@ -69,3 +74,4 @@ public class LottoMachine {
         Output.printStatisticsToUser(result);
     }
 }
+*/
