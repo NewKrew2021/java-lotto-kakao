@@ -11,14 +11,13 @@ public class WinnerBalls {
 
     public WinnerBalls(List<Integer> winningNumbers, int bonusBall) {
         if(!isValid(winningNumbers, bonusBall)){
-            throw new IllegalArgumentException("우승자 정보 매개변수 전달과정에서 예외 발생");
+            throw new BadWinnerBallsException("잘못된 당첨정보입니다.");
         }
         this.winningNumbers = new HashSet<>(winningNumbers);
         this.bonusBall = bonusBall;
     }
 
-    /* 생성자로 값을 생성하기 전에 이 함수를 사용하여 전달될 값이 유효한지 미리 검사해볼 수 있다. */
-    public static boolean isValid(List<Integer> initialWinningNumbers, int bonusBall) {
+    private boolean isValid(List<Integer> initialWinningNumbers, int bonusBall) {
         Set<Integer> compressedNumbers = new HashSet<>(initialWinningNumbers);
 
         if(중복이_존재하는_당첨번호(initialWinningNumbers.size(), compressedNumbers.size())){

@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -35,7 +34,7 @@ public class TicketTest {
                                 Arrays.asList(abnormalValue)
                         )
                 )
-        ).isInstanceOf(IllegalArgumentException.class);
+        ).isInstanceOf(BadTicketException.class);
     }
 
     private static Stream<Arguments> provideAbnormalTicketValue(){

@@ -22,6 +22,7 @@ public class Input {
     }
 
     public static List<Integer> getWinnerNumbersFromUser(boolean retry) {
+        System.out.println();
         if(retry){
             System.out.println("잘못된 입력입니다. 재시도 합니다.......");
         }

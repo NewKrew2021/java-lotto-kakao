@@ -14,13 +14,13 @@ public class Ticket {
     public Ticket(GeneratingStrategy strategy) {
         Set<Integer> generatedNumbers = strategy.generate();
         if(!isValid(generatedNumbers)){
-            throw new IllegalArgumentException();
+            throw new BadTicketException("잘못된 Ticket 객체 생성을 시도했습니다.");
         }
 
         numbers = generatedNumbers;
     }
 
-    private boolean isValid(Set<Integer> numbers){
+    public boolean isValid(Set<Integer> numbers){
         return isValidTicketSize(numbers.size()) && isConsistOfValidNumbers(numbers);
     }
 

@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -9,14 +10,17 @@ import java.util.*;
 import java.util.stream.Stream;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class WinnerBallsTest {
 
-    @DisplayName("valid한 파라미터에 대해 true를 반환하는지 테스트")
+    @DisplayName("정상적인 정보가 주어졌을때, 예외없이 객체를 생성하는지 테스트")
     @ParameterizedTest
     @MethodSource("provideWinningNumbersAndBonusBallForTrue")
-    public void isValidTestForTrue(List<Integer> winningNumbers, int bonusBall) {
-        assertThat(WinnerBalls.isValid(winningNumbers, bonusBall)).isTrue();
+    public void createTestForTrue(List<Integer> winningNumbers, int bonusBall) {
+        Assertions.assertThatCode(() ->
+                new WinnerBalls(winningNumbers, bonusBall)
+        ).doesNotThrowAnyException();
     }
 
     private static Stream<Arguments> provideWinningNumbersAndBonusBallForTrue() {
@@ -28,11 +32,13 @@ public class WinnerBallsTest {
         );
     }
 
-    @DisplayName("invalid한 파라미터에 대해 false를 반환하는지 테스트")
+    @DisplayName("비정상적인 정보가 주어졌을때, 예외를 생성하는지 테스트")
     @ParameterizedTest
     @MethodSource("provideWinningNumbersAndBonusBallForFalse")
     public void isValidTestForFalse(List<Integer> winningNumbers, int bonusBall) {
-        assertThat(WinnerBalls.isValid(winningNumbers, bonusBall)).isFalse();
+        assertThatThrownBy(() ->
+                new WinnerBalls(winningNumbers, bonusBall)
+        ).isInstanceOf(BadWinnerBallsException.class);
     }
 
     private static Stream<Arguments> provideWinningNumbersAndBonusBallForFalse() {
@@ -73,5 +79,4 @@ public class WinnerBallsTest {
                 Arguments.of(Arrays.asList(1, 2, 11, 12, 13, 14), Rank.OUT)
         );
     }
-
 }
