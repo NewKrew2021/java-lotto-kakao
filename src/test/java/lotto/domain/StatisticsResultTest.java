@@ -1,11 +1,13 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.*;
 
 public class StatisticsResultTest {
 
     @Test
+    @DisplayName("수익률 확인 테스트")
     void benefitTest() {
         StatisticsResult statisticsResult = new StatisticsResult();
         statisticsResult.increaseTypeCount(StatisticsType.NONE);

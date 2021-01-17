@@ -1,6 +1,7 @@
 package lotto.domain;
 
 import lotto.domain.StatisticsType;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -8,6 +9,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class StatisticsTypeTest {
 
     @Test
+    @DisplayName("당첨금 확인")
     void getJackpotTest() {
         int none = StatisticsType.NONE.getJackpot();
         int three = StatisticsType.THREE.getJackpot();
@@ -25,6 +27,7 @@ public class StatisticsTypeTest {
     }
 
     @Test
+    @DisplayName("로또 같은 번호갯수와 보너스번호 당첨 여부에 따라 Ranking enum 반환 테스트")
     void matchTicketsTest() {
         StatisticsType none = StatisticsType.matchTickets(0, false);
         StatisticsType three = StatisticsType.matchTickets(3, false);
