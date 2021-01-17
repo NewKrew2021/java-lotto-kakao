@@ -1,5 +1,10 @@
 package lotto.domain;
 
+import lotto.domain.strategy.AutoBuyingStrategy;
+import lotto.domain.strategy.BuyingStrategy;
+import lotto.domain.strategy.ManualBuyingStrategy;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -7,7 +12,6 @@ public class PurchaseList {
 
     private int autoTicketCount;
     private int manualTicketCount;
-    private List<Set<Integer>> manualLottoTicketNumbers;
 
     public PurchaseList(int money) {
         if( !validateInputMoney(money) ) {
@@ -24,7 +28,6 @@ public class PurchaseList {
 
         this.manualTicketCount = manualLottoTicketNumbers.size();
         this.autoTicketCount = money / 1000 - manualTicketCount;
-        this.manualLottoTicketNumbers = manualLottoTicketNumbers;
     }
 
     public static boolean validateInputMoney(final int money) {
@@ -47,10 +50,6 @@ public class PurchaseList {
         return true;
     }
 
-    public Set<Integer> getManualTicketNumbers() {
-        return this.manualLottoTicketNumbers.get(this.manualTicketCount);
-    }
-
     public int getAutoTicketCount() {
         return autoTicketCount;
     }
@@ -59,4 +58,22 @@ public class PurchaseList {
         return manualTicketCount;
     }
 
+    public List<LottoTicket> buyAllTickets(LottoDto lottoDto) {
+        List<LottoTicket> lottoTickets = new ArrayList<>();
+        AutoBuyingStrategy autoBuyingStrategy = new AutoBuyingStrategy();
+        ManualBuyingStrategy manualBuyingStrategy = new ManualBuyingStrategy(lottoDto);
+
+        while(payForAutoTicketing()) {
+            lottoTickets.add(buyTicket(autoBuyingStrategy));
+        }
+        while(payForManualTicketing()) {
+            lottoTickets.add(buyTicket(manualBuyingStrategy));
+        }
+
+        return lottoTickets;
+    }
+
+    private LottoTicket buyTicket(BuyingStrategy buyingStrategy) {
+        return buyingStrategy.buyTicket();
+    }
 }

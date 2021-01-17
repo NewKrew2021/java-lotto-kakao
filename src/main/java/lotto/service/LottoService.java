@@ -1,9 +1,6 @@
 package lotto.service;
 
 import lotto.domain.*;
-import lotto.domain.strategy.AutoBuyingStrategy;
-import lotto.domain.strategy.BuyingStrategy;
-import lotto.domain.strategy.ManualBuyingStrategy;
 
 import java.util.*;
 
@@ -17,18 +14,9 @@ public class LottoService {
 
     public void buyLottoTickets() {
         PurchaseList purchaseList = lottoDto.getPurchaseList();
-        List<LottoTicket> lottoTickets = new ArrayList<>();
-        AutoBuyingStrategy autoBuyingStrategy = new AutoBuyingStrategy(purchaseList);
-        ManualBuyingStrategy manualBuyingStrategy = new ManualBuyingStrategy(purchaseList);
-
-        lottoTickets.addAll(buyTicket(manualBuyingStrategy));
-        lottoTickets.addAll(buyTicket(autoBuyingStrategy));
+        List<LottoTicket> lottoTickets = new ArrayList<>(purchaseList.buyAllTickets(lottoDto));
 
         lottoDto.setLottoTickets(lottoTickets);
-    }
-
-    private List<LottoTicket> buyTicket(BuyingStrategy buyingStrategy) {
-        return buyingStrategy.buyTicket();
     }
 
     public void winningStatistics() {
@@ -49,6 +37,7 @@ public class LottoService {
         PurchaseList purchaseList = new PurchaseList(money, manualLottoNumbers);
 
         lottoDto.setPurchaseList(purchaseList);
+
     }
 
     public void makeWinningLottoNumbers() {

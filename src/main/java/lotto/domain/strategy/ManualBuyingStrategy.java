@@ -1,28 +1,25 @@
 package lotto.domain.strategy;
 
-import lotto.domain.LottoNo;
+import lotto.domain.LottoDto;
 import lotto.domain.LottoTicket;
-import lotto.domain.PurchaseList;
 
 import java.util.*;
 
 public class ManualBuyingStrategy implements BuyingStrategy{
 
-    private PurchaseList purchaseList;
+    private LottoDto lottoDto;
 
-    public ManualBuyingStrategy(PurchaseList purchaseList) {
-        this.purchaseList = purchaseList;
+    public ManualBuyingStrategy(LottoDto lottoDto) {
+        this.lottoDto = lottoDto;
     }
 
     @Override
-    public List<LottoTicket> buyTicket() {
-        List<LottoTicket> autoLottoTickets = new ArrayList<>();
-
-        while(this.purchaseList.payForManualTicketing()) {
-            autoLottoTickets.add(new LottoTicket(purchaseList.getManualTicketNumbers()));
-        }
-
-        return autoLottoTickets;
+    public LottoTicket buyTicket() {
+        List<Set<Integer>> manualLottoNumbers = this.lottoDto.getManualLottoNumbers();
+        Set<Integer> manualLottoNumber = manualLottoNumbers.get(manualLottoNumbers.size()-1);
+        LottoTicket lottoTicket = new LottoTicket(manualLottoNumber);
+        manualLottoNumbers.remove(manualLottoNumber);
+        return lottoTicket;
     }
 
 }

@@ -1,6 +1,7 @@
 package lotto.service;
 
 import lotto.domain.*;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -14,6 +15,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.*;
 public class LottoServiceTest {
 
     @Test
+    @DisplayName("로또 티켓 구입 테스트")
     void buyingLottoNosCountTest() {
         LottoDto lottoDto = new LottoDto();
         LottoService lottoService = new LottoService(lottoDto);
@@ -43,6 +45,7 @@ public class LottoServiceTest {
             "1,2,3,4,5,7|" +    //FIVE_WITH_BONUS
             "1,2,3,4,5,6'"      //SIX
     )
+    @DisplayName("당첨 로또 정상 생성 확인 테스트")
     void winningStatisticsTest(String winningLottoNumbers, int bonusNumber, String tickets) {
         WinningLottoNos winningLottoNos = new WinningLottoNos(CsvParsing.convertStringToIntegerSet(winningLottoNumbers), bonusNumber);
         List<LottoTicket> lottoTickets = new ArrayList<>();
