@@ -2,7 +2,7 @@ package lotto.setting;
 
 public class Prize {
 
-    private Prize(){
+    private Prize() {
         throw new IllegalStateException("Prize class is not allowed to construct.");
     }
 

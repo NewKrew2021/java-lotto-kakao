@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.exceptions.BadTicketException;
+import lotto.domain.strategies.ManuallyGeneratingStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -27,7 +29,7 @@ public class TicketTest {
     @DisplayName("잘못된 티켓 정보가 전달되었을때 예외가 발생하는지 체크")
     @ParameterizedTest
     @MethodSource("provideAbnormalTicketValue")
-    public void createAbnormal(Set<Integer> abnormalValue){
+    public void createAbnormal(Set<Integer> abnormalValue) {
         assertThatThrownBy(() ->
                 new Ticket(
                         new ManuallyGeneratingStrategy(
@@ -37,7 +39,7 @@ public class TicketTest {
         ).isInstanceOf(BadTicketException.class);
     }
 
-    private static Stream<Arguments> provideAbnormalTicketValue(){
+    private static Stream<Arguments> provideAbnormalTicketValue() {
         return Stream.of(
                 Arguments.of(new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7))),
                 Arguments.of(new HashSet<>(Arrays.asList(1, 2, 46, 4, 5, 6))),

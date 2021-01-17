@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.domain.strategies.ManuallyGeneratingStrategy;
 import lotto.dto.LottoNumberData;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -49,13 +50,13 @@ public class LottoPaperTest {
 
     @DisplayName("두개의 LottoPaper 객체를 하나로 합치는 기능 테스트")
     @Test
-    public void joinTest(){
+    public void joinTest() {
         //given
         LottoPaper paper1 = new LottoPaper(new ManuallyGeneratingStrategy(testInputNumberSets));
         LottoPaper paper2 = new LottoPaper(new ManuallyGeneratingStrategy(testInputNumberSets));
 
         List<Set<Integer>> dataOfExpectedResult = new ArrayList<>();
-        for(int i = 0; i < testInputNumberSets.size() * 2; i++){
+        for(int i = 0; i < testInputNumberSets.size() * 2; i++) {
             Set<Integer> copiedTicketInfo = testInputNumberSets.get(i % testInputNumberSets.size());
             dataOfExpectedResult.add(copiedTicketInfo);
         }
@@ -104,7 +105,7 @@ public class LottoPaperTest {
         );
 
         LottoResult expectedLottoResult = new LottoResult();
-        for(Rank rank : testRanks){
+        for(Rank rank : testRanks) {
             expectedLottoResult.putRank(rank);
         }
 
@@ -161,7 +162,7 @@ public class LottoPaperTest {
         );
 
         LottoResult expectedLottoResult = new LottoResult();
-        for(Rank rank : testRanks){
+        for(Rank rank : testRanks) {
             expectedLottoResult.putRank(rank);
         }
 
@@ -203,7 +204,7 @@ public class LottoPaperTest {
         );
 
         LottoResult expectedLottoResult = new LottoResult();
-        for(Rank rank : testRanks){
+        for(Rank rank : testRanks) {
             expectedLottoResult.putRank(rank);
         }
 
@@ -241,7 +242,7 @@ public class LottoPaperTest {
         );
 
         LottoResult expectedLottoResult = new LottoResult();
-        for(Rank rank : testRanks){
+        for(Rank rank : testRanks) {
             expectedLottoResult.putRank(rank);
         }
 

@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.exceptions.BadWinnerBallsException;
+import lotto.domain.strategies.ManuallyGeneratingStrategy;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;

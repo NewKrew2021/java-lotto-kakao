@@ -8,7 +8,7 @@ public class Main {
         machine.purchasingManually();
         machine.purchasingRemainsAutomatically();
         machine.printAllPurchasedLotto();
-        machine.inputWinnerInformation(false);
+        machine.inputWinnerInformation();
         machine.outputStatisticsAboutPurchasedLotto();
     }
 }

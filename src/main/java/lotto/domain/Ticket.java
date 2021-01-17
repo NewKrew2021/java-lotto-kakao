@@ -1,5 +1,8 @@
 package lotto.domain;
 
+import lotto.domain.exceptions.BadTicketException;
+import lotto.domain.strategies.GeneratingStrategy;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,7 +23,7 @@ public class Ticket {
         numbers = generatedNumbers;
     }
 
-    public boolean isValid(Set<Integer> numbers){
+    public boolean isValid(Set<Integer> numbers) {
         return isValidTicketSize(numbers.size()) && isConsistOfValidNumbers(numbers);
     }
 
@@ -28,7 +31,7 @@ public class Ticket {
         return TICKET_SIZE == size;
     }
 
-    private boolean isConsistOfValidNumbers(Set<Integer> numbers){
+    private boolean isConsistOfValidNumbers(Set<Integer> numbers) {
         return numbers.stream().allMatch(
                 number -> (LOWER_LIMIT_OF_NUMBER <= number && number <= UPPER_LIMIT_OF_NUMBER)
         );

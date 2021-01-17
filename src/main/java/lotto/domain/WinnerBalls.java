@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.exceptions.BadWinnerBallsException;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -20,16 +22,16 @@ public class WinnerBalls {
     private boolean isValid(List<Integer> initialWinningNumbers, int bonusBall) {
         Set<Integer> compressedNumbers = new HashSet<>(initialWinningNumbers);
 
-        if(중복이_존재하는_당첨번호(initialWinningNumbers.size(), compressedNumbers.size())){
+        if(중복이_존재하는_당첨번호(initialWinningNumbers.size(), compressedNumbers.size())) {
             return false;
         }
-        if(유효하지않은_당첨번호의_개수(compressedNumbers.size())){
+        if(유효하지않은_당첨번호의_개수(compressedNumbers.size())) {
             return false;
         }
-        if(당첨번호에_보너스볼이_포함(compressedNumbers, bonusBall)){
+        if(당첨번호에_보너스볼이_포함(compressedNumbers, bonusBall)) {
             return false;
         }
-        if(범위를_벗어나는_로또번호가_존재(compressedNumbers, bonusBall)){
+        if(범위를_벗어나는_로또번호가_존재(compressedNumbers, bonusBall)) {
             return false;
         }
         return true;

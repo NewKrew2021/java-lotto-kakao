@@ -1,4 +1,6 @@
-package lotto.domain;
+package lotto.domain.strategies;
+
+import lotto.domain.strategies.GeneratingStrategy;
 
 import java.util.ArrayList;
 import java.util.HashSet;

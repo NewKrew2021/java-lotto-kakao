@@ -12,7 +12,7 @@ public class LottoResultTest {
 
     @DisplayName("객체 생성 테스트")
     @Test
-    public void createTest(){
+    public void createTest() {
         Assertions.assertThatCode(LottoResult::new).doesNotThrowAnyException();
     }
 
