@@ -14,9 +14,6 @@ import java.util.Set;
 
 public class LottoGame {
 
-    private static final String WINNING_LOTTO_INPUT_TEXT = "지난 주 당첨 번호를 입력해 주세요.";
-    private static final String MANUAL_LOTTO_INPUT_TEXT = "수동으로 구매할 번호를 입력해 주세요.";
-
     public void run() {
         PurchaseList purchaseList = this.createPurchaseList();
         List<LottoTicket> lottoTickets = LottoLogic.buyLottoTickets(purchaseList);           // 로또 티켓 구입
@@ -24,7 +21,7 @@ public class LottoGame {
         LottoOutputView.printLottoTickets(lottoTickets);                                                        // 구입한 티켓 출력
 
         WinningLottoNos winningLottoNos =
-                new WinningLottoNos(LottoInputView.inputLottoNumbers(WINNING_LOTTO_INPUT_TEXT), LottoInputView.inputBonusNumber());   // 당첨 로또 입력
+                new WinningLottoNos(LottoInputView.inputWinningLottoNumbers(), LottoInputView.inputBonusNumber());   // 당첨 로또 입력
 
         StatisticsResult statisticsResult = LottoLogic.winningStatistics(lottoTickets, winningLottoNos);        // 구입한 티켓의 당첨여부 확인
 
@@ -36,7 +33,7 @@ public class LottoGame {
         int manualTicketCount = LottoInputView.inputManualLottoBuying();
         List<Set<Integer>> manualLottoNumbers = new ArrayList<>();
         for (int i = 0; i < manualTicketCount; i++) {
-            manualLottoNumbers.add(LottoInputView.inputLottoNumbers(MANUAL_LOTTO_INPUT_TEXT));
+            manualLottoNumbers.add(LottoInputView.inputManualLottoNumbers());
         }
         return new PurchaseList(money, manualLottoNumbers);
     }
