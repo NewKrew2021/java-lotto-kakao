@@ -15,9 +15,18 @@ public class LottoLogicTest {
 
     @Test
     void buyingLottoNosCountTest() {
-        List<LottoTicket> lottoTickets1 = LottoLogic.buyLottoTickets(new PurchaseList(1000));
-        List<LottoTicket> lottoTickets10 = LottoLogic.buyLottoTickets(new PurchaseList(10000));
-        List<LottoTicket> lottoTickets100 = LottoLogic.buyLottoTickets(new PurchaseList(100000));
+        LottoDto lottoDto = new LottoDto();
+        LottoLogic lottoLogic = new LottoLogic(lottoDto);
+
+        lottoDto.setPurchaseList(new PurchaseList(1000));
+        lottoLogic.buyLottoTickets();
+        List<LottoTicket> lottoTickets1 = lottoDto.getLottoTickets();
+        lottoDto.setPurchaseList(new PurchaseList(10000));
+        lottoLogic.buyLottoTickets();
+        List<LottoTicket> lottoTickets10 = lottoDto.getLottoTickets();
+        lottoDto.setPurchaseList(new PurchaseList(100000));
+        lottoLogic.buyLottoTickets();
+        List<LottoTicket> lottoTickets100 = lottoDto.getLottoTickets();
 
         assertThat(lottoTickets1.size()).isEqualTo(1);
         assertThat(lottoTickets10.size()).isEqualTo(10);
@@ -38,10 +47,16 @@ public class LottoLogicTest {
         WinningLottoNos winningLottoNos = new WinningLottoNos(CsvParsing.convertStringToIntegerSet(winningLottoNumbers), bonusNumber);
         List<LottoTicket> lottoTickets = new ArrayList<>();
         List<Set<Integer>> ticketsNumbers = CsvParsing.convertStringToTicketsNumber(tickets);
+        LottoDto lottoDto = new LottoDto();
+        LottoLogic lottoLogic = new LottoLogic(lottoDto);
 
         for( Set<Integer> ticket : ticketsNumbers ) {
             lottoTickets.add(new LottoTicket(ticket));
         }
+
+        lottoDto.setLottoTickets(lottoTickets);
+        lottoDto.setWinningLottoNos(winningLottoNos);
+        lottoLogic.winningStatistics();
 
         StatisticsResult statisticsResult = new StatisticsResult();
         statisticsResult.increaseTypeCount(StatisticsType.THREE);
@@ -51,7 +66,7 @@ public class LottoLogicTest {
         statisticsResult.increaseTypeCount(StatisticsType.FIVE_WITH_BONUS);
         statisticsResult.increaseTypeCount(StatisticsType.SIX);
 
-        assertThat(LottoLogic.winningStatistics(lottoTickets, winningLottoNos))
+        assertThat(lottoDto.getStatisticsResult())
                 .isEqualTo(statisticsResult);
     }
 

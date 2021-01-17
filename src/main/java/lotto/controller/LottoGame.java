@@ -1,40 +1,53 @@
 package lotto.controller;
 
-import lotto.domain.LottoTicket;
-import lotto.domain.PurchaseList;
-import lotto.domain.StatisticsResult;
-import lotto.domain.WinningLottoNos;
+import lotto.domain.*;
 import lotto.service.LottoLogic;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
 public class LottoGame {
 
+    private LottoDto lottoDto;
+    private LottoLogic lottoLogic;
+    private LottoInputView lottoInputView;
+    private LottoOutputView lottoOutputView;
+
+    public LottoGame() {
+        lottoDto = new LottoDto();
+        lottoLogic = new LottoLogic(lottoDto);
+        lottoInputView = new LottoInputView(lottoDto);
+        lottoOutputView = new LottoOutputView(lottoDto);
+    }
+
     public void run() {
-        PurchaseList purchaseList = this.createPurchaseList();
-        List<LottoTicket> lottoTickets = LottoLogic.buyLottoTickets(purchaseList);           // 로또 티켓 구입
-        LottoOutputView.printLottoTicketCount(purchaseList.getManualTicketCount(), purchaseList.getAutoTicketCount());                    // 구입한 티켓 갯 출력
-        LottoOutputView.printLottoTickets(lottoTickets);                                                        // 구입한 티켓 출력
-
-        WinningLottoNos winningLottoNos =
-                new WinningLottoNos(LottoInputView.inputWinningLottoNumbers(), LottoInputView.inputBonusNumber());   // 당첨 로또 입력
-
-        StatisticsResult statisticsResult = LottoLogic.winningStatistics(lottoTickets, winningLottoNos);        // 구입한 티켓의 당첨여부 확인
-
-        LottoOutputView.printWinningStatistics(statisticsResult);                                               // 결과 출력
+        this.buyLottoTicket();                                      // 로또 티켓 구입 실행
+        this.executePrintLottoTicket();                             // 로또 티켓 출력 실행
+        this.winningLottoNumbers();                                 // 당첨 로또 번호 객체 생성
+        this.confirmStatistics();                                   // 티켓의 당첨 여부 출력
     }
 
-    private PurchaseList createPurchaseList() {
-        int money = LottoInputView.inputMoney();
-        int manualTicketCount = LottoInputView.inputManualLottoBuying();
-        List<Set<Integer>> manualLottoNumbers = new ArrayList<>();
-        for (int i = 0; i < manualTicketCount; i++) {
-            manualLottoNumbers.add(LottoInputView.inputManualLottoNumbers());
-        }
-        return new PurchaseList(money, manualLottoNumbers);
+    private void buyLottoTicket() {
+        lottoInputView.inputMoney();                                // 돈 입력
+        lottoInputView.inputManualLottoBuying();                    // 수동 횟수 입력
+        lottoInputView.inputManualLottoNumbers();                   // 수동 번호 입력
+        lottoLogic.makePurchaseList();                              // 구매목록 객체 생성
+        lottoLogic.buyLottoTickets();                               // 로또 티켓 구입
     }
+
+    private void executePrintLottoTicket() {
+        lottoOutputView.printLottoTicketCount();                    // 구입한 티켓 갯수출력
+        lottoOutputView.printLottoTickets();                        // 구입한 티켓 출력
+    }
+
+    private void winningLottoNumbers() {
+        lottoInputView.inputWinningLottoNumbers();                  // 당첨 로또 번호 입력
+        lottoInputView.inputBonusNumber();                          // 로또 보너스 번호 입력
+        lottoLogic.makeWinningLottoNumbers();                       // 당첨 로또 객체 생성
+    }
+
+    private void confirmStatistics() {
+        lottoLogic.winningStatistics();                             // 구입한 티켓의 당첨여부 확인
+        lottoOutputView.printWinningStatistics();                   // 결과 출력
+    }
+
 }

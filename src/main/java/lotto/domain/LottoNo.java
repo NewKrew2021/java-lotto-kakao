@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.util.Validation;
+
 import java.util.*;
 
 public class LottoNo implements Comparable<LottoNo>{
