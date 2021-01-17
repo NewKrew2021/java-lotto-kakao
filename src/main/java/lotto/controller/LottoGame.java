@@ -1,20 +1,20 @@
 package lotto.controller;
 
 import lotto.domain.*;
-import lotto.service.LottoLogic;
+import lotto.service.LottoService;
 import lotto.view.LottoInputView;
 import lotto.view.LottoOutputView;
 
 public class LottoGame {
 
     private LottoDto lottoDto;
-    private LottoLogic lottoLogic;
+    private LottoService lottoService;
     private LottoInputView lottoInputView;
     private LottoOutputView lottoOutputView;
 
     public LottoGame() {
         lottoDto = new LottoDto();
-        lottoLogic = new LottoLogic(lottoDto);
+        lottoService = new LottoService(lottoDto);
         lottoInputView = new LottoInputView(lottoDto);
         lottoOutputView = new LottoOutputView(lottoDto);
     }
@@ -30,8 +30,8 @@ public class LottoGame {
         lottoInputView.inputMoney();                                // 돈 입력
         lottoInputView.inputManualLottoBuying();                    // 수동 횟수 입력
         lottoInputView.inputManualLottoNumbers();                   // 수동 번호 입력
-        lottoLogic.makePurchaseList();                              // 구매목록 객체 생성
-        lottoLogic.buyLottoTickets();                               // 로또 티켓 구입
+        lottoService.makePurchaseList();                              // 구매목록 객체 생성
+        lottoService.buyLottoTickets();                               // 로또 티켓 구입
     }
 
     private void executePrintLottoTicket() {
@@ -42,11 +42,11 @@ public class LottoGame {
     private void winningLottoNumbers() {
         lottoInputView.inputWinningLottoNumbers();                  // 당첨 로또 번호 입력
         lottoInputView.inputBonusNumber();                          // 로또 보너스 번호 입력
-        lottoLogic.makeWinningLottoNumbers();                       // 당첨 로또 객체 생성
+        lottoService.makeWinningLottoNumbers();                       // 당첨 로또 객체 생성
     }
 
     private void confirmStatistics() {
-        lottoLogic.winningStatistics();                             // 구입한 티켓의 당첨여부 확인
+        lottoService.winningStatistics();                             // 구입한 티켓의 당첨여부 확인
         lottoOutputView.printWinningStatistics();                   // 결과 출력
     }
 

@@ -11,21 +11,21 @@ import java.util.Set;
 
 import static org.assertj.core.api.AssertionsForClassTypes.*;
 
-public class LottoLogicTest {
+public class LottoServiceTest {
 
     @Test
     void buyingLottoNosCountTest() {
         LottoDto lottoDto = new LottoDto();
-        LottoLogic lottoLogic = new LottoLogic(lottoDto);
+        LottoService lottoService = new LottoService(lottoDto);
 
         lottoDto.setPurchaseList(new PurchaseList(1000));
-        lottoLogic.buyLottoTickets();
+        lottoService.buyLottoTickets();
         List<LottoTicket> lottoTickets1 = lottoDto.getLottoTickets();
         lottoDto.setPurchaseList(new PurchaseList(10000));
-        lottoLogic.buyLottoTickets();
+        lottoService.buyLottoTickets();
         List<LottoTicket> lottoTickets10 = lottoDto.getLottoTickets();
         lottoDto.setPurchaseList(new PurchaseList(100000));
-        lottoLogic.buyLottoTickets();
+        lottoService.buyLottoTickets();
         List<LottoTicket> lottoTickets100 = lottoDto.getLottoTickets();
 
         assertThat(lottoTickets1.size()).isEqualTo(1);
@@ -48,7 +48,7 @@ public class LottoLogicTest {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         List<Set<Integer>> ticketsNumbers = CsvParsing.convertStringToTicketsNumber(tickets);
         LottoDto lottoDto = new LottoDto();
-        LottoLogic lottoLogic = new LottoLogic(lottoDto);
+        LottoService lottoService = new LottoService(lottoDto);
 
         for( Set<Integer> ticket : ticketsNumbers ) {
             lottoTickets.add(new LottoTicket(ticket));
@@ -56,7 +56,7 @@ public class LottoLogicTest {
 
         lottoDto.setLottoTickets(lottoTickets);
         lottoDto.setWinningLottoNos(winningLottoNos);
-        lottoLogic.winningStatistics();
+        lottoService.winningStatistics();
 
         StatisticsResult statisticsResult = new StatisticsResult();
         statisticsResult.increaseTypeCount(StatisticsType.THREE);

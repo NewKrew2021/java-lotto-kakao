@@ -4,15 +4,14 @@ import lotto.domain.*;
 import lotto.domain.strategy.AutoBuyingStrategy;
 import lotto.domain.strategy.BuyingStrategy;
 import lotto.domain.strategy.ManualBuyingStrategy;
-import lotto.view.LottoInputView;
 
 import java.util.*;
 
-public class LottoLogic {
+public class LottoService {
 
     private LottoDto lottoDto;
 
-    public LottoLogic(LottoDto lottoDto) {
+    public LottoService(LottoDto lottoDto) {
         this.lottoDto = lottoDto;
     }
 
@@ -48,6 +47,7 @@ public class LottoLogic {
         int money = lottoDto.getMoney();
         List<Set<Integer>> manualLottoNumbers = lottoDto.getManualLottoNumbers();
         PurchaseList purchaseList = new PurchaseList(money, manualLottoNumbers);
+
         lottoDto.setPurchaseList(purchaseList);
     }
 
@@ -55,6 +55,7 @@ public class LottoLogic {
         Set<Integer> winningLottoOnlyNumbers = lottoDto.getWinningLottoOnlyNumbers();
         int bonusNumber = lottoDto.getBonusNumber();
         WinningLottoNos winningLottoNos = new WinningLottoNos(winningLottoOnlyNumbers, bonusNumber);
+
         lottoDto.setWinningLottoNos(winningLottoNos);
     }
 }
