@@ -52,3 +52,4 @@ public class LottoPaper {
         return lottoResult;
     }
 }
+

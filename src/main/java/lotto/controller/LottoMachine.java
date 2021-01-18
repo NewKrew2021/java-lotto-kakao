@@ -18,7 +18,7 @@ import java.util.Set;
 public class LottoMachine {
     private int userMoney;
     private int countOfAllTicket, countOfManualTicket, countOfAutoTicket;
-    private LottoPaper manualLottoPaper, autoLottoPaper;
+    private LottoPapers lottoPapers = new LottoPapers();
     private WinnerBalls winnerBalls;
 
     public void inputUserMoney() {
@@ -50,18 +50,19 @@ public class LottoMachine {
 
     public void purchasingManually() {
         List<Set<Integer>> manuallyEnteredNumbers = Input.getListOfTicketNumbersFromUser(countOfManualTicket);
-        manualLottoPaper = new LottoPaper(new ManuallyGeneratingStrategy(manuallyEnteredNumbers));
+        LottoPaper manualLottoPaper = new LottoPaper(new ManuallyGeneratingStrategy(manuallyEnteredNumbers));
+        lottoPapers.add(manualLottoPaper);
     }
 
     public void purchasingRemainsAutomatically() {
         countOfAutoTicket = countOfAllTicket - countOfManualTicket;
-        autoLottoPaper = new LottoPaper(new RandomlyGeneratingStrategy(countOfAutoTicket));
+        LottoPaper autoLottoPaper = new LottoPaper(new RandomlyGeneratingStrategy(countOfAutoTicket));
+        lottoPapers.add(autoLottoPaper);
     }
 
     public void printAllPurchasedLotto() {
         Output.printCountOfPurchase(countOfManualTicket, countOfAutoTicket);
-        Output.printPurchasedLottoToUser(manualLottoPaper);
-        Output.printPurchasedLottoToUser(autoLottoPaper);
+        Output.printPurchasedLottoPapersToUser(lottoPapers);
     }
 
     public void inputWinnerInformation() {
@@ -72,8 +73,7 @@ public class LottoMachine {
     }
 
     public void outputStatisticsAboutPurchasedLotto() {
-        LottoPaper joinedPaper = LottoPaper.join(manualLottoPaper, autoLottoPaper);
-        LottoResult result = joinedPaper.getResultCompareWith(winnerBalls);
-        Output.printStatisticsToUser(result);
+        LottoResult resultOfAllPapers = lottoPapers.getMergedPaper().getResultCompareWith(winnerBalls);
+        Output.printStatisticsToUser(resultOfAllPapers);
     }
 }
