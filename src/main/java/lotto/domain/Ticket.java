@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.exceptions.BadTicketException;
+import lotto.exceptions.BadTicketException;
 import lotto.domain.strategies.GeneratingStrategy;
 
 import java.util.HashSet;

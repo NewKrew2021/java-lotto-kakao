@@ -1,4 +1,4 @@
-package lotto.view;
+package lotto.exceptions;
 
 public class CastingFailException extends RuntimeException {
 

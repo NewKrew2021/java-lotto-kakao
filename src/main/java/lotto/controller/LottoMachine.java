@@ -3,6 +3,7 @@ package lotto.controller;
 import lotto.domain.*;
 import lotto.domain.strategies.ManuallyGeneratingStrategy;
 import lotto.domain.strategies.RandomlyGeneratingStrategy;
+import lotto.exceptions.BadUserBehaviorException;
 import lotto.view.Input;
 import lotto.view.Output;
 

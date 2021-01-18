@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.exceptions.BadTicketException;
+import lotto.exceptions.BadTicketException;
 import lotto.domain.strategies.ManuallyGeneratingStrategy;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

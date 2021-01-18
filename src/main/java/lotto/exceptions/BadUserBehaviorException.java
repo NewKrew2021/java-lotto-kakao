@@ -1,4 +1,4 @@
-package lotto.controller;
+package lotto.exceptions;
 
 public class BadUserBehaviorException extends RuntimeException {
 

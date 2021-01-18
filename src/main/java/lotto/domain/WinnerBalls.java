@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.domain.exceptions.BadWinnerBallsException;
+import lotto.exceptions.BadWinnerBallsException;
 
 import java.util.HashSet;
 import java.util.List;

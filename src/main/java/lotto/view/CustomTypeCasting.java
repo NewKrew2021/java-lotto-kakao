@@ -1,9 +1,11 @@
 package lotto.view;
 
+import lotto.exceptions.CastingFailException;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomTypeCasting { //TODO 이곳에서 예외처리
+public class CustomTypeCasting {
 
     private CustomTypeCasting() {
         throw new IllegalStateException("CustomTypeCasting class is not allowed to construct");

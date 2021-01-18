@@ -1,5 +1,8 @@
 package lotto.view;
 
+import lotto.exceptions.CastingFailException;
+import lotto.exceptions.IllegalTypeEnteredException;
+
 import java.util.*;
 
 public class Input {
