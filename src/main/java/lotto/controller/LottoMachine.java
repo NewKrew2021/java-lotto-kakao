@@ -30,7 +30,7 @@ public class LottoMachine {
     }
 
     private void validateEnteredMoney(int money) {
-        if((money < 0) && (0 != money % Ticket.TICKET_PRICE)){
+        if((money < 0) || (0 != money % Ticket.TICKET_PRICE)){
             throw new BadUserBehaviorException("잘못된 금액입니다. (금액은 0이상이어야 하고, 거스름돈이 남지 않아야 합니다.)");
         }
     }
@@ -43,7 +43,7 @@ public class LottoMachine {
     }
 
     private void validateEnteredTicketCount(int count) {
-        if((count < 0) && (countOfAllTicket < count)){
+        if((count < 0) || (countOfAllTicket < count)){
             throw new BadUserBehaviorException("입력된 티켓의 수가 구입가능한 티켓의 수보다 많습니다.");
         }
     }

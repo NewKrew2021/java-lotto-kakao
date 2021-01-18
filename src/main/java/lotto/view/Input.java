@@ -61,7 +61,7 @@ public class Input {
         }
     }
 
-    private static Set<Integer> getTicketNumbersFromUser(){
+    private static Set<Integer> getTicketNumbersFromUser() {
         String userInputTicketNumbers = scanner.nextLine();
         List<Integer> convertedNumbers = CustomTypeCasting.stringToIntegersUsingParsing(userInputTicketNumbers, ",");
         return new HashSet<>(convertedNumbers);
