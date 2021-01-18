@@ -16,25 +16,29 @@ public class Ticket {
 
     public Ticket(GeneratingStrategy strategy) {
         Set<Integer> generatedNumbers = strategy.generate();
-        if(!isValid(generatedNumbers)){
-            throw new BadTicketException("잘못된 Ticket 객체 생성을 시도했습니다.");
-        }
+        validateNumbers(generatedNumbers);
 
         numbers = generatedNumbers;
     }
 
-    public boolean isValid(Set<Integer> numbers) {
-        return isValidTicketSize(numbers.size()) && isConsistOfValidNumbers(numbers);
+    public void validateNumbers(Set<Integer> numbers) {
+        validateTicketSize(numbers.size());
+        validateConsistingNumbers(numbers);
     }
 
-    private boolean isValidTicketSize(int size) {
-        return TICKET_SIZE == size;
+    private void validateTicketSize(int size) {
+        if(TICKET_SIZE != size) {
+            throw new BadTicketException("ticket의 size가 잘못되었습니다.");
+        }
     }
 
-    private boolean isConsistOfValidNumbers(Set<Integer> numbers) {
-        return numbers.stream().allMatch(
-                number -> (LOWER_LIMIT_OF_NUMBER <= number && number <= UPPER_LIMIT_OF_NUMBER)
-        );
+    private void validateConsistingNumbers(Set<Integer> numbers) {
+        boolean existInvalidNumber = numbers.stream()
+                .anyMatch(number -> (number < LOWER_LIMIT_OF_NUMBER || UPPER_LIMIT_OF_NUMBER < number));
+
+        if(existInvalidNumber){
+            throw new BadTicketException("유효하지 않은 범위의 숫자가 포함되어 있습니다.");
+        }
     }
 
     /* 숫자 정보가 변경되는 것을 막기 위해 복사하여 전달한다. */
