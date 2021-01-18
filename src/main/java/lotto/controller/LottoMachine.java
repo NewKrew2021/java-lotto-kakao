@@ -22,34 +22,34 @@ public class LottoMachine {
 
     public void inputUserMoney() {
         int enteredMoney = Input.getPriceFromUser();
-        if(!유효한_구입금액(enteredMoney)) {
-            throw new BadUserBehaviorException("잘못된 금액입니다. (금액은 0이상이어야 하고, 거스름돈이 남지 않아야 합니다.)");
-        }
+        validateEnteredMoney(enteredMoney);
 
         userMoney = enteredMoney;
         countOfAllTicket = userMoney / Ticket.TICKET_PRICE;
     }
 
-    private boolean 유효한_구입금액(int money) {
-        return (0 <= money) && (0 == money % Ticket.TICKET_PRICE);
+    private void validateEnteredMoney(int money) {
+        if((money < 0) && (0 != money % Ticket.TICKET_PRICE)){
+            throw new BadUserBehaviorException("잘못된 금액입니다. (금액은 0이상이어야 하고, 거스름돈이 남지 않아야 합니다.)");
+        }
     }
 
     public void inputManualTicketCount() {
         int enteredTicketCount = Input.getNumberOfManualTicket();
-        if (!구매가능한_티켓의_수(enteredTicketCount)) {
-            throw new BadUserBehaviorException("입력된 티켓의 수가 구입가능한 티켓의 수보다 많습니다.");
-        }
+        validateEnteredTicketCount(enteredTicketCount);
 
         countOfManualTicket = enteredTicketCount;
+    }
+
+    private void validateEnteredTicketCount(int count) {
+        if((count < 0) && (countOfAllTicket < count)){
+            throw new BadUserBehaviorException("입력된 티켓의 수가 구입가능한 티켓의 수보다 많습니다.");
+        }
     }
 
     public void purchasingManually() {
         List<Set<Integer>> manuallyEnteredNumbers = Input.getListOfTicketNumbersFromUser(countOfManualTicket);
         manualLottoPaper = new LottoPaper(new ManuallyGeneratingStrategy(manuallyEnteredNumbers));
-    }
-
-    private boolean 구매가능한_티켓의_수(int count) {
-        return (0 < count) && (count <= countOfAllTicket);
     }
 
     public void purchasingRemainsAutomatically() {
