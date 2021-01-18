@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,6 +16,29 @@ public class Lotto {
         this.lottoNumbers = lottoNumbers;
     }
 
+    public Lotto() {
+        this.lottoNumbers = LottoNumber.generateLottoNumbers(LOTTO_NUMBER_COUNT);
+    }
+
+    public Lotto(String lotto) {
+        String[] lottoNumber = lotto.split(",");
+        if (lottoNumber.length != LOTTO_NUMBER_COUNT) {
+            throw new IllegalArgumentException("6자리 숫자가 아닙니다");
+        }
+        this.lottoNumbers = new ArrayList<>();
+        for (String number : lottoNumber) {
+            validateDuplicate(LottoNumber.of(number.trim()));
+            lottoNumbers.add(LottoNumber.of(number.trim()));
+        }
+    }
+
+    public void validateDuplicate(LottoNumber lottoNumber) {
+        if (contain(lottoNumber)) {
+            System.out.println("중복");
+            throw new IllegalArgumentException("중복된 숫자가 입력되었습니다");
+        }
+    }
+
     public List<LottoNumber> getLottoNumbers() {
         return Collections.unmodifiableList(lottoNumbers);
     }
@@ -28,10 +52,7 @@ public class Lotto {
     }
 
     public boolean contain(LottoNumber number) {
-        if (lottoNumbers.contains(number)) {
-            return true;
-        }
-        return false;
+        return lottoNumbers.contains(number);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package lotto.domain;
 
-import lotto.service.LottoGeneratorService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -8,14 +7,14 @@ import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
 
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+
 public class WonLottoTest {
     private WonLotto wonLotto;
-    private LottoGeneratorService lottoGeneratorService;
 
     @BeforeEach
     void setUp() {
-        lottoGeneratorService = new LottoGeneratorService();
-        wonLotto = new WonLotto(lottoGeneratorService.lottoStringParser("1,2,3,4,5,6"), LottoNumber.of(7));
+        wonLotto = new WonLotto(new Lotto("1,2,3,4,5,6"), LottoNumber.of(7));
     }
 
     @Test
@@ -26,6 +25,13 @@ public class WonLottoTest {
         Assertions.assertTrue(set.size() == 6);
         set.add(wonLotto.getBonusNumber());
         Assertions.assertTrue(set.size() == 7);
+    }
+
+
+    @Test
+    @DisplayName("보너스 넘버가 같을경우 exception발생")
+    void testDuplicateNumber() {
+        assertThatExceptionOfType(IllegalArgumentException.class).isThrownBy(() -> new WonLotto(new Lotto("1,2,3,4,5,6"), LottoNumber.of(1)));
     }
 
 }

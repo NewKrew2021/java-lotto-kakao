@@ -16,12 +16,6 @@ public class LottoNumber implements Comparable<LottoNumber> {
             .boxed()
             .collect(toMap(Function.identity(), LottoNumber::new));
 
-    static {
-        for (int i = LOTTO_MIN_INT; i <= LOTTO_MAX_INT; i++) {
-            lottoNumbers.put(i, new LottoNumber(i));
-        }
-    }
-
     public static LottoNumber of(int number) {
         if (number > LOTTO_MAX_INT || number < LOTTO_MIN_INT) {
             throw new IllegalArgumentException("1~45범위를 벗어난 숫자입니다.");
@@ -29,16 +23,26 @@ public class LottoNumber implements Comparable<LottoNumber> {
         return lottoNumbers.get(number);
     }
 
+    public static LottoNumber of(String number) {
+        try {
+            return of(Integer.parseInt(number));
+        } catch (Exception e) {
+            throw new IllegalArgumentException("숫자가 아닌 입력입니다");
+        }
+    }
+
     public LottoNumber(int number) {
         this.number = number;
     }
 
-    public static Lotto generateAutoLotto() {
-        List<LottoNumber> numbers = lottoNumbers.values().stream().collect(Collectors.toList());
+    public static List<LottoNumber> generateLottoNumbers(int amount) {
+        List<LottoNumber> numbers = lottoNumbers.values()
+                .stream()
+                .collect(Collectors.toList());
         Collections.shuffle(numbers);
-        numbers = numbers.subList(0, Lotto.LOTTO_NUMBER_COUNT);
+        numbers = numbers.subList(0, amount);
         Collections.sort(numbers);
-        return new Lotto(new ArrayList<>(numbers));
+        return numbers;
     }
 
     @Override

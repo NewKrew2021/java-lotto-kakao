@@ -24,6 +24,10 @@ public class Lottos {
         return results;
     }
 
+    public void appendLottos(Lottos newLottos) {
+        this.lottos.addAll(newLottos.lottos);
+    }
+
     @Override
     public String toString() {
         StringBuilder str = new StringBuilder();
