@@ -21,7 +21,7 @@ public class WonLotto {
     public LottoRank checkRanking(Lotto lotto){
         int matchNo=wonLotto.checkSameCount(lotto);
 
-        boolean isBonusMatched=lotto.getLotto().add(LottoNumber.makeNumber(bonusNo));
+        boolean isBonusMatched=lotto.getLotto().contains(LottoNumber.makeNumber(bonusNo));
 
         return LottoRank.rankForMatched(matchNo, isBonusMatched);
     }

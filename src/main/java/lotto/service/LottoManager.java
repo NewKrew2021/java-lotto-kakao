@@ -29,7 +29,7 @@ public class LottoManager {
 
     private void insertMoney(){
         int moneyInput = LottoInputView.getLottoBuyAmount();
-        money = Money.makeMoney(moneyInput);
+        money = Money.of(moneyInput);
     }
 
     private void buyLotto(Money money){
