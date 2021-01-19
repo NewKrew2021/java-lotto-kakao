@@ -13,7 +13,7 @@ public class LottoNumberData {
     public List<Set<Integer>> getNumberData() {
         List<Set<Integer>> copiedNumbers = new ArrayList<>();
 
-        for(Set<Integer> currentLine : numberData){
+        for(Set<Integer> currentLine : numberData) {
             copiedNumbers.add(copyingLine(currentLine));
         }
 

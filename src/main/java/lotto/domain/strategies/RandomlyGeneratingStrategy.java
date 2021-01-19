@@ -1,4 +1,6 @@
-package lotto.domain;
+package lotto.domain.strategies;
+
+import lotto.domain.Ticket;
 
 import java.util.HashSet;
 import java.util.Random;

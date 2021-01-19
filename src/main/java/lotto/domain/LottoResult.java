@@ -30,7 +30,7 @@ public class LottoResult {
         return countSum;
     }
 
-    private long getSumOfPrizes(){
+    private long getSumOfPrizes() {
         long sum = 0;
         for (Rank rank : Rank.values()) {
             sum += getCountOf(rank) * rank.getPrize();

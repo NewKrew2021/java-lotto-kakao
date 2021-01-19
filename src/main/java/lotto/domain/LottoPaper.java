@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.domain.strategies.GeneratingStrategy;
+import lotto.domain.strategies.ManuallyGeneratingStrategy;
 import lotto.dto.LottoNumberData;
 
 import java.util.*;
@@ -8,6 +10,17 @@ import java.util.stream.Stream;
 
 public class LottoPaper {
     private List<Ticket> tickets;
+
+    public static LottoPaper join(LottoPaper paper1, LottoPaper paper2) {
+
+        List<Set<Integer>> data = paper1.getLottoNumberData().getNumberData();
+
+        for(Set<Integer> oneLine : paper2.getLottoNumberData().getNumberData()) {
+            data.add(new HashSet<>(oneLine));
+        }
+
+        return new LottoPaper(new ManuallyGeneratingStrategy(data));
+    }
 
     public LottoPaper(GeneratingStrategy strategy) {
         tickets = Stream.generate(() -> new Ticket(strategy))
@@ -19,7 +32,7 @@ public class LottoPaper {
     public LottoNumberData getLottoNumberData() {
         List<Set<Integer>> responseData = new ArrayList<>();
 
-        for(Ticket ticket : tickets){
+        for(Ticket ticket : tickets) {
             responseData.add(ticket.getNumberData());
         }
 
@@ -28,12 +41,15 @@ public class LottoPaper {
 
     /* 당첨정보를 받아서 이 객체와 비교후, 결과정보를 반환한다. */
     public LottoResult getResultCompareWith(WinnerBalls winnerBalls) {
+
         LottoResult lottoResult = new LottoResult();
-        for(Ticket curTicket : tickets){
-            int matchCount = winnerBalls.getMatchCountComparedWith(curTicket);
-            boolean matchBonusBall = curTicket.isContain(winnerBalls.getBonusBall());
-            lottoResult.putRank(Rank.getRankAccordingTo(matchCount, matchBonusBall));
+
+        for(Ticket curTicket : tickets) {
+            Rank rankOfCurTicket = winnerBalls.getRankOf(curTicket);
+            lottoResult.putRank(rankOfCurTicket);
         }
+
         return lottoResult;
     }
 }
+

@@ -1,6 +1,7 @@
 package lotto.view;
 
 import lotto.domain.LottoPaper;
+import lotto.domain.LottoPapers;
 import lotto.domain.Rank;
 import lotto.dto.LottoNumberData;
 import lotto.domain.LottoResult;
@@ -12,11 +13,20 @@ import java.util.Set;
 
 public class Output {
 
-    public static void printCountOfPurchase(long count) {
-        System.out.println(count + "개를 구매했습니다.");
+    private Output() {
+        throw new IllegalStateException("Output class is not allowed to construct.");
     }
 
-    public static void printPurchasedLottoToUser(LottoPaper paper) {
+    public static void printCountOfPurchase(long manualCount, long autoCount) {
+        System.out.printf("\n수동으로 %d장, 자동으로 %d장을 구매했습니다.\n", manualCount, autoCount);
+    }
+
+    public static void printPurchasedLottoPapersToUser(LottoPapers lottoPapers) {
+        LottoPaper mergedPaper = lottoPapers.getMergedPaper();
+        printPurchasedLottoToUser(mergedPaper);
+    }
+
+    private static void printPurchasedLottoToUser(LottoPaper paper) {
         LottoNumberData data = paper.getLottoNumberData();
         List<Set<Integer>> rawData = data.getNumberData();
         for (Set<Integer> integers : rawData) {
