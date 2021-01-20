@@ -1,7 +1,8 @@
 package lotto.view;
 
+import lotto.domain.BuyingListDto;
+import lotto.domain.BuyingList;
 import lotto.domain.LottoDto;
-import lotto.domain.PurchaseList;
 import lotto.util.Validation;
 
 import java.util.*;
@@ -19,13 +20,8 @@ public class LottoInputView {
     private static final String WRONG_NUMBER = "잘못된 수를 입력하셨습니다.";
     private static Scanner sc = new Scanner(System.in);
 
-    private LottoDto lottoDto;
 
-    public LottoInputView(LottoDto lottoDto) {
-        this.lottoDto = lottoDto;
-    }
-
-    public void inputMoney() {
+    public void inputMoney(BuyingListDto buyingListDto) {
         String money;
 
         do {
@@ -33,12 +29,12 @@ public class LottoInputView {
             money = sc.nextLine();
         } while(!validateMoney(money));
 
-        this.lottoDto.setMoney(Integer.parseInt(money));
+        buyingListDto.setMoney(Integer.parseInt(money));
     }
 
     private static boolean validateMoney(String inputMoney) {
         int money = convertStringToInt(inputMoney);
-        if( !PurchaseList.validateInputMoney(money) ) {
+        if( !BuyingList.validateInputMoney(money) ) {
             System.out.println(WRONG_PRICE);
             return false;
         }
@@ -54,16 +50,16 @@ public class LottoInputView {
         return -1;
     }
 
-    public void inputWinningLottoNumbers() {
+    public void inputWinningLottoNumbers(LottoDto lottoDto) {
         lottoDto.setWinningLottoOnlyNumbers(inputLottoNumbers(WINNING_LOTTO_INPUT_TEXT));
     }
 
-    public void inputManualLottoNumbers() {
+    public void inputManualLottoNumbers(BuyingListDto buyingListDto) {
         List<Set<Integer>> manualLottoNumbers = new ArrayList<>();
-        for (int i = 0; i < lottoDto.getManualTicketCount(); i++) {
+        for (int i = 0; i < buyingListDto.getManualTicketCount(); i++) {
             manualLottoNumbers.add(inputLottoNumbers(MANUAL_LOTTO_INPUT_TEXT));
         }
-        lottoDto.setManualLottoNumbers(manualLottoNumbers);
+        buyingListDto.setManualLottoNumbers(manualLottoNumbers);
     }
 
     private Set<Integer> inputLottoNumbers(String printText) {
@@ -95,7 +91,7 @@ public class LottoInputView {
         return true;
     }
 
-    public void inputBonusNumber() {
+    public void inputBonusNumber(LottoDto lottoDto) {
         String bonusNum;
         do{
             System.out.println(INPUT_BONUS_BALL_NUMBER);
@@ -115,14 +111,14 @@ public class LottoInputView {
         return true;
     }
 
-    public void inputManualLottoBuying() {
+    public void inputManualLottoBuying(BuyingListDto buyingListDto) {
         String count;
         System.out.println(MANUAL_LOTTO_INPUT_TEXT);
         do {
             count = sc.nextLine();
         }while(!validateManualCount(count));
 
-        lottoDto.setManualTicketCount(Integer.parseInt(count));
+        buyingListDto.setManualTicketCount(Integer.parseInt(count));
     }
 
     private static boolean validateManualCount(String inputCount) {

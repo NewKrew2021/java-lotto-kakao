@@ -6,20 +6,14 @@ import java.util.*;
 
 public class LottoService {
 
-    private LottoDto lottoDto;
-
-    public LottoService(LottoDto lottoDto) {
-        this.lottoDto = lottoDto;
-    }
-
-    public void buyLottoTickets() {
-        PurchaseList purchaseList = lottoDto.getPurchaseList();
-        List<LottoTicket> lottoTickets = new ArrayList<>(purchaseList.buyAllTickets(lottoDto));
+    public void buyLottoTickets(BuyingListDto buyingListDto, LottoDto lottoDto) {
+        BuyingList buyingList = buyingListDto.getBuyingList();
+        List<LottoTicket> lottoTickets = new ArrayList<>(buyingList.buyAllTickets(buyingListDto));
 
         lottoDto.setLottoTickets(lottoTickets);
     }
 
-    public void winningStatistics() {
+    public StatisticsResult winningStatistics(LottoDto lottoDto) {
         StatisticsResult statisticsResult = new StatisticsResult();
         List<LottoTicket> lottoTickets = lottoDto.getLottoTickets();
         WinningLottoNos winningLottoNos = lottoDto.getWinningLottoNos();
@@ -28,19 +22,20 @@ public class LottoService {
             statisticsResult.increaseTypeCount(winningLottoNos.rankWinning(lottoTicket));
         }
 
-        lottoDto.setStatisticsResult(statisticsResult);
+        return statisticsResult;
     }
 
-    public void makePurchaseList() {
-        int money = lottoDto.getMoney();
-        List<Set<Integer>> manualLottoNumbers = lottoDto.getManualLottoNumbers();
-        PurchaseList purchaseList = new PurchaseList(money, manualLottoNumbers);
+    public void makePurchaseList(BuyingListDto buyingListDto) {
+        int money = buyingListDto.getMoney();
+        int manualTicketCount = buyingListDto.getManualTicketCount();
+        List<Set<Integer>> manualLottoNumbers = buyingListDto.getManualLottoNumbers();
+        BuyingList buyingList = new BuyingList(money, manualLottoNumbers);
 
-        lottoDto.setPurchaseList(purchaseList);
+        buyingListDto.setBuyingList(buyingList);
 
     }
 
-    public void makeWinningLottoNumbers() {
+    public void makeWinningLottoNumbers(LottoDto lottoDto) {
         Set<Integer> winningLottoOnlyNumbers = lottoDto.getWinningLottoOnlyNumbers();
         int bonusNumber = lottoDto.getBonusNumber();
         WinningLottoNos winningLottoNos = new WinningLottoNos(winningLottoOnlyNumbers, bonusNumber);

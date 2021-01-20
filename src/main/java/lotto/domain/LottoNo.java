@@ -9,7 +9,6 @@ public class LottoNo implements Comparable<LottoNo>{
     public static final int MIN_NUMBER = 1;
     public static final int MAX_NUMBER = 45;
 
-    public static List<Integer> lottoNumberBasket = new ArrayList<>();
     private static Map<Integer, LottoNo> lottoNoCache = new HashMap<>();
     private final int number;
 
@@ -23,7 +22,6 @@ public class LottoNo implements Comparable<LottoNo>{
 
     static {
         for (int i = LottoNo.MIN_NUMBER; i <= LottoNo.MAX_NUMBER; i++) {
-            lottoNumberBasket.add(i);
             lottoNoCache.put(i, new LottoNo(i));
         }
     }

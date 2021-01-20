@@ -17,17 +17,20 @@ public class LottoServiceTest {
     @Test
     @DisplayName("로또 티켓 구입 테스트")
     void buyingLottoNosCountTest() {
+        BuyingListDto buyingListDto = new BuyingListDto();
         LottoDto lottoDto = new LottoDto();
-        LottoService lottoService = new LottoService(lottoDto);
+        LottoService lottoService = new LottoService();
+        List<Set<Integer>> manualLottoTicketNumbers = new ArrayList<>();
 
-        lottoDto.setPurchaseList(new PurchaseList(1000));
-        lottoService.buyLottoTickets();
+
+        buyingListDto.setBuyingList(new BuyingList(1000, manualLottoTicketNumbers));
+        lottoService.buyLottoTickets(buyingListDto, lottoDto);
         List<LottoTicket> lottoTickets1 = lottoDto.getLottoTickets();
-        lottoDto.setPurchaseList(new PurchaseList(10000));
-        lottoService.buyLottoTickets();
+        buyingListDto.setBuyingList(new BuyingList(10000, manualLottoTicketNumbers));
+        lottoService.buyLottoTickets(buyingListDto, lottoDto);
         List<LottoTicket> lottoTickets10 = lottoDto.getLottoTickets();
-        lottoDto.setPurchaseList(new PurchaseList(100000));
-        lottoService.buyLottoTickets();
+        buyingListDto.setBuyingList(new BuyingList(100000, manualLottoTicketNumbers));
+        lottoService.buyLottoTickets(buyingListDto, lottoDto);
         List<LottoTicket> lottoTickets100 = lottoDto.getLottoTickets();
 
         assertThat(lottoTickets1.size()).isEqualTo(1);
@@ -51,7 +54,7 @@ public class LottoServiceTest {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         List<Set<Integer>> ticketsNumbers = CsvParsing.convertStringToTicketsNumber(tickets);
         LottoDto lottoDto = new LottoDto();
-        LottoService lottoService = new LottoService(lottoDto);
+        LottoService lottoService = new LottoService();
 
         for( Set<Integer> ticket : ticketsNumbers ) {
             lottoTickets.add(new LottoTicket(ticket));
@@ -59,7 +62,7 @@ public class LottoServiceTest {
 
         lottoDto.setLottoTickets(lottoTickets);
         lottoDto.setWinningLottoNos(winningLottoNos);
-        lottoService.winningStatistics();
+
 
         StatisticsResult statisticsResult = new StatisticsResult();
         statisticsResult.increaseTypeCount(StatisticsType.THREE);
@@ -69,7 +72,7 @@ public class LottoServiceTest {
         statisticsResult.increaseTypeCount(StatisticsType.FIVE_WITH_BONUS);
         statisticsResult.increaseTypeCount(StatisticsType.SIX);
 
-        assertThat(lottoDto.getStatisticsResult())
+        assertThat(lottoService.winningStatistics(lottoDto))
                 .isEqualTo(statisticsResult);
     }
 

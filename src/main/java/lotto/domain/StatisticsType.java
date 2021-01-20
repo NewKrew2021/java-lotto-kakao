@@ -3,6 +3,7 @@ package lotto.domain;
 import java.util.Arrays;
 import java.util.List;
 
+
 public enum StatisticsType {
     NONE( 0, 0, false ),
     THREE( 3, 5000, false ),

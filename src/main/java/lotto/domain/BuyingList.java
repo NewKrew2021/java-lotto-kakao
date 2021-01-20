@@ -8,26 +8,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-public class PurchaseList {
+public class BuyingList {
 
     private int autoTicketCount;
     private int manualTicketCount;
 
-    public PurchaseList(int money) {
-        if( !validateInputMoney(money) ) {
-            throw new IllegalArgumentException("잘못된 금액을 입력하셨습니다.");
-        }
-
-        this.autoTicketCount = money / 1000;
-    }
-
-    public PurchaseList(int money, List<Set<Integer>> manualLottoTicketNumbers) {
+    public BuyingList(int money, List<Set<Integer>> manualLottoTicketNumbers) {
         if( !validateInputMoney(money) ) {
             throw new IllegalArgumentException("잘못된 금액을 입력하셨습니다.");
         }
 
         this.manualTicketCount = manualLottoTicketNumbers.size();
-        this.autoTicketCount = money / 1000 - manualTicketCount;
+        this.autoTicketCount = money / LottoTicket.LOTTO_PRICE - manualTicketCount;
+    }
+
+    public BuyingList(BuyingListDto buyingListDto) {
+        this(buyingListDto.getMoney(), buyingListDto.getManualLottoNumbers());
     }
 
     public static boolean validateInputMoney(final int money) {
@@ -58,10 +54,10 @@ public class PurchaseList {
         return manualTicketCount;
     }
 
-    public List<LottoTicket> buyAllTickets(LottoDto lottoDto) {
+    public List<LottoTicket> buyAllTickets(BuyingListDto buyingListDto) {
         List<LottoTicket> lottoTickets = new ArrayList<>();
         AutoBuyingStrategy autoBuyingStrategy = new AutoBuyingStrategy();
-        ManualBuyingStrategy manualBuyingStrategy = new ManualBuyingStrategy(lottoDto);
+        ManualBuyingStrategy manualBuyingStrategy = new ManualBuyingStrategy(buyingListDto);
 
         while(payForAutoTicketing()) {
             lottoTickets.add(buyTicket(autoBuyingStrategy));

@@ -1,28 +1,19 @@
 package lotto.view;
 
-import lotto.domain.LottoDto;
-import lotto.domain.LottoTicket;
-import lotto.domain.PurchaseList;
-import lotto.domain.StatisticsResult;
+import lotto.domain.*;
 
 import java.util.List;
 
 public class LottoOutputView {
 
-    private LottoDto lottoDto;
-
-    public LottoOutputView(LottoDto lottoDto) {
-        this.lottoDto = lottoDto;
-    }
-
-    public void printLottoTicketCount() {
-        PurchaseList purchaseList = lottoDto.getPurchaseList();
-        int manualLottoCount = purchaseList.getManualTicketCount();
-        int autoLottoCount = purchaseList.getAutoTicketCount();
+    public void printLottoTicketCount(BuyingListDto buyingListDto) {
+        BuyingList buyingList = buyingListDto.getBuyingList();
+        int manualLottoCount = buyingList.getManualTicketCount();
+        int autoLottoCount = buyingList.getAutoTicketCount();
         System.out.println("수동으로 " + manualLottoCount + "장, 자동으로 " + autoLottoCount + "를 구매했습니다.");
     }
 
-    public void printLottoTickets() {
+    public void printLottoTickets(LottoDto lottoDto) {
         List<LottoTicket> lottoTickets = lottoDto.getLottoTickets();
         for( LottoTicket lottoTicket : lottoTickets ) {
             System.out.println(lottoTicket.toString());
@@ -30,8 +21,7 @@ public class LottoOutputView {
         System.out.println();
     }
 
-    public void printWinningStatistics() {
-        StatisticsResult statisticsResult = lottoDto.getStatisticsResult();
+    public void printWinningStatistics(StatisticsResult statisticsResult) {
         System.out.println("당첨 통계");
         System.out.println("----------");
         System.out.println(statisticsResult.toString());
