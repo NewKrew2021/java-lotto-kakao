@@ -1,5 +1,7 @@
 package lotto.domain;
 
+import lotto.util.Validation;
+
 import java.util.*;
 
 public class LottoTicket {
@@ -11,20 +13,14 @@ public class LottoTicket {
 
     public LottoTicket(Set<Integer> numbers) {
 
-        if( !checkValidationLottoTicket(numbers) ) {
-            IllegalArgumentException error = new IllegalArgumentException();
-            error.printStackTrace();
-            throw error;
+        if( !Validation.validateLottoTicket(numbers) ) {
+            throw new IllegalArgumentException(Validation.INVALID_LOTTO_NUMBER);
         }
 
         for( int number : numbers ) {
             this.numbers.add(new LottoNo(number));
         }
         Collections.sort(this.numbers);
-    }
-
-    public static boolean checkValidationLottoTicket(final Set<Integer> numbers) {
-        return numbers.size() == LOTTO_NUMBER_COUNT_OF_TICKET;
     }
 
     public boolean isContains(LottoNo lottoNo) {

@@ -1,6 +1,8 @@
 package lotto.domain;
 
-import java.util.Objects;
+import lotto.util.Validation;
+
+import java.util.*;
 
 public class LottoNo implements Comparable<LottoNo>{
 
@@ -10,17 +12,11 @@ public class LottoNo implements Comparable<LottoNo>{
     private final int number;
 
     public LottoNo(final Integer number) {
-        if( !checkValidationLottoNo(number) ) {
-            IllegalArgumentException error = new IllegalArgumentException();
-            error.printStackTrace();
-            throw error;
+        if( !Validation.validateLottoNo(number) ) {
+            throw new IllegalArgumentException(Validation.INVALID_LOTTO_NUMBER);
         }
 
         this.number = number;
-    }
-
-    public static boolean checkValidationLottoNo(final Integer number) {
-        return number >= MIN_NUMBER && number <= MAX_NUMBER;
     }
 
     @Override

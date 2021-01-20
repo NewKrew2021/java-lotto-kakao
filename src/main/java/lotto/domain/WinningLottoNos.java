@@ -1,6 +1,6 @@
 package lotto.domain;
 
-import lotto.StatisticsType;
+import lotto.util.Validation;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,21 +12,18 @@ public class WinningLottoNos {
     private final LottoNo bonusNo;
 
     public WinningLottoNos(Set<Integer> numbers, int bonusNo ) {
+        if(!Validation.validateWinningLottoNos(numbers, bonusNo)) {
+            throw new IllegalArgumentException("잘못된 로또 당첨 번호입니다.");
+        }
+
         this.winningNumbers = new ArrayList<>();
         for( Integer number : numbers ) {
             this.winningNumbers.add(new LottoNo(number));
         }
-        this.bonusNo = new LottoNo(bonusNo);
+        this.bonusNo = new LottoNo(bonusNo);;
     }
 
-    public static boolean checkValidationWinningLottoNos(Set<Integer> numbers, Integer bonusNo ) {
-        if( !LottoTicket.checkValidationLottoTicket(numbers) || !LottoNo.checkValidationLottoNo(bonusNo) ) {
-            return false;
-        }
-        return !numbers.contains(bonusNo);
-    }
-
-    public StatisticsType isWinning(LottoTicket lottoTicket) {
+    public StatisticsType rankWinning(LottoTicket lottoTicket) {
         int matchCount = this.matchTickets(lottoTicket);
         boolean isBonusMatch = lottoTicket.isContains(bonusNo);
         return StatisticsType.matchTickets(matchCount, isBonusMatch);

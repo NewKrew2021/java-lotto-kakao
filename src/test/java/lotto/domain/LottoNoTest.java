@@ -1,29 +1,14 @@
 package lotto.domain;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.*;
 
+@DisplayName("로또 번호 테스트")
 public class LottoNoTest {
 
     @Test
-    void validLottoNoTest() {
-        int underMin = LottoNo.MIN_NUMBER - 1;
-        int min = LottoNo.MIN_NUMBER;
-        int upperMax = LottoNo.MAX_NUMBER + 1;
-        int max = LottoNo.MAX_NUMBER;
-
-        boolean underMinValidation = LottoNo.checkValidationLottoNo(underMin);
-        boolean minValidation = LottoNo.checkValidationLottoNo(min);
-        boolean upperMaxValidation = LottoNo.checkValidationLottoNo(upperMax);
-        boolean maxValidation = LottoNo.checkValidationLottoNo(max);
-
-        assertThat(underMinValidation).isFalse();
-        assertThat(minValidation).isTrue();
-        assertThat(upperMaxValidation).isFalse();
-        assertThat(maxValidation).isTrue();
-    }
-
-    @Test
+    @DisplayName("로또 번호 객체 equal 함수 테스트")
     void lottoEqualTest(){
         LottoNo lotto1 = new LottoNo(1);
         LottoNo lotto2 = new LottoNo(2);

@@ -1,50 +1,72 @@
 package lotto.view;
 
-import lotto.domain.LottoNo;
-import lotto.domain.LottoTicket;
-import lotto.domain.Money;
+import lotto.dto.BuyingListDto;
+import lotto.domain.BuyingList;
+import lotto.dto.LottoDto;
+import lotto.exception.WrongMoneyInputException;
+import lotto.util.Validation;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class LottoInputView {
 
+    private static final String WINNING_LOTTO_INPUT_TEXT = "지난 주 당첨 번호를 입력해 주세요.";
+    private static final String MANUAL_LOTTO_INPUT_TEXT = "수동으로 구매할 번호를 입력해 주세요.";
+    private static final String INPUT_PRICE = "구입 금액을 입력해 주세요.";
+    private static final String INPUT_BONUS_BALL_NUMBER = "보너스 볼을 입력해 주세요.";
+    private static final String INVALID_BONUS_BALL_NUMBER = "보너스볼 번호가 적절하지 않습니다.";
+    private static final String WRONG_NUMBER = "잘못된 수를 입력하셨습니다.";
     private static Scanner sc = new Scanner(System.in);
 
-    public static int inputMoney() {
+
+    public void inputMoney(BuyingListDto buyingListDto) {
         String money;
 
         do {
-            System.out.println("구입금액을 입력해 주세요.");
+            System.out.println(INPUT_PRICE);
             money = sc.nextLine();
-        } while(!checkValidMoney(money));
+        } while(!validateMoney(money));
 
-        return Integer.parseInt(money);
+        buyingListDto.setMoney(Integer.parseInt(money));
     }
 
-    private static boolean checkValidMoney(String inputMoney) {
-        int money = convertStringToIntMoney(inputMoney);
-        if( !Money.checkValidationInputMoney(money) ) {
-            System.out.println("잘못된 금액을 입력하셨습니다.");
+    private static boolean validateMoney(String inputMoney) {
+        int money = convertStringToInt(inputMoney);
+        if( !BuyingList.validateInputMoney(money) ) {
+            System.out.println(WrongMoneyInputException.WRONG_MONEY_INPUT_EXCEPTION);
             return false;
         }
         return true;
     }
 
-    private static Integer convertStringToIntMoney(String inputMoney) {
+    private static Integer convertStringToInt(String inputMoney) {
         try {
             return Integer.parseInt(inputMoney);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return 0;
+        return -1;
     }
 
-    public static Set<Integer> inputWinningNumbers() {
+    public void inputWinningLottoNumbers(LottoDto lottoDto) {
+        lottoDto.setWinningLottoOnlyNumbers(inputLottoNumbers(WINNING_LOTTO_INPUT_TEXT));
+    }
+
+    public void inputManualLottoNumbers(BuyingListDto buyingListDto) {
+        List<Set<Integer>> manualLottoNumbers = new ArrayList<>();
+        for (int i = 0; i < buyingListDto.getManualTicketCount(); i++) {
+            manualLottoNumbers.add(inputLottoNumbers(MANUAL_LOTTO_INPUT_TEXT));
+        }
+        buyingListDto.setManualLottoNumbers(manualLottoNumbers);
+    }
+
+    private Set<Integer> inputLottoNumbers(String printText) {
         Set<Integer> nums;
         do{
-            System.out.println("지난 주 당첨 번호를 입력해 주세요.");
+            System.out.println(printText);
             nums = convertInputToNumbers(sc.nextLine().split(", "));
-        }while(!checkValidWinningNumber(nums));
+        }while(!validateWinningNumber(nums));
         return nums;
     }
 
@@ -59,32 +81,52 @@ public class LottoInputView {
         return new HashSet<>();
     }
 
-    private static boolean checkValidWinningNumber(Set<Integer> numbers){
-        if( !LottoTicket.checkValidationLottoTicket(numbers) ) {
-            System.out.println("당첨번호가 적절하지 않습니다.");
+    private static boolean validateWinningNumber(Set<Integer> numbers){
+        if( !Validation.validateLottoTicket(numbers) ) {
+            System.out.println(Validation.INVALID_LOTTO_NUMBER);
             return false;
         }
 
         return true;
     }
 
-    public static int inputBonusNumber() {
+    public void inputBonusNumber(LottoDto lottoDto) {
         String bonusNum;
         do{
-            System.out.println("보너스 볼을 입력해 주세요.");
+            System.out.println(INPUT_BONUS_BALL_NUMBER);
             bonusNum = sc.nextLine();
-        }while(!checkValidBonusNumber(bonusNum));
+        }while(!validateBonusNumber(bonusNum));
         System.out.println();
-        return Integer.parseInt(bonusNum);
+        lottoDto.setBonusNumber(Integer.parseInt(bonusNum));
     }
 
-    private static boolean checkValidBonusNumber(String inputBonus){
-        int bonusNum = convertStringToIntMoney(inputBonus);
-        if( !LottoNo.checkValidationLottoNo(bonusNum) ) {
-            System.out.println("보너스볼 번호가 적절하지 않습니다.");
+    private static boolean validateBonusNumber(String inputBonus){
+        int bonusNum = convertStringToInt(inputBonus);
+        if( !Validation.validateLottoNo(bonusNum) ) {
+            System.out.println(INVALID_BONUS_BALL_NUMBER);
             return false;
         }
 
         return true;
     }
+
+    public void inputManualLottoBuying(BuyingListDto buyingListDto) {
+        String count;
+        System.out.println(MANUAL_LOTTO_INPUT_TEXT);
+        do {
+            count = sc.nextLine();
+        }while(!validateManualCount(count));
+
+        buyingListDto.setManualTicketCount(Integer.parseInt(count));
+    }
+
+    private static boolean validateManualCount(String inputCount) {
+        int count = convertStringToInt(inputCount);
+        if( count < 0 ) {
+            System.out.println(WRONG_NUMBER);
+            return false;
+        }
+        return true;
+    }
+
 }
