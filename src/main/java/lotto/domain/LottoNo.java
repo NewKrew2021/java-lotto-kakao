@@ -13,7 +13,7 @@ public class LottoNo implements Comparable<LottoNo>{
 
     public LottoNo(final Integer number) {
         if( !Validation.validateLottoNo(number) ) {
-            throw new IllegalArgumentException("잘못된 로또 번호 입니다.");
+            throw new IllegalArgumentException(Validation.INVALID_LOTTO_NUMBER);
         }
 
         this.number = number;

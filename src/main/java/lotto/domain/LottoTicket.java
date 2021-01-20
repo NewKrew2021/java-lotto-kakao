@@ -14,7 +14,7 @@ public class LottoTicket {
     public LottoTicket(Set<Integer> numbers) {
 
         if( !Validation.validateLottoTicket(numbers) ) {
-            throw new IllegalArgumentException("잘못된 로또 티켓 번호입니다.");
+            throw new IllegalArgumentException(Validation.INVALID_LOTTO_NUMBER);
         }
 
         for( int number : numbers ) {

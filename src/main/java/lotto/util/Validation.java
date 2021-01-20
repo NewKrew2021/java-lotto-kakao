@@ -7,6 +7,8 @@ import java.util.Set;
 
 public class Validation {
 
+    public static final String INVALID_LOTTO_NUMBER = "로또 번호가 적절하지 않습니다.";
+
     public static boolean validateLottoNo(final Integer number) {
         return number >= LottoNo.MIN_NUMBER && number <= LottoNo.MAX_NUMBER;
     }
