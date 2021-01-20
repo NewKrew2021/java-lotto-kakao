@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.domain.strategy.AutoBuyingStrategy;
 import lotto.domain.strategy.BuyingStrategy;
 import lotto.domain.strategy.ManualBuyingStrategy;
+import lotto.exception.WrongMoneyInputException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,7 @@ public class BuyingList {
 
     public BuyingList(int money, List<Set<Integer>> manualLottoTicketNumbers) {
         if( !validateInputMoney(money) ) {
-            throw new IllegalArgumentException("잘못된 금액을 입력하셨습니다.");
+            throw new WrongMoneyInputException();
         }
 
         this.manualTicketCount = manualLottoTicketNumbers.size();

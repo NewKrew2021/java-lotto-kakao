@@ -3,6 +3,7 @@ package lotto.view;
 import lotto.domain.BuyingListDto;
 import lotto.domain.BuyingList;
 import lotto.domain.LottoDto;
+import lotto.exception.WrongMoneyInputException;
 import lotto.util.Validation;
 
 import java.util.*;
@@ -13,7 +14,6 @@ public class LottoInputView {
     private static final String WINNING_LOTTO_INPUT_TEXT = "지난 주 당첨 번호를 입력해 주세요.";
     private static final String MANUAL_LOTTO_INPUT_TEXT = "수동으로 구매할 번호를 입력해 주세요.";
     private static final String INPUT_PRICE = "구입 금액을 입력해 주세요.";
-    private static final String WRONG_PRICE = "잘못된 금액을 입력하셨습니다.";
     private static final String INVALID_LOTTO_NUMBER = "로또 번호가 적절하지 않습니다.";
     private static final String INPUT_BONUS_BALL_NUMBER = "보너스 볼을 입력해 주세요.";
     private static final String INVALID_BONUS_BALL_NUMBER = "보너스볼 번호가 적절하지 않습니다.";
@@ -35,7 +35,7 @@ public class LottoInputView {
     private static boolean validateMoney(String inputMoney) {
         int money = convertStringToInt(inputMoney);
         if( !BuyingList.validateInputMoney(money) ) {
-            System.out.println(WRONG_PRICE);
+            System.out.println(WrongMoneyInputException.WRONG_MONEY_INPUT_EXCEPTION);
             return false;
         }
         return true;
