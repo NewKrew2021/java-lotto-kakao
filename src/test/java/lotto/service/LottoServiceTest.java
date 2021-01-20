@@ -1,6 +1,8 @@
 package lotto.service;
 
 import lotto.domain.*;
+import lotto.dto.BuyingListDto;
+import lotto.dto.LottoDto;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,6 +14,7 @@ import java.util.Set;
 
 import static org.assertj.core.api.AssertionsForClassTypes.*;
 
+@DisplayName("로또 서비스 테스트")
 public class LottoServiceTest {
 
     @Test

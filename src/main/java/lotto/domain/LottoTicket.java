@@ -18,7 +18,7 @@ public class LottoTicket {
         }
 
         for( int number : numbers ) {
-            this.numbers.add(LottoNo.of(number));
+            this.numbers.add(new LottoNo(number));
         }
         Collections.sort(this.numbers);
     }

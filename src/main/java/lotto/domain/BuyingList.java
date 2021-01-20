@@ -3,6 +3,7 @@ package lotto.domain;
 import lotto.domain.strategy.AutoBuyingStrategy;
 import lotto.domain.strategy.BuyingStrategy;
 import lotto.domain.strategy.ManualBuyingStrategy;
+import lotto.dto.BuyingListDto;
 import lotto.exception.WrongMoneyInputException;
 
 import java.util.ArrayList;

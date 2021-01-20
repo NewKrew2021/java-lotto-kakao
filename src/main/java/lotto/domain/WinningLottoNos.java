@@ -18,9 +18,9 @@ public class WinningLottoNos {
 
         this.winningNumbers = new ArrayList<>();
         for( Integer number : numbers ) {
-            this.winningNumbers.add(LottoNo.of(number));
+            this.winningNumbers.add(new LottoNo(number));
         }
-        this.bonusNo = LottoNo.of(bonusNo);
+        this.bonusNo = new LottoNo(bonusNo);;
     }
 
     public StatisticsType rankWinning(LottoTicket lottoTicket) {

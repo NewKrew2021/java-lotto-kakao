@@ -9,6 +9,7 @@ import java.util.Set;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+@DisplayName("로또 티켓 테스트")
 public class LottoTicketTest {
 
     @ParameterizedTest
@@ -18,7 +19,7 @@ public class LottoTicketTest {
     @DisplayName("티켓에 번호가 포함되어있는지 여부 확인 true 반환 테스트")
     void isContainsTrueTest(String ticketNumbers, Integer lottoNumber){
         LottoTicket lottoTicket = new LottoTicket(CsvParsing.convertStringToIntegerSet(ticketNumbers));
-        LottoNo lottoNo = LottoNo.of(lottoNumber);
+        LottoNo lottoNo = new LottoNo(lottoNumber);
 
         boolean isContain = lottoTicket.isContains(lottoNo);
 
@@ -32,7 +33,7 @@ public class LottoTicketTest {
     @DisplayName("티켓에 번호가 포함되어있는지 여부 확인 false 반환 테스트")
     void isContainsFalseTest(String ticketNumbers, Integer lottoNumber){
         LottoTicket lottoTicket = new LottoTicket(CsvParsing.convertStringToIntegerSet(ticketNumbers));
-        LottoNo lottoNo = LottoNo.of(lottoNumber);
+        LottoNo lottoNo = new LottoNo(lottoNumber);
 
         boolean isContain = lottoTicket.isContains(lottoNo);
 

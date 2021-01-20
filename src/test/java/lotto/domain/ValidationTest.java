@@ -11,6 +11,7 @@ import java.util.Set;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+@DisplayName("예외 처리 테스트")
 public class ValidationTest {
 
     @Test

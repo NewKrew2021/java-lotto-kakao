@@ -1,8 +1,8 @@
 package lotto.view;
 
-import lotto.domain.BuyingListDto;
+import lotto.dto.BuyingListDto;
 import lotto.domain.BuyingList;
-import lotto.domain.LottoDto;
+import lotto.dto.LottoDto;
 import lotto.exception.WrongMoneyInputException;
 import lotto.util.Validation;
 

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.AssertionsForClassTypes.*;
 
+@DisplayName("당첨 결과 테스트")
 public class StatisticsResultTest {
 
     @Test

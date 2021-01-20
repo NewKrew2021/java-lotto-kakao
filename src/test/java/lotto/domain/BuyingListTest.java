@@ -1,5 +1,6 @@
 package lotto.domain;
 
+import lotto.exception.WrongMoneyInputException;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -12,13 +13,14 @@ import java.util.Set;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
+@DisplayName("구입 리스트 테스트")
 public class BuyingListTest {
 
     @Test
     @DisplayName("PurchaseList 객체 생성 예외처리 / 정상 생성 확인 테스트")
     void purchaseListConstructorTest() {
         List<Set<Integer>> manualLottoTicketNumbers = new ArrayList<>();
-        assertThatThrownBy(()-> new BuyingList(999, manualLottoTicketNumbers)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(()-> new BuyingList(999, manualLottoTicketNumbers)).isInstanceOf(WrongMoneyInputException.class);
 
         BuyingList buyingList1 = new BuyingList(1000, manualLottoTicketNumbers );
         BuyingList buyingList2 = new BuyingList(50000, manualLottoTicketNumbers );

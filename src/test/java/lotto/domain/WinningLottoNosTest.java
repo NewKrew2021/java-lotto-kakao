@@ -9,6 +9,7 @@ import java.util.Set;
 
 import static org.assertj.core.api.AssertionsForClassTypes.*;
 
+@DisplayName("당첨 로또 번호 테스트")
 public class WinningLottoNosTest {
 
     @ParameterizedTest

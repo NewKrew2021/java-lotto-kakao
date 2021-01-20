@@ -1,6 +1,6 @@
 package lotto.domain.strategy;
 
-import lotto.domain.BuyingListDto;
+import lotto.dto.BuyingListDto;
 import lotto.domain.LottoTicket;
 
 import java.util.*;

@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
+@DisplayName("당첨 확인 테스트")
 public class StatisticsTypeTest {
 
     @Test

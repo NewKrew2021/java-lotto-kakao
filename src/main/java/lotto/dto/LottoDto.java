@@ -1,4 +1,7 @@
-package lotto.domain;
+package lotto.dto;
+
+import lotto.domain.LottoTicket;
+import lotto.domain.WinningLottoNos;
 
 import java.util.List;
 import java.util.Set;
@@ -8,7 +11,7 @@ public class LottoDto {
     private List<LottoTicket> lottoTickets;
     private Set<Integer> winningLottoOnlyNumbers;
     private int BonusNumber;
-    private WinningLottoNos WinningLottoNos;
+    private lotto.domain.WinningLottoNos WinningLottoNos;
 
     public  List<LottoTicket> getLottoTickets() {
         return lottoTickets;

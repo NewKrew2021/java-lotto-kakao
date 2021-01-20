@@ -1,6 +1,8 @@
 package lotto.service;
 
 import lotto.domain.*;
+import lotto.dto.BuyingListDto;
+import lotto.dto.LottoDto;
 
 import java.util.*;
 
